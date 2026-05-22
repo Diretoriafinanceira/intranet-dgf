@@ -842,7 +842,7 @@ if(pagina === "aniversariantes"){
 
         let htmlFinal = "";
         listaFiltrada.forEach(pessoa => {
-            const ehHoje = p.data === hojeString;
+            const ehHoje = pessoa.data === hojeString;
             htmlFinal += `
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; margin-bottom: 8px; background: ${ehHoje ? '#e8f4fd' : 'white'}; border-radius: 8px; border-left: 4px solid ${ehHoje ? '#3498db' : '#bdc3c7'}; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
                     <div>
@@ -961,7 +961,6 @@ if(pagina === "aniversariantes"){
 
     let hojeHTML = "";
     aniversariantesHoje.forEach((pessoa, index) => {
-        // Cria um identificador único de texto para a chave do localStorage
         const chaveUsuario = pessoa.nome.toLowerCase().replace(/\s+/g, '-');
 
         hojeHTML += `
@@ -1035,7 +1034,6 @@ if(pagina === "aniversariantes"){
 
     renderizarMes(mesAtual);
 }
-
 if(pagina === "organograma"){
         conteudo.innerHTML = `
             <h2>📊 Organograma DGF</h2>

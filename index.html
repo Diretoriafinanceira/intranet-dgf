@@ -287,6 +287,7 @@ section {
             <div id="submenuComunicacao" class="submenu">
 			    <button onclick="mostrar('central_notas')">📝 Central de Notas</button>
 				<button onclick="mostrar('coordtech')">🚀coordtech</button>
+				<button onclick="mostrar('radar_dgf')">📉 Radar DGF</button>
                 <button onclick="mostrar('noticias')">📰 Notícias</button>
                 <button onclick="mostrar('eventos')">📅 Agenda de Eventos</button>
             </div>
@@ -533,7 +534,11 @@ const listaAniversariantes = [
     { nome: "Cynthya Caroline Acioli Debastiani", data: "10/01", superintendência: "Superintendência do Fundo Estadual de Saúde" },
     { nome: "IVANDETE SEVERINA DA SILVA", data: "11/12", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Anna Beatryz Calado de Carvalho Santos", data: "03/05", superintendência: "Superintendência Financeira de Prestação de Contas" },
-	{ nome: "Edson Elias de Moura Junior", data: "31/05", superintendência: "Superintendência do Fundo Estadual de Saúde" }
+	{ nome: "Edson Elias de Moura Junior", data: "31/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
+	{ nome: "Diane Calas", data: "25/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
+	{ nome: "Monica Bernardo da silva", data: "10/05", superintendência: "Superintendência Financeira de Prestação de Contas" },
+	{ nome: "Alexandre Gomes do Nascimento", data: "30/05", superintendência: "Superintendência Financeira de Prestação de Contas" },
+	{ nome: "Adson Rodrigues da Silva", data: "06/03", superintendência: "Superintendência Financeira de Prestação de Contas" }
 ];
 
 const listaNoticias = [
@@ -607,19 +612,32 @@ function mostrar(pagina){
         
         <div style="display: flex; gap: 20px; flex-wrap: wrap; flex-shrink: 0;">
             
-            <div style="flex: 1; min-width: 280px; background: white; border-radius: 8px; border-top: 4px solid #e74c3c; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
+            <div style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #e74c3c; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
                 <img src="central.png" alt="Central de Notas" onclick="mostrar('central_notas')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
                 <div style="padding: 15px;">
                     <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📝 Conheça a Nova Central de Notas</h3>
-                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Gerencie, consulte e acompanhe a tramitação de notas fiscais e empenhos en um só lugar. Mais agilidade, transparência e controle para os processos financeiros da DGF.</p>
+                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Gerencie, consulte e acompanhe a tramitação de notas fiscais e empenhos in um só lugar. Mais agilidade, transparência e controle para os processos financeiros da DGF.</p>
                 </div>
             </div>
 
-            <div style="flex: 1; min-width: 280px; background: white; border-radius: 8px; border-top: 4px solid #3498db; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
+            <div style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #3498db; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
                 <img src="coordetech.png" alt="Coordetech" onclick="mostrar('coordtech')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
                 <div style="padding: 15px;">
                     <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">🚀 Conectividade Coordetech</h3>
-                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Fique por dentro das atualizações tecnológicas e soluções de infraestrutura integradas pela equipe Coordetech para otimizar os fluxos da nossa diretoria.</p>
+                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Fique por dentro das updates tecnológicas e soluções de infraestrutura integradas pela equipe Coordetech para otimizar os fluxos da nossa diretoria.</p>
+                </div>
+            </div>
+
+            <div onclick="mostrar('radar_dgf')" style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #9b59b6; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
+                <div style="padding: 10px; background: #9b59b6; color: white; text-align: center; font-weight: bold; font-size: 14px;">
+                    📊 RADAR DGF
+                </div>
+                <div style="width: 100%; height: 140px; background: #fff; border-bottom: 1px solid #f1f2f6; overflow: hidden; position: relative; pointer-events: none;">
+                    <iframe id="iframe-radar-dgf" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive" style="width: 285%; height: 285%; border: none; transform: scale(0.35); transform-origin: top left; position: absolute; top: 0; left: 0;" scrolling="no"></iframe>
+                </div>
+                <div style="padding: 15px; flex-grow: 1;">
+                    <h3 id="titulo-radar-dgf" style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📈 Monitoramento: CLSMO</h3>
+                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Indicadores estratégicos e gráficos consolidados em tempo real sobre as principais operações, fluxos de despesas e metas da Diretoria Geral de Finanças.</p>
                 </div>
             </div>
 
@@ -666,6 +684,44 @@ function mostrar(pagina){
         }
     </style>
     `;
+
+    // Lógica do Carrossel do Radar DGF (Loop dos gráficos)
+    const graficosRadar = [
+        { nome: "CLSMO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive" },
+        { nome: "CLTESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive" },
+        { nome: "CLSUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive" },
+        { nome: "GEMP", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive" },
+        { nome: "CPAG_TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive" },
+        { nome: "CPAG_SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive" }
+    ];
+
+    let indiceAtualRadar = 0;
+    
+    // Limpa intervalos anteriores se o usuário ficar alternando de página na intranet
+    if (window.intervaloRadarDGF) {
+        clearInterval(window.intervaloRadarDGF);
+    }
+
+    window.intervaloRadarDGF = setInterval(() => {
+        indiceAtualRadar = (indiceAtualRadar + 1) % graficosRadar.length;
+        const iframeRadar = document.getElementById("iframe-radar-dgf");
+        const tituloRadar = document.getElementById("titulo-radar-dgf");
+        
+        if (iframeRadar && tituloRadar) {
+            // Guarda o nome correto correspondente à URL que vai carregar
+            const proximoNome = graficosRadar[indiceAtualRadar].nome;
+            
+            // Só altera o texto de monitoramento na tela quando o iframe terminar 100% de carregar o novo gráfico
+            iframeRadar.onload = () => {
+                tituloRadar.innerHTML = `📈 Monitoramento: ${proximoNome}`;
+            };
+            
+            iframeRadar.src = graficosRadar[indiceAtualRadar].url;
+        } else {
+            // Se os elementos não existirem mais na tela (mudou de página), para o contador
+            clearInterval(window.intervaloRadarDGF);
+        }
+    }, 10000); // Altera o gráfico a cada 10 segundos
 }
 
 if(pagina === "noticias"){
@@ -694,6 +750,190 @@ if(pagina === "noticias"){
     });
     
     conteudo.innerHTML = html;
+}
+
+if (pagina === "radar_dgf") {
+    // Garante a limpeza de qualquer intervalo anterior para evitar duplicação
+    if (window.intervaloPaginaRadar) {
+        clearInterval(window.intervaloPaginaRadar);
+    }
+    if (window.intervaloRadarDGF) {
+        clearInterval(window.intervaloRadarDGF);
+    }
+
+    // Array com todos os seus gráficos estruturados
+    const graficosPainel = [
+        { nome: "CLSMO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive", cor: "#34495e" },
+        { nome: "CLTESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive", cor: "#3498db" },
+        { nome: "CLSUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive", cor: "#e67e22" },
+        { nome: "GEMP", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive", cor: "#2ecc71" },
+        { nome: "CPAG_TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive", cor: "#e74c3c" },
+        { nome: "CPAG_SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive", cor: "#1abc9c" }
+    ];
+
+    let indicePainel = 0;
+
+    // Monta a estrutura esticando 100% nas laterais e aplicando o redimensionamento interno
+    conteudo.innerHTML = `
+    <div style="
+        display: flex; 
+        flex-direction: column; 
+        gap: 15px; 
+        height: 85vh; 
+        padding: 10px;
+        background: #f4f7f6;
+        border-radius: 8px;
+        border-top: 10px solid ${graficosPainel[0].cor};
+        font-family: sans-serif;
+        box-sizing: border-box;
+        transition: border-color 0.5s ease;
+        width: 100%;
+    " id="container-painel-radar">
+        
+        <div id="topo-painel-radar" style="background: ${graficosPainel[0].cor}; color: white; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 18px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: background 0.5s ease; width: 100%; box-sizing: border-box;">
+            📊 RADAR DGF: Monitoramento ${graficosPainel[0].nome}
+        </div>
+
+        <div style="display: flex; flex: 1; width: 100%; gap: 15px; overflow: hidden;">
+            
+            <div style="flex: 1; background: transparent; overflow: hidden; position: relative;">
+                <iframe id="iframe-painel-radar" src="${graficosPainel[0].url}" 
+                    style="
+                        width: 111.5%; 
+                        height: 104%; 
+                        border: none; 
+                        position: absolute; 
+                        top: 0; 
+                        left: 0;
+                        transform: scale(1.005, 0.96); 
+                        transform-origin: top left;
+                    " 
+                    scrolling="no">
+                </iframe>
+            </div>
+
+            <div style="
+                width: 260px; 
+                background: white; 
+                border-radius: 8px; 
+                box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+                padding: 15px; 
+                display: flex; 
+                flex-direction: column; 
+                gap: 10px; 
+                box-sizing: border-box;
+            ">
+                <div style="font-weight: bold; font-size: 13px; color: #7f8c8d; border-bottom: 2px solid #f4f7f6; padding-bottom: 6px; text-align: center; letter-spacing: 0.5px;">
+                    🎛️ SELEÇÃO RÁPIDA
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; overflow-y: auto;">
+                    ${graficosPainel.map((g, idx) => `
+                        <button 
+                            id="btn-atalho-${idx}" 
+                            onclick="window.mudarGraficoRadarManual(${idx})"
+                            style="
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                width: 100%;
+                                padding: 11px 12px;
+                                border: 1px solid ${idx === 0 ? g.cor : '#e0e0e0'};
+                                border-left: 5px solid ${g.cor};
+                                border-radius: 6px;
+                                background: ${idx === 0 ? '#f8f9fa' : '#ffffff'};
+                                color: #2c3e50;
+                                font-weight: ${idx === 0 ? 'bold' : 'normal'};
+                                font-size: 13px;
+                                cursor: pointer;
+                                text-align: left;
+                                transition: all 0.2s ease;
+                            "
+                            onmouseover="this.style.background='#f8f9fa'; this.style.transform='translateX(3px)'"
+                            onmouseout="if(window.indiceRadarAtual !== ${idx}) { this.style.background='#fff'; this.style.transform='none'; } else { this.style.transform='none'; }"
+                        >
+                            <span id="dot-atalho-${idx}" style="width: 8px; height: 8px; border-radius: 50%; background: ${idx === 0 ? g.cor : 'transparent'}; border: 1px solid ${idx === 0 ? 'transparent' : '#bdc3c7'};"></span>
+                            ${g.nome}
+                        </button>
+                    `).join('')}
+                </div>
+
+                <div style="font-size: 11px; color: #95a5a6; text-align: center; border-top: 1px solid #f4f7f6; padding-top: 8px; font-style: italic;">
+                    Clique para fixar um gráfico
+                </div>
+            </div>
+
+        </div>
+    </div>
+    `;
+
+    // Mantém o controle do índice atual de forma global temporária para os estilos dos botões
+    window.indiceRadarAtual = 0;
+
+    // Função interna que gerencia a atualização visual completa ao mudar de gráfico
+    const atualizarInterfaceRadar = (novoIndice) => {
+        window.indiceRadarAtual = novoIndice;
+        indicePainel = novoIndice;
+        
+        const container = document.getElementById("container-painel-radar");
+        const topo = document.getElementById("topo-painel-radar");
+        const iframe = document.getElementById("iframe-painel-radar");
+
+        if (container && topo && iframe) {
+            const grafico = graficosPainel[novoIndice];
+            iframe.src = grafico.url;
+
+            // ALTERAÇÃO REALIZADA AQUI: A interface agora muda na hora (sem esperar o iframe.onload)
+            topo.innerHTML = `📊 RADAR DGF: Monitoramento ${grafico.nome}`;
+            topo.style.background = grafico.cor;
+            container.style.borderTopColor = grafico.cor;
+
+            // Atualiza o estado visual de todos os botões da lista lateral instantaneamente
+            graficosPainel.forEach((g, idx) => {
+                const btn = document.getElementById(`btn-atalho-${idx}`);
+                const dot = document.getElementById(`dot-atalho-${idx}`);
+                if (btn && dot) {
+                    if (idx === novoIndice) {
+                        btn.style.background = "#f8f9fa";
+                        btn.style.borderColor = g.cor;
+                        btn.style.fontWeight = "bold";
+                        dot.style.background = g.cor;
+                        dot.style.borderColor = "transparent";
+                    } else {
+                        btn.style.background = "#ffffff";
+                        btn.style.borderColor = "#e0e0e0";
+                        btn.style.fontWeight = "normal";
+                        dot.style.background = "transparent";
+                        dot.style.borderColor = "#bdc3c7";
+                    }
+                }
+            });
+        }
+    };
+
+    // Permite que a ação de clique resete o timer, dando mais 8s para o usuário ler o gráfico escolhido
+    window.mudarGraficoRadarManual = (idx) => {
+        atualizarInterfaceRadar(idx);
+        clearInterval(window.intervaloPaginaRadar);
+        criarLoopRadar();
+    };
+
+    // Cria e isola o loop de rotação automática de 8 segundos
+    const criarLoopRadar = () => {
+        window.intervaloPaginaRadar = setInterval(() => {
+            let próximo = (window.indiceRadarAtual + 1) % graficosPainel.length;
+            const container = document.getElementById("container-painel-radar");
+            
+            if (container) {
+                atualizarInterfaceRadar(próximo);
+            } else {
+                clearInterval(window.intervaloPaginaRadar);
+            }
+        }, 8000);
+    };
+
+    // Inicia o carrossel padrão
+    criarLoopRadar();
 }
 	
 	if(pagina === "organograma_view"){
@@ -827,6 +1067,7 @@ if(pagina === "noticias"){
             </div>
             `;
         }
+		
 if(pagina === "aniversariantes"){
     const agora = new Date();
     const diaAtual = agora.getDate().toString().padStart(2, '0');
@@ -862,6 +1103,8 @@ if(pagina === "aniversariantes"){
     // Função para salvar os parabéns no localStorage de forma isolada por usuário
     window.enviarParabensDGF = (nomeUsuario, index) => {
         const campoTexto = document.getElementById(`msg-input-${nomeUsuario}-${index}`);
+        const campoAssinatura = document.getElementById(`assinatura-input-${nomeUsuario}-${index}`);
+        
         if (campoTexto && campoTexto.value.trim() !== "") {
             const mensagensSalvas = JSON.parse(localStorage.getItem('mural_aniversariantes_dgf') || '{}');
             if (!mensagensSalvas[nomeUsuario]) {
@@ -869,11 +1112,13 @@ if(pagina === "aniversariantes"){
             }
             mensagensSalvas[nomeUsuario].push({
                 texto: campoTexto.value.trim(),
+                assinatura: campoAssinatura ? campoAssinatura.value.trim() : "",
                 data: new Date().toLocaleDateString('pt-BR')
             });
             localStorage.setItem('mural_aniversariantes_dgf', JSON.stringify(mensagensSalvas));
             alert('Sua mensagem de parabéns foi enviada ao mural do colega! 🌟');
             campoTexto.value = '';
+            if(campoAssinatura) campoAssinatura.value = '';
         } else {
             alert('Por favor, digite uma mensagem antes de enviar.');
         }
@@ -889,21 +1134,59 @@ if(pagina === "aniversariantes"){
             return;
         }
 
+        // Paginação definida para 50 mensagens por página
+        const itensPorPagina = 50;
+        const totalMensagens = minhasMensagens.length;
+        const totalPaginas = Math.ceil(totalMensagens / itensPorPagina);
+        
+        // Exibe apenas as primeiras 50 mensagens na página atual do PDF
+        const mensagensExibidas = minhasMensagens.slice(0, itensPorPagina);
+
         const janelaPDF = window.open('', '_blank');
         let blocosMensagensHTML = '';
         const tagsDecorativas = ['✨ Gratidão', '🎈 Celebração', '❤️ Carinho', '🌟 Sucesso'];
+        
+        const tonsPasteis = [
+            '#fff5f5', '#f0faff', '#f6fff5', '#fffdf0', '#faf5ff', '#f5fffe'
+        ];
 
-        minhasMensagens.forEach((m, idx) => {
+        mensagensExibidas.forEach((m, idx) => {
             const tag = tagsDecorativas[idx % tagsDecorativas.length];
+            const corFundo = tonsPasteis[idx % tonsPasteis.length];
+            
+            const rotacoesPossiveis = [-3, -1.5, 2, -2, 1.5, 3, -1, 2.5];
+            const anguloAlea = rotacoesPossiveis[idx % rotacoesPossiveis.length];
+            const moverX = (idx % 3 === 0) ? '3px' : (idx % 3 === 1) ? '-3px' : '0px';
+            const moverY = (idx % 2 === 0) ? '2px' : '-2px';
+
             blocosMensagensHTML += `
-                <div style="background: #ffffff; border-radius: 16px; padding: 22px; margin-bottom: 20px; border: 1px solid #f8ece8; box-shadow: 0 4px 15px rgba(0,0,0,0.02); position: relative;">
-                    <p style="font-size: 12pt; line-height: 1.6; color: #2d3436; margin: 0 0 15px 0; font-style: italic; font-weight: 500;">"${m.texto}"</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #fbf2ef; padding-top: 12px;">
-                        <span style="font-size: 9pt; color: #a4b0be; font-weight: bold;">📅 ${m.data}</span>
-                        <span style="font-size: 8pt; font-weight: 800; color: #ffffff; background: linear-gradient(135deg, #ff7675, #fd79a8); padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;">${tag}</span>
+                <div style="background: ${corFundo}; width: 100%; aspect-ratio: 1/1; box-sizing: border-box; padding: 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.04); box-shadow: 2px 4px 10px rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: space-between; transform: rotate(${anguloAlea}deg) translate(${moverX}, ${moverY}); position: relative; overflow: hidden;">
+                    
+                    <div style="position: absolute; top: 4px; left: 50%; transform: translateX(-50%); width: 35px; height: 10px; background: rgba(255,255,255,0.7); box-shadow: 0 1px 3px rgba(0,0,0,0.05);"></div>
+                    
+                    <p style="font-size: 8.5pt; line-height: 1.4; color: #2d3436; margin: 8px 0 0 0; font-style: italic; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                        "${m.texto}"
+                    </p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 3px; border-top: 1px dashed rgba(0,0,0,0.06); padding-top: 5px;">
+                        ${m.assinatura ? `<span style="font-size: 7.5pt; font-weight: bold; color: #2c3e50; text-align: left; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">✍️ De: ${m.assinatura}</span>` : ''}
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2px;">
+                            <span style="font-size: 6.5pt; font-weight: 800; color: #ffffff; background: linear-gradient(135deg, #ff7675, #fd79a8); padding: 2px 6px; border-radius: 20px; text-transform: uppercase; text-align: center; width: fit-content; scale: 0.9;">${tag}</span>
+                            <span style="font-size: 6.5pt; color: #a4b0be; font-weight: bold; text-align: right;">📅 ${m.data}</span>
+                        </div>
                     </div>
                 </div>`;
         });
+
+        // String informativa de paginação caso ultrapasse 25 mensagens acumuladas
+        let indicadorPaginasHTML = '';
+        if (totalMensagens > 25) {
+            indicadorPaginasHTML = `
+                <div style="background: #fff9db; border: 1px solid #f59f00; color: #f59f00; padding: 6px; text-align: center; font-size: 9pt; font-weight: bold; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                    <span>◀️</span> 📄 Página 1 de ${totalPaginas} (${totalMensagens} mensagens no total) <span>▶️</span>
+                </div>
+            `;
+        }
 
         janelaPDF.document.write(`
             <html>
@@ -911,43 +1194,46 @@ if(pagina === "aniversariantes"){
                 <title>Mural DGF - ${nomeCompleto}</title>
                 <style>
                     @page { size: portrait; margin: 0; }
-                    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #fcf8f2; margin: 0; padding: 40px; color: #2c3e50; -webkit-print-color-adjust: exact; }
-                    .MuralContainer { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 30px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.04); border: 8px solid #ffffff; outline: 2px dashed #f3a683; }
-                    .DGFHeader { text-align: center; border-bottom: 2px dashed #f3a683; padding-bottom: 25px; margin-bottom: 35px; position: relative; }
-                    .DGFLogo { font-size: 26pt; font-weight: 900; color: #2c3e50; letter-spacing: 4px; margin: 0; text-transform: uppercase; }
+                    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f7f9fa; margin: 0; padding: 20px; color: #2c3e50; -webkit-print-color-adjust: exact; }
+                    .MuralContainer { max-width: 760px; height: 1040px; margin: 0 auto; background: #ffffff; border-radius: 24px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); border: 6px solid #ffffff; outline: 2px dashed #ff7675; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; }
+                    .DGFHeader { text-align: center; border-bottom: 2px dashed #f3a683; padding-bottom: 12px; margin-bottom: 15px; }
+                    .DGFLogo { font-size: 22pt; font-weight: 900; color: #2c3e50; letter-spacing: 3px; margin: 0; text-transform: uppercase; }
                     .DGFLogo span { color: #ff7675; }
-                    .MuralTitulo { font-size: 20pt; color: #d63031; margin: 15px 0 5px 0; font-weight: bold; }
-                    .MuralSub { font-size: 10pt; color: #7f8c8d; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
-                    .PerfilBadge { background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; padding: 15px 25px; border-radius: 20px; margin-bottom: 35px; display: flex; align-items: center; justify-content: space-between; }
+                    .MuralTitulo { font-size: 16pt; color: #d63031; margin: 5px 0 2px 0; font-weight: bold; }
+                    .MuralSub { font-size: 8pt; color: #7f8c8d; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
+                    .PerfilBadge { background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; padding: 10px 20px; border-radius: 14px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; }
+                    .GridMensagens { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; row-gap: 18px; padding: 10px 5px; flex-grow: 1; align-content: start; }
                 </style>
             </head>
             <body>
+                ${indicadorPaginasHTML}
                 <div class="MuralContainer">
-                    <div class="DGFHeader">
-                        <div class="DGFLogo">📌 DGF<span>.</span></div>
-                        <div class="MuralTitulo">Mural de Parabéns ✨</div>
-                        <div class="MuralSub">Minhas Mensagens Corporativas</div>
-                    </div>
-                    
-                    <div class="PerfilBadge">
-                        <div>
-                            <div style="font-size: 14pt; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">${nomeCompleto}</div>
-                            <div style="font-size: 9pt; opacity: 0.9; font-weight: 600; margin-top: 2px;">${depto}</div>
+                    <div>
+                        <div class="DGFHeader">
+                            <div class="DGFLogo">📌 DGF<span>.</span></div>
+                            <div class="MuralTitulo">Mural de Parabéns ✨</div>
+                            <div class="MuralSub">Diretoria Geral de Finanças</div>
                         </div>
-                        <div style="font-size: 24pt;">🎂</div>
+                        
+                        <div class="PerfilBadge">
+                            <div>
+                                <div style="font-size: 11pt; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">${nomeCompleto}</div>
+                            </div>
+                            <div style="font-size: 18pt;">🎂</div>
+                        </div>
+
+                        <div class="GridMensagens">
+                            ${blocosMensagensHTML}
+                        </div>
                     </div>
 
-                    <div style="margin-top: 20px;">
-                        ${blocosMensagensHTML}
-                    </div>
-
-                    <div style="text-align: center; color: #b2bec3; font-size: 9pt; margin-top: 40px; font-weight: bold; border-top: 1px solid #f1f2f6; padding-top: 20px;">
+                    <div style="text-align: center; color: #b2bec3; font-size: 8pt; font-weight: bold; border-top: 1px solid #f1f2f6; padding-top: 12px; margin-top: 10px;">
                         Gerado com ❤️ pela Intranet DGF • Pronto para o Instagram 📸
                     </div>
                 </div>
                 <script>
                     window.onload = function() {
-                        setTimeout(function() { window.print(); window.close(); }, 500);
+                        setTimeout(function() { window.print(); window.close(); }, 600);
                     };
                 <\/script>
             </body>
@@ -984,9 +1270,12 @@ if(pagina === "aniversariantes"){
                 </div>
 
                 <div style="margin-top: 15px; background: #f8f9fa; border-radius: 12px; padding: 12px; border: 1px solid #e9ecef; text-align: left;">
-                    <label style="font-size: 10px; font-weight: bold; color: #7f8c8d; text-transform: uppercase; display: block; margin-bottom: 6px;">Deixe sua mensagem:</label>
-                    <textarea id="msg-input-${chaveUsuario}-${index}" placeholder="Deseje um feliz aniversário corporativo..." style="width: 100%; height: 55px; padding: 8px; border-radius: 6px; border: 1px solid #cccccc; font-size: 11px; font-family: sans-serif; resize: none; box-sizing: border-box; outline: none; margin-bottom: 6px;"></textarea>
+                    <label style="font-size: 10px; font-weight: bold; color: #7f8c8d; text-transform: uppercase; display: block; margin-bottom: 4px;">Deixe sua mensagem:</label>
+                    <textarea id="msg-input-${chaveUsuario}-${index}" placeholder="Deseje um feliz aniversário..." style="width: 100%; height: 55px; padding: 8px; border-radius: 6px; border: 1px solid #cccccc; font-size: 11px; font-family: sans-serif; resize: none; box-sizing: border-box; outline: none; margin-bottom: 6px;"></textarea>
                     
+                    <label style="font-size: 10px; font-weight: bold; color: #7f8c8d; text-transform: uppercase; display: block; margin-bottom: 4px;">Sua Assinatura (Max 15 carac.):</label>
+                    <input type="text" id="assinatura-input-${chaveUsuario}-${index}" maxlength="15" placeholder="Seu nome..." style="width: 100%; padding: 6px; border-radius: 6px; border: 1px solid #cccccc; font-size: 11px; font-family: sans-serif; box-sizing: border-box; outline: none; margin-bottom: 8px;" />
+
                     <button onclick="window.enviarParabensDGF('${chaveUsuario}', '${index}')" style="width: 100%; padding: 8px; background: #3498db; color: white; border: none; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 6px;">
                         Enviar Mensagem 📩
                     </button>
@@ -1033,6 +1322,7 @@ if(pagina === "aniversariantes"){
 
     renderizarMes(mesAtual);
 }
+
 if(pagina === "organograma"){
         conteudo.innerHTML = `
             <h2>📊 Organograma DGF</h2>
@@ -1373,8 +1663,11 @@ if(pagina === "organograma"){
     if(pagina === "chegou"){
     // Lista de novos servidores - Basta adicionar novos aqui
     const novosServidores = [
-        { nome: "Romero Cavalcanti Barreto da Silva", cargo: "Assessor administrativo", data: "Maio/2026" }
-    ];
+        { nome: "Romero Cavalcanti Barreto da Silva", cargo: "COORD. Liquidação Tesouro", data: "Maio/2026" },
+		{ nome: "Monica Bernardo da silva", cargo: "GPC- OSS", data: "Maio/2026" },
+		{ nome: "Alexandre Gomes do Nascimento", cargo: "GPC- OSS", data: "Maio/2026" },
+		{ nome: "Adson Rodrigues da Silva", cargo: "GPC- OSS", data: "Maio/2026" }
+		];
 
     conteudo.innerHTML = `
         <div style="padding: 20px; font-family: sans-serif;">
@@ -1424,6 +1717,8 @@ if(pagina === "organograma"){
     const funcionarios = [
         { nome: "Mauro Ataíde da Silva Júnior", cargo: "Diretoria Geral de Finanças" },
         { nome: "Adjair Jordão De Aragão", cargo: "Coordenador de Análise de Prestação de Contas - UPA" },
+		{ nome: "Adson Rodrigues da Silva", cargo: "Assessor Administrativo" },
+		{ nome: "Alexandre Gomes do Nascimento", cargo: "Assessor Administrativo" },
         { nome: "Carla Gomes Costa", cargo: "Coordenadora de prestação de Contas" },
         { nome: "Cicero Guedes De Lima", cargo: "Assistente de Prestação de Contas" },
         { nome: "Juliana Gomes da Silva", cargo: "Coordenadora Contábil Financeiros dos Contratos de Gestão - UPA" },
@@ -1493,6 +1788,7 @@ if(pagina === "organograma"){
         { nome: "Cristiane Etna da Silva Souza", cargo: "Assessor Administrativo" },
         { nome: "Cynthya Caroline Acioli Debastiani", cargo: "Assessor Administrativo" },
         { nome: "Daniel Bormolini Marques", cargo: "Assessor Administrativo" },
+		{ nome: "Diane Calas", cargo: "Assessor Administrativo" },
         { nome: "Edinaldo Leandro Wanderley", cargo: "Apoio Administrativo" },
         { nome: "Éder Silva Cordeiro", cargo: "Assessor Administrativo" },
         { nome: "Edson Elias de Moura Júnior", cargo: "Assessor Administrativo" },
@@ -1536,6 +1832,7 @@ if(pagina === "organograma"){
         { nome: "Maurício Barbosa Ferreira Júnior", cargo: "Assessor Administrativo" },
         { nome: "Mayra Maria Ferreira de Melo", cargo: "Assessor Técnico" },
         { nome: "Medyson da Silva Lima", cargo: "Assessor Administrativo" },
+		{ nome: "Monica Bernardo da silva", cargo: "Assessor Administrativo" },
         { nome: "Mônica Maria da Costa", cargo: "Assessor Administrativo" },
         { nome: "Myrna Marroquim Soares", cargo: "Assessor Administrativo" },
         { nome: "Nadja Cristina Aleixo Costa", cargo: "Assessor Administrativo" },
@@ -1828,7 +2125,6 @@ window.abrirGC = () => {
     conteudo.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #34495e; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h2 style="margin:0; font-size: 18px; color: #2c3e50;">📍 Detalhes: Sala GC</h2>
-            <button onclick="location.reload()" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">⬅ Voltar ao Mapa Geral</button>
         </div>
         
         <div style="display: flex; width: 100%; height: calc(100vh - 150px); background: #f1f2f6; border-radius: 12px; border: 1px solid #dcdde1; overflow: hidden;">
@@ -1864,7 +2160,7 @@ window.abrirGC = () => {
                     ${renderCadeira(282, 140, 'larissa-n', 'Larissa Nascimento De Oliveira', false, true)}
                     ${renderCadeira(282, 200, 'wanessa', 'Wanessa Louise Lima dos Santos', false, true)}
                     ${renderCadeira(282, 260, 'ana-n', 'Ana Caroline Nobre Nascimento', false, true)}
-                    ${renderCadeira(282, 320, 'iasmim', 'Iasmim Santos Veloso Silva', false, true)}
+                    ${renderCadeira(282, 320)}
                     ${renderCadeira(282, 380, 'jessica', 'Jéssica Ferreira de Freitas Lima', false, true)}
 
                     <text x="190" y="35" text-anchor="middle" style="font-family: Arial; font-size: 20px; font-weight: bold; fill: #34495e;">LAYOUT INTERNO - GC</text>
@@ -1878,7 +2174,6 @@ window.abrirGC = () => {
                     ${renderItemLista('Larissa Nascimento De Oliveira', 'larissa-n')}
                     ${renderItemLista('Wanessa Louise Lima dos Santos', 'wanessa')}
                     ${renderItemLista('Ana Caroline Nobre Nascimento', 'ana-n')}
-                    ${renderItemLista('Iasmim Santos Veloso Silva', 'iasmim')}
                     ${renderItemLista('Jéssica Ferreira de Freitas Lima', 'jessica')}
                     ${renderItemLista('Heber Rocha Linhares de Siqueira', 'heber')}
                     ${renderItemLista('Anna Beatriz Calado', 'anna')}
@@ -2150,6 +2445,11 @@ window.abrirSFES = () => {
                 <rect x="585" y="385" width="10" height="22" class="pc-dgf" /> <rect x="585" y="419" width="10" height="22" class="pc-dgf" /> <rect x="585" y="453" width="10" height="22" class="pc-dgf" />
                 <rect x="625" y="385" width="10" height="22" class="pc-dgf" /> <rect x="625" y="419" width="10" height="22" class="pc-dgf" /> <rect x="625" y="453" width="10" height="22" class="pc-dgf" />
 
+                <g style="cursor: pointer;" onclick="alert('Equipamento de Segurança: Hidrante')">
+                    <circle cx="355" cy="495" r="14" fill="#e74c3c" stroke="#ffffff" stroke-width="2" />
+                    <text x="355" y="499" font-family="'Segoe UI', Arial" font-size="11px" font-weight="bold" fill="#ffffff" text-anchor="middle">H</text>
+                </g>
+
                 <rect x="20" y="505" width="320" height="45" class="btn-pc" onclick="alert('Coordenação de Convênios')" />
                 <rect x="35" y="510" width="22" height="10" class="pc-dgf" /> <rect x="110" y="510" width="22" height="10" class="pc-dgf" /> <rect x="185" y="510" width="22" height="10" class="pc-dgf" /> <rect x="260" y="510" width="22" height="10" class="pc-dgf" />
                 <rect x="35" y="535" width="22" height="10" class="pc-dgf" /> <rect x="110" y="535" width="22" height="10" class="pc-dgf" /> <rect x="185" y="535" width="22" height="10" class="pc-dgf" /> <rect x="260" y="535" width="22" height="10" class="pc-dgf" />
@@ -2167,14 +2467,13 @@ window.abrirSFES = () => {
                 <rect x="35" y="635" width="22" height="10" class="pc-dgf" /> <rect x="110" y="635" width="22" height="10" class="pc-dgf" /> <rect x="185" y="635" width="22" height="10" class="pc-dgf" /> <rect x="260" y="635" width="22" height="10" class="pc-dgf" />
                 
                 <rect x="370" y="560" width="320" height="90" class="setor-sala" onclick="abrirGCE()" />
-                <text x="530" y="610" text-anchor="middle" class="label-sala" style="font-size:16px; fill:#2c3e50; pointer-events: none;">GCE (Ver Detalhes)</text>
+                <text x="530" y="610" text-anchor="middle" class="label-sala" style="font-size:16px; fill:#2c3e50; pointer-events: none;">GCE</text>
             </svg>
         </div>
     `;
-}
+	}
 }
 </script>
 
 </body>
 </html>
-

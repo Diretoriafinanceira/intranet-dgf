@@ -294,6 +294,7 @@ section {
 
             <button style="cursor: default; background: #2c3e50;">👥 Gestão de Pessoas</button>
             <div id="submenuGestao" class="submenu">
+			    <button onclick="mostrar('areadogestor')">🧑‍💼 Área do Gestor</button>
                 <button onclick="mostrar('contracheque')">💰 Contracheque</button>
                 <button onclick="mostrar('feedback')">💬 Sugestões</button>
                 <button onclick="mostrar('mapa')">🗺️ Mapa DGF</button>
@@ -534,7 +535,7 @@ const listaAniversariantes = [
     { nome: "Cynthya Caroline Acioli Debastiani", data: "10/01", superintendência: "Superintendência do Fundo Estadual de Saúde" },
     { nome: "IVANDETE SEVERINA DA SILVA", data: "11/12", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Anna Beatryz Calado de Carvalho Santos", data: "03/05", superintendência: "Superintendência Financeira de Prestação de Contas" },
-	{ nome: "Edson Elias de Moura Junior", data: "02/06", superintendência: "Superintendência do Fundo Estadual de Saúde" },
+	{ nome: "Edson Elias de Moura Junior", data: "31/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Diane Calas", data: "25/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Monica Bernardo da silva", data: "10/05", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Alexandre Gomes do Nascimento", data: "30/05", superintendência: "Superintendência Financeira de Prestação de Contas" },
@@ -611,63 +612,96 @@ function mostrar(pagina){
             width: 100%;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
             flex-shrink: 0;
-            background: linear-gradient(90deg,#009739,#FEDD00,#009739);
+            background: linear-gradient(135deg, #007A25 0%, #E5B800 50%, #00591B 100%);
             position: relative;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         ">
+            <div style="
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%), 
+                            linear-gradient(-45deg, rgba(255,255,255,0.05) 25%, transparent 25%);
+                background-size: 30px 30px;
+                opacity: 0.4;
+                pointer-events: none;
+            "></div>
+
+            <div style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 6px;
+                background: repeating-linear-gradient(90deg, #0B3D91, #0B3D91 20px, #fff 20px, #fff 40px);
+                opacity: 0.6;
+            "></div>
 
             <div style="
                 display:flex;
                 align-items:center;
                 justify-content:space-between;
                 flex-wrap:wrap;
-                padding:20px 30px;
+                padding:25px 40px;
                 min-height:120px;
+                position: relative;
+                z-index: 1;
             ">
 
                 <div style="
                     display:flex;
+                    flex-direction: column;
                     align-items:center;
-                    gap:15px;
-                    font-size:48px;
+                    color: white;
+                    background: rgba(11, 61, 145, 0.85);
+                    padding: 12px 18px;
+                    border-radius: 6px;
+                    border-bottom: 3px solid #E5B800;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                 ">
-                    🌽 🪗 🔥 🎉
+                    <span style="font-size: 24px; font-weight: bold; letter-spacing: 1px;">TRADIÇÃO</span>
+                    <span style="font-size: 13px; opacity: 0.9; margin-top: 2px;">🪗 Cultura & União</span>
                 </div>
 
                 <div style="
                     flex:1;
                     text-align:center;
                     min-width:300px;
-                    font-family:sans-serif;
+                    padding: 0 20px;
                 ">
                     <div style="
-                        font-size:34px;
-                        font-weight:bold;
+                        font-size:32px;
+                        font-weight:800;
+                        color:#FFFFFF;
+                        text-shadow: 0 2px 4px rgba(0, 59, 27, 0.5);
+                        letter-spacing: -0.5px;
+                    ">
+                        No Ritmo do São João
+                    </div>
+
+                    <div style="
+                        font-size:22px;
+                        font-weight:600;
                         color:#0B3D91;
-                        text-shadow:1px 1px 2px rgba(255,255,255,0.5);
+                        margin-top:4px;
+                        text-shadow: 1px 1px 0px rgba(255,255,255,0.4);
                     ">
-                        No ritmo do São João
+                        e na torcida pelo Brasil <img src="https://flagcdn.com/w40/br.png" alt="Brasil" style="width: 28px; height: auto; vertical-align: middle; border-radius: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.2);">
                     </div>
 
                     <div style="
-                        font-size:24px;
-                        font-weight:bold;
-                        color:#006400;
-                        margin-top:5px;
-                    ">
-                        e na torcida pelo Brasil 🇧🇷
-                    </div>
-
-                    <div style="
-                        margin-top:10px;
+                        margin-top:12px;
                         display:inline-block;
                         background:#0B3D91;
                         color:white;
-                        padding:8px 20px;
-                        border-radius:25px;
-                        font-size:18px;
-                        font-weight:bold;
+                        padding:6px 24px;
+                        border-radius:4px;
+                        font-size:15px;
+                        font-weight:600;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
                     ">
                         juntos fazemos acontecer!
                     </div>
@@ -675,11 +709,17 @@ function mostrar(pagina){
 
                 <div style="
                     display:flex;
+                    flex-direction: column;
                     align-items:center;
-                    gap:15px;
-                    font-size:48px;
+                    color: white;
+                    background: rgba(11, 61, 145, 0.85);
+                    padding: 12px 18px;
+                    border-radius: 6px;
+                    border-bottom: 3px solid #007A25;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                 ">
-                    🏆 👕 ⚽ 🇧🇷
+                    <span style="font-size: 24px; font-weight: bold; letter-spacing: 1px;">GARRA</span>
+                    <span style="font-size: 13px; opacity: 0.9; margin-top: 2px;">⚽ Rumo aos Objetivos</span>
                 </div>
 
             </div>
@@ -716,6 +756,19 @@ function mostrar(pagina){
                 </div>
             </div>
 
+            <div onclick="mostrar('areadogestor')" style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #f39c12; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
+                <div style="padding: 10px; background: #f39c12; color: white; text-align: center; font-weight: bold; font-size: 14px;">
+                    📊 ÁREA DO GESTOR
+                </div>
+                <div style="width: 100%; height: 140px; background: #fffbf3; border-bottom: 1px solid #f1f2f6; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 64px;">🧑‍💼</span>
+                </div>
+                <div style="padding: 15px; flex-grow: 1;">
+                    <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">💼 Painel Corporativo e Decisões</h3>
+                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Espaço restrito para lideranças. Acesse ferramentas de governança, aprovação de fluxos, análise integrada de relatórios e planejamento estratégico da DGF.</p>
+                </div>
+            </div>
+
         </div>
 
         ${anivHoje.length > 0 ? `
@@ -742,6 +795,7 @@ function mostrar(pagina){
         </div>
 
     <style>
+        /* --- ESTILOS ORIGINAIS INTACTOS --- */
         @keyframes neonPulsar {
             0%, 100% {
                 color: #00ffcc;
@@ -763,7 +817,7 @@ function mostrar(pagina){
             border-radius: 10px;
         }
         div::-webkit-scrollbar-thumb {
-            background: #0079bf; /* Cor combinando com o Trello */
+            background: #0079bf; 
             border-radius: 10px;
             border: 2px solid #e1e1e1;
         }
@@ -838,6 +892,47 @@ if(pagina === "noticias"){
     });
     
     conteudo.innerHTML = html;
+}
+
+// =========================================================
+// NOVO BLOCO ESTRUTURADO: ÁREA DO GESTOR COMO PÁGINA OFICIAL
+// =========================================================
+if (pagina === "areadogestor") {
+    // 1. Limpa os carrosséis e timers ativos para não pesar o navegador
+    if (window.intervaloPaginaRadar) { clearInterval(window.intervaloPaginaRadar); }
+    if (window.intervaloRadarDGF) { clearInterval(window.intervaloRadarDGF); }
+
+    // 2. Injeta o HTML diretamente na sua variável "conteudo" que o sistema já usa
+    conteudo.innerHTML = `
+    <div style="
+        display: flex; 
+        flex-direction: column; 
+        gap: 20px; 
+        padding: 25px;
+        background: #fff;
+        border-radius: 8px;
+        font-family: 'Segoe UI', Roboto, sans-serif;
+        border-top: 10px solid #f39c12;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        width: 100%;
+        box-sizing: border-box;
+    ">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span style="font-size: 35px;">🧑‍💼</span>
+            <div>
+                <h2 style="margin: 0; color: #2c3e50;">Área do Gestor</h2>
+                <p style="margin: 2px 0 0 0; color: #7f8c8d; font-size: 14px;">Painel de Governança Estratégica e Tomada de Decisão</p>
+            </div>
+        </div>
+        
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
+        
+        <div style="background: #fffbf3; padding: 20px; border-left: 4px solid #f39c12; border-radius: 4px;">
+            <p style="margin: 0; color: #d35400; font-weight: bold;">⚠️ Painel em desenvolvimento corporativo.</p>
+            <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Espaço reservado para inserção de relatórios consolidados, aprovações de fluxos financeiros e indicadores de equipe da DGF.</p>
+        </div>
+    </div>
+    `;
 }
 
 if (pagina === "radar_dgf") {
@@ -1876,8 +1971,7 @@ if(pagina === "organograma"){
         { nome: "Cristiane Etna da Silva Souza", cargo: "Assessor Administrativo" },
         { nome: "Cynthya Caroline Acioli Debastiani", cargo: "Assessor Administrativo" },
         { nome: "Daniel Bormolini Marques", cargo: "Assessor Administrativo" },
-		{ nome: "Diane Calas", cargo: "Assessor Administrativo" },
-        { nome: "Edinaldo Leandro Wanderley", cargo: "Apoio Administrativo" },
+		{ nome: "Edinaldo Leandro Wanderley", cargo: "Apoio Administrativo" },
         { nome: "Éder Silva Cordeiro", cargo: "Assessor Administrativo" },
         { nome: "Edson Elias de Moura Júnior", cargo: "Assessor Administrativo" },
         { nome: "Edvaldo Mendes Neves", cargo: "Assessor Administrativo" },
@@ -2668,35 +2762,35 @@ window.abrirSFES = () => {
             </div>
         </div>
 
-        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleMesaCoord('coord-frente-tesouro')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <span>🖥️ MESA 5</span>
-                <span id="seta-coord-frente-tesouro">▶</span>
-            </div>
-            <div id="coord-frente-tesouro" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
-                <div onclick="window.acenderPcDgf('fren-anapaula')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Ana Paula Moreira da Silva</div>
-                <div onclick="window.acenderPcDgf('fren-ariane')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Ariane Isabelle de Torres Valentim</div>
-                <div onclick="window.acenderPcDgf('fren-aaaaa')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">AAAAA</div>
-                <div onclick="window.acenderPcDgf('fren-gabriel')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Gabriel Pedro Gomes Costa</div>
-                <div onclick="window.acenderPcDgf('fren-jaqueline')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Jaqueline Castelo Branco Simões</div>
-                <div onclick="window.acenderPcDgf('fren-silvanir')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Silvanir Lopes da Silva</div>
-            </div>
-        </div>
+        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
+    <div onclick="window.toggleMesaCoord('coord-mesa5')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+        <span>🖥️ MESA 5</span>
+        <span id="seta-coord-mesa5">▶</span>
+    </div>
+    <div id="coord-mesa5" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
+        <div onclick="window.acenderPcDgf('fren-anapaula')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Ana Paula Moreira da Silva</div>
+        <div onclick="window.acenderPcDgf('fren-ariane')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Ariane Isabelle de Torres Valentim</div>
+        <div onclick="window.acenderPcDgf('fren-aaaaa')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Diane Calas da Silva Soares</div>
+        <div onclick="window.acenderPcDgf('fren-gabriel')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Gabriel Pedro Gomes Costa</div>
+        <div onclick="window.acenderPcDgf('fren-jaqueline')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Jaqueline Castelo Branco Simões</div>
+        <div onclick="window.acenderPcDgf('fren-silvanir')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Silvanir</div>
+    </div>
+</div>
 
-        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleMesaCoord('coord-sus')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <span>🖥️ MESA 6</span>
-                <span id="seta-coord-sus">▶</span>
-            </div>
-            <div id="coord-sus" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
-                <div onclick="window.acenderPcDgf('sus-orlandina')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Orlandina Fernandes Da Silva</div>
-                <div onclick="window.acenderPcDgf('sus-rosicleide')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Rosicleide Lima dos Santos</div>
-                <div onclick="window.acenderPcDgf('sus-mayra')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Mayra Maria Ferreira de Melo</div>
-                <div onclick="window.acenderPcDgf('sus-zenaide')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Zenaide Vasconcelos Torres</div>
-                <div onclick="window.acenderPcDgf('sus-cynthya')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Cynthya Caroline Acioli Debastiani</div>
-                <div onclick="window.acenderPcDgf('sus-gleiciany')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Gleiciany Pinto Santos</div>
-            </div>
-        </div>
+        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
+    <div onclick="window.toggleMesaCoord('coord-sus')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+        <span>🖥️ MESA 6</span>
+        <span id="seta-coord-sus">▶</span>
+    </div>
+    <div id="coord-sus" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
+        <div onclick="window.acenderPcDgf('sus-orlandina')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Orlandina Fernandes Da Silva</div>
+        <div onclick="window.acenderPcDgf('sus-rosicleide')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Rosicleide Lima dos Santos</div>
+        <div onclick="window.acenderPcDgf('sus-mayra')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Mayra Maria Ferreira de Melo</div>
+        <div onclick="window.acenderPcDgf('sus-zenaide')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Zenaide Vasconcelos Torres</div>
+        <div onclick="window.acenderPcDgf('sus-cynthya')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Cynthya Caroline Acioli Debastiani</div>
+        <div onclick="window.acenderPcDgf('sus-gleiciany')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Gleiciany Pinto Santos</div>
+    </div>
+</div>
 
         <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
             <div onclick="window.toggleMesaCoord('coord-tesouro')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">

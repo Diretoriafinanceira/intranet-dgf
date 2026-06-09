@@ -305,6 +305,7 @@ section {
                 <button onclick="mostrar('aniversariantes')">🎂 Aniversariantes</button>
                 <button onclick="mostrar('chegou')">🆕 Quem Chegou</button>
                 <button onclick="mostrar('Funcionários')">👤 Funcionários</button>
+				<button onclick="mostrar('Bolão')">⚽ Bolão da Copa do Mundo</button>
             </div>
 
             <button style="cursor: default; background: #2c3e50;">🏢 Corporativo</button>
@@ -639,6 +640,7 @@ function mostrar(pagina){
                 height: 6px;
                 background: repeating-linear-gradient(90deg, #0B3D91, #0B3D91 20px, #fff 20px, #fff 40px);
                 opacity: 0.6;
+                pointer-events: none;
             "></div>
 
             <div style="
@@ -650,6 +652,7 @@ function mostrar(pagina){
                 min-height:120px;
                 position: relative;
                 z-index: 1;
+                gap: 15px;
             ">
 
                 <div style="
@@ -710,20 +713,28 @@ function mostrar(pagina){
                     </div>
                 </div>
 
-                <div style="
-                    display:flex;
+                <button onclick="mostrar('Bolão')" style="
+                    display: flex;
                     flex-direction: column;
-                    align-items:center;
+                    align-items: center;
+                    justify-content: center;
                     color: white;
                     background: rgba(11, 61, 145, 0.85);
                     padding: 12px 18px;
                     border-radius: 6px;
+                    border: none;
                     border-bottom: 3px solid #007A25;
                     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                ">
-                    <span style="font-size: 24px; font-weight: bold; letter-spacing: 1px;">GARRA</span>
-                    <span style="font-size: 13px; opacity: 0.9; margin-top: 2px;">⚽ Rumo aos Objetivos</span>
-                </div>
+                    cursor: pointer;
+                    transition: transform 0.2s ease, background-color 0.2s ease;
+                    font-family: inherit;
+                "
+                onmouseover="this.style.background='rgba(11, 61, 145, 1)'; this.style.transform='scale(1.03)';"
+                onmouseout="this.style.background='rgba(11, 61, 145, 0.85)'; this.style.transform='scale(1)';"
+                >
+                    <span style="font-size: 24px; font-weight: bold; letter-spacing: 1px;">⚽ BOLÃO DGF</span>
+                    <span style="font-size: 13px; opacity: 0.9; margin-top: 2px;">Da Copa do Mundo</span>
+                </button>
 
             </div>
         </div>
@@ -832,12 +843,12 @@ function mostrar(pagina){
 
     // Lógica do Carrossel do Radar DGF (Loop dos gráficos)
     const graficosRadar = [
-        { nome: "CLSMO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive" },
-        { nome: "CLTESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive" },
-        { nome: "CLSUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive" },
-        { nome: "GEMP", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive" },
-        { nome: "CPAG_TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive" },
-        { nome: "CPAG_SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive" }
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - MÃO DE OBRA", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive" },
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive" },
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive" },
+        { nome: "GERÊNCIA DE EMPENHO COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive" },
+        { nome: "COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive" },
+        { nome: "COORDENAÇÃO DE PAGAMENTO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive" }
     ];
 
     let indiceAtualRadar = 0;
@@ -869,21 +880,152 @@ function mostrar(pagina){
     }, 10000); // Altera o gráfico a cada 10 segundos
 }
 
+
+
+
+if (pagina === "Bolão") {
+
+    let html = `
+    <div style="padding:20px; max-width:900px; margin:auto;">
+
+        <h1 style="
+            color:#003366;
+            font-family:'Segoe UI', Arial, sans-serif;
+            font-size:50px;
+            font-weight:bold;
+            text-align:center;
+        ">
+            ⚽ BOLÃO DGF ⚽
+        </h1>
+
+        <div style="
+            background:#fff;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+            line-height:1.8;
+            font-size:16px;
+        ">
+
+            <h2 style="color:#009c3b;">
+                🎯 Como participar
+            </h2>
+
+            <p>
+                Siga o passo a passo de 1 minuto para entrar e palpitar:
+            </p>
+
+            <p>
+                <strong>1️⃣ Acesse:</strong><br>
+                <a href="https://bolaoplay.com.br" target="_blank">
+                    bolaoplay.com.br
+                </a>
+            </p>
+
+            <p>
+                <strong>2️⃣ Faça login rápido e seguro</strong><br>
+                Informando apenas seu e-mail.
+            </p>
+
+            <p>
+                <strong>3️⃣ Entre no bolão</strong><br>
+                Digite o código:
+                <span style="
+                    color:red;
+                    font-weight:bold;
+                    font-size:20px;
+                ">
+                    QWDCPR
+                </span>
+            </p>
+
+            <p>
+                <strong>4️⃣ Crie seu apelido</strong><br>
+                E comece a pontuar.
+            </p>
+
+            <hr>
+
+            <div style="
+                text-align:center;
+                font-size:22px;
+                font-weight:bold;
+                color:#009c3b;
+            ">
+                ⚽🔥 Sem planilhas, sem confusão.<br>
+                Só a resenha e o placar em tempo real!
+            </div>
+
+            <br>
+
+            <div style="text-align:center;">
+
+                <a href="https://bolaoplay.com.br"
+                   target="_blank"
+                   style="
+                       background:#009c3b;
+                       color:white;
+                       padding:12px 25px;
+                       text-decoration:none;
+                       border-radius:6px;
+                       font-weight:bold;
+                       display:inline-block;
+                   ">
+                   🚀 ACESSAR O BOLÃO
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+    `;
+
+    conteudo.innerHTML = html;
+}
+
+
+
+
+
 if(pagina === "noticias"){
     let html = "<h2>📰 Notícias</h2>";
 
-    // Inserindo o Guia de Ajuda como a primeira notícia (no topo)
     const hoje = new Date().toLocaleDateString('pt-BR');
+
+    // 1. Inserindo o Guia de Ajuda como a primeira notícia (no topo) - Sem a imagem
     html += `
         <div class="noticia-card">
             <small style="color:#7f8c8d;">📅 ${hoje}</small>
             <h3 style="margin: 10px 0;">📌 Guia de Ajuda</h3>
-            <div style="text-align: center;">
-                <img src="ajuda.png" alt="Ajuda" style="width: 400px; max-width: 100%; border-radius: 8px; margin-top: 10px;">
-            </div>
         </div>
     `;
 
+    // 2. NOVA NOTÍCIA: Bolão da DGF (Fixa no topo junto com o guia)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #e5b800; background: #fffdf3;">
+            <small style="color:#7f8c8d;">📅 ${hoje}</small>
+            <h3 style="margin: 10px 0; color: #0b3d91;">🏆 Participe do Grande Bolão da Copa DGF!</h3>
+            <p style="line-height: 1.5; color: #2c3e50;">
+                Atenção, pessoal! Estão abertas as inscrições para o <strong>Bolão da DGF</strong>, e o melhor de tudo: <strong>é 100% gratuito!</strong>
+            </p>
+            <p style="line-height: 1.5; color: #2c3e50;">
+                Mostre que você entende de futebol e concorra a prêmios exclusivos para decorar seu espaço:
+            </p>
+            <ul style="margin: 10px 0; padding-left: 20px; color: #2c3e50; line-height: 1.5;">
+                <li>🥇 <strong>1º Lugar:</strong> Um incrível Troféu Réplica da Copa do Mundo!</li>
+                <li>🥈 <strong>Até o 5º Lugar:</strong> Mini-troféus personalizados para enfeitar a sua mesa de trabalho!</li>
+            </ul>
+            <p style="line-height: 1.5; color: #2c3e50; font-weight: bold;">
+                🤝 Integração total: O bolão está aberto para todos! Não precisa ser da DGF, colaboradores de outros setores também estão mais do que convidados a participar.
+            </p>
+            <div style="margin-top: 15px; font-style: italic; color: #7f8c8d; font-size: 13px;">
+                📍 Acesse a aba "Social > Bolão da Copa do Mundo" no menu ou clique no botão do cabeçalho para registrar seus palpites!
+            </div>
+        </div>
+    `;
+    
+    // 3. Renderiza as demais notícias cadastradas na lista
     listaNoticias.forEach((n, i) => {
         html += `
             <div class="noticia-card">
@@ -962,17 +1104,17 @@ if (pagina === "radar_dgf") {
 
     // Array com todos os seus gráficos estruturados
     const graficosPainel = [
-        { nome: "CLSMO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive", cor: "#34495e" },
-        { nome: "CLTESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive", cor: "#3498db" },
-        { nome: "CLSUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive", cor: "#e67e22" },
-        { nome: "GEMP", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive", cor: "#2ecc71" },
-        { nome: "CPAG_TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive", cor: "#e74c3c" },
-        { nome: "CPAG_SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive", cor: "#1abc9c" }
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - MÃO DE OBRA", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive", cor: "#34495e" },
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive", cor: "#3498db" },
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive", cor: "#e67e22" },
+        { nome: "GERÊNCIA DE EMPENHO COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive", cor: "#2ecc71" },
+        { nome: "COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive", cor: "#e74c3c" },
+        { nome: "COORDENAÇÃO DE PAGAMENTO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive", cor: "#1abc9c" }
     ];
 
     let indicePainel = 0;
 
-    // Monta a estrutura esticando 100% nas laterais e aplicando o redimensionamento interno
+    // Monta a estrutura com rolagem vertical e organização dos blocos
     conteudo.innerHTML = `
     <div style="
         display: flex; 
@@ -987,15 +1129,16 @@ if (pagina === "radar_dgf") {
         box-sizing: border-box;
         transition: border-color 0.5s ease;
         width: 100%;
+        overflow-y: auto;
     " id="container-painel-radar">
         
-        <div id="topo-painel-radar" style="background: ${graficosPainel[0].cor}; color: white; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 18px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: background 0.5s ease; width: 100%; box-sizing: border-box;">
+        <div id="topo-painel-radar" style="background: ${graficosPainel[0].cor}; color: white; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 18px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: background 0.5s ease; width: 100%; box-sizing: border-box; flex-shrink: 0;">
             📊 RADAR DGF: Monitoramento ${graficosPainel[0].nome}
         </div>
 
-        <div style="display: flex; flex: 1; width: 100%; gap: 15px; overflow: hidden;">
+        <div style="display: flex; width: 100%; gap: 15px; height: 650px; flex-shrink: 0;">
             
-            <div style="flex: 1; background: transparent; overflow: hidden; position: relative;">
+            <div style="flex: 1.2; background: transparent; overflow: hidden; position: relative; border: 1px solid #e0e0e0; border-radius: 8px; height: 100%;">
                 <iframe id="iframe-painel-radar" src="${graficosPainel[0].url}" 
                     style="
                         width: 111.5%; 
@@ -1012,7 +1155,7 @@ if (pagina === "radar_dgf") {
             </div>
 
             <div style="
-                width: 260px; 
+                width: 250px; 
                 background: white; 
                 border-radius: 8px; 
                 box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
@@ -1021,6 +1164,7 @@ if (pagina === "radar_dgf") {
                 flex-direction: column; 
                 gap: 10px; 
                 box-sizing: border-box;
+                height: 100%;
             ">
                 <div style="font-weight: bold; font-size: 13px; color: #7f8c8d; border-bottom: 2px solid #f4f7f6; padding-bottom: 6px; text-align: center; letter-spacing: 0.5px;">
                     🎛️ SELEÇÃO RÁPIDA
@@ -1036,14 +1180,14 @@ if (pagina === "radar_dgf") {
                                 align-items: center;
                                 gap: 10px;
                                 width: 100%;
-                                padding: 11px 12px;
+                                padding: 9px 10px;
                                 border: 1px solid ${idx === 0 ? g.cor : '#e0e0e0'};
                                 border-left: 5px solid ${g.cor};
                                 border-radius: 6px;
                                 background: ${idx === 0 ? '#f8f9fa' : '#ffffff'};
                                 color: #2c3e50;
                                 font-weight: ${idx === 0 ? 'bold' : 'normal'};
-                                font-size: 13px;
+                                font-size: 12px;
                                 cursor: pointer;
                                 text-align: left;
                                 transition: all 0.2s ease;
@@ -1051,18 +1195,41 @@ if (pagina === "radar_dgf") {
                             onmouseover="this.style.background='#f8f9fa'; this.style.transform='translateX(3px)'"
                             onmouseout="if(window.indiceRadarAtual !== ${idx}) { this.style.background='#fff'; this.style.transform='none'; } else { this.style.transform='none'; }"
                         >
-                            <span id="dot-atalho-${idx}" style="width: 8px; height: 8px; border-radius: 50%; background: ${idx === 0 ? g.cor : 'transparent'}; border: 1px solid ${idx === 0 ? 'transparent' : '#bdc3c7'};"></span>
-                            ${g.nome}
+                            <span id="dot-atalho-${idx}" style="width: 8px; height: 8px; border-radius: 50%; background: ${idx === 0 ? g.cor : 'transparent'}; border: 1px solid ${idx === 0 ? 'transparent' : '#bdc3c7'}; flex-shrink: 0;"></span>
+                            <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; width: 100%;">${g.nome}</span>
                         </button>
                     `).join('')}
                 </div>
 
                 <div style="font-size: 11px; color: #95a5a6; text-align: center; border-top: 1px solid #f4f7f6; padding-top: 8px; font-style: italic;">
-                    Clique para fixar um gráfico
+                    Fixar gráfico da lista
                 </div>
             </div>
 
         </div>
+
+        <div style="width: 100%; height: 500px; display: flex; flex-direction: column; gap: 8px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 10px; box-sizing: border-box; flex-shrink: 0; overflow-y: auto;">
+            <div style="font-weight: bold; font-size: 13px; color: #27ae60; border-bottom: 2px solid #f4f7f6; padding-bottom: 6px; text-align: center; letter-spacing: 0.5px;">
+                📊 PLANILHA DE DADOS GERAL
+            </div>
+            <div style="flex: 1; position: relative; border-radius: 4px; border: 1px solid #f0f0f0; min-height: 400px;">
+                <iframe src="https://docs.google.com/spreadsheets/d/13n59XTDICxmQS7UCWt0Z-eyeIk6raZSd55MdGGG33ZA/edit?usp=sharing&rm=minimal" 
+                        style="width: 100%; height: 100%; border: none;">
+                </iframe>
+            </div>
+        </div>
+
+        <div style="width: 100%; height: 500px; display: flex; flex-direction: column; gap: 8px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 10px; box-sizing: border-box; flex-shrink: 0; overflow-y: auto;">
+            <div style="font-weight: bold; font-size: 13px; color: #2980b9; border-bottom: 2px solid #f4f7f6; padding-bottom: 6px; text-align: center; letter-spacing: 0.5px;">
+                📈 PLANILHA DE RELATÓRIOS
+            </div>
+            <div style="flex: 1; position: relative; border-radius: 4px; border: 1px solid #f0f0f0; min-height: 400px;">
+                <iframe src="https://docs.google.com/spreadsheets/d/1iLNYGCyUj9ua0PTvZK2YLD2s4jYbObNG/edit?usp=sharing&ouid=105842997163149787413&rtpof=true&sd=true&rm=minimal" 
+                        style="width: 100%; height: 100%; border: none;">
+                </iframe>
+            </div>
+        </div>
+
     </div>
     `;
 
@@ -1071,7 +1238,7 @@ if (pagina === "radar_dgf") {
 
     // Função interna que gerencia a atualização visual completa ao mudar de gráfico
     const atualizarInterfaceRadar = (novoIndice) => {
-        window.indiceRadarAtual = novoIndice;
+        window.indiceRadarAtual = !isNaN(novoIndice) ? novoIndice : 0;
         indicePainel = novoIndice;
         
         const container = document.getElementById("container-painel-radar");
@@ -1082,7 +1249,6 @@ if (pagina === "radar_dgf") {
             const grafico = graficosPainel[novoIndice];
             iframe.src = grafico.url;
 
-            // ALTERAÇÃO REALIZADA AQUI: A interface agora muda na hora (sem esperar o iframe.onload)
             topo.innerHTML = `📊 RADAR DGF: Monitoramento ${grafico.nome}`;
             topo.style.background = grafico.cor;
             container.style.borderTopColor = grafico.cor;
@@ -2601,8 +2767,16 @@ window.abrirSFES = () => {
 
                     <rect x="370" y="30" width="320" height="60" class="mesa-dgf" />
                     <text x="530" y="60" class="numero-mesa">MESA 1</text>
-                    <rect x="385" y="35" width="22" height="12" class="pc-dgf" /> <rect x="460" y="35" width="22" height="12" class="pc-dgf" /> <rect x="535" y="35" width="22" height="12" class="pc-dgf" /> <rect x="610" y="35" width="22" height="12" class="pc-dgf" />
-                    <rect x="385" y="73" width="22" height="12" class="pc-dgf" /> <rect x="460" y="73" width="22" height="12" class="pc-dgf" /> <rect x="535" y="73" width="22" height="12" class="pc-dgf" /> <rect x="610" y="73" width="22" height="12" class="pc-dgf" />
+
+                    <rect id="m1-thaislan" x="385" y="35" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m1-joelson" x="460" y="35" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m1-carla" x="535" y="35" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m1-adjair" x="610" y="35" width="22" height="12" class="pc-dgf" />
+
+                    <rect id="m1-vago1" x="385" y="73" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m1-lilian" x="460" y="73" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m1-julia" x="535" y="73" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m1-nadja" x="610" y="73" width="22" height="12" class="pc-dgf" />
 
                     <rect x="730" y="20" width="150" height="170" class="setor-sala" onclick="alert('Setor: GPAG')" />
                     <text x="805" y="105" text-anchor="middle" class="label-sala">GPAG</text>
@@ -2640,8 +2814,16 @@ window.abrirSFES = () => {
 
                     <rect x="370" y="140" width="320" height="60" class="mesa-dgf" />
                     <text x="530" y="170" class="numero-mesa">MESA 2</text>
-                    <rect x="385" y="145" width="22" height="12" class="pc-dgf" /> <rect x="460" y="145" width="22" height="12" class="pc-dgf" /> <rect x="535" y="145" width="22" height="12" class="pc-dgf" /> <rect x="610" y="145" width="22" height="12" class="pc-dgf" />
-                    <rect x="385" y="183" width="22" height="12" class="pc-dgf" /> <rect x="460" y="183" width="22" height="12" class="pc-dgf" /> <rect x="535" y="183" width="22" height="12" class="pc-dgf" /> <rect x="610" y="183" width="22" height="12" class="pc-dgf" />
+
+                    <rect id="m2-pettersson" x="385" y="145" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m2-anny" x="460" y="145" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m2-mauricio" x="535" y="145" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m2-gabriel" x="610" y="145" width="22" height="12" class="pc-dgf" />
+
+                    <rect id="m2-jonas" x="385" y="183" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m2-marcio" x="460" y="183" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m2-wilson" x="535" y="183" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m2-daniel" x="610" y="183" width="22" height="12" class="pc-dgf" />
 
                     <rect x="370" y="220" width="320" height="60" class="mesa-dgf" />
                     <text x="530" y="250" class="numero-mesa">MESA 3</text>
@@ -2651,8 +2833,16 @@ window.abrirSFES = () => {
 
                     <rect x="370" y="300" width="320" height="60" class="mesa-dgf" />
                     <text x="530" y="330" class="numero-mesa">MESA 4</text>
-                    <rect x="385" y="305" width="22" height="12" class="pc-dgf" /> <rect x="460" y="305" width="22" height="12" class="pc-dgf" /> <rect x="535" y="305" width="22" height="12" class="pc-dgf" /> <rect x="610" y="305" width="22" height="12" class="pc-dgf" />
-                    <rect x="385" y="343" width="22" height="12" class="pc-dgf" /> <rect x="460" y="343" width="22" height="12" class="pc-dgf" /> <rect x="535" y="343" width="22" height="12" class="pc-dgf" /> <rect x="610" y="343" width="22" height="12" class="pc-dgf" />
+
+                    <rect id="m4-stephany" x="385" y="305" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m4-pedro" x="460" y="305" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m4-edinaldo" x="535" y="305" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m4-vago1" x="610" y="305" width="22" height="12" class="pc-dgf" />
+
+                    <rect id="m4-vago4" x="385" y="343" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m4-eder" x="460" y="343" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m4-vago3" x="535" y="343" width="22" height="12" class="pc-dgf" /> 
+                    <rect id="m4-vago2" x="610" y="343" width="22" height="12" class="pc-dgf" />
 
                     <rect x="580" y="375" width="60" height="110" class="mesa-dgf" /> 
                     <text x="610" y="430" class="numero-mesa" style="writing-mode: vertical-lr;">MESA 5</text>
@@ -2665,8 +2855,14 @@ window.abrirSFES = () => {
 
                     <rect x="230" y="375" width="60" height="110" class="mesa-dgf" /> 
                     <text x="260" y="430" class="numero-mesa" style="writing-mode: vertical-lr;">MESA 11</text>
-                    <rect x="235" y="385" width="10" height="22" class="pc-dgf" /> <rect x="235" y="419" width="10" height="22" class="pc-dgf" /> <rect x="235" y="453" width="10" height="22" class="pc-dgf" />
-                    <rect x="275" y="385" width="10" height="22" class="pc-dgf" /> <rect x="275" y="419" width="10" height="22" class="pc-dgf" /> <rect x="275" y="453" width="10" height="22" class="pc-dgf" />
+
+                    <rect id="m11-mariaconceicao" x="235" y="385" width="10" height="22" class="pc-dgf" /> 
+                    <rect id="m11-adrielly" x="235" y="419" width="10" height="22" class="pc-dgf" /> 
+                    <rect id="m11-helena" x="235" y="453" width="10" height="22" class="pc-dgf" />
+
+                    <rect id="m11-irailda" x="275" y="385" width="10" height="22" class="pc-dgf" /> 
+                    <rect id="m11-anaelizabeth" x="275" y="419" width="10" height="22" class="pc-dgf" /> 
+                    <rect id="m11-rosileide" x="275" y="453" width="10" height="22" class="pc-dgf" />
 
                     <rect x="420" y="375" width="60" height="110" class="mesa-dgf" /> 
                     <text x="450" y="430" class="numero-mesa" style="writing-mode: vertical-lr;">MESA 6</text>
@@ -2679,8 +2875,14 @@ window.abrirSFES = () => {
 
                     <rect x="70" y="375" width="60" height="110" class="mesa-dgf" /> 
                     <text x="100" y="430" class="numero-mesa" style="writing-mode: vertical-lr;">MESA 12</text>
-                    <rect x="75" y="385" width="10" height="22" class="pc-dgf" /> <rect x="75" y="419" width="10" height="22" class="pc-dgf" /> <rect x="75" y="453" width="10" height="22" class="pc-dgf" />
-                    <rect x="115" y="385" width="10" height="22" class="pc-dgf" /> <rect x="115" y="419" width="10" height="22" class="pc-dgf" /> <rect x="115" y="453" width="10" height="22" class="pc-dgf" />
+
+                    <rect id="m12-ianfelipe" x="75" y="385" width="10" height="22" class="pc-dgf" /> 
+                    <rect id="m12-helenamartins" x="75" y="419" width="10" height="22" class="pc-dgf" /> 
+                    <rect id="m12-veronica" x="75" y="453" width="10" height="22" class="pc-dgf" />
+
+                    <rect id="m12-mariawilza" x="115" y="385" width="10" height="22" class="pc-dgf" /> 
+                    <rect id="m12-thiago" x="115" y="419" width="10" height="22" class="pc-dgf" /> 
+                    <rect id="m12-fabiana" x="115" y="453" width="10" height="22" class="pc-dgf" />
 
                     <g style="cursor: pointer;" onclick="alert('Equipamento de Segurança: Hidrante')">
                         <circle cx="355" cy="495" r="14" fill="#e74c3c" stroke="#ffffff" stroke-width="2" />
@@ -2712,14 +2914,14 @@ window.abrirSFES = () => {
 
                     <rect x="20" y="560" width="320" height="40" class="mesa-dgf" />
                     <text x="180" y="580" class="numero-mesa">MESA 14</text>
-                    <rect x="260" y="565" width="22" height="10" class="pc-dgf" />
-                    <rect x="185" y="565" width="22" height="10" class="pc-dgf" />
-                    <rect x="110" y="565" width="22" height="10" class="pc-dgf" />
-                    <rect x="35" y="565" width="22" height="10" class="pc-dgf" />
-                    <rect x="260" y="585" width="22" height="10" class="pc-dgf" />
-                    <rect x="185" y="585" width="22" height="10" class="pc-dgf" />
-                    <rect x="110" y="585" width="22" height="10" class="pc-dgf" />
-                    <rect x="35" y="585" width="22" height="10" class="pc-dgf" />
+                    <rect id="m14-anapaula" x="260" y="565" width="22" height="10" class="pc-dgf" />
+                    <rect id="m14-camila" x="185" y="565" width="22" height="10" class="pc-dgf" />
+                    <rect id="m14-paloma" x="110" y="565" width="22" height="10" class="pc-dgf" />
+                    <rect id="m14-mariadores" x="35" y="565" width="22" height="10" class="pc-dgf" />
+                    <rect id="m14-mariawilza" x="260" y="585" width="22" height="10" class="pc-dgf" />
+                    <rect id="m14-wanessa" x="185" y="585" width="22" height="10" class="pc-dgf" />
+                    <rect id="m14-henrique" x="110" y="585" width="22" height="10" class="pc-dgf" />
+                    <rect id="m14-vago" x="35" y="585" width="22" height="10" class="pc-dgf" />
 
                     <rect x="20" y="610" width="320" height="40" class="mesa-dgf" />
                     <text x="180" y="630" class="numero-mesa">MESA 15</text>
@@ -2738,25 +2940,39 @@ window.abrirSFES = () => {
     
     <div style="flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 8px;">
         
-        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleMesaCoord('coord-contas')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <span>🖥️ MESA 1</span>
-                <span id="seta-coord-contas">▶</span>
-            </div>
-            <div id="coord-contas" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
-                <div style="padding: 6px 10px; font-size: 12px; color: #b2bec3; font-style: italic;">Nenhum usuário cadastrado</div>
-            </div>
-        </div>
+       <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
+    <div onclick="window.toggleMesaCoord('coord-mesa1')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+        <span>🖥️ MESA 1</span>
+        <span id="seta-coord-mesa1">▶</span>
+    </div>
+    <div id="coord-mesa1" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
+        <div onclick="window.acenderPcDgf('m1-thaislan')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Thaislan Wisles da Silva</div>
+        <div onclick="window.acenderPcDgf('m1-joelson')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Joelson Pereira Mota</div>
+        <div onclick="window.acenderPcDgf('m1-carla')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Carla Andressa Farias da Fonsêca Ferraz</div>
+        <div onclick="window.acenderPcDgf('m1-adjair')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Adjair Jordão De Aragão</div>
+        <div onclick="window.acenderPcDgf('m1-vago1')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">VAGO</div>
+        <div onclick="window.acenderPcDgf('m1-lilian')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Lilian</div>
+        <div onclick="window.acenderPcDgf('m1-julia')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Julia</div>
+        <div onclick="window.acenderPcDgf('m1-nadja')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Nadja Cristina Aleixo Costa</div>
+    </div>
+</div>
 
-        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleMesaCoord('coord-mesa2')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <span>🖥️ MESA 2</span>
-                <span id="seta-coord-mesa2">▶</span>
-            </div>
-            <div id="coord-mesa2" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
-                <div style="padding: 6px 10px; font-size: 12px; color: #b2bec3; font-style: italic;">Nenhum usuário cadastrado</div>
-            </div>
-        </div>
+        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
+    <div onclick="window.toggleMesaCoord('coord-mesa2')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+        <span>🖥️ MESA 2</span>
+        <span id="seta-coord-mesa2">▶</span>
+    </div>
+    <div id="coord-mesa2" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
+        <div onclick="window.acenderPcDgf('m2-pettersson')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Pettersson Steffanno Nascimento dos Santos</div>
+        <div onclick="window.acenderPcDgf('m2-anny')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Anny Livia Augusto de Melo</div>
+        <div onclick="window.acenderPcDgf('m2-mauricio')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Maurício Barbosa Ferreira Júnior</div>
+        <div onclick="window.acenderPcDgf('m2-gabriel')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Gabriel Bezerra Rozendo de Souza</div>
+        <div onclick="window.acenderPcDgf('m2-jonas')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Jonas Gonçalves do Nascimento Junior</div>
+        <div onclick="window.acenderPcDgf('m2-marcio')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Márcio Domingues Soares</div>
+        <div onclick="window.acenderPcDgf('m2-wilson')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Wilson</div>
+        <div onclick="window.acenderPcDgf('m2-daniel')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Daniel Bormolini Marques</div>
+    </div>
+</div>
         
         <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleMesaCoord('coord-mesa3')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2768,15 +2984,22 @@ window.abrirSFES = () => {
             </div>
         </div>
 
-        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleMesaCoord('coord-mesa4')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <span>🖥️ MESA 4</span>
-                <span id="seta-coord-mesa4">▶</span>
-            </div>
-            <div id="coord-mesa4" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
-                <div style="padding: 6px 10px; font-size: 12px; color: #b2bec3; font-style: italic;">Nenhum usuário cadastrado</div>
-            </div>
-        </div>
+        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
+    <div onclick="window.toggleMesaCoord('coord-mesa4')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+        <span>🖥️ MESA 4</span>
+        <span id="seta-coord-mesa4">▶</span>
+    </div>
+    <div id="coord-mesa4" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
+        <div onclick="window.acenderPcDgf('m4-vago1')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">VAGO</div>
+        <div onclick="window.acenderPcDgf('m4-edinaldo')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Edinaldo Leandro Wanderley</div>
+        <div onclick="window.acenderPcDgf('m4-pedro')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Pedro Henrique Da Silva Lima</div>
+        <div onclick="window.acenderPcDgf('m4-stephany')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Stephany Caroline Gomes Martins</div>
+        <div onclick="window.acenderPcDgf('m4-vago2')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">VAGO</div>
+        <div onclick="window.acenderPcDgf('m4-vago3')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">VAGO</div>
+        <div onclick="window.acenderPcDgf('m4-eder')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Eder</div>
+        <div onclick="window.acenderPcDgf('m4-vago4')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">VAGO</div>
+    </div>
+</div>
 
         <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
     <div onclick="window.toggleMesaCoord('coord-mesa5')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2789,7 +3012,7 @@ window.abrirSFES = () => {
         <div onclick="window.acenderPcDgf('fren-aaaaa')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Diane Calas da Silva Soares</div>
         <div onclick="window.acenderPcDgf('fren-gabriel')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Gabriel Pedro Gomes Costa</div>
         <div onclick="window.acenderPcDgf('fren-jaqueline')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Jaqueline Castelo Branco Simões</div>
-        <div onclick="window.acenderPcDgf('fren-silvanir')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Silvanir Lopes da Silva</div>
+        <div onclick="window.acenderPcDgf('fren-silvanir')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Silvanir</div>
     </div>
 </div>
 
@@ -2855,25 +3078,41 @@ window.abrirSFES = () => {
             </div>
         </div>
 
-        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleMesaCoord('coord-mesa11')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <span>🖥️ MESA 11</span>
-                <span id="seta-coord-mesa11">▶</span>
-            </div>
-            <div id="coord-mesa11" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
-                <div style="padding: 6px 10px; font-size: 12px; color: #b2bec3; font-style: italic;">Nenhum usuário cadastrado</div>
-            </div>
-        </div>
+        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
+    <div onclick="window.toggleMesaCoord('coord-mesa11')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+        <span>🖥️ MESA 11</span>
+        <span id="seta-coord-mesa11">▶</span>
+    </div>
+    <div id="coord-mesa11" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
+        
+        <div onclick="window.acenderPcDgf('m11-rosileide')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Rosileide Correia Brasil</div>
+        <div onclick="window.acenderPcDgf('m11-anaelizabeth')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Ana Elizabeth Gomes Lessa</div>
+        <div onclick="window.acenderPcDgf('m11-irailda')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Irailda Evangelista da Silva</div>
+        
+        <div onclick="window.acenderPcDgf('m11-helena')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Helena Cristina Reis Paes Pinto</div>
+        <div onclick="window.acenderPcDgf('m11-adrielly')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Adrielly Estevão dos Santos</div>
+        <div onclick="window.acenderPcDgf('m11-mariaconceicao')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Maria da Conceição Araújo Lopes Silva</div>
+        
+    </div>
+</div>
 
-        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleMesaCoord('coord-mesa12')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <span>🖥️ MESA 12</span>
-                <span id="seta-coord-mesa12">▶</span>
-            </div>
-            <div id="coord-mesa12" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
-                <div style="padding: 6px 10px; font-size: 12px; color: #b2bec3; font-style: italic;">Nenhum usuário cadastrado</div>
-            </div>
-        </div>
+        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
+    <div onclick="window.toggleMesaCoord('coord-mesa12')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+        <span>🖥️ MESA 12</span>
+        <span id="seta-coord-mesa12">▶</span>
+    </div>
+    <div id="coord-mesa12" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
+        
+        <div onclick="window.acenderPcDgf('m12-fabiana')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Fabiana Martins de souza</div>
+        <div onclick="window.acenderPcDgf('m12-thiago')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Thiago Felipe Mendes Costa</div>
+        <div onclick="window.acenderPcDgf('m12-mariawilza')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Maria Wilza Arraes Alencar</div>
+        
+        <div onclick="window.acenderPcDgf('m12-veronica')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Veronica Soares Dubeux</div>
+        <div onclick="window.acenderPcDgf('m12-helenamartins')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Helena Martins de Melo</div>
+        <div onclick="window.acenderPcDgf('m12-ianfelipe')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Ian Felipe Chagas</div>
+        
+    </div>
+</div>
 
         <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
             <div onclick="window.toggleMesaCoord('coord-mesa13')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2892,15 +3131,25 @@ window.abrirSFES = () => {
             </div>
         </div>
 
-        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleMesaCoord('coord-mesa14')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <span>🖥️ MESA 14</span>
-                <span id="seta-coord-mesa14">▶</span>
-            </div>
-            <div id="coord-mesa14" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
-                <div style="padding: 6px 10px; font-size: 12px; color: #b2bec3; font-style: italic;">Nenhum usuário cadastrado</div>
-            </div>
-        </div>
+        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
+    <div onclick="window.toggleMesaCoord('coord-mesa14')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+        <span>🖥️ MESA 14</span>
+        <span id="seta-coord-mesa14">▶</span>
+    </div>
+    <div id="coord-mesa14" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
+        
+        <div onclick="window.acenderPcDgf('m14-anapaula')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Ana Paula do Nascimento</div>
+        <div onclick="window.acenderPcDgf('m14-camila')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Camila Menezes Vinhaes</div>
+        <div onclick="window.acenderPcDgf('m14-paloma')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Paloma Beatriz de Oliveira Costa</div>
+        <div onclick="window.acenderPcDgf('m14-mariadores')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Maria das Dores Silva</div>
+        
+        <div onclick="window.acenderPcDgf('m14-mariawilza')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Maria Wilza Arraes Alencar</div>
+        <div onclick="window.acenderPcDgf('m14-wanessa')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Wanessa dos Santos Oliveira</div>
+        <div onclick="window.acenderPcDgf('m14-henrique')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Henrique Mateus Batista</div>
+        <div onclick="window.acenderPcDgf('m14-vago')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">VAGO</div>
+        
+    </div>
+</div>
 
         <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleMesaCoord('coord-mesa15')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">

@@ -285,10 +285,11 @@ section {
 
             <button style="cursor: default; background: #2c3e50;">📢 Comunicação</button>
             <div id="submenuComunicacao" class="submenu">
+			<button onclick="mostrar('noticias')">📰 Notícias</button>
 			    <button onclick="mostrar('central_notas')">📝 Central de Notas</button>
 				<button onclick="mostrar('coordtech')">🚀coordtech</button>
 				<button onclick="mostrar('radar_dgf')">📉 Radar DGF</button>
-                <button onclick="mostrar('noticias')">📰 Notícias</button>
+                <button onclick="mostrar('relatorio')">📊 Relatório</button>
                 <button onclick="mostrar('eventos')">📅 Agenda de Eventos</button>
             </div>
 
@@ -417,7 +418,7 @@ const listaAniversariantes = [
     { nome: "ROBERTO XISTO VILELA", data: "09/03", superintendência: "Superintendência do Fundo Estadual de Saúde" },
     { nome: "Viviane Silva de Lima", data: "26/03", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Izabelly de Araujo Lopes", data: "14/06", superintendência: "Superintendência Financeira de Prestação de Contas" },
-    { nome: "Leyriane Serly Xavier da Silva", data: "05/03", superintendência: "Superintendência do Fundo Estadual de Saúde" },
+	{ nome: "Luiz Gustavo Almeida da Costa", data: "08/04", superintendência: "Superintendência do Fundo Estadual de Saúde" },
     { nome: "thais keila emidia de souza", data: "23/07", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "KATARINA RIBEIRO BARBOSA DA COSTA", data: "27/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
     { nome: "Rosileide Correia Brasil", data: "14/04", superintendência: "Superintendência Financeira de Prestação de Contas" },
@@ -430,11 +431,9 @@ const listaAniversariantes = [
     { nome: "Wanessa Louise Lima dos Santos", data: "04/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
     { nome: "ANA CAROLINE NOBRE NASCIMENTO", data: "29/08", superintendência: "Superintendência do Fundo Estadual de Saúde" },
     { nome: "Ariane Isabelle de Torres Valentim", data: "28/02", superintendência: "Superintendência do Fundo Estadual de Saúde" },
-    { nome: "Tatiane Rosilene da Silva", data: "09/06", superintendência: "Superintendência Financeira de Emendas Parlamentares" },
-    { nome: "Charlene Silva de santana", data: "01/09", superintendência: "Superintendência Financeira de Emendas Parlamentares" },
+        { nome: "Charlene Silva de santana", data: "01/09", superintendência: "Superintendência Financeira de Emendas Parlamentares" },
     { nome: "Carla Gomes Costa", data: "10/12", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Rhebeca Borges Finizola", data: "07/01", superintendência: "Superintendência Financeira de Emendas Parlamentares" },
-    { nome: "Iasmim Santos Veloso Silva", data: "15/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
     { nome: "Tiago Muniz de Araujo", data: "24/01", superintendência: "Superintendência Financeira de Emendas Parlamentares" },
     { nome: "ALEXANDRE RIBEIRO DE MOURA MOTA", data: "02/09", superintendência: "Superintendência do Fundo Estadual de Saúde" },
     { nome: "Gabriel Pedro Gomes Costa", data: "13/05", superintendência: "Superintendência Financeira de Emendas Parlamentares" },
@@ -543,6 +542,7 @@ const listaAniversariantes = [
 	{ nome: "Diane Calas", data: "25/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Monica Bernardo da silva", data: "10/05", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Alexandre Gomes do Nascimento", data: "30/05", superintendência: "Superintendência Financeira de Prestação de Contas" },
+	{ nome: "Ana Paula Moreira da Silva", data: "24/06", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Zenaide Vasconcelos Torres", data: "19/06", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Adson Rodrigues da Silva", data: "06/03", superintendência: "Superintendência Financeira de Prestação de Contas" }
 ];
@@ -584,7 +584,7 @@ function detalharSetor(nome, resp, ramal) {
 function mostrar(pagina){
     let conteudo = document.getElementById("conteudo");
  
-    if (pagina === "home") {
+   if (pagina === "home") {
     // Captura a data de hoje no formato DD/MM (ex: 18/05)
     const hojeData = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
     
@@ -672,7 +672,7 @@ function mostrar(pagina){
                     font-family: inherit;
                 "
                 onmouseover="this.style.background='rgba(11, 61, 145, 1)'; this.style.transform='scale(1.03)';"
-                onmouseout="this.style.background='rgba(11, 61, 145, 0.85)'; this.style.transform='scale(1)';"
+                onmouseout="this.style.background='rgba(11, 61, 145, 0.85)'; this.style.transform='scale(1)'"
                 >
                     <span style="font-size: 24px; font-weight: bold; letter-spacing: 1px;">📚 CLUBE DO LIVRO</span>
                     <span style="font-size: 13px; opacity: 0.9; margin-top: 2px;">Cultura & Conhecimento</span>
@@ -738,7 +738,7 @@ function mostrar(pagina){
                     font-family: inherit;
                 "
                 onmouseover="this.style.background='rgba(11, 61, 145, 1)'; this.style.transform='scale(1.03)';"
-                onmouseout="this.style.background='rgba(11, 61, 145, 0.85)'; this.style.transform='scale(1)';"
+                onmouseout="this.style.background='rgba(11, 61, 145, 0.85)'; this.style.transform='scale(1)'"
                 >
                     <span style="font-size: 24px; font-weight: bold; letter-spacing: 1px;">⚽ BOLÃO DGF</span>
                     <span style="font-size: 13px; opacity: 0.9; margin-top: 2px;">Da Copa do Mundo</span>
@@ -765,6 +765,19 @@ function mostrar(pagina){
                 </div>
             </div>
 
+            <div onclick="mostrar('areadogestor')" style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #f39c12; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
+                <div style="padding: 10px; background: #f39c12; color: white; text-align: center; font-weight: bold; font-size: 14px;">
+                    📊 ÁREA DO GESTOR
+                </div>
+                <div style="width: 100%; height: 140px; background: #fffbf3; border-bottom: 1px solid #f1f2f6; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 64px;">🧑‍💼</span>
+                </div>
+                <div style="padding: 15px; flex-grow: 1;">
+                    <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">💼 Painel Corporativo e Decisões</h3>
+                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Espaço restrito para lideranças. Acesse ferramentas de governança, aprovação de fluxos, análise integrada de relatórios e planejamento estratégico da DGF.</p>
+                </div>
+            </div>
+
             <div onclick="mostrar('radar_dgf')" style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #9b59b6; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
                 <div style="padding: 10px; background: #9b59b6; color: white; text-align: center; font-weight: bold; font-size: 14px;">
                     📊 RADAR DGF
@@ -778,16 +791,16 @@ function mostrar(pagina){
                 </div>
             </div>
 
-            <div onclick="mostrar('areadogestor')" style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #f39c12; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
-                <div style="padding: 10px; background: #f39c12; color: white; text-align: center; font-weight: bold; font-size: 14px;">
-                    📊 ÁREA DO GESTOR
+            <div onclick="mostrar('relatorio')" style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #3498db; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
+                <div style="padding: 10px; background: #3498db; color: white; text-align: center; font-weight: bold; font-size: 14px;">
+                    📊 RELATÓRIOS GERAIS
                 </div>
-                <div style="width: 100%; height: 140px; background: #fffbf3; border-bottom: 1px solid #f1f2f6; display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 64px;">🧑‍💼</span>
+                <div style="width: 100%; height: 140px; background: #f3f9fc; border-bottom: 1px solid #f1f2f6; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 64px;">📊</span>
                 </div>
                 <div style="padding: 15px; flex-grow: 1;">
-                    <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">💼 Painel Corporativo e Decisões</h3>
-                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Espaço restrito para lideranças. Acesse ferramentas de governança, aprovação de fluxos, análise integrada de relatórios e planejamento estratégico da DGF.</p>
+                    <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📈 Indicadores e Planilhas Integradas</h3>
+                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Consulte as planilhas consolidadas de desempenho, dados operacionais automatizados e métricas analíticas completas da DGF em tempo real.</p>
                 </div>
             </div>
 
@@ -887,6 +900,61 @@ function mostrar(pagina){
         }
     }, 10000); // Altera o gráfico a cada 10 segundos
 }
+
+// === BLOCO DO RELATÓRIO COM PLANILHAS INCORPORADAS ===
+    else if (pagina === "relatorio") {
+        conteudo.innerHTML = `
+        <div style="
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+            padding: 25px;
+            background: #fff;
+            border-radius: 8px;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            border-top: 10px solid #3498db;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 100%;
+            box-sizing: border-box;
+        ">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="font-size: 35px;">📊</span>
+                <div>
+                    <h2 style="margin: 0; color: #2c3e50;">Relatórios Gerais</h2>
+                    <p style="margin: 2px 0 0 0; color: #7f8c8d; font-size: 14px;">Consulte os dados das planilhas diretamente abaixo</p>
+                </div>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
+
+            <div style="display: flex; flex-direction: column; gap: 30px;">
+                
+                <div>
+                    <h3 style="margin: 0 0 10px 0; color: #27ae60; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                        📈 Planilha de Relatório da OSS
+                    </h3>
+                    <iframe 
+                        src="https://docs.google.com/spreadsheets/d/13n59XTDICxmQS7UCWt0Z-eyeIk6raZSd55MdGGG33ZA/edit?rm=minimal" 
+                        style="width: 100%; height: 500px; border: 1px solid #ccc; border-radius: 6px;" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <div>
+                    <h3 style="margin: 0 0 10px 0; color: #2ecc71; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                        📈 Planilha de Relatório
+                    </h3>
+                    <iframe 
+                        src="https://docs.google.com/spreadsheets/d/1iLNYGCyUj9ua0PTvZK2YLD2s4jYbObNG/edit?rm=minimal" 
+                        style="width: 100%; height: 500px; border: 1px solid #ccc; border-radius: 6px;" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+            </div>
+        </div>
+        `;
+    }
 
 
 
@@ -1143,7 +1211,7 @@ if (pagina === "radar_dgf") {
 
     let indicePainel = 0;
 
-    // Monta a estrutura com rolagem vertical e organização dos blocos
+    // Monta a estrutura com rolagem vertical e organização dos blocos (apenas a parte superior)
     conteudo.innerHTML = `
     <div style="
         display: flex; 
@@ -1235,28 +1303,6 @@ if (pagina === "radar_dgf") {
                 </div>
             </div>
 
-        </div>
-
-        <div style="width: 100%; height: 500px; display: flex; flex-direction: column; gap: 8px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 10px; box-sizing: border-box; flex-shrink: 0; overflow-y: auto;">
-            <div style="font-weight: bold; font-size: 13px; color: #27ae60; border-bottom: 2px solid #f4f7f6; padding-bottom: 6px; text-align: center; letter-spacing: 0.5px;">
-                📊 PLANILHA DE DADOS GERAL
-            </div>
-            <div style="flex: 1; position: relative; border-radius: 4px; border: 1px solid #f0f0f0; min-height: 400px;">
-                <iframe src="https://docs.google.com/spreadsheets/d/13n59XTDICxmQS7UCWt0Z-eyeIk6raZSd55MdGGG33ZA/edit?usp=sharing&rm=minimal" 
-                        style="width: 100%; height: 100%; border: none;">
-                </iframe>
-            </div>
-        </div>
-
-        <div style="width: 100%; height: 500px; display: flex; flex-direction: column; gap: 8px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 10px; box-sizing: border-box; flex-shrink: 0; overflow-y: auto;">
-            <div style="font-weight: bold; font-size: 13px; color: #2980b9; border-bottom: 2px solid #f4f7f6; padding-bottom: 6px; text-align: center; letter-spacing: 0.5px;">
-                📈 PLANILHA DE RELATÓRIOS
-            </div>
-            <div style="flex: 1; position: relative; border-radius: 4px; border: 1px solid #f0f0f0; min-height: 400px;">
-                <iframe src="https://docs.google.com/spreadsheets/d/1iLNYGCyUj9ua0PTvZK2YLD2s4jYbObNG/edit?usp=sharing&ouid=105842997163149787413&rtpof=true&sd=true&rm=minimal" 
-                        style="width: 100%; height: 100%; border: none;">
-                </iframe>
-            </div>
         </div>
 
     </div>
@@ -2060,6 +2106,7 @@ if(pagina === "organograma"){
         { nome: "Romero Cavalcanti Barreto da Silva", cargo: "COORD. Liquidação Tesouro", data: "Maio/2026" },
 		{ nome: "Monica Bernardo da silva", cargo: "GPC- OSS", data: "Maio/2026" },
 		{ nome: "Alexandre Gomes do Nascimento", cargo: "GPC- OSS", data: "Maio/2026" },
+		{ nome: "Luiz Gustavo Almeida da Costa", cargo: "GEMP", data: "Maio/2026" },
 		{ nome: "Adson Rodrigues da Silva", cargo: "GPC- OSS", data: "Maio/2026" }
 		];
 
@@ -2198,7 +2245,6 @@ if(pagina === "organograma"){
         { nome: "Idalmi Viturino Sobrinho", cargo: "Assessor Técnico" },
         { nome: "Igor Murilo de Andrade Silva", cargo: "Assessor Administrativo" },
         { nome: "Irailda Evangelista da Silva", cargo: "Assessor Administrativo" },
-        { nome: "Iasmim Santos Veloso Silva", cargo: "Assessor Administrativo" },
         { nome: "Ivandete Severina da Silva", cargo: "Assessor Administrativo" },
         { nome: "Jaqueline Castelo Branco Simões", cargo: "Assessor Técnico" },
         { nome: "Jéssica Ferreira de Freitas Lima", cargo: "Assessor Técnico" },
@@ -2211,8 +2257,8 @@ if(pagina === "organograma"){
         { nome: "Larissa Cristina Simões dos Santos", cargo: "Assessor Administrativo" },
         { nome: "Laryssa Cristina de Moura Felix", cargo: "Assessor Administrativo" },
         { nome: "Laudeci Gomes do Nascimento", cargo: "Assessor Administrativo" },
-        { nome: "Leyriane Serly Xavier da Silva", cargo: "Assessor Administrativo" },
         { nome: "Lívia da Silva Santos", cargo: "Assessor Administrativo" },
+		{ nome: "Luiz Gustavo Almeida da Costa", cargo: "Assistente administrativo"},
         { nome: "Márcio Domingues Soares", cargo: "Assessor Administrativo" },
         { nome: "Marcela Mirelle Arruda Bezerra", cargo: "Assessor Administrativo" },
         { nome: "Maria da Conceição Araújo Lopes Silva", cargo: "Assessor Administrativo" },

@@ -578,11 +578,11 @@ function detalharSetor(nome, resp, ramal) {
     document.getElementById('det-ramal').innerText = ramal;
     document.getElementById('detalhes-setor').scrollIntoView({ behavior: 'smooth' });
 }
-	
-	function mostrar(pagina){
-    let conteudo = document.getElementById("conteudo");
 
-if (pagina === "home") {
+function mostrar(pagina){
+    let conteudo = document.getElementById("conteudo");
+ 
+   if (pagina === "home") {
     // Captura a data de hoje no formato DD/MM (ex: 18/05)
     const hojeData = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
     
@@ -745,42 +745,52 @@ if (pagina === "home") {
             </div>
         </div>
 
-        <div style="text-align: center; margin-bottom: -10px; font-family: 'Segoe UI', Roboto, sans-serif; flex-shrink: 0;">
-            <span style="font-size: 16px; font-weight: 800; color: #007A25; text-transform: uppercase; letter-spacing: 1.5px;">
-                🏆 Destaque do Bolão DGF: Líder do Dia
-            </span>
-        </div>
-
-        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%; max-width: 1120px; margin: 0 auto; flex-wrap: wrap;">
+        <div style="display: flex; align-items: flex-end; justify-content: center; gap: 20px; width: 100%; max-width: 1120px; margin: 0 auto; flex-wrap: wrap; font-family: 'Segoe UI', Roboto, sans-serif;">
             
-            <div style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); width: 100%; max-width: 550px; height: 133px; overflow: hidden; display: flex; align-items: center; justify-content: center; box-sizing: border-box; border-top: 4px solid #f39c12;">
-                <img src="INTRANET/saojoao.png" alt="São João" style="width: 100%; height: 100%; max-width: 100%; max-height: 100%; display: block; object-fit: cover; object-position: center;">
+            <div style="flex: 1; min-width: 300px; max-width: 550px; display: flex; flex-direction: column; gap: 10px;">
+                <div style="text-align: center;">
+                    <span style="font-size: 16px; font-weight: 800; color: #e67e22; text-transform: uppercase; letter-spacing: 1.5px;">
+                        🔥 Clique aqui e confirme sua presença
+                    </span>
+                </div>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScty8A8n2tU5Gp1UbC1mUGUKoKIYijCz8EwAicOo6Qub_F1og/viewform?usp=header" target="_blank" style="text-decoration: none; width: 100%; cursor: pointer;">
+                    <div style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); width: 100%; height: 133px; overflow: hidden; display: flex; align-items: center; justify-content: center; box-sizing: border-box; border-top: 4px solid #f39c12;">
+                        <img src="./saojoao.png" alt="São João" style="width: 100%; height: 100%; display: block; object-fit: cover; object-position: center;">
+                    </div>
+                </a>
             </div>
 
-            <div id="lider-card" onclick="mostrar('Bolão')" style="background: #092516 !important; border: 2.5px solid #00ff75; border-radius: 12px; padding: 22px 30px; width: 100%; max-width: 550px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 25px rgba(0, 255, 117, 0.3); cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; font-family: 'Segoe UI', Roboto, Helvetica, sans-serif; box-sizing: border-box; flex-shrink: 0;">
-                <div style="display: flex; align-items: center; gap: 22px;">
-                    <span style="font-size: 46px; font-weight: 900; color: #00ff75 !important; text-shadow: 0 0 12px rgba(0,255,117,0.6); min-width: 55px; font-style: italic;">01</span>
-                    
-                    <div style="position: relative; width: 85px; height: 85px; flex-shrink: 0;">
-                        <div style="width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, #00591B 0%, #007A25 100%); border: 3px solid #00ff75; box-shadow: 0 0 15px rgba(0,255,117,0.4); display: flex; align-items: center; justify-content: center; color: #ffffff;">
-                            <span style="font-size: 28px; font-weight: 800; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.4);">SM</span>
-                        </div>
-                        <span style="position: absolute; top: -10px; right: -10px; font-size: 26px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">👑</span>
-                    </div>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 6px;">
-                        <strong style="font-size: 20px; color: #ffffff !important; letter-spacing: 0.5px; word-break: break-all; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">stephanymartins.ses</strong>
-                        <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #b3c7bc !important; font-weight: 600;">
-                            <span>🎯 2 exatos</span>
-                            <span style="color: #00ff75; opacity: 0.6;">•</span>
-                            <span>🏆 2 vencedor/empate</span>
-                        </div>
-                    </div>
+            <div style="flex: 1; min-width: 300px; max-width: 550px; display: flex; flex-direction: column; gap: 10px;">
+                <div style="text-align: center;">
+                    <span style="font-size: 16px; font-weight: 800; color: #007A25; text-transform: uppercase; letter-spacing: 1.5px;">
+                        🏆 Destaque do Bolão DGF: Líder do Dia 
+                    </span>
                 </div>
+                <div id="lider-card" onclick="mostrar('Bolão')" style="background: #092516 !important; border: 2.5px solid #00ff75; border-radius: 12px; padding: 22px 30px; width: 100%; height: 133px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 8px 25px rgba(0, 255, 117, 0.3); cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; box-sizing: border-box;">
+                    <div style="display: flex; align-items: center; gap: 22px;">
+                        <span style="font-size: 46px; font-weight: 900; color: #00ff75 !important; text-shadow: 0 0 12px rgba(0,255,117,0.6); min-width: 55px; font-style: italic;">01</span>
+                        
+                        <div style="position: relative; width: 85px; height: 85px; flex-shrink: 0;">
+                            <div style="width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, #00591B 0%, #007A25 100%); border: 3px solid #00ff75; box-shadow: 0 0 15px rgba(0,255,117,0.4); display: flex; align-items: center; justify-content: center; color: #ffffff;">
+                                <span style="font-size: 28px; font-weight: 800; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.4);">SM</span>
+                            </div>
+                            <span style="position: absolute; top: -10px; right: -10px; font-size: 26px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));">👑</span>
+                        </div>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                            <strong style="font-size: 20px; color: #ffffff !important; letter-spacing: 0.5px; word-break: break-all; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">stephanymartins.ses</strong>
+                            <div style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #b3c7bc !important; font-weight: 600;">
+                                <span>🎯 3 exatos</span>
+                                <span style="color: #00ff75; opacity: 0.6;">•</span>
+                                <span>🏆 7 vencedor/empate</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <div style="text-align: right; min-width: 90px; border-left: 2px solid rgba(0, 255, 117, 0.3); padding-left: 15px;">
-                    <span style="display: block; font-size: 44px; font-weight: 900; color: #00ff75 !important; line-height: 1; text-shadow: 0 0 12px rgba(0,255,117,0.4);">50</span>
-                    <span style="font-size: 11px; color: #ffffff !important; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.9; display: block; margin-top: 2px;">pontos</span>
+                    <div style="text-align: right; min-width: 90px; border-left: 2px solid rgba(0, 255, 117, 0.3); padding-left: 15px;">
+                        <span style="display: block; font-size: 44px; font-weight: 900; color: #00ff75 !important; line-height: 1; text-shadow: 0 0 12px rgba(0,255,117,0.4);">115</span>
+                        <span style="font-size: 11px; color: #ffffff !important; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.9; display: block; margin-top: 2px;">pontos</span>
+                    </div>
                 </div>
             </div>
 
@@ -928,21 +938,19 @@ if (pagina === "home") {
         const tituloRadar = document.getElementById("titulo-radar-dgf");
         
         if (iframeRadar && tituloRadar) {
-            // Guarda o nome correto correspondente à URL que vai carregar
             const proximoNome = graficosRadar[indiceAtualRadar].nome;
             
-            // Só altera o texto de monitoramento na tela quando o iframe terminar 100% de carregar o novo gráfico
             iframeRadar.onload = () => {
                 tituloRadar.innerHTML = `📈 Monitoramento: ${proximoNome}`;
             };
             
             iframeRadar.src = graficosRadar[indiceAtualRadar].url;
         } else {
-            // Se os elementos não existirem mais na tela (mudou de página), para o contador
             clearInterval(window.intervaloRadarDGF);
         }
-    }, 10000); // Altera o gráfico a cada 10 segundos
+    }, 10000);
 }
+
 
 if (pagina === "Bolão") {
 
@@ -1041,163 +1049,78 @@ if (pagina === "Bolão") {
 		
     </div>
 	
-	<div id="ranking-container" style="font-family: Arial, sans-serif; max-width: 500px; margin: 20px auto; padding: 15px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
-        <h2 style="text-align: center; color: #333; margin-top: 0;">🏆 Ranking de Pontuação</h2>
-        
-        <ul id="ranking-lista" style="list-style: none; padding: 0; margin: 0;"></ul>
-        
-        <button id="btn-ver-mais" onclick="toggleRanking()" style="display: block; width: 100%; padding: 10px; margin-top: 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold;">
-            Ver classificação completa
-        </button>
-
-        <div id="modal-detalhes" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; color: #333;">
-            <div style="background-color: white; padding: 20px; border-radius: 8px; max-width: 300px; width: 80%; text-align: center; position: relative; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                <span onclick="fecharModal()" style="position: absolute; top: 10px; right: 15px; font-size: 20px; cursor: pointer; color: #aaa;">&times;</span>
-                <h3 id="modal-nome" style="margin-top: 10px; color: #111;"></h3>
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
-                <p id="modal-posicao" style="font-weight: bold; margin: 5px 0;"></p>
-                <p id="modal-exatos" style="margin: 5px 0;"></p>
-                <p id="modal-vencedor" style="margin: 5px 0;"></p>
-                <p id="modal-pontos" style="margin: 5px 0; font-size: 18px; color: #28a745; font-weight: bold;"></p>
-            </div>
-        </div>
-    </div>
-
-</div> </div>
-</div>
 ` ;
 
 conteudo.innerHTML = html;
 
-    // INÍCIO DO SCRIPT DO RANKING (Cole logo após o innerHTML)
-    const dadosRanking = [
-        { pos: "01", nome: "stephanymartins.ses", exatos: "2 exatos", vencedor: "2 vencedor/empate", pontos: 50 },
-        { pos: "02", nome: "Medyson Lima", exatos: "1 exatos", vencedor: "2 vencedor/empate", pontos: 40 },
-        { pos: "02", nome: "Paulo Ruan", exatos: "1 exatos", vencedor: "2 vencedor/empate", pontos: 40 },
-        { pos: "02", nome: "Pedro Lima", exatos: "1 exatos", vencedor: "2 vencedor/empate", pontos: 40 },
-        { pos: "05", nome: "Igor Murilo", exatos: "1 exatos", vencedor: "2 vencedor/empate", pontos: 35 },
-        { pos: "05", nome: "joaon.ses", exatos: "1 exatos", vencedor: "2 vencedor/empate", pontos: 35 },
-        { pos: "05", nome: "Ri", exatos: "1 exatos", vencedor: "2 vencedor/empate", pontos: 35 },
-        { pos: "05", nome: "Rosicleide", exatos: "1 exatos", vencedor: "2 vencedor/empate", pontos: 35 },
-        { pos: "09", nome: "Adna Sousa", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "Ana Beatriz Montana", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "Diego Farias", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "Ed Mendes", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "Edilson Lima", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "Gabrielle Lins", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "Henrique", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "idalmi", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "JOSÉ DO CARMO", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "Luis Lucena", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "Márcio Soares", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "Marcos Aurélio", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "09", nome: "mauroataide80", exatos: "1 exatos", vencedor: "1 vencedor/empate (Criador)", pontos: 25 },
-        { pos: "09", nome: "Romero", exatos: "1 exatos", vencedor: "1 vencedor/empate", pontos: 25 },
-        { pos: "23", nome: "Adiele", exatos: "0 exatos", vencedor: "2 vencedor/empate", pontos: 25 },
-        { pos: "23", nome: "Evellin França", exatos: "0 exatos", vencedor: "2 vencedor/empate", pontos: 25 },
-        { pos: "23", nome: "Jorge Rodrigues", exatos: "0 exatos", vencedor: "2 vencedor/empate", pontos: 25 },
-        { pos: "23", nome: "Renata Pereira CC", exatos: "0 exatos", vencedor: "2 vencedor/empate", pontos: 25 },
-        { pos: "23", nome: "Sueli Durval", exatos: "0 exatos", vencedor: "2 vencedor/empate", pontos: 25 },
-        { pos: "28", nome: "Gabriel Bezerra", exatos: "0 exatos", vencedor: "2 vencedor/empate", pontos: 20 },
-        { pos: "28", nome: "osolubac", exatos: "0 exatos", vencedor: "2 vencedor/empate", pontos: 20 },
-        { pos: "28", nome: "Renan Martins - CPAG", exatos: "0 exatos", vencedor: "2 vencedor/empate", pontos: 20 },
-        { pos: "31", nome: "Luiz Carlos Jr.", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 15 },
-        { pos: "31", nome: "THIAGO FELIPE", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 15 },
-        { pos: "33", nome: "Ana Carolina", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Ane74", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Bruno Barreto", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Camila", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Dôra Silva", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Éder Cordeiro", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Edson Jr", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Erika Milena", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Georgia Sena", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "JuTavares", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Larissa Oliveira", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "LEANDROGATO", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Marcela Arruda", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Mauricio Barbosa", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Niedja Bezerra", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Paloma Oliveira", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "RafaGEMP", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "Rayville Santos", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "33", nome: "robertoxistovillella", exatos: "0 exatos", vencedor: "1 vencedor/empate", pontos: 10 },
-        { pos: "52", nome: "@MagoBlack", exatos: "0 exatos", vencedor: "0 vencedor/empate", pontos: 0 },
-        { pos: "52", nome: "Alexandre Ribeiro", exatos: "0 exatos", vencedor: "0 vencedor/empate", pontos: 0 },
-        { pos: "52", nome: "CAMILA VINHAES", exatos: "0 exatos", vencedor: "0 vencedor/empate", pontos: 0 },
-        { pos: "52", nome: "Daniel Bormolini Marques", exatos: "0 exatos", vencedor: "0 vencedor/empate", pontos: 0 },
-        { pos: "52", nome: "Gabriel Pedro", exatos: "0 exatos", vencedor: "0 vencedor/empate", pontos: 0 },
-        { pos: "52", nome: "Larissa Simões", exatos: "0 exatos", vencedor: "0 vencedor/empate", pontos: 0 },
-        { pos: "52", nome: "Laura Lane", exatos: "0 exatos", vencedor: "0 vencedor/empate", pontos: 0 },
-        { pos: "52", nome: "Mickeliny sena", exatos: "0 exatos", vencedor: "0 vencedor/empate", pontos: 0 },
-        { pos: "52", nome: "Orlandina", exatos: "0 exatos", vencedor: "0 vencedor/empate", pontos: 0 },
-        { pos: "52", nome: "Sabrina GEPF", exatos: "0 exatos", vencedor: "0 vencedor/empate", pontos: 0 }
-    ];
+} 
 
-    let mostrandoTudo = false;
 
-    window.renderizarRanking = function() {
-        const lista = document.getElementById('ranking-lista');
-        if(!lista) return;
-        lista.innerHTML = '';
-        
-        const itensParaExibir = mostrandoTudo ? dadosRanking : dadosRanking.slice(0, 5);
 
-        itensParaExibir.forEach((usuario, index) => {
-            const li = document.createElement('li');
-            li.style.display = 'flex';
-            li.style.justifyContent = 'space-between';
-            li.style.alignItems = 'center';
-            li.style.padding = '10px';
-            li.style.borderBottom = '1px solid #eee';
-            li.style.backgroundColor = index % 2 === 0 ? '#ffffff' : '#f8f9fa';
-            
-            li.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-weight: bold; color: #666; width: 25px;">${usuario.pos}º</span>
-                    <span class="nome-clicavel" style="color: #007bff; cursor: pointer; font-weight: 500; text-decoration: underline;">
-                        ${usuario.nome}
-                    </span>
+
+
+if(pagina === "noticias"){
+    let html = "<h2>📰 Notícias</h2>";
+
+    const hoje = new Date().toLocaleDateString('pt-BR');
+
+    // 0. NOVA NOTÍCIA NO TOPO: Confirmação de Presença São João DGF
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9;">
+            <small style="color:#7f8c8d;">📅 ${hoje}</small>
+            <h3 style="margin: 10px 0; color: #e67e22;">🔥 Confirme sua presença no SÃO JOÃO da SEAF clicando na imagem abaixo</h3>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScty8A8n2tU5Gp1UbC1mUGUKoKIYijCz8EwAicOo6Qub_F1og/viewform?usp=header" target="_blank" style="text-decoration: none; display: block; width: 100%; margin-top: 15px;">
+                <div style="width: 100%; height: 200px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    <img src="./saojoao.png" alt="Confirme sua Presença" style="width: 100%; height: 100%; display: block; object-fit: contain; object-position: center;">
                 </div>
-                <span style="font-weight: bold; color: #333;">${usuario.pontos} pts</span>
-            `;
-            
-            // Adiciona o evento de clique de forma segura
-            li.querySelector('.nome-clicavel').addEventListener('click', () => abrirModal(usuario));
-            lista.appendChild(li);
-        });
-    }
+            </a>
+        </div>
+    `;
 
-    window.toggleRanking = function() {
-        mostrandoTudo = !mostrandoTudo;
-        const btn = document.getElementById('btn-ver-mais');
-        if(btn) btn.innerText = mostrandoTudo ? "Ver menos" : "Ver classificação completa";
-        renderizarRanking();
-    }
+    // 1. Inserindo o Guia de Ajuda como a primeira notícia (no topo) - Sem a imagem
+    html += `
+        <div class="noticia-card">
+            <small style="color:#7f8c8d;">📅 ${hoje}</small>
+            <h3 style="margin: 10px 0;">📌 Guia de Ajuda</h3>
+        </div>
+    `;
 
-    window.abrirModal = function(usuario) {
-        document.getElementById('modal-nome').innerText = usuario.nome;
-        document.getElementById('modal-posicao').innerText = `Posição: ${usuario.pos}º Lugar`;
-        document.getElementById('modal-exatos').innerText = `🎯 Exatos: ${usuario.exatos}`;
-        document.getElementById('modal-vencedor').innerText = `🏆 Vencedor/Empate: ${usuario.vencedor}`;
-        document.getElementById('modal-pontos').innerText = `Pontuação: ${usuario.pontos} pontos`;
-        document.getElementById('modal-detalhes').style.display = 'flex';
-    }
-
-    window.fecharModal = function() {
-        document.getElementById('modal-detalhes').style.display = 'none';
-    }
-
-    // Fecha se clicar fora da caixa do modal
-    const modalBg = document.getElementById('modal-detalhes');
-    if(modalBg) {
-        modalBg.onclick = function(event) {
-            if (event.target == modalBg) fecharModal();
-        }
-    }
-
-    renderizarRanking();
-
+    // 2. NOVA NOTÍCIA: Bolão da DGF (Fixa no topo junto com o guia)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #e5b800; background: #fffdf3;">
+            <small style="color:#7f8c8d;">📅 ${hoje}</small>
+            <h3 style="margin: 10px 0; color: #0b3d91;">🏆 Participe do Grande Bolão da Copa DGF!</h3>
+            <p style="line-height: 1.5; color: #2c3e50;">
+                Atenção, pessoal! Estão abertas as inscrições para o <strong>Bolão da DGF</strong>, e o melhor de tudo: <strong>é 100% gratuito!</strong>
+            </p>
+            <p style="line-height: 1.5; color: #2c3e50;">
+                Mostre que você entende de futebol e concorra a prêmios exclusivos para decorar seu espaço:
+            </p>
+            <ul style="margin: 10px 0; padding-left: 20px; color: #2c3e50; line-height: 1.5;">
+                <li>🥇 <strong>1º Lugar:</strong> Um incrível Troféu Réplica da Copa do Mundo!</li>
+                <li>🥈 <strong>Até o 5º Lugar:</strong> Mini-troféus personalizados para enfeitar a sua mesa de trabalho!</li>
+            </ul>
+            <p style="line-height: 1.5; color: #2c3e50; font-weight: bold;">
+                🤝 Integração total: O bolão está aberto para todos! Não precisa ser da DGF, colaboradores de outros setores também estão mais do que convidados a participar.
+            </p>
+            <div style="margin-top: 15px; font-style: italic; color: #7f8c8d; font-size: 13px;">
+                📍 Acesse a aba "Social > Bolão da Copa do Mundo" no menu ou clique no botão do cabeçalho para registrar seus palpites!
+            </div>
+        </div>
+    `;
+    
+    // 3. Renderiza as demais notícias cadastradas na lista
+    listaNoticias.forEach((n, i) => {
+        html += `
+            <div class="noticia-card">
+                <small style="color:#7f8c8d;">📅 ${n.data}</small>
+                <h3 style="margin: 10px 0;">${n.titulo}</h3>
+                <p>${n.texto}</p>
+            </div>
+        `;
+    });
+    
+    conteudo.innerHTML = html;
 }
 
 // =========================================================

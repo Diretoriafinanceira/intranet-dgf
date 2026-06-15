@@ -1481,14 +1481,51 @@ if (pagina === "radar_dgf") {
         }
 
         if (pagina === 'central_notas') {
-            conteudo.innerHTML = `
-                <h2>📝 Central de Notas</h2>
-                <div class="noticia-card" style="border-left-color: #e74c3c; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 15px; font-family: sans-serif;">
-                    <h3>Aviso do Sistema</h3>
-                    <p style="color: #7f8c8d; margin: 10px 0 0 0;">No momento, não temos notas fiscais ou empenhos registrados para exibição.</p>
-                </div>
-            `;
+    // Array com todas as notícias (por enquanto, apenas uma, mas estruturado para facilitar a expansão futura)
+    const noticias = [
+        {
+            titulo: "SES-PE lança nova ferramenta digital que torna pagamentos mais rápidos e eficientes na saúde de Pernambuco",
+            data: "02/05/2026",
+            texto: [
+                "A Secretaria Estadual de Saúde de Pernambuco (SES-PE) vem avançando na modernização de seus processos administrativos e lançou, nesta segunda-feira (04/05/2026), a Central de Notas, uma solução tecnológica voltada a dar mais agilidade, organização e transparência aos pagamentos realizados pelo Estado.",
+                "Atualmente, o envio de notas fiscais ocorre por múltiplos canais, como protocolo físico, e-mail, Sistema Eletrônico de Informações (SEI) e até aplicativos de mensagem, o que torna o fluxo descentralizado e mais suscetível a falhas. Esse modelo exige das equipes um esforço contínuo de conferência de documentos, checagem de certidões e validação de informações, muitas vezes incompletas ou fora da validade, resultando em atrasos e retrabalho.",
+                "Com a Central de Notas, esse cenário muda. A proposta é centralizar e padronizar o processo por meio de formulários digitais simples, utilizados por todos os setores envolvidos. A ferramenta atua como um checklist inteligente e conta com integração a sistemas automatizados, incluindo recursos de inteligência artificial para validação de dados.",
+                "“A Central de Notas poderá ser acessada pelos credores credenciados por meio de link específico. Os credores aderentes às fases citadas serão informados pela secretaria, por meio do cadastro oficial, e poderão solicitar informações por telefones e e-mails. Outro ponto relevante é a simplificação da fiscalização dos contratos que serão pagos, pois os fiscais passarão a receber e-mails e, futuramente, mensagens de WhatsApp com informações para análise e ateste eletrônico, com a mesma segurança e integridade, mas com muito mais rapidez e automação. Assim, a Central de Notas é um divisor de águas nos processos eletrônicos de pagamento no Estado”, destacou o diretor-geral de Finanças da SES-PE, Mauro Ataíde.",
+                "A expectativa é que, com a nova dinâmica, a capacidade de processamento de pagamentos seja significativamente ampliada, podendo chegar a até três vezes o volume atual, sem a necessidade de ampliação das equipes. Além disso, a automatização reduz a ocorrência de erros e permite que os profissionais direcionem seus esforços para atividades mais estratégicas.",
+                "“A inclusão desses recursos vai triplicar a capacidade das equipes atuais de processar pagamentos, sem a necessidade de ampliação de pessoal, gerando também economia. Haverá uma maximização dos recursos humanos, que serão aplicados integralmente na análise assertiva dos processos, reduzindo o caráter operacional e a ocorrência de erros humanos nas tratativas de anexação”, completou Mauro Ataíde.",
+                "A iniciativa também traz melhorias no acompanhamento dos contratos. Os fiscais passam a ser acionados por e-mail, com previsão de ampliação para aplicativos de mensagem, recebendo informações organizadas para a realização do ateste eletrônico, garantindo mais rapidez sem comprometer a segurança dos dados."
+            ]
         }
+    ];
+
+    // Monta a estrutura da página
+    conteudo.innerHTML = `
+        <div style="display: flex; flex-direction: column; gap: 20px; height: 85vh; padding: 20px; background: #f4f7f6; border-radius: 8px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; box-sizing: border-box; width: 100%;">
+            
+            <div id="topo-central-notas" style="background: #1abc9c; color: white; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; box-sizing: border-box;">
+                📝 Central de Notas Fiscal SES-PE
+            </div>
+
+            <div style="display: flex; flex: 1; width: 100%; gap: 20px; overflow: hidden;">
+                
+                <div style="flex: 1; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 25px; display: flex; flex-direction: column; gap: 15px; overflow-y: auto; text-align: justify; border: 1px solid #e0e0e0; box-sizing: border-box;">
+                    <h1 style="color: #2c3e50; font-size: 24px; margin-bottom: 10px; border-bottom: 3px solid #1abc9c; padding-bottom: 10px;">
+                        ${noticias[0].titulo}
+                    </h1>
+                    
+                    ${noticias[0].texto.map(paragrafo => `<p style="color: #34495e; font-size: 16px; line-height: 1.7; margin: 0 0 10px 0; text-indent: 20px;">${paragrafo}</p>`).join('')}
+                    
+                    <div style="display: flex; gap: 15px; margin-top: 15px;">
+                        <span style="background: #1abc9c; color: white; padding: 5px 10px; border-radius: 4px; font-size: 14px; font-weight: bold;">Modernização</span>
+                        <span style="background: #e67e22; color: white; padding: 5px 10px; border-radius: 4px; font-size: 14px; font-weight: bold;">Transparência</span>
+                        <span style="background: #3498db; color: white; padding: 5px 10px; border-radius: 4px; font-size: 14px; font-weight: bold;">Saúde Digital</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    `;
+}
 
         if (pagina === 'coordtech') {
     conteudo.innerHTML = `

@@ -1059,9 +1059,44 @@ conteudo.innerHTML = html;
 
 } 
 
+// =========================================================
+    // ABA RELATÓRIO - INTEGRADA COM PLANILHAS EM TEMPO REAL
+    // =========================================================
+    if (pagina === "relatorio") {
+        conteudo.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: 20px; padding: 20px; background: #f4f7f6; border-radius: 8px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; box-sizing: border-box; width: 100%; height: 85vh; overflow-y: auto;">
+                
+                <div style="background: #2c3e50; color: white; padding: 15px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; box-sizing: border-box; flex-shrink: 0;">
+                    📊 Painel de Relatórios Gerenciais
+                </div>
 
+                <div style="background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 20px; border: 1px solid #e0e0e0; box-sizing: border-box; display: flex; flex-direction: column; flex-shrink: 0;">
+                    <div style="font-size: 18px; font-weight: bold; color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 8px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        📅 Painel Agenda Contábil
+                    </div>
+                    <div style="width: 100%; height: 500px; border-radius: 4px; overflow: hidden; border: 1px solid #ddd;">
+                        <iframe src="https://docs.google.com/spreadsheets/d/1iLNYGCyUj9ua0PTvZK2YLD2s4jYbObNG/edit?usp=sharing" 
+                                style="width: 100%; height: 100%; border: none;" 
+                                loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
 
+                <div style="background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 20px; border: 1px solid #e0e0e0; box-sizing: border-box; display: flex; flex-direction: column; flex-shrink: 0;">
+                    <div style="font-size: 18px; font-weight: bold; color: #2c3e50; border-bottom: 3px solid #1abc9c; padding-bottom: 8px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                        🖥️ Controle de Telas (GR Piso)
+                    </div>
+                    <div style="width: 100%; height: 500px; border-radius: 4px; overflow: hidden; border: 1px solid #ddd;">
+                        <iframe src="https://docs.google.com/spreadsheets/d/13n59XTDICxmQS7UCWt0Z-eyeIk6raZSd55MdGGG33ZA/edit?usp=sharing" 
+                                style="width: 100%; height: 100%; border: none;" 
+                                loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
 
+            </div>
+        `;
+    }
 
 if(pagina === "noticias"){
     let html = "<h2>📰 Notícias</h2>";

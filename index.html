@@ -959,7 +959,8 @@ function mostrar(pagina){
 if (pagina === "Bolão") {
 
     let html = `
-    <div style="padding:20px; max-width:900px; margin:auto;">
+
+    <div style="padding:20px; max-width:1200px; margin:auto;">
 
         <h1 style="
             color:#003366;
@@ -973,91 +974,95 @@ if (pagina === "Bolão") {
 
         <div style="
             background:#fff;
-            padding:20px;
+            padding:30px;
             border-radius:10px;
             box-shadow:0 2px 10px rgba(0,0,0,0.1);
             line-height:1.8;
             font-size:16px;
         ">
 
-            <h2 style="color:#009c3b;">
-                🎯 Como participar
-            </h2>
-
-            <p>
-                Siga o passo a passo de 1 minuto para entrar e palpitar:
-            </p>
-
-            <p>
-                <strong>1️⃣ Acesse:</strong><br>
-                <a href="https://bolaoplay.com.br" target="_blank">
-                    bolaoplay.com.br
-                </a>
-            </p>
-
-            <p>
-                <strong>2️⃣ Faça login rápido e seguro</strong><br>
-                Informando apenas seu e-mail.
-            </p>
-
-            <p>
-                <strong>3️⃣ Entre no bolão</strong><br>
-                Digite o código:
-                <span style="
-                    color:red;
-                    font-weight:bold;
-                    font-size:20px;
-                ">
-                    QWDCPR
-                </span>
-            </p>
-
-            <p>
-                <strong>4️⃣ Crie seu apelido</strong><br>
-                E comece a pontuar.
-            </p>
-
-            <hr>
-
-            <div style="
-                text-align:center;
-                font-size:22px;
-                font-weight:bold;
-                color:#009c3b;
-            ">
-                ⚽🔥 Sem planilhas, sem confusão.<br>
-                Só a resenha e o placar em tempo real!
-            </div>
-
-            <br>
-
-            <div style="text-align:center;">
+            <div style="text-align:center; margin-bottom:30px;">
 
                 <a href="https://bolaoplay.com.br"
                    target="_blank"
                    style="
                        background:#009c3b;
                        color:white;
-                       padding:12px 25px;
+                       padding:15px 35px;
                        text-decoration:none;
-                       border-radius:6px;
+                       border-radius:8px;
                        font-weight:bold;
+                       font-size:20px;
                        display:inline-block;
                    ">
-                   🚀 ACESSAR O BOLÃO
+                   🚀 ACESSE O BOLÃO
+                </a>
+
+            </div>
+
+            <hr>
+
+            <h2 style="
+                color:#003366;
+                text-align:center;
+                margin-top:30px;
+            ">
+                📖 ÁLBUM DA COPA DGF
+            </h2>
+
+            <div style="
+                text-align:center;
+                margin-top:20px;
+            ">
+
+                <iframe
+                    src="https://docs.google.com/presentation/d/e/2PACX-1vROMOHz7dAdKFgtZanL6Gmh_Lh3A5zgQO9T5refE35Rk7pUrLU1B2QoTVghYcWoWV4H6ijMJNu4UVVU/embed?start=false&loop=false&delayms=3000&rm=minimal"
+                    frameborder="0"
+                    width="100%"
+                    height="700"
+                    allowfullscreen="true"
+                    mozallowfullscreen="true"
+                    webkitallowfullscreen="true"
+                    style="
+                        border:none;
+                        border-radius:10px;
+                    ">
+                </iframe>
+
+            </div>
+
+            <div style="
+                text-align:center;
+                margin-top:25px;
+                margin-bottom:10px;
+            ">
+
+                <a href="https://docs.google.com/presentation/d/e/2PACX-1vROMOHz7dAdKFgtZanL6Gmh_Lh3A5zgQO9T5refE35Rk7pUrLU1B2QoTVghYcWoWV4H6ijMJNu4UVVU/pub?start=false&loop=false&delayms=3000"
+                   target="_blank"
+                   style="
+                       background:#003366;
+                       color:white;
+                       padding:15px 35px;
+                       text-decoration:none;
+                       border-radius:8px;
+                       font-weight:bold;
+                       font-size:20px;
+                       display:inline-block;
+                   ">
+                   📖 ABRIR ÁLBUM EM TELA CHEIA
                 </a>
 
             </div>
 
         </div>
-		
+
     </div>
-	
-` ;
 
-conteudo.innerHTML = html;
+    `;
 
-} 
+    conteudo.innerHTML = html;
+
+}
 
 // =========================================================
     // ABA RELATÓRIO - INTEGRADA COM PLANILHAS EM TEMPO REAL

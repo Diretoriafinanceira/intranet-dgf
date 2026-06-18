@@ -2586,9 +2586,10 @@ window.abrirGCE = () => {
 
                     <rect x="80" y="160" width="70" height="150" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="8" />
                     <rect id="assento-risaldo" class="cadeira-gce" x="150" y="180" width="10" height="30" fill="#3498db" rx="2" />
-                    <rect id="assento-alexandre-silva" class="cadeira-gce" x="150" y="260" width="10" height="30" fill="#3498db" rx="2" />
-                    <rect id="assento-alexandre-moura" class="cadeira-gce" x="70" y="180" width="10" height="30" fill="#3498db" rx="2" />
-                    <rect class="cadeira-gce" x="70" y="260" width="10" height="30" fill="#3498db" rx="2" /> 
+                    <rect id="assento-luiz" class="cadeira-gce" x="150" y="260" width="10" height="30" fill="#3498db" rx="2" />
+                    
+                    <rect class="cadeira-gce" x="70" y="180" width="10" height="30" fill="#3498db" rx="2" />
+                    <rect id="assento-alexandre-moura" class="cadeira-gce" x="70" y="260" width="10" height="30" fill="#3498db" rx="2" /> 
 
                     <rect x="240" y="80" width="110" height="60" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="8" />
                     <rect id="assento-jaqueline" class="cadeira-gce" x="350" y="95" width="10" height="30" fill="#3498db" rx="2" />
@@ -2598,7 +2599,8 @@ window.abrirGCE = () => {
                     <rect id="assento-myrna" class="cadeira-gce" x="340" y="255" width="10" height="35" fill="#3498db" rx="2" />
                     <rect id="assento-rafaela" class="cadeira-gce" x="340" y="330" width="10" height="35" fill="#3498db" rx="2" />
                     <rect id="assento-cleide" class="cadeira-gce" x="250" y="180" width="10" height="35" fill="#3498db" rx="2" />
-                    <rect class="cadeira-gce" x="250" y="255" width="10" height="35" fill="#3498db" rx="2" /> <rect id="assento-ladjane" class="cadeira-gce" x="250" y="330" width="10" height="35" fill="#3498db" rx="2" />
+                    <rect class="cadeira-gce" x="250" y="255" width="10" height="35" fill="#3498db" rx="2" /> 
+                    <rect id="assento-ladjane" class="cadeira-gce" x="250" y="330" width="10" height="35" fill="#3498db" rx="2" />
                     
 
                     <text x="225" y="45" text-anchor="middle" style="font-family: Arial; font-size: 20px; font-weight: bold; fill: #34495e;">LAYOUT INTERNO - GCE</text>
@@ -2615,7 +2617,7 @@ window.abrirGCE = () => {
                     <button onclick="focarFuncionarioGCE('ladjane')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Ladjane Maria da Silva</b></button>
                     <button onclick="focarFuncionarioGCE('cleide')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Cleide Maria Aragao</b></button>
                     <button onclick="focarFuncionarioGCE('risaldo')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Risaldo Francisco</b></button>
-                    <button onclick="focarFuncionarioGCE('alexandre-silva')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Alexandre Ribeiro da Silva</b></button>
+                    <button onclick="focarFuncionarioGCE('luiz')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Luiz Gustavo Almeida da Costa</b></button>
                     <button onclick="focarFuncionarioGCE('alexandre-moura')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Alexandre Ribeiro de Moura</b></button>
                 </div>
             </div>
@@ -2881,7 +2883,7 @@ window.abrirSFES = () => {
 
    conteudo.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #1abc9c; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-            <h2 style="margin:0; font-size: 18px; color: #2c3e50;">🗺️ Mapa de Ocupação DGF - Layout Profissional</h2>
+            <h2 style="margin:0; font-size: 18px; color: #2c3e50;">🗺️ Mapa de Ocupação DGF</h2>
             <div style="font-size: 12px; color: #7f8c8d; font-weight: bold;">Unidade: DGF 2026</div>
         </div>
         
@@ -2950,22 +2952,34 @@ window.abrirSFES = () => {
                     <rect x="730" y="340" width="150" height="310" class="setor-sala" onclick="abrirGC()" /> 
                     <text x="805" y="500" text-anchor="middle" class="label-sala">GC</text>
 
+                    <g id="bloco-mesa8">
                     <rect x="20" y="140" width="320" height="60" class="mesa-dgf" />
                     <text x="180" y="170" class="numero-mesa">MESA 8</text>
-                    <rect x="35" y="145" width="22" height="12" class="pc-dgf" /> <rect x="110" y="145" width="22" height="12" class="pc-dgf" /> <rect x="185" y="145" width="22" height="12" class="pc-dgf" /> <rect x="260" y="145" width="22" height="12" class="pc-dgf" />
-                    <rect x="35" y="183" width="22" height="12" class="pc-dgf" /> <rect x="110" y="183" width="22" height="12" class="pc-dgf" /> <rect x="185" y="183" width="22" height="12" class="pc-dgf" /> <rect x="260" y="183" width="22" height="12" class="pc-dgf" />
-
+    
+                    <rect id="m8-laryssa" x="260" y="145" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    <rect id="m8-thiago" x="185" y="145" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    <rect id="m8-adiele" x="110" y="145" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    <rect id="m8-rafael" x="35" y="145" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+    
+                    <rect id="m8-medyson" x="260" y="183" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    <rect id="m8-maria" x="185" y="183" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    <rect id="m8-vago" x="110" y="183" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" /> <rect id="m8-junior" x="35" y="183" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    </g>
+					
+                    <g id="bloco-mesa9">
                     <rect x="20" y="220" width="320" height="60" class="mesa-dgf" />
                     <text x="180" y="250" class="numero-mesa">MESA 9</text>
-                    <rect x="35" y="225" width="22" height="12" class="pc-dgf" /> 
-                    <rect x="110" y="225" width="22" height="12" class="pc-dgf" /> 
-                    <rect x="185" y="225" width="22" height="12" class="pc-dgf" /> 
-                    <rect x="260" y="225" width="22" height="12" class="pc-dgf" />
-                    
-                    <rect x="35" y="263" width="22" height="12" class="pc-dgf" /> 
-                    <rect x="110" y="263" width="22" height="12" class="pc-dgf" /> 
-                    <rect x="185" y="263" width="22" height="12" class="pc-dgf" /> 
-                    <rect x="260" y="263" width="22" height="12" class="pc-dgf" />
+    
+                    <rect id="m9-cristiane" x="260" y="225" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    <rect id="m9-tatiana" x="185" y="225" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    <rect id="m9-niedja" x="110" y="225" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    <rect id="m9-cicero" x="35" y="225" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+    
+                    <rect id="m9-juliana" x="260" y="263" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    <rect id="m9-veronica" x="185" y="263" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    <rect id="m9-renata" x="110" y="263" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    <rect id="m9-marcos" x="35" y="263" width="22" height="12" class="pc-dgf" style="transition: fill 0.3s;" />
+                    </g>
 
                     <rect x="20" y="300" width="320" height="60" class="mesa-dgf" />
                     <text x="180" y="330" class="numero-mesa">MESA 10</text>
@@ -3102,7 +3116,7 @@ window.abrirSFES = () => {
 
             <div style="flex: 1; min-width: 280px; max-width: 350px; background: white; border-left: 1px solid #dcdde1; display: flex; flex-direction: column; font-family: 'Segoe UI', Arial, sans-serif;">
     <div style="padding: 15px; background: #2c3e50; color: white; font-weight: bold; font-size: 14px; text-align: center; letter-spacing: 0.5px;">
-        🗂️ LISTA DE MESAS DGF
+        🗂️ CLIQUE NA MESA E VEJA OS SERVIDORES NO MAPA DE OCUPAÇÃO
     </div>
     
     <div style="flex: 1; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 8px;">
@@ -3223,25 +3237,39 @@ window.abrirSFES = () => {
             </div>
         </div>
 
-        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
+        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
             <div onclick="window.toggleMesaCoord('coord-mesa8')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
                 <span>🖥️ MESA 8</span>
                 <span id="seta-coord-mesa8">▶</span>
-            </div>
-            <div id="coord-mesa8" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
-                <div style="padding: 6px 10px; font-size: 12px; color: #b2bec3; font-style: italic;">Nenhum usuário cadastrado</div>
-            </div>
+        </div>
+        <div id="coord-mesa8" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: none !important; overflow: auto !important;">
+            <div onclick="window.acenderPcDgf('m8-laryssa')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Laryssa Cristina de Moura Felix</div>
+            <div onclick="window.acenderPcDgf('m8-thiago')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Thiago Lucas</div>
+            <div onclick="window.acenderPcDgf('m8-adiele')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Adiele Gracindo da Silva</div>
+            <div onclick="window.acenderPcDgf('m8-rafael')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Rafael Bernardo</div>
+            <div onclick="window.acenderPcDgf('m8-medyson')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Medyson da Silva Lima</div>
+            <div onclick="window.acenderPcDgf('m8-maria')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Maria Eduarda Bezerra Silva</div>
+            <div style="padding: 6px 10px; font-size: 12px; color: #b2bec3; font-style: italic; border-bottom: 1px solid #f1f2f6;">(Espaço Vago)</div>
+            <div onclick="window.acenderPcDgf('m8-junior')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Junior</div>
+        </div>
         </div>
 
-        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleMesaCoord('coord-mesa9')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <span>🖥️ MESA 9</span>
-                <span id="seta-coord-mesa9">▶</span>
-            </div>
-            <div id="coord-mesa9" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: 150px; overflow-y: auto;">
-                <div style="padding: 6px 10px; font-size: 12px; color: #b2bec3; font-style: italic;">Nenhum usuário cadastrado</div>
-            </div>
-        </div>
+        <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: visible;">
+    <div onclick="window.toggleMesaCoord('coord-mesa9')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+        <span>🖥️ MESA 9</span>
+        <span id="seta-coord-mesa9">▶</span>
+    </div>
+    <div id="coord-mesa9" class="conteudo-mesa" style="display: none; padding: 5px; background: #fff; flex-direction: column; gap: 4px; max-height: none !important; overflow: auto !important;">
+        <div onclick="window.acenderPcDgf('m9-cristiane')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Cristiane Etna da Silva Souza</div>
+        <div onclick="window.acenderPcDgf('m9-tatiana')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Tatiana Isabel de Oliveira</div>
+        <div onclick="window.acenderPcDgf('m9-niedja')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Niedja de Oliveira Bezerra</div>
+        <div onclick="window.acenderPcDgf('m9-cicero')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Cicero Guedes De Lima</div>
+        <div onclick="window.acenderPcDgf('m9-juliana')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Juliana Tavares de Souza</div>
+        <div onclick="window.acenderPcDgf('m9-veronica')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Veronica Soares Dubeux</div>
+        <div onclick="window.acenderPcDgf('m9-renata')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Renata Valéria da Silva</div>
+        <div onclick="window.acenderPcDgf('m9-marcos')" style="padding: 6px 10px; font-size: 12px; cursor: pointer; color: #57606f; border-bottom: 1px solid #f1f2f6;" onmouseenter="this.style.background='#e8f8f5'" onmouseleave="this.style.background='transparent'">Marcos Augusto Duarte</div>
+    </div>
+</div>
 
         <div style="border: 1px solid #dcdde1; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleMesaCoord('coord-mesa10')" style="padding: 10px; background: #f1f2f6; font-size: 12px; font-weight: bold; color: #2c3e50; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">

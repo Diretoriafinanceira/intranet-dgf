@@ -719,72 +719,48 @@ function mostrar(pagina){
                     </div>
                 </div>
 
-                <button onclick="mostrar('Bolão')" style="
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                    background: rgba(11, 61, 145, 0.85);
-                    padding: 12px 18px;
-                    border-radius: 6px;
-                    border: none;
-                    border-bottom: 3px solid #007A25;
-                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                    cursor: pointer;
-                    transition: transform 0.2s ease, background-color 0.2s ease;
+                <div id="lider-card-unificado" onclick="mostrar('Bolão')" style="
+                    background: #092516 !important; 
+                    border: 2px solid #00ff75; 
+                    border-radius: 6px; 
+                    padding: 8px 14px; 
+                    width: 260px; 
+                    display: flex; 
+                    flex-direction: column; 
+                    gap: 4px; 
+                    box-shadow: 0 4px 15px rgba(0, 255, 117, 0.2); 
+                    cursor: pointer; 
+                    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+                    box-sizing: border-box;
                     font-family: inherit;
                 "
-                onmouseover="this.style.background='rgba(11, 61, 145, 1)'; this.style.transform='scale(1.03)';"
-                onmouseout="this.style.background='rgba(11, 61, 145, 0.85)'; this.style.transform='scale(1)'"
+                onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 6px 20px rgba(0, 255, 117, 0.35)';"
+                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(0, 255, 117, 0.2)';"
                 >
-                    <span style="font-size: 24px; font-weight: bold; letter-spacing: 1px;">⚽ BOLÃO DGF</span>
-                    <span style="font-size: 13px; opacity: 0.9; margin-top: 2px;">Da Copa do Mundo</span>
-                </button>
-
-            </div>
-        </div>
-
-        <div style="display: flex; align-items: flex-end; justify-content: center; gap: 20px; width: 100%; max-width: 1120px; margin: 0 auto; flex-wrap: wrap; font-family: 'Segoe UI', Roboto, sans-serif;">
-            
-            <div style="flex: 1; min-width: 300px; max-width: 550px; display: flex; flex-direction: column; gap: 6px; margin: 0 auto;">
-                <div style="text-align: center;">
-                    <span style="font-size: 14px; font-weight: 800; color: #007A25; text-transform: uppercase; letter-spacing: 1.2px;">
-                        🏆 Destaque do Bolão DGF: Líder do Dia 
-                    </span>
-                </div>
-
-                <div id="lider-card-unificado" onclick="mostrar('Bolão')" style="background: #092516 !important; border: 2px solid #00ff75; border-radius: 10px; padding: 10px 16px; width: 100%; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 6px 20px rgba(0, 255, 117, 0.25); cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; box-sizing: border-box;">
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 255, 117, 0.15); padding-bottom: 4px;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #ffffff; font-weight: bold; font-size: 25px; text-transform: uppercase; letter-spacing: 0.8px;">Líder</span>
-                        </div>
-                        <div style="text-align: right; display: flex; align-items: baseline; gap: 4px;">
-                            <span style="font-size: 35px; font-weight: 900; color: #00ff75 !important; text-shadow: 0 0 10px rgba(0,255,117,0.4); line-height: 1;">550</span>
-                            <span style="font-size: 10px; color: #ffffff !important; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">pontos</span>
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 255, 117, 0.15); padding-bottom: 2px;">
+                        <span style="color: #ffffff; font-weight: bold; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">👑 Líder do Dia</span>
+                        <div style="text-align: right; display: flex; align-items: baseline; gap: 2px;">
+                            <span style="font-size: 20px; font-weight: 900; color: #00ff75 !important; line-height: 1;">550</span>
+                            <span style="font-size: 9px; color: #ffffff !important; font-weight: 700; text-transform: uppercase;">pts</span>
                         </div>
                     </div>
 
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="position: relative; width: 55px; height: 55px; flex-shrink: 0;">
-                            <div style="width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, #00591B 0%, #007A25 100%); border: 2px solid #00ff75; box-shadow: 0 0 6px rgba(0,255,117,0.3); display: flex; align-items: center; justify-content: center; color: #ffffff;">
-                                <span style="font-size: 12px; font-weight: 800; text-shadow: 0 1px 2px rgba(0,0,0,0.4);">ML</span>
-                            </div>
-                            <span style="position: absolute; top: -6px; right: -6px; font-size: 13px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));">👑</span>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #00591B 0%, #007A25 100%); border: 1px solid #00ff75; display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
+                            <span style="font-size: 10px; font-weight: 800;">ML</span>
                         </div>
                         
-                        <div style="display: flex; flex-direction: column; gap: 1px;">
-                            <strong style="font-size: 35px; color: #ffffff !important; letter-spacing: 0.3px; word-break: break-all; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Medyson Lima</strong>
-                            <div style="display: flex; align-items: center; gap: 6px; font-size: 11px; color: #b3c7bc !important; font-weight: 600;">
-                                <span>🎯 7 exatos</span>
+                        <div style="display: flex; flex-direction: column; min-width: 0;">
+                            <strong style="font-size: 14px; color: #ffffff !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 700;">Medyson Lima</strong>
+                            <div style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: #b3c7bc !important; font-weight: 600;">
+                                <span>🎯 7 exat</span>
                                 <span style="color: #00ff75; opacity: 0.5;">•</span>
-                                <span>🏆 34 ven/emp</span>
+                                <span>🏆 34 v/e</span>
                             </div>
                         </div>
                     </div>
-              
                 </div>
+
             </div>
         </div>
 
@@ -816,32 +792,6 @@ function mostrar(pagina){
                 <div style="padding: 15px; flex-grow: 1;">
                     <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">💼 Painel Corporativo e Decisões</h3>
                     <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Espaço restrito para lideranças. Acesse ferramentas de governança, aprovação de fluxos, análise integrada de relatórios e planejamento estratégico da DGF.</p>
-                </div>
-            </div>
-
-            <div onclick="mostrar('radar_dgf')" style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #9b59b6; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
-                <div style="padding: 10px; background: #9b59b6; color: white; text-align: center; font-weight: bold; font-size: 14px;">
-                    📊 RADAR DGF
-                </div>
-                <div style="width: 100%; height: 140px; background: #fff; border-bottom: 1px solid #f1f2f6; overflow: hidden; position: relative; pointer-events: none;">
-                    <iframe id="iframe-radar-dgf" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive" style="width: 285%; height: 285%; border: none; transform: scale(0.35); transform-origin: top left; position: absolute; top: 0; left: 0;" scrolling="no"></iframe>
-                </div>
-                <div style="padding: 15px; flex-grow: 1;">
-                    <h3 id="titulo-radar-dgf" style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📈 Monitoramento: CLSMO</h3>
-                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Indicadores estratégicos e gráficos consolidados em tempo real sobre as principais operações, fluxos de despesas e metas da Diretoria Geral de Finanças.</p>
-                </div>
-            </div>
-
-            <div onclick="mostrar('relatorio')" style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #3498db; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
-                <div style="padding: 10px; background: #3498db; color: white; text-align: center; font-weight: bold; font-size: 14px;">
-                    📊 RELATÓRIOS GERAIS
-                </div>
-                <div style="width: 100%; height: 140px; background: #f3f9fc; border-bottom: 1px solid #f1f2f6; display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 64px;">📊</span>
-                </div>
-                <div style="padding: 15px; flex-grow: 1;">
-                    <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📈 Indicadores e Planilhas Integradas</h3>
-                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Consulte as planilhas consolidadas de desempenho, dados operacionais automatizados e métricas analíticas completas da DGF em tempo real.</p>
                 </div>
             </div>
 
@@ -938,6 +888,7 @@ function mostrar(pagina){
             
             iframeRadar.src = graficosRadar[indiceAtualRadar].url;
         } else {
+            // Se o card não está na tela (ex: em outra página), limpa sem quebrar o código
             clearInterval(window.intervaloRadarDGF);
         }
     }, 10000);
@@ -1183,7 +1134,6 @@ if (pagina === "areadogestor") {
         if (acao === 'login') {
             const senhaInput = senhaInputEl.value;
             if (senhaInput === senhaSalva) {
-                alert('Acesso concedido!');
                 window.usuarioLogadoAtual = usuarioSelect; // Salva quem logou para saber de quem alterar a senha depois
                 carregarPainelGestor();
             } else {
@@ -1236,14 +1186,14 @@ if (pagina === "areadogestor") {
                 
                 <div style="background: #fdfefe; padding: 20px; border-left: 4px solid #3498db; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0;">
                     <p style="margin: 0; color: #2980b9; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                        💼 ASSISTENTE DE PD
+                        🖥️ BI DGF
                     </p>
                     <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Espaço para gerenciamento, acompanhamento e suporte às demandas de PD.</p>
                 </div>
 
                 <div style="background: #fdfefe; padding: 20px; border-left: 4px solid #2ecc71; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0;">
                     <p style="margin: 0; color: #27ae60; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                        🤖 ASSISTENTE DGF - CHATBOT
+                        🤖 ASSISTENTE SEAF - CHATBOT
                     </p>
                     <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Interface de comunicação automatizada para suporte e respostas rápidas da DGF.</p>
                 </div>
@@ -1254,6 +1204,34 @@ if (pagina === "areadogestor") {
                         🔍 PESQUISE SEU PROCESSO
                     </p>
                     <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Consulte o andamento, histórico e situação atual de processos internos.</p>
+                </div>
+
+                <div onclick="window.open('SUA_NOVA_URL_DO_GOOGLE_SHEETS_AQUI', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #e74c3c; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+                   onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+                    <p style="margin: 0; color: #c0392b; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                        🗄️ BASE DE DADOS
+                    </p>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao repositório centralizado de dados e arquivos consolidados.</p>
+                </div>
+
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;">
+                    
+                    <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                        <div style="background: #1a73e8; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
+                            📊 RELATÓRIO ESTRATÉGICO - LOOKER STUDIO
+                        </div>
+                        <iframe src="https://datastudio.google.com/reporting/56d2bf7a-eaf6-4c58-9273-56f81c27e1d5" 
+                                style="width: 100%; height: 500px; border: none;" loading="lazy"></iframe>
+                    </div>
+
+                    <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                        <div style="background: #0f9d58; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
+                            📈 PLANILHA CONSOLIDADA DGF
+                        </div>
+                        <iframe src="https://docs.google.com/spreadsheets/d/1iLNYGCyUj9ua0PTvZK2YLD2s4jYbObNG/edit?usp=sharing&ouid=105842997163149787413&rtpof=true&sd=true" 
+                                style="width: 100%; height: 500px; border: none;" loading="lazy"></iframe>
+                    </div>
+
                 </div>
 
             </div>
@@ -1271,7 +1249,7 @@ if (pagina === "areadogestor") {
                     font-weight: bold;
                     cursor: pointer;
                     transition: all 0.2s;
-                " onmouseover="this.style.background='#hover'; this.style.color='#c0392b'; this.style.borderColor='#semibold';" onmouseout="this.style.background='#ecf0f1'; this.style.color='#7f8c8d'; this.style.borderColor='#bdc3c7';">
+                " onmouseover="this.style.background='#bdc3c7'; this.style.color='#c0392b';" onmouseout="this.style.background='#ecf0f1'; this.style.color='#7f8c8d';">
                     ⚙️ ALTERAR MINHA SENHA
                 </button>
             </div>
@@ -1312,7 +1290,7 @@ if (pagina === "areadogestor") {
 
             <div style="margin-bottom: 20px; text-align: left;">
                 <label style="font-size: 12px; font-weight: bold; color: #34495e; display: block; margin-bottom: 5px;">SENHA</label>
-                <input type="password" id="gestor-senha" placeholder="Digite sua senha" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                <input type="password" id="gestor-senha" placeholder="Digite sua senha" onkeydown="if(event.key === 'Enter') autenticarGestor('login')" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
             </div>
 
             <button onclick="autenticarGestor('login')" style="

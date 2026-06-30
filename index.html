@@ -1121,6 +1121,16 @@ if (pagina === "areadogestor") {
         localStorage.setItem('senha_diretoria', 'dir123');
     }
 
+    // Array com todos os seus gráficos estruturados do Radar DGF
+    const graficosPainel = [
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - MÃO DE OBRA", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive", cor: "#34495e" },
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive", cor: "#3498db" },
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive", cor: "#e67e22" },
+        { nome: "GERÊNCIA DE EMPENHO COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive", cor: "#2ecc71" },
+        { nome: "COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive", cor: "#e74c3c" },
+        { nome: "COORDENAÇÃO DE PAGAMENTO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive", cor: "#1abc9c" }
+    ];
+
     // 3. Função global (temporária na janela) para gerenciar o fluxo de login e senha
     window.autenticarGestor = function(acao) {
         // Busca os elementos dependendo de onde a ação é disparada
@@ -1156,6 +1166,20 @@ if (pagina === "areadogestor") {
         }
     };
 
+    // Função auxiliar para forçar o download do arquivo local de forma segura
+    window.baixarPlanilhaLocal = function() {
+        try {
+            const link = document.createElement('a');
+            link.href = 'BASE CONTRATO PAGO.xlsx';
+            link.download = 'BASE CONTRATO PAGO.xlsx';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (e) {
+            window.open('BASE CONTRATO PAGO.xlsx', '_blank');
+        }
+    };
+
     // 4. Função interna para renderizar o painel principal após o login correto
     function carregarPainelGestor() {
         conteudo.innerHTML = `
@@ -1182,56 +1206,155 @@ if (pagina === "areadogestor") {
             
             <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
             
-            <div style="display: flex; flex-direction: column; gap: 15px;">
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; width: 100%;">
                 
-                <div style="background: #fdfefe; padding: 20px; border-left: 4px solid #3498db; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0;">
-                    <p style="margin: 0; color: #2980b9; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                        🖥️ BI DGF
-                    </p>
-                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Espaço para gerenciamento, acompanhamento e suporte às demandas de PD.</p>
+                <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 15px;">
+                    <div onclick="window.open('https://datastudio.google.com/u/0/reporting/01e1e47a-5ad6-41a0-9a1f-3c04344b53f5/page/cJyYF', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #3498db; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+                       onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+                        <p style="margin: 0; color: #2980b9; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                            🖥️ BI DGF
+                        </p>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Espaço para gerenciamento, acompanhamento e suporte às demandas de PD.</p>
+                    </div>
+
+                    <div onclick="window.open('https://seaf-ai.onrender.com/login', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #2ecc71; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+                       onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+                        <p style="margin: 0; color: #27ae60; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                            🤖 ASSISTENTE SEAF - CHATBOT
+                        </p>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Interface de comunicação automatizada para suporte e respostas rápidas da DGF.</p>
+                    </div>
+
+                    <div onclick="window.location.href='chatbot.html';" style="background: #fdfefe; padding: 20px; border-left: 4px solid #9b59b6; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+     onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+    <p style="margin: 0; color: #8e44ad; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+        🔍 PESQUISE SEU PROCESSO
+    </p>
+    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Consulte o andamento, histórico e situação atual de processos internos.</p>
+</div>
+
+                    <div onclick="window.baixarPlanilhaLocal()" style="background: #fdfefe; padding: 20px; border-left: 4px solid #e74c3c; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+                       onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+                        <p style="margin: 0; color: #c0392b; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                            🗄️ BASE DE DADOS
+                        </p>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao repositório centralizado de dados e arquivos consolidados.</p>
+                    </div>
                 </div>
 
-                <div style="background: #fdfefe; padding: 20px; border-left: 4px solid #2ecc71; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0;">
-                    <p style="margin: 0; color: #27ae60; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                        🤖 ASSISTENTE SEAF - CHATBOT
-                    </p>
-                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Interface de comunicação automatizada para suporte e respostas rápidas da DGF.</p>
+            </div>
+
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px; width: 100%;">
+                
+                <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <div style="background: #1a73e8; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
+                        📊 PAINEL - OSS / PISO
+                    </div>
+                    <iframe src="https://docs.google.com/spreadsheets/d/13n59XTDICxmQS7UCWt0Z-eyeIk6raZSd55MdGGG33ZA/edit?usp=sharing" 
+                            style="width: 100%; height: 500px; border: none;" loading="lazy"></iframe>
                 </div>
 
-                <div onclick="" style="background: #fdfefe; padding: 20px; border-left: 4px solid #9b59b6; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
-                   onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
-                    <p style="margin: 0; color: #8e44ad; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                        🔍 PESQUISE SEU PROCESSO
-                    </p>
-                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Consulte o andamento, histórico e situação atual de processos internos.</p>
+                <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <div style="background: #0f9d58; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
+                        📈 PAINEL CONTÁBIL
+                    </div>
+                    <iframe src="https://datastudio.google.com/reporting/56d2bf7a-eaf6-4c58-9273-56f81c27e1d5" 
+                            style="width: 100%; height: 500px; border: none;" loading="lazy"></iframe>
                 </div>
 
-                <div onclick="window.open('SUA_NOVA_URL_DO_GOOGLE_SHEETS_AQUI', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #e74c3c; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
-                   onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
-                    <p style="margin: 0; color: #c0392b; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                        🗄️ BASE DE DADOS
-                    </p>
-                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao repositório centralizado de dados e arquivos consolidados.</p>
-                </div>
-
-                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;">
+                <div onclick="pagina = 'radar_dgf'; if(typeof mudarAba === 'function') { mudarAba('radar_dgf'); } else { location.reload(); }" style="
+                    flex: 1; 
+                    min-width: 320px; 
+                    display: flex; 
+                    flex-direction: column; 
+                    gap: 10px; 
+                    background: #f4f7f6; 
+                    border-radius: 8px; 
+                    padding: 12px; 
+                    box-sizing: border-box;
+                    border-top: 10px solid ${graficosPainel[0].cor};
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+                    transition: border-color 0.5s ease, transform 0.2s ease, background 0.2s ease;
+                    height: 546px;
+                    cursor: pointer;
+                " id="container-painel-radar"
+                onmouseover="this.style.background='#eaeded'; this.style.transform='scale(1.01)'" 
+                onmouseout="this.style.background='#f4f7f6'; this.style.transform='none'">
                     
-                    <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                        <div style="background: #1a73e8; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
-                            📊 RELATÓRIO ESTRATÉGICO - LOOKER STUDIO
-                        </div>
-                        <iframe src="https://datastudio.google.com/reporting/56d2bf7a-eaf6-4c58-9273-56f81c27e1d5" 
-                                style="width: 100%; height: 500px; border: none;" loading="lazy"></iframe>
+                    <div id="topo-painel-radar" style="background: ${graficosPainel[0].cor}; color: white; padding: 10px; border-radius: 6px; text-align: center; font-weight: bold; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: background 0.5s ease; box-sizing: border-box; flex-shrink: 0;">
+                        📊 RADAR DGF: Monitoramento ${graficosPainel[0].nome}
                     </div>
 
-                    <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                        <div style="background: #0f9d58; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
-                            📈 PLANILHA CONSOLIDADA DGF
+                    <div style="display: flex; flex-direction: column; width: 100%; gap: 10px; flex: 1; min-height: 0;">
+                        
+                        <div style="flex: 1; background: transparent; overflow: hidden; position: relative; border: 1px solid #e0e0e0; border-radius: 6px; width: 100%;">
+                            <div style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; background: transparent;"></div>
+                            <iframe id="iframe-painel-radar" src="${graficosPainel[0].url}" 
+                                style="
+                                    width: 142%; 
+                                    height: 142%; 
+                                    border: none; 
+                                    position: absolute; 
+                                    top: 0; 
+                                    left: 0;
+                                    transform: scale(0.7);
+                                    transform-origin: top left;
+                                " 
+                                scrolling="no">
+                             iframe>
                         </div>
-                        <iframe src="https://docs.google.com/spreadsheets/d/1iLNYGCyUj9ua0PTvZK2YLD2s4jYbObNG/edit?usp=sharing&ouid=105842997163149787413&rtpof=true&sd=true" 
-                                style="width: 100%; height: 500px; border: none;" loading="lazy"></iframe>
-                    </div>
 
+                        <div style="
+                            width: 100%; 
+                            background: white; 
+                            border-radius: 6px; 
+                            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+                            padding: 8px; 
+                            display: flex; 
+                            flex-direction: column; 
+                            gap: 6px; 
+                            box-sizing: border-box;
+                            height: 150px;
+                            position: relative;
+                            z-index: 2;
+                        " onclick="event.stopPropagation();">
+                            <div style="font-weight: bold; font-size: 11px; color: #7f8c8d; border-bottom: 2px solid #f4f7f6; padding-bottom: 4px; text-align: center;">
+                                🎛️ SELEÇÃO RÁPIDA (Clique no card para abrir o menu expandido)
+                            </div>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto;">
+                                ${graficosPainel.map((g, idx) => `
+                                    <button 
+                                        id="btn-atalho-${idx}" 
+                                        onclick="window.mudarGraficoRadarManual(${idx})"
+                                        style="
+                                            display: flex;
+                                            align-items: center;
+                                            gap: 6px;
+                                            width: 100%;
+                                            padding: 6px;
+                                            border: 1px solid ${idx === 0 ? g.cor : '#e0e0e0'};
+                                            border-left: 4px solid ${g.cor};
+                                            border-radius: 4px;
+                                            background: ${idx === 0 ? '#f8f9fa' : '#ffffff'};
+                                            color: #2c3e50;
+                                            font-weight: ${idx === 0 ? 'bold' : 'normal'};
+                                            font-size: 10px;
+                                            cursor: pointer;
+                                            text-align: left;
+                                            transition: all 0.2s ease;
+                                        "
+                                        onmouseover="this.style.background='#f8f9fa'; this.style.transform='translateX(2px)'"
+                                        onmouseout="if(window.indiceRadarAtual !== ${idx}) { this.style.background='#fff'; this.style.transform='none'; } else { this.style.transform='none'; }"
+                                    >
+                                        <span id="dot-atalho-${idx}" style="width: 6px; height: 6px; border-radius: 50%; background: ${idx === 0 ? g.cor : 'transparent'}; border: 1px solid ${idx === 0 ? 'transparent' : '#bdc3c7'}; flex-shrink: 0;"></span>
+                                        <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; width: 100%;">${g.nome}</span>
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
@@ -1255,6 +1378,68 @@ if (pagina === "areadogestor") {
             </div>
         </div>
         `;
+
+        // --- Inicialização Automática das Lógicas e Timers do Radar DGF ---
+        window.indiceRadarAtual = 0;
+
+        const atualizarInterfaceRadar = (novoIndice) => {
+            window.indiceRadarAtual = !isNaN(novoIndice) ? novoIndice : 0;
+            
+            const container = document.getElementById("container-painel-radar");
+            const topo = document.getElementById("topo-painel-radar");
+            const iframe = document.getElementById("iframe-painel-radar");
+
+            if (container && topo && iframe) {
+                const grafico = graficosPainel[novoIndice];
+                iframe.src = grafico.url;
+
+                topo.innerHTML = `📊 RADAR DGF: Monitoramento ${grafico.nome}`;
+                topo.style.background = grafico.cor;
+                container.style.borderTopColor = grafico.cor;
+
+                graficosPainel.forEach((g, idx) => {
+                    const btn = document.getElementById(`btn-atalho-${idx}`);
+                    const dot = document.getElementById(`dot-atalho-${idx}`);
+                    if (btn && dot) {
+                        if (idx === novoIndice) {
+                            btn.style.background = "#f8f9fa";
+                            btn.style.borderColor = g.cor;
+                            btn.style.fontWeight = "bold";
+                            dot.style.background = g.cor;
+                            dot.style.borderColor = "transparent";
+                        } else {
+                            btn.style.background = "#ffffff";
+                            btn.style.borderColor = "#e0e0e0";
+                            btn.style.fontWeight = "normal";
+                            dot.style.background = "transparent";
+                            dot.style.borderColor = "#bdc3c7";
+                        }
+                    }
+                });
+            }
+        };
+
+        window.mudarGraficoRadarManual = (idx) => {
+            atualizarInterfaceRadar(idx);
+            clearInterval(window.intervaloPaginaRadar);
+            criarLoopRadar();
+        };
+
+        const criarLoopRadar = () => {
+            window.intervaloPaginaRadar = setInterval(() => {
+                let proximo = (window.indiceRadarAtual + 1) % graficosPainel.length;
+                const container = document.getElementById("container-painel-radar");
+                
+                if (container) {
+                    atualizarInterfaceRadar(proximo);
+                } else {
+                    clearInterval(window.intervaloPaginaRadar);
+                }
+            }, 8000);
+        };
+
+        // Ativa o carrossel de rotação do radar assim que carrega o painel
+        criarLoopRadar();
     }
 
     // 5. Injeta a tela de login inicial com o menu de seleção e opções

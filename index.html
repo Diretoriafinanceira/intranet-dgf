@@ -1109,497 +1109,986 @@ if(pagina === "noticias"){
 // NOVO BLOCO ESTRUTURADO: ÁREA DO GESTOR COMO PÁGINA OFICIAL
 // =========================================================
 if (pagina === "areadogestor") {
+
     // 1. Limpa os carrosséis e timers ativos para não pesar o navegador
+
     if (window.intervaloPaginaRadar) { clearInterval(window.intervaloPaginaRadar); }
+
     if (window.intervaloRadarDGF) { clearInterval(window.intervaloRadarDGF); }
 
+
+
     // 2. Inicializa as senhas padrão no localStorage caso não existam
+
     if (!localStorage.getItem('senha_executivo')) {
+
         localStorage.setItem('senha_executivo', 'exe123');
+
     }
+
     if (!localStorage.getItem('senha_diretoria')) {
+
         localStorage.setItem('senha_diretoria', 'dir123');
+
     }
+
+
 
     // Array com todos os seus gráficos estruturados do Radar DGF
+
     const graficosPainel = [
+
         { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - MÃO DE OBRA", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive", cor: "#34495e" },
+
         { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive", cor: "#3498db" },
+
         { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive", cor: "#e67e22" },
+
         { nome: "GERÊNCIA DE EMPENHO COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive", cor: "#2ecc71" },
+
         { nome: "COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive", cor: "#e74c3c" },
+
         { nome: "COORDENAÇÃO DE PAGAMENTO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive", cor: "#1abc9c" }
+
     ];
 
+
+
     // 3. Função global (temporária na janela) para gerenciar o fluxo de login e senha
+
     window.autenticarGestor = function(acao) {
+
         const usuarioSelectEl = document.getElementById('gestor-usuario');
+
         const senhaInputEl = document.getElementById('gestor-senha');
+
         
+
         const usuarioSelect = usuarioSelectEl ? usuarioSelectEl.value : window.usuarioLogadoAtual;
+
         const senhaSalva = localStorage.getItem(`senha_${usuarioSelect}`);
 
+
+
         if (acao === 'login') {
+
             const senhaInput = senhaInputEl.value;
+
             if (senhaInput === senhaSalva) {
+
                 window.usuarioLogadoAtual = usuarioSelect;
+
                 carregarPainelGestor();
+
             } else {
+
                 alert('Senha incorreta! Acesso negado.');
+
             }
+
         } 
+
         else if (acao === 'alterar') {
+
             const senhaAtual = prompt('Digite a sua senha ATUAL para segurança:');
+
             if (senhaAtual === senhaSalva) {
+
                 const novaSenha = prompt('Digite a sua NOVA senha:');
+
                 if (novaSenha && novaSenha.trim() !== "") {
+
                     localStorage.setItem(`senha_${usuarioSelect}`, novaSenha.trim());
+
                     alert('Senha alterada com sucesso! Use a nova senha no próximo acesso.');
+
                 } else {
+
                     alert('Alteração cancelada ou senha inválida.');
+
                 }
+
             } else {
+
                 alert('Senha atual incorreta. Não foi possível alterar.');
+
             }
+
         }
+
     };
+
+
 
     // Função auxiliar para forçar o download do arquivo local de forma segura
+
     window.baixarPlanilhaLocal = function() {
+
         try {
+
             const link = document.createElement('a');
+
             link.href = 'BASE CONTRATO PAGO.xlsx';
+
             link.download = 'BASE CONTRATO PAGO.xlsx';
+
             document.body.appendChild(link);
+
             link.click();
+
             document.body.removeChild(link);
+
         } catch (e) {
+
             window.open('BASE CONTRATO PAGO.xlsx', '_blank');
+
         }
+
     };
+
+
 
     // Nova Função: Controla a exibição e a busca do Chatbot integrado à planilha Google Sheets
+
     window.toggleChatbotPainel = function() {
+
         const painelChat = document.getElementById('chatbot-painel-container');
+
         if (painelChat.style.display === 'none') {
+
             painelChat.style.display = 'block';
+
             document.getElementById('input-sei-gestor').focus();
+
         } else {
+
             painelChat.style.display = 'none';
+
         }
+
     };
+
+
 
     window.consultarSeiGoogleSheets = function() {
+
         const inputVal = document.getElementById('input-sei-gestor').value.trim();
+
         const resultadoEl = document.getElementById('resultado-sei-gestor');
+
         
+
         if (!inputVal) {
+
             resultadoEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>⚠️ Digite o número do processo!</span>";
+
             return;
+
         }
+
         
+
         resultadoEl.innerHTML = "<span style='color: #7f8c8d;'>🤖 Buscando na planilha online... Por favor, aguarde.</span>";
+
         
+
         const limpar = (t) => String(t).replace(/[\.\-\/\s]/g, '');
+
         const buscaLimpa = limpar(inputVal);
+
         
+
         // URL corrigida apontando exatamente para a aba 'Página1' convertida em CSV
+
         const urlGoogleSheetsCsv = "https://docs.google.com/spreadsheets/d/1Qgrrz8f_iQxjZXU_HL2drPrZ7GYN0cazYx7Xzf9-RRM/gviz/tq?tqx=out:csv&gid=0";
+
         
+
         fetch(urlGoogleSheetsCsv)
+
             .then(res => {
+
                 if (!res.ok) throw new Error("Erro ao acessar dados");
+
                 return res.text();
+
             })
+
             .then(csvText => {
+
                 // Função simples para quebrar linhas e colunas respeitando as aspas do CSV do Google
+
                 const linhas = csvText.split(/\r?\n/).map(linha => {
+
                     return linha.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(col => col.replace(/^"|"$/g, '').trim());
+
                 });
+
                 
+
                 if (linhas.length === 0) {
+
                     resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ A planilha está vazia ou inacessível.</span>";
+
                     return;
+
                 }
+
                 
+
                 // Cabeçalhos na linha 0
+
                 const cabecalhos = linhas[0].map(c => c.toUpperCase());
+
                 const idxSEI = cabecalhos.findIndex(c => c.includes("SEI"));
+
                 const idxOrigem = cabecalhos.findIndex(c => c.includes("SETOR ORIGEM") || c.includes("SETOR"));
+
                 const idxArea = cabecalhos.findIndex(c => c.includes("ÁREA") || c.includes("AREA"));
+
                 
+
                 if (idxSEI === -1) {
+
                     resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ Coluna 'SEI' não mapeada no cabeçalho da planilha.</span>";
+
                     return;
+
                 }
+
                 
+
                 let registroEncontrado = null;
+
                 
+
                 // Pesquisa a partir da linha 1
+
                 for (let i = 1; i < linhas.length; i++) {
-                    const colunas = lines[i];
+
+                    const colunas = linhas[i];
+
                     if (!colunas || colunas.length <= idxSEI) continue;
+
                     
+
                     const celulaSEI = colunas[idxSEI];
+
                     if (celulaSEI === "" || celulaSEI === ".") continue;
+
                     
+
                     if (limpar(celulaSEI) === buscaLimpa) {
+
                         registroEncontrado = {
-                            seiOriginal: celulaSEI,
+
                             setor: idxOrigem !== -1 ? colunas[idxOrigem] : "Não informado",
+
                             area: idxArea !== -1 ? colunas[idxArea] : "Não informada"
+
                         };
+
                         break;
+
                     }
+
                 }
+
                 
+
                 if (registroEncontrado) {
+
                     resultadoEl.innerHTML = `
-                        <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50; font-family: monospace; font-size: 13px; line-height: 1.6;">
-                            <strong>SEI:</strong> ${registroEncontrado.seiOriginal}<br>
-                            <strong>ESTÁ NA:</strong> ${registroEncontrado.setor || "Não informado"}<br>
-                            <strong>AREA:</strong> ${registroEncontrado.area || "Não informada"}
+
+                        <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50;">
+
+                            <strong style="color: #27ae60;">✓ Processo Localizado!</strong><br><br>
+
+                            📍 <strong>SETOR ORIGEM:</strong> ${registroEncontrado.setor || "Não informado"}<br>
+
+                            🏢 <strong>COORDENAÇÃO:</strong> DGF<br>
+
+                            🌐 <strong>ÁREA:</strong> ${registroEncontrado.area || "Não informada"}
+
                         </div>
+
                     `;
+
                 } else {
+
                     resultadoEl.innerHTML = `
+
                         <div style="background: #fdf2f2; padding: 12px; border-left: 4px solid #e74c3c; border-radius: 4px; text-align: left; color: #c0392b; font-weight: bold;">
+
                             ❌ O processo não está na DGF.
+
                         </div>
+
                     `;
+
                 }
+
             })
+
             .catch(err => {
+
                 console.error(err);
+
                 resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ Erro ao conectar ao Google Sheets. Garanta que o link esteja compartilhado com 'Qualquer pessoa com o link'.</span>";
+
             });
+
     };
 
+
+
     // 4. Função interna para renderizar o painel principal após o login correto
+
     function carregarPainelGestor() {
+
         conteudo.innerHTML = `
+
         <div style="
+
             display: flex; 
+
             flex-direction: column; 
+
             gap: 20px; 
+
             padding: 25px;
+
             background: #fff;
+
             border-radius: 8px;
+
             font-family: 'Segoe UI', Roboto, sans-serif;
+
             border-top: 10px solid #f39c12;
+
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+
             width: 100%;
+
             box-sizing: border-box;
+
         ">
+
             <div style="display: flex; align-items: center; gap: 15px;">
+
                 <span style="font-size: 35px;">🧑‍💼</span>
+
                 <div>
+
                     <h2 style="margin: 0; color: #2c3e50;">Área do Gestor</h2>
+
                     <p style="margin: 2px 0 0 0; color: #7f8c8d; font-size: 14px;">Painel de Governança Estratégica e Tomada de Decisão</p>
+
                 </div>
+
             </div>
+
             
+
             <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
+
             
+
             <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; width: 100%;">
+
                 
+
                 <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 15px;">
+
                     <div onclick="window.open('https://datastudio.google.com/u/0/reporting/01e1e47a-5ad6-41a0-9a1f-3c04344b53f5/page/cJyYF', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #3498db; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+
                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+
                         <p style="margin: 0; color: #2980b9; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+
                             🖥️ BI DGF
+
                         </p>
+
                         <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Espaço para gerenciamento, acompanhamento e suporte às demandas de PD.</p>
+
                     </div>
+
+
 
                     <div onclick="window.open('https://seaf-ai.onrender.com/login', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #2ecc71; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+
                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+
                         <p style="margin: 0; color: #27ae60; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+
                             🤖 ASSISTENTE SEAF - CHATBOT
+
                         </p>
+
                         <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Interface de comunicação automatizada para suporte e respostas rápidas da DGF.</p>
+
                     </div>
+
+
 
                     <div onclick="window.baixarPlanilhaLocal()" style="background: #fdfefe; padding: 20px; border-left: 4px solid #e74c3c; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+
                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+
                         <p style="margin: 0; color: #c0392b; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+
                             🗄️ BASE DE DADOS
+
                         </p>
+
                         <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao repositório centralizado de dados e arquivos consolidados.</p>
+
                     </div>
+
+
 
                     <div onclick="window.toggleChatbotPainel()" style="background: #fdfefe; padding: 20px; border-left: 4px solid #9b59b6; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+
                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+
                         <p style="margin: 0; color: #8e44ad; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+
                             🔍 PESQUISE SEU PROCESSO
+
                         </p>
+
                         <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Consulte o andamento em tempo real direto da planilha Google Sheets.</p>
+
                     </div>
+
+
 
                     <div id="chatbot-painel-container" style="display: none; background: #fafafa; border: 1px solid #ddd; padding: 15px; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);">
+
                         <p style="margin: 0 0 10px 0; font-size: 13px; font-weight: bold; color: #34495e;">🤖 Assistente de Processos DGF</p>
+
                         <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+
                             <input type="text" id="input-sei-gestor" placeholder="Digite o número do SEI..." onkeydown="if(event.key === 'Enter') window.consultarSeiGoogleSheets()" style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; outline: none;">
+
                             <button onclick="window.consultarSeiGoogleSheets()" style="background: #9b59b6; color: white; border: none; padding: 8px 15px; border-radius: 4px; font-size: 13px; font-weight: bold; cursor: pointer;">Buscar</button>
+
                         </div>
+
                         <div id="resultado-sei-gestor" style="font-size: 13px; margin-top: 5px;"></div>
+
                     </div>
+
+
 
                 </div>
 
+
+
             </div>
+
+
 
             <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px; width: 100%;">
+
                 
-                <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                    <div style="background: #1a73e8; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
-                        📊 PAINEL - OSS / PISO
-                    </div>
-                    <iframe src="https://docs.google.com/spreadsheets/d/13n59XTDICxmQS7UCWt0Z-eyeIk6raZSd55MdGGG33ZA/edit?usp=sharing" 
-                            style="width: 100%; height: 500px; border: none;" loading="lazy"></iframe>
-                </div>
 
                 <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                    <div style="background: #0f9d58; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
-                        📈 PAINEL CONTÁBIL
+
+                    <div style="background: #1a73e8; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
+
+                        📊 PAINEL - OSS / PISO
+
                     </div>
-                    <iframe src="https://datastudio.google.com/reporting/56d2bf7a-eaf6-4c58-9273-56f81c27e1d5" 
+
+                    <iframe src="https://docs.google.com/spreadsheets/d/13n59XTDICxmQS7UCWt0Z-eyeIk6raZSd55MdGGG33ZA/edit?usp=sharing" 
+
                             style="width: 100%; height: 500px; border: none;" loading="lazy"></iframe>
+
                 </div>
+
+
+
+                <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+
+                    <div style="background: #0f9d58; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
+
+                        📈 PAINEL CONTÁBIL
+
+                    </div>
+
+                    <iframe src="https://datastudio.google.com/reporting/56d2bf7a-eaf6-4c58-9273-56f81c27e1d5" 
+
+                            style="width: 100%; height: 500px; border: none;" loading="lazy"></iframe>
+
+                </div>
+
+
 
                 <div onclick="pagina = 'radar_dgf'; if(typeof mudarAba === 'function') { mudarAba('radar_dgf'); } else { location.reload(); }" style="
+
                     flex: 1; 
+
                     min-width: 320px; 
+
                     display: flex; 
+
                     flex-direction: column; 
+
                     gap: 10px; 
+
                     background: #f4f7f6; 
+
                     border-radius: 8px; 
+
                     padding: 12px; 
+
                     box-sizing: border-box;
+
                     border-top: 10px solid ${graficosPainel[0].cor};
+
                     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+
                     transition: border-color 0.5s ease, transform 0.2s ease, background 0.2s ease;
+
                     height: 546px;
+
                     cursor: pointer;
+
                 " id="container-painel-radar"
+
                 onmouseover="this.style.background='#eaeded'; this.style.transform='scale(1.01)'" 
+
                 onmouseout="this.style.background='#f4f7f6'; this.style.transform='none'">
+
                     
+
                     <div id="topo-painel-radar" style="background: ${graficosPainel[0].cor}; color: white; padding: 10px; border-radius: 6px; text-align: center; font-weight: bold; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: background 0.5s ease; box-sizing: border-box; flex-shrink: 0;">
+
                         📊 RADAR DGF: Monitoramento ${graficosPainel[0].nome}
+
                     </div>
+
+
 
                     <div style="display: flex; flex-direction: column; width: 100%; gap: 10px; flex: 1; min-height: 0;">
+
                         
+
                         <div style="flex: 1; background: transparent; overflow: hidden; position: relative; border: 1px solid #e0e0e0; border-radius: 6px; width: 100%;">
+
                             <div style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; background: transparent;"></div>
+
                             <iframe id="iframe-painel-radar" src="${graficosPainel[0].url}" 
+
                                 style="
+
                                     width: 142%; 
+
                                     height: 142%; 
+
                                     border: none; 
+
                                     position: absolute; 
+
                                     top: 0; 
+
                                     left: 0;
+
                                     transform: scale(0.7);
+
                                     transform-origin: top left;
+
                                 " 
+
                                 scrolling="no">
+
                              </iframe>
+
                         </div>
+
+
 
                         <div style="
+
                             width: 100%; 
+
                             background: white; 
+
                             border-radius: 6px; 
+
                             box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+
                             padding: 8px; 
+
                             display: flex; 
+
                             flex-direction: column; 
+
                             gap: 6px; 
+
                             box-sizing: border-box;
+
                             height: 150px;
+
                             position: relative;
+
                             z-index: 2;
+
                         " onclick="event.stopPropagation();">
+
                             <div style="font-weight: bold; font-size: 11px; color: #7f8c8d; border-bottom: 2px solid #f4f7f6; padding-bottom: 4px; text-align: center;">
+
                                 🎛️ SELEÇÃO RÁPIDA (Clique no card para abrir o menu expandido)
+
                             </div>
+
                             
+
                             <div style="display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto;">
+
                                 ${graficosPainel.map((g, idx) => `
+
                                     <button 
+
                                         id="btn-atalho-${idx}" 
+
                                         onclick="window.mudarGraficoRadarManual(${idx})"
+
                                         style="
+
                                             display: flex;
+
                                             align-items: center;
+
                                             gap: 6px;
+
                                             width: 100%;
+
                                             padding: 6px;
+
                                             border: 1px solid ${idx === 0 ? g.cor : '#e0e0e0'};
+
                                             border-left: 4px solid ${g.cor};
+
                                             border-radius: 4px;
+
                                             background: ${idx === 0 ? '#f8f9fa' : '#ffffff'};
+
                                             color: #2c3e50;
+
                                             font-weight: ${idx === 0 ? 'bold' : 'normal'};
+
                                             font-size: 10px;
+
                                             cursor: pointer;
+
                                             text-align: left;
+
                                             transition: all 0.2s ease;
+
                                         "
+
                                         onmouseover="this.style.background='#f8f9fa'; this.style.transform='translateX(2px)'"
+
                                         onmouseout="if(window.indiceRadarAtual !== ${idx}) { this.style.background='#fff'; this.style.transform='none'; } else { this.style.transform='none'; }"
+
                                     >
+
                                         <span id="dot-atalho-${idx}" style="width: 6px; height: 6px; border-radius: 50%; background: ${idx === 0 ? g.cor : 'transparent'}; border: 1px solid ${idx === 0 ? 'transparent' : '#bdc3c7'}; flex-shrink: 0;"></span>
+
                                         <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; width: 100%;">${g.nome}</span>
+
                                     </button>
+
                                 `).join('')}
+
                             </div>
+
                         </div>
 
+
+
                     </div>
+
                 </div>
 
+
+
             </div>
+
+
 
             <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0 5px 0;">
 
+
+
             <div style="text-align: right;">
+
                 <button onclick="autenticarGestor('alterar')" style="
+
                     background: #ecf0f1;
+
                     color: #7f8c8d;
+
                     border: 1px solid #bdc3c7;
+
                     padding: 8px 15px;
+
                     border-radius: 4px;
+
                     font-size: 12px;
+
                     font-weight: bold;
+
                     cursor: pointer;
+
                     transition: all 0.2s;
+
                 " onmouseover="this.style.background='#bdc3c7'; this.style.color='#c0392b';" onmouseout="this.style.background='#ecf0f1'; this.style.color='#7f8c8d';">
+
                     ⚙️ ALTERAR MINHA SENHA
+
                 </button>
+
             </div>
+
         </div>
+
         `;
 
+
+
         // --- Inicialização Automática das Lógicas e Timers do Radar DGF ---
+
         window.indiceRadarAtual = 0;
 
+
+
         const atualizarInterfaceRadar = (novoIndice) => {
+
             window.indiceRadarAtual = !isNaN(novoIndice) ? novoIndice : 0;
+
             
+
             const container = document.getElementById("container-painel-radar");
+
             const topo = document.getElementById("topo-painel-radar");
+
             const iframe = document.getElementById("iframe-painel-radar");
 
+
+
             if (container && topo && iframe) {
+
                 const grafico = graficosPainel[novoIndice];
+
                 iframe.src = grafico.url;
 
+
+
                 topo.innerHTML = `📊 RADAR DGF: Monitoramento ${grafico.nome}`;
+
                 topo.style.background = grafico.cor;
+
                 container.style.borderTopColor = grafico.cor;
 
+
+
                 graficosPainel.forEach((g, idx) => {
+
                     const btn = document.getElementById(`btn-atalho-${idx}`);
+
                     const dot = document.getElementById(`dot-atalho-${idx}`);
+
                     if (btn && dot) {
+
                         if (idx === novoIndice) {
+
                             btn.style.background = "#f8f9fa";
+
                             btn.style.borderColor = g.cor;
+
                             btn.style.fontWeight = "bold";
+
                             dot.style.background = g.cor;
+
                             dot.style.borderColor = "transparent";
+
                         } else {
+
                             btn.style.background = "#ffffff";
+
                             btn.style.borderColor = "#e0e0e0";
+
                             btn.style.fontWeight = "normal";
+
                             dot.style.background = "transparent";
+
                             dot.style.borderColor = "#bdc3c7";
+
                         }
+
                     }
+
                 });
+
             }
+
         };
+
+
 
         window.mudarGraficoRadarManual = (idx) => {
+
             atualizarInterfaceRadar(idx);
+
             clearInterval(window.intervaloPaginaRadar);
+
             criarLoopRadar();
+
         };
+
+
 
         const criarLoopRadar = () => {
+
             window.intervaloPaginaRadar = setInterval(() => {
+
                 let proximo = (window.indiceRadarAtual + 1) % graficosPainel.length;
+
                 const container = document.getElementById("container-painel-radar");
+
                 
+
                 if (container) {
+
                     atualizarInterfaceRadar(proximo);
+
                 } else {
+
                     clearInterval(window.intervaloPaginaRadar);
+
                 }
+
             }, 8000);
+
         };
 
+
+
         criarLoopRadar();
+
     }
 
+
+
     // 5. Injeta a tela de login inicial com o menu de seleção e opções
+
     conteudo.innerHTML = `
+
     <div style="
+
         display: flex;
+
         justify-content: center;
+
         align-items: center;
+
         height: 70vh;
+
         font-family: 'Segoe UI', Roboto, sans-serif;
+
     ">
+
         <div style="
+
             background: white;
+
             padding: 30px;
+
             border-radius: 8px;
+
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
             border-top: 8px solid #f39c12;
+
             width: 100%;
+
             max-width: 360px;
+
             text-align: center;
+
         ">
+
             <span style="font-size: 45px;">🔒</span>
+
             <h3 style="margin: 10px 0 5px 0; color: #2c3e50;">Acesso Restrito</h3>
+
             <p style="margin: 0 0 20px 0; color: #7f8c8d; font-size: 14px;">Selecione seu perfil e entre com as credenciais</p>
+
             
+
             <div style="margin-bottom: 15px; text-align: left;">
+
                 <label style="font-size: 12px; font-weight: bold; color: #34495e; display: block; margin-bottom: 5px;">USUÁRIO</label>
+
                 <select id="gestor-usuario" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; background: #fff;">
+
                     <option value="executivo">Executivo</option>
+
                     <option value="diretoria">Diretoria</option>
+
                 </select>
+
             </div>
+
+
 
             <div style="margin-bottom: 20px; text-align: left;">
+
                 <label style="font-size: 12px; font-weight: bold; color: #34495e; display: block; margin-bottom: 5px;">SENHA</label>
+
                 <input type="password" id="gestor-senha" placeholder="Digite sua senha" onkeydown="if(event.key === 'Enter') autenticarGestor('login')" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+
             </div>
 
-            <button onclick="autenticarGestor('login')" style="
-                width: 100%;
-                background: #f39c12;
-                color: white;
-                border: none;
-                padding: 12px;
-                border-radius: 4px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: background 0.2s;
-            " onmouseover="this.style.background='#e67e22'" onmouseout="this.style.background='#f39c12'">
-                ENTRAR NO PAINEL
-            </button>
-        </div>
-    </div>
-    `;
-}
 
+
+            <button onclick="autenticarGestor('login')" style="
+
+                width: 100%;
+
+                background: #f39c12;
+
+                color: white;
+
+                border: none;
+
+                padding: 12px;
+
+                border-radius: 4px;
+
+                font-weight: bold;
+
+                cursor: pointer;
+
+                transition: background 0.2s;
+
+            " onmouseover="this.style.background='#e67e22'" onmouseout="this.style.background='#f39c12'">
+
+                ENTRAR NO PAINEL
+
+            </button>
+
+        </div>
+
+    </div>
+
+    `;
+
+}
 if (pagina === "radar_dgf") {
     // Garante a limpeza de qualquer intervalo anterior para evitar duplicação
     if (window.intervaloPaginaRadar) {

@@ -1963,10 +1963,6 @@ if(pagina === "aniversariantes"){
     const mesAtual = (agora.getMonth() + 1).toString().padStart(2, '0');
     const hojeString = `${diaAtual}/${mesAtual}`;
     
-    // Identificador único para a sua lista na nuvem (mude os números finais se quiser resetar o mural)
-    const BOX_ID = "mural_dgf_coletivo_2026"; 
-    const API_URL = `https://jsonstorage.net/api/items/${BOX_ID}`;
-    
     window.renderizarMes = (mesSelecionado) => {
         const nomesMeses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
         const listaFiltrada = listaAniversariantes
@@ -1993,7 +1989,7 @@ if(pagina === "aniversariantes"){
         `;
     };
 
-    // Salva a mensagem no banco de dados público unificado
+    // ALTERADO: Salva apenas no PC do remetente localmente usando localStorage
     window.enviarParabensDGF = (nomeUsuario, index) => {
         const campoTexto = document.getElementById(`msg-input-${nomeUsuario}-${index}`);
         const campoAssinatura = document.getElementById(`assinatura-input-${nomeUsuario}-${index}`);
@@ -2006,135 +2002,115 @@ if(pagina === "aniversariantes"){
                 data: new Date().toLocaleDateString('pt-BR')
             };
 
-            // Busca as mensagens existentes ou cria um array vazio se for a primeira
-            fetch(API_URL)
-            .then(res => res.ok ? res.json() : { mensagens: [] })
-            .then(data => {
-                let mensagensGlobais = data.mensagens && Array.isArray(data.mensagens) ? data.mensagens : [];
-                mensagensGlobais.push(novaMensagem);
+            // Salva apenas localmente no PC de quem envia
+            const chLocal = `mural_local_${nomeUsuario}`;
+            const locais = JSON.parse(localStorage.getItem(chLocal) || "[]");
+            locais.push(novaMensagem);
+            localStorage.setItem(chLocal, JSON.stringify(locais));
 
-                // Salva o array atualizado de volta na nuvem
-                return fetch(API_URL, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ mensagens: mensagensGlobais })
-                });
+            // Mantém a simulação da rota caso seu ecossistema necessite do gatilho remoto
+            fetch('/api/mural', { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(novaMensagem)
             })
             .then(() => {
-                alert('Sua mensagem de parabéns foi publicada no mural coletivo! 🌟');
+                alert('Sua mensagem de parabéns foi guardada localmente e enviada ao mural! 🌟');
                 campoTexto.value = '';
                 if(campoAssinatura) campoAssinatura.value = '';
             })
-            .catch(err => {
-                console.error(err);
-                alert('Erro ao salvar na nuvem. Verifique a conexão com a rede externa.');
+            .catch(() => {
+                // Se der erro de rota, ainda funciona pois salvou localmente no computador
+                alert('Sua mensagem de parabéns foi guardada no seu computador! 🌟');
+                campoTexto.value = '';
+                if(campoAssinatura) campoAssinatura.value = '';
             });
         } else {
             alert('Por favor, digite uma mensagem antes de enviar.');
         }
     };
 
-    // Lê os dados do banco público e exibe o mural para qualquer pessoa na rede
+    // ALTERADO: Busca os dados locais salvos neste computador e abre uma página estilo Feed do Instagram
     window.baixarMuralDGF = (nomeUsuario, nomeCompleto, depto) => {
-        fetch(API_URL)
-        .then(res => res.json())
-        .then(data => {
-            const mensagensGlobais = data.mensagens && Array.isArray(data.mensagens) ? data.mensagens : [];
-            const mensagensFiltradas = mensagensGlobais.filter(m => m.usuarioDestino === nomeUsuario);
+        const chLocal = `mural_local_${nomeUsuario}`;
+        const minhasMensagens = JSON.parse(localStorage.getItem(chLocal) || "[]");
 
-            if (mensagensFiltradas.length === 0) {
-                alert(`Ainda não há mensagens deixadas para ${nomeCompleto} no mural coletivo.`);
-                return;
-            }
+        if (!minhasMensagens || minhasMensagens.length === 0) {
+            alert('Você ainda não possui mensagens cadastradas neste computador para esse mural.');
+            return;
+        }
 
-            const janelaMural = window.open('', '_blank');
-            let blocosMensagensHTML = '';
-            const tagsDecorativas = ['✨ Gratidão', '🎈 Celebração', '❤️ Carinho', '🌟 Sucesso', '🎁 Felicidades', '🥳 Festa'];
-            const tonsVibrantes = ['#fff2f2', '#f0f3ff', '#f3fff0', '#fffbf0', '#fdf0ff', '#e8ffff'];
+        const janelaPDF = window.open('', '_blank');
+        let blocosMensagensHTML = '';
+        const tagsDecorativas = ['✨ Gratidão', '🎈 Celebração', '❤️ Carinho', '🌟 Sucesso'];
+        const tonsPasteis = ['#fff5f5', '#f0faff', '#f6fff5', '#fffdf0', '#faf5ff', '#f5fffe'];
 
-            mensagensFiltradas.forEach((m, idx) => {
-                const tag = tagsDecorativas[idx % tagsDecorativas.length];
-                const corFundo = tonsVibrantes[idx % tonsVibrantes.length];
+        minhasMensagens.forEach((m, idx) => {
+            const tag = tagsDecorativas[idx % tagsDecorativas.length];
+            const corFundo = tonsPasteis[idx % tonsPasteis.length];
 
-                blocosMensagensHTML += `
-                    <div style="background: ${corFundo}; width: 100%; box-sizing: border-box; padding: 22px; border-radius: 20px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 8px 20px rgba(0,0,0,0.04); display: flex; flex-direction: column; gap: 15px; position: relative;">
-                        <p style="font-size: 11.5pt; line-height: 1.6; color: #1c2022; margin: 0; font-style: italic; font-weight: 600; white-space: pre-wrap;">
-                            "${m.texto}"
-                        </p>
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 14px;">
-                            <div>
-                                ${m.assinatura ? `<span style="font-size: 9.5pt; font-weight: bold; color: #2c3e50;">✍️ De: ${m.assinatura}</span>` : '<span style="font-size: 9.5pt; color: #95a5a6; font-style: italic;">Anônimo</span>'}
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <span style="font-size: 8pt; font-weight: bold; color: #ffffff; background: linear-gradient(135deg, #ff7675, #fd79a8); padding: 4px 12px; border-radius: 20px; text-transform: uppercase;">${tag}</span>
-                                <span style="font-size: 8pt; color: #a4b0be; font-weight: bold;">📅 ${m.data}</span>
-                            </div>
+            // Renderização instagramável vertical: exibe o texto completo sem quebras estritas de grid rígido
+            blocosMensagensHTML += `
+                <div style="background: ${corFundo}; width: 100%; box-sizing: border-box; padding: 20px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 15px; position: relative;">
+                    <p style="font-size: 11pt; line-height: 1.6; color: #2d3436; margin: 0; font-style: italic; font-weight: 500; white-space: pre-wrap;">
+                        "${m.texto}"
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed rgba(0,0,0,0.08); padding-top: 12px;">
+                        <div>
+                            ${m.assinatura ? `<span style="font-size: 9pt; font-weight: bold; color: #2c3e50;">✍️ De: ${m.assinatura}</span>` : '<span style="font-size: 9pt; color: #95a5a6; font-style: italic;">Anônimo</span>'}
                         </div>
-                    </div>`;
-            });
-
-            janelaMural.document.write(`
-                <html>
-                <head>
-                    <title>Mural DGF - ${nomeCompleto}</title>
-                    <style>
-                        body { 
-                            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-                            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-                            background-attachment: fixed;
-                            margin: 0; padding: 20px; color: #2c3e50; position: relative;
-                        }
-                        body::before {
-                            content: "FELIZ ANIVERSÁRIO • FELICIDADES • PARABÉNS • SUCESSO • CELEBRAÇÃO";
-                            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                            font-size: 30pt; font-weight: 900; color: rgba(255, 118, 117, 0.04);
-                            word-wrap: break-word; letter-spacing: 5px; line-height: 2.2;
-                            padding: 20px; box-sizing: border-box; z-index: -1; pointer-events: none; text-transform: uppercase;
-                        }
-                        .FeedContainer { 
-                            max-width: 650px; margin: 20px auto; background: rgba(255, 255, 255, 0.97); 
-                            border-radius: 30px; padding: 35px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); 
-                            border: 1px solid rgba(255,255,255,0.8); backdrop-filter: blur(10px);
-                        }
-                        .DGFHeader { text-align: center; border-bottom: 2px solid #f1f2f6; padding-bottom: 22px; margin-bottom: 25px; }
-                        .DGFLogo { font-size: 26pt; font-weight: 900; color: #2c3e50; letter-spacing: 2px; margin: 0; text-transform: uppercase; }
-                        .DGFLogo span { color: #ff7675; }
-                        .MuralTitulo { font-size: 20pt; background: linear-gradient(135deg, #ff7675, #6c5ce7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 8px 0 4px 0; font-weight: 800; }
-                        .MuralSub { font-size: 9.5pt; color: #8e8e8e; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
-                        .PerfilBadge { background: linear-gradient(135deg, #ffffff, #f1f2f6); border: 1px solid #e4e7eb; padding: 18px 25px; border-radius: 20px; margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between; }
-                        .ListaMensagensVertical { display: flex; flex-direction: column; gap: 24px; }
-                    </style>
-                </head>
-                <body>
-                    <div class="FeedContainer">
-                        <div class="DGFHeader">
-                            <div class="DGFLogo">📌 DGF<span>.</span></div>
-                            <div class="MuralTitulo">Mural de Parabéns ✨</div>
-                            <div class="MuralSub">Diretoria Geral de Finanças</div>
-                        </div>
-                        
-                        <div class="PerfilBadge">
-                            <div>
-                                <div style="font-size: 13pt; font-weight: 800; color: #2d3436; text-transform: uppercase; letter-spacing: 0.5px;">${nomeCompleto}</div>
-                                <div style="font-size: 9.5pt; color: #6c5ce7; font-weight: 700; margin-top: 4px; text-transform: uppercase;">${depto}</div>
-                            </div>
-                            <div style="font-size: 26pt;">🎂</div>
-                        </div>
-
-                        <div class="ListaMensagensVertical">
-                            ${blocosMensagensHTML}
-                        </div>
-
-                        <div style="text-align: center; color: #a4b0be; font-size: 9.5pt; font-weight: 700; border-top: 2px solid #f1f2f6; padding-top: 25px; margin-top: 35px; letter-spacing: 0.5px;">
-                            Gerado com ❤️ pela Intranet DGF • Feed Coletivo 📸
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 8pt; font-weight: bold; color: #ffffff; background: linear-gradient(135deg, #ff7675, #fd79a8); padding: 4px 10px; border-radius: 20px; text-transform: uppercase;">${tag}</span>
+                            <span style="font-size: 8pt; color: #a4b0be; font-weight: bold;">📅 ${m.data}</span>
                         </div>
                     </div>
-                </body>
-                </html>
-            `);
-            janelaMural.document.close();
-        })
-        .catch(() => alert("Erro ao carregar o mural coletivo. Certifique-se de que o dispositivo possui acesso à internet externa para ler o banco de dados."));
+                </div>`;
+        });
+
+        janelaPDF.document.write(`
+            <html>
+            <head>
+                <title>Mural DGF - ${nomeCompleto}</title>
+                <style>
+                    body { font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #fafafa; margin: 0; padding: 20px dashed #ffeaa7; color: #2c3e50; }
+                    .FeedContainer { max-width: 600px; margin: 30px auto; background: #ffffff; border-radius: 24px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); border: 1px solid #e6e6e6; }
+                    .DGFHeader { text-align: center; border-bottom: 1px solid #efefef; padding-bottom: 20px; margin-bottom: 25px; }
+                    .DGFLogo { font-size: 24pt; font-weight: 900; color: #2c3e50; letter-spacing: 2px; margin: 0; text-transform: uppercase; }
+                    .DGFLogo span { color: #ff7675; }
+                    .MuralTitulo { font-size: 18pt; color: #2c3e50; margin: 8px 0 4px 0; font-weight: 800; }
+                    .MuralSub { font-size: 9pt; color: #8e8e8e; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+                    .PerfilBadge { background: #f8f9fa; border: 1px solid #efefef; padding: 15px 20px; border-radius: 18px; margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between; }
+                    .ListaMensagensVertical { display: flex; flex-direction: column; gap: 20px; }
+                </style>
+            </head>
+            <body>
+                <div class="FeedContainer">
+                    <div class="DGFHeader">
+                        <div class="DGFLogo">📌 DGF<span>.</span></div>
+                        <div class="MuralTitulo">Mural de Parabéns ✨</div>
+                        <div class="MuralSub">Diretoria Geral de Finanças</div>
+                    </div>
+                    
+                    <div class="PerfilBadge">
+                        <div>
+                            <div style="font-size: 12pt; font-weight: 700; color: #262626; text-transform: uppercase;">${nomeCompleto}</div>
+                            <div style="font-size: 9pt; color: #8e8e8e; margin-top: 2px;">${depto}</div>
+                        </div>
+                        <div style="font-size: 22pt;">🎂</div>
+                    </div>
+
+                    <div class="ListaMensagensVertical">
+                        ${blocosMensagensHTML}
+                    </div>
+
+                    <div style="text-align: center; color: #bfbfbf; font-size: 9pt; font-weight: 600; border-top: 1px solid #efefef; padding-top: 20px; margin-top: 30px;">
+                        Gerado com ❤️ pela Intranet DGF • Feed Interativo 📸
+                    </div>
+                </div>
+            </body>
+            </html>
+        `);
+        janelaPDF.document.close();
     };
 
     const aniversariantesHoje = listaAniversariantes.filter(p => p.data === hojeString);
@@ -2145,41 +2121,68 @@ if(pagina === "aniversariantes"){
 
         hojeHTML += `
             <div style="background: white; width: 100%; max-width: 300px; padding: 25px 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative; overflow: hidden; border-top: 5px solid #3498db; text-align: center; margin-bottom: 15px; display: flex; flex-direction: column; justify-content: space-between;">
-                <div style="position: absolute; top: 15px; right: -35px; background: #f1c40f; color: #fff; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">HOJE</div>
+                
+                <div style="position: absolute; top: 15px; right: -35px; background: #f1c40f; color: #fff; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    HOJE
+                </div>
+
                 <div>
                     <div style="width: 70px; height: 70px; background: #e8f4fd; color: #3498db; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; border: 2px solid #3498db; position: relative;">
                         ${pessoa.nome.charAt(0)}
                         <span style="position: absolute; bottom: -5px; right: -5px; font-size: 20px;">🎂</span>
                     </div>
+
                     <h3 style="margin: 10px 0 5px 0; color: #2c3e50; font-size: 18px;">${pessoa.nome.toUpperCase()}</h3>
                     <p style="margin: 0; color: #3498db; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">${pessoa.superintendência || 'DGF'}</p>
+                    
                     <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #f0f0f0; display: flex; justify-content: center; align-items: center; gap: 8px; color: #95a5a6; font-size: 12px;">
                         <span>✨ Data Especial: <strong>${pessoa.data}</strong></span>
                     </div>
                 </div>
+
                 <div style="margin-top: 15px; background: #f8f9fa; border-radius: 12px; padding: 12px; border: 1px solid #e9ecef; text-align: left;">
                     <label style="font-size: 10px; font-weight: bold; color: #7f8c8d; text-transform: uppercase; display: block; margin-bottom: 4px;">Deixe sua mensagem:</label>
                     <textarea id="msg-input-${chaveUsuario}-${index}" placeholder="Deseje um feliz aniversário..." style="width: 100%; height: 55px; padding: 8px; border-radius: 6px; border: 1px solid #cccccc; font-size: 11px; font-family: sans-serif; resize: none; box-sizing: border-box; outline: none; margin-bottom: 6px;"></textarea>
-                    <label style="font-size: 10px; font-weight: bold; color: #7f8c8d; text-transform: uppercase; display: block; margin-bottom: 4px;">Sua Assinatura:</label>
+                    
+                    <label style="font-size: 10px; font-weight: bold; color: #7f8c8d; text-transform: uppercase; display: block; margin-bottom: 4px;">Sua Assinatura (Max 15 carac.):</label>
                     <input type="text" id="assinatura-input-${chaveUsuario}-${index}" maxlength="15" placeholder="Seu nome..." style="width: 100%; padding: 6px; border-radius: 6px; border: 1px solid #cccccc; font-size: 11px; font-family: sans-serif; box-sizing: border-box; outline: none; margin-bottom: 8px;" />
-                    <button onclick="window.enviarParabensDGF('${chaveUsuario}', '${index}')" style="width: 100%; padding: 8px; background: #3498db; color: white; border: none; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 6px;">Enviar Mensagem 📩</button>
-                    <button onclick="window.baixarMuralDGF('${chaveUsuario}', '${pessoa.nome}', '${pessoa.superintendência || 'DGF'}')" style="width: 100%; padding: 6px; background: #e17055; color: white; border: none; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;">Ver Nosso Mural 📸</button>
+
+                    <button onclick="window.enviarParabensDGF('${chaveUsuario}', '${index}')" style="width: 100%; padding: 8px; background: #3498db; color: white; border: none; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 6px;">
+                        Enviar Mensagem 📩
+                    </button>
+                    
+                    <button onclick="window.baixarMuralDGF('${chaveUsuario}', '${pessoa.nome}', '${pessoa.superintendência || 'DGF'}')" style="width: 100%; padding: 6px; background: #e17055; color: white; border: none; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;">
+                        Ver Meu Mural (PDF 📸)
+                    </button>
+                </div>
+
+                <div style="margin-top: 12px; display: flex; justify-content: center; gap: 5px;">
+                    <span style="background: #2c3e50; color: white; padding: 4px 12px; border-radius: 12px; font-size: 10px;">#Parabéns</span>
+                    <span style="background: #2ecc71; color: white; padding: 4px 12px; border-radius: 12px; font-size: 10px;">🎈 Celebração</span>
                 </div>
             </div>`;
     });
 
     conteudo.innerHTML = `
-        <h2 style="color: #2c3e50; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;"><span style="font-size: 30px;">🎂</span> Aniversariantes</h2>
+        <h2 style="color: #2c3e50; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 30px;">🎂</span> Aniversariantes
+        </h2>
+
         <div style="margin-bottom: 30px;">
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; justify-items: start;">
-                ${hojeHTML || `<div style="grid-column: 1 / -1; width: 100%; padding: 20px; background: white; border-radius: 12px; border: 1px dashed #bdc3c7; text-align: center; color: #95a5a6;">Ninguém faz aniversário hoje, ${hojeString}.</div>`}
+                ${hojeHTML || `
+                    <div style="grid-column: 1 / -1; width: 100%; padding: 20px; background: white; border-radius: 12px; border: 1px dashed #bdc3c7; text-align: center; color: #95a5a6;">
+                        Ninguém faz aniversário hoje, ${hojeString}.
+                    </div>
+                `}
             </div>
         </div>
+
         <div style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
             <p style="margin: 0 0 10px 0; font-size: 12px; font-weight: bold; color: #7f8c8d; text-transform: uppercase; letter-spacing: 1px;">Consultar por mês:</p>
             <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px;">
                 ${["01","02","03","04","05","06","07","08","09","10","11","12"].map((m, i) => `
-                    <button onclick="renderizarMes('${m}')" style="padding: 8px; border: 1px solid #f1f2f6; background: ${m === mesAtual ? '#3498db' : '#f8f9fa'}; color: ${m === mesAtual ? 'white' : '#34495e'}; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold; transition: 0.2s;">
+                    <button onclick="renderizarMes('${m}')" style="padding: 8px; border: 1px solid #f1f2f6; background: ${m === mesAtual ? '#3498db' : '#f8f9fa'}; color: ${m === mesAtual ? 'white' : '#34495e'}; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold; transition: 0.2s;" onmouseover="this.style.background='#3498db'; this.style.color='white'" onmouseout="${m === mesAtual ? '' : "this.style.background='#f8f9fa'; this.style.color='#34495e'"}">
                         ${["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"][i]}
                     </button>
                 `).join('')}

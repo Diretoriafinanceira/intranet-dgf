@@ -1133,18 +1133,16 @@ if (pagina === "areadogestor") {
 
     // 3. Função global (temporária na janela) para gerenciar o fluxo de login e senha
     window.autenticarGestor = function(acao) {
-        // Busca os elementos dependendo de onde a ação é disparada
         const usuarioSelectEl = document.getElementById('gestor-usuario');
         const senhaInputEl = document.getElementById('gestor-senha');
         
-        // Se a ação for pelo painel interno, usamos o usuário logado salvo temporariamente
         const usuarioSelect = usuarioSelectEl ? usuarioSelectEl.value : window.usuarioLogadoAtual;
         const senhaSalva = localStorage.getItem(`senha_${usuarioSelect}`);
 
         if (acao === 'login') {
             const senhaInput = senhaInputEl.value;
             if (senhaInput === senhaSalva) {
-                window.usuarioLogadoAtual = usuarioSelect; // Salva quem logou para saber de quem alterar a senha depois
+                window.usuarioLogadoAtual = usuarioSelect;
                 carregarPainelGestor();
             } else {
                 alert('Senha incorreta! Acesso negado.');
@@ -1178,6 +1176,103 @@ if (pagina === "areadogestor") {
         } catch (e) {
             window.open('BASE CONTRATO PAGO.xlsx', '_blank');
         }
+    };
+
+    // Nova Função: Controla a exibição e a busca do Chatbot integrado à planilha Google Sheets
+    window.toggleChatbotPainel = function() {
+        const painelChat = document.getElementById('chatbot-painel-container');
+        if (painelChat.style.display === 'none') {
+            painelChat.style.display = 'block';
+            document.getElementById('input-sei-gestor').focus();
+        } else {
+            painelChat.style.display = 'none';
+        }
+    };
+
+    window.consultarSeiGoogleSheets = function() {
+        const inputVal = document.getElementById('input-sei-gestor').value.trim();
+        const resultadoEl = document.getElementById('resultado-sei-gestor');
+        
+        if (!inputVal) {
+            resultadoEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>⚠️ Digite o número do processo!</span>";
+            return;
+        }
+        
+        resultadoEl.innerHTML = "<span style='color: #7f8c8d;'>🤖 Buscando na planilha online... Por favor, aguarde.</span>";
+        
+        const limpar = (t) => String(t).replace(/[\.\-\/\s]/g, '');
+        const buscaLimpa = limpar(inputVal);
+        
+        // URL corrigida apontando exatamente para a aba 'Página1' convertida em CSV
+        const urlGoogleSheetsCsv = "https://docs.google.com/spreadsheets/d/1Qgrrz8f_iQxjZXU_HL2drPrZ7GYN0cazYx7Xzf9-RRM/gviz/tq?tqx=out:csv&gid=0";
+        
+        fetch(urlGoogleSheetsCsv)
+            .then(res => {
+                if (!res.ok) throw new Error("Erro ao acessar dados");
+                return res.text();
+            })
+            .then(csvText => {
+                // Função simples para quebrar linhas e colunas respeitando as aspas do CSV do Google
+                const linhas = csvText.split(/\r?\n/).map(linha => {
+                    return linha.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(col => col.replace(/^"|"$/g, '').trim());
+                });
+                
+                if (linhas.length === 0) {
+                    resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ A planilha está vazia ou inacessível.</span>";
+                    return;
+                }
+                
+                // Cabeçalhos na linha 0
+                const cabecalhos = linhas[0].map(c => c.toUpperCase());
+                const idxSEI = cabecalhos.findIndex(c => c.includes("SEI"));
+                const idxOrigem = cabecalhos.findIndex(c => c.includes("SETOR ORIGEM") || c.includes("SETOR"));
+                const idxArea = cabecalhos.findIndex(c => c.includes("ÁREA") || c.includes("AREA"));
+                
+                if (idxSEI === -1) {
+                    resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ Coluna 'SEI' não mapeada no cabeçalho da planilha.</span>";
+                    return;
+                }
+                
+                let registroEncontrado = null;
+                
+                // Pesquisa a partir da linha 1
+                for (let i = 1; i < linhas.length; i++) {
+                    const colunas = linhas[i];
+                    if (!colunas || colunas.length <= idxSEI) continue;
+                    
+                    const celulaSEI = colunas[idxSEI];
+                    if (celulaSEI === "" || celulaSEI === ".") continue;
+                    
+                    if (limpar(celulaSEI) === buscaLimpa) {
+                        registroEncontrado = {
+                            setor: idxOrigem !== -1 ? colunas[idxOrigem] : "Não informado",
+                            area: idxArea !== -1 ? colunas[idxArea] : "Não informada"
+                        };
+                        break;
+                    }
+                }
+                
+                if (registroEncontrado) {
+                    resultadoEl.innerHTML = `
+                        <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50;">
+                            <strong style="color: #27ae60;">✓ Processo Localizado!</strong><br><br>
+                            📍 <strong>SETOR ORIGEM:</strong> ${registroEncontrado.setor || "Não informado"}<br>
+                            🏢 <strong>COORDENAÇÃO:</strong> DGF<br>
+                            🌐 <strong>ÁREA:</strong> ${registroEncontrado.area || "Não informada"}
+                        </div>
+                    `;
+                } else {
+                    resultadoEl.innerHTML = `
+                        <div style="background: #fdf2f2; padding: 12px; border-left: 4px solid #e74c3c; border-radius: 4px; text-align: left; color: #c0392b; font-weight: bold;">
+                            ❌ O processo não está na DGF.
+                        </div>
+                    `;
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ Erro ao conectar ao Google Sheets. Garanta que o link esteja compartilhado com 'Qualquer pessoa com o link'.</span>";
+            });
     };
 
     // 4. Função interna para renderizar o painel principal após o login correto
@@ -1225,14 +1320,6 @@ if (pagina === "areadogestor") {
                         <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Interface de comunicação automatizada para suporte e respostas rápidas da DGF.</p>
                     </div>
 
-                    <div onclick="window.location.href='chatbot.html';" style="background: #fdfefe; padding: 20px; border-left: 4px solid #9b59b6; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
-     onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
-    <p style="margin: 0; color: #8e44ad; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-        🔍 PESQUISE SEU PROCESSO
-    </p>
-    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Consulte o andamento, histórico e situação atual de processos internos.</p>
-</div>
-
                     <div onclick="window.baixarPlanilhaLocal()" style="background: #fdfefe; padding: 20px; border-left: 4px solid #e74c3c; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
                         <p style="margin: 0; color: #c0392b; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
@@ -1240,6 +1327,24 @@ if (pagina === "areadogestor") {
                         </p>
                         <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao repositório centralizado de dados e arquivos consolidados.</p>
                     </div>
+
+                    <div onclick="window.toggleChatbotPainel()" style="background: #fdfefe; padding: 20px; border-left: 4px solid #9b59b6; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+                       onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+                        <p style="margin: 0; color: #8e44ad; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                            🔍 PESQUISE SEU PROCESSO
+                        </p>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Consulte o andamento em tempo real direto da planilha Google Sheets.</p>
+                    </div>
+
+                    <div id="chatbot-painel-container" style="display: none; background: #fafafa; border: 1px solid #ddd; padding: 15px; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);">
+                        <p style="margin: 0 0 10px 0; font-size: 13px; font-weight: bold; color: #34495e;">🤖 Assistente de Processos DGF</p>
+                        <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                            <input type="text" id="input-sei-gestor" placeholder="Digite o número do SEI..." onkeydown="if(event.key === 'Enter') window.consultarSeiGoogleSheets()" style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; outline: none;">
+                            <button onclick="window.consultarSeiGoogleSheets()" style="background: #9b59b6; color: white; border: none; padding: 8px 15px; border-radius: 4px; font-size: 13px; font-weight: bold; cursor: pointer;">Buscar</button>
+                        </div>
+                        <div id="resultado-sei-gestor" style="font-size: 13px; margin-top: 5px;"></div>
+                    </div>
+
                 </div>
 
             </div>
@@ -1301,7 +1406,7 @@ if (pagina === "areadogestor") {
                                     transform-origin: top left;
                                 " 
                                 scrolling="no">
-                             iframe>
+                             </iframe>
                         </div>
 
                         <div style="
@@ -1438,7 +1543,6 @@ if (pagina === "areadogestor") {
             }, 8000);
         };
 
-        // Ativa o carrossel de rotação do radar assim que carrega o painel
         criarLoopRadar();
     }
 
@@ -1495,7 +1599,6 @@ if (pagina === "areadogestor") {
     </div>
     `;
 }
-
 if (pagina === "radar_dgf") {
     // Garante a limpeza de qualquer intervalo anterior para evitar duplicação
     if (window.intervaloPaginaRadar) {

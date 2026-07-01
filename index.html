@@ -1963,8 +1963,8 @@ if(pagina === "aniversariantes"){
     const mesAtual = (agora.getMonth() + 1).toString().padStart(2, '0');
     const hojeString = `${diaAtual}/${mesAtual}`;
     
-    // Banco de dados em nuvem unificado para a Intranet DGF
-    const API_URL = "https://jsonstorage.net/api/items/mural_dgf_coletivo_global";
+    // Identificador exclusivo para o banco de dados da sua equipe
+    const API_URL = "https://jsonstorage.net/api/items/mural_dgf_intranet_2026";
     
     window.renderizarMes = (mesSelecionado) => {
         const nomesMeses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
@@ -1992,7 +1992,7 @@ if(pagina === "aniversariantes"){
         `;
     };
 
-    // ALTERADO: Salva na nuvem para aparecer em qualquer computador acessando a intranet
+    // Envia para a nuvem tratando erros caso o repositório seja novo
     window.enviarParabensDGF = (nomeUsuario, index) => {
         const campoTexto = document.getElementById(`msg-input-${nomeUsuario}-${index}`);
         const campoAssinatura = document.getElementById(`assinatura-input-${nomeUsuario}-${index}`);
@@ -2005,14 +2005,13 @@ if(pagina === "aniversariantes"){
                 data: new Date().toLocaleDateString('pt-BR')
             };
 
-            // Busca as mensagens existentes na nuvem
             fetch(API_URL)
             .then(res => res.ok ? res.json() : { mensagens: [] })
+            .catch(() => ({ mensagens: [] })) // Trata erros de rota inicial inexistente
             .then(data => {
-                let mensagensGlobais = data.mensagens && Array.isArray(data.mensagens) ? data.mensagens : [];
+                let mensagensGlobais = data && data.mensagens && Array.isArray(data.mensagens) ? data.mensagens : [];
                 mensagensGlobais.push(novaMensagem);
 
-                // Grava a nova lista de mensagens de volta na nuvem
                 return fetch(API_URL, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
@@ -2026,23 +2025,24 @@ if(pagina === "aniversariantes"){
             })
             .catch(err => {
                 console.error(err);
-                alert('Erro ao salvar na nuvem. Verifique sua conexão com a internet.');
+                alert('Erro ao salvar na nuvem. Tente enviar novamente.');
             });
         } else {
             alert('Por favor, digite uma mensagem antes de enviar.');
         }
     };
 
-    // ALTERADO: Puxa os dados da nuvem e gera o mural com papel de parede bem colorido e festivo
+    // Abre o mural com papel de parede super colorido e animado
     window.baixarMuralDGF = (nomeUsuario, nomeCompleto, depto) => {
         fetch(API_URL)
-        .then(res => res.json())
+        .then(res => res.ok ? res.json() : { mensagens: [] })
+        .catch(() => ({ mensagens: [] }))
         .then(data => {
-            const mensagensGlobais = data.mensagens && Array.isArray(data.mensagens) ? data.mensagens : [];
+            const mensagensGlobais = data && data.mensagens && Array.isArray(data.mensagens) ? data.mensagens : [];
             const minhasMensagens = mensagensGlobais.filter(m => m.usuarioDestino === nomeUsuario);
 
             if (!minhasMensagens || minhasMensagens.length === 0) {
-                alert(`Ainda não há mensagens enviadas para ${nomeCompleto} no mural coletivo.`);
+                alert(`Ainda não há mensagens deixadas para ${nomeCompleto} no mural coletivo.`);
                 return;
             }
 
@@ -2079,20 +2079,20 @@ if(pagina === "aniversariantes"){
                     <style>
                         body { 
                             font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-                            /* Papel de parede super colorido, festivo e vibrante */
-                            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 30%, #a1c4fd 70%, #c2e9fb 100%);
+                            /* Papel de parede super festivo e colorido em degradê vibrante */
+                            background: linear-gradient(-45deg, #ff3f34, #00d2d3, #ffa801, #05c46b, #ef5777);
                             background-size: 400% 400%;
-                            animation: gradientAnimation 12s ease infinite;
+                            animation: festaGradiente 10s ease infinite;
                             margin: 0; 
                             padding: 20px; 
                             color: #2c3e50; 
                         }
-                        @keyframes gradientAnimation {
+                        @keyframes festaGradiente {
                             0% { background-position: 0% 50%; }
                             50% { background-position: 100% 50%; }
                             100% { background-position: 0% 50%; }
                         }
-                        .FeedContainer { max-width: 600px; margin: 30px auto; background: rgba(255, 255, 255, 0.93); border-radius: 24px; padding: 30px; box-shadow: 0 20px 45px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.6); backdrop-filter: blur(8px); }
+                        .FeedContainer { max-width: 600px; margin: 30px auto; background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 30px; box-shadow: 0 25px 55px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.7); backdrop-filter: blur(12px); }
                         .DGFHeader { text-align: center; border-bottom: 1px solid #efefef; padding-bottom: 20px; margin-bottom: 25px; }
                         .DGFLogo { font-size: 24pt; font-weight: 900; color: #2c3e50; letter-spacing: 2px; margin: 0; text-transform: uppercase; }
                         .DGFLogo span { color: #ff7675; }
@@ -2122,7 +2122,7 @@ if(pagina === "aniversariantes"){
                             ${blocosMensagensHTML}
                         </div>
 
-                        <div style="text-align: center; color: #7f8c8d; font-size: 9pt; font-weight: 600; border-top: 1px solid #efefef; padding-top: 20px; margin-top: 30px;">
+                        <div style="text-align: center; color: #bfbfbf; font-size: 9pt; font-weight: 600; border-top: 1px solid #efefef; padding-top: 20px; margin-top: 30px;">
                             Gerado com ❤️ pela Intranet DGF • Feed Interativo 📸
                         </div>
                     </div>
@@ -2130,10 +2130,6 @@ if(pagina === "aniversariantes"){
                 </html>
             `);
             janelaPDF.document.close();
-        })
-        .catch(err => {
-            console.error(err);
-            alert("Não foi possível carregar as mensagens unificadas do mural remoto.");
         });
     };
 

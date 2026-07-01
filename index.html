@@ -1963,9 +1963,9 @@ if(pagina === "aniversariantes"){
     const mesAtual = (agora.getMonth() + 1).toString().padStart(2, '0');
     const hojeString = `${diaAtual}/${mesAtual}`;
     
-    // Configuração do JSONBin público compartilhado (Lê e grava no mesmo lugar para todos)
-    // Usando uma rota de caixas de armazenamento KV livre para persistência global na intranet
-    const BIN_ID = "668297b6ad19ca34f8e1a53b"; 
+    // Identificador único para a sua lista na nuvem (mude os números finais se quiser resetar o mural)
+    const BOX_ID = "mural_dgf_coletivo_2026"; 
+    const API_URL = `https://jsonstorage.net/api/items/${BOX_ID}`;
     
     window.renderizarMes = (mesSelecionado) => {
         const nomesMeses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
@@ -1993,7 +1993,7 @@ if(pagina === "aniversariantes"){
         `;
     };
 
-    // FUNÇÃO CORRIGIDA: Puxa o banco global, adiciona a nova mensagem e salva de volta na nuvem
+    // Salva a mensagem no banco de dados público unificado
     window.enviarParabensDGF = (nomeUsuario, index) => {
         const campoTexto = document.getElementById(`msg-input-${nomeUsuario}-${index}`);
         const campoAssinatura = document.getElementById(`assinatura-input-${nomeUsuario}-${index}`);
@@ -2006,53 +2006,40 @@ if(pagina === "aniversariantes"){
                 data: new Date().toLocaleDateString('pt-BR')
             };
 
-            // 1. Busca todas as mensagens existentes na nuvem primeiro
-            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-                headers: { "X-Master-Key": "$2b$10$wE7pXg9K1V6P.K9NnBovI.gE4mF6tI6z7b6e4e5r6t7y8u9i0o1p2" } // Chave pública de leitura/escrita
-            })
-            .then(res => res.json())
+            // Busca as mensagens existentes ou cria um array vazio se for a primeira
+            fetch(API_URL)
+            .then(res => res.ok ? res.json() : { mensagens: [] })
             .then(data => {
-                let mensagensGlobais = Array.isArray(data.record) ? data.record : [];
-                
-                // 2. Insere a nova mensagem no array global
+                let mensagensGlobais = data.mensagens && Array.isArray(data.mensagens) ? data.mensagens : [];
                 mensagensGlobais.push(novaMensagem);
 
-                // 3. Atualiza o banco na nuvem de forma definitiva para todos os computadores
-                return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                // Salva o array atualizado de volta na nuvem
+                return fetch(API_URL, {
                     method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': "$2b$10$wE7pXg9K1V6P.K9NnBovI.gE4mF6tI6z7b6e4e5r6t7y8u9i0o1p2"
-                    },
-                    body: JSON.stringify(mensagensGlobais)
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mensagens: mensagensGlobais })
                 });
             })
             .then(() => {
-                alert('Sua mensagem de parabéns foi publicada no mural coletivo oficial! 🌟');
+                alert('Sua mensagem de parabéns foi publicada no mural coletivo! 🌟');
                 campoTexto.value = '';
                 if(campoAssinatura) campoAssinatura.value = '';
             })
             .catch(err => {
                 console.error(err);
-                alert('Erro de conexão ao salvar na nuvem. Tentando salvar localmente...');
+                alert('Erro ao salvar na nuvem. Verifique a conexão com a rede externa.');
             });
         } else {
             alert('Por favor, digite uma mensagem antes de enviar.');
         }
     };
 
-    // FUNÇÃO CORRIGIDA: Busca diretamente da nuvem para exibir as mensagens de qualquer usuário na rede
+    // Lê os dados do banco público e exibe o mural para qualquer pessoa na rede
     window.baixarMuralDGF = (nomeUsuario, nomeCompleto, depto) => {
-        
-        // Busca o banco unificado em tempo real
-        fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-            headers: { "X-Master-Key": "$2b$10$wE7pXg9K1V6P.K9NnBovI.gE4mF6tI6z7b6e4e5r6t7y8u9i0o1p2" }
-        })
+        fetch(API_URL)
         .then(res => res.json())
         .then(data => {
-            const mensagensGlobais = Array.isArray(data.record) ? data.record : [];
-            
-            // Filtra as mensagens que pertencem especificamente a este aniversariante
+            const mensagensGlobais = data.mensagens && Array.isArray(data.mensagens) ? data.mensagens : [];
             const mensagensFiltradas = mensagensGlobais.filter(m => m.usuarioDestino === nomeUsuario);
 
             if (mensagensFiltradas.length === 0) {
@@ -2147,7 +2134,7 @@ if(pagina === "aniversariantes"){
             `);
             janelaMural.document.close();
         })
-        .catch(() => alert("Erro ao carregar o mural da nuvem. Verifique sua conexão."));
+        .catch(() => alert("Erro ao carregar o mural coletivo. Certifique-se de que o dispositivo possui acesso à internet externa para ler o banco de dados."));
     };
 
     const aniversariantesHoje = listaAniversariantes.filter(p => p.data === hojeString);

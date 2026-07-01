@@ -1228,6 +1228,7 @@ if (pagina === "areadogestor") {
                 const idxSEI = cabecalhos.findIndex(c => c.includes("SEI"));
                 const idxOrigem = cabecalhos.findIndex(c => c.includes("SETOR ORIGEM") || c.includes("SETOR"));
                 const idxArea = cabecalhos.findIndex(c => c.includes("ÁREA") || c.includes("AREA"));
+                const idxCoordenacao = cabecalhos.findIndex(c => c.includes("COORDENAÇÃO") || c.includes("COORDENACAO"));
                 
                 if (idxSEI === -1) {
                     resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ Coluna 'SEI' não mapeada no cabeçalho da planilha.</span>";
@@ -1248,7 +1249,8 @@ if (pagina === "areadogestor") {
                         registroEncontrado = {
                             seiOriginal: celulaSEI,
                             setor: idxOrigem !== -1 ? colunas[idxOrigem] : "Não informado",
-                            area: idxArea !== -1 ? colunas[idxArea] : "Não informada"
+                            area: idxArea !== -1 ? colunas[idxArea] : "Não informada",
+                            coordenacao: idxCoordenacao !== -1 ? colunas[idxCoordenacao] : "Não informada"
                         };
                         break;
                     }
@@ -1258,8 +1260,8 @@ if (pagina === "areadogestor") {
                     resultadoEl.innerHTML = `
                         <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50;">
                             <strong>SEI:</strong> ${registroEncontrado.seiOriginal}<br>
-                            <strong>ATUALMENTE O SEI ENCONTRA-SE NO:</strong> DGF (${registroEncontrado.setor || "Não informado"})<br>
-                            <strong>STATUS:</strong> ${registroEncontrado.area || "Não informada"}
+                            <strong>ATUALMENTE O SEI ENCONTRA-SE NO:</strong> ${registroEncontrado.coordenacao || "Não informada"} (${registroEncontrado.setor || "Não informado"})<br>
+                            <strong>STATUS:</strong> PARA ${registroEncontrado.area || "Não informada"}
                         </div>
                     `;
                 } else {

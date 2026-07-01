@@ -1237,7 +1237,7 @@ if (pagina === "areadogestor") {
                 
                 // Pesquisa a partir da linha 1
                 for (let i = 1; i < linhas.length; i++) {
-                    const colunas = linhas[i];
+                    const colunas = lines[i];
                     if (!colunas || colunas.length <= idxSEI) continue;
                     
                     const celulaSEI = colunas[idxSEI];
@@ -1245,6 +1245,7 @@ if (pagina === "areadogestor") {
                     
                     if (limpar(celulaSEI) === buscaLimpa) {
                         registroEncontrado = {
+                            seiOriginal: celulaSEI,
                             setor: idxOrigem !== -1 ? colunas[idxOrigem] : "Não informado",
                             area: idxArea !== -1 ? colunas[idxArea] : "Não informada"
                         };
@@ -1254,11 +1255,10 @@ if (pagina === "areadogestor") {
                 
                 if (registroEncontrado) {
                     resultadoEl.innerHTML = `
-                        <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50;">
-                            <strong style="color: #27ae60;">✓ Processo Localizado!</strong><br><br>
-                            📍 <strong>SETOR ORIGEM:</strong> ${registroEncontrado.setor || "Não informado"}<br>
-                            🏢 <strong>COORDENAÇÃO:</strong> DGF<br>
-                            🌐 <strong>ÁREA:</strong> ${registroEncontrado.area || "Não informada"}
+                        <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50; font-family: monospace; font-size: 13px; line-height: 1.6;">
+                            <strong>SEI:</strong> ${registroEncontrado.seiOriginal}<br>
+                            <strong>ESTÁ NA:</strong> ${registroEncontrado.setor || "Não informado"}<br>
+                            <strong>AREA:</strong> ${registroEncontrado.area || "Não informada"}
                         </div>
                     `;
                 } else {
@@ -1599,6 +1599,7 @@ if (pagina === "areadogestor") {
     </div>
     `;
 }
+
 if (pagina === "radar_dgf") {
     // Garante a limpeza de qualquer intervalo anterior para evitar duplicação
     if (window.intervaloPaginaRadar) {

@@ -1200,6 +1200,7 @@ if (pagina === "areadogestor") {
         }
     };
 
+    // ALTERADO: Agora integrado diretamente com o seu fluxo n8n
     window.consultarSeiGoogleSheets = function() {
         const inputVal = document.getElementById('input-sei-gestor').value.trim();
         const resultadoEl = document.getElementById('resultado-sei-gestor');
@@ -1209,82 +1210,38 @@ if (pagina === "areadogestor") {
             return;
         }
         
-        resultadoEl.innerHTML = "<span style='color: #7f8c8d;'>🤖 Buscando na planilha online... Por favor, aguarde.</span>";
+        resultadoEl.innerHTML = "<span style='color: #7f8c8d;'>🤖 Consultando Assistente DGF... Por favor, aguarde.</span>";
         
-        const limpar = (t) => String(t).replace(/[\.\-\/\s]/g, '');
-        const buscaLimpa = limpar(inputVal);
+        // Chamada direta para o link de produção do seu webhook n8n
+        const urlN8n = `https://sesdgf.app.n8n.cloud/webhook/consulta-sei?processo=${encodeURIComponent(inputVal)}`;
         
-        // URL corrigida apontando exatamente para a aba 'Página1' convertida em CSV
-        const urlGoogleSheetsCsv = "https://docs.google.com/spreadsheets/d/1Qgrrz8f_iQxjZXU_HL2drPrZ7GYN0cazYx7Xzf9-RRM/gviz/tq?tqx=out:csv&gid=0";
-        
-        fetch(urlGoogleSheetsCsv)
+        fetch(urlN8n)
             .then(res => {
-                if (!res.ok) throw new Error("Erro ao acessar dados");
+                if (!res.ok) throw new Error("Erro na requisição");
                 return res.text();
             })
-            .then(csvText => {
-                // Função simples para quebrar linhas e colunas respeitando as aspas do CSV do Google
-                const linhas = csvText.split(/\r?\n/).map(linha => {
-                    return linha.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(col => col.replace(/^"|"$/g, '').trim());
-                });
+            .then(textoResposta => {
+                // Formata a quebra de linha vinda do n8n para exibir corretamente no HTML
+                const textoFormatadoHtml = textoResposta.replace(/\n/g, '<br>');
                 
-                if (linhas.length === 0) {
-                    resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ A planilha está vazia ou inacessível.</span>";
-                    return;
-                }
-                
-                // Cabeçalhos na linha 0
-                const cabecalhos = linhas[0].map(c => c.toUpperCase());
-                const idxSEI = cabecalhos.findIndex(c => c.includes("SEI"));
-                const idxOrigem = cabecalhos.findIndex(c => c.includes("SETOR ORIGEM") || c.includes("SETOR"));
-                const idxArea = cabecalhos.findIndex(c => c.includes("ÁREA") || c.includes("AREA"));
-                const idxCoordenacao = cabecalhos.findIndex(c => c.includes("COORDENAÇÃO") || c.includes("COORDENACAO"));
-                
-                if (idxSEI === -1) {
-                    resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ Coluna 'SEI' não mapeada no cabeçalho da planilha.</span>";
-                    return;
-                }
-                
-                let registroEncontrado = null;
-                
-                // Pesquisa a partir da linha 1
-                for (let i = 1; i < linhas.length; i++) {
-                    const colunas = linhas[i];
-                    if (!colunas || colunas.length <= idxSEI) continue;
-                    
-                    const celulaSEI = colunas[idxSEI];
-                    if (celulaSEI === "" || celulaSEI === ".") continue;
-                    
-                    if (limpar(celulaSEI) === buscaLimpa) {
-                        registroEncontrado = {
-                            seiOriginal: celulaSEI,
-                            setor: idxOrigem !== -1 ? colunas[idxOrigem] : "Não informado",
-                            area: idxArea !== -1 ? colunas[idxArea] : "Não informada",
-                            coordenacao: idxCoordenacao !== -1 ? colunas[idxCoordenacao] : "Não informada"
-                        };
-                        break;
-                    }
-                }
-                
-                if (registroEncontrado) {
+                // Define a estilização do bloco baseado no tipo de retorno (Encontrado vs Não Encontrado)
+                if (textoResposta.includes("🔴")) {
                     resultadoEl.innerHTML = `
-                        <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50;">
-                            <strong>SEI:</strong> ${registroEncontrado.seiOriginal}<br>
-                            <strong>ATUALMENTE O SEI ENCONTRA-SE NO:</strong> ${registroEncontrado.coordenacao || "Não informada"} (${registroEncontrado.setor || "Não informado"})<br>
-                            <strong>STATUS:</strong> PARA ${registroEncontrado.area || "Não informada"}
+                        <div style="background: #fdf2f2; padding: 12px; border-left: 4px solid #e74c3c; border-radius: 4px; text-align: left; color: #c0392b; font-weight: bold; white-space: pre-wrap;">
+                            ${textoFormatadoHtml}
                         </div>
                     `;
                 } else {
                     resultadoEl.innerHTML = `
-                        <div style="background: #fdf2f2; padding: 12px; border-left: 4px solid #e74c3c; border-radius: 4px; text-align: left; color: #c0392b; font-weight: bold;">
-                            ❌ O processo não está na DGF.
+                        <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50; font-size: 13px; line-height: 1.4; white-space: pre-wrap;">
+                            ${textoFormatadoHtml}
                         </div>
                     `;
                 }
             })
             .catch(err => {
                 console.error(err);
-                resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ Erro ao conectar ao Google Sheets. Garanta que o link esteja compartilhado com 'Qualquer pessoa com o link'.</span>";
+                resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ Erro ao conectar ao Assistente. Certifique-se de que o fluxo está ativo ('Published') no n8n.</span>";
             });
     };
 
@@ -1335,7 +1292,7 @@ if (pagina === "areadogestor") {
 
                     <div onclick="window.baixarPlanilhaLocal()" style="background: #fdfefe; padding: 20px; border-left: 4px solid #e74c3c; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
-                        <p style="margin: 0; color: #c0392b; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                        <p style="margin: 0; color: #27ae60; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
                             🗄️ BASE DE DADOS
                         </p>
                         <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao repositório centralizado de dados e arquivos consolidados.</p>

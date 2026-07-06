@@ -283,7 +283,7 @@ section {
             
             <button onclick="mostrar('home')">🏠 Início</button>
 
-            <button style="cursor: default; background: #2c3e50;">📢 Comunicação</button>
+            <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">📢 Comunicação</button>
             <div id="submenuComunicacao" class="submenu">
 			<button onclick="mostrar('noticias')">📰 Notícias</button>
 			    <button onclick="mostrar('central_notas')">📝 Central de Notas</button>
@@ -293,7 +293,7 @@ section {
                 <button onclick="mostrar('eventos')">📅 Agenda de Eventos</button>
             </div>
 
-            <button style="cursor: default; background: #2c3e50;">👥 Gestão de Pessoas</button>
+            <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">👥 Gestão de Pessoas</button>
             <div id="submenuGestao" class="submenu">
 			    <button onclick="mostrar('areadogestor')">👨🏻‍💻 Área do Gestor</button>
                 <button onclick="mostrar('contracheque')">💰 Contracheque</button>
@@ -301,7 +301,7 @@ section {
                 <button onclick="mostrar('mapa')">🗺️ Mapa DGF</button>
             </div>
 
-            <button style="cursor: default; background: #2c3e50;">🎉 Social</button>
+            <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">🎉 Social</button>
             <div id="submenuSocial" class="submenu">
                 <button onclick="mostrar('aniversariantes')">🎂 Aniversariantes</button>
                 <button onclick="mostrar('chegou')">🆕 Quem Chegou</button>
@@ -309,14 +309,14 @@ section {
 				<button onclick="mostrar('Bolão')">⚽ Bolão da Copa do Mundo</button>
             </div>
 
-            <button style="cursor: default; background: #2c3e50;">🏢 Corporativo</button>
+            <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">🏢 Corporativo</button>
             <div id="submenuCorporativo" class="submenu">
                 <button onclick="mostrar('organograma')">📊 Agente de Busca</button>
                 <button onclick="mostrar('organograma_view')">📊 Organograma</button>
                 <button onclick="mostrar('reserva')">📅 Reserva de Sala</button>
             </div>
 
-            <button style="cursor: default; background: #2c3e50;">🎓 DGF Educa</button>
+            <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">🎓 DGF Educa</button>
             <div id="submenuEduca" class="submenu">
                 <button onclick="mostrar('biblioteca')">📚 Clube do Livro</button>
                 <button onclick="mostrar('cursos')">🎓 Cursos - indica</button>
@@ -327,7 +327,6 @@ section {
         <div class="main-content">
             <header>
                 <h1 style="display:flex; align-items:center; justify-content:center; gap:10px;">
-                <img src="laco.png" alt="Junho Vermelho e Junho Laranja" height="100">
                 Intranet - Diretoria Geral de Finanças
                 </h1>
             </header>
@@ -1569,6 +1568,8 @@ if (pagina === "areadogestor") {
     </div>
     `;
 }
+
+
 if (pagina === "radar_dgf") {
     // Garante a limpeza de qualquer intervalo anterior para evitar duplicação
     if (window.intervaloPaginaRadar) {
@@ -2903,72 +2904,113 @@ if (pagina === "mapa") {
 
    // Função para abrir os detalhes da sala GCE
 window.abrirGCE = () => {
-    // Função interna para destacar a cadeira ao clicar no nome da lista
+    // Função interna para destacar a cadeira/estação ao clicar no nome da lista
     window.focarFuncionarioGCE = (id) => {
         // Reseta todas as cadeiras da sala GCE para azul
         document.querySelectorAll('.cadeira-gce').forEach(c => c.setAttribute('fill', '#3498db'));
+        document.querySelectorAll('.encosto-gce').forEach(e => e.setAttribute('fill', '#2980b9'));
         
         // Destaca a selecionada em verde
         const assento = document.getElementById(`assento-${id}`);
+        const encosto = document.getElementById(`encosto-${id}`);
         if(assento) {
             assento.setAttribute('fill', '#2ecc71');
+        }
+        if(encosto) {
+            encosto.setAttribute('fill', '#27ae60');
         }
     };
 
     conteudo.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #34495e; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #2c3e50; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h2 style="margin:0; font-size: 18px; color: #2c3e50;">📍 Detalhes: Sala GCE</h2>
             <button onclick="mostrar('mapa_dgf_view')" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">⬅ Voltar ao Mapa DGF</button>
         </div>
         
         <div style="display: flex; width: 100%; height: calc(100vh - 150px); background: #f1f2f6; border-radius: 12px; border: 1px solid #dcdde1; overflow: hidden;">
-            <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+            <div style="flex: 1; display: flex; justify-content: center; align-items: center; padding: 10px;">
                 <svg viewBox="0 0 450 500" preserveAspectRatio="xMidYMid meet" style="width: 95%; height: 95%;">
                     <rect x="50" y="50" width="350" height="400" fill="white" stroke="#2c3e50" stroke-width="5" rx="10" />
                     
                     <rect x="50" y="65" width="10" height="60" fill="#e67e22" />
-                    <text x="65" y="100" style="font-family: Arial; font-size: 14px; font-weight: bold; fill: #e67e22;">porta</text>
+                    <text x="65" y="100" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #e67e22;">PORTA</text>
 
-                    <rect x="80" y="160" width="70" height="150" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="8" />
-                    <rect id="assento-risaldo" class="cadeira-gce" x="150" y="180" width="10" height="30" fill="#3498db" rx="2" />
-                    <rect id="assento-luiz" class="cadeira-gce" x="150" y="260" width="10" height="30" fill="#3498db" rx="2" />
-                    
-                    <rect class="cadeira-gce" x="70" y="180" width="10" height="30" fill="#3498db" rx="2" />
-                    <rect id="assento-alexandre-moura" class="cadeira-gce" x="70" y="260" width="10" height="30" fill="#3498db" rx="2" /> 
+                    <g transform="translate(80, 160)">
+                        <rect x="0" y="0" width="70" height="150" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="4" />
+                        
+                        <text x="35" y="35" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">RISALDO F.</text>
+                        <rect id="encosto-risaldo" class="encosto-gce" x="73" y="20" width="4" height="30" fill="#2980b9" rx="1" />
+                        <rect id="assento-risaldo" class="cadeira-gce" x="70" y="20" width="10" height="30" fill="#3498db" rx="2" />
+                        
+                        <text x="35" y="115" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">LUIZ G.</text>
+                        <rect id="encosto-luiz" class="encosto-gce" x="73" y="100" width="4" height="30" fill="#2980b9" rx="1" />
+                        <rect id="assento-luiz" class="cadeira-gce" x="70" y="100" width="10" height="30" fill="#3498db" rx="2" />
+                        
+                        <rect class="encosto-gce" x="-17" y="20" width="4" height="30" fill="#2980b9" rx="1" />
+                        <rect class="cadeira-gce" x="-14" y="20" width="10" height="30" fill="#3498db" rx="2" />
+                        
+                        <text x="35" y="75" text-anchor="middle" style="font-family: Arial; font-size: 8px; fill: #7f8c8d;">ALEXANDRE</text>
+                        <rect id="encosto-alexandre-moura" class="encosto-gce" x="-17" y="100" width="4" height="30" fill="#2980b9" rx="1" />
+                        <rect id="assento-alexandre-moura" class="cadeira-gce" x="-14" y="100" width="10" height="30" fill="#3498db" rx="2" /> 
+                    </g>
 
-                    <rect x="240" y="80" width="110" height="60" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="8" />
-                    <rect id="assento-jaqueline" class="cadeira-gce" x="350" y="95" width="10" height="30" fill="#3498db" rx="2" />
+                    <g transform="translate(240, 80)">
+                        <rect x="0" y="0" width="110" height="60" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="4" />
+                        <text x="55" y="35" text-anchor="middle" style="font-family: Arial; font-size: 10px; font-weight: bold; fill: #2c3e50;">JAQUELINE R.</text>
+                        <rect id="encosto-jaqueline" class="encosto-gce" x="113" y="15" width="4" height="30" fill="#2980b9" rx="1" />
+                        <rect id="assento-jaqueline" class="cadeira-gce" x="110" y="15" width="10" height="30" fill="#3498db" rx="2" />
+                    </g>
 
-                    <rect x="260" y="160" width="80" height="230" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="8" />
-                    <rect id="assento-flavia" class="cadeira-gce" x="340" y="180" width="10" height="35" fill="#3498db" rx="2" />
-                    <rect id="assento-myrna" class="cadeira-gce" x="340" y="255" width="10" height="35" fill="#3498db" rx="2" />
-                    <rect id="assento-rafaela" class="cadeira-gce" x="340" y="330" width="10" height="35" fill="#3498db" rx="2" />
-                    <rect id="assento-cleide" class="cadeira-gce" x="250" y="180" width="10" height="35" fill="#3498db" rx="2" />
-                    <rect class="cadeira-gce" x="250" y="255" width="10" height="35" fill="#3498db" rx="2" /> 
-                    <rect id="assento-ladjane" class="cadeira-gce" x="250" y="330" width="10" height="35" fill="#3498db" rx="2" />
-                    
+                    <g transform="translate(260, 160)">
+                        <rect x="0" y="0" width="80" height="230" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="4" />
+                        
+                        <text x="40" y="40" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">FLAVIA M.</text>
+                        <rect id="encosto-flavia" class="encosto-gce" x="83" y="20" width="4" height="35" fill="#2980b9" rx="1" />
+                        <rect id="assento-flavia" class="cadeira-gce" x="80" y="20" width="10" height="35" fill="#3498db" rx="2" />
+                        
+                        <text x="40" y="115" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">MYRNA M.</text>
+                        <rect id="encosto-myrna" class="encosto-gce" x="83" y="95" width="4" height="35" fill="#2980b9" rx="1" />
+                        <rect id="assento-myrna" class="cadeira-gce" x="80" y="95" width="10" height="35" fill="#3498db" rx="2" />
+                        
+                        <text x="40" y="190" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">RAFAELA A.</text>
+                        <rect id="encosto-rafaela" class="encosto-gce" x="83" y="170" width="4" height="35" fill="#2980b9" rx="1" />
+                        <rect id="assento-rafaela" class="cadeira-gce" x="80" y="170" width="10" height="35" fill="#3498db" rx="2" />
+                        
+                        <text x="40" y="55" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">CLEIDE M.</text>
+                        <rect id="encosto-cleide" class="encosto-gce" x="-17" y="20" width="4" height="35" fill="#2980b9" rx="1" />
+                        <rect id="assento-cleide" class="cadeira-gce" x="-10" y="20" width="10" height="35" fill="#3498db" rx="2" />
+                        
+                        <rect class="encosto-gce" x="-17" y="95" width="4" height="35" fill="#2980b9" rx="1" />
+                        <rect class="cadeira-gce" x="-10" y="95" width="10" height="35" fill="#3498db" rx="2" /> 
+                        
+                        <text x="40" y="205" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">LADJANE M.</text>
+                        <rect id="encosto-ladjane" class="encosto-gce" x="-17" y="170" width="4" height="35" fill="#2980b9" rx="1" />
+                        <rect id="assento-ladjane" class="cadeira-gce" x="-10" y="170" width="10" height="35" fill="#3498db" rx="2" />
+                    </g>
 
-                    <text x="225" y="45" text-anchor="middle" style="font-family: Arial; font-size: 20px; font-weight: bold; fill: #34495e;">LAYOUT INTERNO - GCE</text>
+                    <text x="225" y="440" text-anchor="middle" style="font-family: Arial; font-size: 16px; font-weight: bold; fill: #34495e;">LAYOUT INTERNO - GCE</text>
                 </svg>
             </div>
 
-            <div style="width: 280px; background: white; border-left: 1px solid #dcdde1; padding: 20px; overflow-y: auto;">
-                <h3 style="margin: 0 0 15px 0; font-size: 14px; color: #7f8c8d; letter-spacing: 1px; text-transform: uppercase;">Equipe GCE</h3>
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <button onclick="focarFuncionarioGCE('jaqueline')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Jaqueline Rodrigues</b></button>
-                    <button onclick="focarFuncionarioGCE('flavia')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Flavia Maria Albuquerque</b></button>
-                    <button onclick="focarFuncionarioGCE('myrna')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Myrna Marroquim Soares</b></button>
-                    <button onclick="focarFuncionarioGCE('rafaela')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Rafaela Aragão Sousa</b></button>
-                    <button onclick="focarFuncionarioGCE('ladjane')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Ladjane Maria da Silva</b></button>
-                    <button onclick="focarFuncionarioGCE('cleide')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Cleide Maria Aragao</b></button>
-                    <button onclick="focarFuncionarioGCE('risaldo')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Risaldo Francisco</b></button>
-                    <button onclick="focarFuncionarioGCE('luiz')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Luiz Gustavo Almeida da Costa</b></button>
-                    <button onclick="focarFuncionarioGCE('alexandre-moura')" style="padding: 10px; border: 1px solid #eee; border-radius: 8px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 13px;"><b>Alexandre Ribeiro de Moura</b></button>
-                </div>
+            <div style="width: 290px; background: white; border-left: 1px solid #dcdde1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+                <h3 style="margin: 0 0 5px 0; font-size: 13px; color: #7f8c8d; letter-spacing: 1px; text-transform: uppercase;">Equipe GCE</h3>
+                
+                <button onclick="focarFuncionarioGCE('jaqueline')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Jaqueline Rodrigues</button>
+                <button onclick="focarFuncionarioGCE('flavia')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Flavia Maria Albuquerque</button>
+                <button onclick="focarFuncionarioGCE('myrna')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Myrna Marroquim Soares</button>
+                <button onclick="focarFuncionarioGCE('rafaela')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Rafaela Aragão Sousa</button>
+                <button onclick="focarFuncionarioGCE('ladjane')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Ladjane Maria da Silva</button>
+                <button onclick="focarFuncionarioGCE('cleide')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Cleide Maria Aragao</button>
+                <button onclick="focarFuncionarioGCE('risaldo')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Risaldo Francisco</button>
+                <button onclick="focarFuncionarioGCE('luiz')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Luiz Gustavo Almeida da Costa</button>
+                <button onclick="focarFuncionarioGCE('alexandre-moura')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Alexandre Ribeiro de Moura</button>
             </div>
         </div>
     `;
 };
+
+
+
 
 // AJUSTE AQUI: Coloque abaixo a função exata que abre o seu Mapa DGF
 window.mostrarMapaDGF = () => {
@@ -3093,6 +3135,11 @@ function renderItemLista(nome, id) {
     `;
 }
 
+
+
+
+
+
  // Nova Função: abrir os detalhes da sala DGF
 window.abrirDGF = () => {
     // Função para destacar a cadeira do Diretor
@@ -3161,6 +3208,12 @@ window.abrirDGF = () => {
     `;
 };
 
+
+
+
+
+
+
     // Nova Função: abrir os detalhes da sala SFES
 window.abrirSFES = () => {
     // Função para destacar a cadeira do Superintendente
@@ -3226,6 +3279,183 @@ window.abrirSFES = () => {
     `;
 };
 
+
+
+
+// Função para abrir os detalhes da sala GPAG (Gerência de Pagamento)
+window.abrirGPAG = () => {
+    // Função interna para destacar a cadeira/estação ao clicar no nome da lista
+    window.focarFuncionarioGPAG = (id) => {
+        // Reseta todas as cadeiras da sala GPAG para azul
+        document.querySelectorAll('.cadeira-gpag').forEach(c => c.setAttribute('fill', '#3498db'));
+        document.querySelectorAll('.encosto-gpag').forEach(e => e.setAttribute('fill', '#2980b9'));
+        
+        // Destaca a selecionada em verde
+        const assento = document.getElementById(`assento-${id}`);
+        const encosto = document.getElementById(`encosto-${id}`);
+        if(assento) {
+            assento.setAttribute('fill', '#2ecc71');
+        }
+        if(encosto) {
+            encosto.setAttribute('fill', '#27ae60');
+        }
+    };
+
+    conteudo.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #2c3e50; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h2 style="margin:0; font-size: 18px; color: #2c3e50;">📍 Detalhes: GPAG - Gerência de Pagamento</h2>
+            <button onclick="location.reload()" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">⬅ Voltar ao Mapa Geral</button>
+        </div>
+        
+        <div style="display: flex; width: 100%; height: calc(100vh - 150px); background: #f1f2f6; border-radius: 12px; border: 1px solid #dcdde1; overflow: hidden;">
+            <div style="flex: 1; display: flex; justify-content: center; align-items: center; padding: 10px;">
+                <svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid meet" style="width: 95%; height: 95%;">
+                    <rect x="20" y="20" width="560" height="660" fill="white" stroke="#2c3e50" stroke-width="5" rx="10" />
+                    
+                    <rect x="380" y="20" width="80" height="10" fill="#e67e22" />
+                    <text x="420" y="15" text-anchor="middle" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #e67e22;">ENTRADA</text>
+                    
+                    <rect x="20" y="580" width="10" height="60" fill="#e67e22" />
+                    <text x="40" y="615" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #e67e22; writing-mode: vertical-rl;">ENTRADA</text>
+
+                    <rect x="25" y="25" width="60" height="60" fill="#bdc3c7" stroke="#95a5a6" stroke-width="1" />
+                    <text x="55" y="55" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #7f8c8d; writing-mode: vertical-rl;">ARMÁRIO</text>
+                    
+                    <rect x="500" y="25" width="75" height="50" fill="#bdc3c7" stroke="#95a5a6" stroke-width="1" />
+                    <text x="537" y="50" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #7f8c8d;">ARMÁRIO</text>
+
+                    <g transform="translate(140, 640)">
+                        <rect x="0" y="0" width="100" height="35" fill="#bdc3c7" stroke="#95a5a6" />
+                        <text x="50" y="20" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #7f8c8d;">ARMÁRIO</text>
+                        <rect x="105" y="0" width="90" height="35" fill="#bdc3c7" stroke="#95a5a6" />
+                        <text x="150" y="20" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #7f8c8d;">ARMÁRIO</text>
+                        <rect x="200" y="10" width="35" height="25" fill="#7f8c8d" />
+                        <text x="217" y="25" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: white;">TV</text>
+                        <rect x="240" y="0" width="90" height="35" fill="#bdc3c7" stroke="#95a5a6" />
+                        <text x="285" y="20" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #7f8c8d;">ARMÁRIO</text>
+                    </g>
+
+                    <g transform="translate(25, 140)">
+                        <rect x="0" y="0" width="140" height="60" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="4" />
+                        <text x="70" y="30" text-anchor="middle" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #2c3e50;">MARCOS AURÉLIO</text>
+                        <text x="70" y="45" text-anchor="middle" style="font-family: Arial; font-size: 10px; fill: #7f8c8d; text-transform: uppercase;">Gerente</text>
+                        <rect id="encosto-marcos" class="encosto-gpag" x="55" y="-25" width="30" height="5" fill="#2980b9" rx="1" />
+                        <rect id="assento-marcos" class="cadeira-gpag" x="55" y="-20" width="30" height="20" fill="#3498db" rx="2" />
+                    </g>
+
+                    <g transform="translate(25, 260)">
+                        <rect x="0" y="0" width="70" height="80" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="35" text-anchor="middle" style="font-family: Arial; font-size: 10px; font-weight: bold;">FÁBIO F.</text>
+                        <rect id="assento-fabio" class="cadeira-gpag" x="75" y="25" width="15" height="30" fill="#3498db" rx="2" />
+                        
+                        <rect x="0" y="95" width="70" height="80" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="130" text-anchor="middle" style="font-family: Arial; font-size: 10px; font-weight: bold;">IGOR M.</text>
+                        <rect id="assento-igor" class="cadeira-gpag" x="75" y="120" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="190" width="70" height="80" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="225" text-anchor="middle" style="font-family: Arial; font-size: 10px; font-weight: bold;">VÉRA L.</text>
+                        <rect id="assento-vera" class="cadeira-gpag" x="75" y="215" width="15" height="30" fill="#3498db" rx="2" />
+                    </g>
+
+                    <g transform="translate(250, 120)">
+                        <rect x="0" y="0" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="37" y="35" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">JOSELMA</text>
+                        <rect id="assento-joselma" class="cadeira-gpag" x="-20" y="18" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="75" y="0" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="112" y="35" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">M. SOCORRO</text>
+                        <rect id="assento-socorro" class="cadeira-gpag" x="155" y="18" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="80" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="37" y="115" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">CRISTIANE</text>
+                        <rect id="assento-cristiane" class="cadeira-gpag" x="-20" y="98" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="75" y="80" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="112" y="115" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">KATLYN</text>
+                        <rect id="assento-katlyn" class="cadeira-gpag" x="155" y="98" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="160" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="37" y="195" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">LÚCIA A.</text>
+                        <rect id="assento-lucia" class="cadeira-gpag" x="-20" y="178" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="75" y="160" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="112" y="195" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">HELLEN</text>
+                        <rect id="assento-hellen" class="cadeira-gpag" x="155" y="178" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="240" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="37" y="275" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">TACIANA</text>
+                        <rect id="assento-taciana" class="cadeira-gpag" x="-20" y="258" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="75" y="240" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="112" y="275" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">RENAN M.</text>
+                        <rect id="assento-renan" class="cadeira-gpag" x="155" y="258" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="320" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="37" y="355" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">TEREZINHA</text>
+                        <rect id="assento-terezinha" class="cadeira-gpag" x="-20" y="338" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="75" y="320" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="112" y="355" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">PAULA S.</text>
+                        <rect id="assento-paula" class="cadeira-gpag" x="155" y="338" width="15" height="30" fill="#3498db" rx="2" />
+                    </g>
+
+                    <g transform="translate(485, 125)">
+                        <rect x="0" y="0" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="35" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">LEANDRO</text>
+                        <rect id="assento-leandro" class="cadeira-gpag" x="-20" y="18" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="85" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="120" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">SANDRA</text>
+                        <rect id="assento-sandra" class="cadeira-gpag" x="-20" y="103" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="170" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="205" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">EDNALDO</text>
+                        <rect id="assento-ednaldo" class="cadeira-gpag" x="-20" y="188" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="255" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="290" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">ANNY L.</text>
+                        <rect id="assento-anny" class="cadeira-gpag" x="-20" y="273" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="340" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="375" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">CHARLES</text>
+                        <rect id="assento-charles" class="cadeira-gpag" x="-20" y="358" width="15" height="30" fill="#3498db" rx="2" />
+                    </g>
+
+                    <text x="300" y="620" text-anchor="middle" style="font-family: Arial; font-size: 16px; font-weight: bold; fill: #34495e;">LAYOUT INTERNO - GPAG</text>
+                </svg>
+            </div>
+
+            <div style="width: 290px; background: white; border-left: 1px solid #dcdde1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+                <h3 style="margin: 0 0 5px 0; font-size: 13px; color: #7f8c8d; letter-spacing: 1px; text-transform: uppercase;">Gerência</h3>
+                <button onclick="focarFuncionarioGPAG('marcos')" style="padding: 8px; border: 1px solid #dcdde1; border-radius: 6px; background: #fdfdfd; text-align: left; cursor: pointer; font-size: 12px; border-left: 4px solid #e74c3c;"><b>Marcos Aurélio</b><br><small style="color:#7f8c8d;">Gerente</small></button>
+                
+                <h3 style="margin: 10px 0 5px 0; font-size: 13px; color: #7f8c8d; letter-spacing: 1px; text-transform: uppercase;">Setor: CPAG_SUS</h3>
+                <button onclick="focarFuncionarioGPAG('fabio')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Fábio Ferreira</button>
+                <button onclick="focarFuncionarioGPAG('igor')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Igor Murilo</button>
+                <button onclick="focarFuncionarioGPAG('vera')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Véra Lúcia</button>
+
+                <h3 style="margin: 10px 0 5px 0; font-size: 13px; color: #7f8c8d; letter-spacing: 1px; text-transform: uppercase;">Setor: CPAG_TESOURO</h3>
+                <button onclick="focarFuncionarioGPAG('joselma')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Joselma Carvalho</button>
+                <button onclick="focarFuncionarioGPAG('socorro')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Maria Socorro</button>
+                <button onclick="focarFuncionarioGPAG('cristiane')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Cristiane Almeida</button>
+                <button onclick="focarFuncionarioGPAG('katlyn')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Katlyn Pereira</button>
+                <button onclick="focarFuncionarioGPAG('lucia')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Lúcia Albuquerque</button>
+                <button onclick="focarFuncionarioGPAG('hellen')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Hellen Beatriz</button>
+                <button onclick="focarFuncionarioGPAG('taciana')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Taciana Sá</button>
+                <button onclick="focarFuncionarioGPAG('renan')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Renan Martins</button>
+                <button onclick="focarFuncionarioGPAG('terezinha')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Terezinha Júlia</button>
+                <button onclick="focarFuncionarioGPAG('paula')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Paula Souza</button>
+                <button onclick="focarFuncionarioGPAG('leandro')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Leandro Wander</button>
+                <button onclick="focarFuncionarioGPAG('sandra')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Sandra Lúcia</button>
+                <button onclick="focarFuncionarioGPAG('ednaldo')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Ednaldo Luiz</button>
+                <button onclick="focarFuncionarioGPAG('anny')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Anny Lívia</button>
+            </div>
+        </div>
+    `;
+};
+
+
+
    conteudo.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #1abc9c; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h2 style="margin:0; font-size: 18px; color: #2c3e50;">🗺️ Mapa de Ocupação DGF</h2>
@@ -3285,7 +3515,7 @@ window.abrirSFES = () => {
                     <rect id="m1-julia" x="535" y="73" width="22" height="12" class="pc-dgf" /> 
                     <rect id="m1-nadja" x="610" y="73" width="22" height="12" class="pc-dgf" />
 
-                    <rect x="730" y="20" width="150" height="170" class="setor-sala" onclick="alert('Setor: GPAG')" />
+                    <rect x="730" y="20" width="150" height="170" class="setor-sala" onclick="abrirGPAG()" />
                     <text x="805" y="105" text-anchor="middle" class="label-sala">GPAG</text>
                     
                     <rect x="730" y="190" width="150" height="70" class="setor-sala" onclick="abrirSFES()" />

@@ -2898,6 +2898,11 @@ if(pagina === "avaliacao"){
     `;
 }
 
+
+
+
+
+
 if (pagina === "mapa") {
     conteudo.style.maxWidth = "100%";
     conteudo.style.padding = "10px";
@@ -2908,23 +2913,18 @@ window.abrirGCE = () => {
     window.focarFuncionarioGCE = (id) => {
         // Reseta todas as cadeiras da sala GCE para azul
         document.querySelectorAll('.cadeira-gce').forEach(c => c.setAttribute('fill', '#3498db'));
-        document.querySelectorAll('.encosto-gce').forEach(e => e.setAttribute('fill', '#2980b9'));
         
         // Destaca a selecionada em verde
         const assento = document.getElementById(`assento-${id}`);
-        const encosto = document.getElementById(`encosto-${id}`);
         if(assento) {
             assento.setAttribute('fill', '#2ecc71');
-        }
-        if(encosto) {
-            encosto.setAttribute('fill', '#27ae60');
         }
     };
 
     conteudo.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #2c3e50; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h2 style="margin:0; font-size: 18px; color: #2c3e50;">📍 Detalhes: Sala GCE</h2>
-            <button onclick="mostrar('mapa_dgf_view')" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">⬅ Voltar ao Mapa DGF</button>
+            <button onclick="mostrar('mapa')" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">🗺️ Voltar</button>
         </div>
         
         <div style="display: flex; width: 100%; height: calc(100vh - 150px); background: #f1f2f6; border-radius: 12px; border: 1px solid #dcdde1; overflow: hidden;">
@@ -2936,56 +2936,53 @@ window.abrirGCE = () => {
                     <text x="65" y="100" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #e67e22;">PORTA</text>
 
                     <g transform="translate(80, 160)">
-                        <rect x="0" y="0" width="70" height="150" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="4" />
+                        <rect x="0" y="0" width="35" height="52" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="2" />
+                        <text x="15" y="26" text-anchor="middle" style="font-family: Arial; font-size: 7px; fill: #bdc3c7; font-weight: bold; writing-mode: vertical-rl;">DISPONÍVEL</text>
+                        <rect class="cadeira-gce" x="-20" y="11" width="10" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="35" y="0" width="35" height="52" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="2" />
+                        <text x="45" y="26" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50; writing-mode: vertical-rl;">RISALDO F.</text>
+                        <rect id="assento-risaldo" class="cadeira-gce" x="76" y="11" width="10" height="30" fill="#3498db" rx="2" />
                         
-                        <text x="35" y="35" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">RISALDO F.</text>
-                        <rect id="encosto-risaldo" class="encosto-gce" x="73" y="20" width="4" height="30" fill="#2980b9" rx="1" />
-                        <rect id="assento-risaldo" class="cadeira-gce" x="70" y="20" width="10" height="30" fill="#3498db" rx="2" />
-                        
-                        <text x="35" y="115" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">LUIZ G.</text>
-                        <rect id="encosto-luiz" class="encosto-gce" x="73" y="100" width="4" height="30" fill="#2980b9" rx="1" />
-                        <rect id="assento-luiz" class="cadeira-gce" x="70" y="100" width="10" height="30" fill="#3498db" rx="2" />
-                        
-                        <rect class="encosto-gce" x="-17" y="20" width="4" height="30" fill="#2980b9" rx="1" />
-                        <rect class="cadeira-gce" x="-14" y="20" width="10" height="30" fill="#3498db" rx="2" />
-                        
-                        <text x="35" y="75" text-anchor="middle" style="font-family: Arial; font-size: 8px; fill: #7f8c8d;">ALEXANDRE</text>
-                        <rect id="encosto-alexandre-moura" class="encosto-gce" x="-17" y="100" width="4" height="30" fill="#2980b9" rx="1" />
-                        <rect id="assento-alexandre-moura" class="cadeira-gce" x="-14" y="100" width="10" height="30" fill="#3498db" rx="2" /> 
+                        <rect x="0" y="70" width="35" height="52" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="2" />
+                        <text x="15" y="96" text-anchor="middle" style="font-family: Arial; font-size: 7px; font-weight: bold; fill: #2c3e50; writing-mode: vertical-rl;">ALEXANDRE M.</text>
+                        <rect id="assento-alexandre-moura" class="cadeira-gce" x="-20" y="81" width="10" height="30" fill="#3498db" rx="2" /> 
+
+                        <rect x="35" y="70" width="35" height="52" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="2" />
+                        <text x="45" y="96" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50; writing-mode: vertical-rl;">LUIZ G.</text>
+                        <rect id="assento-luiz" class="cadeira-gce" x="76" y="81" width="10" height="30" fill="#3498db" rx="2" />
                     </g>
 
                     <g transform="translate(240, 80)">
                         <rect x="0" y="0" width="110" height="60" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="4" />
                         <text x="55" y="35" text-anchor="middle" style="font-family: Arial; font-size: 10px; font-weight: bold; fill: #2c3e50;">JAQUELINE R.</text>
-                        <rect id="encosto-jaqueline" class="encosto-gce" x="113" y="15" width="4" height="30" fill="#2980b9" rx="1" />
-                        <rect id="assento-jaqueline" class="cadeira-gce" x="110" y="15" width="10" height="30" fill="#3498db" rx="2" />
+                        <rect id="assento-jaqueline" class="cadeira-gce" x="116" y="15" width="10" height="30" fill="#3498db" rx="2" />
                     </g>
 
                     <g transform="translate(260, 160)">
-                        <rect x="0" y="0" width="80" height="230" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="4" />
+                        <rect x="40" y="0" width="40" height="72" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="2" />
+                        <text x="55" y="36" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50; writing-mode: vertical-rl;">FLAVIA M.</text>
+                        <rect id="assento-flavia" class="cadeira-gce" x="86" y="18" width="10" height="35" fill="#3498db" rx="2" />
                         
-                        <text x="40" y="40" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">FLAVIA M.</text>
-                        <rect id="encosto-flavia" class="encosto-gce" x="83" y="20" width="4" height="35" fill="#2980b9" rx="1" />
-                        <rect id="assento-flavia" class="cadeira-gce" x="80" y="20" width="10" height="35" fill="#3498db" rx="2" />
+                        <rect x="0" y="0" width="40" height="72" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="2" />
+                        <text x="25" y="36" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50; writing-mode: vertical-rl;">CLEIDE M.</text>
+                        <rect id="assento-cleide" class="cadeira-gce" x="-16" y="18" width="10" height="35" fill="#3498db" rx="2" />
                         
-                        <text x="40" y="115" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">MYRNA M.</text>
-                        <rect id="encosto-myrna" class="encosto-gce" x="83" y="95" width="4" height="35" fill="#2980b9" rx="1" />
-                        <rect id="assento-myrna" class="cadeira-gce" x="80" y="95" width="10" height="35" fill="#3498db" rx="2" />
+                        <rect x="40" y="79" width="40" height="72" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="2" />
+                        <text x="55" y="115" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50; writing-mode: vertical-rl;">MYRNA M.</text>
+                        <rect id="assento-myrna" class="cadeira-gce" x="86" y="97" width="10" height="35" fill="#3498db" rx="2" />
                         
-                        <text x="40" y="190" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">RAFAELA A.</text>
-                        <rect id="encosto-rafaela" class="encosto-gce" x="83" y="170" width="4" height="35" fill="#2980b9" rx="1" />
-                        <rect id="assento-rafaela" class="cadeira-gce" x="80" y="170" width="10" height="35" fill="#3498db" rx="2" />
+                        <rect x="0" y="79" width="40" height="72" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="2" />
+                        <text x="25" y="115" text-anchor="middle" style="font-family: Arial; font-size: 8px; font-weight: bold; fill: #bdc3c7; writing-mode: vertical-rl;">DISPONÍVEL</text>
+                        <rect class="cadeira-gce" x="-16" y="97" width="10" height="35" fill="#3498db" rx="2" /> 
                         
-                        <text x="40" y="55" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">CLEIDE M.</text>
-                        <rect id="encosto-cleide" class="encosto-gce" x="-17" y="20" width="4" height="35" fill="#2980b9" rx="1" />
-                        <rect id="assento-cleide" class="cadeira-gce" x="-10" y="20" width="10" height="35" fill="#3498db" rx="2" />
+                        <rect x="40" y="158" width="40" height="72" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="2" />
+                        <text x="55" y="194" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50; writing-mode: vertical-rl;">RAFAELA A.</text>
+                        <rect id="assento-rafaela" class="cadeira-gce" x="86" y="174" width="10" height="35" fill="#3498db" rx="2" />
                         
-                        <rect class="encosto-gce" x="-17" y="95" width="4" height="35" fill="#2980b9" rx="1" />
-                        <rect class="cadeira-gce" x="-10" y="95" width="10" height="35" fill="#3498db" rx="2" /> 
-                        
-                        <text x="40" y="205" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50;">LADJANE M.</text>
-                        <rect id="encosto-ladjane" class="encosto-gce" x="-17" y="170" width="4" height="35" fill="#2980b9" rx="1" />
-                        <rect id="assento-ladjane" class="cadeira-gce" x="-10" y="170" width="10" height="35" fill="#3498db" rx="2" />
+                        <rect x="0" y="158" width="40" height="72" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="2" />
+                        <text x="25" y="194" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold; fill: #2c3e50; writing-mode: vertical-rl;">LADJANE M.</text>
+                        <rect id="assento-ladjane" class="cadeira-gce" x="-16" y="174" width="10" height="35" fill="#3498db" rx="2" />
                     </g>
 
                     <text x="225" y="440" text-anchor="middle" style="font-family: Arial; font-size: 16px; font-weight: bold; fill: #34495e;">LAYOUT INTERNO - GCE</text>
@@ -2993,9 +2990,15 @@ window.abrirGCE = () => {
             </div>
 
             <div style="width: 290px; background: white; border-left: 1px solid #dcdde1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
-                <h3 style="margin: 0 0 5px 0; font-size: 13px; color: #7f8c8d; letter-spacing: 1px; text-transform: uppercase;">Equipe GCE</h3>
+                <h3 style="margin: 0 0 5px 0; font-size: 13px; color: #7f8c8d; letter-spacing: 1px; text-transform: uppercase;">Gerência</h3>
                 
-                <button onclick="focarFuncionarioGCE('jaqueline')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Jaqueline Rodrigues</button>
+                <button onclick="focarFuncionarioGCE('jaqueline')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #white; text-align: left; cursor: pointer; border-left: 4px solid #e74c3c; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div style="font-size: 11px; font-weight: bold; color: #2c3e50;">Jaqueline Rodrigues</div>
+                    <div style="font-size: 9px; color: #7f8c8d; margin-top: 2px;">Gerente</div>
+                </button>
+
+                <h3 style="margin: 10px 0 5px 0; font-size: 13px; color: #7f8c8d; letter-spacing: 1px; text-transform: uppercase;">Equipe GCE</h3>
+                
                 <button onclick="focarFuncionarioGCE('flavia')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Flavia Maria Albuquerque</button>
                 <button onclick="focarFuncionarioGCE('myrna')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Myrna Marroquim Soares</button>
                 <button onclick="focarFuncionarioGCE('rafaela')" style="padding: 8px; border: 1px solid #eee; border-radius: 6px; background: #f9f9f9; text-align: left; cursor: pointer; font-size: 11px;">Rafaela Aragão Sousa</button>
@@ -3012,26 +3015,29 @@ window.abrirGCE = () => {
 
 
 
-// AJUSTE AQUI: Coloque abaixo a função exata que abre o seu Mapa DGF
+
+
+
+// Ajuste do Mapa Principal
 window.mostrarMapaDGF = () => {
-    // Exemplo: se a função do seu mapa original for mostrar('mapa_view'), coloque ela aqui:
-    // mostrar('id_do_seu_mapa_aqui');
+    mostrar('mapa');
 };
 
-
-    // Função para abrir os detalhes da sala GC
+// Função para abrir os detalhes da sala GC
 window.abrirGC = () => {
     // Função interna para destacar a cadeira ao clicar no nome da lista
     window.focarFuncionario = (id) => {
-        // Reseta todas as cadeiras para azul
-        document.querySelectorAll('.cadeira-gc').forEach(c => c.setAttribute('fill', '#3498db'));
-        document.querySelectorAll('.encosto-gc').forEach(e => e.setAttribute('fill', '#2980b9'));
+        // Reseta todas as cadeiras para azul usando o padrão visual gpag
+        document.querySelectorAll('.cadeira-gpag').forEach(c => c.setAttribute('fill', '#3498db'));
+        document.querySelectorAll('.encosto-gpag').forEach(e => e.setAttribute('fill', '#2980b9'));
         
         // Destaca a selecionada em verde
         const assento = document.getElementById(`assento-${id}`);
         const encosto = document.getElementById(`encosto-${id}`);
-        if(assento && encosto) {
+        if(assento) {
             assento.setAttribute('fill', '#2ecc71');
+        }
+        if(encosto) {
             encosto.setAttribute('fill', '#27ae60');
         }
     };
@@ -3039,101 +3045,169 @@ window.abrirGC = () => {
     conteudo.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #34495e; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h2 style="margin:0; font-size: 18px; color: #2c3e50;">📍 Detalhes: Sala GC</h2>
+            <button onclick="mostrar('mapa')" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">🗺️ Mapa DGF</button>
         </div>
         
         <div style="display: flex; width: 100%; height: calc(100vh - 150px); background: #f1f2f6; border-radius: 12px; border: 1px solid #dcdde1; overflow: hidden;">
-            <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
-                <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid meet" style="width: 95%; height: 95%;">
-                    <rect x="50" y="50" width="280" height="400" fill="white" stroke="#2c3e50" stroke-width="5" rx="10" />
+            <div style="flex: 1; display: flex; justify-content: center; align-items: center; padding: 10px;">
+                <svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid meet" style="width: 95%; height: 95%;">
+                    <rect x="20" y="20" width="560" height="660" fill="white" stroke="#2c3e50" stroke-width="5" rx="10" />
                     
-                    <rect x="50" y="65" width="10" height="60" fill="#e67e22" />
-                    <text x="65" y="100" style="font-family: Arial; font-size: 14px; font-weight: bold; fill: #e67e22;">porta</text>
+                    <rect x="20" y="50" width="10" height="60" fill="#e67e22" />
+                    <text x="35" y="85" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #e67e22;">ENTRADA</text>
 
-                    <rect x="55" y="130" width="40" height="240" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="5" />
-                    ${renderCadeira(95, 145, 'viviane', 'Viviane Silva de Lima')}
-                    ${renderCadeira(95, 205, 'ivandete', 'Ivandete Severina da Silva')}
-                    ${renderCadeira(95, 265, 'larissa-c', 'Larissa Cristina Simões dos Santos')}
-                    ${renderCadeira(95, 325, 'karoline', 'karoline Diniz De Araújo')}
+                    <g transform="translate(45, 120)">
+                        <rect x="0" y="0" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="35" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">VIVIANE</text>
+                        <rect id="assento-viviane" class="cadeira-gpag" x="75" y="18" width="15" height="30" fill="#3498db" rx="2" />
 
-                    <rect x="55" y="380" width="45" height="40" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="5" />
-                    ${renderCadeira(62, 422, 'rayville', 'Rayville Rayanne Almeida Dos Santos', true)}
+                        <rect x="0" y="80" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="115" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">IVANDETE</text>
+                        <rect id="assento-ivandete" class="cadeira-gpag" x="75" y="98" width="15" height="30" fill="#3498db" rx="2" />
 
-                    <rect x="140" y="140" width="80" height="250" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="8" />
-                    ${renderCadeira(132, 155, 'heber', 'Heber Rocha Linhares de Siqueira')}
-                    ${renderCadeira(132, 215, 'anna', 'Anna Beatriz Calado')}
-                    ${renderCadeira(132, 275, 'camila', 'Camila')}
-                    ${renderCadeira(132, 335, 'bruno', 'BRUNO RODRIGO DOS SANTOS BARRETO')}
+                        <rect x="0" y="160" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="195" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">LARISSA C.</text>
+                        <rect id="assento-larissa-c" class="cadeira-gpag" x="75" y="178" width="15" height="30" fill="#3498db" rx="2" />
 
-                    ${renderCadeira(220, 155, 'idalmi', 'Idalmi Viturino Sobrinho', false, true)}
-                    ${renderCadeira(220, 215, 'lais', 'Lais Alves Dos Santos De Azevedo', false, true)}
-                    ${renderCadeira(220, 275, 'natalia', 'Natália Gusmão de Carvalho', false, true)}
-                    ${renderCadeira(220, 335, 'renata', 'Renata Pereira Da Silva', false, true)}
+                        <rect x="0" y="240" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="275" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">KAROLINE</text>
+                        <rect id="assento-karoline" class="cadeira-gpag" x="75" y="258" width="15" height="30" fill="#3498db" rx="2" />
+                    </g>
 
-                    <rect x="290" y="52" width="40" height="396" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
-                    ${renderCadeira(282, 80, 'raiza', 'Raiza Leandro Pontes Rita', false, true)}
-                    ${renderCadeira(282, 140, 'larissa-n', 'Larissa Nascimento De Oliveira', false, true)}
-                    ${renderCadeira(282, 200, 'wanessa', 'Wanessa Louise Lima dos Santos', false, true)}
-                    ${renderCadeira(282, 260, 'ana-n', 'Ana Caroline Nobre Nascimento', false, true)}
-                    ${renderCadeira(282, 320)}
-                    ${renderCadeira(282, 380, 'jessica', 'Jéssica Ferreira de Freitas Lima', false, true)}
+                    <g transform="translate(45, 480)">
+                        <rect x="0" y="0" width="70" height="55" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" rx="4" />
+                        <text x="35" y="32" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">RAYVILLE</text>
+                        <rect id="assento-rayville" class="cadeira-gpag" x="20" y="-20" width="30" height="15" fill="#3498db" rx="2" />
+                    </g>
 
-                    <text x="190" y="35" text-anchor="middle" style="font-family: Arial; font-size: 20px; font-weight: bold; fill: #34495e;">LAYOUT INTERNO - GC</text>
+                    <g transform="translate(200, 120)">
+                        <rect x="0" y="0" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="37" y="35" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">HEBER</text>
+                        <rect id="assento-heber" class="cadeira-gpag" x="-20" y="18" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="80" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="37" y="115" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">Rosevalda</text>
+                        <rect id="assento-Rosevalda" class="cadeira-gpag" x="-20" y="98" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="160" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="37" y="195" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">Denadja</text>
+                        <rect id="assento-Denadja" class="cadeira-gpag" x="-20" y="178" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="240" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="37" y="275" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">BRUNO</text>
+                        <rect id="assento-bruno" class="cadeira-gpag" x="-20" y="258" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="75" y="0" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="112" y="35" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">IDALMI</text>
+                        <rect id="assento-idalmi" class="cadeira-gpag" x="155" y="18" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="75" y="80" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="112" y="115" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">LAIS</text>
+                        <rect id="assento-lais" class="cadeira-gpag" x="155" y="98" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="75" y="160" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="112" y="195" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">NATÁLIA</text>
+                        <rect id="assento-natalia" class="cadeira-gpag" x="155" y="178" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="75" y="240" width="75" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="112" y="275" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">RENATA</text>
+                        <rect id="assento-renata" class="cadeira-gpag" x="155" y="258" width="15" height="30" fill="#3498db" rx="2" />
+                    </g>
+
+                    <g transform="translate(465, 90)">
+                        <rect x="0" y="0" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="35" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">RAIZA</text>
+                        <rect id="assento-raiza" class="cadeira-gpag" x="-20" y="18" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="75" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="110" text-anchor="middle" style="font-family: Arial; font-size: 8px; font-weight: bold;">JOANA D'ARC</text>
+                        <rect id="assento-joana" class="cadeira-gpag" x="-20" y="93" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="150" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="185" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">WANESSA</text>
+                        <rect id="assento-wanessa" class="cadeira-gpag" x="-20" y="168" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="225" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="260" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">ANA CAROL.</text>
+                        <rect id="assento-ana-n" class="cadeira-gpag" x="-20" y="243" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="300" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="335" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">LARISSA N.</text>
+                        <rect id="assento-larissa-n" class="cadeira-gpag" x="-20" y="318" width="15" height="30" fill="#3498db" rx="2" />
+
+                        <rect x="0" y="375" width="70" height="65" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+                        <text x="35" y="410" text-anchor="middle" style="font-family: Arial; font-size: 9px; font-weight: bold;">JÉSSICA</text>
+                        <rect id="assento-jessica" class="cadeira-gpag" x="-20" y="393" width="15" height="30" fill="#3498db" rx="2" />
+                    </g>
+
+                    <text x="300" y="640" text-anchor="middle" style="font-family: Arial; font-size: 16px; font-weight: bold; fill: #34495e;">LAYOUT INTERNO - GC</text>
                 </svg>
             </div>
 
             <div style="width: 280px; background: white; border-left: 1px solid #dcdde1; padding: 20px; overflow-y: auto;">
-                <h3 style="margin: 0 0 15px 0; font-size: 14px; color: #7f8c8d; letter-spacing: 1px; text-transform: uppercase;">Equipe GC</h3>
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    ${renderItemLista('Raiza Leandro Pontes Rita', 'raiza')}
-                    ${renderItemLista('Larissa Nascimento De Oliveira', 'larissa-n')}
-                    ${renderItemLista('Wanessa Louise Lima dos Santos', 'wanessa')}
-                    ${renderItemLista('Ana Caroline Nobre Nascimento', 'ana-n')}
-                    ${renderItemLista('Jéssica Ferreira de Freitas Lima', 'jessica')}
-                    ${renderItemLista('Heber Rocha Linhares de Siqueira', 'heber')}
-                    ${renderItemLista('Anna Beatriz Calado', 'anna')}
-                    ${renderItemLista('Lais Alves Dos Santos De Azevedo', 'lais')}
-                    ${renderItemLista('Camila', 'camila')}
-                    ${renderItemLista('BRUNO RODRIGO DOS SANTOS BARRETO', 'bruno')}
-                    ${renderItemLista('Idalmi Viturino Sobrinho', 'idalmi')}
-                    ${renderItemLista('Natália Gusmão de Carvalho', 'natalia')}
-                    ${renderItemLista('Renata Pereira Da Silva', 'renata')}
-                    ${renderItemLista('Viviane Silva de Lima', 'viviane')}
-                    ${renderItemLista('Ivandete Severina da Silva', 'ivandete')}
-                    ${renderItemLista('Larissa Cristina Simões dos Santos', 'larissa-c')}
-                    ${renderItemLista('karoline Diniz De Araújo', 'karoline')}
-                    ${renderItemLista('Rayville Rayanne Almeida Dos Santos', 'rayville')}
+                <h3 style="margin: 0 0 15px 0; font-size: 14px; color: #7f8c8d; letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px solid #3498db; padding-bottom: 5px;">Gestão Contábil</h3>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    
+                    <div>
+                        ${renderItemLista('Rayville Rayanne Almeida Dos Santos', 'rayville', 'Gerente de Contábil', '#0066cc')}
+                    </div>
+
+                    <div>
+                        <div style="font-size: 11px; font-weight: bold; color: #e67e22; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Núcleo Tributário FES</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px; padding-left: 5px; border-left: 2px solid #e67e22;">
+                            ${renderItemLista('Raiza Leandro Pontes Rita', 'raiza', 'COORDENADORA', '#d35400')}
+                            ${renderItemLista('Jéssica Ferreira de Freitas Lima', 'jessica', '')}
+                            ${renderItemLista('Larissa Nascimento De Oliveira', 'larissa-n', '')}
+                            ${renderItemLista('Ana Caroline Nobre Nascimento', 'ana-n', '')}
+                            ${renderItemLista('Wanessa Louise Lima dos Santos', 'wanessa', '')}
+                            ${renderItemLista("Joana D'arc e Silva Pessoa Campello", 'joana', '')}
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="font-size: 11px; font-weight: bold; color: #27ae60; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Coordenação de Contabilidade</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px; padding-left: 5px; border-left: 2px solid #27ae60;">
+                            ${renderItemLista('BRUNO RODRIGO DOS SANTOS BARRETO', 'bruno', 'COORDENADOR', '#1e824c')}
+                            ${renderItemLista('Renata Pereira Da Silva', 'renata', '')}
+                            ${renderItemLista('Natália Gusmão de Carvalho', 'natalia', '')}
+                            ${renderItemLista('Lais Alves Dos Santos De Azevedo', 'lais', '')}
+                            ${renderItemLista('Idalmi Viturino Sobrinho', 'idalmi', '')}
+                            ${renderItemLista('Denadja Fabiana Arruda de Melo', 'Denadja', '')}
+                            ${renderItemLista('Rosevalda da Silva Alves', 'Rosevalda', '')}
+                            ${renderItemLista('Heber Rocha Linhares de Siqueira', 'heber', '')}
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="font-size: 11px; font-weight: bold; color: #8e44ad; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Núcleo Tributário SES</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px; padding-left: 5px; border-left: 2px solid #8e44ad;">
+                            ${renderItemLista('karoline Diniz De Araújo', 'karoline', 'COORDENADORA', '#6c3483')}
+                            ${renderItemLista('Larissa Cristina Simões dos Santos', 'larissa-c', '')}
+                            ${renderItemLista('Ivandete Severina da Silva', 'ivandete', '')}
+                            ${renderItemLista('Viviane Silva de Lima', 'viviane', '')}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     `;
 };
 
-// Funções Auxiliares (Padrão Corporativo)
-function renderCadeira(x, y, id, nome, horizontal = false, inverter = false) {
-    const width = horizontal ? 30 : 8;
-    const height = horizontal ? 8 : 30;
-    const encostoOffset = inverter ? (horizontal ? 0 : 5) : (horizontal ? -3 : -3);
-    
-    return `
-        <g onclick="alert('${nome}')" style="cursor:pointer">
-            <title>${nome}</title>
-            <rect id="assento-${id}" class="cadeira-gc" x="${x}" y="${y}" width="${width}" height="${height}" fill="#3498db" rx="1" />
-            <rect id="encosto-${id}" class="encosto-gc" x="${horizontal ? x : x + encostoOffset}" y="${horizontal ? y + height + encostoOffset : y}" width="${horizontal ? width : 3}" height="${horizontal ? 3 : height}" fill="#2980b9" rx="1" />
-        </g>
-    `;
-}
-
-function renderItemLista(nome, id) {
+function renderItemLista(nome, id, cargo, corCargo = '#3498db') {
     return `
         <div onclick="focarFuncionario('${id}')" 
-             style="padding: 12px; background: #fdfdfd; border: 1px solid #f1f2f6; border-radius: 8px; cursor: pointer; transition: all 0.3s;" 
-             onmouseover="this.style.borderLeft='4px solid #3498db'; this.style.background='#f0f7ff'" 
+             style="padding: 10px; background: #fdfdfd; border: 1px solid #f1f2f6; border-radius: 8px; cursor: pointer; transition: all 0.3s;" 
+             onmouseover="this.style.borderLeft='4px solid ${corCargo}'; this.style.background='#f0f7ff'" 
              onmouseout="this.style.borderLeft='1px solid #f1f2f6'; this.style.background='#fdfdfd'">
-            <div style="font-weight: bold; color: #2c3e50; font-size: 11px; text-transform: uppercase;">${nome}</div>
-            <div style="color: #3498db; font-size: 10px; margin-top: 4px; font-weight: bold;">Setor GC</div>
+            <div style="font-weight: bold; color: #2c3e50; font-size: 10px; text-transform: uppercase;">${nome}</div>
+            <div style="color: ${corCargo}; font-size: 9px; margin-top: 4px; font-weight: bold; text-transform: uppercase;">${cargo}</div>
         </div>
     `;
 }
+
+
+
 
 
 
@@ -3160,7 +3234,7 @@ window.abrirDGF = () => {
     conteudo.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #e74c3c; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h2 style="margin:0; font-size: 18px; color: #2c3e50;">📍 Detalhes: Sala DGF</h2>
-            <button onclick="location.reload()" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">⬅ Voltar ao Mapa Geral</button>
+            <button onclick="mostrar('mapa')" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">🗺️ Voltar</button>
         </div>
         
         <div style="display: flex; width: 100%; height: calc(100vh - 150px); background: #f1f2f6; border-radius: 12px; border: 1px solid #dcdde1; overflow: hidden;">
@@ -3213,7 +3287,6 @@ window.abrirDGF = () => {
 
 
 
-
     // Nova Função: abrir os detalhes da sala SFES
 window.abrirSFES = () => {
     // Função para destacar a cadeira do Superintendente
@@ -3234,7 +3307,7 @@ window.abrirSFES = () => {
     conteudo.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #34495e; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h2 style="margin:0; font-size: 18px; color: #2c3e50;">📍 Detalhes: Sala SFES</h2>
-            <button onclick="location.reload()" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">⬅ Voltar ao Mapa Geral</button>
+            <button onclick="mostrar('mapa')" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">🗺️ Voltar</button>
         </div>
         
         <div style="display: flex; width: 100%; height: calc(100vh - 150px); background: #f1f2f6; border-radius: 12px; border: 1px solid #dcdde1; overflow: hidden;">
@@ -3282,6 +3355,9 @@ window.abrirSFES = () => {
 
 
 
+
+
+
 // Função para abrir os detalhes da sala GPAG (Gerência de Pagamento)
 window.abrirGPAG = () => {
     // Função interna para destacar a cadeira/estação ao clicar no nome da lista
@@ -3300,11 +3376,16 @@ window.abrirGPAG = () => {
             encosto.setAttribute('fill', '#27ae60');
         }
     };
+	
+	
+	
+	
+	
 
     conteudo.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #2c3e50; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h2 style="margin:0; font-size: 18px; color: #2c3e50;">📍 Detalhes: GPAG - Gerência de Pagamento</h2>
-            <button onclick="location.reload()" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">⬅ Voltar ao Mapa Geral</button>
+            <button onclick="mostrar('mapa')" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">🗺️ Voltar</button>
         </div>
         
         <div style="display: flex; width: 100%; height: calc(100vh - 150px); background: #f1f2f6; border-radius: 12px; border: 1px solid #dcdde1; overflow: hidden;">
@@ -3984,3 +4065,4 @@ window.abrirGPAG = () => {
 
 </body>
 </html>
+

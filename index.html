@@ -1297,6 +1297,14 @@ if (pagina === "areadogestor") {
                         <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao repositório centralizado de dados e arquivos consolidados.</p>
                     </div>
 
+                    <div onclick="window.open('SEU_LINK_AQUI', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #e67e22; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+                       onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+                        <p style="margin: 0; color: #d35400; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                            🗂️ GESTÃO DE ANESTESISTA
+                        </p>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao painel e relatórios da gestão de anestesistas.</p>
+                    </div>
+
                     <div onclick="window.toggleChatbotPainel()" style="background: #fdfefe; padding: 20px; border-left: 4px solid #9b59b6; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
                         <p style="margin: 0; color: #8e44ad; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
@@ -2485,7 +2493,7 @@ if(pagina === "organograma"){
     `;
 }
 
-    if(pagina === "cursos"){
+   if(pagina === "cursos"){
         conteudo.innerHTML = `
             <h2>🎓 DGF Educa - Portal de Cursos</h2>
             <p>Capacitação contínua para a excelência em nossos processos financeiros.</p>
@@ -2502,6 +2510,20 @@ if(pagina === "organograma"){
                     <button class="btn-enviar" style="padding: 8px; font-size: 14px; background: #e74c3c; cursor: not-allowed;" disabled>Curso Encerrado</button>
                 </div>
 
+                <div class="noticia-card" style="border-left-color: #1abc9c; position: relative; display: flex; flex-direction: column; justify-content: space-between;">
+                    <span style="position: absolute; top: 10px; right: 10px; background: #e8f8f5; color: #1abc9c; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: bold;">INSCRIÇÕES ABERTAS</span>
+                    <h3 style="margin-top: 5px; padding-right: 110px;">Inteligência Artificial no Contexto do Serviço Público</h3>
+                    <p style="font-size: 14px; color: #7f8c8d; margin-bottom: 12px;">📢 Oportunidade de Capacitação Gratuita!<br><br>A Escola Virtual de Governo (EV.G/Enap) está com o curso "Inteligência Artificial no Contexto do Serviço Público", totalmente gratuito e com certificado. A capacitação apresenta conceitos fundamentais, aplicações práticas e experiências de uso da IA para tornar os serviços públicos mais eficientes, inovadores e orientados ao cidadão.</p>
+                    <div>
+                        <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 12px;">
+                        <p style="font-size: 13px;"><strong>Modalidade:</strong> Online (Autoinstrucional)</p>
+                        <p style="font-size: 13px;"><strong>Instituição:</strong> EV.G / Enap</p>
+                        <a href="https://www.escolavirtual.gov.br/curso/377?utm_source=chatgpt.com" target="_blank" style="text-decoration: none;">
+                            <button class="btn-enviar" style="width: 100%; padding: 10px; font-size: 14px; background: #1abc9c; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Inscreva-se Gratuitamente</button>
+                        </a>
+                    </div>
+                </div>
+
             </div>
 
             <div class="form-container" style="max-width: 100%; margin-top: 40px; border: 1px dashed #1abc9c; background: #f0fdfa;">
@@ -2516,7 +2538,7 @@ if(pagina === "organograma"){
                 </form>
             </div>
         `;
-    }
+}
 
     if(pagina === "chegou"){
     // Lista de novos servidores - Basta adicionar novos aqui
@@ -3045,7 +3067,7 @@ window.abrirGC = () => {
     conteudo.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 10px; background: white; border-radius: 10px; border-left: 5px solid #34495e; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
             <h2 style="margin:0; font-size: 18px; color: #2c3e50;">📍 Detalhes: Sala GC</h2>
-            <button onclick="mostrar('mapa')" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">🗺️ Mapa DGF</button>
+            <button onclick="mostrar('mapa')" style="padding: 8px 15px; background: #1abc9c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">🗺️ Voltar</button>
         </div>
         
         <div style="display: flex; width: 100%; height: calc(100vh - 150px); background: #f1f2f6; border-radius: 12px; border: 1px solid #dcdde1; overflow: hidden;">
@@ -4062,6 +4084,10 @@ window.abrirGPAG = () => {
 }
 }
 </script>
+
+</body>
+</html>
+
 
 </body>
 </html>

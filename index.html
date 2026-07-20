@@ -726,6 +726,23 @@ function mostrar(pagina){
                     ">
                         Gestão Eficiente e Transparência na Saúde Pública
                     </div>
+
+                    <div style="margin-top: 15px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                        <a href="https://sei.pe.gov.br" target="_blank" style="
+                            display: inline-flex; align-items: center; gap: 6px; background: #2196f3; color: white; 
+                            padding: 8px 16px; font-size: 13px; font-weight: bold; text-decoration: none; border-radius: 4px;
+                            box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: background 0.2s;"
+                           onmouseover="this.style.background='#1976d2'" onmouseout="this.style.background='#2196f3'">
+                            💻 Entrar em SEI
+                        </a>
+                        <a href="https://efisco.sefaz.pe.gov.br" target="_blank" style="
+                            display: inline-flex; align-items: center; gap: 6px; background: #ff9800; color: white; 
+                            padding: 8px 16px; font-size: 13px; font-weight: bold; text-decoration: none; border-radius: 4px;
+                            box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: background 0.2s;"
+                           onmouseover="this.style.background='#f57c00'" onmouseout="this.style.background='#ff9800'">
+                            🔑 Entrar em E-fisco
+                        </a>
+                    </div>
                 </div>
 
                 <div id="lider-card-unificado" onclick="mostrar('Bolão')" style="
@@ -821,6 +838,17 @@ function mostrar(pagina){
                 <div style="padding: 15px; flex-grow: 1;">
                     <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">💼 Painel Corporativo e Decisões</h3>
                     <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Espaço restrito para lideranças. Acesse ferramentas de governança, aprovação de fluxos, análise integrada de relatórios e planejamento estratégico da DGF.</p>
+                </div>
+            </div>
+
+            <div onclick="mostrar('Bolão')" style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #2ecc71; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
+                <div style="padding: 10px; background: #2ecc71; color: white; text-align: center; font-weight: bold; font-size: 14px;">
+                    🏆 BOLÃO DGF
+                </div>
+                <img src="image_3e56be.jpg" alt="Top 10 Bolão DGF" style="width: 100%; height: 140px; object-fit: cover; object-position: top; display: block;">
+                <div style="padding: 15px; flex-grow: 1;">
+                    <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">⚽ Classificação e Palpites</h3>
+                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Acompanhe o ranking atualizado, confira os líderes de exatos e veja quem está dominando as pontuações no Bolão oficial da DGF.</p>
                 </div>
             </div>
 
@@ -922,7 +950,7 @@ function mostrar(pagina){
         }
     }, 10000);
 }
-	
+
 if (pagina === "Bolão") {
 
     let html = `
@@ -1071,11 +1099,82 @@ if (pagina === "Bolão") {
     }
 
 if(pagina === "noticias"){
-    let html = "<h2>📰 Notícias</h2>";
+    // CORREÇÃO AQUI: Mudado para crase para permitir a concatenação de templates multilinhas de forma segura
+    let html = `<h2>📰 Notícias</h2>`;
 
     const hoje = new Date().toLocaleDateString('pt-BR');
 
-    // 0. NOVA NOTÍCIA NO TOPO: Confirmação de Presença São João DGF
+    // 2. NOVA NOTÍCIA: Resultado Parcial do Bolão DGF (AGORA NO TOPO)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #2ecc71; background: #f4fbf7; font-family: 'Arial', sans-serif;">
+            <small style="color:#7f8c8d;">📅 ${hoje}</small>
+            
+            <h3 style="margin: 10px 0; color: #1b5e20; text-transform: uppercase; letter-spacing: 0.5px;">
+                🏆 HISTÓRICO! Divulgada a Classificação do Bolão DGF!
+            </h3>
+            
+            <p style="line-height: 1.6; color: #2c3e50; font-size: 14px;">
+                A disputa foi acirrada e o clima de Copa do Mundo tomou conta de vez! Com palpites cirúrgicos e muita intuição técnica, os nossos craques da tabela assumiram o topo do ranking. Confira como ficou o pódio da nossa primeira COPA DGF:
+            </p>
+
+            <div style="background: #081e09; border-radius: 0px; padding: 25px 20px; margin: 20px 0; box-shadow: 0 6px 20px rgba(0,0,0,0.4); border: 2px solid #1b5e20; display: flex; flex-direction: column; gap: 15px;">
+                
+                
+
+                <div style="display: flex; align-items: center; background: linear-gradient(90deg, #1e4620 0%, #153617 100%); border: 2px solid #f1c40f; padding: 18px 20px; border-radius: 0px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                    <div style="font-size: 26px; font-weight: 900; color: #f1c40f; width: 60px; display: flex; align-items: center; gap: 6px;">
+                        1º <span style="font-size: 18px;">👑</span>
+                    </div>
+                    <div style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid #f1c40f; overflow: hidden; background: #fff; margin-right: 20px; flex-shrink: 0; box-shadow: 0 0 10px rgba(241,196,15,0.5);">
+                        <img src="./joelson.png" alt="Joelson" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="color: #fff; font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Joelson
+                    </div>
+                    <div style="margin-left: auto; background: #f1c40f; color: #081e09; font-weight: 900; padding: 6px 14px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                        Campeão
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center; background: linear-gradient(90deg, #163818 0%, #0f2b10 100%); border: 1px solid #bdc3c7; padding: 18px 20px; border-radius: 0px;">
+                    <div style="font-size: 24px; font-weight: 900; color: #bdc3c7; width: 60px;">
+                        2º
+                    </div>
+                    <div style="width: 75px; height: 75px; border-radius: 50%; border: 2.5px solid #bdc3c7; overflow: hidden; background: #fff; margin-right: 20px; flex-shrink: 0;">
+                        <img src="./renan.png" alt="Renan" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="color: #eee; font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Renan
+                    </div>
+                    <div style="margin-left: auto; background: #bdc3c7; color: #1a252f; font-weight: 900; padding: 6px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Vice-Campeão
+                    </div>
+                </div>
+
+                <div style="display: flex; align-items: center; background: linear-gradient(90deg, #0f2b10 0%, #081e09 100%); border: 1px solid #e67e22; padding: 18px 20px; border-radius: 0px;">
+                    <div style="font-size: 22px; font-weight: 900; color: #e67e22; width: 60px;">
+                        3º
+                    </div>
+                    <div style="width: 75px; height: 75px; border-radius: 50%; border: 2.5px solid #e67e22; overflow: hidden; background: #fff; margin-right: 20px; flex-shrink: 0;">
+                        <img src="./rosicleide.png" alt="Rosicleide" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="color: #ccc; font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Rosicleide
+                    </div>
+                    <div style="margin-left: auto; background: #e67e22; color: #fff; font-weight: 900; padding: 6px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Terceiro Colocado
+                    </div>
+                </div>
+
+            </div>
+
+            <p style="line-height: 1.6; color: #2c3e50; font-size: 14px; font-weight: bold; text-align: center; margin-top: 15px;">
+                Parabéns aos participantes. #JuntosSomosFortes
+            </p>
+        </div>
+    `;
+
+    // 0. NOVA NOTÍCIA: Confirmação de Presença São João DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9;">
             <small style="color:#7f8c8d;">📅 ${hoje}</small>
@@ -1088,35 +1187,11 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 1. Inserindo o Guia de Ajuda como a primeira notícia (no topo) - Sem a imagem
+    // 1. Inserindo o Guia de Ajuda
     html += `
         <div class="noticia-card">
             <small style="color:#7f8c8d;">📅 ${hoje}</small>
             <h3 style="margin: 10px 0;">📌 Guia de Ajuda</h3>
-        </div>
-    `;
-
-    // 2. NOVA NOTÍCIA: Bolão da DGF (Fixa no topo junto com o guia)
-    html += `
-        <div class="noticia-card" style="border-left: 5px solid #e5b800; background: #fffdf3;">
-            <small style="color:#7f8c8d;">📅 ${hoje}</small>
-            <h3 style="margin: 10px 0; color: #0b3d91;">🏆 Participe do Grande Bolão da Copa DGF!</h3>
-            <p style="line-height: 1.5; color: #2c3e50;">
-                Atenção, pessoal! Estão abertas as inscrições para o <strong>Bolão da DGF</strong>, e o melhor de tudo: <strong>é 100% gratuito!</strong>
-            </p>
-            <p style="line-height: 1.5; color: #2c3e50;">
-                Mostre que você entende de futebol e concorra a prêmios exclusivos para decorar seu espaço:
-            </p>
-            <ul style="margin: 10px 0; padding-left: 20px; color: #2c3e50; line-height: 1.5;">
-                <li>🥇 <strong>1º Lugar:</strong> Um incrível Troféu Réplica da Copa do Mundo!</li>
-                <li>🥈 <strong>Até o 5º Lugar:</strong> Mini-troféus personalizados para enfeitar a sua mesa de trabalho!</li>
-            </ul>
-            <p style="line-height: 1.5; color: #2c3e50; font-weight: bold;">
-                🤝 Integração total: O bolão está aberto para todos! Não precisa ser da DGF, colaboradores de outros setores também estão mais do que convidados a participar.
-            </p>
-            <div style="margin-top: 15px; font-style: italic; color: #7f8c8d; font-size: 13px;">
-                📍 Acesse a aba "Social > Bolão da Copa do Mundo" no menu ou clique no botão do cabeçalho para registrar seus palpites!
-            </div>
         </div>
     `;
     
@@ -1133,80 +1208,6 @@ if(pagina === "noticias"){
     
     conteudo.innerHTML = html;
 }
-
-// =========================================================
-// NOVO BLOCO ESTRUTURADO: ÁREA DO GESTOR COMO PÁGINA OFICIAL
-// =========================================================
-if (pagina === "areadogestor") {
-
-    // 1. Limpa os carrosséis e timers ativos para não pesar o navegador
-    if (window.intervaloPaginaRadar) { clearInterval(window.intervaloPaginaRadar); }
-    if (window.intervaloRadarDGF) { clearInterval(window.intervaloRadarDGF); }
-
-    // 2. Inicializa as senhas padrão no localStorage caso não existam
-    if (!localStorage.getItem('senha_executivo')) {
-        localStorage.setItem('senha_executivo', 'exe123');
-    }
-    if (!localStorage.getItem('senha_diretoria')) {
-        localStorage.setItem('senha_diretoria', 'dir123');
-    }
-
-    // Array com todos os seus gráficos estruturados do Radar DGF
-    const graficosPainel = [
-        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - MÃO DE OBRA", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive", cor: "#34495e" },
-        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive", cor: "#3498db" },
-        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive", cor: "#e67e22" },
-        { nome: "GERÊNCIA DE EMPENHO COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive", cor: "#2ecc71" },
-        { nome: "COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive", cor: "#e74c3c" },
-        { nome: "COORDENAÇÃO DE PAGAMENTO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive", cor: "#1abc9c" }
-    ];
-
-    // 3. Função global (temporária na janela) para gerenciar o fluxo de login e senha
-    window.autenticarGestor = function(acao) {
-        const usuarioSelectEl = document.getElementById('gestor-usuario');
-        const senhaInputEl = document.getElementById('gestor-senha');
-        
-        const usuarioSelect = usuarioSelectEl ? usuarioSelectEl.value : window.usuarioLogadoAtual;
-        const senhaSalva = localStorage.getItem(`senha_${usuarioSelect}`);
-
-        if (acao === 'login') {
-            const senhaInput = senhaInputEl.value;
-            if (senhaInput === senhaSalva) {
-                window.usuarioLogadoAtual = usuarioSelect;
-                carregarPainelGestor();
-            } else {
-                alert('Senha incorreta! Acesso negado.');
-            }
-        } 
-        else if (acao === 'alterar') {
-            const senhaAtual = prompt('Digite a sua senha ATUAL para segurança:');
-            if (senhaAtual === senhaSalva) {
-                const novaSenha = prompt('Digite a sua NOVA senha:');
-                if (novaSenha && novaSenha.trim() !== "") {
-                    localStorage.setItem(`senha_${usuarioSelect}`, novaSenha.trim());
-                    alert('Senha alterada com sucesso! Use a nova senha no próximo acesso.');
-                } else {
-                    alert('Alteração cancelada ou senha inválida.');
-                }
-            } else {
-                alert('Senha atual incorreta. Não foi possível alterar.');
-            }
-        }
-    };
-
-    // Função auxiliar para forçar o download do arquivo local de forma segura
-    window.baixarPlanilhaLocal = function() {
-        try {
-            const link = document.createElement('a');
-            link.href = 'BASE CONTRATO PAGO.xlsx';
-            link.download = 'BASE CONTRATO PAGO.xlsx';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        } catch (e) {
-            window.open('BASE CONTRATO PAGO.xlsx', '_blank');
-        }
-    };
 
     // Nova Função: Controla a exibição e a busca do Chatbot integrado à planilha Google Sheets
     window.toggleChatbotPainel = function() {

@@ -282,7 +282,7 @@ section {
             </div>
             
             <button onclick="mostrar('home')">🏠 Início</button>
-
+			
             <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">📢 Comunicação</button>
             <div id="submenuComunicacao" class="submenu">
 			<button onclick="mostrar('noticias')">📰 Notícias</button>
@@ -1208,6 +1208,81 @@ if(pagina === "noticias"){
     
     conteudo.innerHTML = html;
 }
+
+
+// =========================================================
+// NOVO BLOCO ESTRUTURADO: ÁREA DO GESTOR COMO PÁGINA OFICIAL
+// =========================================================
+if (pagina === "areadogestor") {
+
+    // 1. Limpa os carrosséis e timers ativos para não pesar o navegador
+    if (window.intervaloPaginaRadar) { clearInterval(window.intervaloPaginaRadar); }
+    if (window.intervaloRadarDGF) { clearInterval(window.intervaloRadarDGF); }
+
+    // 2. Inicializa as senhas padrão no localStorage caso não existam
+    if (!localStorage.getItem('senha_executivo')) {
+        localStorage.setItem('senha_executivo', 'exe123');
+    }
+    if (!localStorage.getItem('senha_diretoria')) {
+        localStorage.setItem('senha_diretoria', 'dir123');
+    }
+
+    // Array com todos os seus gráficos estruturados do Radar DGF
+    const graficosPainel = [
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - MÃO DE OBRA", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive", cor: "#34495e" },
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive", cor: "#3498db" },
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive", cor: "#e67e22" },
+        { nome: "GERÊNCIA DE EMPENHO COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive", cor: "#2ecc71" },
+        { nome: "COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive", cor: "#e74c3c" },
+        { nome: "COORDENAÇÃO DE PAGAMENTO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive", cor: "#1abc9c" }
+    ];
+
+    // 3. Função global (temporária na janela) para gerenciar o fluxo de login e senha
+    window.autenticarGestor = function(acao) {
+        const usuarioSelectEl = document.getElementById('gestor-usuario');
+        const senhaInputEl = document.getElementById('gestor-senha');
+        
+        const usuarioSelect = usuarioSelectEl ? usuarioSelectEl.value : window.usuarioLogadoAtual;
+        const senhaSalva = localStorage.getItem(`senha_${usuarioSelect}`);
+
+        if (acao === 'login') {
+            const senhaInput = senhaInputEl.value;
+            if (senhaInput === senhaSalva) {
+                window.usuarioLogadoAtual = usuarioSelect;
+                carregarPainelGestor();
+            } else {
+                alert('Senha incorreta! Acesso negado.');
+            }
+        } 
+        else if (acao === 'alterar') {
+            const senhaAtual = prompt('Digite a sua senha ATUAL para segurança:');
+            if (senhaAtual === senhaSalva) {
+                const novaSenha = prompt('Digite a sua NOVA senha:');
+                if (novaSenha && novaSenha.trim() !== "") {
+                    localStorage.setItem(`senha_${usuarioSelect}`, novaSenha.trim());
+                    alert('Senha alterada com sucesso! Use a nova senha no próximo acesso.');
+                } else {
+                    alert('Alteração cancelada ou senha inválida.');
+                }
+            } else {
+                alert('Senha atual incorreta. Não foi possível alterar.');
+            }
+        }
+    };
+
+    // Função auxiliar para forçar o download do arquivo local de forma segura
+    window.baixarPlanilhaLocal = function() {
+        try {
+            const link = document.createElement('a');
+            link.href = 'BASE CONTRATO PAGO.xlsx';
+            link.download = 'BASE CONTRATO PAGO.xlsx';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (e) {
+            window.open('BASE CONTRATO PAGO.xlsx', '_blank');
+        }
+    };
 
     // Nova Função: Controla a exibição e a busca do Chatbot integrado à planilha Google Sheets
     window.toggleChatbotPainel = function() {
@@ -4108,8 +4183,3 @@ window.abrirGPAG = () => {
 
 </body>
 </html>
-
-
-</body>
-</html>
-

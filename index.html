@@ -388,8 +388,6 @@ const listaAniversariantes = [
     { nome: "JOSÉ DO EGITO CARDOSO DE QUEIROZ", data: "23/08", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "João Victor do Nascimento", data: "30/04", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Adjair Jordão de Aragão", data: "26/04", superintendência: "Superintendência Financeira de Prestação de Contas" },
-    { nome: "Dóris Emanuelle Tavares Chaves", data: "15/08", superintendência: "Superintendência Financeira de Prestação de Contas" },
-    { nome: "Marise Lidivane Gomes Cavalcanti", data: "08/08", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Verônica Soares Dubeux", data: "16/10", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Pedro Henrique da Silva Lima", data: "09/12", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Evellin Rodrigues Sales de França", data: "16/12", superintendência: "Superintendência Financeira de Prestação de Contas" },
@@ -818,12 +816,13 @@ function mostrar(pagina){
                  onmouseout="this.style.transform='scale(1)'">
                 <div style="padding: 10px; background: #132237; color: white; text-align: center; font-weight: bold; font-size: 14px; letter-spacing: 0.5px;">
                     ⚡ Sistema de Integração e Monitoramento de Processos de Anestesistas
+					                            (SIMPA)
                 </div>
                 <div style="width: 100%; height: 140px; background: #0f1a2a; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px 0;">
                     <svg width="130" height="55" viewBox="0 0 120 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 25H38L44 4L51 46L57 18L61 29L65 25H120" stroke="#00d2ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span style="color: white; font-size: 24px; font-weight: 900; letter-spacing: 3px; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1;">SIMPA</span>
+					<span style="color: white; font-size: 24px; font-weight: 900; letter-spacing: 3px; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1;">ANESTESISTAS</span>
                     <span style="color: #00d2ff; font-size: 8.5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">Monitoramento Integrado</span>
                 </div>
                 <div style="padding: 15px; flex-grow: 1;">
@@ -1668,7 +1667,7 @@ if (pagina === "areadogestor") {
 
 
 if (pagina === "radar_dgf") {
-    // Garante a limpeza de qualquer intervalo anterior para evitar duplicação
+    // Garante a limpeza de qualquer intervalo anterior para evitar duplicação ou consumo de memória
     if (window.intervaloPaginaRadar) {
         clearInterval(window.intervaloPaginaRadar);
     }
@@ -1676,181 +1675,29 @@ if (pagina === "radar_dgf") {
         clearInterval(window.intervaloRadarDGF);
     }
 
-    // Array com todos os seus gráficos estruturados
-    const graficosPainel = [
-        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - MÃO DE OBRA", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive", cor: "#34495e" },
-        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive", cor: "#3498db" },
-        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive", cor: "#e67e22" },
-        { nome: "GERÊNCIA DE EMPENHO COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive", cor: "#2ecc71" },
-        { nome: "COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive", cor: "#e74c3c" },
-        { nome: "COORDENAÇÃO DE PAGAMENTO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive", cor: "#1abc9c" }
-    ];
-
-    let indicePainel = 0;
-
-    // Monta a estrutura com rolagem vertical e organização dos blocos (apenas a parte superior)
+    // Renderiza o Looker Studio em tela cheia dentro da página
     conteudo.innerHTML = `
     <div style="
-        display: flex; 
-        flex-direction: column; 
-        gap: 15px; 
+        width: 100%; 
         height: 85vh; 
-        padding: 10px;
-        background: #f4f7f6;
-        border-radius: 8px;
-        border-top: 10px solid ${graficosPainel[0].cor};
-        font-family: sans-serif;
-        box-sizing: border-box;
-        transition: border-color 0.5s ease;
-        width: 100%;
-        overflow-y: auto;
-    " id="container-painel-radar">
-        
-        <div id="topo-painel-radar" style="background: ${graficosPainel[0].cor}; color: white; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 18px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: background 0.5s ease; width: 100%; box-sizing: border-box; flex-shrink: 0;">
-            📊 RADAR DGF: Monitoramento ${graficosPainel[0].nome}
-        </div>
-
-        <div style="display: flex; width: 100%; gap: 15px; height: 650px; flex-shrink: 0;">
-            
-            <div style="flex: 1.2; background: transparent; overflow: hidden; position: relative; border: 1px solid #e0e0e0; border-radius: 8px; height: 100%;">
-                <iframe id="iframe-painel-radar" src="${graficosPainel[0].url}" 
-                    style="
-                        width: 111.5%; 
-                        height: 104%; 
-                        border: none; 
-                        position: absolute; 
-                        top: 0; 
-                        left: 0;
-                        transform: scale(1.005, 0.96); 
-                        transform-origin: top left;
-                    " 
-                    scrolling="no">
-                </iframe>
-            </div>
-
-            <div style="
-                width: 250px; 
-                background: white; 
-                border-radius: 8px; 
-                box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
-                padding: 15px; 
-                display: flex; 
-                flex-direction: column; 
-                gap: 10px; 
-                box-sizing: border-box;
-                height: 100%;
-            ">
-                <div style="font-weight: bold; font-size: 13px; color: #7f8c8d; border-bottom: 2px solid #f4f7f6; padding-bottom: 6px; text-align: center; letter-spacing: 0.5px;">
-                    🎛️ SELEÇÃO RÁPIDA
-                </div>
-                
-                <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; overflow-y: auto;">
-                    ${graficosPainel.map((g, idx) => `
-                        <button 
-                            id="btn-atalho-${idx}" 
-                            onclick="window.mudarGraficoRadarManual(${idx})"
-                            style="
-                                display: flex;
-                                align-items: center;
-                                gap: 10px;
-                                width: 100%;
-                                padding: 9px 10px;
-                                border: 1px solid ${idx === 0 ? g.cor : '#e0e0e0'};
-                                border-left: 5px solid ${g.cor};
-                                border-radius: 6px;
-                                background: ${idx === 0 ? '#f8f9fa' : '#ffffff'};
-                                color: #2c3e50;
-                                font-weight: ${idx === 0 ? 'bold' : 'normal'};
-                                font-size: 12px;
-                                cursor: pointer;
-                                text-align: left;
-                                transition: all 0.2s ease;
-                            "
-                            onmouseover="this.style.background='#f8f9fa'; this.style.transform='translateX(3px)'"
-                            onmouseout="if(window.indiceRadarAtual !== ${idx}) { this.style.background='#fff'; this.style.transform='none'; } else { this.style.transform='none'; }"
-                        >
-                            <span id="dot-atalho-${idx}" style="width: 8px; height: 8px; border-radius: 50%; background: ${idx === 0 ? g.cor : 'transparent'}; border: 1px solid ${idx === 0 ? 'transparent' : '#bdc3c7'}; flex-shrink: 0;"></span>
-                            <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; width: 100%;">${g.nome}</span>
-                        </button>
-                    `).join('')}
-                </div>
-
-                <div style="font-size: 11px; color: #95a5a6; text-align: center; border-top: 1px solid #f4f7f6; padding-top: 8px; font-style: italic;">
-                    Fixar gráfico da lista
-                </div>
-            </div>
-
-        </div>
-
+        background: #f4f7f6; 
+        border-radius: 8px; 
+        overflow: hidden; 
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+    ">
+        <iframe 
+            src="https://datastudio.google.com/embed/reporting/6d8f5d1d-c00a-45a9-938e-db082183c44d/page/liH3F" 
+            style="
+                width: 100%; 
+                height: 100%; 
+                border: none;
+            " 
+            allowfullscreen>
+        </iframe>
     </div>
     `;
-
-    // Mantém o controle do índice atual de forma global temporária para os estilos dos botões
-    window.indiceRadarAtual = 0;
-
-    // Função interna que gerencia a atualização visual completa ao mudar de gráfico
-    const atualizarInterfaceRadar = (novoIndice) => {
-        window.indiceRadarAtual = !isNaN(novoIndice) ? novoIndice : 0;
-        indicePainel = novoIndice;
-        
-        const container = document.getElementById("container-painel-radar");
-        const topo = document.getElementById("topo-painel-radar");
-        const iframe = document.getElementById("iframe-painel-radar");
-
-        if (container && topo && iframe) {
-            const grafico = graficosPainel[novoIndice];
-            iframe.src = grafico.url;
-
-            topo.innerHTML = `📊 RADAR DGF: Monitoramento ${grafico.nome}`;
-            topo.style.background = grafico.cor;
-            container.style.borderTopColor = grafico.cor;
-
-            // Atualiza o estado visual de todos os botões da lista lateral instantaneamente
-            graficosPainel.forEach((g, idx) => {
-                const btn = document.getElementById(`btn-atalho-${idx}`);
-                const dot = document.getElementById(`dot-atalho-${idx}`);
-                if (btn && dot) {
-                    if (idx === novoIndice) {
-                        btn.style.background = "#f8f9fa";
-                        btn.style.borderColor = g.cor;
-                        btn.style.fontWeight = "bold";
-                        dot.style.background = g.cor;
-                        dot.style.borderColor = "transparent";
-                    } else {
-                        btn.style.background = "#ffffff";
-                        btn.style.borderColor = "#e0e0e0";
-                        btn.style.fontWeight = "normal";
-                        dot.style.background = "transparent";
-                        dot.style.borderColor = "#bdc3c7";
-                    }
-                }
-            });
-        }
-    };
-
-    // Permite que a ação de clique resete o timer, dando mais 8s para o usuário ler o gráfico escolhido
-    window.mudarGraficoRadarManual = (idx) => {
-        atualizarInterfaceRadar(idx);
-        clearInterval(window.intervaloPaginaRadar);
-        criarLoopRadar();
-    };
-
-    // Cria e isola o loop de rotação automática de 8 segundos
-    const criarLoopRadar = () => {
-        window.intervaloPaginaRadar = setInterval(() => {
-            let próximo = (window.indiceRadarAtual + 1) % graficosPainel.length;
-            const container = document.getElementById("container-painel-radar");
-            
-            if (container) {
-                atualizarInterfaceRadar(próximo);
-            } else {
-                clearInterval(window.intervaloPaginaRadar);
-            }
-        }, 8000);
-    };
-
-    // Inicia o carrossel padrão
-    criarLoopRadar();
 }
 	
 	if(pagina === "organograma_view"){

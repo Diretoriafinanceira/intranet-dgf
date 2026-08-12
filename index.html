@@ -553,6 +553,7 @@ const listaAniversariantes = [
 	{ nome: "Suzineide Santana Campêlo", data: "04/01", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Zenaide Vasconcelos Torres", data: "19/06", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Pollyana Correia de Freitas", data: "02/12", superintendência: "Superintendência do Fundo Estadual de Saúde" },
+	{ nome: "Rayan Vinicius Torres de Santana", data: "02/06", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Adson Rodrigues da Silva", data: "06/03", superintendência: "Superintendência Financeira de Prestação de Contas" }
 ];
 
@@ -592,8 +593,8 @@ function detalharSetor(nome, resp, ramal) {
 
 function mostrar(pagina){
     let conteudo = document.getElementById("conteudo");
- 
-   if (pagina === "home") {
+
+    if (pagina === "home") {
     // Captura a data de hoje no formato DD/MM (ex: 18/05)
     const hojeData = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
     
@@ -655,7 +656,7 @@ function mostrar(pagina){
             <div style="
                 display:flex;
                 align-items:center;
-                justify-content:space-between;
+                justify-space-between;
                 flex-wrap:wrap;
                 padding:25px 40px;
                 min-height:120px;
@@ -747,51 +748,32 @@ function mostrar(pagina){
                     </div>
                 </div>
 
-                <div id="lider-card-unificado" onclick="mostrar('Bolão')" style="
-                    background: #092516 !important; 
-                    border: 2px solid #00ff75; 
+                <!-- CARD DE LUTO -->
+                <div style="
+                    background: rgba(0, 0, 0, 0.65) !important; 
+                    border: 1px solid rgba(255, 255, 255, 0.2); 
                     border-radius: 6px; 
-                    padding: 8px 14px; 
+                    padding: 12px 18px; 
                     width: 260px; 
                     display: flex; 
-                    flex-direction: column; 
-                    gap: 4px; 
-                    box-shadow: 0 4px 15px rgba(0, 255, 117, 0.2); 
-                    cursor: pointer; 
-                    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+                    align-items: center; 
+                    justify-content: center;
+                    gap: 14px; 
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
                     box-sizing: border-box;
                     font-family: inherit;
-                "
-                onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 6px 20px rgba(0, 255, 117, 0.35)';"
-                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(0, 255, 117, 0.2)';"
-                >
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0, 255, 117, 0.15); padding-bottom: 2px;">
-                        <span style="color: #ffffff; font-weight: bold; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">👑 CAMPEÃO</span>
-                        <div style="text-align: right; display: flex; align-items: baseline; gap: 2px;">
-                            <span style="font-size: 20px; font-weight: 900; color: #00ff75 !important; line-height: 1;">1305</span>
-                            <span style="font-size: 9px; color: #ffffff !important; font-weight: 700; text-transform: uppercase;">pts</span>
-                        </div>
-                    </div>
-
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #00591B 0%, #007A25 100%); border: 1px solid #00ff75; display: flex; align-items: center; justify-content: center; color: #ffffff; flex-shrink: 0;">
-                            <span style="font-size: 10px; font-weight: 800;">JM</span>
-                        </div>
-                        
-                        <div style="display: flex; flex-direction: column; min-width: 0;">
-                            <strong style="font-size: 14px; color: #ffffff !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 700;">JoelsonMota</strong>
-                            <div style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: #b3c7bc !important; font-weight: 600;">
-                                <span>🎯 14 exat</span>
-                                <span style="color: #00ff75; opacity: 0.5;">•</span>
-                                <span>🏆 49 v/e</span>
-                            </div>
-                        </div>
+                ">
+                    <span style="font-size: 34px; line-height: 1;">🖤</span>
+                    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                        <span style="color: #ffffff; font-weight: 800; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; line-height: 1.2;">LUTO</span>
+                        <span style="color: #dcdde1; font-size: 11px; font-weight: 500; margin-top: 3px;">Nossos sentimentos</span>
                     </div>
                 </div>
 
             </div>
         </div>
 
+        <!-- 4 CARDS PRINCIPAIS -->
         <div style="display: flex; gap: 20px; flex-wrap: wrap; flex-shrink: 0;">
             
             <div style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #e74c3c; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
@@ -810,19 +792,19 @@ function mostrar(pagina){
                 </div>
             </div>
 
-            <div onclick="window.open('https://script.google.com/macros/s/AKfycbyX8UGu3-9jAMUPXeeJ2qFAyAYDpJr6mAKU9Ac8PYnGuYyXp7aT5tSBDsIrwgncpozr/exec', '_blank')" 
+            <div onclick="window.open('https://script.google.com/macros/s/AKfycbzOImaEQeey6jcFJhTAohbW59gaKjTBjtZraiahuczXoKn2eTMoUujpPcHoMOkrCXo/exec', '_blank')" 
                  style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #0079bf; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s;"
                  onmouseover="this.style.transform='scale(1.02)'"
                  onmouseout="this.style.transform='scale(1)'">
                 <div style="padding: 10px; background: #132237; color: white; text-align: center; font-weight: bold; font-size: 14px; letter-spacing: 0.5px;">
                     ⚡ Sistema de Integração e Monitoramento de Processos de Anestesistas
-					                            (SIMPA)
+                                                                (SIMPA)
                 </div>
                 <div style="width: 100%; height: 140px; background: #0f1a2a; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px 0;">
                     <svg width="130" height="55" viewBox="0 0 120 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 25H38L44 4L51 46L57 18L61 29L65 25H120" stroke="#00d2ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-					<span style="color: white; font-size: 24px; font-weight: 900; letter-spacing: 3px; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1;">ANESTESISTAS</span>
+                    <span style="color: white; font-size: 24px; font-weight: 900; letter-spacing: 3px; font-family: 'Segoe UI', Arial, sans-serif; line-height: 1;">ANESTESISTAS</span>
                     <span style="color: #00d2ff; font-size: 8.5px; font-weight: bold; text-transform: uppercase; letter-spacing: 1.2px;">Monitoramento Integrado</span>
                 </div>
                 <div style="padding: 15px; flex-grow: 1;">
@@ -831,17 +813,92 @@ function mostrar(pagina){
                 </div>
             </div>
 
+            <!-- CARD ÁREA DO GESTOR -->
             <div onclick="mostrar('areadogestor')" style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #f39c12; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
-                <div style="padding: 10px; background: #f39c12; color: white; text-align: center; font-weight: bold; font-size: 14px;">
-                    📊 ÁREA DO GESTOR
+                <div style="padding: 10px; background: #132237; color: white; text-align: center; font-weight: bold; font-size: 14px; letter-spacing: 0.5px;">
+                    PAINEL DE LIDERANÇA
                 </div>
-                <div style="width: 100%; height: 140px; background: #fffbf3; border-bottom: 1px solid #f1f2f6; display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 64px;">👨🏻‍💻</span>
+                <div style="width: 100%; height: 140px; background: #f39c12; border-bottom: 1px solid #f1f2f6; display: flex; align-items: center; justify-content: center; padding: 0 10px; box-sizing: border-box;">
+                    <span style="font-size: 22px; font-weight: 900; color: white; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); text-align: center;">ÁREA DO GESTOR</span>
                 </div>
                 <div style="padding: 15px; flex-grow: 1;">
                     <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">💼 Painel Corporativo e Decisões</h3>
                     <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Espaço restrito para lideranças. Acesse ferramentas de governança, aprovação de fluxos, análise integrada de relatórios e planejamento estratégico da DGF.</p>
                 </div>
+            </div>
+
+        </div>
+
+        <!-- ========================================================================================= -->
+        <!-- NOVOS BOTÕES: "MONITORE SEU PROCESSO" E "PRIORIZE" (INSERIDOS ABAIXO DOS CARDS E ACIMA DA AGENDA) -->
+        <!-- ========================================================================================= -->
+        <div style="display: flex; flex-direction: column; gap: 15px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); font-family: sans-serif; border-left: 5px solid #8e44ad;">
+            
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <!-- 1. Botão Monitore Seu Processo -->
+                <button onclick="window.toggleMonitorProcesso()" style="
+                    flex: 1;
+                    min-width: 220px;
+                    background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+                    color: white;
+                    border: none;
+                    padding: 14px 20px;
+                    border-radius: 6px;
+                    font-size: 15px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                    transition: transform 0.2s, background 0.2s;
+                " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    🔍 MONITORE SEU PROCESSO
+                </button>
+
+                <!-- 2. Botão Priorize -->
+                <button onclick="window.togglePriorizeProcesso()" style="
+                    flex: 1;
+                    min-width: 220px;
+                    background: linear-gradient(135deg, #e67e22 0%, #d35400 100%);
+                    color: white;
+                    border: none;
+                    padding: 14px 20px;
+                    border-radius: 6px;
+                    font-size: 15px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                    transition: transform 0.2s, background 0.2s;
+                " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    ⭐ PRIORIZE
+                </button>
+            </div>
+
+            <!-- Painel Expansível: Monitore Seu Processo -->
+            <div id="painel-monitor-processo" style="display: none; background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 6px; padding: 15px; margin-top: 5px;">
+                <h4 style="margin: 0 0 10px 0; color: #2c3e50; font-size: 14px;">🔎 Pesquise seu Processo</h4>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="text" id="input-sei-home" placeholder="Digite o número do processo SEI..." style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px;">
+                    <button onclick="window.consultarSeiHome()" style="background: #8e44ad; color: white; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer;">Buscar</button>
+                </div>
+                <div id="resultado-sei-home" style="margin-top: 10px; font-size: 13px;"></div>
+            </div>
+
+            <!-- Painel Expansível: Priorize (Consulta Contrato e SEI) -->
+            <div id="painel-priorize-processo" style="display: none; background: #fffaf0; border: 1px solid #fbd38d; border-radius: 6px; padding: 15px; margin-top: 5px;">
+                <h4 style="margin: 0 0 10px 0; color: #c05621; font-size: 14px;">📑 Solicitação de Priorização por Contrato</h4>
+                <p style="margin: 0 0 10px 0; color: #7b341e; font-size: 12px;">Informe o número do contrato para pesquisar os dados na base e abrir a solicitação de priorização.</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <input type="text" id="input-contrato-priorize" placeholder="Digite o número do Contrato..." style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px;">
+                    <button onclick="window.consultarContratoPriorize()" style="background: #d35400; color: white; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer;">Consultar Contrato</button>
+                </div>
+                <div id="resultado-contrato-priorize" style="margin-top: 10px; font-size: 13px;"></div>
             </div>
 
         </div>
@@ -906,6 +963,62 @@ function mostrar(pagina){
     </style>
     `;
 
+    // FUNÇÕES DE AÇÃO DOS NOVOS BOTÕES
+    window.toggleMonitorProcesso = function() {
+        const p1 = document.getElementById('painel-monitor-processo');
+        const p2 = document.getElementById('painel-priorize-processo');
+        if (p2) p2.style.display = 'none';
+        if (p1) {
+            p1.style.display = p1.style.display === 'none' ? 'block' : 'none';
+        }
+    };
+
+    window.togglePriorizeProcesso = function() {
+        const p1 = document.getElementById('painel-monitor-processo');
+        const p2 = document.getElementById('painel-priorize-processo');
+        if (p1) p1.style.display = 'none';
+        if (p2) {
+            p2.style.display = p2.style.display === 'none' ? 'block' : 'none';
+        }
+    };
+
+    window.consultarSeiHome = function() {
+        const val = document.getElementById('input-sei-home').value.trim();
+        const resEl = document.getElementById('resultado-sei-home');
+        if(!val){
+            resEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>⚠️ Digite o número do processo!</span>";
+            return;
+        }
+        resEl.innerHTML = "<span style='color: #7f8c8d;'>🤖 Consultando Assistente DGF...</span>";
+        
+        fetch(`https://sesdgf.app.n8n.cloud/webhook/consulta-sei?processo=${encodeURIComponent(val)}`)
+            .then(res => res.text())
+            .then(txt => {
+                resEl.innerHTML = `<div style="background:#f4fbf7; padding:10px; border-left:4px solid #2ecc71; border-radius:4px; white-space:pre-wrap;">${txt.replace(/\n/g, '<br>')}</div>`;
+            })
+            .catch(() => {
+                resEl.innerHTML = "<span style='color: #e74c3c;'>❌ Erro ao conectar ao serviço de busca.</span>";
+            });
+    };
+
+    window.consultarContratoPriorize = function() {
+        const val = document.getElementById('input-contrato-priorize').value.trim();
+        const resEl = document.getElementById('resultado-contrato-priorize');
+        if(!val){
+            resEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>⚠️ Digite o número do contrato!</span>";
+            return;
+        }
+        resEl.innerHTML = "<span style='color: #d35400;'>🔎 Consultando contrato na base de dados...</span>";
+        
+        // Estrutura pronta para receber a base de dados
+        setTimeout(() => {
+            resEl.innerHTML = `<div style="background:#fff; padding:12px; border:1px solid #fbd38d; border-radius:4px;">
+                <strong>Contrato:</strong> ${val}<br>
+                <span style="color:#718096; font-size:12px;">Base de dados pronta para integração. Envie a base de dados para realizar a vinculação com os contratos e processos SEI.</span>
+            </div>`;
+        }, 500);
+    };
+
     // Lógica do Carrossel do Radar DGF (Loop dos gráficos)
     const graficosRadar = [
         { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - MÃO DE OBRA", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive" },
@@ -918,7 +1031,6 @@ function mostrar(pagina){
 
     let indiceAtualRadar = 0;
     
-    // Limpa intervalos anteriores se o usuário ficar alternando de página na intranet
     if (window.intervaloRadarDGF) {
         clearInterval(window.intervaloRadarDGF);
     }
@@ -937,7 +1049,6 @@ function mostrar(pagina){
             
             iframeRadar.src = graficosRadar[indiceAtualRadar].url;
         } else {
-            // Se o card não está na tela (ex: em outra página), limpa sem quebrar o código
             clearInterval(window.intervaloRadarDGF);
         }
     }, 10000);
@@ -1287,7 +1398,7 @@ if (pagina === "areadogestor") {
         }
     };
 
-    // ALTERADO: Agora integrado diretamente com o seu fluxo n8n
+    // Integrado diretamente com o seu fluxo n8n
     window.consultarSeiGoogleSheets = function() {
         const inputVal = document.getElementById('input-sei-gestor').value.trim();
         const resultadoEl = document.getElementById('resultado-sei-gestor');
@@ -1299,7 +1410,6 @@ if (pagina === "areadogestor") {
         
         resultadoEl.innerHTML = "<span style='color: #7f8c8d;'>🤖 Consultando Assistente DGF... Por favor, aguarde.</span>";
         
-        // Chamada direta para o link de produção do seu webhook n8n
         const urlN8n = `https://sesdgf.app.n8n.cloud/webhook/consulta-sei?processo=${encodeURIComponent(inputVal)}`;
         
         fetch(urlN8n)
@@ -1308,10 +1418,8 @@ if (pagina === "areadogestor") {
                 return res.text();
             })
             .then(textoResposta => {
-                // Formata a quebra de linha vinda do n8n para exibir corretamente no HTML
                 const textoFormatadoHtml = textoResposta.replace(/\n/g, '<br>');
                 
-                // Define a estilização do bloco baseado no tipo de retorno (Encontrado vs Não Encontrado)
                 if (textoResposta.includes("🔴")) {
                     resultadoEl.innerHTML = `
                         <div style="background: #fdf2f2; padding: 12px; border-left: 4px solid #e74c3c; border-radius: 4px; text-align: left; color: #c0392b; font-weight: bold; white-space: pre-wrap;">
@@ -1361,38 +1469,8 @@ if (pagina === "areadogestor") {
             <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; width: 100%;">
                 
                 <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 15px;">
-                    <div onclick="window.open('https://datastudio.google.com/u/0/reporting/01e1e47a-5ad6-41a0-9a1f-3c04344b53f5/page/cJyYF', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #3498db; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
-                       onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
-                        <p style="margin: 0; color: #2980b9; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                            🖥️ BI DGF
-                        </p>
-                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Espaço para gerenciamento, acompanhamento e suporte às demandas de PD.</p>
-                    </div>
-
-                    <div onclick="window.open('https://seaf-ai.onrender.com/login', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #2ecc71; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
-                       onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
-                        <p style="margin: 0; color: #27ae60; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                            🤖 ASSISTENTE SEAF - CHATBOT
-                        </p>
-                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Interface de comunicação automatizada para suporte e respostas rápidas da DGF.</p>
-                    </div>
-
-                    <div onclick="window.baixarPlanilhaLocal()" style="background: #fdfefe; padding: 20px; border-left: 4px solid #e74c3c; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
-                       onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
-                        <p style="margin: 0; color: #27ae60; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                            🗄️ BASE DE DADOS
-                        </p>
-                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao repositório centralizado de dados e arquivos consolidados.</p>
-                    </div>
-
-                    <div onclick="window.open('https://script.google.com/macros/s/AKfycbyX8UGu3-9jAMUPXeeJ2qFAyAYDpJr6mAKU9Ac8PYnGuYyXp7aT5tSBDsIrwgncpozr/exec', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #e67e22; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
-                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
-                            <p style="margin: 0; color: #d35400; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                                🗄️ GESTÃO DE ANESTESISTA
-                        </p>
-                            <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao painel e relatórios da gestão de anestesistas.</p>
-                    </div>
-
+                    
+                    <!-- 1. PESQUISE SEU PROCESSO (Agora em primeiro lugar) -->
                     <div onclick="window.toggleChatbotPainel()" style="background: #fdfefe; padding: 20px; border-left: 4px solid #9b59b6; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
                         <p style="margin: 0; color: #8e44ad; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
@@ -1410,124 +1488,170 @@ if (pagina === "areadogestor") {
                         <div id="resultado-sei-gestor" style="font-size: 13px; margin-top: 5px;"></div>
                     </div>
 
+                    <!-- 2. BI DGF -->
+                    <div onclick="window.open('https://datastudio.google.com/u/0/reporting/01e1e47a-5ad6-41a0-9a1f-3c04344b53f5/page/cJyYF', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #3498db; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+                       onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+                        <p style="margin: 0; color: #2980b9; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                            🖥️ BI DGF
+                        </p>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Espaço para gerenciamento, acompanhamento e suporte às demandas de PD.</p>
+                    </div>
+
+                    <!-- 3. ASSISTENTE SEAF - CHATBOT (TESTE) -->
+                    <div onclick="window.open('https://seaf-ai.onrender.com/login', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #2ecc71; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+                       onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+                        <p style="margin: 0; color: #27ae60; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                            🤖 ASSISTENTE SEAF - CHATBOT (teste)
+                        </p>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Interface de comunicação automatizada para suporte e respostas rápidas da DGF.</p>
+                    </div>
+
+                    <!-- 4. BASE DE DADOS -->
+                    <div onclick="window.baixarPlanilhaLocal()" style="background: #fdfefe; padding: 20px; border-left: 4px solid #e74c3c; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+                       onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+                        <p style="margin: 0; color: #27ae60; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                            🗄️ BASE DE DADOS
+                        </p>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao repositório centralizado de dados e arquivos consolidados.</p>
+                    </div>
+
+                    <!-- 5. GESTÃO DE ANESTESISTA -->
+                    <div onclick="window.open('https://script.google.com/macros/s/AKfycbyX8UGu3-9jAMUPXeeJ2qFAyAYDpJr6mAKU9Ac8PYnGuYyXp7aT5tSBDsIrwgncpozr/exec', '_blank')" style="background: #fdfefe; padding: 20px; border-left: 4px solid #e67e22; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+                        <p style="margin: 0; color: #d35400; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                            🗄️ GESTÃO DE ANESTESISTA
+                        </p>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao painel e relatórios da gestão de anestesistas.</p>
+                    </div>
+
+                    <!-- 6. CALENDÁRIO DE PROCESSOS (Novo Botão Adicionado ao Final) -->
+                    <div onclick="alert('Funcionalidade Calendário de Processos em desenvolvimento.');" style="background: #fdfefe; padding: 20px; border-left: 4px solid #16a085; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
+                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
+                        <p style="margin: 0; color: #16a085; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                            📅 CALENDÁRIO DE PROCESSOS
+                        </p>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acompanhamento e cronograma dos prazos dos processos estratégicos.</p>
+                    </div>
+
                 </div>
 
             </div>
 
             <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px; width: 100%;">
                 
-                <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                    <div style="background: #1a73e8; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
-                        📊 PAINEL - OSS / PISO
-                    </div>
-                    <iframe src="https://docs.google.com/spreadsheets/d/13n59XTDICxmQS7UCWt0Z-eyeIk6raZSd55MdGGG33ZA/edit?usp=sharing" 
-                            style="width: 100%; height: 500px; border: none;" loading="lazy"></iframe>
-                </div>
+    <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <div style="background: #1a73e8; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
+            📊 PAINEL - OSS / PISO
+        </div>
+        <iframe src="https://lookerstudio.google.com/embed/reporting/6d8f5d1d-c00a-45a9-938e-db082183c44d/page/p_e7aq1dle5d" 
+                style="width: 100%; height: 500px; border: none;" allowfullscreen loading="lazy"></iframe>
+    </div>
 
-                <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                    <div style="background: #0f9d58; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
-                        📈 PAINEL CONTÁBIL
-                    </div>
-                    <iframe src="https://lookerstudio.google.com/embed/reporting/56d2bf7a-eaf6-4c58-9273-56f81c27e1d5" 
-                            style="width: 100%; height: 500px; border: none;" loading="lazy"></iframe>
-                </div>
+    <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+        <div style="background: #0f9d58; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
+            📈 PAINEL CONTÁBIL
+        </div>
+        <iframe src="https://lookerstudio.google.com/embed/reporting/56d2bf7a-eaf6-4c58-9273-56f81c27e1d5/page/hwz0F" 
+                style="width: 100%; height: 500px; border: none;" allowfullscreen loading="lazy"></iframe>
+    </div>
 
-                <div onclick="pagina = 'radar_dgf'; if(typeof mudarAba === 'function') { mudarAba('radar_dgf'); } else { location.reload(); }" style="
-                    flex: 1; 
-                    min-width: 320px; 
-                    display: flex; 
-                    flex-direction: column; 
-                    gap: 10px; 
-                    background: #f4f7f6; 
-                    border-radius: 8px; 
-                    padding: 12px; 
-                    box-sizing: border-box;
-                    border-top: 10px solid ${graficosPainel[0].cor};
-                    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-                    transition: border-color 0.5s ease, transform 0.2s ease, background 0.2s ease;
-                    height: 546px;
-                    cursor: pointer;
-                " id="container-painel-radar"
-                onmouseover="this.style.background='#eaeded'; this.style.transform='scale(1.01)'" 
-                onmouseout="this.style.background='#f4f7f6'; this.style.transform='none'">
-                    
-                    <div id="topo-painel-radar" style="background: ${graficosPainel[0].cor}; color: white; padding: 10px; border-radius: 6px; text-align: center; font-weight: bold; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: background 0.5s ease; box-sizing: border-box; flex-shrink: 0;">
-                        📊 RADAR DGF: Monitoramento ${graficosPainel[0].nome}
-                    </div>
+    <!-- RADAR DGF (MANTIDO À DIREITA) -->
+    <div onclick="pagina = 'radar_dgf'; if(typeof mudarAba === 'function') { mudarAba('radar_dgf'); } else { location.reload(); }" style="
+        flex: 1; 
+        min-width: 320px; 
+        display: flex; 
+        flex-direction: column; 
+        gap: 10px; 
+        background: #f4f7f6; 
+        border-radius: 8px; 
+        padding: 12px; 
+        box-sizing: border-box;
+        border-top: 10px solid ${graficosPainel[0].cor};
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: border-color 0.5s ease, transform 0.2s ease, background 0.2s ease;
+        height: 546px;
+        cursor: pointer;
+    " id="container-painel-radar"
+    onmouseover="this.style.background='#eaeded'; this.style.transform='scale(1.01)'" 
+    onmouseout="this.style.background='#f4f7f6'; this.style.transform='none'">
+        
+        <div id="topo-painel-radar" style="background: ${graficosPainel[0].cor}; color: white; padding: 10px; border-radius: 6px; text-align: center; font-weight: bold; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: background 0.5s ease; box-sizing: border-box; flex-shrink: 0;">
+            📊 RADAR DGF: Monitoramento ${graficosPainel[0].nome}
+        </div>
 
-                    <div style="display: flex; flex-direction: column; width: 100%; gap: 10px; flex: 1; min-height: 0;">
-                        
-                        <div style="flex: 1; background: transparent; overflow: hidden; position: relative; border: 1px solid #e0e0e0; border-radius: 6px; width: 100%;">
-                            <div style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; background: transparent;"></div>
-                            <iframe id="iframe-painel-radar" src="${graficosPainel[0].url}" 
-                                style="
-                                    width: 142%; 
-                                    height: 142%; 
-                                    border: none; 
-                                    position: absolute; 
-                                    top: 0; 
-                                    left: 0;
-                                    transform: scale(0.7);
-                                    transform-origin: top left;
-                                " 
-                                scrolling="no">
-                             </iframe>
-                        </div>
-
-                        <div style="
-                            width: 100%; 
-                            background: white; 
-                            border-radius: 6px; 
-                            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
-                            padding: 8px; 
-                            display: flex; 
-                            flex-direction: column; 
-                            gap: 6px; 
-                            box-sizing: border-box;
-                            height: 150px;
-                            position: relative;
-                            z-index: 2;
-                        " onclick="event.stopPropagation();">
-                            <div style="font-weight: bold; font-size: 11px; color: #7f8c8d; border-bottom: 2px solid #f4f7f6; padding-bottom: 4px; text-align: center;">
-                                🎛️ SELEÇÃO RÁPIDA (Clique no card para abrir o menu expandido)
-                            </div>
-                            
-                            <div style="display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto;">
-                                ${graficosPainel.map((g, idx) => `
-                                    <button 
-                                        id="btn-atalho-${idx}" 
-                                        onclick="window.mudarGraficoRadarManual(${idx})"
-                                        style="
-                                            display: flex;
-                                            align-items: center;
-                                            gap: 6px;
-                                            width: 100%;
-                                            padding: 6px;
-                                            border: 1px solid ${idx === 0 ? g.cor : '#e0e0e0'};
-                                            border-left: 4px solid ${g.cor};
-                                            border-radius: 4px;
-                                            background: ${idx === 0 ? '#f8f9fa' : '#ffffff'};
-                                            color: #2c3e50;
-                                            font-weight: ${idx === 0 ? 'bold' : 'normal'};
-                                            font-size: 10px;
-                                            cursor: pointer;
-                                            text-align: left;
-                                            transition: all 0.2s ease;
-                                        "
-                                        onmouseover="this.style.background='#f8f9fa'; this.style.transform='translateX(2px)'"
-                                        onmouseout="if(window.indiceRadarAtual !== ${idx}) { this.style.background='#fff'; this.style.transform='none'; } else { this.style.transform='none'; }"
-                                    >
-                                        <span id="dot-atalho-${idx}" style="width: 6px; height: 6px; border-radius: 50%; background: ${idx === 0 ? g.cor : 'transparent'}; border: 1px solid ${idx === 0 ? 'transparent' : '#bdc3c7'}; flex-shrink: 0;"></span>
-                                        <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; width: 100%;">${g.nome}</span>
-                                    </button>
-                                `).join('')}
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
+        <div style="display: flex; flex-direction: column; width: 100%; gap: 10px; flex: 1; min-height: 0;">
+            
+            <div style="flex: 1; background: transparent; overflow: hidden; position: relative; border: 1px solid #e0e0e0; border-radius: 6px; width: 100%;">
+                <div style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; background: transparent;"></div>
+                <iframe id="iframe-painel-radar" src="${graficosPainel[0].url}" 
+                    style="
+                        width: 142%; 
+                        height: 142%; 
+                        border: none; 
+                        position: absolute; 
+                        top: 0; 
+                        left: 0;
+                        transform: scale(0.7);
+                        transform-origin: top left;
+                    " 
+                    scrolling="no">
+                 </iframe>
             </div>
+
+            <div style="
+                width: 100%; 
+                background: white; 
+                border-radius: 6px; 
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+                padding: 8px; 
+                display: flex; 
+                flex-direction: column; 
+                gap: 6px; 
+                box-sizing: border-box;
+                height: 150px;
+                position: relative;
+                z-index: 2;
+            " onclick="event.stopPropagation();">
+                <div style="font-weight: bold; font-size: 11px; color: #7f8c8d; border-bottom: 2px solid #f4f7f6; padding-bottom: 4px; text-align: center;">
+                    🎛️ SELEÇÃO RÁPIDA (Clique no card para abrir o menu expandido)
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto;">
+                    ${graficosPainel.map((g, idx) => `
+                        <button 
+                            id="btn-atalho-${idx}" 
+                            onclick="window.mudarGraficoRadarManual(${idx})"
+                            style="
+                                display: flex;
+                                align-items: center;
+                                gap: 6px;
+                                width: 100%;
+                                padding: 6px;
+                                border: 1px solid ${idx === 0 ? g.cor : '#e0e0e0'};
+                                border-left: 4px solid ${g.cor};
+                                border-radius: 4px;
+                                background: ${idx === 0 ? '#f8f9fa' : '#ffffff'};
+                                color: #2c3e50;
+                                font-weight: ${idx === 0 ? 'bold' : 'normal'};
+                                font-size: 10px;
+                                cursor: pointer;
+                                text-align: left;
+                                transition: all 0.2s ease;
+                            "
+                            onmouseover="this.style.background='#f8f9fa'; this.style.transform='translateX(2px)'"
+                            onmouseout="if(window.indiceRadarAtual !== ${idx}) { this.style.background='#fff'; this.style.transform='none'; } else { this.style.transform='none'; }"
+                        >
+                            <span id="dot-atalho-${idx}" style="width: 6px; height: 6px; border-radius: 50%; background: ${idx === 0 ? g.cor : 'transparent'}; border: 1px solid ${idx === 0 ? 'transparent' : '#bdc3c7'}; flex-shrink: 0;"></span>
+                            <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; width: 100%;">${g.nome}</span>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
 
             <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0 5px 0;">
 
@@ -2477,36 +2601,22 @@ if(pagina === "organograma"){
 }
 
     if(pagina === "chegou"){
-    // Lista de novos servidores - Basta adicionar novos aqui
     const novosServidores = [
-        { nome: "Aleteia Mara Ferreira Ramos", cargo: "GPC_OSS", data: "JULHO/2026" },
-		{ nome: "Aliana de Moraes Coêlho", cargo: "COORD. LIQUIDAÇÃO (TESOURO)", data: "JULHO/2026" },
-        { nome: "Ana Carolina Tomé da Silva", cargo: "COORD. LIQUIDAÇÃO (TESOURO)", data: "JULHO/2026" },
-        { nome: "Denadja Fabiana Arruda de Melo", cargo: "COORD. DE CONTABILIDADE", data: "JULHO/2026" },
-		{ nome: "Ingrid nascimento de oliveira ramos ", cargo: "prestação de contas", data: "JULHO/2026" },
-        { nome: "Janaína Ferreira de Pontes", cargo: "GPC_OSS", data: "JULHO/2026" },
-        { nome: "Joana D'arc e Silva Pessoa Campello", cargo: "COORD. TRIBUTARIA_FES", data: "JULHO/2026" },
-        { nome: "Joelma lima da Silva", cargo: "GPC_OSS", data: "JULHO/2026" },
-        { nome: "Nilciane Ferreira Gaia", cargo: "GPC_OSS", data: "JULHO/2026" },
-		{ nome: "Pollyana Correia de Freitas", cargo: "Coordenação de Contabilidade", data: "JULHO/2026" },
-		{ nome: "Rafael Fernando Pereira das Mercês", cargo: "GPC_OSS", data: "JULHO/2026" },
-        { nome: "Rosevalda da Silva Alves", cargo: "COORD. DE CONTABILIDADE", data: "JULHO/2026" },
-        { nome: "Shirley farias alvim", cargo: "GPC_OSS", data: "JULHO/2026" },
-        { nome: "Suzineide Santana Campêlo", cargo: "GPC- OSS", data: "JULHO/2026" }
+        { nome: "Rayan Vinicius Torres de Santana", cargo: "GPC_OSS", data: "AGOSTO/2026" }
     ];
-		
+
     conteudo.innerHTML = `
-        <div style="padding: 20px; font-family: sans-serif;">
+        <div style="padding: 20px; font-family: 'Segoe UI', Arial, sans-serif; max-width: 1200px; margin: 0 auto;">
+            
             <div style="text-align: center; margin-bottom: 40px;">
                 <h2 style="color: #2c3e50; font-size: 28px; margin-bottom: 10px;">✨ Boas-vindas ao Time!</h2>
                 <p style="color: #7f8c8d; font-size: 16px;">Conheça os novos servidores que chegaram para somar na DGF.</p>
                 <div style="width: 60px; height: 4px; background: #1abc9c; margin: 15px auto; border-radius: 2px;"></div>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; justify-items: center;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; justify-items: center; margin-bottom: 50px;">
                 ${novosServidores.map(s => `
-                    <div style="background: white; width: 100%; max-width: 300px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative; overflow: hidden; border-top: 5px solid #1abc9c; text-align: center; transition: transform 0.3s ease;">
-                        
+                    <div style="background: white; width: 100%; max-width: 300px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative; overflow: hidden; border-top: 5px solid #1abc9c; text-align: center;">
                         <div style="position: absolute; top: 15px; right: -35px; background: #f1c40f; color: #fff; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                             NOVO
                         </div>
@@ -2530,12 +2640,255 @@ if(pagina === "organograma"){
                 `).join('')}
             </div>
 
-            <div style="margin-top: 50px; background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <p style="margin: 0; font-style: italic; font-size: 16px; opacity: 0.9;">"Nenhum de nós é tão bom quanto todos nós juntos."</p>
+            <!-- BOTÃO PARA EXIBIR/OCULTAR FORMULÁRIO -->
+            <div style="text-align: center; margin-bottom: 30px;">
+                <button id="btnAbrirFormulario" style="background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%); color: white; border: none; padding: 16px 32px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(26, 188, 156, 0.3); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    📝 VOCÊ É UM NOVO SERVIDOR? CLIQUE AQUI PARA PREENCHER SUA FICHA
+                </button>
+            </div>
+
+            <!-- FORMULÁRIO CORPORATIVO DO NOVATO (INICIALMENTE OCULTO) -->
+            <div id="containerFormulario" style="display: none; background: white; padding: 35px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border-top: 6px solid #2c3e50; margin-bottom: 50px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; border-bottom: 2px solid #f0f2f5; padding-bottom: 15px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 28px;">📋</span>
+                        <div>
+                            <h3 style="margin: 0; color: #2c3e50; font-size: 20px;">Ficha Completa de Cadastramento Inicial</h3>
+                            <p style="margin: 3px 0 0 0; color: #7f8c8d; font-size: 13px;">Preencha todos os dados cadastrais solicitados para integração oficial na DGF.</p>
+                        </div>
+                    </div>
+                    <button id="btnFecharFormulario" style="background: #e74c3c; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 12px;">✕ Fechar</button>
+                </div>
+
+                <form id="formNovatoDGF">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">NOME COMPLETO *</label>
+                            <input type="text" id="cad_nome" required placeholder="Digite seu nome completo" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">CPF *</label>
+                            <input type="text" id="cad_cpf" required placeholder="000.000.000-00" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">SEXO *</label>
+                            <select id="cad_sexo" required style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                                <option value="">Selecione...</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Outro">Outro</option>
+                                <option value="Preferiu não informar">Preferiu não informar</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">DATA DE NASCIMENTO *</label>
+                            <input type="date" id="cad_nascimento" required style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">TIPO SANGUÍNEO / FATOR RH *</label>
+                            <select id="cad_sanguineo" required style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                                <option value="">Selecione...</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">ESTADO CIVIL *</label>
+                            <select id="cad_estado_civil" required style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                                <option value="">Selecione...</option>
+                                <option value="Solteiro(a)">Solteiro(a)</option>
+                                <option value="Casado(a)">Casado(a)</option>
+                                <option value="Divorciado(a)">Divorciado(a)</option>
+                                <option value="Viúvo(a)">Viúvo(a)</option>
+                                <option value="União Estável">União Estável</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">ESCOLARIDADE / GRAU DE INSTRUÇÃO *</label>
+                            <select id="cad_escolaridade" required style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                                <option value="">Selecione...</option>
+                                <option value="Ensino Médio">Ensino Médio</option>
+                                <option value="Técnico">Técnico</option>
+                                <option value="Superior Incompleto">Superior Incompleto</option>
+                                <option value="Superior Completo">Superior Completo</option>
+                                <option value="Pós-Graduação / Especialização">Pós-Graduação / Especialização</option>
+                                <option value="Mestrado / Doutorado">Mestrado / Doutorado</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">E-MAIL INSTITUCIONAL *</label>
+                            <input type="email" id="cad_email" required placeholder="nome.sobrenome@recife.pe.gov.br" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">TELEFONE / WHATSAPP *</label>
+                            <input type="tel" id="cad_telefone" required placeholder="(81) 90000-0000" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #c0392b; margin-bottom: 6px;">CONTATO DE URGÊNCIA (NOME E FONE) *</label>
+                            <input type="text" id="cad_urgencia" required placeholder="Ex: Maria (Mãe) - (81) 98888-8888" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">ENDEREÇO RESIDENCIAL *</label>
+                            <input type="text" id="cad_endereco" required placeholder="Rua, Nº, Bairro - Cidade/UF" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">CARGO / SETOR *</label>
+                            <input type="text" id="cad_cargo" required placeholder="Ex: GPC_OSS / Financeiro" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">DATA DE ADMISSÃO *</label>
+                            <input type="date" id="cad_data" required style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div style="grid-column: 1 / -1;">
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">OBSERVAÇÕES / RESTRIÇÕES / PCD (OPCIONAL)</label>
+                            <textarea id="cad_obs" rows="3" placeholder="Insira quaisquer observações importantes ou informações adicionais..." style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px; font-family: inherit;"></textarea>
+                        </div>
+                    </div>
+                    <div style="margin-top: 25px; text-align: right;">
+                        <button type="submit" style="background: #1abc9c; color: white; border: none; padding: 12px 25px; border-radius: 6px; font-weight: bold; font-size: 14px; cursor: pointer;">
+                            💾 Finalizar e Enviar Cadastro
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 30px; border-radius: 15px; text-align: center; margin-bottom: 50px;">
+                <p style="margin: 0; font-style: italic; font-size: 16px;">"Nenhum de nós é tão bom quanto todos nós juntos."</p>
                 <p style="margin-top: 10px; font-weight: bold; color: #1abc9c;">Sejam muito bem-vindos!</p>
             </div>
+
+            <!-- PASTA ACESSO RESTRITO -->
+            <div style="border: 1px solid #e0e0e0; background: #ffffff; border-radius: 12px; overflow: hidden;">
+                <div id="btnAcessoRestrito" style="background: #34495e; color: white; padding: 16px 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 15px;">
+                        <span>📁</span> ACESSO RESTRITO - BANCO DE DADOS DE NOVOS SERVIDORES
+                    </div>
+                    <span style="background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 4px; font-size: 11px;">🔒 Requer Senha</span>
+                </div>
+                <div id="painelRestrito" style="display: none; padding: 20px; background: #fcfcfc;"></div>
+            </div>
+
         </div>
     `;
+
+    // Ações do Botão de Formulário (Abrir e Fechar)
+    const btnAbrir = document.getElementById("btnAbrirFormulario");
+    const btnFechar = document.getElementById("btnFecharFormulario");
+    const containerForm = document.getElementById("containerFormulario");
+
+    btnAbrir.onclick = function() {
+        containerForm.style.display = "block";
+        btnAbrir.style.display = "none";
+        containerForm.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    btnFechar.onclick = function() {
+        containerForm.style.display = "none";
+        btnAbrir.style.display = "inline-block";
+    };
+
+    // Lógica do Formulário
+    document.getElementById("formNovatoDGF").onsubmit = function(e) {
+        e.preventDefault();
+        const registro = {
+            dataCadastro: new Date().toLocaleDateString('pt-BR') + ' ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}),
+            nome: document.getElementById("cad_nome").value,
+            cpf: document.getElementById("cad_cpf").value,
+            sexo: document.getElementById("cad_sexo").value,
+            nascimento: document.getElementById("cad_nascimento").value,
+            sanguineo: document.getElementById("cad_sanguineo").value,
+            estadoCivil: document.getElementById("cad_estado_civil").value,
+            escolaridade: document.getElementById("cad_escolaridade").value,
+            email: document.getElementById("cad_email").value,
+            telefone: document.getElementById("cad_telefone").value,
+            urgencia: document.getElementById("cad_urgencia").value,
+            endereco: document.getElementById("cad_endereco").value,
+            cargo: document.getElementById("cad_cargo").value,
+            dataAdmissao: document.getElementById("cad_data").value,
+            obs: document.getElementById("cad_obs").value
+        };
+        let db = JSON.parse(localStorage.getItem('dgf_db_novatos')) || [];
+        db.push(registro);
+        localStorage.setItem('dgf_db_novatos', JSON.stringify(db));
+        alert("✅ Cadastro realizado com sucesso!");
+        this.reset();
+        containerForm.style.display = "none";
+        btnAbrir.style.display = "inline-block";
+    };
+
+    // Lógica da Pasta Restrita com Senha 123456
+    document.getElementById("btnAcessoRestrito").onclick = function() {
+        const pass = prompt("🔒 Digite a senha para acessar a pasta:");
+        if (pass === "123456") {
+            const painel = document.getElementById("painelRestrito");
+            const db = JSON.parse(localStorage.getItem('dgf_db_novatos')) || [];
+            
+            if (db.length === 0) {
+                painel.innerHTML = "<p style='color:#7f8c8d; text-align:center;'>Nenhum registro encontrado.</p>";
+            } else {
+                let html = `
+                    <div style="overflow-x:auto;">
+                        <table style="width:100%; border-collapse:collapse; font-size:12px; text-align:left;">
+                            <thead>
+                                <tr style="background:#2c3e50; color:white;">
+                                    <th style="padding:8px;">Data/Hora</th>
+                                    <th style="padding:8px;">Nome</th>
+                                    <th style="padding:8px;">CPF</th>
+                                    <th style="padding:8px;">Sexo</th>
+                                    <th style="padding:8px;">Nascimento</th>
+                                    <th style="padding:8px;">Tipo Sang.</th>
+                                    <th style="padding:8px;">Estado Civil</th>
+                                    <th style="padding:8px;">Escolaridade</th>
+                                    <th style="padding:8px;">E-mail</th>
+                                    <th style="padding:8px;">Telefone</th>
+                                    <th style="padding:8px;">Urgência</th>
+                                    <th style="padding:8px;">Endereço</th>
+                                    <th style="padding:8px;">Cargo/Setor</th>
+                                    <th style="padding:8px;">Admissão</th>
+                                    <th style="padding:8px;">Obs</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                db.forEach(item => {
+                    html += `
+                        <tr style="border-bottom:1px solid #ccc;">
+                            <td style="padding:8px;">${item.dataCadastro}</td>
+                            <td style="padding:8px; font-weight:bold;">${item.nome}</td>
+                            <td style="padding:8px;">${item.cpf}</td>
+                            <td style="padding:8px;">${item.sexo || '-'}</td>
+                            <td style="padding:8px;">${item.nascimento || '-'}</td>
+                            <td style="padding:8px; font-weight:bold; color:#e74c3c;">${item.sanguineo || '-'}</td>
+                            <td style="padding:8px;">${item.estadoCivil || '-'}</td>
+                            <td style="padding:8px;">${item.escolaridade || '-'}</td>
+                            <td style="padding:8px;">${item.email}</td>
+                            <td style="padding:8px;">${item.telefone}</td>
+                            <td style="padding:8px; color:#c0392b; font-weight:bold;">${item.urgencia || '-'}</td>
+                            <td style="padding:8px;">${item.endereco || '-'}</td>
+                            <td style="padding:8px;">${item.cargo}</td>
+                            <td style="padding:8px;">${item.dataAdmissao || '-'}</td>
+                            <td style="padding:8px;">${item.obs || '-'}</td>
+                        </tr>
+                    `;
+                });
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                painel.innerHTML = html;
+            }
+            painel.style.display = "block";
+        } else if (pass !== null) {
+            alert("❌ Senha incorreta!");
+        }
+    };
 }
 	
     if(pagina === "Funcionários"){
@@ -2669,6 +3022,7 @@ if(pagina === "organograma"){
 		{ nome: "Rafael Fernando Pereira das Mercês", cargo: "Contador" },
         { nome: "Rafaela Aragão Sousa Ferraz", cargo: "Assessor Administrativo" },
         { nome: "Raiza Leandro Pontes Rita", cargo: "Coordenadora do Núcleo Tributário FES" },
+		{ nome: "Rayan Vinicius Torres de Santana", cargo: "Assessor Administrativo" },
         { nome: "Rayville Rayanne Almeida Dos Santos", cargo: "Gerente de Contábil" },
         { nome: "Renan Martins da Silva", cargo: "Assessor Administrativo" },
         { nome: "Renata Pereira Da Silva", cargo: "ANALISTA EM SAUDE" },

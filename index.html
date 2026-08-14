@@ -306,14 +306,14 @@ section {
                 <button onclick="mostrar('aniversariantes')">🎂 Aniversariantes</button>
                 <button onclick="mostrar('chegou')">🆕 Quem Chegou</button>
                 <button onclick="mostrar('Funcionários')">👤 Funcionários</button>
-				<button onclick="mostrar('Bolão')">⚽ Bolão da Copa do Mundo</button>
+				<button onclick="mostrar('TV DGF')">📺 TV DGF</button>
             </div>
 
             <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">🏢 Corporativo</button>
             <div id="submenuCorporativo" class="submenu">
                 <button onclick="mostrar('organograma')">📊 Agente de Busca</button>
                 <button onclick="mostrar('organograma_view')">📊 Organograma</button>
-                <button onclick="mostrar('reserva')">📅 Reserva de Sala</button>
+                <button onclick="mostrar('reserva')">🛡️ Conformidade Fiscal</button>
             </div>
 
             <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">🎓 DGF Educa</button>
@@ -1054,10 +1054,9 @@ function mostrar(pagina){
     }, 10000);
 }
 
-if (pagina === "Bolão") {
+if (pagina === "TV DGF") {
 
     let html = `
-
     <div style="padding:20px; max-width:1200px; margin:auto;">
 
         <h1 style="
@@ -1066,8 +1065,9 @@ if (pagina === "Bolão") {
             font-size:50px;
             font-weight:bold;
             text-align:center;
+            margin-bottom:20px;
         ">
-            ⚽ BOLÃO DGF ⚽
+            📺 TV DGF
         </h1>
 
         <div style="
@@ -1079,40 +1079,9 @@ if (pagina === "Bolão") {
             font-size:16px;
         ">
 
-            <div style="text-align:center; margin-bottom:30px;">
-
-                <a href="https://bolaoplay.com.br"
-                   target="_blank"
-                   style="
-                       background:#009c3b;
-                       color:white;
-                       padding:15px 35px;
-                       text-decoration:none;
-                       border-radius:8px;
-                       font-weight:bold;
-                       font-size:20px;
-                       display:inline-block;
-                   ">
-                   🚀 ACESSE O BOLÃO
-                </a>
-
-            </div>
-
-            <hr>
-
-            <h2 style="
-                color:#003366;
-                text-align:center;
-                margin-top:30px;
-            ">
-                📖 ÁLBUM DA COPA DGF
-            </h2>
-
             <div style="
                 text-align:center;
-                margin-top:20px;
             ">
-
                 <iframe
                     src="https://docs.google.com/presentation/d/e/2PACX-1vROMOHz7dAdKFgtZanL6Gmh_Lh3A5zgQO9T5refE35Rk7pUrLU1B2QoTVghYcWoWV4H6ijMJNu4UVVU/embed?start=false&loop=false&delayms=3000&rm=minimal"
                     frameborder="0"
@@ -1126,7 +1095,6 @@ if (pagina === "Bolão") {
                         border-radius:10px;
                     ">
                 </iframe>
-
             </div>
 
             <div style="
@@ -1134,7 +1102,6 @@ if (pagina === "Bolão") {
                 margin-top:25px;
                 margin-bottom:10px;
             ">
-
                 <a href="https://docs.google.com/presentation/d/e/2PACX-1vROMOHz7dAdKFgtZanL6Gmh_Lh3A5zgQO9T5refE35Rk7pUrLU1B2QoTVghYcWoWV4H6ijMJNu4UVVU/pub?start=false&loop=false&delayms=3000"
                    target="_blank"
                    style="
@@ -1147,15 +1114,13 @@ if (pagina === "Bolão") {
                        font-size:20px;
                        display:inline-block;
                    ">
-                   📖 ABRIR ÁLBUM EM TELA CHEIA
+                    📺 ABRIR EM TELA CHEIA
                 </a>
-
             </div>
 
         </div>
 
     </div>
-
     `;
 
     conteudo.innerHTML = html;
@@ -1202,114 +1167,178 @@ if (pagina === "Bolão") {
     }
 
 if(pagina === "noticias"){
-    // CORREÇÃO AQUI: Mudado para crase para permitir a concatenação de templates multilinhas de forma segura
     let html = `<h2>📰 Notícias</h2>`;
 
     const hoje = new Date().toLocaleDateString('pt-BR');
 
-    // 2. NOVA NOTÍCIA: Resultado Parcial do Bolão DGF (AGORA NO TOPO)
+    // 1. NOTÍCIA INICIAL PRINCIPAL (ABERTA TOTALMENTE): Missa de 7º Dia de Rafael
     html += `
-        <div class="noticia-card" style="border-left: 5px solid #2ecc71; background: #f4fbf7; font-family: 'Arial', sans-serif;">
-            <small style="color:#7f8c8d;">📅 ${hoje}</small>
+        <div class="noticia-card" style="border-left: 5px solid #2c3e50; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; padding: 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px;">
+            <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
             
-            <h3 style="margin: 10px 0; color: #1b5e20; text-transform: uppercase; letter-spacing: 0.5px;">
-                🏆 HISTÓRICO! Divulgada a Classificação do Bolão DGF!
+            <h3 style="margin: 12px 0 6px 0; color: #2c3e50; font-size: 22px; text-transform: uppercase; letter-spacing: 0.5px;">
+                🕊️ MISSA DE 7º DIA – EM MEMÓRIA DE RAFAEL CORREIA GUIMARÃES DOS SANTOS
             </h3>
             
-            <p style="line-height: 1.6; color: #2c3e50; font-size: 14px;">
-                A disputa foi acirrada e o clima de Copa do Mundo tomou conta de vez! Com palpites cirúrgicos e muita intuição técnica, os nossos craques da tabela assumiram o topo do ranking. Confira como ficou o pódio da nossa primeira COPA DGF:
+            <p style="line-height: 1.6; color: #555; font-size: 15px; margin-bottom: 20px;">
+                A família convida parentes, amigos e colegas de trabalho para a Missa de 7º Dia, que será celebrada em sua memória.
             </p>
 
-            <div style="background: #081e09; border-radius: 0px; padding: 25px 20px; margin: 20px 0; box-shadow: 0 6px 20px rgba(0,0,0,0.4); border: 2px solid #1b5e20; display: flex; flex-direction: column; gap: 15px;">
-                
-                
-
-                <div style="display: flex; align-items: center; background: linear-gradient(90deg, #1e4620 0%, #153617 100%); border: 2px solid #f1c40f; padding: 18px 20px; border-radius: 0px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
-                    <div style="font-size: 26px; font-weight: 900; color: #f1c40f; width: 60px; display: flex; align-items: center; gap: 6px;">
-                        1º <span style="font-size: 18px;">👑</span>
-                    </div>
-                    <div style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid #f1c40f; overflow: hidden; background: #fff; margin-right: 20px; flex-shrink: 0; box-shadow: 0 0 10px rgba(241,196,15,0.5);">
-                        <img src="./joelson.png" alt="Joelson" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div style="color: #fff; font-weight: 900; font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px;">
-                        Joelson
-                    </div>
-                    <div style="margin-left: auto; background: #f1c40f; color: #081e09; font-weight: 900; padding: 6px 14px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                        Campeão
-                    </div>
+            <div style="background: #fdfbf7; border: 1px solid #e0d8c3; border-radius: 8px; padding: 20px; margin: 15px 0; display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px; color: #4a3b32; font-size: 15px;">
+                    <span style="font-size: 20px;">📅</span> <strong>Data:</strong> 16 de agosto de 2026
                 </div>
-
-                <div style="display: flex; align-items: center; background: linear-gradient(90deg, #163818 0%, #0f2b10 100%); border: 1px solid #bdc3c7; padding: 18px 20px; border-radius: 0px;">
-                    <div style="font-size: 24px; font-weight: 900; color: #bdc3c7; width: 60px;">
-                        2º
-                    </div>
-                    <div style="width: 75px; height: 75px; border-radius: 50%; border: 2.5px solid #bdc3c7; overflow: hidden; background: #fff; margin-right: 20px; flex-shrink: 0;">
-                        <img src="./renan.png" alt="Renan" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div style="color: #eee; font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 0.5px;">
-                        Renan
-                    </div>
-                    <div style="margin-left: auto; background: #bdc3c7; color: #1a252f; font-weight: 900; padding: 6px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
-                        Vice-Campeão
-                    </div>
+                <div style="display: flex; align-items: center; gap: 12px; color: #4a3b32; font-size: 15px;">
+                    <span style="font-size: 20px;">⏰</span> <strong>Horário:</strong> Às 8h da manhã
                 </div>
-
-                <div style="display: flex; align-items: center; background: linear-gradient(90deg, #0f2b10 0%, #081e09 100%); border: 1px solid #e67e22; padding: 18px 20px; border-radius: 0px;">
-                    <div style="font-size: 22px; font-weight: 900; color: #e67e22; width: 60px;">
-                        3º
-                    </div>
-                    <div style="width: 75px; height: 75px; border-radius: 50%; border: 2.5px solid #e67e22; overflow: hidden; background: #fff; margin-right: 20px; flex-shrink: 0;">
-                        <img src="./rosicleide.png" alt="Rosicleide" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div style="color: #ccc; font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 0.5px;">
-                        Rosicleide
-                    </div>
-                    <div style="margin-left: auto; background: #e67e22; color: #fff; font-weight: 900; padding: 6px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
-                        Terceiro Colocado
-                    </div>
+                <div style="display: flex; align-items: center; gap: 12px; color: #4a3b32; font-size: 15px;">
+                    <span style="font-size: 20px;">⛪</span> <strong>Local:</strong> Paróquia Nossa Senhora da Conceição Aparecida
                 </div>
-
+                <div style="display: flex; align-items: center; gap: 12px; color: #666; font-size: 14px; padding-left: 32px;">
+                    📍 Rua Adolfo Faro – Ipsep
+                </div>
             </div>
 
-            <p style="line-height: 1.6; color: #2c3e50; font-size: 14px; font-weight: bold; text-align: center; margin-top: 15px;">
-                Parabéns aos participantes. #JuntosSomosFortes
+            <p style="font-style: italic; color: #7f8c8d; text-align: center; margin-top: 15px; font-size: 14px;">
+                "Sua presença será uma forma de carinho, amor e homenagem à memória de Rafael."<br><br>
+                <strong>“Aqueles que amamos nunca morrem, apenas partem antes de nós.”</strong>
             </p>
         </div>
     `;
 
-    // 0. NOVA NOTÍCIA: Confirmação de Presença São João DGF
+    // 2. NOTÍCIA RETRÁTIL: Resultado do Bolão DGF
     html += `
-        <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9;">
-            <small style="color:#7f8c8d;">📅 ${hoje}</small>
-            <h3 style="margin: 10px 0; color: #e67e22;">🔥 Confirme sua presença no SÃO JOÃO da SEAF clicando na imagem abaixo</h3>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScty8A8n2tU5Gp1UbC1mUGUKoKIYijCz8EwAicOo6Qub_F1og/viewform?usp=header" target="_blank" style="text-decoration: none; display: block; width: 100%; margin-top: 15px;">
-                <div style="width: 100%; height: 200px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                    <img src="./saojoao.png" alt="Confirme sua Presença" style="width: 100%; height: 100%; display: block; object-fit: contain; object-position: center;">
+        <div class="noticia-card" style="border-left: 5px solid #2ecc71; background: #f4fbf7; font-family: 'Arial', sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-bolao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #1b5e20; text-transform: uppercase; font-size: 16px;">
+                        🏆 HISTÓRICO! Divulgada a Classificação do Bolão DGF!
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Clique para ver o pódio completo e os vencedores da COPA DGF...</p>
                 </div>
-            </a>
+                <span id="icon-noticia-bolao" style="font-size: 18px; color: #2ecc71; font-weight: bold;">▼</span>
+            </div>
+
+            <div id="noticia-bolao" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #e0f2e9;">
+                <p style="line-height: 1.6; color: #2c3e50; font-size: 14px;">
+                    A disputa foi acirrada e o clima de Copa do Mundo tomou conta de vez! Com palpites cirúrgicos e muita intuição técnica, os nossos craques da tabela assumiram o topo do ranking. Confira como ficou o pódio da nossa primeira COPA DGF:
+                </p>
+
+                <div style="background: #081e09; padding: 20px 15px; margin: 15px 0; border: 2px solid #1b5e20; display: flex; flex-direction: column; gap: 12px;">
+                    
+                    <div style="display: flex; align-items: center; background: linear-gradient(90deg, #1e4620 0%, #153617 100%); border: 2px solid #f1c40f; padding: 12px 15px;">
+                        <div style="font-size: 20px; font-weight: 900; color: #f1c40f; width: 50px;">1º 👑</div>
+                        <div style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #f1c40f; overflow: hidden; background: #fff; margin-right: 15px; flex-shrink: 0;">
+                            <img src="./joelson.png" alt="Joelson" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="color: #fff; font-weight: 900; font-size: 16px; text-transform: uppercase;">Joelson</div>
+                        <div style="margin-left: auto; background: #f1c40f; color: #081e09; font-weight: 900; padding: 4px 10px; font-size: 11px; text-transform: uppercase;">Campeão</div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; background: linear-gradient(90deg, #163818 0%, #0f2b10 100%); border: 1px solid #bdc3c7; padding: 12px 15px;">
+                        <div style="font-size: 18px; font-weight: 900; color: #bdc3c7; width: 50px;">2º</div>
+                        <div style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid #bdc3c7; overflow: hidden; background: #fff; margin-right: 15px; flex-shrink: 0;">
+                            <img src="./renan.png" alt="Renan" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="color: #eee; font-weight: 900; font-size: 15px; text-transform: uppercase;">Renan</div>
+                        <div style="margin-left: auto; background: #bdc3c7; color: #1a252f; font-weight: 900; padding: 4px 10px; font-size: 11px; text-transform: uppercase;">Vice-Campeão</div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; background: linear-gradient(90deg, #0f2b10 0%, #081e09 100%); border: 1px solid #e67e22; padding: 12px 15px;">
+                        <div style="font-size: 18px; font-weight: 900; color: #e67e22; width: 50px;">3º</div>
+                        <div style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid #e67e22; overflow: hidden; background: #fff; margin-right: 15px; flex-shrink: 0;">
+                            <img src="./rosicleide.png" alt="Rosicleide" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div style="color: #ccc; font-weight: 900; font-size: 15px; text-transform: uppercase;">Rosicleide</div>
+                        <div style="margin-left: auto; background: #e67e22; color: #fff; font-weight: 900; padding: 4px 10px; font-size: 11px; text-transform: uppercase;">3º Colocado</div>
+                    </div>
+
+                </div>
+                <p style="color: #2c3e50; font-size: 13px; font-weight: bold; text-align: center;">Parabéns aos participantes. #JuntosSomosFortes</p>
+            </div>
         </div>
     `;
 
-    // 1. Inserindo o Guia de Ajuda
+    // 3. NOTÍCIA RETRÁTIL: São João DGF
     html += `
-        <div class="noticia-card">
-            <small style="color:#7f8c8d;">📅 ${hoje}</small>
-            <h3 style="margin: 10px 0;">📌 Guia de Ajuda</h3>
+        <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-saojoao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #e67e22; font-size: 16px;">🔥 Confirme sua presença no SÃO JOÃO da SEAF</h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Clique para ver os detalhes e link do formulário...</p>
+                </div>
+                <span id="icon-noticia-saojoao" style="font-size: 18px; color: #e67e22; font-weight: bold;">▼</span>
+            </div>
+
+            <div id="noticia-saojoao" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f2e3d5;">
+                <p style="font-size: 14px; color: #333;">Clique no banner abaixo para abrir o formulário de confirmação:</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScty8A8n2tU5Gp1UbC1mUGUKoKIYijCz8EwAicOo6Qub_F1og/viewform?usp=header" target="_blank" style="text-decoration: none; display: block; width: 100%; margin-top: 10px;">
+                    <div style="width: 100%; height: 180px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                        <img src="./saojoao.png" alt="Confirme sua Presença" style="width: 100%; height: 100%; display: block; object-fit: contain; object-position: center;">
+                    </div>
+                </a>
+            </div>
+        </div>
+    `;
+
+    // 4. NOTÍCIA RETRÁTIL: Guia de Ajuda
+    html += `
+        <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #3498db; background: #fff;">
+            <div onclick="window.toggleNoticia('noticia-guia')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #2c3e50; font-size: 16px;">📌 Guia de Ajuda</h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Clique para abrir as orientações e instruções...</p>
+                </div>
+                <span id="icon-noticia-guia" style="font-size: 18px; color: #3498db; font-weight: bold;">▼</span>
+            </div>
+
+            <div id="noticia-guia" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="font-size: 14px; color: #555; margin-top: 10px;">
+                    Acesse as principais instruções e procedimentos internos da DGF através dos nossos canais oficiais e central de suporte.
+                </p>
+            </div>
         </div>
     `;
     
-    // 3. Renderiza as demais notícias cadastradas na lista
+    // 5. Demais notícias cadastradas no array listaNoticias (também retráteis)
     listaNoticias.forEach((n, i) => {
         html += `
-            <div class="noticia-card">
-                <small style="color:#7f8c8d;">📅 ${n.data}</small>
-                <h3 style="margin: 10px 0;">${n.titulo}</h3>
-                <p>${n.texto}</p>
+            <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #95a5a6; background: #fff;">
+                <div onclick="window.toggleNoticia('noticia-lista-${i}')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <small style="color:#7f8c8d;">📅 ${n.data}</small>
+                        <h3 style="margin: 5px 0 0 0; color: #2c3e50; font-size: 16px;">${n.titulo}</h3>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Clique para ler a notícia completa...</p>
+                    </div>
+                    <span id="icon-noticia-lista-${i}" style="font-size: 18px; color: #7f8c8d; font-weight: bold;">▼</span>
+                </div>
+
+                <div id="noticia-lista-${i}" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                    <p style="font-size: 14px; color: #555; margin-top: 10px; line-height: 1.5;">${n.texto}</p>
+                </div>
             </div>
         `;
     });
     
     conteudo.innerHTML = html;
+
+    // Função global para expandir e recolher as notícias secundárias
+    window.toggleNoticia = function(id) {
+        const el = document.getElementById(id);
+        const icon = document.getElementById('icon-' + id);
+        if (el) {
+            if (el.style.display === "none") {
+                el.style.display = "block";
+                if (icon) icon.innerHTML = "▲";
+            } else {
+                el.style.display = "none";
+                if (icon) icon.innerHTML = "▼";
+            }
+        }
+    };
 }
 
 
@@ -1978,20 +2007,83 @@ if (pagina === "radar_dgf") {
 }
 
         if (pagina === "contracheque") {
-            conteudo.innerHTML = `
-            <h2 style="font-size: 28px; margin-bottom: 20px;">Emissão de Contracheque</h2>
-            <div style="display: flex; gap: 25px; flex-wrap: wrap; width: 100%;">
-                <a href="https://holerit.rmterceirizacao.com.br" target="_blank" class="card-contracheque" style="width: 400px; padding: 20px; background: #1abc9c; color: white; border: none; height: auto;">
-                    <img src="rm.png" alt="RM" style="width: 100%; height: auto; max-height: 250px; object-fit: contain; display: block; margin: 0 auto;">
-                    <br><strong style="font-size: 22px; display: block; margin-top: 15px;">RM Terceirização</strong>
-                </a>
-                <a href="https://nps.pe.gov.br/PORTALV2/#/" target="_blank" class="card-contracheque" style="width: 400px; padding: 20px; background: #34495e; color: white; border: none; height: auto;">
-                    <img src="logo.png" alt="Portal PE" style="width: 100%; height: auto; max-height: 250px; object-fit: contain; display: block; margin: 0 auto;">
-                    <br><strong style="font-size: 22px; display: block; margin-top: 15px;">Servidores e Comissionados</strong>
-                </a>
-            </div>
-            `;
-        }
+    conteudo.innerHTML = `
+    <div style="
+        padding: 30px; 
+        background: #f8fafc; 
+        border-radius: 12px; 
+        border-top: 6px solid #2c3e50; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        font-family: 'Segoe UI', Roboto, sans-serif;
+    ">
+        <div style="margin-bottom: 25px;">
+            <h2 style="font-size: 24px; color: #1e293b; margin: 0 0 6px 0; font-weight: 700;">📄 Emissão de Contracheque e Serviços de RH</h2>
+            <p style="color: #64748b; font-size: 14px; margin: 0;">Acesse rapidamente os portais corporativos para emissão de holerites e envio de documentos.</p>
+        </div>
+
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center; width: 100%;">
+            
+            <!-- Botão 1: RM Terceirização -->
+            <a href="https://holerit.rmterceirizacao.com.br" target="_blank" style="
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+                background: #0d9488;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 14px;
+                box-shadow: 0 2px 6px rgba(13, 148, 136, 0.25);
+                transition: transform 0.2s, background-color 0.2s;
+            " onmouseover="this.style.background='#0f766e'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#0d9488'; this.style.transform='translateY(0)';">
+                <img src="rm.png" alt="RM" style="height: 24px; width: auto; max-width: 60px; object-fit: contain; filter: brightness(0) invert(1);">
+                <span>RM Terceirização</span>
+            </a>
+
+            <!-- Botão 2: Enviar Atestado para RM (NOVO) -->
+            <a href="https://atestado.rmterceirizacao.com.br/" target="_blank" style="
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                background: #e11d48;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 14px;
+                box-shadow: 0 2px 6px rgba(225, 29, 72, 0.25);
+                transition: transform 0.2s, background-color 0.2s;
+            " onmouseover="this.style.background='#be123c'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#e11d48'; this.style.transform='translateY(0)';">
+                <span style="font-size: 16px;">📋</span>
+                <span>Enviar Atestado para RM</span>
+            </a>
+
+            <!-- Botão 3: Servidores e Comissionados -->
+            <a href="https://nps.pe.gov.br/PORTALV2/#/" target="_blank" style="
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+                background: #1e293b;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 14px;
+                box-shadow: 0 2px 6px rgba(30, 41, 59, 0.25);
+                transition: transform 0.2s, background-color 0.2s;
+            " onmouseover="this.style.background='#0f172a'; this.style.transform='translateY(-2px)';" onmouseout="this.style.background='#1e293b'; this.style.transform='translateY(0)';">
+                <img src="logo.png" alt="Portal PE" style="height: 24px; width: auto; max-width: 60px; object-fit: contain; filter: brightness(0) invert(1);">
+                <span>Servidores e Comissionados</span>
+            </a>
+
+        </div>
+    </div>
+    `;
+}
 		
 if(pagina === "aniversariantes"){
     const agora = new Date();
@@ -2284,49 +2376,209 @@ if(pagina === "organograma"){
         `;
     }
 
-    if(pagina === "reserva"){ 
-        conteudo.innerHTML = `
-            <h2>📅 Reserva de Sala de Reunião</h2>
-            <div class="form-container">
-                <h3>Solicitar Agendamento</h3>
-                <form action="https://formspree.io/f/xojpooka" method="POST">
-                    <div class="form-group">
-                        <label>Funcionário Solicitante:</label>
-                        <input type="text" name="Nome" required placeholder="Digite seu nome">
-                    </div>
-                    <div class="form-group">
-                        <label>Escolha a Sala:</label>
-                        <select name="Sala" required>
-                            <option value="">Selecione uma sala...</option>
-                            <option value="Sala 01">Sala 01</option>
-                            <option value="Sala 02">Sala 02</option>
-							<option value="Sala 01">Sala 03</option>
-							<option value="Sala 01">Sala 04</option>
-							<option value="Sala 01">Sala 05</option>
-                            <option value="Auditório">Auditório</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Data:</label>
-                        <input type="date" name="Data" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Horário de Início:</label>
-                        <input type="time" name="Inicio" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Horário de Término:</label>
-                        <input type="time" name="Termino" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Motivo da Reunião:</label>
-                        <input type="text" name="Motivo" required placeholder="Ex: Alinhamento mensal">
-                    </div>
-                    <button type="submit" class="btn-enviar">Solicitar Reserva</button>
-                </form>
-            </div>
-        `; 
+    if (pagina === "reserva") {
+    // 1. Define uma senha padrão caso não exista
+    if (!localStorage.getItem('senha_conformidade')) {
+        localStorage.setItem('senha_conformidade', 'ccf123');
     }
+
+    // 2. Função global para renderizar o Checklist após a senha correta
+    window.carregarChecklistConformidade = function() {
+        conteudo.innerHTML = `
+        <div style="max-width: 800px; margin: 0 auto; background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1f2937;">
+            
+            <div style="text-align: center; margin-bottom: 25px;">
+                <h1 style="color: #1a56db; font-size: 26px; margin-bottom: 6px;">Coordenação de Conformidade Fiscal</h1>
+                <p style="color: #6b7280; font-size: 14px; margin: 0;">Checklist Diário de Atividades da Equipe</p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <div style="background-color: #e5e7eb; border-radius: 9999px; height: 12px; overflow: hidden;">
+                    <div id="progressBar" style="background-color: #10b981; height: 100%; width: 0%; transition: width 0.4s ease-in-out;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 14px; font-weight: 500; color: #6b7280;">
+                    <span>Progresso</span>
+                    <span id="progressText">0% (0/14)</span>
+                </div>
+            </div>
+
+            <!-- Diane -->
+            <div style="margin-bottom: 25px;">
+                <h2 style="font-size: 18px; color: #1f2937; border-bottom: 2px solid #1a56db; padding-bottom: 6px; margin-bottom: 12px;">DIANE</h2>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task1" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task1" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Olhar e-mail da CCF e efetivar a triagem</label>
+                    </li>
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task2" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task2" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Acompanhar relatórios de PD aprovadas e PDs em aberto</label>
+                    </li>
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task3" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task3" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Analisar os processos SEI com mais de 7 dias nos setores</label>
+                    </li>
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task4" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task4" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Monitorar os televisores de conformidade</label>
+                    </li>
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task5" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task5" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Elaborar apresentações de aniversários para o televisor DGF</label>
+                    </li>
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task6" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task6" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Mudar slides após 10h (de aniversários para gerenciais/calendário)</label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Janaína -->
+            <div style="margin-bottom: 25px;">
+                <h2 style="font-size: 18px; color: #1f2937; border-bottom: 2px solid #1a56db; padding-bottom: 6px; margin-bottom: 12px;">Janaina</h2>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task7" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task7" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Verificar novos processos de finalização de PAAP</label>
+                    </li>
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task8" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task8" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Instruir processo de TCC</label>
+                    </li>
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task9" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task9" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Elaborar documentação e disponibilizar em bloco de assinatura</label>
+                    </li>
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task10" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task10" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Encaminhar docs assinados aos correios e acompanhar prazos</label>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Jaqueline -->
+            <div style="margin-bottom: 25px;">
+                <h2 style="font-size: 18px; color: #1f2937; border-bottom: 2px solid #1a56db; padding-bottom: 6px; margin-bottom: 12px;">Jaqueline</h2>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task11" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task11" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Monitorar processos da gerência de planejamento de contratações anuais</label>
+                    </li>
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task12" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task12" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Efetivar as inclusões</label>
+                    </li>
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task13" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task13" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Acompanhar processos de Publicação do Piso e fiscalizar pagamentos</label>
+                    </li>
+                    <li class="task-item" style="display: flex; align-items: center; padding: 8px; border-radius: 6px;">
+                        <input type="checkbox" id="task14" class="task-checkbox" style="width: 18px; height: 18px; accent-color: #10b981; cursor: pointer;">
+                        <label for="task14" style="margin-left: 10px; cursor: pointer; font-size: 15px; flex-grow: 1;">Prestar suporte e apoio à equipe nas dúvidas</label>
+                    </li>
+                </ul>
+            </div>
+
+            <button id="resetBtn" style="width: 100%; padding: 14px; background-color: #1a56db; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s;">
+                Limpar Checklist para o Próximo Dia
+            </button>
+        </div>
+        `;
+
+        // Lógica de Eventos e LocalStorage do Checklist
+        const checkboxes = document.querySelectorAll('.task-checkbox');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        const resetBtn = document.getElementById('resetBtn');
+        const totalTasks = checkboxes.length;
+
+        function updateProgress() {
+            let completedTasks = 0;
+            checkboxes.forEach(box => {
+                const label = box.nextElementSibling;
+                if (box.checked) {
+                    completedTasks++;
+                    if(label) {
+                        label.style.textDecoration = 'line-through';
+                        label.style.color = '#6b7280';
+                    }
+                } else {
+                    if(label) {
+                        label.style.textDecoration = 'none';
+                        label.style.color = '#1f2937';
+                    }
+                }
+            });
+
+            const percentage = Math.round((completedTasks / totalTasks) * 100);
+            if(progressBar) progressBar.style.width = percentage + '%';
+            if(progressText) progressText.innerText = `${percentage}% (${completedTasks}/${totalTasks})`;
+
+            if (percentage === 100) {
+                if(progressBar) progressBar.style.backgroundColor = '#059669';
+            } else {
+                if(progressBar) progressBar.style.backgroundColor = '#10b981';
+            }
+        }
+
+        checkboxes.forEach(box => {
+            const savedState = localStorage.getItem(box.id);
+            if (savedState === 'true') {
+                box.checked = true;
+            }
+            box.addEventListener('change', () => {
+                localStorage.setItem(box.id, box.checked);
+                updateProgress();
+            });
+        });
+
+        if(resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                if (confirm("Tem certeza que deseja limpar todas as tarefas marcadas?")) {
+                    checkboxes.forEach(box => {
+                        box.checked = false;
+                        localStorage.setItem(box.id, 'false');
+                    });
+                    updateProgress();
+                }
+            });
+        }
+
+        updateProgress();
+    };
+
+    // 3. Função de Autenticação da Senha
+    window.autenticarConformidade = function() {
+        const passInput = document.getElementById('senha-conformidade-input').value;
+        const passSalva = localStorage.getItem('senha_conformidade');
+
+        if (passInput === passSalva) {
+            carregarChecklistConformidade();
+        } else {
+            alert('❌ Senha incorreta! Acesso negado.');
+        }
+    };
+
+    // 4. Injeta a Tela Inicial de Autenticação com Senha
+    conteudo.innerHTML = `
+    <div style="display: flex; justify-content: center; align-items: center; height: 65vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <div style="background: white; padding: 35px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); border-top: 8px solid #1a56db; width: 100%; max-width: 380px; text-align: center;">
+            <span style="font-size: 45px;">🛡️</span>
+            <h3 style="margin: 12px 0 6px 0; color: #1f2937;">Conformidade Fiscal</h3>
+            <p style="margin: 0 0 20px 0; color: #6b7280; font-size: 13px;">Digite a senha de acesso para visualizar o checklist diário.</p>
+            
+            <div style="margin-bottom: 20px; text-align: left;">
+                <label style="font-size: 12px; font-weight: bold; color: #374151; display: block; margin-bottom: 6px;">SENHA DE ACESSO</label>
+                <input type="password" id="senha-conformidade-input" placeholder="Digite sua senha" onkeydown="if(event.key === 'Enter') autenticarConformidade()" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box; font-size: 14px; outline: none;">
+            </div>
+
+            <button onclick="autenticarConformidade()" style="width: 100%; background: #1a56db; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; font-size: 14px; cursor: pointer; transition: background 0.2s;" onmouseover="this.style.background='#1e40af'" onmouseout="this.style.background='#1a56db'">
+                ENTRAR
+            </button>
+        </div>
+    </div>
+    `;
+}
 
     if(pagina === "feedback"){
         conteudo.innerHTML = `

@@ -2852,7 +2852,7 @@ if(pagina === "organograma"){
         `;
 }
 
-    if(pagina === "chegou"){
+        if(pagina === "chegou"){
     const novosServidores = [
         { nome: "Rayan Vinicius Torres de Santana", cargo: "GPC_OSS", data: "AGOSTO/2026" }
     ];
@@ -2998,8 +2998,8 @@ if(pagina === "organograma"){
                             <input type="date" id="cad_data" required style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
                         </div>
                         <div style="grid-column: 1 / -1;">
-                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">OBSERVAÇÕES / RESTRIÇÕES / PCD (OPCIONAL)</label>
-                            <textarea id="cad_obs" rows="3" placeholder="Insira quaisquer observações importantes ou informações adicionais..." style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px; font-family: inherit;"></textarea>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">FOTO DO SERVIDOR</label>
+                            <input type="file" id="cad_foto" accept="image/*" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px; background: #fcfcfc;">
                         </div>
                     </div>
                     <div style="margin-top: 25px; text-align: right;">
@@ -3051,6 +3051,18 @@ if(pagina === "organograma"){
         btnSubmit.disabled = true;
         btnSubmit.innerHTML = "⏳ Salvando na Planilha...";
 
+        const fotoInput = document.getElementById("cad_foto");
+        let fotoBase64 = "";
+
+        if (fotoInput.files && fotoInput.files[0]) {
+            fotoBase64 = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (event) => resolve(event.target.result);
+                reader.onerror = () => resolve("");
+                reader.readAsDataURL(fotoInput.files[0]);
+            });
+        }
+
         const registro = {
             dataCadastro: new Date().toLocaleDateString('pt-BR') + ' ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}),
             nome: document.getElementById("cad_nome").value,
@@ -3066,7 +3078,7 @@ if(pagina === "organograma"){
             endereco: document.getElementById("cad_endereco").value,
             cargo: document.getElementById("cad_cargo").value,
             dataAdmissao: document.getElementById("cad_data").value,
-            obs: document.getElementById("cad_obs").value
+            foto: fotoBase64
         };
 
         try {

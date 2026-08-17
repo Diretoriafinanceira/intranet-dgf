@@ -2853,10 +2853,6 @@ if(pagina === "organograma"){
 }
 
         if(pagina === "chegou"){
-    const novosServidores = [
-        { nome: "Rayan Vinicius Torres de Santana", cargo: "GPC_OSS", data: "AGOSTO/2026" }
-    ];
-
     conteudo.innerHTML = `
         <div style="padding: 20px; font-family: 'Segoe UI', Arial, sans-serif; max-width: 1200px; margin: 0 auto;">
             
@@ -2866,30 +2862,9 @@ if(pagina === "organograma"){
                 <div style="width: 60px; height: 4px; background: #1abc9c; margin: 15px auto; border-radius: 2px;"></div>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; justify-items: center; margin-bottom: 50px;">
-                ${novosServidores.map(s => `
-                    <div style="background: white; width: 100%; max-width: 300px; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative; overflow: hidden; border-top: 5px solid #1abc9c; text-align: center;">
-                        <div style="position: absolute; top: 15px; right: -35px; background: #f1c40f; color: #fff; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            NOVO
-                        </div>
-
-                        <div style="width: 70px; height: 70px; background: #e8f8f5; color: #1abc9c; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; border: 2px solid #1abc9c;">
-                            ${s.nome.charAt(0)}
-                        </div>
-
-                        <h3 style="margin: 10px 0 5px 0; color: #2c3e50; font-size: 18px;">${s.nome}</h3>
-                        <p style="margin: 0; color: #1abc9c; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">${s.cargo}</p>
-                        
-                        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #f0f0f0; display: flex; justify-content: center; align-items: center; gap: 8px; color: #95a5a6; font-size: 12px;">
-                            <span>📅 Ingresso: <strong>${s.data}</strong></span>
-                        </div>
-
-                        <div style="margin-top: 15px; display: flex; justify-content: center; gap: 5px;">
-                            <span style="background: #2c3e50; color: white; padding: 4px 12px; border-radius: 12px; font-size: 10px;">#TimeDGF</span>
-                            <span style="background: #1abc9c; color: white; padding: 4px 12px; border-radius: 12px; font-size: 10px;">🚀 Sucesso</span>
-                        </div>
-                    </div>
-                `).join('')}
+            <!-- IMAGEM CENTRALIZADA DOS NOVATOS -->
+            <div style="text-align: center; margin-bottom: 50px;">
+                <img src="NOVATOS.png" alt="Novatos DGF" style="max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); display: inline-block;">
             </div>
 
             <!-- BOTÃO PARA EXIBIR/OCULTAR FORMULÁRIO -->

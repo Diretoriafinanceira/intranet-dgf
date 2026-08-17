@@ -3015,7 +3015,7 @@ if(pagina === "organograma"){
                 <p style="margin-top: 10px; font-weight: bold; color: #1abc9c;">Sejam muito bem-vindos!</p>
             </div>
 
-            <!-- BOTÃO DE ACESSO RESTRITO (APENAS CADEADO) -->
+            <!-- BOTÃO DE ACESSO RESTRITO (LINK DIRETO PARA A PLANILHA DO GOOGLE) -->
             <div style="text-align: center;">
                 <button id="btnAcessoRestrito" style="background: #2c3e50; color: white; border: none; padding: 12px 24px; border-radius: 50px; font-size: 18px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.15); transition: background 0.2s;" title="Acesso Restrito - Requer Senha" onmouseover="this.style.background='#1a252f'" onmouseout="this.style.background='#2c3e50'">
                     🔒
@@ -3025,9 +3025,8 @@ if(pagina === "organograma"){
         </div>
     `;
 
-    // Configurações do Banco na Nuvem (API JSONBin.io)
-    const BIN_ID = "66bd2427e41b4d34e4201a0a";
-    const API_KEY = "$2a$10$8v8mFqQjCjG/AOnE.x9Z7.kM1p.6Gj3I9tI7uD8S5W9V0Z1K2L3M4";
+    // INSIRA AQUI A URL DO SEU GOOGLE APPS SCRIPT GERADO NA ETAPA ANTERIOR
+    const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbz8wQwFKSWwyU1c2MqoxA5iVx0YCbWBnKrPWnqgZKlrq0nSQPsNifQF-pYpKD-RK7Mh/exec";
 
     // Ações do Botão de Formulário (Abrir e Fechar)
     const btnAbrir = document.getElementById("btnAbrirFormulario");
@@ -3045,12 +3044,12 @@ if(pagina === "organograma"){
         btnAbrir.style.display = "inline-block";
     };
 
-    // Lógica do Formulário (Salva na Nuvem)
+    // Lógica do Formulário (Envia diretamente para o Google Sheets)
     document.getElementById("formNovatoDGF").onsubmit = async function(e) {
         e.preventDefault();
         const btnSubmit = document.getElementById("btnSalvarForm");
         btnSubmit.disabled = true;
-        btnSubmit.innerHTML = "⏳ Salvando na Nuvem...";
+        btnSubmit.innerHTML = "⏳ Salvando na Planilha...";
 
         const registro = {
             dataCadastro: new Date().toLocaleDateString('pt-BR') + ' ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}),
@@ -3071,99 +3070,31 @@ if(pagina === "organograma"){
         };
 
         try {
-            let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-                headers: { "X-Master-Key": API_KEY }
-            });
-            let data = await res.json();
-            let db = data.record || [];
-
-            db.push(registro);
-
-            await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Master-Key": API_KEY
-                },
-                body: JSON.stringify(db)
+            await fetch(URL_GOOGLE_SHEETS, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(registro)
             });
 
-            alert("✅ Cadastro realizado com sucesso! Os dados foram sincronizados na rede da DGF.");
+            alert("✅ Cadastro realizado com sucesso! Os dados foram enviados diretamente para a planilha do Google.");
             this.reset();
             containerForm.style.display = "none";
             btnAbrir.style.display = "inline-block";
         } catch (err) {
             console.error(err);
-            alert("❌ Ocorreu um erro ao conectar à rede. Tente novamente.");
+            alert("❌ Ocorreu um erro ao conectar à planilha. Tente novamente.");
         } finally {
             btnSubmit.disabled = false;
             btnSubmit.innerHTML = "💾 Finalizar e Enviar Cadastro";
         }
     };
 
-    // Lógica da Pasta Restrita com Senha 123456 (Abre Nova Tela com Lista em Cartões)
-    document.getElementById("btnAcessoRestrito").onclick = async function() {
-        const pass = prompt("🔒 Digite a senha para acessar a área restrita:");
+    // Lógica do Acesso Restrito (Abre a planilha oficial do Google com validação de senha)
+    document.getElementById("btnAcessoRestrito").onclick = function() {
+        const pass = prompt("🔒 Digite a senha para acessar a planilha restrita:");
         if (pass === "123456") {
-            conteudo.innerHTML = `
-                <div style="padding: 20px; font-family: 'Segoe UI', Arial, sans-serif; max-width: 900px; margin: 0 auto;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #2c3e50; padding-bottom: 15px;">
-                        <h2 style="color: #2c3e50; margin: 0; font-size: 24px;">🔒 Banco de Dados de Novos Servidores</h2>
-                        <button onclick="mostrar('chegou')" style="background: #e74c3c; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer;">← Voltar</button>
-                    </div>
-                    <div id="painelServidoresRestrito">
-                        <p style="color:#7f8c8d; text-align:center; font-size: 16px;">⏳ Carregando registros da nuvem...</p>
-                    </div>
-                </div>
-            `;
-
-            try {
-                let res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-                    headers: { "X-Master-Key": API_KEY }
-                });
-                let data = await res.json();
-                let db = data.record || [];
-                const painel = document.getElementById("painelServidoresRestrito");
-
-                if (db.length === 0) {
-                    painel.innerHTML = "<p style='color:#7f8c8d; text-align:center;'>Nenhum servidor cadastrado até o momento.</p>";
-                } else {
-                    let html = `<div style="display: flex; flex-direction: column; gap: 30px;">`;
-                    
-                    db.forEach((item, i) => {
-                        html += `
-                            <div style="background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border-left: 6px solid #1abc9c;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
-                                    <h3 style="margin: 0; color: #2c3e50; font-size: 20px;">👤 ${item.nome}</h3>
-                                    <span style="font-size: 12px; color: #95a5a6; background: #f8f9fa; padding: 4px 10px; border-radius: 4px;">Cadastrado em: ${item.dataCadastro}</span>
-                                </div>
-                                
-                                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: #34495e;">
-                                    <div><strong>CPF:</strong> ${item.cpf || '-'}</div>
-                                    <div><strong>Sexo:</strong> ${item.sexo || '-'}</div>
-                                    <div><strong>Data de Nascimento:</strong> ${item.nascimento || '-'}</div>
-                                    <div><strong>Tipo Sanguíneo:</strong> <span style="color:#e74c3c; font-weight:bold;">${item.sanguineo || '-'}</span></div>
-                                    <div><strong>Estado Civil:</strong> ${item.estadoCivil || '-'}</div>
-                                    <div><strong>Escolaridade:</strong> ${item.escolaridade || '-'}</div>
-                                    <div><strong>E-mail Institucional:</strong> ${item.email || '-'}</div>
-                                    <div><strong>Telefone / WhatsApp:</strong> ${item.telefone || '-'}</div>
-                                    <div><strong>Contato de Urgência:</strong> <span style="color:#c0392b; font-weight:bold;">${item.urgencia || '-'}</span></div>
-                                    <div><strong>Endereço Residencial:</strong> ${item.endereco || '-'}</div>
-                                    <div><strong>Cargo / Setor:</strong> ${item.cargo || '-'}</div>
-                                    <div><strong>Data de Admissão:</strong> ${item.dataAdmissao || '-'}</div>
-                                    <div><strong>Observações / PCD:</strong> ${item.obs || '-'}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
-
-                    html += `</div>`;
-                    painel.innerHTML = html;
-                }
-            } catch (err) {
-                console.error(err);
-                document.getElementById("painelServidoresRestrito").innerHTML = "<p style='color:#e74c3c; text-align:center;'>❌ Erro ao consultar a nuvem. Verifique sua conexão com a internet.</p>";
-            }
+            window.open("https://docs.google.com/spreadsheets/d/1Oh9X6Lu-YjgRlm7GFW5J5NoV5tE7Y6oQsVk_78kiXpA/edit?usp=sharing", "_blank");
         } else if (pass !== null) {
             alert("❌ Senha incorreta!");
         }

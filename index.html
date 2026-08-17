@@ -884,7 +884,7 @@ function mostrar(pagina){
             <div id="painel-monitor-processo" style="display: none; background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 6px; padding: 15px; margin-top: 5px;">
                 <h4 style="margin: 0 0 10px 0; color: #2c3e50; font-size: 14px;">🔎 Pesquise seu Processo</h4>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <input type="text" id="input-sei-home" placeholder="Digite o número do processo SEI..." style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px;">
+                    <input type="text" id="input-sei-home" placeholder="Digite o número do processo SEI..." onkeydown="if(event.key === 'Enter') window.consultarSeiHome()" style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; outline: none;">
                     <button onclick="window.consultarSeiHome()" style="background: #8e44ad; color: white; border: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer;">Buscar</button>
                 </div>
                 <div id="resultado-sei-home" style="margin-top: 10px; font-size: 13px;"></div>
@@ -982,23 +982,134 @@ function mostrar(pagina){
         }
     };
 
+    // Consulta do Processo via JSONP direcionado à nova planilha
     window.consultarSeiHome = function() {
-        const val = document.getElementById('input-sei-home').value.trim();
+        const inputVal = document.getElementById('input-sei-home').value.trim();
         const resEl = document.getElementById('resultado-sei-home');
-        if(!val){
+
+        if (!inputVal) {
             resEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>⚠️ Digite o número do processo!</span>";
             return;
         }
-        resEl.innerHTML = "<span style='color: #7f8c8d;'>🤖 Consultando Assistente DGF...</span>";
-        
-        fetch(`https://sesdgf.app.n8n.cloud/webhook/consulta-sei?processo=${encodeURIComponent(val)}`)
-            .then(res => res.text())
-            .then(txt => {
-                resEl.innerHTML = `<div style="background:#f4fbf7; padding:10px; border-left:4px solid #2ecc71; border-radius:4px; white-space:pre-wrap;">${txt.replace(/\n/g, '<br>')}</div>`;
-            })
-            .catch(() => {
-                resEl.innerHTML = "<span style='color: #e74c3c;'>❌ Erro ao conectar ao serviço de busca.</span>";
+
+        resEl.innerHTML = "<span style='color: #7f8c8d;'>🔍 Pesquisando processo na planilha... Por favor, aguarde.</span>";
+
+        const docId = "1Lz169HkURx2K1BEYqjLp1x921pzJOWSizYVv4bt3dk0";
+        const sheetName = "controle sei";
+
+        window.processarRespostaHomeGoogleSheets = function(jsonData) {
+            if (!jsonData || !jsonData.table) {
+                resEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>❌ Não foi possível carregar os dados da planilha.</span>";
+                return;
+            }
+
+            const rows = jsonData.table.rows;
+            const cols = jsonData.table.cols;
+
+            let idxSetor = -1, idxSei = -1, idxData = -1, idxDias = -1, idxSaiu = -1, idxUnidade = -1;
+
+            cols.forEach((col, idx) => {
+                if (!col || !col.label) return;
+                const label = col.label.trim().toUpperCase();
+                if (label.includes("SETOR ORIGEM") || label.includes("ORIGEM")) idxSetor = idx;
+                else if (label === "SEI" || label.includes("PROCESSO")) idxSei = idx;
+                else if (label.includes("DATA LEITURA") || label.includes("LEITURA")) idxData = idx;
+                else if (label.includes("QT DIAS") || label.includes("DIAS")) idxDias = idx;
+                else if (label.includes("SAIU")) idxSaiu = idx;
+                else if (label.includes("UNIDADE")) idxUnidade = idx;
             });
+
+            if (idxSei === -1 && rows.length > 0) {
+                rows[0].c.forEach((cell, idx) => {
+                    if (!cell || cell.v === null) return;
+                    const val = String(cell.v).trim().toUpperCase();
+                    if (val.includes("SETOR ORIGEM")) idxSetor = idx;
+                    else if (val === "SEI") idxSei = idx;
+                    else if (val.includes("DATA LEITURA")) idxData = idx;
+                    else if (val.includes("QT DIAS")) idxDias = idx;
+                    else if (val.includes("SAIU")) idxSaiu = idx;
+                    else if (val.includes("UNIDADE")) idxUnidade = idx;
+                });
+            }
+
+            const termoLimpo = inputVal.replace(/\D/g, '');
+            let encontrado = null;
+
+            for (let r = 0; r < rows.length; r++) {
+                const rowCells = rows[r].c;
+                if (!rowCells) continue;
+
+                let valorSei = "";
+                if (idxSei !== -1 && rowCells[idxSei]) {
+                    valorSei = String(rowCells[idxSei].f || rowCells[idxSei].v || "").trim();
+                } else {
+                    for (let c = 0; c < rowCells.length; c++) {
+                        if (rowCells[c] && rowCells[c].v) {
+                            const tempVal = String(rowCells[c].f || rowCells[c].v);
+                            if (tempVal.replace(/\D/g, '') === termoLimpo || tempVal.includes(inputVal)) {
+                                valorSei = tempVal;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                const seiLimpo = valorSei.replace(/\D/g, '');
+                if ((termoLimpo !== "" && seiLimpo === termoLimpo) || valorSei.toLowerCase().includes(inputVal.toLowerCase())) {
+                    const getVal = (idx) => {
+                        if (idx === -1 || !rowCells[idx]) return "N/A";
+                        const cell = rowCells[idx];
+                        return cell.f || cell.v || "N/A";
+                    };
+
+                    encontrado = {
+                        setorOrigem: getVal(idxSetor),
+                        sei: valorSei || inputVal,
+                        dataLeitura: getVal(idxData),
+                        qtDias: getVal(idxDias),
+                        saiu: getVal(idxSaiu),
+                        unidade: getVal(idxUnidade)
+                    };
+                    break;
+                }
+            }
+
+            if (encontrado) {
+                resEl.innerHTML = `
+                    <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50; font-size: 13px; line-height: 1.6;">
+                        <strong style="color: #27ae60; font-size: 14px;">✅ Processo Encontrado!</strong><br>
+                        <b>📍 SETOR ORIGEM:</b> ${encontrado.setorOrigem}<br>
+                        <b>📄 SEI:</b> ${encontrado.sei}<br>
+                        <b>📅 DATA LEITURA:</b> ${encontrado.dataLeitura}<br>
+                        <b>⏳ QT DIAS:</b> ${encontrado.qtDias}<br>
+                        <b>🚪 SAIU?:</b> ${encontrado.saiu}<br>
+                        <b>🏢 UNIDADE:</b> ${encontrado.unidade}
+                    </div>
+                `;
+            } else {
+                resEl.innerHTML = `
+                    <div style="background: #fdf2f2; padding: 12px; border-left: 4px solid #e74c3c; border-radius: 4px; text-align: left; color: #c0392b; font-weight: bold;">
+                        🔴 Processo não localizado na aba 'controle sei'. Verifique o número digitado.
+                    </div>
+                `;
+            }
+
+            const scriptAntigo = document.getElementById('script-jsonp-home-sei');
+            if (scriptAntigo) scriptAntigo.remove();
+        };
+
+        const scriptExistente = document.getElementById('script-jsonp-home-sei');
+        if (scriptExistente) scriptExistente.remove();
+
+        const script = document.createElement('script');
+        script.id = 'script-jsonp-home-sei';
+        script.src = `https://docs.google.com/spreadsheets/d/${docId}/gviz/tq?tqx=responseHandler:processarRespostaHomeGoogleSheets&sheet=${encodeURIComponent(sheetName)}`;
+        
+        script.onerror = function() {
+            resEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>❌ Erro ao acessar a planilha. Verifique se o acesso está público no Google Sheets.</span>";
+        };
+
+        document.body.appendChild(script);
     };
 
     window.consultarContratoPriorize = function() {
@@ -1010,7 +1121,6 @@ function mostrar(pagina){
         }
         resEl.innerHTML = "<span style='color: #d35400;'>🔎 Consultando contrato na base de dados...</span>";
         
-        // Estrutura pronta para receber a base de dados
         setTimeout(() => {
             resEl.innerHTML = `<div style="background:#fff; padding:12px; border:1px solid #fbd38d; border-radius:4px;">
                 <strong>Contrato:</strong> ${val}<br>
@@ -1416,7 +1526,7 @@ if (pagina === "areadogestor") {
         }
     };
 
-    // Nova Função: Controla a exibição e a busca do Chatbot integrado à planilha Google Sheets
+    // Função para alternar a visibilidade da área de busca do SEI
     window.toggleChatbotPainel = function() {
         const painelChat = document.getElementById('chatbot-painel-container');
         if (painelChat.style.display === 'none') {
@@ -1427,46 +1537,135 @@ if (pagina === "areadogestor") {
         }
     };
 
-    // Integrado diretamente com o seu fluxo n8n
+    // Função para pesquisar o número do SEI na planilha Google Sheets usando JSONP
     window.consultarSeiGoogleSheets = function() {
         const inputVal = document.getElementById('input-sei-gestor').value.trim();
         const resultadoEl = document.getElementById('resultado-sei-gestor');
-        
+
         if (!inputVal) {
             resultadoEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>⚠️ Digite o número do processo!</span>";
             return;
         }
-        
-        resultadoEl.innerHTML = "<span style='color: #7f8c8d;'>🤖 Consultando Assistente DGF... Por favor, aguarde.</span>";
-        
-        const urlN8n = `https://sesdgf.app.n8n.cloud/webhook/consulta-sei?processo=${encodeURIComponent(inputVal)}`;
-        
-        fetch(urlN8n)
-            .then(res => {
-                if (!res.ok) throw new Error("Erro na requisição");
-                return res.text();
-            })
-            .then(textoResposta => {
-                const textoFormatadoHtml = textoResposta.replace(/\n/g, '<br>');
-                
-                if (textoResposta.includes("🔴")) {
-                    resultadoEl.innerHTML = `
-                        <div style="background: #fdf2f2; padding: 12px; border-left: 4px solid #e74c3c; border-radius: 4px; text-align: left; color: #c0392b; font-weight: bold; white-space: pre-wrap;">
-                            ${textoFormatadoHtml}
-                        </div>
-                    `;
-                } else {
-                    resultadoEl.innerHTML = `
-                        <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50; font-size: 13px; line-height: 1.4; white-space: pre-wrap;">
-                            ${textoFormatadoHtml}
-                        </div>
-                    `;
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                resultadoEl.innerHTML = "<span style='color: #e74c3c;'>❌ Erro ao conectar ao Assistente. Certifique-se de que o fluxo está ativo ('Published') no n8n.</span>";
+
+        resultadoEl.innerHTML = "<span style='color: #7f8c8d;'>🔍 Pesquisando processo na planilha... Por favor, aguarde.</span>";
+
+        const docId = "1Lz169HkURx2K1BEYqjLp1x921pzJOWSizYVv4bt3dk0";
+        const sheetName = "controle sei";
+
+        // Callback global para processamento via JSONP
+        window.processarRespostaGoogleSheets = function(jsonData) {
+            if (!jsonData || !jsonData.table) {
+                resultadoEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>❌ Não foi possível carregar os dados da planilha.</span>";
+                return;
+            }
+
+            const rows = jsonData.table.rows;
+            const cols = jsonData.table.cols;
+
+            let idxSetor = -1, idxSei = -1, idxData = -1, idxDias = -1, idxSaiu = -1, idxUnidade = -1;
+
+            cols.forEach((col, idx) => {
+                if (!col || !col.label) return;
+                const label = col.label.trim().toUpperCase();
+                if (label.includes("SETOR ORIGEM") || label.includes("ORIGEM")) idxSetor = idx;
+                else if (label === "SEI" || label.includes("PROCESSO")) idxSei = idx;
+                else if (label.includes("DATA LEITURA") || label.includes("LEITURA")) idxData = idx;
+                else if (label.includes("QT DIAS") || label.includes("DIAS")) idxDias = idx;
+                else if (label.includes("SAIU")) idxSaiu = idx;
+                else if (label.includes("UNIDADE")) idxUnidade = idx;
             });
+
+            if (idxSei === -1 && rows.length > 0) {
+                rows[0].c.forEach((cell, idx) => {
+                    if (!cell || cell.v === null) return;
+                    const val = String(cell.v).trim().toUpperCase();
+                    if (val.includes("SETOR ORIGEM")) idxSetor = idx;
+                    else if (val === "SEI") idxSei = idx;
+                    else if (val.includes("DATA LEITURA")) idxData = idx;
+                    else if (val.includes("QT DIAS")) idxDias = idx;
+                    else if (val.includes("SAIU")) idxSaiu = idx;
+                    else if (val.includes("UNIDADE")) idxUnidade = idx;
+                });
+            }
+
+            const termoLimpo = inputVal.replace(/\D/g, '');
+            let encontrado = null;
+
+            for (let r = 0; r < rows.length; r++) {
+                const rowCells = rows[r].c;
+                if (!rowCells) continue;
+
+                let valorSei = "";
+                if (idxSei !== -1 && rowCells[idxSei]) {
+                    valorSei = String(rowCells[idxSei].f || rowCells[idxSei].v || "").trim();
+                } else {
+                    for (let c = 0; c < rowCells.length; c++) {
+                        if (rowCells[c] && rowCells[c].v) {
+                            const tempVal = String(rowCells[c].f || rowCells[c].v);
+                            if (tempVal.replace(/\D/g, '') === termoLimpo || tempVal.includes(inputVal)) {
+                                valorSei = tempVal;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                const seiLimpo = valorSei.replace(/\D/g, '');
+                if ((termoLimpo !== "" && seiLimpo === termoLimpo) || valorSei.toLowerCase().includes(inputVal.toLowerCase())) {
+                    const getVal = (idx) => {
+                        if (idx === -1 || !rowCells[idx]) return "N/A";
+                        const cell = rowCells[idx];
+                        return cell.f || cell.v || "N/A";
+                    };
+
+                    encontrado = {
+                        setorOrigem: getVal(idxSetor),
+                        sei: valorSei || inputVal,
+                        dataLeitura: getVal(idxData),
+                        qtDias: getVal(idxDias),
+                        saiu: getVal(idxSaiu),
+                        unidade: getVal(idxUnidade)
+                    };
+                    break;
+                }
+            }
+
+            if (encontrado) {
+                resultadoEl.innerHTML = `
+                    <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50; font-size: 13px; line-height: 1.6;">
+                        <strong style="color: #27ae60; font-size: 14px;">✅ Processo Encontrado!</strong><br>
+                        <b>📍 SETOR ORIGEM:</b> ${encontrado.setorOrigem}<br>
+                        <b>📄 SEI:</b> ${encontrado.sei}<br>
+                        <b>📅 DATA LEITURA:</b> ${encontrado.dataLeitura}<br>
+                        <b>⏳ QT DIAS:</b> ${encontrado.qtDias}<br>
+                        <b>🚪 SAIU?:</b> ${encontrado.saiu}<br>
+                        <b>🏢 UNIDADE:</b> ${encontrado.unidade}
+                    </div>
+                `;
+            } else {
+                resultadoEl.innerHTML = `
+                    <div style="background: #fdf2f2; padding: 12px; border-left: 4px solid #e74c3c; border-radius: 4px; text-align: left; color: #c0392b; font-weight: bold;">
+                        🔴 Processo não localizado na aba 'controle sei'. Verifique o número digitado.
+                    </div>
+                `;
+            }
+
+            const scriptAntigo = document.getElementById('script-jsonp-sei');
+            if (scriptAntigo) scriptAntigo.remove();
+        };
+
+        const scriptExistente = document.getElementById('script-jsonp-sei');
+        if (scriptExistente) scriptExistente.remove();
+
+        const script = document.createElement('script');
+        script.id = 'script-jsonp-sei';
+        script.src = `https://docs.google.com/spreadsheets/d/${docId}/gviz/tq?tqx=responseHandler:processarRespostaGoogleSheets&sheet=${encodeURIComponent(sheetName)}`;
+        
+        script.onerror = function() {
+            resultadoEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>❌ Erro ao acessar a planilha. Verifique se o acesso está público no Google Sheets.</span>";
+        };
+
+        document.body.appendChild(script);
     };
 
     // 4. Função interna para renderizar o painel principal após o login correto
@@ -1499,19 +1698,19 @@ if (pagina === "areadogestor") {
                 
                 <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 15px;">
                     
-                    <!-- 1. PESQUISE SEU PROCESSO (Agora em primeiro lugar) -->
+                    <!-- 1. PESQUISAR SEI -->
                     <div onclick="window.toggleChatbotPainel()" style="background: #fdfefe; padding: 20px; border-left: 4px solid #9b59b6; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
                        onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
                         <p style="margin: 0; color: #8e44ad; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                            🔍 PESQUISE SEU PROCESSO
+                            🔍 PESQUISAR SEI
                         </p>
-                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Consulte o andamento em tempo real direto da planilha Google Sheets.</p>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Consulte o andamento do processo na aba controle sei da planilha.</p>
                     </div>
 
                     <div id="chatbot-painel-container" style="display: none; background: #fafafa; border: 1px solid #ddd; padding: 15px; border-radius: 6px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);">
-                        <p style="margin: 0 0 10px 0; font-size: 13px; font-weight: bold; color: #34495e;">🤖 Assistente de Processos DGF</p>
+                        <p style="margin: 0 0 10px 0; font-size: 13px; font-weight: bold; color: #34495e;">🔎 Consulta de Processos SEI</p>
                         <div style="display: flex; gap: 8px; margin-bottom: 10px;">
-                            <input type="text" id="input-sei-gestor" placeholder="Digite o número do SEI..." onkeydown="if(event.key === 'Enter') window.consultarSeiGoogleSheets()" style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; outline: none;">
+                            <input type="text" id="input-sei-gestor" placeholder="Ex: 2300002215.000001/2023-37" onkeydown="if(event.key === 'Enter') window.consultarSeiGoogleSheets()" style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; outline: none;">
                             <button onclick="window.consultarSeiGoogleSheets()" style="background: #9b59b6; color: white; border: none; padding: 8px 15px; border-radius: 4px; font-size: 13px; font-weight: bold; cursor: pointer;">Buscar</button>
                         </div>
                         <div id="resultado-sei-gestor" style="font-size: 13px; margin-top: 5px;"></div>
@@ -1553,7 +1752,7 @@ if (pagina === "areadogestor") {
                         <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Acesso ao painel e relatórios da gestão de anestesistas.</p>
                     </div>
 
-                    <!-- 6. CALENDÁRIO DE PROCESSOS (Novo Botão Adicionado ao Final) -->
+                    <!-- 6. CALENDÁRIO DE PROCESSOS -->
                     <div onclick="alert('Funcionalidade Calendário de Processos em desenvolvimento.');" style="background: #fdfefe; padding: 20px; border-left: 4px solid #16a085; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border-top: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background 0.2s;"
                         onmouseover="this.style.background='#f5f6fa'" onmouseout="this.style.background='#fdfefe'">
                         <p style="margin: 0; color: #16a085; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
@@ -1817,7 +2016,6 @@ if (pagina === "areadogestor") {
     </div>
     `;
 }
-
 
 if (pagina === "radar_dgf") {
     // Garante a limpeza de qualquer intervalo anterior para evitar duplicação ou consumo de memória
@@ -2852,7 +3050,7 @@ if(pagina === "organograma"){
         `;
 }
 
-        if(pagina === "chegou"){
+if(pagina === "chegou"){
     conteudo.innerHTML = `
         <div style="padding: 20px; font-family: 'Segoe UI', Arial, sans-serif; max-width: 1200px; margin: 0 auto;">
             

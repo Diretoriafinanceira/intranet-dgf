@@ -748,25 +748,31 @@ function mostrar(pagina){
                     </div>
                 </div>
 
-                <!-- CARD DE LUTO -->
-                <div style="
-                    background: rgba(0, 0, 0, 0.65) !important; 
-                    border: 1px solid rgba(255, 255, 255, 0.2); 
+                <!-- CARD MURAL DE AVISOS RÁPIDOS (CLICÁVEL -> PÁGINA NOTÍCIAS) -->
+                <div onclick="mostrar('noticias')" style="
+                    background: #fff9c4 !important; 
+                    border: 1px solid #fbc02d; 
+                    border-left: 5px solid #f57f17;
                     border-radius: 6px; 
-                    padding: 12px 18px; 
-                    width: 260px; 
+                    padding: 12px 15px; 
+                    width: 270px; 
                     display: flex; 
-                    align-items: center; 
+                    flex-direction: column;
                     justify-content: center;
-                    gap: 14px; 
-                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+                    gap: 6px; 
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
                     box-sizing: border-box;
                     font-family: inherit;
-                ">
-                    <span style="font-size: 34px; line-height: 1;">🖤</span>
-                    <div style="display: flex; flex-direction: column; align-items: flex-start;">
-                        <span style="color: #ffffff; font-weight: 800; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; line-height: 1.2;">LUTO</span>
-                        <span style="color: #dcdde1; font-size: 11px; font-weight: 500; margin-top: 3px;">Nossos sentimentos</span>
+                    position: relative;
+                    cursor: pointer;
+                    transition: transform 0.2s, box-shadow 0.2s;
+                " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 20px; line-height: 1;">📌</span>
+                        <span style="color: #f57f17; font-weight: 800; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Mural de Avisos</span>
+                    </div>
+                    <div style="color: #333333; font-size: 12px; font-weight: 500; line-height: 1.35; margin-top: 2px;">
+                        📢 <b>Atenção:</b> Fiquem atentos aos prazos de fechamento de folha e empenhos do mês vigente!
                     </div>
                 </div>
 

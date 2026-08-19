@@ -811,7 +811,7 @@ function mostrar(pagina){
                 </div>
             </div>
 
-            <div onclick="window.open('https://script.google.com/macros/s/AKfycbzOImaEQeey6jcFJhTAohbW59gaKjTBjtZraiahuczXoKn2eTMoUujpPcHoMOkrCXo/exec', '_blank')" 
+            <div onclick="window.open('https://script.google.com/macros/s/AKfycbwdkH03kEMmy-Sk2FFdBj9WMRcs6RMf9DUaO-cFqUHI_r2K-EemMNSq6sCQBRWzIwCB/exec', '_blank')" 
                  style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #0079bf; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s;"
                  onmouseover="this.style.transform='scale(1.02)'"
                  onmouseout="this.style.transform='scale(1)'">
@@ -2726,10 +2726,8 @@ if(pagina === "organograma"){
     }
 
     if (pagina === "reserva") {
-    // 1. Define uma senha padrão caso não exista
-    if (!localStorage.getItem('senha_conformidade')) {
-        localStorage.setItem('senha_conformidade', 'ccf123');
-    }
+    // 1. Define e força a atualização da senha no localStorage
+    localStorage.setItem('senha_conformidade', 'CCF01072026');
 
     // 2. Função global para renderizar o Checklist após a senha correta
     window.carregarChecklistConformidade = function() {
@@ -2896,12 +2894,12 @@ if(pagina === "organograma"){
         updateProgress();
     };
 
-    // 3. Função de Autenticação da Senha
+    // 3. Função de Autenticação da Senha ajustada diretamente para CCF01072026
     window.autenticarConformidade = function() {
         const passInput = document.getElementById('senha-conformidade-input').value;
         const passSalva = localStorage.getItem('senha_conformidade');
 
-        if (passInput === passSalva) {
+        if (passInput === 'CCF01072026' || passInput === passSalva) {
             carregarChecklistConformidade();
         } else {
             alert('❌ Senha incorreta! Acesso negado.');

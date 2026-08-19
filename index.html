@@ -3281,7 +3281,7 @@ if(pagina === "chegou"){
                         </div>
                         <div>
                             <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">CPF *</label>
-                            <input type="text" id="cad_cpf" required placeholder="000.000.000-00" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                            <input type="text" id="cad_cpf" required maxlength="14" placeholder="000.000.000-00" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
                         </div>
                         <div>
                             <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">SEXO *</label>
@@ -3309,6 +3309,7 @@ if(pagina === "chegou"){
                                 <option value="AB-">AB-</option>
                                 <option value="O+">O+</option>
                                 <option value="O-">O-</option>
+								<option value="O-">NÃO SEI</option>
                             </select>
                         </div>
                         <div>
@@ -3358,6 +3359,14 @@ if(pagina === "chegou"){
                             <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">DATA DE ADMISSÃO *</label>
                             <input type="date" id="cad_data" required style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
                         </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">LOGIN DE REDE</label>
+                            <input type="text" id="cad_login_rede" placeholder="Digite seu login de rede" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">LOGIN DO SEI</label>
+                            <input type="text" id="cad_login_sei" placeholder="Digite seu login do SEI" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
                         <div style="grid-column: 1 / -1;">
                             <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">FOTO DO SERVIDOR</label>
                             <input type="file" id="cad_foto" accept="image/*" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px; background: #fcfcfc;">
@@ -3385,6 +3394,16 @@ if(pagina === "chegou"){
 
         </div>
     `;
+
+    // MÁSCARA AUTOMÁTICA EM TEMPO REAL PARA O CPF (000.000.000-00)
+    document.getElementById("cad_cpf").oninput = function() {
+        let v = this.value.replace(/\D/g, '');
+        if (v.length > 11) v = v.slice(0, 11);
+        v = v.replace(/(\d{3})(\d)/, '$1.$2');
+        v = v.replace(/(\d{3})(\d)/, '$1.$2');
+        v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        this.value = v;
+    };
 
     // INSIRA AQUI A URL DO SEU GOOGLE APPS SCRIPT GERADO NA ETAPA ANTERIOR
     const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbz8wQwFKSWwyU1c2MqoxA5iVx0YCbWBnKrPWnqgZKlrq0nSQPsNifQF-pYpKD-RK7Mh/exec";
@@ -3439,6 +3458,8 @@ if(pagina === "chegou"){
             endereco: document.getElementById("cad_endereco").value,
             cargo: document.getElementById("cad_cargo").value,
             dataAdmissao: document.getElementById("cad_data").value,
+            loginRede: document.getElementById("cad_login_rede").value,
+            loginSei: document.getElementById("cad_login_sei").value,
             foto: fotoBase64
         };
 

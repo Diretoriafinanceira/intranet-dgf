@@ -554,6 +554,7 @@ const listaAniversariantes = [
 	{ nome: "Zenaide Vasconcelos Torres", data: "19/06", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Pollyana Correia de Freitas", data: "02/12", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Rayan Vinicius Torres de Santana", data: "02/06", superintendência: "Superintendência do Fundo Estadual de Saúde" },
+	{ nome: "Janaina Maria de Melo", data: "11/06", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Adson Rodrigues da Silva", data: "06/03", superintendência: "Superintendência Financeira de Prestação de Contas" }
 ];
 
@@ -656,7 +657,7 @@ function mostrar(pagina){
             <div style="
                 display:flex;
                 align-items:center;
-                justify-space-between;
+                justify-content: space-between;
                 flex-wrap:wrap;
                 padding:25px 40px;
                 min-height:120px;
@@ -748,11 +749,11 @@ function mostrar(pagina){
                     </div>
                 </div>
 
-                <!-- CARD MURAL DE AVISOS RÁPIDOS (CLICÁVEL -> PÁGINA NOTÍCIAS) -->
+                <!-- CARD MURAL DE AVISOS - QUEBRA-CABEÇA DGF COM BARRA DE PROGRESSO (14%) -->
                 <div onclick="mostrar('noticias')" style="
                     background: #fff9c4 !important; 
                     border: 1px solid #fbc02d; 
-                    border-left: 5px solid #f57f17;
+                    border-left: 5px solid #8e44ad;
                     border-radius: 6px; 
                     padding: 12px 15px; 
                     width: 270px; 
@@ -767,12 +768,24 @@ function mostrar(pagina){
                     cursor: pointer;
                     transition: transform 0.2s, box-shadow 0.2s;
                 " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    
                     <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 20px; line-height: 1;">📌</span>
-                        <span style="color: #f57f17; font-weight: 800; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Mural de Avisos</span>
+                        <span style="font-size: 18px; line-height: 1;">📌</span>
+                        <span style="color: #f57f17; font-weight: 800; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Mural de Avisos</span>
                     </div>
-                    <div style="color: #333333; font-size: 12px; font-weight: 500; line-height: 1.35; margin-top: 2px;">
-                        📢 <b>Atenção:</b> Fiquem atentos aos prazos de fechamento de folha e empenhos do mês vigente!
+
+                    <div style="font-size: 13px; font-weight: bold; color: #8e44ad; margin-top: 2px; display: flex; justify-content: space-between; align-items: center;">
+                        <span>🧩 Quebra-Cabeça DGF</span>
+                        <span style="font-size: 11px; background: #8e44ad; color: white; padding: 1px 6px; border-radius: 10px;">14%</span>
+                    </div>
+
+                    <!-- Barra de Porcentagem (Progresso) -->
+                    <div style="width: 100%; background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden; margin: 2px 0;">
+                        <div style="width: 14%; background: linear-gradient(90deg, #8e44ad, #9b59b6); height: 100%; border-radius: 4px;"></div>
+                    </div>
+
+                    <div style="width: 100%; height: 75px; border-radius: 4px; overflow: hidden; margin-top: 2px;">
+                        <img src="./qubra.png" alt="Quebra-Cabeça" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                 </div>
 
@@ -786,7 +799,7 @@ function mostrar(pagina){
                 <img src="central.png" alt="Central de Notas" onclick="mostrar('central_notas')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
                 <div style="padding: 15px;">
                     <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📝 Conheça a Nova Central de Notas</h3>
-                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Gerencie, consulte e acompanhe a tramitação de notas fiscais e empenhos in um só lugar. Mais agilidade, transparência e controle para os processos financeiros da DGF.</p>
+                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Gerencie, consulte e acompanhe a tramitação de notas fiscais e empenhos em um só lugar. Mais agilidade, transparência e controle para os processos financeiros da DGF.</p>
                 </div>
             </div>
 
@@ -798,7 +811,7 @@ function mostrar(pagina){
                 </div>
             </div>
 
-            <div onclick="window.open('https://script.google.com/macros/s/AKfycbwdkH03kEMmy-Sk2FFdBj9WMRcs6RMf9DUaO-cFqUHI_r2K-EemMNSq6sCQBRWzIwCB/exec', '_blank')" 
+            <div onclick="window.open('https://script.google.com/macros/s/AKfycbzOImaEQeey6jcFJhTAohbW59gaKjTBjtZraiahuczXoKn2eTMoUujpPcHoMOkrCXo/exec', '_blank')" 
                  style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #0079bf; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s;"
                  onmouseover="this.style.transform='scale(1.02)'"
                  onmouseout="this.style.transform='scale(1)'">
@@ -1169,7 +1182,6 @@ function mostrar(pagina){
         }
     }, 10000);
 }
-
 if (pagina === "TV DGF") {
 
     let html = `
@@ -1287,42 +1299,75 @@ if(pagina === "noticias"){
 
     const hoje = new Date().toLocaleDateString('pt-BR');
 
-    // 1. NOTÍCIA INICIAL PRINCIPAL (ABERTA TOTALMENTE): Missa de 7º Dia de Rafael
+    // 1. ANDAMENTO DO QUEBRA-CABEÇA (ABERTA POR PADRÃO)
     html += `
-        <div class="noticia-card" style="border-left: 5px solid #2c3e50; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; padding: 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px;">
-            <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
-            
-            <h3 style="margin: 12px 0 6px 0; color: #2c3e50; font-size: 22px; text-transform: uppercase; letter-spacing: 0.5px;">
-                🕊️ MISSA DE 7º DIA – EM MEMÓRIA DE RAFAEL CORREIA GUIMARÃES DOS SANTOS
-            </h3>
-            
-            <p style="line-height: 1.6; color: #555; font-size: 15px; margin-bottom: 20px;">
-                A família convida parentes, amigos e colegas de trabalho para a Missa de 7º Dia, que será celebrada em sua memória.
-            </p>
-
-            <div style="background: #fdfbf7; border: 1px solid #e0d8c3; border-radius: 8px; padding: 20px; margin: 15px 0; display: flex; flex-direction: column; gap: 12px;">
-                <div style="display: flex; align-items: center; gap: 12px; color: #4a3b32; font-size: 15px;">
-                    <span style="font-size: 20px;">📅</span> <strong>Data:</strong> 16 de agosto de 2026
+        <div class="noticia-card" style="border-left: 5px solid #9b59b6; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-quebracabeca')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #8e44ad; font-size: 16px; text-transform: uppercase;">
+                        🧩 ANDAMENTO DO NOSSO QUEBRA-CABEÇA DGF
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Confira o progresso da montagem da nossa equipe...</p>
                 </div>
-                <div style="display: flex; align-items: center; gap: 12px; color: #4a3b32; font-size: 15px;">
-                    <span style="font-size: 20px;">⏰</span> <strong>Horário:</strong> Às 8h da manhã
-                </div>
-                <div style="display: flex; align-items: center; gap: 12px; color: #4a3b32; font-size: 15px;">
-                    <span style="font-size: 20px;">⛪</span> <strong>Local:</strong> Paróquia Nossa Senhora da Conceição Aparecida
-                </div>
-                <div style="display: flex; align-items: center; gap: 12px; color: #666; font-size: 14px; padding-left: 32px;">
-                    📍 Rua Adolfo Faro – Ipsep
-                </div>
+                <span id="icon-noticia-quebracabeca" style="font-size: 18px; color: #8e44ad; font-weight: bold;">▲</span>
             </div>
 
-            <p style="font-style: italic; color: #7f8c8d; text-align: center; margin-top: 15px; font-size: 14px;">
-                "Sua presença será uma forma de carinho, amor e homenagem à memória de Rafael."<br><br>
-                <strong>“Aqueles que amamos nunca morrem, apenas partem antes de nós.”</strong>
-            </p>
+            <div id="noticia-quebracabeca" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="line-height: 1.6; color: #555; font-size: 14px; margin: 15px 0 10px 0;">
+                    A cada peça encaixada, vemos o resultado do nosso trabalho em equipe! Veja abaixo o andamento atual da montagem do nosso quebra-cabeça:
+                </p>
+                
+                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 10px;">
+                    <img src="./qubra.png" alt="Andamento do Quebra-Cabeça" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+            </div>
         </div>
     `;
 
-    // 2. NOTÍCIA RETRÁTIL: Resultado do Bolão DGF
+    // 2. MISSA DE 7º DIA (FECHADA)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #2c3e50; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-missa')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #2c3e50; font-size: 16px; text-transform: uppercase;">
+                        🕊️ MISSA DE 7º DIA – EM MEMÓRIA DE RAFAEL CORREIA GUIMARÃES DOS SANTOS
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Clique para ver as informações de data e local...</p>
+                </div>
+                <span id="icon-noticia-missa" style="font-size: 18px; color: #2c3e50; font-weight: bold;">▼</span>
+            </div>
+
+            <div id="noticia-missa" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="line-height: 1.6; color: #555; font-size: 15px; margin: 15px 0 20px 0;">
+                    A família convida parentes, amigos e colegas de trabalho para a Missa de 7º Dia, que será celebrada em sua memória.
+                </p>
+
+                <div style="background: #fdfbf7; border: 1px solid #e0d8c3; border-radius: 8px; padding: 20px; margin: 15px 0; display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px; color: #4a3b32; font-size: 15px;">
+                        <span style="font-size: 20px;">📅</span> <strong>Data:</strong> 16 de agosto de 2026
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; color: #4a3b32; font-size: 15px;">
+                        <span style="font-size: 20px;">⏰</span> <strong>Horário:</strong> Às 8h da manhã
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; color: #4a3b32; font-size: 15px;">
+                        <span style="font-size: 20px;">⛪</span> <strong>Local:</strong> Paróquia Nossa Senhora da Conceição Aparecida
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; color: #666; font-size: 14px; padding-left: 32px;">
+                        📍 Rua Adolfo Faro – Ipsep
+                    </div>
+                </div>
+
+                <p style="font-style: italic; color: #7f8c8d; text-align: center; margin-top: 15px; font-size: 14px;">
+                    "Sua presença será uma forma de carinho, amor e homenagem à memória de Rafael."<br><br>
+                    <strong>“Aqueles que amamos nunca morrem, apenas partem antes de nós.”</strong>
+                </p>
+            </div>
+        </div>
+    `;
+
+    // 3. Resultado do Bolão DGF (FECHADA)
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2ecc71; background: #f4fbf7; font-family: 'Arial', sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-bolao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1337,12 +1382,11 @@ if(pagina === "noticias"){
             </div>
 
             <div id="noticia-bolao" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #e0f2e9;">
-                <p style="line-height: 1.6; color: #2c3e50; font-size: 14px;">
+                <p style="line-height: 1.6; color: #2c3e50; font-size: 14px; margin-top: 10px;">
                     A disputa foi acirrada e o clima de Copa do Mundo tomou conta de vez! Com palpites cirúrgicos e muita intuição técnica, os nossos craques da tabela assumiram o topo do ranking. Confira como ficou o pódio da nossa primeira COPA DGF:
                 </p>
 
                 <div style="background: #081e09; padding: 20px 15px; margin: 15px 0; border: 2px solid #1b5e20; display: flex; flex-direction: column; gap: 12px;">
-                    
                     <div style="display: flex; align-items: center; background: linear-gradient(90deg, #1e4620 0%, #153617 100%); border: 2px solid #f1c40f; padding: 12px 15px;">
                         <div style="font-size: 20px; font-weight: 900; color: #f1c40f; width: 50px;">1º 👑</div>
                         <div style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #f1c40f; overflow: hidden; background: #fff; margin-right: 15px; flex-shrink: 0;">
@@ -1369,14 +1413,13 @@ if(pagina === "noticias"){
                         <div style="color: #ccc; font-weight: 900; font-size: 15px; text-transform: uppercase;">Rosicleide</div>
                         <div style="margin-left: auto; background: #e67e22; color: #fff; font-weight: 900; padding: 4px 10px; font-size: 11px; text-transform: uppercase;">3º Colocado</div>
                     </div>
-
                 </div>
                 <p style="color: #2c3e50; font-size: 13px; font-weight: bold; text-align: center;">Parabéns aos participantes. #JuntosSomosFortes</p>
             </div>
         </div>
     `;
 
-    // 3. NOTÍCIA RETRÁTIL: São João DGF
+    // 4. São João DGF (FECHADA)
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-saojoao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1389,7 +1432,7 @@ if(pagina === "noticias"){
             </div>
 
             <div id="noticia-saojoao" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f2e3d5;">
-                <p style="font-size: 14px; color: #333;">Clique no banner abaixo para abrir o formulário de confirmação:</p>
+                <p style="font-size: 14px; color: #333; margin-top: 10px;">Clique no banner abaixo para abrir o formulário de confirmação:</p>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLScty8A8n2tU5Gp1UbC1mUGUKoKIYijCz8EwAicOo6Qub_F1og/viewform?usp=header" target="_blank" style="text-decoration: none; display: block; width: 100%; margin-top: 10px;">
                     <div style="width: 100%; height: 180px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
                         <img src="./saojoao.png" alt="Confirme sua Presença" style="width: 100%; height: 100%; display: block; object-fit: contain; object-position: center;">
@@ -1399,7 +1442,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 4. NOTÍCIA RETRÁTIL: Guia de Ajuda
+    // 5. Guia de Ajuda (FECHADA)
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #3498db; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-guia')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1419,7 +1462,7 @@ if(pagina === "noticias"){
         </div>
     `;
     
-    // 5. Demais notícias cadastradas no array listaNoticias (também retráteis)
+    // 6. Demais notícias cadastradas no array listaNoticias (FECHADAS)
     listaNoticias.forEach((n, i) => {
         html += `
             <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #95a5a6; background: #fff;">
@@ -1441,7 +1484,7 @@ if(pagina === "noticias"){
     
     conteudo.innerHTML = html;
 
-    // Função global para expandir e recolher as notícias secundárias
+    // Função global para expandir e recolher as notícias
     window.toggleNoticia = function(id) {
         const el = document.getElementById(id);
         const icon = document.getElementById('icon-' + id);
@@ -2432,6 +2475,108 @@ if(pagina === "aniversariantes"){
                         .MuralSub { font-size: 9pt; color: #8e8e8e; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
                         .PerfilBadge { background: #f8f9fa; border: 1px solid #efefef; padding: 15px 20px; border-radius: 18px; margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between; }
                         .ListaMensagensVertical { display: flex; flex-direction: column; gap: 20px; }
+						
+						/* ========================================================
+   REGRAS RESPONSIVAS PARA A INTRANET DGF (MOBILE & TABLET)
+   ======================================================== */
+
+/* Dispositivos Médios e Pequenos (Tablets e Smartphones: até 768px) */
+@media screen and (max-width: 768px) {
+
+    /* 1. Reestruturação do Layout Principal */
+    body, .app-container, .main-layout {
+        display: block !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* 2. Menu Lateral (Sidebar) Convertido para Navegação Superior */
+    nav, .sidebar, #menu-lateral {
+        width: 100% !important;
+        min-width: 100% !important;
+        height: auto !important;
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 10px 15px !important;
+    }
+
+    /* Ajuste dos itens do menu para layout fluido */
+    nav ul, .sidebar ul {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        justify-content: center !important;
+    }
+
+    nav ul li, .sidebar ul li {
+        width: auto !important;
+        margin: 0 !important;
+    }
+
+    nav ul li a, .sidebar ul li a {
+        padding: 8px 12px !important;
+        font-size: 0.9rem !important;
+        border-radius: 6px !important;
+        display: inline-block !important;
+    }
+
+    /* 3. Área de Conteúdo Principal */
+    main, .content, .pagina-conteudo {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 15px !important;
+    }
+
+    /* 4. Redimensionamento e Enfileiramento dos Cards */
+    .card-grid, .grid-container, .cards-wrapper {
+        display: grid !important;
+        grid-template-columns: 1fr !important; /* Força 1 coluna em telas menores */
+        gap: 15px !important;
+    }
+
+    .card, .card-mural, .info-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 5. Adequação de IFrames (Google Calendar, Looker Studio, Trello) */
+    iframe {
+        width: 100% !important;
+        min-height: 350px !important;
+        height: auto !important;
+    }
+
+    /* 6. Tabelas Responsivas (Consultas SEI e Relatórios) */
+    .table-responsive, table {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* Dispositivos Muito Pequenos (Smartphones na Vertical: até 480px) */
+@media screen and (max-width: 480px) {
+    h1 { font-size: 1.4rem !important; }
+    h2 { font-size: 1.2rem !important; }
+
+    nav ul li a, .sidebar ul li a {
+        font-size: 0.8rem !important;
+        padding: 6px 10px !important;
+    }
+
+    .card {
+        padding: 12px !important;
+    }
+}
+						
                     </style>
                 </head>
                 <body>
@@ -2945,63 +3090,100 @@ if(pagina === "organograma"){
 
     if(pagina === "biblioteca"){
     conteudo.innerHTML = `
-        <h2>📚 Biblioteca DGF</h2>
-        <p>Indicações de leitura para o crescimento da nossa equipe.</p>
+        <h2>📚 Biblioteca Corporativa DGF</h2>
+        <p>Indicações de leitura selecionadas para o desenvolvimento pessoal e profissional da nossa equipe.</p>
         
-        <div class="biblioteca-grade" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
-            <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-                <img src="livro-pai.png" alt="Pai Rico Pai Pobre" style="width:100%; height:300px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
-                <h3>Pai Rico, Pai Pobre</h3>
-                <p><small>Robert Kiyosaki</small></p>
-                <p style="font-size:13px"><strong>Dica de Edson Junior:</strong> Essencial para entender ativos e passivos.</p>
-            </div>
+        <!-- CATEGORIA 1: FINANÇAS E INVESTIMENTOS -->
+        <div style="margin-top: 30px;">
+            <h3 style="border-left: 4px solid #27ae60; padding-left: 10px; color: #2c3e50; font-size: 1.2rem;">💰 Finanças & Educação Financeira</h3>
+            <div class="biblioteca-grade" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 15px;">
+                
+                <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; border: 1px solid #eee;">
+                    <span style="background: #e8f8f5; color: #27ae60; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 12px; display: inline-block; margin-bottom: 8px;">Finanças</span>
+                    <img src="livro-pai.png" alt="Pai Rico Pai Pobre" style="width:100%; height:260px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
+                    <h4 style="margin: 5px 0;">Pai Rico, Pai Pobre</h4>
+                    <p style="margin: 0;"><small style="color:#7f8c8d;">Robert Kiyosaki</small></p>
+                    <p style="font-size:12px; margin-top: 10px; color: #34495e;"><strong>Dica de Edson Junior:</strong> Essencial para entender ativos e passivos.</p>
+                </div>
 
-            <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-                <img src="livro-essencialismo.png" alt="Essencialismo" style="width:100%; height:300px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
-                <h3>Essencialismo</h3>
-                <p><small>Greg McKeown</small></p>
-                <p style="font-size:13px"><strong>Dica de Edson Junior:</strong> Para aprendermos a priorizar o que é vital.</p>
-            </div>
+                <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; border: 1px solid #eee;">
+                    <span style="background: #e8f8f5; color: #27ae60; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 12px; display: inline-block; margin-bottom: 8px;">Investimentos</span>
+                    <img src="dinheiro.png" alt="Dinheiro Domine esse Jogo" style="width:100%; height:260px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
+                    <h4 style="margin: 5px 0;">Dinheiro: Domine esse Jogo</h4>
+                    <p style="margin: 0;"><small style="color:#7f8c8d;">Tony Robbins</small></p>
+                    <p style="font-size:12px; margin-top: 10px; color: #34495e;"><strong>Dica de Mauro Ataíde:</strong> Estratégias para alcançar a liberdade financeira.</p>
+                </div>
 
-            <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-                <img src="empatia.png" alt="Radical Candor" style="width:100%; height:300px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
-                <h3>Empatia Assertiva</h3>
-                <p><small>Kim Scott</small></p>
-                <p style="font-size:13px"><strong>Dica de Edson Junior:</strong> Como dar feedbacks honestos e humanos.</p>
-            </div>
+                <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; border: 1px solid #eee;">
+                    <span style="background: #e8f8f5; color: #27ae60; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 12px; display: inline-block; margin-bottom: 8px;">Finanças</span>
+                    <img src="rico.png" alt="O Homem Mais Rico da Babilônia" style="width:100%; height:260px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
+                    <h4 style="margin: 5px 0;">O Homem Mais Rico da Babilônia</h4>
+                    <p style="margin: 0;"><small style="color:#7f8c8d;">George S. Clason</small></p>
+                    <p style="font-size:12px; margin-top: 10px; color: #34495e;"><strong>Dica de Mauro Ataíde:</strong> Lições atemporais sobre como economizar e investir.</p>
+                </div>
 
-            <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-                <img src="dinheiro.png" alt="Dinheiro Domine esse Jogo" style="width:100%; height:300px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
-                <h3>Dinheiro: Domine esse Jogo</h3>
-                <p><small>Tony Robbins</small></p>
-                <p style="font-size:13px"><strong>Dica de Mauro Ataíde:</strong> Estratégias para alcançar a liberdade financeira.</p>
-            </div>
-
-            <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-                <img src="rico.png" alt="O Homem Mais Rico da Babilônia" style="width:100%; height:300px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
-                <h3>O Homem Mais Rico da Babilônia</h3>
-                <p><small>George S. Clason</small></p>
-                <p style="font-size:13px"><strong>Dica de Mauro Ataíde:</strong> Lições atemporais sobre como economizar e investir.</p>
-            </div>
-
-            <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
-                <img src="mente.png" alt="A Mente Vencendo o Humor" style="width:100%; height:300px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
-                <h3>A Mente Vencendo o Humor</h3>
-                <p><small>Dennis Greenberger / Christine A. Padesky</small></p>
-                <p style="font-size:13px"><strong>Dica de Evellin França:</strong> Técnicas para transformar estados emocionais e pensamentos.</p>
             </div>
         </div>
 
-        <div class="form-container" style="max-width: 100%; margin-top: 30px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            <h3>💡 Indique um Livro</h3>
+        <!-- CATEGORIA 2: GESTÃO & PRODUTIVIDADE -->
+        <div style="margin-top: 40px;">
+            <h3 style="border-left: 4px solid #2980b9; padding-left: 10px; color: #2c3e50; font-size: 1.2rem;">🎯 Gestão, Liderança & Produtividade</h3>
+            <div class="biblioteca-grade" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 15px;">
+                
+                <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; border: 1px solid #eee;">
+                    <span style="background: #ebf5fb; color: #2980b9; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 12px; display: inline-block; margin-bottom: 8px;">Produtividade</span>
+                    <img src="livro-essencialismo.png" alt="Essencialismo" style="width:100%; height:260px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
+                    <h4 style="margin: 5px 0;">Essencialismo</h4>
+                    <p style="margin: 0;"><small style="color:#7f8c8d;">Greg McKeown</small></p>
+                    <p style="font-size:12px; margin-top: 10px; color: #34495e;"><strong>Dica de Edson Junior:</strong> Para aprendermos a priorizar o que é vital.</p>
+                </div>
+
+                <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; border: 1px solid #eee;">
+                    <span style="background: #ebf5fb; color: #2980b9; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 12px; display: inline-block; margin-bottom: 8px;">Liderança</span>
+                    <img src="empatia.png" alt="Empatia Assertiva" style="width:100%; height:260px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
+                    <h4 style="margin: 5px 0;">Empatia Assertiva</h4>
+                    <p style="margin: 0;"><small style="color:#7f8c8d;">Kim Scott</small></p>
+                    <p style="font-size:12px; margin-top: 10px; color: #34495e;"><strong>Dica de Edson Junior:</strong> Como dar feedbacks honestos e humanos.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CATEGORIA 3: SAÚDE MENTAL & BEM-ESTAR -->
+        <div style="margin-top: 40px;">
+            <h3 style="border-left: 4px solid #8e44ad; padding-left: 10px; color: #2c3e50; font-size: 1.2rem;">🧠 Saúde Mental, Inteligência Emocional & Bem-Estar</h3>
+            <div class="biblioteca-grade" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 15px;">
+                
+                <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; border: 1px solid #eee;">
+                    <span style="background: #f4ecf7; color: #8e44ad; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 12px; display: inline-block; margin-bottom: 8px;">Desenvolvimento Pessoal</span>
+                    <img src="mente.png" alt="A Mente Vencendo o Humor" style="width:100%; height:260px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
+                    <h4 style="margin: 5px 0;">A Mente Vencendo o Humor</h4>
+                    <p style="margin: 0;"><small style="color:#7f8c8d;">D. Greenberger / C. Padesky</small></p>
+                    <p style="font-size:12px; margin-top: 10px; color: #34495e;"><strong>Dica de Evellin França:</strong> Técnicas para transformar estados emocionais e pensamentos.</p>
+                </div>
+
+                <div class="livro-card" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; border: 1px solid #eee;">
+                    <span style="background: #f4ecf7; color: #8e44ad; font-size: 11px; font-weight: bold; padding: 3px 8px; border-radius: 12px; display: inline-block; margin-bottom: 8px;">Bem-Estar</span>
+                    <img src="felicidade.png" alt="Vamos conversar sobre a felicidade ?" style="width:100%; height:260px; object-fit: cover; border-radius:4px; margin-bottom:10px;">
+                    <h4 style="margin: 5px 0;">Vamos conversar sobre a felicidade ?</h4>
+                    <p style="margin: 0;"><small style="color:#7f8c8d;">Autor</small></p>
+                    <p style="font-size:12px; margin-top: 10px; color: #34495e;"><strong>Dica de [Nome]:</strong> Breve descrição do aprendizado do livro.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FORMULÁRIO DE SUGESTÃO DE LIVROS -->
+        <div class="form-container" style="max-width: 100%; margin-top: 40px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-top: 3px solid #1abc9c;">
+            <h3 style="margin-top: 0;">💡 Indique um Livro para a nossa Biblioteca</h3>
             <form action="https://formspree.io/f/xojpooka" method="POST">
                 <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Título do Livro:</label>
-                    <input type="text" name="Livro_Titulo" required placeholder="Ex: A Meta" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px;">Título do Livro:</label>
+                    <input type="text" name="Livro_Titulo" required placeholder="Ex: A Meta" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
                 </div>
                 <div style="margin-bottom: 15px;">
-                    <label style="display: block; margin-bottom: 5px; font-weight: bold;">Por que você indica este livro?</label>
-                    <textarea name="Livro_Motivo" rows="3" placeholder="Conte brevemente o que aprendeu..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                    <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px;">Por que você indica este livro?</label>
+                    <textarea name="Livro_Motivo" rows="3" placeholder="Conte brevemente o que aprendeu com a leitura..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;"></textarea>
                 </div>
                 <button type="submit" style="background: #1abc9c; color: white; border: none; padding: 10px 30px; border-radius: 4px; cursor: pointer; font-weight: bold;">Enviar Sugestão</button>
             </form>
@@ -3292,7 +3474,7 @@ if(pagina === "chegou"){
     };
 }
 	
-    if(pagina === "Funcionários"){
+   if(pagina === "Funcionários"){
     // Lista de dados extraída do seu texto
     const funcionarios = [
         { nome: "Adiele Gracindo da Silva", cargo: "Assessor Administrativo" },
@@ -3306,7 +3488,7 @@ if(pagina === "chegou"){
         { nome: "Alexandre Gomes do Nascimento", cargo: "Assessor Administrativo" },
         { nome: "Alexandre Ribeiro da Silva Mota", cargo: "Assessor Administrativo" },
         { nome: "Alexandre Ribeiro de Moura Mota", cargo: "Assessor Administrativo" },
-		{ nome: "Aliana de Moraes Coêlho", cargo: "Contador" },
+        { nome: "Aliana de Moraes Coêlho", cargo: "Contador" },
         { nome: "Amanda Tadeu da Silva Araújo", cargo: "Assessor Administrativo" },
         { nome: "Ana Beatriz Montana Rodrigues Silva", cargo: "Assessor Administrativo" },
         { nome: "Ana Carolina Cabral dos Reis Moreira", cargo: "Assessor Administrativo" },
@@ -3353,11 +3535,12 @@ if(pagina === "chegou"){
         { nome: "Henrique Mateus Batista", cargo: "Apoio Administrativo" },
         { nome: "Idalmi Viturino Sobrinho", cargo: "Assessor Técnico" },
         { nome: "Igor Murilo de Andrade Silva", cargo: "Assessor Administrativo" },
-		{ nome: "Ingrid nascimento de oliveira ramos", cargo: "Contador" },
+        { nome: "Ingrid nascimento de oliveira ramos", cargo: "Contador" },
         { nome: "Irailda Evangelista da Silva", cargo: "Assessor Administrativo" },
         { nome: "Irany Maria Souza Da Costa", cargo: "AUXILIAR EM SAUDE" },
         { nome: "Ivandete Severina da Silva", cargo: "Assessor Administrativo" },
-        { nome: "Janaína Ferreira de Pontes", cargo: "Contador" },
+        { nome: "Janaina Ferreira de Pontes", cargo: "Assessor Jurídico" },
+        { nome: "Janaina Maria de Melo", cargo: "Assessor Administrativo" },
         { nome: "Jaqueline Castelo Branco Simões", cargo: "Assessor Técnico" },
         { nome: "Jaqueline Rodrigues Da Mota Soares", cargo: "Gerente de Controle Orçamentário e Empenho" },
         { nome: "Jéssica Ferreira de Freitas Lima", cargo: "Assessor Técnico" },
@@ -3419,11 +3602,11 @@ if(pagina === "chegou"){
         { nome: "Paulo Ruan de Lima Andrade", cargo: "Assessor Administrativo" },
         { nome: "Pedro Henrique Da Silva Lima", cargo: "Coordenador de Prestação de Contas - UPAE" },
         { nome: "Pettersson Steffanno Nascimento dos Santos", cargo: "Coordenador de Análise de Prestação de Contas - UPA" },
-		{ nome: "Pollyana Correia de Freitas", cargo: "Contador" },
-		{ nome: "Rafael Fernando Pereira das Mercês", cargo: "Contador" },
+        { nome: "Pollyana Correia de Freitas", cargo: "Contador" },
+        { nome: "Rafael Fernando Pereira das Mercês", cargo: "Contador" },
         { nome: "Rafaela Aragão Sousa Ferraz", cargo: "Assessor Administrativo" },
         { nome: "Raiza Leandro Pontes Rita", cargo: "Coordenadora do Núcleo Tributário FES" },
-		{ nome: "Rayan Vinicius Torres de Santana", cargo: "Assessor Administrativo" },
+        { nome: "Rayan Vinicius Torres de Santana", cargo: "Assessor Administrativo" },
         { nome: "Rayville Rayanne Almeida Dos Santos", cargo: "Gerente de Contábil" },
         { nome: "Renan Martins da Silva", cargo: "Assessor Administrativo" },
         { nome: "Renata Pereira Da Silva", cargo: "ANALISTA EM SAUDE" },
@@ -3457,7 +3640,7 @@ if(pagina === "chegou"){
         { nome: "Wanessa Louise Lima dos Santos", cargo: "Assessor Administrativo" },
         { nome: "Zenaide Vasconcelos Torres", cargo: "Assessor Administrativo" }
     ];
-		
+        
     conteudo.innerHTML = `
         <div style="padding: 20px;">
             <h2 style="color: #2c3e50; margin-bottom: 10px;">👥 Nossa Equipe</h2>
@@ -3469,11 +3652,26 @@ if(pagina === "chegou"){
             <div id="listaCards" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
                 ${funcionarios.map(f => {
                     const inicial = f.nome.charAt(0);
+                    const eJaqueline = f.nome === "Jaqueline Castelo Branco Simões";
+                    const eJanainaPontes = f.nome === "Janaina Ferreira de Pontes";
+                    const eJanainaMelo = f.nome.toLowerCase().includes("janaina") && f.nome.toLowerCase().includes("melo");
+                    const eRayan = f.nome === "Rayan Vinicius Torres de Santana";
+                    
+                    let avatarHtml = `<div style="background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;">${inicial}</div>`;
+
+                    if (eJaqueline) {
+                        avatarHtml = `<img src="jaqueline.png" alt="${f.nome}" onerror="this.onerror=null; this.outerHTML='<div style=\\'background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;\\'>${inicial}</div>';" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">`;
+                    } else if (eJanainaPontes) {
+                        avatarHtml = `<img src="janaina.png" alt="${f.nome}" onerror="this.onerror=null; this.outerHTML='<div style=\\'background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;\\'>${inicial}</div>';" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">`;
+                    } else if (eJanainaMelo) {
+                        avatarHtml = `<img src="jana.png" alt="${f.nome}" onerror="this.onerror=null; this.outerHTML='<div style=\\'background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;\\'>${inicial}</div>';" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">`;
+                    } else if (eRayan) {
+                        avatarHtml = `<img src="rayan.png" alt="${f.nome}" onerror="this.onerror=null; this.outerHTML='<div style=\\'background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;\\'>${inicial}</div>';" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">`;
+                    }
+
                     return `
                         <div class="card-user" style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.07); display: flex; align-items: center; gap: 15px; border-left: 5px solid #1abc9c; transition: transform 0.2s;">
-                            <div style="background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;">
-                                ${inicial}
-                            </div>
+                            ${avatarHtml}
                             <div>
                                 <h4 style="margin: 0; color: #2c3e50; font-size: 15px;">${f.nome}</h4>
                                 <p style="margin: 5px 0 0 0; color: #1abc9c; font-size: 12px; font-weight: bold; text-transform: uppercase;">${f.cargo}</p>
@@ -3502,8 +3700,8 @@ if(pagina === "chegou"){
     });
 }
 
-    if(pagina === "documentos"){ conteudo.innerHTML = "<h2>Documentos</h2><p>Central de documentos.</p>"; }
-    if(pagina === "ouvidoria"){ conteudo.innerHTML = "<h2>Ouvidoria</h2><p>Canal de comunicação.</p>"; }
+if(pagina === "documentos"){ conteudo.innerHTML = "<h2>Documentos</h2><p>Central de documentos.</p>"; }
+if(pagina === "ouvidoria"){ conteudo.innerHTML = "<h2>Ouvidoria</h2><p>Canal de comunicação.</p>"; }
 	
 if(pagina === "avaliacao"){
     conteudo.style.maxWidth = "1200px";

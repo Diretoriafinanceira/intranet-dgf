@@ -3307,7 +3307,7 @@ if(pagina === "chegou"){
                                 <option value="AB-">AB-</option>
                                 <option value="O+">O+</option>
                                 <option value="O-">O-</option>
-								<option value="O-">NÃO SEI</option>
+                                <option value="NÃO SEI">NÃO SEI</option>
                             </select>
                         </div>
                         <div>
@@ -3347,27 +3347,39 @@ if(pagina === "chegou"){
                         </div>
                         <div>
                             <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">ENDEREÇO RESIDENCIAL *</label>
-                            <input type="text" id="cad_endereco" required placeholder="Rua, Nº, Bairro - Cidade/UF" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                            <input type="text" id="cad_endereco" required placeholder="Rua, Nº" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
                         </div>
                         <div>
-                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">CARGO / SETOR *</label>
-                            <input type="text" id="cad_cargo" required placeholder="Ex: GPC_OSS / Financeiro" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">BAIRRO *</label>
+                            <input type="text" id="cad_bairro" required placeholder="Digite seu bairro" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">CIDADE *</label>
+                            <input type="text" id="cad_cidade" required placeholder="Digite sua cidade" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">SETOR *</label>
+                            <input type="text" id="cad_setor" required placeholder="Digite seu setor" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">CARGO*</label>
+                            <input type="text" id="cad_cargo" required placeholder="Ex: Assessor administrativo" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
                         </div>
                         <div>
                             <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">DATA DE ADMISSÃO *</label>
                             <input type="date" id="cad_data" required style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
                         </div>
                         <div>
-                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">LOGIN DE REDE</label>
-                            <input type="text" id="cad_login_rede" placeholder="Digite seu login de rede" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">LOGIN DE REDE *</label>
+                            <input type="text" id="cad_login_rede" required placeholder="Digite seu login de rede" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
                         </div>
                         <div>
-                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">LOGIN DO SEI</label>
-                            <input type="text" id="cad_login_sei" placeholder="Digite seu login do SEI" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">LOGIN DO SEI *</label>
+                            <input type="text" id="cad_login_sei" required placeholder="Digite seu login do SEI" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
                         </div>
                         <div style="grid-column: 1 / -1;">
-                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">FOTO DO SERVIDOR</label>
-                            <input type="file" id="cad_foto" accept="image/*" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px; background: #fcfcfc;">
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">FOTO DO SERVIDOR *</label>
+                            <input type="file" id="cad_foto" required accept="image/*" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px; background: #fcfcfc;">
                         </div>
                     </div>
                     <div style="margin-top: 25px; text-align: right;">
@@ -3454,6 +3466,9 @@ if(pagina === "chegou"){
             telefone: document.getElementById("cad_telefone").value,
             urgencia: document.getElementById("cad_urgencia").value,
             endereco: document.getElementById("cad_endereco").value,
+            bairro: document.getElementById("cad_bairro").value,
+            cidade: document.getElementById("cad_cidade").value,
+            setor: document.getElementById("cad_setor").value,
             cargo: document.getElementById("cad_cargo").value,
             dataAdmissao: document.getElementById("cad_data").value,
             loginRede: document.getElementById("cad_login_rede").value,

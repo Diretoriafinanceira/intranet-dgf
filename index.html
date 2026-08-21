@@ -3278,6 +3278,10 @@ if(pagina === "chegou"){
                             <input type="text" id="cad_nome" required placeholder="Digite seu nome completo" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
                         </div>
                         <div>
+                            <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">MATRÍCULA *</label>
+                            <input type="text" id="cad_matricula" required placeholder="Digite sua matrícula" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
+                        </div>
+                        <div>
                             <label style="display: block; font-size: 12px; font-weight: bold; color: #34495e; margin-bottom: 6px;">CPF *</label>
                             <input type="text" id="cad_cpf" required maxlength="14" placeholder="000.000.000-00" style="width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 6px; box-sizing: border-box; font-size: 13px;">
                         </div>
@@ -3415,7 +3419,7 @@ if(pagina === "chegou"){
         this.value = v;
     };
 
-    // INSIRA AQUI A URL DO SEU GOOGLE APPS SCRIPT GERADO NA ETAPA ANTERIOR
+    // URL DO SEU GOOGLE APPS SCRIPT
     const URL_GOOGLE_SHEETS = "https://script.google.com/macros/s/AKfycbz8wQwFKSWwyU1c2MqoxA5iVx0YCbWBnKrPWnqgZKlrq0nSQPsNifQF-pYpKD-RK7Mh/exec";
 
     // Ações do Botão de Formulário (Abrir e Fechar)
@@ -3456,6 +3460,7 @@ if(pagina === "chegou"){
         const registro = {
             dataCadastro: new Date().toLocaleDateString('pt-BR') + ' ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}),
             nome: document.getElementById("cad_nome").value,
+            matricula: document.getElementById("cad_matricula").value,
             cpf: document.getElementById("cad_cpf").value,
             sexo: document.getElementById("cad_sexo").value,
             nascimento: document.getElementById("cad_nascimento").value,

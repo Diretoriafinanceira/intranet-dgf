@@ -746,6 +746,14 @@ function mostrar(pagina){
                            onmouseover="this.style.background='#f57c00'" onmouseout="this.style.background='#ff9800'">
                             🔑 Entrar em E-fisco
                         </a>
+                        <!-- BOTÃO DO PDF INSERIDO AQUI -->
+                        <a href="file:///C:/Users/edson.emjunior/Downloads/Decreto%20Encerramento%202025%20(1).pdf" target="_blank" style="
+                            display: inline-flex; align-items: center; gap: 6px; background: #e74c3c; color: white; 
+                            padding: 8px 16px; font-size: 13px; font-weight: bold; text-decoration: none; border-radius: 4px;
+                            box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: background 0.2s;"
+                           onmouseover="this.style.background='#c0392b'" onmouseout="this.style.background='#e74c3c'">
+                            📄 Decreto Encerramento 2025 PDF
+                        </a>
                     </div>
                 </div>
 
@@ -1816,115 +1824,33 @@ if (pagina === "areadogestor") {
 
             <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px; width: 100%;">
                 
-    <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-        <div style="background: #1a73e8; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
+    <div style="flex: 1; min-width: 300px; height: 500px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: relative;">
+        <div style="background: #1a73e8; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px; position: relative; z-index: 2;">
             📊 PAINEL - OSS / PISO
         </div>
-        <iframe src="https://lookerstudio.google.com/embed/reporting/6d8f5d1d-c00a-45a9-938e-db082183c44d/page/p_e7aq1dle5d" 
-                style="width: 100%; height: 500px; border: none;" allowfullscreen loading="lazy"></iframe>
+        <div style="width: 100%; height: calc(100% - 43px); overflow: hidden; position: relative;">
+            <iframe src="https://lookerstudio.google.com/embed/reporting/13596eec-522b-4bb3-b4c5-1ec67aea5d2f/page/p_1" 
+                    style="width: 133.33%; height: 133.33%; border: none; transform: scale(0.75); transform-origin: 0 0;" allowfullscreen loading="lazy"></iframe>
+        </div>
     </div>
 
-    <div style="flex: 1; min-width: 300px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-        <div style="background: #0f9d58; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px;">
+    <div style="flex: 1; min-width: 300px; height: 500px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: relative;">
+        <div style="background: #0f9d58; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px; position: relative; z-index: 2;">
             📈 PAINEL CONTÁBIL
         </div>
-        <iframe src="https://lookerstudio.google.com/embed/reporting/56d2bf7a-eaf6-4c58-9273-56f81c27e1d5/page/hwz0F" 
-                style="width: 100%; height: 500px; border: none;" allowfullscreen loading="lazy"></iframe>
+        <div style="width: 100%; height: calc(100% - 43px); overflow: hidden; position: relative;">
+            <iframe src="https://datastudio.google.com/embed/reporting/56d2bf7a-eaf6-4c58-9273-56f81c27e1d5/page/hwz0F" 
+                    style="width: 133.33%; height: 133.33%; border: none; transform: scale(0.75); transform-origin: 0 0;" allowfullscreen loading="lazy"></iframe>
+        </div>
     </div>
 
-    <!-- RADAR DGF (MANTIDO À DIREITA) -->
-    <div onclick="pagina = 'radar_dgf'; if(typeof mudarAba === 'function') { mudarAba('radar_dgf'); } else { location.reload(); }" style="
-        flex: 1; 
-        min-width: 320px; 
-        display: flex; 
-        flex-direction: column; 
-        gap: 10px; 
-        background: #f4f7f6; 
-        border-radius: 8px; 
-        padding: 12px; 
-        box-sizing: border-box;
-        border-top: 10px solid ${graficosPainel[0].cor};
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        transition: border-color 0.5s ease, transform 0.2s ease, background 0.2s ease;
-        height: 546px;
-        cursor: pointer;
-    " id="container-painel-radar"
-    onmouseover="this.style.background='#eaeded'; this.style.transform='scale(1.01)'" 
-    onmouseout="this.style.background='#f4f7f6'; this.style.transform='none'">
-        
-        <div id="topo-painel-radar" style="background: ${graficosPainel[0].cor}; color: white; padding: 10px; border-radius: 6px; text-align: center; font-weight: bold; font-size: 14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: background 0.5s ease; box-sizing: border-box; flex-shrink: 0;">
-            📊 RADAR DGF: Monitoramento ${graficosPainel[0].nome}
+    <div style="flex: 1; min-width: 300px; height: 500px; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: relative;">
+        <div style="background: #34495e; color: white; padding: 12px; text-align: center; font-weight: bold; font-size: 14px; position: relative; z-index: 2;">
+            📉 RADAR DGF
         </div>
-
-        <div style="display: flex; flex-direction: column; width: 100%; gap: 10px; flex: 1; min-height: 0;">
-            
-            <div style="flex: 1; background: transparent; overflow: hidden; position: relative; border: 1px solid #e0e0e0; border-radius: 6px; width: 100%;">
-                <div style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; background: transparent;"></div>
-                <iframe id="iframe-painel-radar" src="${graficosPainel[0].url}" 
-                    style="
-                        width: 142%; 
-                        height: 142%; 
-                        border: none; 
-                        position: absolute; 
-                        top: 0; 
-                        left: 0;
-                        transform: scale(0.7);
-                        transform-origin: top left;
-                    " 
-                    scrolling="no">
-                 </iframe>
-            </div>
-
-            <div style="
-                width: 100%; 
-                background: white; 
-                border-radius: 6px; 
-                box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
-                padding: 8px; 
-                display: flex; 
-                flex-direction: column; 
-                gap: 6px; 
-                box-sizing: border-box;
-                height: 150px;
-                position: relative;
-                z-index: 2;
-            " onclick="event.stopPropagation();">
-                <div style="font-weight: bold; font-size: 11px; color: #7f8c8d; border-bottom: 2px solid #f4f7f6; padding-bottom: 4px; text-align: center;">
-                    🎛️ SELEÇÃO RÁPIDA (Clique no card para abrir o menu expandido)
-                </div>
-                
-                <div style="display: flex; flex-direction: column; gap: 5px; flex: 1; overflow-y: auto;">
-                    ${graficosPainel.map((g, idx) => `
-                        <button 
-                            id="btn-atalho-${idx}" 
-                            onclick="window.mudarGraficoRadarManual(${idx})"
-                            style="
-                                display: flex;
-                                align-items: center;
-                                gap: 6px;
-                                width: 100%;
-                                padding: 6px;
-                                border: 1px solid ${idx === 0 ? g.cor : '#e0e0e0'};
-                                border-left: 4px solid ${g.cor};
-                                border-radius: 4px;
-                                background: ${idx === 0 ? '#f8f9fa' : '#ffffff'};
-                                color: #2c3e50;
-                                font-weight: ${idx === 0 ? 'bold' : 'normal'};
-                                font-size: 10px;
-                                cursor: pointer;
-                                text-align: left;
-                                transition: all 0.2s ease;
-                            "
-                            onmouseover="this.style.background='#f8f9fa'; this.style.transform='translateX(2px)'"
-                            onmouseout="if(window.indiceRadarAtual !== ${idx}) { this.style.background='#fff'; this.style.transform='none'; } else { this.style.transform='none'; }"
-                        >
-                            <span id="dot-atalho-${idx}" style="width: 6px; height: 6px; border-radius: 50%; background: ${idx === 0 ? g.cor : 'transparent'}; border: 1px solid ${idx === 0 ? 'transparent' : '#bdc3c7'}; flex-shrink: 0;"></span>
-                            <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; width: 100%;">${g.nome}</span>
-                        </button>
-                    `).join('')}
-                </div>
-            </div>
-
+        <div style="width: 100%; height: calc(100% - 43px); overflow: hidden; position: relative;">
+            <iframe src="https://lookerstudio.google.com/embed/reporting/6d8f5d1d-c00a-45a9-938e-db082183c44d/page/p_1" 
+                    style="width: 133.33%; height: 133.33%; border: none; transform: scale(0.75); transform-origin: 0 0;" allowfullscreen loading="lazy"></iframe>
         </div>
     </div>
 
@@ -1949,67 +1875,6 @@ if (pagina === "areadogestor") {
             </div>
         </div>
         `;
-
-        // --- Inicialização Automática das Lógicas e Timers do Radar DGF ---
-        window.indiceRadarAtual = 0;
-
-        const atualizarInterfaceRadar = (novoIndice) => {
-            window.indiceRadarAtual = !isNaN(novoIndice) ? novoIndice : 0;
-            
-            const container = document.getElementById("container-painel-radar");
-            const topo = document.getElementById("topo-painel-radar");
-            const iframe = document.getElementById("iframe-painel-radar");
-
-            if (container && topo && iframe) {
-                const grafico = graficosPainel[novoIndice];
-                iframe.src = grafico.url;
-
-                topo.innerHTML = `📊 RADAR DGF: Monitoramento ${grafico.nome}`;
-                topo.style.background = grafico.cor;
-                container.style.borderTopColor = grafico.cor;
-
-                graficosPainel.forEach((g, idx) => {
-                    const btn = document.getElementById(`btn-atalho-${idx}`);
-                    const dot = document.getElementById(`dot-atalho-${idx}`);
-                    if (btn && dot) {
-                        if (idx === novoIndice) {
-                            btn.style.background = "#f8f9fa";
-                            btn.style.borderColor = g.cor;
-                            btn.style.fontWeight = "bold";
-                            dot.style.background = g.cor;
-                            dot.style.borderColor = "transparent";
-                        } else {
-                            btn.style.background = "#ffffff";
-                            btn.style.borderColor = "#e0e0e0";
-                            btn.style.fontWeight = "normal";
-                            dot.style.background = "transparent";
-                            dot.style.borderColor = "#bdc3c7";
-                        }
-                    }
-                });
-            }
-        };
-
-        window.mudarGraficoRadarManual = (idx) => {
-            atualizarInterfaceRadar(idx);
-            clearInterval(window.intervaloPaginaRadar);
-            criarLoopRadar();
-        };
-
-        const criarLoopRadar = () => {
-            window.intervaloPaginaRadar = setInterval(() => {
-                let proximo = (window.indiceRadarAtual + 1) % graficosPainel.length;
-                const container = document.getElementById("container-painel-radar");
-                
-                if (container) {
-                    atualizarInterfaceRadar(proximo);
-                } else {
-                    clearInterval(window.intervaloPaginaRadar);
-                }
-            }, 8000);
-        };
-
-        criarLoopRadar();
     }
 
     // 5. Injeta a tela de login inicial com o menu de seleção e opções
@@ -2065,7 +1930,6 @@ if (pagina === "areadogestor") {
     </div>
     `;
 }
-
 if (pagina === "radar_dgf") {
     // Garante a limpeza de qualquer intervalo anterior para evitar duplicação ou consumo de memória
     if (window.intervaloPaginaRadar) {

@@ -757,8 +757,8 @@ function mostrar(pagina){
                     </div>
                 </div>
 
-                <!-- CARD MURAL DE AVISOS - QUEBRA-CABEÇA DGF COM BARRA DE PROGRESSO (14%) -->
-                <div onclick="mostrar('noticias')" style="
+                <!-- CARD MURAL DE AVISOS - VÍDEO INSTITUCIONAL + QUEBRA-CABEÇA DGF -->
+                <div style="
                     background: #fff9c4 !important; 
                     border: 1px solid #fbc02d; 
                     border-left: 5px solid #8e44ad;
@@ -773,28 +773,34 @@ function mostrar(pagina){
                     box-sizing: border-box;
                     font-family: inherit;
                     position: relative;
-                    cursor: pointer;
-                    transition: transform 0.2s, box-shadow 0.2s;
-                " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                ">
                     
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 18px; line-height: 1;">📌</span>
-                        <span style="color: #f57f17; font-weight: 800; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Mural de Avisos</span>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 18px; line-height: 1;">📌</span>
+                            <span style="color: #f57f17; font-weight: 800; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Mural de Avisos</span>
+                        </div>
+                        <span onclick="mostrar('noticias')" style="font-size: 11px; color: #8e44ad; font-weight: bold; cursor: pointer; text-decoration: underline;">Ver tudo</span>
                     </div>
 
-                    <div style="font-size: 13px; font-weight: bold; color: #8e44ad; margin-top: 2px; display: flex; justify-content: space-between; align-items: center;">
+                    <!-- VÍDEO NO MURAL DE AVISOS -->
+                    <div style="width: 100%; border-radius: 4px; overflow: hidden; margin-top: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
+                        <video controls style="width: 100%; height: auto; max-height: 120px; display: block; background: #000;">
+                            <source src="./institucional.mp4" type="video/mp4">
+                            Seu navegador não suporta vídeos.
+                        </video>
+                    </div>
+
+                    <div style="font-size: 12px; font-weight: bold; color: #8e44ad; margin-top: 4px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="mostrar('noticias')">
                         <span>🧩 Quebra-Cabeça DGF</span>
-                        <span style="font-size: 11px; background: #8e44ad; color: white; padding: 1px 6px; border-radius: 10px;">32%</span>
+                        <span style="font-size: 10px; background: #8e44ad; color: white; padding: 1px 6px; border-radius: 10px;">32%</span>
                     </div>
 
                     <!-- Barra de Porcentagem (Progresso) -->
-                    <div style="width: 100%; background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden; margin: 2px 0;">
-                        <div style="width: 14%; background: linear-gradient(90deg, #8e44ad, #9b59b6); height: 100%; border-radius: 4px;"></div>
+                    <div style="width: 100%; background: #e0e0e0; height: 6px; border-radius: 4px; overflow: hidden; margin: 2px 0; cursor: pointer;" onclick="mostrar('noticias')">
+                        <div style="width: 32%; background: linear-gradient(90deg, #8e44ad, #9b59b6); height: 100%; border-radius: 4px;"></div>
                     </div>
 
-                    <div style="width: 100%; height: 75px; border-radius: 4px; overflow: hidden; margin-top: 2px;">
-                        <img src="./qubra.png" alt="Quebra-Cabeça" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
                 </div>
 
             </div>
@@ -1190,6 +1196,7 @@ function mostrar(pagina){
         }
     }, 10000);
 }
+
 if (pagina === "TV DGF") {
 
     let html = `
@@ -1263,6 +1270,274 @@ if (pagina === "TV DGF") {
 
 }
 
+if (pagina === "cantinho") {
+    let html = `
+    <div style="padding: 20px; max-width: 1200px; margin: auto; font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%); border-radius: 16px; box-sizing: border-box;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+            <h1 style="color: #003366; font-size: 32px; margin: 0; text-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                ☕ Cantinho DGF & Classificados
+            </h1>
+            <!-- Botão que abre a caixinha de cadastro na própria tela -->
+            <button onclick="document.getElementById('modalPublicar').style.display='flex'" style="background: #00b894; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; box-shadow: 0 4px 10px rgba(0,184,148,0.3);">
+                ➕ Publicar na Tela
+            </button>
+        </div>
+
+        <!-- Seção 1: Previsão do Tempo, Trânsito e Mural de Avisos -->
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px; margin-bottom: 25px;">
+            
+            <!-- Coluna da Esquerda: Widget de Clima e Trânsito -->
+            <div style="background: linear-gradient(135deg, #3498db 0%, #1abc9c 100%); border-radius: 14px; padding: 20px; color: white; box-shadow: 0 6px 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h3 style="margin: 0 0 10px 0; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                        🌤️ Clima & Trânsito
+                    </h3>
+                    <p style="margin: 0 0 15px 0; font-size: 13px; opacity: 0.95;">Recife / PE</p>
+                    
+                    <div style="background: rgba(255,255,255,0.25); padding: 12px; border-radius: 10px; margin-bottom: 12px; backdrop-filter: blur(5px);">
+                        <div style="font-size: 26px; font-weight: bold;">28°C</div>
+                        <div style="font-size: 12px;">Parcialmente nublado • Ótimo dia</div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.25); padding: 10px; border-radius: 10px; backdrop-filter: blur(5px);">
+                        <div style="font-size: 12px; font-weight: bold; margin-bottom: 3px;">🚗 Trânsito para Volta:</div>
+                        <div style="font-size: 11px; opacity: 0.95;">Fluxo normal nas principais vias de acesso. Sem retenções graves no momento.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna da Direita: Mural de Avisos Rápidos -->
+            <div style="background: #ffffff; border-radius: 14px; padding: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); border: 1px solid #d1d8e0; display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0; color: #2c3e50; font-size: 16px;">📌 Mural de Avisos Rápidos</h3>
+                    <span style="font-size: 11px; color: #00b894; background: #e6fffa; padding: 4px 10px; border-radius: 12px; font-weight: bold; border: 1px solid #b2f5ea;">Online via Planilha</span>
+                </div>
+                
+                <div id="muralAvisosContainer" style="overflow-y: auto; max-height: 180px; display: flex; flex-direction: column; gap: 10px; flex: 1; padding-right: 5px;">
+                    <div style="text-align: center; color: #7f8c8d; font-size: 13px; padding: 20px;">Carregando avisos em tempo real...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção 2: Cantinho do Café / Classificados Internos -->
+        <div style="background: #ffffff; border-radius: 14px; padding: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); border: 1px solid #d1d8e0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #edf2f7; padding-bottom: 10px;">
+                <h3 style="margin: 0; color: #2c3e50; font-size: 18px;">☕ Classificados & Mural DGF</h3>
+                <span style="font-size: 13px; color: #e17055; font-weight: 600;">Espaço de convivência da equipe</span>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+                <button onclick="window.filtrarClassificados('todos')" style="padding: 7px 15px; border-radius: 20px; border: 1px solid #cbd5e1; background: #003366; color: white; cursor: pointer; font-size: 12px; font-weight: bold;">Todos</button>
+                <button onclick="window.filtrarClassificados('carona')" style="padding: 7px 15px; border-radius: 20px; border: 1px solid #cbd5e1; background: #f1f5f9; color: #334155; cursor: pointer; font-size: 12px; font-weight: 600;">🚗 Carona Solidária</button>
+                <button onclick="window.filtrarClassificados('venda')" style="padding: 7px 15px; border-radius: 20px; border: 1px solid #cbd5e1; background: #f1f5f9; color: #334155; cursor: pointer; font-size: 12px; font-weight: 600;">🏷️ Vendas & Trocas</button>
+                <button onclick="window.filtrarClassificados('conquista')" style="padding: 7px 15px; border-radius: 20px; border: 1px solid #cbd5e1; background: #f1f5f9; color: #334155; cursor: pointer; font-size: 12px; font-weight: 600;">🏆 Achados & Conquistas</button>
+            </div>
+
+            <!-- Grid de Classificados -->
+            <div id="gridClassificados" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px;">
+                <div style="text-align: center; grid-column: 1/-1; color: #7f8c8d; padding: 20px;">Carregando classificados...</div>
+            </div>
+        </div>
+
+        <!-- MODAL DE CADASTRO DIRETO NA TELA -->
+        <div id="modalPublicar" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(3px);">
+            <div style="background:white; padding:30px; border-radius:14px; width:90%; max-width:450px; box-shadow:0 10px 25px rgba(0,0,0,0.2); position:relative; font-family:'Segoe UI', Arial, sans-serif;">
+                <h3 style="margin-top:0; color:#003366; font-size:22px; margin-bottom:15px;">📝 Publicar no Cantinho DGF</h3>
+                
+                <form id="formPublicacao" onsubmit="enviarParaPlanilha(event)">
+                    <div style="margin-bottom: 12px;">
+                        <label style="display:block; font-size:12px; font-weight:bold; color:#475569; margin-bottom:4px;">O que você deseja publicar?</label>
+                        <select id="tipoPub" style="width:100%; padding:10px; border-radius:6px; border:1px solid #cbd5e1; font-size:14px; background:#fff;">
+                            <option value="aviso">📌 Aviso Rápido para o Mural</option>
+                            <option value="carona">🚗 Carona Solidária</option>
+                            <option value="venda">🏷️ Venda & Troca</option>
+                            <option value="conquista">🏆 Achados & Conquistas</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <label style="display:block; font-size:12px; font-weight:bold; color:#475569; margin-bottom:4px;">Título / Assunto</label>
+                        <input type="text" id="tituloPub" required placeholder="Ex: Cafeteira / Reunião / Trajeto Centro" style="width:100%; padding:10px; border-radius:6px; border:1px solid #cbd5e1; font-size:14px; box-sizing:border-box;">
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <label style="display:block; font-size:12px; font-weight:bold; color:#475569; margin-bottom:4px;">Mensagem / Descrição</label>
+                        <textarea id="descPub" required rows="3" placeholder="Detalhes do que está anunciando..." style="width:100%; padding:10px; border-radius:6px; border:1px solid #cbd5e1; font-size:14px; box-sizing:border-box; resize:none;"></textarea>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="display:block; font-size:12px; font-weight:bold; color:#475569; margin-bottom:4px;">Seu Nome e Ramal</label>
+                        <input type="text" id="autorPub" required placeholder="Ex: Mariana (Ramal 4215)" style="width:100%; padding:10px; border-radius:6px; border:1px solid #cbd5e1; font-size:14px; box-sizing:border-box;">
+                    </div>
+
+                    <div style="display:flex; justify-content:flex-end; gap:10px;">
+                        <button type="button" onclick="document.getElementById('modalPublicar').style.display='none'" style="background:#cbd5e1; color:#334155; border:none; padding:10px 18px; border-radius:6px; cursor:pointer; font-weight:bold;">Cancelar</button>
+                        <button type="submit" id="btnSalvarPub" style="background:#00b894; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer; font-weight:bold;">Publicar Agora</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    `;
+
+    conteudo.innerHTML = html;
+
+    // Função de filtro dos classificados
+    window.filtrarClassificados = function(cat) {
+        const cards = document.querySelectorAll('.card-anuncio');
+        cards.forEach(card => {
+            if (cat === 'todos' || card.getAttribute('data-categoria') === cat) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    };
+
+    // FUNÇÃO DE ENVIO SEGURO PARA A PLANILHA (VIA GOOGLE APPS SCRIPT)
+    window.enviarParaPlanilha = function(e) {
+        e.preventDefault();
+        
+        const tipo = document.getElementById('tipoPub').value;
+        const titulo = document.getElementById('tituloPub').value;
+        const descricao = document.getElementById('descPub').value;
+        const autor = document.getElementById('autorPub').value;
+        const btn = document.getElementById('btnSalvarPub');
+
+        btn.innerText = "Publicando...";
+        btn.disabled = true;
+
+        // URL do seu Web App do Google Apps Script (veja a explicação abaixo de como gerar)
+        const urlWebScript = "https://script.google.com/macros/s/AKfycbwKXQuv4d_hSlFym2jsMdSZOHO_CAcmxEJyDR6RCKAaUrYWhs0_fieAYR99QfE3HQlr/exec";
+
+        const dados = { tipo, titulo, descricao, autor };
+
+        fetch(urlWebScript, {
+            method: "POST",
+            mode: "no-cors", // Necessário para aceitar requisições de domínios externos no Google Apps Script
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dados)
+        }).then(() => {
+            alert("✅ Publicado com sucesso! O conteúdo já está visível na tela e salvo na sua planilha.");
+            document.getElementById('modalPublicar').style.display = 'none';
+            document.getElementById('formPublicacao').reset();
+            btn.innerText = "Publicar Agora";
+            btn.disabled = false;
+            // Recarrega a página para atualizar os dados
+            window.mostrar('cantinho');
+        }).catch(err => {
+            alert("❌ Erro ao publicar. Tente novamente.");
+            console.error(err);
+            btn.innerText = "Publicar Agora";
+            btn.disabled = false;
+        });
+    };
+
+    // LEITURA AUTOMÁTICA DA PLANILHA (MOSTRA NA TELA PARA TODOS)
+    const docIdCantinho = "1gtpXCUvLheezCPkVjyWEEVMfmR5K9JngnJ1VG419AtM";
+    
+    // Puxar Avisos
+    const scriptAvisos = document.createElement('script');
+    scriptAvisos.src = `https://docs.google.com/spreadsheets/d/${docIdCantinho}/gviz/tq?tqx=responseHandler:carregarAvisosSheet`;
+    document.body.appendChild(scriptAvisos);
+
+    window.carregarAvisosSheet = function(response) {
+        try {
+            const rows = response.table.rows;
+            const containerAvisos = document.getElementById('muralAvisosContainer');
+            if (!containerAvisos) return;
+
+            if (!rows || rows.length === 0) {
+                containerAvisos.innerHTML = `<div style="text-align: center; color: #7f8c8d; font-size: 13px; padding: 15px;">Nenhum aviso no mural.</div>`;
+                return;
+            }
+
+            let htmlAvisos = '';
+            rows.forEach(row => {
+                // Filtra apenas o que for do tipo 'aviso' ou registros gerais da aba de avisos
+                const tipoReg = row.c[0] ? String(row.c[0].v).toLowerCase() : 'aviso';
+                if (tipoReg.includes('aviso')) {
+                    const tituloAviso = row.c[1] ? row.c[1].v : '';
+                    const descAviso = row.c[2] ? row.c[2].v : '';
+                    const autorAviso = row.c[4] ? row.c[4].v : 'Equipe DGF';
+
+                    htmlAvisos += `
+                        <div style="background: #f8fafc; border-left: 4px solid #0984e3; padding: 10px 12px; border-radius: 6px; font-size: 13px; border: 1px solid #e2e8f0; border-left-width: 4px;">
+                            <strong style="color: #1e293b;">${autorAviso}:</strong> <span style="color: #475569;"><b>${tituloAviso}</b> - ${descAviso}</span>
+                        </div>
+                    `;
+                }
+            });
+            containerAvisos.innerHTML = htmlAvisos || `<div style="text-align: center; color: #7f8c8d; font-size: 13px; padding: 15px;">Nenhum aviso rápido no momento.</div>`;
+        } catch (e) {
+            console.error("Erro ao carregar avisos:", e);
+        }
+    };
+
+    // Puxar Classificados (Carona, Venda, Conquista)
+    const scriptClassificados = document.createElement('script');
+    scriptClassificados.src = `https://docs.google.com/spreadsheets/d/${docIdCantinho}/gviz/tq?tqx=responseHandler:carregarClassificadosSheet`;
+    document.body.appendChild(scriptClassificados);
+
+    window.carregarClassificadosSheet = function(response) {
+        try {
+            const rows = response.table.rows;
+            const grid = document.getElementById('gridClassificados');
+            if (!grid) return;
+
+            if (!rows || rows.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: #7f8c8d; padding: 20px;">Nenhum classificado ativo.</div>`;
+                return;
+            }
+
+            let htmlCards = '';
+            rows.forEach(row => {
+                const categoria = row.c[0] ? String(row.c[0].v).toLowerCase().trim() : 'venda';
+                if (categoria !== 'aviso') { // Pula os avisos e pega o resto (carona, venda, conquista)
+                    const titulo = row.c[1] ? row.c[1].v : '';
+                    const descricao = row.c[2] ? row.c[2].v : '';
+                    const contato = row.c[3] ? row.c[3].v : '';
+
+                    let corTag = '#0984e3';
+                    let bgCard = '#f8fafc';
+                    let nomeCat = 'Geral';
+
+                    if (categoria.includes('carona')) {
+                        corTag = '#ff7675';
+                        bgCard = '#fdfbf7';
+                        nomeCat = 'Carona';
+                    } else if (categoria.includes('venda')) {
+                        corTag = '#00b894';
+                        bgCard = '#f4f9f9';
+                        nomeCat = 'Venda';
+                    } else if (categoria.includes('conquista')) {
+                        corTag = '#f39c12';
+                        bgCard = '#fef9e7';
+                        nomeCat = 'Conquista';
+                    }
+
+                    if (titulo) {
+                        htmlCards += `
+                            <div class="card-anuncio" data-categoria="${categoria}" style="background: ${bgCard}; border: 1px solid #cbd5e1; border-radius: 10px; padding: 15px; position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+                                <span style="background: ${corTag}; color: white; font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: bold; position: absolute; top: 12px; right: 12px;">${nomeCat}</span>
+                                <h4 style="margin: 0 0 5px 0; color: #1e293b; font-size: 14px; padding-right: 50px;">${titulo}</h4>
+                                <p style="margin: 0 0 10px 0; color: #475569; font-size: 12px; line-height: 1.4;">${descricao}</p>
+                                <div style="font-size: 11px; color: #64748b; border-top: 1px dashed #cbd5e1; padding-top: 8px;">Por: ${contato}</div>
+                            </div>
+                        `;
+                    }
+                }
+            });
+
+            grid.innerHTML = htmlCards || `<div style="grid-column: 1/-1; text-align: center; color: #7f8c8d; padding: 20px;">Nenhum anúncio encontrado.</div>`;
+        } catch (e) {
+            console.error("Erro ao carregar classificados:", e);
+        }
+    };
+}
+
 // =========================================================
     // ABA RELATÓRIO - INTEGRADA COM PLANILHAS EM TEMPO REAL
     // =========================================================
@@ -1334,7 +1609,33 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 2. ANDAMENTO DO QUEBRA-CABEÇA (SEGUNDA NOTÍCIA - FECHADA)
+    // 2. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026 (SEGUNDA NOTÍCIA)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #d35400; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-cge')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 01/09/2026</small>
+                    <h3 style="margin: 5px 0 0 0; color: #d35400; font-size: 16px; text-transform: uppercase;">
+                        📢 OFÍCIO CIRCULAR CGE Nº 10/2026 – FECHAMENTO DO MÊS DE AGOSTO NO E-FISCO
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Clique para ler o comunicado da Contadoria Geral do Estado...</p>
+                </div>
+                <span id="icon-noticia-cge" style="font-size: 18px; color: #d35400; font-weight: bold;">▼</span>
+            </div>
+
+            <div id="noticia-cge" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0;">
+                    Prezados(as),<br><br>
+                    Conforme Ofício Circular CGE nº 10/2026, de 31/08/2026, SEI nº 1500000144.001114/2026-84 reiteramos que o fechamento do mês de AGOSTO no e-Fisco ocorrerá impreterivelmente no dia 15/09/2026, às 19h.<br><br>
+                    Atenciosamente,<br>
+                    <strong>Contadoria Geral do Estado</strong><br>
+                    Secretaria da Fazenda de Pernambuco
+                </p>
+            </div>
+        </div>
+    `;
+
+    // 3. ANDAMENTO DO QUEBRA-CABEÇA
     html += `
         <div class="noticia-card" style="border-left: 5px solid #9b59b6; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-quebracabeca')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1360,7 +1661,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 3. MISSA DE 7º DIA
+    // 4. MISSA DE 7º DIA
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2c3e50; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-missa')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1402,7 +1703,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 4. Resultado do Bolão DGF
+    // 5. Resultado do Bolão DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2ecc71; background: #f4fbf7; font-family: 'Arial', sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-bolao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1454,7 +1755,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 5. São João DGF
+    // 6. São João DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-saojoao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1477,7 +1778,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 6. Guia de Ajuda
+    // 7. Guia de Ajuda
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #3498db; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-guia')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1497,7 +1798,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 7. Demais notícias
+    // 8. Demais notícias
     if (typeof listaNoticias !== 'undefined') {
         listaNoticias.forEach((n, i) => {
             html += `
@@ -3088,6 +3389,26 @@ if(pagina === "organograma"){
             
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
                 
+                <!-- NOVO CURSO: ESAFAZ (PRIMEIRO DA ESQUERDA PARA A DIREITA) -->
+                <div class="noticia-card" style="border-left-color: #1abc9c; position: relative; display: flex; flex-direction: column; justify-content: space-between;">
+                    <span style="position: absolute; top: 10px; right: 10px; background: #e8f8f5; color: #1abc9c; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: bold;">INSCRIÇÕES ABERTAS</span>
+                    <h3 style="margin-top: 5px; padding-right: 110px;">Ciclo Formativo ESAFAZ</h3>
+                    <p style="font-size: 14px; color: #7f8c8d; margin-bottom: 12px;">
+                        📢 Abertura do ciclo formativo da Escola Fazendária de Pernambuco.<br><br>
+                        Solicitamos que a inscrição seja realizada apenas se houver certeza de participação. Temos lista de espera e é fundamental que todas as vagas sejam efetivamente aproveitadas.<br><br>
+                        <small style="color: #e67e22; font-weight: bold;">⚠️ Importante: Os cursos que não aparecem disponíveis no link são de acesso restrito aos servidores da SEFAZ ou pertencem a turmas fechadas.</small>
+                    </p>
+                    <div>
+                        <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 12px;">
+                        <p style="font-size: 13px;"><strong>Modalidade:</strong> Online / Presencial</p>
+                        <p style="font-size: 13px;"><strong>Instituição:</strong> ESAFAZ - Escola Fazendária de PE</p>
+                        <a href="https://linktr.ee/esafaz" target="_blank" style="text-decoration: none;">
+                            <button class="btn-enviar" style="width: 100%; padding: 10px; font-size: 14px; background: #1abc9c; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Inscreva-se Gratuitamente</button>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CURSO 1: DEMONSTRAÇÕES CONTÁBEIS (ENCERRADO) -->
                 <div class="noticia-card" style="border-left-color: #e74c3c; position: relative;">
                     <span style="position: absolute; top: 10px; right: 10px; background: #fce4d6; color: #e74c3c; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: bold;">INSCRIÇÕES FECHADAS</span>
                     <h3 style="margin-top: 5px;">Demonstrações Contábeis Aplicadas ao Setor Público</h3>
@@ -3098,17 +3419,16 @@ if(pagina === "organograma"){
                     <button class="btn-enviar" style="padding: 8px; font-size: 14px; background: #e74c3c; cursor: not-allowed;" disabled>Curso Encerrado</button>
                 </div>
 
-                <div class="noticia-card" style="border-left-color: #1abc9c; position: relative; display: flex; flex-direction: column; justify-content: space-between;">
-                    <span style="position: absolute; top: 10px; right: 10px; background: #e8f8f5; color: #1abc9c; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: bold;">INSCRIÇÕES ABERTAS</span>
+                <!-- CURSO 2: INTELIGÊNCIA ARTIFICIAL (AGORA ENCERRADO) -->
+                <div class="noticia-card" style="border-left-color: #e74c3c; position: relative; display: flex; flex-direction: column; justify-content: space-between;">
+                    <span style="position: absolute; top: 10px; right: 10px; background: #fce4d6; color: #e74c3c; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: bold;">INSCRIÇÕES FECHADAS</span>
                     <h3 style="margin-top: 5px; padding-right: 110px;">Inteligência Artificial no Contexto do Serviço Público</h3>
-                    <p style="font-size: 14px; color: #7f8c8d; margin-bottom: 12px;">📢 Oportunidade de Capacitação Gratuita!<br><br>A Escola Virtual de Governo (EV.G/Enap) está com o curso "Inteligência Artificial no Contexto do Serviço Público", totalmente gratuito e com certificado. A capacitação apresenta conceitos fundamentais, aplicações práticas e experiências de uso da IA para tornar os serviços públicos mais eficientes, inovadores e orientados ao cidadão.</p>
+                    <p style="font-size: 14px; color: #7f8c8d; margin-bottom: 12px;">A Escola Virtual de Governo (EV.G/Enap) apresentou conceitos fundamentais, aplicações práticas e experiências de uso da IA para tornar os serviços públicos mais eficientes, inovadores e orientados ao cidadão.</p>
                     <div>
                         <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 12px;">
                         <p style="font-size: 13px;"><strong>Modalidade:</strong> Online (Autoinstrucional)</p>
                         <p style="font-size: 13px;"><strong>Instituição:</strong> EV.G / Enap</p>
-                        <a href="https://www.escolavirtual.gov.br/curso/377?utm_source=chatgpt.com" target="_blank" style="text-decoration: none;">
-                            <button class="btn-enviar" style="width: 100%; padding: 10px; font-size: 14px; background: #1abc9c; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Inscreva-se Gratuitamente</button>
-                        </a>
+                        <button class="btn-enviar" style="width: 100%; padding: 10px; font-size: 14px; background: #e74c3c; cursor: not-allowed; border: none; border-radius: 4px; color: white; font-weight: bold;" disabled>Curso Encerrado</button>
                     </div>
                 </div>
 

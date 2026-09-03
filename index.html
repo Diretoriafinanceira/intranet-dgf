@@ -666,28 +666,63 @@ function mostrar(pagina){
                 gap: 15px;
             ">
 
-                <button onclick="mostrar('biblioteca')" style="
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                    background: rgba(39, 174, 96, 0.85);
-                    padding: 12px 18px;
-                    border-radius: 6px;
-                    border: none;
-                    border-bottom: 3px solid #2196f3;
-                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                    cursor: pointer;
-                    transition: transform 0.2s ease, background-color 0.2s ease;
-                    font-family: inherit;
-                "
-                onmouseover="this.style.background='rgba(39, 174, 96, 1)'; this.style.transform='scale(1.03)';"
-                onmouseout="this.style.background='rgba(39, 174, 96, 0.85)'; this.style.transform='scale(1)'"
-                >
-                    <span style="font-size: 24px; font-weight: bold; letter-spacing: 1px;">📚 CLUBE DO LIVRO</span>
-                    <span style="font-size: 13px; opacity: 0.9; margin-top: 2px;">Cultura & Conhecimento</span>
-                </button>
+                <!-- COLUNA DA ESQUERDA: CLUBE DO LIVRO + CARD COMPACTO DO QUEBRA-CABEÇA -->
+                <div style="display: flex; flex-direction: column; gap: 10px; width: 210px;">
+                    
+                    <!-- BOTÃO CLUBE DO LIVRO MANTIDO -->
+                    <button onclick="mostrar('biblioteca')" style="
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        background: rgba(39, 174, 96, 0.85);
+                        padding: 10px 14px;
+                        border-radius: 6px;
+                        border: none;
+                        border-bottom: 3px solid #2196f3;
+                        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                        cursor: pointer;
+                        transition: transform 0.2s ease, background-color 0.2s ease;
+                        font-family: inherit;
+                        width: 100%;
+                    "
+                    onmouseover="this.style.background='rgba(39, 174, 96, 1)'; this.style.transform='scale(1.02)';"
+                    onmouseout="this.style.background='rgba(39, 174, 96, 0.85)'; this.style.transform='scale(1)'"
+                    >
+                        <span style="font-size: 18px; font-weight: bold; letter-spacing: 0.5px;">📚 CLUBE DO LIVRO</span>
+                        <span style="font-size: 11px; opacity: 0.9; margin-top: 2px;">Cultura & Conhecimento</span>
+                    </button>
+
+                    <!-- CARD COMPACTO QUEBRA-CABEÇA -->
+                    <div onclick="mostrar('noticias')" style="
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        background: rgba(142, 68, 173, 0.85);
+                        padding: 8px;
+                        border-radius: 6px;
+                        border-bottom: 2px solid #8e44ad;
+                        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+                        cursor: pointer;
+                        transition: transform 0.2s ease, background-color 0.2s ease;
+                        font-family: inherit;
+                        width: 100%;
+                        box-sizing: border-box;
+                    "
+                    onmouseover="this.style.background='rgba(142, 68, 173, 1)'; this.style.transform='scale(1.02)';"
+                    onmouseout="this.style.background='rgba(142, 68, 173, 0.85)'; this.style.transform='scale(1)'"
+                    >
+                        <!-- IMAGEM EM MODO PAISAGEM (ASPECT-RATIO 16/9 + COVER) -->
+                        <img src="./qubra.png" alt="Quebra-Cabeça" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin-bottom: 6px;">
+                        <span style="font-size: 11px; font-weight: bold; line-height: 1.2; text-align: center; color: #fff;">
+                            🧩 Doe 5 min e nos ajude a montar nosso quebra-cabeça!
+                        </span>
+                    </div>
+
+                </div>
 
                 <div style="
                     flex:1;
@@ -757,7 +792,7 @@ function mostrar(pagina){
                     </div>
                 </div>
 
-                <!-- CARD MURAL DE AVISOS - VÍDEO INSTITUCIONAL + QUEBRA-CABEÇA DGF -->
+                <!-- CARD MURAL DE AVISOS - APENAS VÍDEO INSTITUCIONAL -->
                 <div style="
                     background: #fff9c4 !important; 
                     border: 1px solid #fbc02d; 
@@ -789,16 +824,6 @@ function mostrar(pagina){
                             <source src="./institucional.mp4" type="video/mp4">
                             Seu navegador não suporta vídeos.
                         </video>
-                    </div>
-
-                    <div style="font-size: 12px; font-weight: bold; color: #8e44ad; margin-top: 4px; display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="mostrar('noticias')">
-                        <span>🧩 Quebra-Cabeça DGF</span>
-                        <span style="font-size: 10px; background: #8e44ad; color: white; padding: 1px 6px; border-radius: 10px;">32%</span>
-                    </div>
-
-                    <!-- Barra de Porcentagem (Progresso) -->
-                    <div style="width: 100%; background: #e0e0e0; height: 6px; border-radius: 4px; overflow: hidden; margin: 2px 0; cursor: pointer;" onclick="mostrar('noticias')">
-                        <div style="width: 32%; background: linear-gradient(90deg, #8e44ad, #9b59b6); height: 100%; border-radius: 4px;"></div>
                     </div>
 
                 </div>
@@ -1196,7 +1221,6 @@ function mostrar(pagina){
         }
     }, 10000);
 }
-
 if (pagina === "TV DGF") {
 
     let html = `

@@ -717,8 +717,15 @@ function mostrar(pagina){
                     >
                         <!-- IMAGEM EM MODO PAISAGEM (ASPECT-RATIO 16/9 + COVER) -->
                         <img src="./qubra.png" alt="Quebra-Cabeça" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin-bottom: 6px;">
+                        
+                        <!-- BARRINHA DE PROGRESSO (55%) -->
+                        <div style="width: 100%; background: rgba(0,0,0,0.25); border-radius: 10px; height: 12px; margin-bottom: 6px; overflow: hidden; position: relative;">
+                            <div style="width: 55%; background: #2ecc71; height: 100%; border-radius: 10px; transition: width 0.3s ease;"></div>
+                            <span style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-size: 9px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.8);">55%</span>
+                        </div>
+
                         <span style="font-size: 11px; font-weight: bold; line-height: 1.2; text-align: center; color: #fff;">
-                            🧩 Doe 5 min do seu tempo e nos ajude a montar nosso quebra-cabeça!
+                            🧩 Doe 5 min e nos ajude a montar nosso quebra-cabeça!
                         </span>
                     </div>
 
@@ -1221,6 +1228,7 @@ function mostrar(pagina){
         }
     }, 10000);
 }
+	
 if (pagina === "TV DGF") {
 
     let html = `

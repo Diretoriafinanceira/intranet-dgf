@@ -1614,7 +1614,33 @@ if(pagina === "noticias"){
 
     const hoje = new Date().toLocaleDateString('pt-BR');
 
-    // 1. VÍDEO INSTITUCIONAL DGF (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    // 1. ANDAMENTO DO QUEBRA-CABEÇA (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #9b59b6; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-quebracabeca')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #8e44ad; font-size: 16px; text-transform: uppercase;">
+                        🧩 ANDAMENTO DO NOSSO QUEBRA-CABEÇA DGF
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Confira o progresso da montagem da nossa equipe...</p>
+                </div>
+                <span id="icon-noticia-quebracabeca" style="font-size: 18px; color: #8e44ad; font-weight: bold;">▲</span>
+            </div>
+
+            <div id="noticia-quebracabeca" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="line-height: 1.6; color: #555; font-size: 14px; margin: 15px 0 10px 0;">
+                    A cada peça encaixada, vemos o resultado do nosso trabalho em equipe! Veja abaixo o andamento atual da montagem do nosso quebra-cabeça:
+                </p>
+                
+                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 10px;">
+                    <img src="./qubra.png" alt="Andamento do Quebra-Cabeça" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 2. VÍDEO INSTITUCIONAL DGF (SEGUNDA NOTÍCIA)
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #e74c3c; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-video')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1623,10 +1649,10 @@ if(pagina === "noticias"){
                     <h3 style="margin: 5px 0 0 0; color: #c0392b; font-size: 16px;">🎬 VÍDEO INSTITUCIONAL DGF</h3>
                     <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Confira o vídeo informativo abaixo...</p>
                 </div>
-                <span id="icon-noticia-video" style="font-size: 18px; color: #e74c3c; font-weight: bold;">▲</span>
+                <span id="icon-noticia-video" style="font-size: 18px; color: #e74c3c; font-weight: bold;">▼</span>
             </div>
 
-            <div id="noticia-video" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+            <div id="noticia-video" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
                 <p style="font-size: 14px; color: #555; margin: 10px 0;">
                     Assista ao vídeo explicativo:
                 </p>
@@ -1641,7 +1667,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 2. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026 (SEGUNDA NOTÍCIA)
+    // 3. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026 (TERCEIRA NOTÍCIA)
     html += `
         <div class="noticia-card" style="border-left: 5px solid #d35400; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-cge')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1663,32 +1689,6 @@ if(pagina === "noticias"){
                     <strong>Contadoria Geral do Estado</strong><br>
                     Secretaria da Fazenda de Pernambuco
                 </p>
-            </div>
-        </div>
-    `;
-
-    // 3. ANDAMENTO DO QUEBRA-CABEÇA
-    html += `
-        <div class="noticia-card" style="border-left: 5px solid #9b59b6; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleNoticia('noticia-quebracabeca')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
-                    <h3 style="margin: 5px 0 0 0; color: #8e44ad; font-size: 16px; text-transform: uppercase;">
-                        🧩 ANDAMENTO DO NOSSO QUEBRA-CABEÇA DGF
-                    </h3>
-                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Confira o progresso da montagem da nossa equipe...</p>
-                </div>
-                <span id="icon-noticia-quebracabeca" style="font-size: 18px; color: #8e44ad; font-weight: bold;">▼</span>
-            </div>
-
-            <div id="noticia-quebracabeca" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
-                <p style="line-height: 1.6; color: #555; font-size: 14px; margin: 15px 0 10px 0;">
-                    A cada peça encaixada, vemos o resultado do nosso trabalho em equipe! Veja abaixo o andamento atual da montagem do nosso quebra-cabeça:
-                </p>
-                
-                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 10px;">
-                    <img src="./qubra.png" alt="Andamento do Quebra-Cabeça" style="width: 100%; height: auto; display: block; object-fit: contain;">
-                </div>
             </div>
         </div>
     `;
@@ -1868,7 +1868,6 @@ if(pagina === "noticias"){
         }
     };
 }
-
 
 // =========================================================
 // NOVO BLOCO ESTRUTURADO: ÁREA DO GESTOR COMO PÁGINA OFICIAL

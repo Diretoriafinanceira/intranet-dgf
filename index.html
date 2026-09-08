@@ -286,6 +286,7 @@ section {
             <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">📢 Comunicação</button>
             <div id="submenuComunicacao" class="submenu">
 			<button onclick="mostrar('noticias')">📰 Notícias</button>
+				<button onclick="mostrar('plano_anual_de_contratacoes')">📊 Plano Anual de Contratações</button>
 			    <button onclick="mostrar('central_notas')">📝 Central de Notas</button>
 				<button onclick="mostrar('coordtech')">🚀coordtech</button>
 				<button onclick="mostrar('radar_dgf')">📉 Radar DGF</button>
@@ -694,40 +695,41 @@ function mostrar(pagina){
                         <span style="font-size: 11px; opacity: 0.9; margin-top: 2px;">Cultura & Conhecimento</span>
                     </button>
 
-                  <!-- CARD COMPACTO QUEBRA-CABEÇA -->
-<div onclick="mostrar('noticias')" style="
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    background: rgba(142, 68, 173, 0.85);
-    padding: 8px;
-    border-radius: 6px;
-    border-bottom: 2px solid #8e44ad;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    font-family: inherit;
-    width: 100%;
-    box-sizing: border-box;
-"
-onmouseover="this.style.background='rgba(142, 68, 173, 1)'; this.style.transform='scale(1.02)';"
-onmouseout="this.style.background='rgba(142, 68, 173, 0.85)'; this.style.transform='scale(1)'"
->
-    <!-- IMAGEM EM MODO PAISAGEM (ASPECT-RATIO 16/9 + COVER) -->
-    <img src="./qubra.png" alt="Quebra-Cabeça" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin-bottom: 6px;">
-    
-    <!-- BARRINHA DE PROGRESSO (75%) -->
-    <div style="width: 100%; background: rgba(0,0,0,0.25); border-radius: 10px; height: 12px; margin-bottom: 6px; overflow: hidden; position: relative;">
-        <div style="width: 75%; background: #2ecc71; height: 100%; border-radius: 10px; transition: width 0.3s ease;"></div>
-        <span style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-size: 9px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.8);">75%</span>
-    </div>
+                    <!-- CARD COMPACTO QUEBRA-CABEÇA -->
+                    <div onclick="mostrar('noticias')" style="
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        background: rgba(142, 68, 173, 0.85);
+                        padding: 8px;
+                        border-radius: 6px;
+                        border-bottom: 2px solid #8e44ad;
+                        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+                        cursor: pointer;
+                        transition: transform 0.2s ease, background-color 0.2s ease;
+                        font-family: inherit;
+                        width: 100%;
+                        box-sizing: border-box;
+                    "
+                    onmouseover="this.style.background='rgba(142, 68, 173, 1)'; this.style.transform='scale(1.02)';"
+                    onmouseout="this.style.background='rgba(142, 68, 173, 0.85)'; this.style.transform='scale(1)'"
+                    >
+                        <!-- IMAGEM EM MODO PAISAGEM (ASPECT-RATIO 16/9 + COVER) -->
+                        <img src="./qubra.png" alt="Quebra-Cabeça" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin-bottom: 6px;">
+                        
+                        <!-- BARRINHA DE PROGRESSO (55%) -->
+                        <div style="width: 100%; background: rgba(0,0,0,0.25); border-radius: 10px; height: 12px; margin-bottom: 6px; overflow: hidden; position: relative;">
+                            <div style="width: 55%; background: #2ecc71; height: 100%; border-radius: 10px; transition: width 0.3s ease;"></div>
+                            <span style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-size: 9px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.8);">55%</span>
+                        </div>
 
-    <span style="font-size: 11px; font-weight: bold; line-height: 1.2; text-align: center; color: #fff;">
-        🧩 Doe 5 min e nos ajude a montar nosso quebra-cabeça!
-    </span>
-</div>
+                        <span style="font-size: 11px; font-weight: bold; line-height: 1.2; text-align: center; color: #fff;">
+                            🧩 Doe 5 min e nos ajude a montar nosso quebra-cabeça!
+                        </span>
+                    </div>
+
                 </div>
 
                 <div style="
@@ -837,10 +839,11 @@ onmouseout="this.style.background='rgba(142, 68, 173, 0.85)'; this.style.transfo
             </div>
         </div>
 
-        <!-- 4 CARDS PRINCIPAIS -->
+        <!-- CARDS PRINCIPAIS (AGORA COM 5 CARDS) -->
         <div style="display: flex; gap: 20px; flex-wrap: wrap; flex-shrink: 0;">
             
-            <div style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #e74c3c; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
+            <!-- CARD 1: CENTRAL DE NOTAS -->
+            <div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #e74c3c; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
                 <img src="central.png" alt="Central de Notas" onclick="mostrar('central_notas')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
                 <div style="padding: 15px;">
                     <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📝 Conheça a Nova Central de Notas</h3>
@@ -848,7 +851,8 @@ onmouseout="this.style.background='rgba(142, 68, 173, 0.85)'; this.style.transfo
                 </div>
             </div>
 
-            <div style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #3498db; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
+            <!-- CARD 2: COORDETECH -->
+            <div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #3498db; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
                 <img src="coordetech.png" alt="Coordetech" onclick="mostrar('coordtech')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
                 <div style="padding: 15px;">
                     <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">🚀 Conectividade Coordetech</h3>
@@ -856,8 +860,9 @@ onmouseout="this.style.background='rgba(142, 68, 173, 0.85)'; this.style.transfo
                 </div>
             </div>
 
+            <!-- CARD 3: SIMPA -->
             <div onclick="window.open('https://script.google.com/macros/s/AKfycbwdkH03kEMmy-Sk2FFdBj9WMRcs6RMf9DUaO-cFqUHI_r2K-EemMNSq6sCQBRWzIwCB/exec', '_blank')" 
-                 style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #0079bf; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s;"
+                 style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #0079bf; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s;"
                  onmouseover="this.style.transform='scale(1.02)'"
                  onmouseout="this.style.transform='scale(1)'">
                 <div style="padding: 10px; background: #132237; color: white; text-align: center; font-weight: bold; font-size: 14px; letter-spacing: 0.5px;">
@@ -877,8 +882,17 @@ onmouseout="this.style.background='rgba(142, 68, 173, 0.85)'; this.style.transfo
                 </div>
             </div>
 
-            <!-- CARD ÁREA DO GESTOR -->
-            <div onclick="mostrar('areadogestor')" style="flex: 1; min-width: 250px; background: white; border-radius: 8px; border-top: 4px solid #f39c12; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
+            <!-- NOVO CARD 4: PLANO ANUAL DE CONTRATAÇÕES (PCA) -->
+            <div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #27ae60; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
+                <img src="pca.png" alt="Plano Anual de Contratações" onclick="mostrar('plano_anual_de_contratacoes')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
+                <div style="padding: 15px;">
+                    <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📊 Plano Anual de Contratações</h3>
+                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Acompanhe prazos, revisões orçamentárias e orientações estratégicas do planejamento de compras da DGF.</p>
+                </div>
+            </div>
+
+            <!-- CARD 5: ÁREA DO GESTOR -->
+            <div onclick="mostrar('areadogestor')" style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #f39c12; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif; display: flex; flex-direction: column; cursor: pointer;">
                 <div style="padding: 10px; background: #132237; color: white; text-align: center; font-weight: bold; font-size: 14px; letter-spacing: 0.5px;">
                     PAINEL DE LIDERANÇA
                 </div>
@@ -1565,6 +1579,109 @@ if (pagina === "cantinho") {
             grid.innerHTML = htmlCards || `<div style="grid-column: 1/-1; text-align: center; color: #7f8c8d; padding: 20px;">Nenhum anúncio encontrado.</div>`;
         } catch (e) {
             console.error("Erro ao carregar classificados:", e);
+        }
+    };
+}
+
+	if (pagina === "plano_anual_de_contratacoes") {
+    let html = `
+    <div style="padding: 20px; max-width: 1200px; margin: auto; font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%); border-radius: 16px; box-sizing: border-box;">
+        
+        <!-- CABEÇALHO DA PÁGINA PCA -->
+        <div style="margin-bottom: 25px; border-bottom: 3px solid #003366; padding-bottom: 15px;">
+            <h1 style="color: #003366; font-size: 30px; margin: 0 0 8px 0; font-weight: 700;">
+                📊 Plano de Contratações Anual - PCA
+            </h1>
+            <p style="color: #475569; font-size: 15px; margin: 0;">
+                Informativos, prazos e orientações estratégicas sobre o planejamento de compras da DGF.
+            </p>
+        </div>
+
+        <!-- MENSAGEM DE INSTRUÇÃO -->
+        <div style="background: #e0f2fe; border-left: 4px solid #0284c7; padding: 12px 16px; border-radius: 6px; color: #0369a1; font-size: 13px; font-weight: 600; margin-bottom: 20px;">
+            💡 Clique no título de qualquer notícia abaixo para abrir e ler o conteúdo completo.
+        </div>
+
+        <!-- CONTAINER DAS NOTÍCIAS (CARDS EXPANSÍVEIS) -->
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+            
+            <!-- NOTÍCIA 1 -->
+            <div style="background: white; border: 1px solid #cbd5e1; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.03); transition: all 0.2s;">
+                <div onclick="window.toggleNoticiaPca('noticia1')" style="padding: 18px 20px; background: #ffffff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; user-select: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="background: #dc2626; color: white; font-size: 11px; font-weight: bold; padding: 4px 8px; border-radius: 4px; text-transform: uppercase;">Aviso Importante</span>
+                        <h3 style="margin: 0; color: #003366; font-size: 17px; font-weight: 700; line-height: 1.4;">
+                            ATENÇÃO, GESTORES: Janela de revisão orçamentária do PCA 2026 e 2027 abre no dia 15 de setembro!
+                        </h3>
+                    </div>
+                    <span id="seta-noticia1" style="color: #003366; font-size: 18px; font-weight: bold; transition: transform 0.3s;">▼</span>
+                </div>
+                <div id="noticia1" style="display: none; padding: 20px; border-top: 1px solid #f1f5f9; background: #fafafa; color: #334155; font-size: 14px; line-height: 1.7;">
+                    <p style="margin-top: 0;">Se a sua gerência precisa incluir, excluir ou redimensionar demandas de contratação planejadas para o próximo ano, marque esta data no calendário! No período de 15 de setembro a 15 de novembro de 2026, o sistema PE-Integrado estará oficialmente aberto para a revisão do Plano de Contratações Anual (PCA 2026 E 2027).</p>
+                    <strong style="color: #003366; display: block; margin-top: 15px; font-size: 15px;">Por que essa abertura ocorre agora?</strong>
+                    <p style="margin-bottom: 0;">Essa janela é aberta para que possamos adequar o nosso planejamento físico de compras à Proposta Orçamentária enviada pelo Poder Executivo ao Poder Legislativo. Trata-se da oportunidade perfeita para alinhar as estimativas financeiras das nossas demandas de saúde às previsões reais de recursos para o exercício de 2026 e 2027. Organize a sua equipe e revise seus Documentos de Formalização de Demanda (DFDs) dentro do prazo legal!</p>
+                </div>
+            </div>
+
+            <!-- NOTÍCIA 2 -->
+            <div style="background: white; border: 1px solid #cbd5e1; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.03); transition: all 0.2s;">
+                <div onclick="window.toggleNoticiaPca('noticia2')" style="padding: 18px 20px; background: #ffffff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; user-select: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="background: #2563eb; color: white; font-size: 11px; font-weight: bold; padding: 4px 8px; border-radius: 4px; text-transform: uppercase;">Planejamento</span>
+                        <h3 style="margin: 0; color: #003366; font-size: 17px; font-weight: 700; line-height: 1.4;">
+                            De olho em 2028: entenda como funciona a "linha de montagem" do nosso planejamento de compras.
+                        </h3>
+                    </div>
+                    <span id="seta-noticia2" style="color: #003366; font-size: 18px; font-weight: bold; transition: transform 0.3s;">▼</span>
+                </div>
+                <div id="noticia2" style="display: none; padding: 20px; border-top: 1px solid #f1f5f9; background: #fafafa; color: #334155; font-size: 14px; line-height: 1.7;">
+                    <p style="margin-top: 0;">Muitas equipes se perguntam: "Por que planejar as compras com tanta antecedência?". A resposta está no Decreto Estadual nº 55.861/2023, que organiza o Plano de Contratações Anual (PCA) como a nossa principal bússola estratégica. Para que as contratações ocorram ao longo de 2028, as etapas começam a ser construídas logo no início de 2027! Veja as principais etapas em que sua área estará diretamente envolvida:</p>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li style="margin-bottom: 8px;"><b>Janeiro a Março de 2027:</b> É hora de arregaçar as mangas e cadastrar as necessidades do seu setor por meio dos DFDs no sistema PE-Integrado. Sem DFD, não há licitação!</li>
+                        <li style="margin-bottom: 8px;"><b>Março a Abril de 2027:</b> A equipe de planejamento consolida todos os pedidos, agrupando itens parecidos para gerar economia de escala, reduzir custos processuais e organizar o calendário oficial de licitações da Saúde.</li>
+                        <li style="margin-bottom: 8px;"><b>Abril de 2027:</b> A autoridade máxima do órgão avalia e aprova a conveniência e oportunidade de cada demanda consolidada.</li>
+                    </ul>
+                    <p style="margin-bottom: 0;">O planejamento antecipado garante que os hospitais, gerências e unidades descentralizadas recebam insumos, medicamentos e serviços de manutenção predial exatamente no momento em que precisarem.</p>
+                </div>
+            </div>
+
+            <!-- NOTÍCIA 3 -->
+            <div style="background: white; border: 1px solid #cbd5e1; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.03); transition: all 0.2s;">
+                <div onclick="window.toggleNoticiaPca('noticia3')" style="padding: 18px 20px; background: #ffffff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; user-select: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="background: #059669; color: white; font-size: 11px; font-weight: bold; padding: 4px 8px; border-radius: 4px; text-transform: uppercase;">Você Sabia?</span>
+                        <h3 style="margin: 0; color: #003366; font-size: 17px; font-weight: 700; line-height: 1.4;">
+                            Série "Você Sabia?": O que é o Relatório de Riscos do PCA e qual o papel das gerências nele?
+                        </h3>
+                    </div>
+                    <span id="seta-noticia3" style="color: #003366; font-size: 18px; font-weight: bold; transition: transform 0.3s;">▼</span>
+                </div>
+                <div id="noticia3" style="display: none; padding: 20px; border-top: 1px solid #f1f5f9; background: #fafafa; color: #334155; font-size: 14px; line-height: 1.7;">
+                    <p style="margin-top: 0;">Você já ouviu falar no Relatório de Riscos do PCA? Esse documento, elaborado duas vezes por ano — sempre nos meses de agosto e outubro, funciona como um verdadeiro exame médico da execução de nossas contratações.</p>
+                    <strong style="color: #003366; display: block; margin-top: 12px; font-size: 15px;">Como ele funciona?</strong>
+                    <p style="margin-top: 5px;">O setor de planejamento estuda a base do nosso PCA e aponta quais compras correm o risco de não se concretizarem até o final do ano. Por exemplo, se uma licitação de leitos de retaguarda estava prevista para acontecer até maio, mas até agosto o processo sequer começou, o relatório acende a luz vermelha de atenção!</p>
+                    <strong style="color: #003366; display: block; margin-top: 12px; font-size: 15px;">O que fazer?</strong>
+                    <p style="margin-top: 5px; margin-bottom: 0;">A partir da identificação dos atrasos, o relatório indica os eventos de risco, as causas institucionais do atraso, os impactos que isso causará no atendimento aos cidadãos e as medidas preventivas ou corretivas a serem adotadas para destravar o processo. As Unidades de Controle Interno (UCIs) dão suporte técnico nessa jornada. Com essa ferramenta de controle, o Estado consegue agir rapidamente para evitar o desabastecimento da nossa rede pública de saúde!</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    `;
+
+    conteudo.innerHTML = html;
+
+    // Função JS para abrir/fechar o texto ao clicar no título
+    window.toggleNoticiaPca = function(id) {
+        const elemento = document.getElementById(id);
+        const seta = document.getElementById('seta-' + id);
+        
+        if (elemento.style.display === "none" || elemento.style.display === "") {
+            elemento.style.display = "block";
+            if (seta) seta.style.transform = "rotate(180deg)";
+        } else {
+            elemento.style.display = "none";
+            if (seta) seta.style.transform = "rotate(0deg)";
         }
     };
 }

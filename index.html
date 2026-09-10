@@ -672,7 +672,7 @@ function mostrar(pagina){
                     <strong style="color: #f57f17; font-size: 16px;">Setembro Amarelo: Mês de Prevenção ao Suicídio</strong>
                 </div>
                 <p style="margin: 0; color: #424242; font-size: 13px; line-height: 1.5;">
-                    O <strong>Setembro Amarelo</strong> é a campanha brasileira dedicada à prevenção do suicídio e ao cuidado com a saúde mental, com destaque especial para o dia <strong>10 de setembro (Dia Mundial de Prevenção do Suicídio)</strong>. Instituída oficialmente pela <strong>Lei nº 15.199/2025</strong>, a iniciativa reforça a importância do diálogo, do acolhimento e da busca por apoio emocional profissional.
+                    O <strong>Setembro Amarelo</strong> é a campanha brasileira dedicada à prevenção do suicídio e ao cuidado com a saúde mental, com destaque especial para o dia <strong>10 de setembro (Dia Mundial de Prevenção do Suicídio)</strong>. Instituída officially pela <strong>Lei nº 15.199/2025</strong>, a iniciativa reforça a importância do diálogo, do acolhimento e da busca por apoio emocional profissional.
                 </p>
             </div>
 
@@ -905,7 +905,7 @@ function mostrar(pagina){
             </div>
         </div>
 
-        <!-- CARDS PRINCIPAIS (AGORA COM 5 CARDS) -->
+        <!-- CARDS PRINCIPAIS -->
         <div style="display: flex; gap: 20px; flex-wrap: wrap; flex-shrink: 0;">
             
             <!-- CARD 1: CENTRAL DE NOTAS -->
@@ -917,12 +917,12 @@ function mostrar(pagina){
                 </div>
             </div>
 
-            <!-- CARD 2: COORDETECH -->
-            <div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #3498db; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
-                <img src="coordetech.png" alt="Coordetech" onclick="mostrar('coordtech')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
+            <!-- CARD 2: AGENDA DGF (SUBSTITUIU O COORDETECH) -->
+            <div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #34495e; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
+                <img src="calendario.png" alt="Agenda DGF" onclick="mostrar('agenda')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
                 <div style="padding: 15px;">
-                    <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">🚀 Conectividade Coordetech</h3>
-                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Fique por dentro das updates tecnológicas e soluções de infraestrutura integradas pela equipe Coordetech para otimizar os fluxos da nossa diretoria.</p>
+                    <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📅 Agenda DGF</h3>
+                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Acompanhe compromissos, reuniões e eventos importantes agendados pela Diretoria Geral de Finanças.</p>
                 </div>
             </div>
 
@@ -948,7 +948,7 @@ function mostrar(pagina){
                 </div>
             </div>
 
-            <!-- NOVO CARD 4: PLANO ANUAL DE CONTRATAÇÕES (PCA) -->
+            <!-- CARD 4: PLANO ANUAL DE CONTRATAÇÕES (PCA) -->
             <div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #27ae60; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
                 <img src="pca.png" alt="Plano Anual de Contratações" onclick="mostrar('plano_anual_de_contratacoes')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
                 <div style="padding: 15px;">
@@ -974,7 +974,7 @@ function mostrar(pagina){
         </div>
 
         <!-- ========================================================================================= -->
-        <!-- NOVOS BOTÕES: "MONITORE SEU PROCESSO" E "PRIORIZE" (INSERIDOS ABAIXO DOS CARDS E ACIMA DA AGENDA) -->
+        <!-- NOVOS BOTÕES: "MONITORE SEU PROCESSO" E "PRIORIZE" -->
         <!-- ========================================================================================= -->
         <div style="display: flex; flex-direction: column; gap: 15px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); font-family: sans-serif; border-left: 5px solid #8e44ad;">
             
@@ -1057,12 +1057,6 @@ function mostrar(pagina){
             </div>
         </div>
         ` : ''}
-        
-        <div style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-            <div style="background: #34495e; color: white; padding: 10px; text-align: center; font-weight: bold; font-family: sans-serif;">📅 AGENDA DGF</div>
-            <iframe src="https://calendar.google.com/calendar/embed?src=Y2NmZ292cGVAZ21haWwuY29t&ctz=America%2FRecife" 
-                    style="width: 100%; height: 600px; border: none;" loading="lazy"></iframe>
-        </div>
 
         <div style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
             <div style="background: #0079bf; color: white; padding: 12px; text-align: center; font-weight: bold; font-family: sans-serif;">📋 QUADRO DE DEMANDAS - TRELLO</div>
@@ -1306,7 +1300,21 @@ function mostrar(pagina){
             clearInterval(window.intervaloRadarDGF);
         }
     }, 10000);
-}
+
+    // =========================================================================
+    // VISUALIZAÇÃO DA AGENDA DGF (ADICIONADA PARA O CLIQUE DO CARD FUNCIONAR)
+    // =========================================================================
+    } else if (pagina === "agenda") {
+        conteudo.innerHTML = `
+        <div style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 10px; background: white;">
+            <div style="background: #34495e; color: white; padding: 12px; text-align: center; font-weight: bold; font-family: sans-serif; border-radius: 4px; margin-bottom: 10px;">
+                📅 AGENDA DGF
+            </div>
+            <iframe src="https://calendar.google.com/calendar/embed?src=Y2NmZ292cGVAZ21haWwuY29t&ctz=America%2FRecife" 
+                    style="width: 100%; height: 750px; border: none;" loading="lazy"></iframe>
+        </div>
+        `;
+    }
 	
 if (pagina === "TV DGF") {
 

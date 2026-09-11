@@ -1830,7 +1830,33 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 2. VÍDEO INSTITUCIONAL DGF (SEGUNDA NOTÍCIA)
+    // 2. NOVA NOTÍCIA: FRENTE DGF (SEGUNDA NOTÍCIA DE CIMA PARA BAIXO)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #27ae60; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-frente')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #27ae60; font-size: 16px; text-transform: uppercase;">
+                        📸 FACHADA E ESTRUTURA DGF
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Confira a imagem da frente da nossa diretoria...</p>
+                </div>
+                <span id="icon-noticia-frente" style="font-size: 18px; color: #27ae60; font-weight: bold;">▼</span>
+            </div>
+
+            <div id="noticia-frente" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="line-height: 1.6; color: #555; font-size: 14px; margin: 15px 0 10px 0;">
+                    Confira o registro da nossa sede:
+                </p>
+                
+                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 10px;">
+                    <img src="./frente.png" alt="Frente DGF" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 3. VÍDEO INSTITUCIONAL DGF (TERCEIRA NOTÍCIA)
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #e74c3c; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-video')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1857,7 +1883,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 3. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026 (TERCEIRA NOTÍCIA)
+    // 4. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026 (QUARTA NOTÍCIA)
     html += `
         <div class="noticia-card" style="border-left: 5px solid #d35400; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-cge')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1883,7 +1909,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 4. MISSA DE 7º DIA
+    // 5. MISSA DE 7º DIA
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2c3e50; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-missa')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1925,7 +1951,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 5. Resultado do Bolão DGF
+    // 6. Resultado do Bolão DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2ecc71; background: #f4fbf7; font-family: 'Arial', sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-bolao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1977,7 +2003,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 6. São João DGF
+    // 7. São João DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-saojoao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2000,7 +2026,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 7. Guia de Ajuda
+    // 8. Guia de Ajuda
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #3498db; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-guia')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2020,7 +2046,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 8. Demais notícias
+    // 9. Demais notícias
     if (typeof listaNoticias !== 'undefined') {
         listaNoticias.forEach((n, i) => {
             html += `

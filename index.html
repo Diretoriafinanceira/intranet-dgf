@@ -1801,7 +1801,68 @@ if(pagina === "noticias"){
 
     const hoje = new Date().toLocaleDateString('pt-BR');
 
-    // 1. ANDAMENTO DO QUEBRA-CABEÇA (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    // 1. FOLHETO INFORMATIVO DE EVACUAÇÃO (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #e74c3c; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-evacuacao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #c0392b; font-size: 16px; text-transform: uppercase;">
+                        🚨 FOLHETO INFORMATIVO DE EVACUAÇÃO
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Guia Rápido de Segurança para Colaboradores - Edifício Empresarial...</p>
+                </div>
+                <span id="icon-noticia-evacuacao" style="font-size: 18px; color: #c0392b; font-weight: bold;">▲</span>
+            </div>
+
+                    <!-- LINK PARA VISUALIZAR O DOCUMENTO -->
+                    <div style="margin-bottom: 15px;">
+                        <a href="./Plano_de_Fuga_Edificio_Corporativo_7_Pavimentos (1).pptx" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #c0392b; font-weight: bold; text-decoration: underline; font-size: 14px;">
+                            📄 Clique aqui para visualizar a Apresentação do Plano de Fuga (.PPTX)
+                        </a>
+                    </div>
+
+                    <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                        <img src="./fogo.png" alt="Folheto de Evacuação" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                    </div>
+
+                    <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">1. AO OUVIR O ALARME DE INCÊNDIO</strong>
+                    <ul style="margin: 5px 0 15px 20px; padding: 0;">
+                        <li><b>Interrompa suas atividades imediatamente:</b> Não tente salvar arquivos ou coletar mochilas e pertences pesados.</li>
+                        <li><b>Mantenha a calma:</b> Siga rigorosamente as orientações dos Guias de Fluxo e da Brigada de Incêndio do seu andar.</li>
+                        <li><b>Direcione-se à saída correta:</b> Dirija-se à porta corta-fogo correspondente ao quadrante do seu setor.</li>
+                    </ul>
+
+                    <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">2. REGRAS DE OURO NAS ESCADAS DE EMERGÊNCIA</strong>
+                    <ul style="margin: 5px 0 15px 20px; padding: 0;">
+                        <li><b>PROIBIDO O USO DE ELEVADORES:</b> Em caso de incêndio, os elevadores são desligados automaticamente ou podem prender os ocupantes.</li>
+                        <li><b>Fila Indiana e Mantenha-se à Direita:</b> Deixe o lado esquerdo livre para a subida de equipes de socorro ou Corpo de Bombeiros.</li>
+                        <li><b>Celulares no Bolso:</b> É terminantemente proibido filmar, mandar mensagens ou usar o celular para evitar quedas e distrações.</li>
+                        <li><b>Portas Corta-Fogo:</b> Certifique-se de que a porta fechou completamente atrás de você para bloquear fumaça e gases tóxicos.</li>
+                    </ul>
+
+                    <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">3. PROTOCOLO PARA PESSOAS COM MOBILIDADE REDUZIDA (PMR)</strong>
+                    <ul style="margin: 5px 0 15px 20px; padding: 0;">
+                        <li><b>Apoio dos Padrinhos:</b> Os colaboradores designados devem conduzir a PMR imediatamente para a Área de Refúgio na escada.</li>
+                        <li><b>Área de Refúgio Protegida:</b> Aguarde no patamar interno da escada de emergência sem bloquear a passagem dos demais funcionários.</li>
+                        <li><b>Resgate Técnico:</b> A descida das escadas será realizada com o auxílio das cadeiras de evacuação assim que o fluxo principal diminuir.</li>
+                    </ul>
+
+                    <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">4. PONTO DE ENCONTRO EXTERNO</strong>
+                    <ul style="margin: 5px 0 15px 20px; padding: 0;">
+                        <li><b>Siga para a Área Segura:</b> Ao sair do edifício, desloque-se imediatamente para o Ponto de Encontro sinalizado na rua/praça.</li>
+                        <li><b>Chamada Nominal:</b> Responda à contagem do seu Líder de Pavimento. Nunca retorne ao prédio até que a liberação oficial seja dada.</li>
+                    </ul>
+
+                    <div style="background: #fff3cd; border: 1px solid #ffeeba; border-left: 5px solid #ffc107; padding: 12px; border-radius: 4px; margin-top: 15px; color: #856404;">
+                        <strong>ATENÇÃO EM CASO DE FUMAÇA DENSA nos corredores:</strong> Abaixe-se e desloque-se agachado. O ar limpo e respirável fica mais próximo ao chão. Se possível, cubra o nariz e a boca com um lenço ou pedaço de pano umedecido.
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 2. ANDAMENTO DO QUEBRA-CABEÇA (SEGUNDA NOTÍCIA)
     html += `
         <div class="noticia-card" style="border-left: 5px solid #9b59b6; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-quebracabeca')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1812,10 +1873,10 @@ if(pagina === "noticias"){
                     </h3>
                     <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Confira o progresso da montagem da nossa equipe...</p>
                 </div>
-                <span id="icon-noticia-quebracabeca" style="font-size: 18px; color: #8e44ad; font-weight: bold;">▲</span>
+                <span id="icon-noticia-quebracabeca" style="font-size: 18px; color: #8e44ad; font-weight: bold;">▼</span>
             </div>
 
-            <div id="noticia-quebracabeca" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+            <div id="noticia-quebracabeca" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
                 <p style="line-height: 1.6; color: #555; font-size: 14px; margin: 15px 0 10px 0;">
                     A cada peça encaixada, vemos o resultado do nosso trabalho em equipe! Veja abaixo o andamento atual da montagem do nosso quebra-cabeça:
                 </p>
@@ -1827,7 +1888,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 2. NOVA NOTÍCIA: FRENTE DGF (SEGUNDA NOTÍCIA DE CIMA PARA BAIXO)
+    // 3. FACHADA E ESTRUTURA DGF (TERCEIRA NOTÍCIA)
     html += `
         <div class="noticia-card" style="border-left: 5px solid #27ae60; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-frente')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1853,7 +1914,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 3. VÍDEO INSTITUCIONAL DGF (TERCEIRA NOTÍCIA)
+    // 4. VÍDEO INSTITUCIONAL DGF (QUARTA NOTÍCIA)
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #e74c3c; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-video')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1880,7 +1941,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 4. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026 (QUARTA NOTÍCIA)
+    // 5. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026 (QUINTA NOTÍCIA)
     html += `
         <div class="noticia-card" style="border-left: 5px solid #d35400; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-cge')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1906,7 +1967,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 5. MISSA DE 7º DIA
+    // 6. MISSA DE 7º DIA
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2c3e50; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-missa')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1948,7 +2009,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 6. Resultado do Bolão DGF
+    // 7. Resultado do Bolão DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2ecc71; background: #f4fbf7; font-family: 'Arial', sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-bolao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2000,7 +2061,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 7. São João DGF
+    // 8. São João DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-saojoao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2023,7 +2084,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 8. Guia de Ajuda
+    // 9. Guia de Ajuda
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #3498db; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-guia')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2043,7 +2104,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 9. Demais notícias
+    // 10. Demais notícias
     if (typeof listaNoticias !== 'undefined') {
         listaNoticias.forEach((n, i) => {
             html += `

@@ -4,24 +4,63 @@
 <meta charset="UTF-8">
 <title>Intranet DGF</title>
 
+<!-- Importação da fonte corporativa Montserrat para o título -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
 <style>
+/* --- ESTILIZAÇÃO DAS BARRAS DE ROLAGEM CORPORATIVAS (SUBSTITUINDO O CINZA) --- */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #1e2b37;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #1abc9c 0%, #2c3e50 100%);
+    border-radius: 5px;
+    border: 2px solid #1e2b37;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #16a085;
+}
+
+/* Suporte de barra de rolagem para o Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #1abc9c #1e2b37;
+}
+
 /* --- SEUS ESTILOS ORIGINAIS AJUSTADOS --- */
 body {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background: #f4f6f9;
     margin: 0;
     display: flex; /* Alinha nav e section lado a lado */
 }
 
-/* ESTILO DO CABEÇALHO RECUPERADO */
+/* ESTILO DO CABEÇALHO RECUPERADO COM FONTE CORPORATIVA */
 header {
     background: #2c3e50 url('logo-pernambuco-ses.png') repeat;
     background-size: 80px; 
     color: white;
     padding: 15px;
     text-align: center;
+}
+
+header h1 {
+    font-family: 'Montserrat', 'Segoe UI', -apple-system, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .container {
@@ -57,13 +96,18 @@ nav {
     margin: 10px 0;
 }
 
-/* Estilo para a imagem no menu lateral */
+/* Estilo para a imagem no menu lateral (DEIXADO REDONDO) */
 .img-nav {
-    width: 120px;
+    width: 110px;
+    height: 110px;
     margin: 0 auto 10px auto;
     display: block;
     position: relative;
     z-index: 2;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border: 3px solid #1abc9c;
 }
 
 nav button {
@@ -327,7 +371,7 @@ section {
 
         <div class="main-content">
             <header>
-                <h1 style="display:flex; align-items:center; justify-content:center; gap:10px;">
+                <h1>
                 Intranet - Diretoria Geral de Finanças
                 </h1>
             </header>
@@ -1536,7 +1580,41 @@ if(pagina === "noticias"){
 
     const hoje = new Date().toLocaleDateString('pt-BR');
 
-    // 1. FOLHETO INFORMATIVO DE EVACUAÇÃO (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    // 0. TREINAMENTO DE RCP (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #2980b9; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-rcp')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 22/09</small>
+                    <h3 style="margin: 5px 0 0 0; color: #2980b9; font-size: 16px; text-transform: uppercase;">
+                        🫀 TREINAMENTO DE RCP, USO DE DEA E MANOBRAS DE DESENGASGO
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Capacitação prática realizada na SES contou com a participação de servidores da DGF...</p>
+                </div>
+                <span id="icon-noticia-rcp" style="font-size: 18px; color: #2980b9; font-weight: bold;">▲</span>
+            </div>
+
+            <div id="noticia-rcp" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0 10px 0;">
+                    No dia 22/09, foi realizado na Secretaria de Saúde (SES) o <strong>Treinamento de Reanimação Cardiopulmonar (RCP) com uso de Desfibrilador Externo Automático (DEA) e Manobras de Desengasgo</strong> em adultos, crianças e bebês.
+                </p>
+
+                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; text-align: center;">
+                    <img src="./rcp.png" alt="Treinamento de RCP" style="max-width: 100%; max-height: 350px; width: auto; height: auto; display: block; margin: 0 auto; object-fit: contain;">
+                </div>
+
+                <div style="background: #ebf5fb; border-left: 4px solid #2980b9; padding: 12px; border-radius: 4px; margin-top: 10px;">
+                    <strong style="color: #1b4f72; font-size: 14px; display: block; margin-bottom: 5px;">👥 PARTICIPANTES DA DGF:</strong>
+                    <ul style="margin: 0; padding-left: 20px; color: #2c3e50; font-size: 14px; line-height: 1.5;">
+                        <li>Márcio Domingues Soares</li>
+                        <li>Paloma Beatriz de Oliveira Costa</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 1. FOLHETO INFORMATIVO DE EVACUAÇÃO (SEGUNDA NOTÍCIA)
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e74c3c; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-evacuacao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1547,57 +1625,57 @@ if(pagina === "noticias"){
                     </h3>
                     <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Guia Rápido de Segurança para Colaboradores - Edifício Empresarial...</p>
                 </div>
-                <span id="icon-noticia-evacuacao" style="font-size: 18px; color: #c0392b; font-weight: bold;">▲</span>
+                <span id="icon-noticia-evacuacao" style="font-size: 18px; color: #c0392b; font-weight: bold;">▼</span>
             </div>
 
-                    <!-- LINK PARA VISUALIZAR O DOCUMENTO -->
-                    <div style="margin-bottom: 15px;">
-                        <a href="./Plano_de_Fuga_Edificio_Corporativo_7_Pavimentos (1).pptx" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #c0392b; font-weight: bold; text-decoration: underline; font-size: 14px;">
-                            📄 Clique aqui para visualizar a Apresentação do Plano de Fuga (.PPTX)
-                        </a>
-                    </div>
+            <div id="noticia-evacuacao" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <!-- LINK PARA VISUALIZAR O DOCUMENTO -->
+                <div style="margin-bottom: 15px; margin-top: 15px;">
+                    <a href="./Plano_de_Fuga_Edificio_Corporativo_7_Pavimentos (1).pptx" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #c0392b; font-weight: bold; text-decoration: underline; font-size: 14px;">
+                        📄 Clique aqui para visualizar a Apresentação do Plano de Fuga (.PPTX)
+                    </a>
+                </div>
 
-                    <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px;">
-                        <img src="./fogo.png" alt="Folheto de Evacuação" style="width: 100%; height: auto; display: block; object-fit: contain;">
-                    </div>
+                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px;">
+                    <img src="./fogo.png" alt="Folheto de Evacuação" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
 
-                    <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">1. AO OUVIR O ALARME DE INCÊNDIO</strong>
-                    <ul style="margin: 5px 0 15px 20px; padding: 0;">
-                        <li><b>Interrompa suas atividades imediatamente:</b> Não tente salvar arquivos ou coletar mochilas e pertences pesados.</li>
-                        <li><b>Mantenha a calma:</b> Siga rigorosamente as orientações dos Guias de Fluxo e da Brigada de Incêndio do seu andar.</li>
-                        <li><b>Direcione-se à saída correta:</b> Dirija-se à porta corta-fogo correspondente ao quadrante do seu setor.</li>
-                    </ul>
+                <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">1. AO OUVIR O ALARME DE INCÊNDIO</strong>
+                <ul style="margin: 5px 0 15px 20px; padding: 0;">
+                    <li><b>Interrompa suas atividades imediatamente:</b> Não tente salvar arquivos ou coletar mochilas e pertences pesados.</li>
+                    <li><b>Mantenha a calma:</b> Siga rigorosamente as orientações dos Guias de Fluxo e da Brigada de Incêndio do seu andar.</li>
+                    <li><b>Direcione-se à saída correta:</b> Dirija-se à porta corta-fogo correspondente ao quadrante do seu setor.</li>
+                </ul>
 
-                    <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">2. REGRAS DE OURO NAS ESCADAS DE EMERGÊNCIA</strong>
-                    <ul style="margin: 5px 0 15px 20px; padding: 0;">
-                        <li><b>PROIBIDO O USO DE ELEVADORES:</b> Em caso de incêndio, os elevadores são desligados automaticamente ou podem prender os ocupantes.</li>
-                        <li><b>Fila Indiana e Mantenha-se à Direita:</b> Deixe o lado esquerdo livre para a subida de equipes de socorro ou Corpo de Bombeiros.</li>
-                        <li><b>Celulares no Bolso:</b> É terminantemente proibido filmar, mandar mensagens ou usar o celular para evitar quedas e distrações.</li>
-                        <li><b>Portas Corta-Fogo:</b> Certifique-se de que a porta fechou completamente atrás de você para bloquear fumaça e gases tóxicos.</li>
-                    </ul>
+                <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">2. REGRAS DE OURO NAS ESCADAS DE EMERGÊNCIA</strong>
+                <ul style="margin: 5px 0 15px 20px; padding: 0;">
+                    <li><b>PROIBIDO O USO DE ELEVADORES:</b> Em caso de incêndio, os elevadores são desligados automaticamente ou podem prender os ocupantes.</li>
+                    <li><b>Fila Indiana e Mantenha-se à Direita:</b> Deixe o lado esquerdo livre para a subida de equipes de socorro ou Corpo de Bombeiros.</li>
+                    <li><b>Celulares no Bolso:</b> É terminantemente proibido filmar, mandar mensagens ou usar o celular para evitar quedas e distrações.</li>
+                    <li><b>Portas Corta-Fogo:</b> Certifique-se de que a porta fechou completamente atrás de você para bloquear fumaça e gases tóxicos.</li>
+                </ul>
 
-                    <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">3. PROTOCOLO PARA PESSOAS COM MOBILIDADE REDUZIDA (PMR)</strong>
-                    <ul style="margin: 5px 0 15px 20px; padding: 0;">
-                        <li><b>Apoio dos Padrinhos:</b> Os colaboradores designados devem conduzir a PMR imediatamente para a Área de Refúgio na escada.</li>
-                        <li><b>Área de Refúgio Protegida:</b> Aguarde no patamar interno da escada de emergência sem bloquear a passagem dos demais funcionários.</li>
-                        <li><b>Resgate Técnico:</b> A descida das escadas será realizada com o auxílio das cadeiras de evacuação assim que o fluxo principal diminuir.</li>
-                    </ul>
+                <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">3. PROTOCOLO PARA PESSOAS COM MOBILIDADE REDUZIDA (PMR)</strong>
+                <ul style="margin: 5px 0 15px 20px; padding: 0;">
+                    <li><b>Apoio dos Padrinhos:</b> Os colaboradores designados devem conduzir a PMR imediatamente para a Área de Refúgio na escada.</li>
+                    <li><b>Área de Refúgio Protegida:</b> Aguarde no patamar interno da escada de emergência sem bloquear a passagem dos demais funcionários.</li>
+                    <li><b>Resgate Técnico:</b> A descida das escadas será realizada com o auxílio das cadeiras de evacuação assim que o fluxo principal diminuir.</li>
+                </ul>
 
-                    <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">4. PONTO DE ENCONTRO EXTERNO</strong>
-                    <ul style="margin: 5px 0 15px 20px; padding: 0;">
-                        <li><b>Siga para a Área Segura:</b> Ao sair do edifício, desloque-se imediatamente para o Ponto de Encontro sinalizado na rua/praça.</li>
-                        <li><b>Chamada Nominal:</b> Responda à contagem do seu Líder de Pavimento. Nunca retorne ao prédio até que a liberação oficial seja dada.</li>
-                    </ul>
+                <strong style="color: #2c3e50; font-size: 14px; display: block; margin-top: 10px;">4. PONTO DE ENCONTRO EXTERNO</strong>
+                <ul style="margin: 5px 0 15px 20px; padding: 0;">
+                    <li><b>Siga para a Área Segura:</b> Ao sair do edifício, desloque-se imediatamente para o Ponto de Encontro sinalizado na rua/praça.</li>
+                    <li><b>Chamada Nominal:</b> Responda à contagem do seu Líder de Pavimento. Nunca retorne ao prédio até que a liberação oficial seja dada.</li>
+                </ul>
 
-                    <div style="background: #fff3cd; border: 1px solid #ffeeba; border-left: 5px solid #ffc107; padding: 12px; border-radius: 4px; margin-top: 15px; color: #856404;">
-                        <strong>ATENÇÃO EM CASO DE FUMAÇA DENSA nos corredores:</strong> Abaixe-se e desloque-se agachado. O ar limpo e respirável fica mais próximo ao chão. Se possível, cubra o nariz e a boca com um lenço ou pedaço de pano umedecido.
-                    </div>
+                <div style="background: #fff3cd; border: 1px solid #ffeeba; border-left: 5px solid #ffc107; padding: 12px; border-radius: 4px; margin-top: 15px; color: #856404;">
+                    <strong>ATENÇÃO EM CASO DE FUMAÇA DENSA nos corredores:</strong> Abaixe-se e desloque-se agachado. O ar limpo e respirável fica mais próximo ao chão. Se possível, cubra o nariz e a boca com um lenço ou pedaço de pano umedecido.
                 </div>
             </div>
         </div>
     `;
 
-    // 2. ANDAMENTO DO QUEBRA-CABEÇA (SEGUNDA NOTÍCIA)
+    // 2. ANDAMENTO DO QUEBRA-CABEÇA
     html += `
         <div class="noticia-card" style="border-left: 5px solid #9b59b6; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-quebracabeca')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1623,7 +1701,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 3. FACHADA E ESTRUTURA DGF (TERCEIRA NOTÍCIA)
+    // 3. FACHADA E ESTRUTURA DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #27ae60; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-frente')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1649,7 +1727,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 4. VÍDEO INSTITUCIONAL DGF (QUARTA NOTÍCIA)
+    // 4. VÍDEO INSTITUCIONAL DGF
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #e74c3c; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-video')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1676,7 +1754,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 5. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026 (QUINTA NOTÍCIA)
+    // 5. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026
     html += `
         <div class="noticia-card" style="border-left: 5px solid #d35400; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-cge')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">

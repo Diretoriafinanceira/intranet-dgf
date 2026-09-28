@@ -2644,441 +2644,1248 @@ if (pagina === "radar_dgf") {
     `;
 }
 		
-if(pagina === "aniversariantes"){
+/* ================================================================
+   ANIVERSARIANTES DGF — PostgreSQL + Supabase
+   Substitui o bloco atual if(pagina === "aniversariantes") { ... }
+
+   IMPORTANTE:
+   1) Troque SUPABASE_URL e SUPABASE_PUBLISHABLE_KEY abaixo.
+   2) Não use a chave service_role no HTML.
+   3) O restante da intranet (listaAniversariantes/conteudo/pagina)
+      permanece como está.
+================================================================ */
+
+if (pagina === "aniversariantes") {
+
+    /* ============================================================
+       1. CONFIGURAÇÃO DO POSTGRESQL (SUPABASE)
+       ============================================================ */
+    const SUPABASE_URL = "https://zwvhmzllbeutbztnynrd.supabase.co";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_4CBHRt_vUYq3v_PwnG9BoQ_Kjv05eUP";
+
+    let muralAtualDGF = null;
+
     const agora = new Date();
     const diaAtual = agora.getDate().toString().padStart(2, '0');
     const mesAtual = (agora.getMonth() + 1).toString().padStart(2, '0');
     const hojeString = `${diaAtual}/${mesAtual}`;
-    
-    // Identificador exclusivo para o banco de dados da sua equipe
-    const API_URL = "https://jsonstorage.net/api/items/mural_dgf_intranet_2026";
-    
+
+    const nomesMeses = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    const abreviacoesMeses = [
+        "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+        "Jul", "Ago", "Set", "Out", "Nov", "Dez"
+    ];
+
+    /* ============================================================
+       2. SEGURANÇA / UTILITÁRIOS
+       ============================================================ */
+    const escapeHTMLDGF = (valor) => String(valor ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+
+    const criarChaveUsuarioDGF = (nome) => {
+        return String(nome || '')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .trim()
+            .replace(/\s+/g, '-')
+            .replace(/[^a-z0-9-]/g, '');
+    };
+
+    const formatarDataDGF = (dataISO) => {
+        if (!dataISO) return '—';
+        const data = new Date(dataISO);
+        return Number.isNaN(data.getTime())
+            ? '—'
+            : data.toLocaleDateString('pt-BR');
+    };
+
+    // Usa JSON para passar nomes com apóstrofo/acentos com segurança aos onclicks.
+    const jsArgDGF = (valor) => JSON.stringify(String(valor ?? ''))
+        .replace(/</g, '\\u003c')
+        .replace(/>/g, '\\u003e')
+        .replace(/&/g, '\\u0026');
+
+    /* ============================================================
+       3. ACESSO AO POSTGRESQL — REST API NATIVA
+       Sem supabase-js, html2canvas ou jsPDF.
+       Isso permite manter a intranet aberta normalmente pelo seu link
+       atual, inclusive quando o HTML é aberto localmente.
+       ============================================================ */
+    const SUPABASE_REST_URL = `${SUPABASE_URL}/rest/v1/aniversariantes_mensagens`;
+
+    const cabecalhosSupabaseDGF = (extra = {}) => ({
+        'apikey': SUPABASE_PUBLISHABLE_KEY,
+        'Authorization': `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+        'Content-Type': 'application/json',
+        ...extra
+    });
+
+    const verificarConfiguracaoDGF = () => {
+        return Boolean(
+            SUPABASE_URL &&
+            SUPABASE_URL.startsWith('https://') &&
+            SUPABASE_PUBLISHABLE_KEY &&
+            SUPABASE_PUBLISHABLE_KEY.startsWith('sb_publishable_')
+        );
+    };
+
+    const escaparAtributoDGF = (valor) => String(valor ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+    const requisicaoSupabaseDGF = async (url, opcoes = {}) => {
+        if (!verificarConfiguracaoDGF()) {
+            throw new Error('SUPABASE_URL ou SUPABASE_PUBLISHABLE_KEY não configurados.');
+        }
+
+        const resposta = await fetch(url, {
+            ...opcoes,
+            headers: {
+                ...cabecalhosSupabaseDGF(),
+                ...(opcoes.headers || {})
+            },
+            cache: 'no-store'
+        });
+
+        const textoResposta = await resposta.text();
+        let corpo = null;
+        try {
+            corpo = textoResposta ? JSON.parse(textoResposta) : null;
+        } catch (_) {
+            corpo = textoResposta;
+        }
+
+        if (!resposta.ok) {
+            const mensagem = corpo?.message || corpo?.hint || corpo?.details || corpo || `HTTP ${resposta.status}`;
+            throw new Error(typeof mensagem === 'string' ? mensagem : JSON.stringify(mensagem));
+        }
+
+        return corpo;
+    };
+
+    /* ============================================================
+       4. CSS DO NOVO AMBIENTE — INSTAGRAMÁVEL + CORPORATIVO
+       ============================================================ */
+    const injetarEstilosMuralDGF = () => {
+        if (document.getElementById('dgf-mural-estilos')) return;
+
+        const style = document.createElement('style');
+        style.id = 'dgf-mural-estilos';
+        style.textContent = `
+            .dgf-aniv-titulo {
+                color: #2c3e50;
+                margin-bottom: 8px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-weight: 800;
+            }
+
+            .dgf-aniv-subtitulo {
+                color: #7f8c8d;
+                margin: 0 0 20px 0;
+                font-size: 13px;
+            }
+
+            .dgf-aniv-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+                gap: 22px;
+                align-items: stretch;
+            }
+
+            .dgf-aniv-card {
+                position: relative;
+                overflow: hidden;
+                background: rgba(255,255,255,.96);
+                border: 1px solid rgba(44,62,80,.08);
+                border-radius: 24px;
+                padding: 22px;
+                box-shadow: 0 14px 35px rgba(44,62,80,.08);
+                transition: transform .2s ease, box-shadow .2s ease;
+                display: flex;
+                flex-direction: column;
+                min-height: 100%;
+                box-sizing: border-box;
+            }
+
+            .dgf-aniv-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 18px 42px rgba(44,62,80,.13);
+            }
+
+            .dgf-aniv-card::before {
+                content: "";
+                position: absolute;
+                width: 160px;
+                height: 160px;
+                border-radius: 50%;
+                top: -80px;
+                right: -65px;
+                background: radial-gradient(circle, rgba(26,188,156,.22), rgba(26,188,156,0));
+                pointer-events: none;
+            }
+
+            .dgf-hoje-badge {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                z-index: 2;
+                background: linear-gradient(135deg,#f1c40f,#ff9f43);
+                color: #fff;
+                border-radius: 999px;
+                padding: 6px 10px;
+                font-size: 10px;
+                font-weight: 900;
+                letter-spacing: .6px;
+                box-shadow: 0 6px 12px rgba(241,196,15,.24);
+            }
+
+            .dgf-avatar {
+                width: 76px;
+                height: 76px;
+                border-radius: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 14px;
+                font-weight: 900;
+                font-size: 28px;
+                color: #fff;
+                background: linear-gradient(135deg,#2c3e50 0%,#1abc9c 100%);
+                box-shadow: 0 10px 22px rgba(26,188,156,.18);
+                position: relative;
+            }
+
+            .dgf-avatar small {
+                position: absolute;
+                right: -7px;
+                bottom: -7px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 17px;
+                box-shadow: 0 4px 10px rgba(0,0,0,.12);
+            }
+
+            .dgf-tag-setor {
+                display: inline-flex;
+                align-items: center;
+                width: fit-content;
+                max-width: 100%;
+                padding: 6px 10px;
+                border-radius: 999px;
+                background: #eef8f6;
+                color: #138d75;
+                font-size: 10px;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: .5px;
+            }
+
+            .dgf-mensagem-box {
+                margin-top: 14px;
+                background: #f8fafc;
+                border: 1px solid #edf0f3;
+                border-radius: 18px;
+                padding: 14px;
+            }
+
+            .dgf-feed-mini {
+                max-height: 160px;
+                overflow: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 12px;
+            }
+
+            .dgf-msg-mini {
+                background: #fff;
+                border: 1px solid #edf0f3;
+                border-left: 4px solid #ff7675;
+                border-radius: 13px;
+                padding: 10px 11px;
+                box-shadow: 0 4px 12px rgba(0,0,0,.035);
+            }
+
+            .dgf-msg-mini-text {
+                color: #2d3436;
+                font-size: 11px;
+                line-height: 1.45;
+                margin: 0;
+            }
+
+            .dgf-msg-mini-meta {
+                color: #a3adb7;
+                font-size: 9px;
+                margin-top: 6px;
+                display: flex;
+                justify-content: space-between;
+                gap: 8px;
+            }
+
+            .dgf-btn {
+                width: 100%;
+                border: 0;
+                border-radius: 13px;
+                padding: 10px 12px;
+                font-size: 11px;
+                font-weight: 800;
+                cursor: pointer;
+                transition: transform .15s ease, filter .15s ease;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                gap: 7px;
+                box-sizing: border-box;
+            }
+
+            .dgf-btn:hover { transform: translateY(-1px); filter: brightness(1.02); }
+            .dgf-btn:disabled { cursor: wait; opacity: .65; transform: none; }
+
+            .dgf-btn-primary { background: linear-gradient(135deg,#2c3e50,#34495e); color: #fff; }
+            .dgf-btn-green { background: linear-gradient(135deg,#16a085,#1abc9c); color: #fff; }
+            .dgf-btn-coral { background: linear-gradient(135deg,#ff7675,#fd79a8); color: #fff; }
+            .dgf-btn-light { background: #fff; color: #34495e; border: 1px solid #e4e9ee; }
+
+            .dgf-month-box {
+                background: rgba(255,255,255,.97);
+                padding: 18px;
+                border-radius: 20px;
+                box-shadow: 0 10px 24px rgba(44,62,80,.05);
+                border: 1px solid rgba(44,62,80,.07);
+                margin-top: 30px;
+            }
+
+            .dgf-month-grid {
+                display: grid;
+                grid-template-columns: repeat(6, minmax(0,1fr));
+                gap: 7px;
+            }
+
+            .dgf-month-btn {
+                border: 1px solid #edf0f3;
+                background: #f8f9fa;
+                color: #34495e;
+                border-radius: 10px;
+                padding: 9px 6px;
+                cursor: pointer;
+                font-size: 11px;
+                font-weight: 800;
+            }
+
+            .dgf-month-btn.ativo {
+                background: #3498db;
+                border-color: #3498db;
+                color: white;
+            }
+
+            /* MODAL */
+            .dgf-mural-overlay {
+                position: fixed;
+                inset: 0;
+                z-index: 99999;
+                background: rgba(14,22,32,.76);
+                backdrop-filter: blur(10px);
+                display: none;
+                align-items: center;
+                justify-content: center;
+                padding: 18px;
+                box-sizing: border-box;
+            }
+
+            .dgf-mural-overlay.ativo { display: flex; }
+
+            .dgf-mural-modal {
+                width: min(1180px, 100%);
+                height: min(90vh, 900px);
+                background: #f5f7fa;
+                border-radius: 28px;
+                box-shadow: 0 35px 80px rgba(0,0,0,.35);
+                overflow: hidden;
+                display: grid;
+                grid-template-columns: 340px 1fr;
+            }
+
+            .dgf-mural-sidebar {
+                padding: 22px;
+                background: linear-gradient(180deg,#243342 0%,#1e2a35 100%);
+                color: #fff;
+                overflow: auto;
+            }
+
+            .dgf-mural-sidebar h3 { margin: 0 0 6px; font-size: 19px; }
+            .dgf-mural-sidebar p { margin: 0; color: rgba(255,255,255,.72); font-size: 11px; line-height: 1.5; }
+
+            .dgf-mural-close {
+                position: absolute;
+                right: 24px;
+                top: 20px;
+                z-index: 5;
+                width: 38px;
+                height: 38px;
+                border: 0;
+                border-radius: 50%;
+                background: rgba(0,0,0,.34);
+                color: #fff;
+                cursor: pointer;
+                font-size: 18px;
+            }
+
+            .dgf-formato-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                margin-top: 18px;
+            }
+
+            .dgf-formato-btn {
+                min-height: 66px;
+                border-radius: 14px;
+                border: 1px solid rgba(255,255,255,.12);
+                background: rgba(255,255,255,.08);
+                color: #fff;
+                cursor: pointer;
+                text-align: left;
+                padding: 11px;
+            }
+
+            .dgf-formato-btn:hover { background: rgba(255,255,255,.15); }
+            .dgf-formato-btn strong { display: block; font-size: 11px; margin-bottom: 4px; }
+            .dgf-formato-btn span { display: block; font-size: 9px; color: rgba(255,255,255,.62); line-height: 1.35; }
+
+            .dgf-mural-stage {
+                overflow: auto;
+                padding: 28px;
+                position: relative;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                background:
+                    radial-gradient(circle at 15% 15%, rgba(26,188,156,.12), transparent 28%),
+                    radial-gradient(circle at 85% 80%, rgba(255,118,117,.12), transparent 30%),
+                    #edf1f5;
+            }
+
+            .dgf-mural-preview-wrap {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .dgf-mural-art {
+                width: 720px;
+                max-width: 100%;
+                box-sizing: border-box;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 24px 54px rgba(44,62,80,.2);
+                background: #fff;
+            }
+
+            .dgf-art-inner {
+                min-height: 100%;
+                box-sizing: border-box;
+                padding: 34px;
+                background:
+                    radial-gradient(circle at 10% 10%, rgba(26,188,156,.22), transparent 22%),
+                    radial-gradient(circle at 90% 5%, rgba(255,118,117,.16), transparent 23%),
+                    linear-gradient(145deg,#ffffff 0%,#f7fbfa 48%,#fff7f8 100%);
+                position: relative;
+            }
+
+            .dgf-art-inner::after {
+                content: "✦   ✧   •   ✦   •   ✧";
+                position: absolute;
+                top: 20px;
+                right: 28px;
+                color: rgba(44,62,80,.12);
+                font-size: 18px;
+                letter-spacing: 8px;
+                pointer-events: none;
+            }
+
+            .dgf-art-header {
+                padding-bottom: 18px;
+                border-bottom: 1px solid rgba(44,62,80,.08);
+                margin-bottom: 18px;
+            }
+
+            .dgf-art-brand {
+                font-size: 13px;
+                letter-spacing: 2px;
+                font-weight: 900;
+                color: #2c3e50;
+                text-transform: uppercase;
+            }
+
+            .dgf-art-brand span { color: #1abc9c; }
+            .dgf-art-title { font-size: clamp(26px,4vw,42px); margin: 8px 0 4px; color: #243342; font-weight: 950; line-height: 1.05; }
+            .dgf-art-subtitle { color: #768594; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; }
+
+            .dgf-art-person {
+                margin: 20px 0;
+                background: rgba(255,255,255,.82);
+                border: 1px solid rgba(255,255,255,.9);
+                border-radius: 22px;
+                padding: 18px;
+                box-shadow: 0 12px 26px rgba(44,62,80,.06);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 14px;
+            }
+
+            .dgf-art-person-name { font-size: 19px; font-weight: 900; color: #243342; }
+            .dgf-art-person-depto { font-size: 10px; color: #73808c; margin-top: 3px; text-transform: uppercase; font-weight: 700; }
+            .dgf-art-person-emoji { font-size: 42px; }
+
+            .dgf-art-message-grid { display: flex; flex-direction: column; gap: 12px; }
+
+            .dgf-art-message {
+                background: rgba(255,255,255,.88);
+                border-radius: 18px;
+                padding: 16px 17px;
+                border: 1px solid rgba(44,62,80,.07);
+                box-shadow: 0 8px 20px rgba(44,62,80,.045);
+                position: relative;
+            }
+
+            .dgf-art-message::before {
+                content: "“";
+                position: absolute;
+                top: -6px;
+                left: 12px;
+                font-size: 40px;
+                color: rgba(255,118,117,.25);
+                font-weight: 900;
+            }
+
+            .dgf-art-message-text { margin: 8px 0 10px; color: #273542; font-size: 12px; line-height: 1.65; white-space: pre-wrap; }
+            .dgf-art-message-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #98a4af; font-size: 9px; border-top: 1px dashed #e7ebee; padding-top: 9px; }
+            .dgf-art-message-tag { background: linear-gradient(135deg,#ff7675,#fd79a8); color: #fff; padding: 4px 8px; border-radius: 999px; font-weight: 800; }
+
+            .dgf-art-footer { margin-top: 22px; text-align: center; color: #95a1aa; font-size: 9px; font-weight: 700; letter-spacing: .4px; }
+
+            @media (max-width: 900px) {
+                .dgf-mural-modal { grid-template-columns: 1fr; height: 92vh; }
+                .dgf-mural-sidebar { max-height: 310px; }
+                .dgf-mural-stage { padding: 18px; }
+            }
+
+            @media (max-width: 600px) {
+                .dgf-aniv-grid { grid-template-columns: 1fr; }
+                .dgf-month-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+                .dgf-mural-modal { border-radius: 18px; }
+                .dgf-mural-sidebar { padding: 16px; }
+                .dgf-mural-stage { padding: 10px; }
+                .dgf-art-inner { padding: 20px; }
+                .dgf-formato-grid { grid-template-columns: 1fr 1fr; }
+            }
+
+            @media print {
+                body > *:not(#dgf-mural-overlay) { display: none !important; }
+                #dgf-mural-overlay { display: flex !important; position: static !important; background: white !important; padding: 0 !important; }
+                #dgf-mural-sidebar, #dgf-mural-close { display: none !important; }
+                #dgf-mural-modal { display: block !important; width: 100% !important; height: auto !important; box-shadow: none !important; border-radius: 0 !important; }
+                #dgf-mural-stage { padding: 0 !important; overflow: visible !important; background: white !important; }
+                #dgf-mural-art { box-shadow: none !important; width: 100% !important; max-width: none !important; border-radius: 0 !important; }
+            }
+        `;
+        document.head.appendChild(style);
+    };
+
+    /* ============================================================
+       5. BANCO — LEITURA
+       ============================================================ */
+    window.carregarMensagensOnlineDGF = async () => {
+        const containers = aniversariantesHoje || [];
+
+        try {
+            const url = `${SUPABASE_REST_URL}?select=id,usuario_destino,texto,assinatura,criado_em&order=criado_em.desc`;
+            const mensagensGlobais = await requisicaoSupabaseDGF(url, { method: 'GET' });
+            const listaMensagens = Array.isArray(mensagensGlobais) ? mensagensGlobais : [];
+
+            containers.forEach((pessoa, index) => {
+                const chaveUsuario = criarChaveUsuarioDGF(pessoa.nome);
+                const containerMsg = document.getElementById(`feed-mensagens-${chaveUsuario}-${index}`);
+                if (!containerMsg) return;
+
+                const minhasMsgs = listaMensagens.filter(m => m.usuario_destino === chaveUsuario);
+
+                if (!minhasMsgs.length) {
+                    containerMsg.innerHTML = `<p style="font-size:10px;color:#b2bec3;font-style:italic;text-align:center;margin:8px 0;">Nenhuma mensagem ainda. Seja o primeiro! ✨</p>`;
+                    return;
+                }
+
+                containerMsg.innerHTML = `
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:2px;">
+                        <span style="font-size:9px;color:#8b98a4;font-weight:900;text-transform:uppercase;letter-spacing:.4px;">💬 ${minhasMsgs.length} mensagem(ns) recebida(s)</span>
+                        <button
+                            type="button"
+                            class="dgf-msg-eye"
+                            onclick="window.alternarMensagensDGF('${chaveUsuario}', '${index}', this)"
+                            aria-label="Mostrar mensagens"
+                            title="Clique para mostrar todas as mensagens"
+                            style="border:0;background:#eef3f5;color:#34495e;border-radius:999px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;line-height:1;box-shadow:0 2px 6px rgba(44,62,80,.08);"
+                        >👁️</button>
+                    </div>
+                    ${minhasMsgs.slice(0, 20).map(m => `
+                        <div class="dgf-msg-mini">
+                            <div class="dgf-msg-conteudo" style="display:none;margin-top:8px;">
+                                <p class="dgf-msg-mini-text">“${escapeHTMLDGF(m.texto)}”</p>
+                                <div class="dgf-msg-mini-meta">
+                                    <span>✍️ ${escapeHTMLDGF(m.assinatura || 'Anônimo')}</span>
+                                    <span>📅 ${escapeHTMLDGF(formatarDataDGF(m.criado_em))}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                `;
+            });
+
+            return listaMensagens;
+        } catch (erro) {
+            console.error('Erro ao buscar mensagens do PostgreSQL:', erro);
+            containers.forEach((pessoa, index) => {
+                const chaveUsuario = criarChaveUsuarioDGF(pessoa.nome);
+                const containerMsg = document.getElementById(`feed-mensagens-${chaveUsuario}-${index}`);
+                if (containerMsg) {
+                    containerMsg.innerHTML = `<p style="font-size:10px;color:#d35400;text-align:center;margin:8px 0;">Não foi possível carregar as mensagens agora.</p>`;
+                }
+            });
+            return [];
+        }
+    };
+
+    /* ============================================================
+       5.1. MENSAGENS FECHADAS — ABRIR PELO OLHO
+       ============================================================ */
+    window.alternarMensagensDGF = (nomeUsuario, index, botao) => {
+        if (!botao) return;
+
+        const container = document.getElementById(`feed-mensagens-${nomeUsuario}-${index}`);
+        if (!container) return;
+
+        const conteudos = Array.from(container.querySelectorAll('.dgf-msg-conteudo'));
+        if (!conteudos.length) return;
+
+        const algumaAberta = conteudos.some(conteudo => conteudo.style.display !== 'none');
+        const abrir = !algumaAberta;
+
+        conteudos.forEach(conteudo => {
+            conteudo.style.display = abrir ? 'block' : 'none';
+        });
+
+        botao.textContent = abrir ? '🙈' : '👁️';
+        botao.setAttribute('aria-label', abrir ? 'Ocultar mensagens' : 'Mostrar mensagens');
+        botao.title = abrir ? 'Clique para ocultar todas as mensagens' : 'Clique para mostrar todas as mensagens';
+    };
+
+    /* ============================================================
+       6. BANCO — ENVIO DA MENSAGEM
+       ============================================================ */
+    window.enviarParabensDGF = async (nomeUsuario, index) => {
+        const campoTexto = document.getElementById(`msg-input-${nomeUsuario}-${index}`);
+        const campoAssinatura = document.getElementById(`assinatura-input-${nomeUsuario}-${index}`);
+        const botao = document.getElementById(`btn-enviar-${nomeUsuario}-${index}`);
+
+        const texto = campoTexto ? campoTexto.value.trim() : '';
+        const assinatura = campoAssinatura ? campoAssinatura.value.trim() : '';
+
+        if (!texto) {
+            alert('Por favor, digite uma mensagem antes de enviar.');
+            return;
+        }
+
+        if (texto.length > 600) {
+            alert('A mensagem pode ter no máximo 600 caracteres.');
+            return;
+        }
+
+        if (assinatura.length > 50) {
+            alert('A assinatura pode ter no máximo 50 caracteres.');
+            return;
+        }
+
+        try {
+            if (botao) {
+                botao.disabled = true;
+                botao.innerHTML = 'Enviando...';
+            }
+
+            await requisicaoSupabaseDGF(SUPABASE_REST_URL, {
+                method: 'POST',
+                headers: {
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({
+                    usuario_destino: nomeUsuario,
+                    texto,
+                    assinatura: assinatura || null
+                })
+            });
+
+            if (campoTexto) campoTexto.value = '';
+            if (campoAssinatura) campoAssinatura.value = '';
+
+            alert('Mensagem enviada com sucesso! 🎉');
+            await window.carregarMensagensOnlineDGF();
+        } catch (erro) {
+            console.error('Erro ao salvar mensagem:', erro);
+            alert(`Não foi possível salvar a mensagem.\n\n${erro.message}`);
+        } finally {
+            if (botao) {
+                botao.disabled = false;
+                botao.innerHTML = 'Enviar mensagem <span>📩</span>';
+            }
+        }
+    };
+
+    /* ============================================================
+       7. BUSCA DAS MENSAGENS DE UM ANIVERSARIANTE
+       ============================================================ */
+    const buscarMensagensDoUsuarioDGF = async (nomeUsuario) => {
+        const parametro = encodeURIComponent(nomeUsuario);
+        const url = `${SUPABASE_REST_URL}?select=id,usuario_destino,texto,assinatura,criado_em&usuario_destino=eq.${parametro}&order=criado_em.desc`;
+        const dados = await requisicaoSupabaseDGF(url, { method: 'GET' });
+        return Array.isArray(dados) ? dados : [];
+    };
+
+    /* ============================================================
+       8. MODAL DO MURAL
+       ============================================================ */
+    const garantirModalMuralDGF = () => {
+        if (document.getElementById('dgf-mural-overlay')) return;
+
+        const overlay = document.createElement('div');
+        overlay.id = 'dgf-mural-overlay';
+        overlay.className = 'dgf-mural-overlay';
+        overlay.innerHTML = `
+            <div id="dgf-mural-modal" class="dgf-mural-modal" style="position:relative;">
+                <button id="dgf-mural-close" class="dgf-mural-close" onclick="window.fecharMuralDGF()">✕</button>
+
+                <aside id="dgf-mural-sidebar" class="dgf-mural-sidebar">
+                    <div style="font-size:12px;letter-spacing:1.5px;font-weight:900;color:#1abc9c;text-transform:uppercase;margin-bottom:10px;">INTRANET DGF</div>
+                    <h3>Mural de Parabéns ✨</h3>
+                    <p id="dgf-mural-sidebar-info">Monte uma arte com as mensagens recebidas. O banco é PostgreSQL via Supabase.</p>
+
+                    <div style="margin-top:18px;padding:12px;border-radius:15px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);">
+                        <div style="font-size:9px;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:800;">Mensagens recebidas</div>
+                        <div id="dgf-mural-contagem" style="font-size:27px;font-weight:900;margin-top:4px;">0</div>
+                    </div>
+
+                    <div style="margin-top:18px;font-size:10px;color:rgba(255,255,255,.6);font-weight:800;text-transform:uppercase;letter-spacing:.8px;">Baixar / compartilhar</div>
+                    <div class="dgf-formato-grid">
+                        <button class="dgf-formato-btn" onclick="window.exportarMuralDGF('pdf')">
+                            <strong>📄 PDF</strong>
+                            <span>Abre a impressão. Escolha “Salvar como PDF”.</span>
+                        </button>
+                        <button class="dgf-formato-btn" onclick="window.exportarMuralDGF('stories')">
+                            <strong>📱 STORIES</strong>
+                            <span>Arte vertical 1080 × 1920.</span>
+                        </button>
+                        <button class="dgf-formato-btn" onclick="window.exportarMuralDGF('feed')">
+                            <strong>🖼️ FEED</strong>
+                            <span>Arte 1080 × 1350.</span>
+                        </button>
+                        <button class="dgf-formato-btn" onclick="window.exportarMuralDGF('reels')">
+                            <strong>🎬 REELS</strong>
+                            <span>Arte vertical 1080 × 1920, pronta para capa/post.</span>
+                        </button>
+                        <button class="dgf-formato-btn" onclick="window.imprimirMuralDGF()" style="grid-column:1 / -1;">
+                            <strong>🖨️ IMPRIMIR</strong>
+                            <span>Abre a impressão do mural.</span>
+                        </button>
+                    </div>
+
+                    <button class="dgf-btn dgf-btn-light" onclick="window.fecharMuralDGF()" style="margin-top:12px;">Fechar mural</button>
+                </aside>
+
+                <main id="dgf-mural-stage" class="dgf-mural-stage">
+                    <div id="dgf-mural-preview-wrap" class="dgf-mural-preview-wrap"></div>
+                </main>
+            </div>
+        `;
+
+        overlay.addEventListener('click', (evento) => {
+            if (evento.target === overlay) window.fecharMuralDGF();
+        });
+
+        document.body.appendChild(overlay);
+    };
+
+    const montarArteMuralDGF = (nomeCompleto, depto, mensagens, formato = 'feed') => {
+        const tamanhos = {
+            stories: { largura: 540, altura: 960 },
+            feed: { largura: 540, altura: 675 },
+            reels: { largura: 540, altura: 960 }
+        };
+
+        const tamanho = tamanhos[formato] || tamanhos.feed;
+        const tagsDecorativas = ['✨ Gratidão', '🎈 Celebração', '❤️ Carinho', '🌟 Sucesso', '💚 Equipe DGF'];
+
+        const htmlMensagens = mensagens.length
+            ? mensagens.map((m, idx) => `
+                <article class="dgf-art-message">
+                    <p class="dgf-art-message-text">“${escapeHTMLDGF(m.texto)}”</p>
+                    <div class="dgf-art-message-meta">
+                        <span>${m.assinatura ? `✍️ ${escapeHTMLDGF(m.assinatura)}` : '✍️ Anônimo'}</span>
+                        <span class="dgf-art-message-tag">${tagsDecorativas[idx % tagsDecorativas.length]}</span>
+                        <span>${escapeHTMLDGF(formatarDataDGF(m.criado_em))}</span>
+                    </div>
+                </article>
+            `).join('')
+            : `<div style="padding:24px;border-radius:18px;background:rgba(255,255,255,.82);text-align:center;color:#8a97a3;">Ainda não há mensagens recebidas.</div>`;
+
+        const arte = document.createElement('div');
+        arte.id = 'dgf-mural-art';
+        arte.className = 'dgf-mural-art';
+        arte.style.width = `${tamanho.largura}px`;
+        arte.style.minHeight = `${tamanho.altura}px`;
+
+        arte.innerHTML = `
+            <div class="dgf-art-inner" style="min-height:${tamanho.altura}px;">
+                <div class="dgf-art-header">
+                    <div class="dgf-art-brand">📌 DGF<span>.</span></div>
+                    <div class="dgf-art-title">Feliz aniversário! 🎂</div>
+                    <div class="dgf-art-subtitle">Um carinho da Diretoria Geral de Finanças</div>
+                </div>
+
+                <div class="dgf-art-person">
+                    <div>
+                        <div class="dgf-art-person-name">${escapeHTMLDGF(nomeCompleto)}</div>
+                        <div class="dgf-art-person-depto">${escapeHTMLDGF(depto || 'DGF')}</div>
+                    </div>
+                    <div class="dgf-art-person-emoji">🥳</div>
+                </div>
+
+                <div class="dgf-art-message-grid">
+                    ${htmlMensagens}
+                </div>
+
+                <div class="dgf-art-footer">
+                    Gerado pela Intranet DGF • Mural de Parabéns ✨
+                </div>
+            </div>
+        `;
+
+        return arte;
+    };
+
+    window.abrirMuralDGF = async (nomeUsuario, nomeCompleto, depto) => {
+        garantirModalMuralDGF();
+
+        muralAtualDGF = {
+            nomeUsuario,
+            nomeCompleto,
+            depto: depto || 'DGF',
+            mensagens: []
+        };
+
+        const overlay = document.getElementById('dgf-mural-overlay');
+        const previewWrap = document.getElementById('dgf-mural-preview-wrap');
+        const info = document.getElementById('dgf-mural-sidebar-info');
+        const contagem = document.getElementById('dgf-mural-contagem');
+
+        info.textContent = `${nomeCompleto} • ${depto || 'DGF'}`;
+        contagem.textContent = '…';
+        previewWrap.innerHTML = `<div style="padding:50px;color:#6c7a89;font-weight:700;">Carregando mural…</div>`;
+        overlay.classList.add('ativo');
+        document.body.style.overflow = 'hidden';
+
+        try {
+            const mensagens = await buscarMensagensDoUsuarioDGF(nomeUsuario);
+            muralAtualDGF.mensagens = mensagens;
+            contagem.textContent = mensagens.length;
+
+            const arte = montarArteMuralDGF(nomeCompleto, depto || 'DGF', mensagens, 'feed');
+            previewWrap.innerHTML = '';
+            previewWrap.appendChild(arte);
+        } catch (erro) {
+            console.error('Erro ao abrir mural:', erro);
+            contagem.textContent = '0';
+            previewWrap.innerHTML = `
+                <div style="padding:40px;max-width:520px;text-align:center;color:#a55b00;">
+                    <div style="font-size:42px;">⚠️</div>
+                    <strong>Não foi possível carregar este mural.</strong>
+                    <p style="font-size:12px;line-height:1.5;">${escapeHTMLDGF(erro.message)}</p>
+                </div>`;
+        }
+    };
+
+    window.fecharMuralDGF = () => {
+        const overlay = document.getElementById('dgf-mural-overlay');
+        if (overlay) overlay.classList.remove('ativo');
+        document.body.style.overflow = '';
+        muralAtualDGF = null;
+    };
+
+    /* ============================================================
+       9. EXPORTAÇÕES — CANVAS NATIVO + IMPRESSÃO/PDF
+       ============================================================ */
+    const carregarFonteCanvasDGF = (ctx, tamanho, peso = 700) => {
+        ctx.font = `${peso} ${tamanho}px Arial, "Segoe UI", sans-serif`;
+    };
+
+    const quebrarTextoCanvasDGF = (ctx, texto, larguraMax) => {
+        const palavras = String(texto || '').split(/\s+/);
+        const linhas = [];
+        let linha = '';
+
+        palavras.forEach(palavra => {
+            const teste = linha ? `${linha} ${palavra}` : palavra;
+            if (ctx.measureText(teste).width <= larguraMax) {
+                linha = teste;
+            } else {
+                if (linha) linhas.push(linha);
+                linha = palavra;
+            }
+        });
+
+        if (linha) linhas.push(linha);
+        return linhas.length ? linhas : [''];
+    };
+
+    const arredondarRetanguloCanvasDGF = (ctx, x, y, largura, altura, raio) => {
+        const r = Math.min(raio, largura / 2, altura / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + largura, y, x + largura, y + altura, r);
+        ctx.arcTo(x + largura, y + altura, x, y + altura, r);
+        ctx.arcTo(x, y + altura, x, y, r);
+        ctx.arcTo(x, y, x + largura, y, r);
+        ctx.closePath();
+    };
+
+    const desenharTextoLimitadoDGF = (ctx, texto, x, y, larguraMax, alturaMax, tamanho, cor, peso = 500, lineHeight = 1.45) => {
+        carregarFonteCanvasDGF(ctx, tamanho, peso);
+        ctx.fillStyle = cor;
+        const linhas = quebrarTextoCanvasDGF(ctx, texto, larguraMax);
+        const maxLinhas = Math.max(1, Math.floor(alturaMax / (tamanho * lineHeight)));
+        const usadas = linhas.slice(0, maxLinhas);
+
+        usadas.forEach((linha, i) => {
+            ctx.fillText(linha, x, y + (i * tamanho * lineHeight));
+        });
+
+        return usadas.length * tamanho * lineHeight;
+    };
+
+    const obterDimensaoArteDGF = (formato) => ({
+        stories: { largura: 1080, altura: 1920 },
+        feed: { largura: 1080, altura: 1350 },
+        reels: { largura: 1080, altura: 1920 }
+    }[formato] || { largura: 1080, altura: 1350 });
+
+    const desenharMuralCanvasDGF = (formato = 'feed') => {
+        if (!muralAtualDGF) throw new Error('Mural não está aberto.');
+
+        const { largura, altura } = obterDimensaoArteDGF(formato);
+        const canvas = document.createElement('canvas');
+        canvas.width = largura;
+        canvas.height = altura;
+        const ctx = canvas.getContext('2d');
+
+        const gradiente = ctx.createLinearGradient(0, 0, largura, altura);
+        gradiente.addColorStop(0, '#ffffff');
+        gradiente.addColorStop(.48, '#f2faf8');
+        gradiente.addColorStop(1, '#fff2f4');
+        ctx.fillStyle = gradiente;
+        ctx.fillRect(0, 0, largura, altura);
+
+        // Elementos decorativos
+        ctx.fillStyle = 'rgba(26,188,156,.15)';
+        ctx.beginPath(); ctx.arc(90, 110, 210, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = 'rgba(255,118,117,.12)';
+        ctx.beginPath(); ctx.arc(largura - 70, altura * .20, 250, 0, Math.PI * 2); ctx.fill();
+
+        const margem = 78;
+        let y = 86;
+
+        carregarFonteCanvasDGF(ctx, formato === 'feed' ? 30 : 28, 900);
+        ctx.fillStyle = '#2c3e50';
+        ctx.fillText('📌 DGF', margem, y);
+        y += 70;
+
+        carregarFonteCanvasDGF(ctx, formato === 'feed' ? 66 : 60, 900);
+        ctx.fillStyle = '#243342';
+        ctx.fillText('Feliz aniversário! 🎂', margem, y);
+        y += 44;
+
+        carregarFonteCanvasDGF(ctx, 22, 600);
+        ctx.fillStyle = '#768594';
+        ctx.fillText('UM CARINHO DA DIRETORIA GERAL DE FINANÇAS', margem, y);
+        y += 58;
+
+        // Pessoa
+        const pessoaAltura = 128;
+        arredondarRetanguloCanvasDGF(ctx, margem, y, largura - (margem * 2), pessoaAltura, 28);
+        ctx.fillStyle = 'rgba(255,255,255,.88)';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(44,62,80,.08)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        carregarFonteCanvasDGF(ctx, 30, 900);
+        ctx.fillStyle = '#243342';
+        ctx.fillText(String(muralAtualDGF.nomeCompleto || '').toUpperCase(), margem + 28, y + 48);
+        carregarFonteCanvasDGF(ctx, 17, 800);
+        ctx.fillStyle = '#73808c';
+        ctx.fillText(String(muralAtualDGF.depto || 'DGF').toUpperCase(), margem + 28, y + 80);
+        carregarFonteCanvasDGF(ctx, 54, 700);
+        ctx.fillText('🥳', largura - margem - 80, y + 76);
+        y += pessoaAltura + 32;
+
+        const mensagens = Array.isArray(muralAtualDGF.mensagens) ? muralAtualDGF.mensagens : [];
+        const maxMensagens = formato === 'feed' ? 5 : 6;
+        const selecionadas = mensagens.slice(0, maxMensagens);
+        const restante = Math.max(0, mensagens.length - selecionadas.length);
+        const tags = ['✨ Gratidão', '🎈 Celebração', '❤️ Carinho', '🌟 Sucesso', '💚 Equipe DGF'];
+
+        if (!selecionadas.length) {
+            arredondarRetanguloCanvasDGF(ctx, margem, y, largura - (margem * 2), 150, 24);
+            ctx.fillStyle = 'rgba(255,255,255,.88)';
+            ctx.fill();
+            carregarFonteCanvasDGF(ctx, 24, 700);
+            ctx.fillStyle = '#8a97a3';
+            ctx.fillText('Ainda não há mensagens recebidas.', margem + 32, y + 75);
+            y += 190;
+        } else {
+            const gap = 18;
+            const larguraCard = largura - (margem * 2);
+            selecionadas.forEach((m, idx) => {
+                carregarFonteCanvasDGF(ctx, 21, 500);
+                const linhas = quebrarTextoCanvasDGF(ctx, `“${m.texto}”`, larguraCard - 70);
+                const alturaCard = Math.min(220, 92 + Math.max(2, linhas.length) * 31);
+                arredondarRetanguloCanvasDGF(ctx, margem, y, larguraCard, alturaCard, 24);
+                ctx.fillStyle = 'rgba(255,255,255,.90)';
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(44,62,80,.07)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                desenharTextoLimitadoDGF(ctx, `“${m.texto}”`, margem + 30, y + 47, larguraCard - 60, alturaCard - 83, 21, '#273542', 500, 1.45);
+
+                carregarFonteCanvasDGF(ctx, 15, 800);
+                ctx.fillStyle = '#7f8c98';
+                ctx.fillText(`✍️ ${m.assinatura || 'Anônimo'}`, margem + 30, y + alturaCard - 25);
+
+                carregarFonteCanvasDGF(ctx, 14, 700);
+                ctx.fillStyle = '#ff7675';
+                const tag = tags[idx % tags.length];
+                ctx.fillText(tag, largura - margem - 195, y + alturaCard - 25);
+
+                y += alturaCard + gap;
+            });
+
+            if (restante > 0) {
+                carregarFonteCanvasDGF(ctx, 17, 800);
+                ctx.fillStyle = '#758493';
+                ctx.textAlign = 'center';
+                ctx.fillText(`+ ${restante} mensagem(ns) recebida(s)`, largura / 2, y + 8);
+                ctx.textAlign = 'left';
+                y += 35;
+            }
+        }
+
+        carregarFonteCanvasDGF(ctx, 16, 700);
+        ctx.fillStyle = '#95a1aa';
+        ctx.textAlign = 'center';
+        ctx.fillText('Gerado pela Intranet DGF • Mural de Parabéns ✨', largura / 2, altura - 45);
+        ctx.textAlign = 'left';
+
+        return canvas;
+    };
+
+    window.exportarMuralDGF = (formato) => {
+        if (!muralAtualDGF) return;
+
+        if (formato === 'pdf') {
+            window.print();
+            return;
+        }
+
+        try {
+            const canvas = desenharMuralCanvasDGF(formato);
+            const nome = criarChaveUsuarioDGF(muralAtualDGF.nomeCompleto);
+            const sufixo = formato === 'stories' ? 'stories' : (formato === 'reels' ? 'reels' : 'feed');
+            const link = document.createElement('a');
+            link.download = `Mural-DGF-${nome}-${sufixo}.png`;
+            link.href = canvas.toDataURL('image/png');
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        } catch (erro) {
+            console.error('Erro ao gerar arte:', erro);
+            alert(`Não foi possível gerar a arte.\n\n${erro.message}`);
+        }
+    };
+
+    window.imprimirMuralDGF = () => {
+        if (!muralAtualDGF) return;
+        window.print();
+    };
+
+    /* ============================================================
+       10. RENDERIZAÇÃO DOS MESES — MESMA LÓGICA DA FUNÇÃO ORIGINAL
+       ============================================================ */
     window.renderizarMes = (mesSelecionado) => {
-        const nomesMeses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
         const listaFiltrada = listaAniversariantes
             .filter(p => p.data.split('/')[1] === mesSelecionado)
             .sort((a, b) => parseInt(a.data.split('/')[0]) - parseInt(b.data.split('/')[0]));
 
-        let htmlFinal = "";
+        let htmlFinal = '';
+
         listaFiltrada.forEach(pessoa => {
             const ehHoje = pessoa.data === hojeString;
             htmlFinal += `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; margin-bottom: 8px; background: ${ehHoje ? '#e8f4fd' : 'white'}; border-radius: 8px; border-left: 4px solid ${ehHoje ? '#3498db' : '#bdc3c7'}; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;margin-bottom:8px;background:${ehHoje ? '#e8f4fd' : 'white'};border-radius:10px;border-left:4px solid ${ehHoje ? '#3498db' : '#bdc3c7'};box-shadow:0 2px 4px rgba(0,0,0,.05);">
                     <div>
-                        <div style="font-weight: bold; color: #2c3e50; font-size: 14px;">${pessoa.nome.toUpperCase()}</div>
-                        <div style="font-size: 11px; color: #7f8c8d; text-transform: uppercase;">${pessoa.superintendência || 'DGF'}</div>
+                        <div style="font-weight:bold;color:#2c3e50;font-size:14px;">${escapeHTMLDGF(pessoa.nome).toUpperCase()}</div>
+                        <div style="font-size:11px;color:#7f8c8d;text-transform:uppercase;">${escapeHTMLDGF(pessoa.superintendência || 'DGF')}</div>
                     </div>
-                    <div style="font-weight: bold; color: #34495e; background: #f1f2f6; padding: 5px 10px; border-radius: 20px; font-size: 12px; min-width: 50px; text-align: center;">
-                        ${pessoa.data}
+                    <div style="font-weight:bold;color:#34495e;background:#f1f2f6;padding:5px 10px;border-radius:20px;font-size:12px;min-width:50px;text-align:center;">
+                        ${escapeHTMLDGF(pessoa.data)}
                     </div>
                 </div>`;
         });
-        document.getElementById('container-lista-mes').innerHTML = `
-            <h3 style="color: #34495e; border-bottom: 2px solid #f1f2f6; padding-bottom: 10px; margin-top: 20px;">📅 Aniversariantes de ${nomesMeses[parseInt(mesSelecionado) - 1]}</h3>
-            ${htmlFinal || "<p style='color: #95a5a6; font-style: italic;'>Nenhum aniversariante encontrado.</p>"}
-        `;
-    };
 
-    // Função para buscar e exibir as mensagens públicas online nos cards
-    window.carregarMensagensOnlineDGF = () => {
-        fetch(API_URL)
-        .then(res => res.ok ? res.json() : { mensagens: [] })
-        .catch(() => ({ mensagens: [] }))
-        .then(data => {
-            const mensagensGlobais = data && data.mensagens && Array.isArray(data.mensagens) ? data.mensagens : [];
-            
-            aniversariantesHoje.forEach((pessoa, index) => {
-                const chaveUsuario = pessoa.nome.toLowerCase().replace(/\s+/g, '-');
-                const containerMsg = document.getElementById(`feed-mensagens-${chaveUsuario}-${index}`);
-                
-                if (containerMsg) {
-                    const minhasMsgs = mensagensGlobais.filter(m => m.usuarioDestino === chaveUsuario);
-                    if (minhasMsgs.length > 0) {
-                        containerMsg.innerHTML = minhasMsgs.map(m => `
-                            <div style="background: #ffffff; padding: 8px; border-radius: 6px; margin-bottom: 6px; border-left: 3px solid #ff7675; font-size: 11px; text-align: left; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                                <div style="color: #2d3436; font-style: italic; font-weight: 500;">"${m.texto}"</div>
-                                <div style="display: flex; justify-content: space-between; margin-top: 4px; font-size: 9px; color: #b2bec3;">
-                                    <span>✍️ ${m.assinatura || 'Anônimo'}</span>
-                                    <span>📅 ${m.data}</span>
-                                </div>
-                            </div>
-                        `).join('');
-                    } else {
-                        containerMsg.innerHTML = `<p style="font-size: 10px; color: #b2bec3; font-style: italic; margin: 5px 0;">Nenhuma mensagem recebida ainda. Seja o primeiro!</p>`;
-                    }
-                }
-            });
-        });
-    };
-
-    // Envia para a nuvem tratando erros caso o repositório seja novo
-    window.enviarParabensDGF = (nomeUsuario, index) => {
-        const campoTexto = document.getElementById(`msg-input-${nomeUsuario}-${index}`);
-        const campoAssinatura = document.getElementById(`assinatura-input-${nomeUsuario}-${index}`);
-        
-        if (campoTexto && campoTexto.value.trim() !== "") {
-            const novaMensagem = {
-                usuarioDestino: nomeUsuario,
-                texto: campoTexto.value.trim(),
-                assinatura: campoAssinatura ? campoAssinatura.value.trim() : "",
-                data: new Date().toLocaleDateString('pt-BR')
-            };
-
-            fetch(API_URL)
-            .then(res => res.ok ? res.json() : { mensagens: [] })
-            .catch(() => ({ mensagens: [] })) // Trata erros de rota inicial inexistente
-            .then(data => {
-                let mensagensGlobais = data && data.mensagens && Array.isArray(data.mensagens) ? data.mensagens : [];
-                mensagensGlobais.push(novaMensagem);
-
-                return fetch(API_URL, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ mensagens: mensagensGlobais })
-                });
-            })
-            .then(() => {
-                alert('Sua mensagem de parabéns foi publicada no mural coletivo na nuvem! 🌟');
-                campoTexto.value = '';
-                if(campoAssinatura) campoAssinatura.value = '';
-                window.carregarMensagensOnlineDGF(); // Atualiza a lista exibida na tela em tempo real
-            })
-            .catch(err => {
-                console.error(err);
-                alert('Erro ao salvar na nuvem. Tente enviar novamente.');
-            });
-        } else {
-            alert('Por favor, digite uma mensagem antes de enviar.');
+        const container = document.getElementById('container-lista-mes');
+        if (container) {
+            container.innerHTML = `
+                <h3 style="color:#34495e;border-bottom:2px solid #f1f2f6;padding-bottom:10px;margin-top:20px;">📅 Aniversariantes de ${escapeHTMLDGF(nomesMeses[parseInt(mesSelecionado) - 1])}</h3>
+                ${htmlFinal || "<p style='color:#95a5a6;font-style:italic;'>Nenhum aniversariante encontrado.</p>"}
+            `;
         }
     };
 
-    // Abre o mural com papel de parede super colorido e animado
-    window.baixarMuralDGF = (nomeUsuario, nomeCompleto, depto) => {
-        fetch(API_URL)
-        .then(res => res.ok ? res.json() : { mensagens: [] })
-        .catch(() => ({ mensagens: [] }))
-        .then(data => {
-            const mensagensGlobais = data && data.mensagens && Array.isArray(data.mensagens) ? data.mensagens : [];
-            const minhasMensagens = mensagensGlobais.filter(m => m.usuarioDestino === nomeUsuario);
-
-            if (!minhasMensagens || minhasMensagens.length === 0) {
-                alert(`Ainda não há mensagens deixadas para ${nomeCompleto} no mural coletivo.`);
-                return;
-            }
-
-            const janelaPDF = window.open('', '_blank');
-            let blocosMensagensHTML = '';
-            const tagsDecorativas = ['✨ Gratidão', '🎈 Celebração', '❤️ Carinho', '🌟 Sucesso'];
-            const tonsPasteis = ['#fff5f5', '#f0faff', '#f6fff5', '#fffdf0', '#faf5ff', '#f5fffe'];
-
-            minhasMensagens.forEach((m, idx) => {
-                const tag = tagsDecorativas[idx % tagsDecorativas.length];
-                const corFundo = tonsPasteis[idx % tonsPasteis.length];
-
-                blocosMensagensHTML += `
-                    <div style="background: ${corFundo}; width: 100%; box-sizing: border-box; padding: 20px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 15px; position: relative;">
-                        <p style="font-size: 11pt; line-height: 1.6; color: #2d3436; margin: 0; font-style: italic; font-weight: 500; white-space: pre-wrap;">
-                            "${m.texto}"
-                        </p>
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed rgba(0,0,0,0.08); padding-top: 12px;">
-                            <div>
-                                ${m.assinatura ? `<span style="font-size: 9pt; font-weight: bold; color: #2c3e50;">✍️ De: ${m.assinatura}</span>` : '<span style="font-size: 9pt; color: #95a5a6; font-style: italic;">Anônimo</span>'}
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <span style="font-size: 8pt; font-weight: bold; color: #ffffff; background: linear-gradient(135deg, #ff7675, #fd79a8); padding: 4px 10px; border-radius: 20px; text-transform: uppercase;">${tag}</span>
-                                <span style="font-size: 8pt; color: #a4b0be; font-weight: bold;">📅 ${m.data}</span>
-                            </div>
-                        </div>
-                    </div>`;
-            });
-
-            janelaPDF.document.write(`
-                <html>
-                <head>
-                    <title>Mural DGF - ${nomeCompleto}</title>
-                    <style>
-                        body { 
-                            font-family: '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-                            /* Papel de parede super festivo e colorido em degradê vibrante */
-                            background: linear-gradient(-45deg, #ff3f34, #00d2d3, #ffa801, #05c46b, #ef5777);
-                            background-size: 400% 400%;
-                            animation: festaGradiente 10s ease infinite;
-                            margin: 0; 
-                            padding: 20px; 
-                            color: #2c3e50; 
-                        }
-                        @keyframes festaGradiente {
-                            0% { background-position: 0% 50%; }
-                            50% { background-position: 100% 50%; }
-                            100% { background-position: 0% 50%; }
-                        }
-                        .FeedContainer { max-width: 600px; margin: 30px auto; background: rgba(255, 255, 255, 0.95); border-radius: 24px; padding: 30px; box-shadow: 0 25px 55px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.7); backdrop-filter: blur(12px); }
-                        .DGFHeader { text-align: center; border-bottom: 1px solid #efefef; padding-bottom: 20px; margin-bottom: 25px; }
-                        .DGFLogo { font-size: 24pt; font-weight: 900; color: #2c3e50; letter-spacing: 2px; margin: 0; text-transform: uppercase; }
-                        .DGFLogo span { color: #ff7675; }
-                        .MuralTitulo { font-size: 18pt; color: #2c3e50; margin: 8px 0 4px 0; font-weight: 800; }
-                        .MuralSub { font-size: 9pt; color: #8e8e8e; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
-                        .PerfilBadge { background: #f8f9fa; border: 1px solid #efefef; padding: 15px 20px; border-radius: 18px; margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between; }
-                        .ListaMensagensVertical { display: flex; flex-direction: column; gap: 20px; }
-						
-						/* ========================================================
-   REGRAS RESPONSIVAS PARA A INTRANET DGF (MOBILE & TABLET)
-   ======================================================== */
-
-/* Dispositivos Médios e Pequenos (Tablets e Smartphones: até 768px) */
-@media screen and (max-width: 768px) {
-
-    /* 1. Reestruturação do Layout Principal */
-    body, .app-container, .main-layout {
-        display: block !important;
-        flex-direction: column !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-
-    /* 2. Menu Lateral (Sidebar) Convertido para Navegação Superior */
-    nav, .sidebar, #menu-lateral {
-        width: 100% !important;
-        min-width: 100% !important;
-        height: auto !important;
-        position: relative !important;
-        top: 0 !important;
-        left: 0 !important;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        padding: 10px 15px !important;
-    }
-
-    /* Ajuste dos itens do menu para layout fluido */
-    nav ul, .sidebar ul {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        justify-content: center !important;
-    }
-
-    nav ul li, .sidebar ul li {
-        width: auto !important;
-        margin: 0 !important;
-    }
-
-    nav ul li a, .sidebar ul li a {
-        padding: 8px 12px !important;
-        font-size: 0.9rem !important;
-        border-radius: 6px !important;
-        display: inline-block !important;
-    }
-
-    /* 3. Área de Conteúdo Principal */
-    main, .content, .pagina-conteudo {
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 15px !important;
-    }
-
-    /* 4. Redimensionamento e Enfileiramento dos Cards */
-    .card-grid, .grid-container, .cards-wrapper {
-        display: grid !important;
-        grid-template-columns: 1fr !important; /* Força 1 coluna em telas menores */
-        gap: 15px !important;
-    }
-
-    .card, .card-mural, .info-card {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin-bottom: 12px !important;
-        box-sizing: border-box !important;
-    }
-
-    /* 5. Adequação de IFrames (Google Calendar, Looker Studio, Trello) */
-    iframe {
-        width: 100% !important;
-        min-height: 350px !important;
-        height: auto !important;
-    }
-
-    /* 6. Tabelas Responsivas (Consultas SEI e Relatórios) */
-    .table-responsive, table {
-        display: block !important;
-        width: 100% !important;
-        overflow-x: auto !important;
-        white-space: nowrap !important;
-    }
-}
-
-/* Dispositivos Muito Pequenos (Smartphones na Vertical: até 480px) */
-@media screen and (max-width: 480px) {
-    h1 { font-size: 1.4rem !important; }
-    h2 { font-size: 1.2rem !important; }
-
-    nav ul li a, .sidebar ul li a {
-        font-size: 0.8rem !important;
-        padding: 6px 10px !important;
-    }
-
-    .card {
-        padding: 12px !important;
-    }
-}
-						
-                    </style>
-                </head>
-                <body>
-                    <div class="FeedContainer">
-                        <div class="DGFHeader">
-                            <div class="DGFLogo">📌 DGF<span>.</span></div>
-                            <div class="MuralTitulo">Mural de Parabéns ✨</div>
-                            <div class="MuralSub">Diretoria Geral de Finanças</div>
-                        </div>
-                        
-                        <div class="PerfilBadge">
-                            <div>
-                                <div style="font-size: 12pt; font-weight: 700; color: #262626; text-transform: uppercase;">${nomeCompleto}</div>
-                                <div style="font-size: 9pt; color: #8e8e8e; margin-top: 2px;">${depto}</div>
-                            </div>
-                            <div style="font-size: 22pt;">🎂</div>
-                        </div>
-
-                        <div class="ListaMensagensVertical">
-                            ${blocosMensagensHTML}
-                        </div>
-
-                        <div style="text-align: center; color: #bfbfbf; font-size: 9pt; font-weight: 600; border-top: 1px solid #efefef; padding-top: 20px; margin-top: 30px;">
-                            Gerado com ❤️ pela Intranet DGF • Feed Interativo 📸
-                        </div>
-                    </div>
-                </body>
-                </html>
-            `);
-            janelaPDF.document.close();
-        });
-    };
-
+    /* ============================================================
+       11. CARDS DE HOJE
+       ============================================================ */
     const aniversariantesHoje = listaAniversariantes.filter(p => p.data === hojeString);
 
-    let hojeHTML = "";
+    let hojeHTML = '';
+
     aniversariantesHoje.forEach((pessoa, index) => {
-        const chaveUsuario = pessoa.nome.toLowerCase().replace(/\s+/g, '-');
+        const chaveUsuario = criarChaveUsuarioDGF(pessoa.nome);
+        const primeiroNome = escapeHTMLDGF(String(pessoa.nome || '').trim().split(/\s+/)[0] || '?');
 
         hojeHTML += `
-            <div style="background: white; width: 100%; max-width: 300px; padding: 25px 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); position: relative; overflow: hidden; border-top: 5px solid #3498db; text-align: center; margin-bottom: 15px; display: flex; flex-direction: column; justify-content: space-between;">
-                
-                <div style="position: absolute; top: 15px; right: -35px; background: #f1c40f; color: #fff; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    HOJE
+            <article class="dgf-aniv-card">
+                <div class="dgf-hoje-badge">ANIVERSARIANTE • HOJE</div>
+
+                <div class="dgf-avatar">
+                    ${primeiroNome.charAt(0).toUpperCase()}
+                    <small>🎂</small>
                 </div>
 
-                <div>
-                    <div style="width: 70px; height: 70px; background: #e8f4fd; color: #3498db; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; border: 2px solid #3498db; position: relative;">
-                        ${pessoa.nome.charAt(0)}
-                        <span style="position: absolute; bottom: -5px; right: -5px; font-size: 20px;">🎂</span>
+                <h3 style="margin:0 0 6px 0;color:#243342;font-size:18px;line-height:1.2;">${escapeHTMLDGF(pessoa.nome).toUpperCase()}</h3>
+                <div class="dgf-tag-setor">${escapeHTMLDGF(pessoa.superintendência || 'DGF')}</div>
+
+                <div style="margin-top:12px;color:#8996a2;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;">✨ Data especial: ${escapeHTMLDGF(pessoa.data)}</div>
+
+                <div class="dgf-mensagem-box">
+                    <label style="font-size:10px;font-weight:900;color:#586674;text-transform:uppercase;display:block;margin-bottom:8px;">💬 Mensagens recebidas</label>
+                    <div id="feed-mensagens-${escaparAtributoDGF(chaveUsuario)}-${index}" class="dgf-feed-mini">
+                        <p style="font-size:10px;color:#b2bec3;font-style:italic;text-align:center;margin:8px 0;">Carregando mensagens…</p>
                     </div>
 
-                    <h3 style="margin: 10px 0 5px 0; color: #2c3e50; font-size: 18px;">${pessoa.nome.toUpperCase()}</h3>
-                    <p style="margin: 0; color: #3498db; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">${pessoa.superintendência || 'DGF'}</p>
-                    
-                    <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #f0f0f0; display: flex; justify-content: center; align-items: center; gap: 8px; color: #95a5a6; font-size: 12px;">
-                        <span>✨ Data Especial: <strong>${pessoa.data}</strong></span>
+                    <div style="border-top:1px solid #e9eef2;padding-top:12px;margin-top:2px;">
+                        <label style="font-size:10px;font-weight:900;color:#7f8c8d;text-transform:uppercase;display:block;margin-bottom:5px;">Deixe seu parabéns</label>
+                        <textarea id="msg-input-${escaparAtributoDGF(chaveUsuario)}-${index}" maxlength="600" placeholder="Escreva uma mensagem de carinho…" style="width:100%;height:72px;padding:9px;border-radius:10px;border:1px solid #dfe5ea;font-size:11px;font-family:inherit;resize:vertical;box-sizing:border-box;outline:none;"></textarea>
+
+                        <input id="assinatura-input-${escaparAtributoDGF(chaveUsuario)}-${index}" maxlength="50" placeholder="Seu nome (opcional)" style="width:100%;padding:9px;border-radius:10px;border:1px solid #dfe5ea;font-size:11px;font-family:inherit;box-sizing:border-box;outline:none;margin-top:7px;" />
+
+                        <button id="btn-enviar-${chaveUsuario}-${index}" class="dgf-btn dgf-btn-green" onclick='window.enviarParabensDGF(${jsArgDGF(chaveUsuario)}, ${jsArgDGF(index)})' style="margin-top:8px;">
+                            Enviar mensagem <span>📩</span>
+                        </button>
+
+                        <button class="dgf-btn dgf-btn-coral" onclick='window.abrirMuralDGF(${jsArgDGF(chaveUsuario)}, ${jsArgDGF(pessoa.nome)}, ${jsArgDGF(pessoa.superintendência || 'DGF')})' style="margin-top:8px;">
+                            Abrir meu mural <span>✨</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Feed de mensagens recebidas visíveis online para todos os computadores -->
-                <div style="margin-top: 15px; text-align: left;">
-                    <label style="font-size: 10px; font-weight: bold; color: #2c3e50; text-transform: uppercase; display: block; margin-bottom: 6px;">💬 Mensagens Recebidas:</label>
-                    <div id="feed-mensagens-${chaveUsuario}-${index}" style="max-height: 120px; overflow-y: auto; background: #f8f9fa; padding: 6px; border-radius: 8px; border: 1px solid #e9ecef; margin-bottom: 10px;">
-                        <p style="font-size: 10px; color: #b2bec3; font-style: italic; text-align: center; margin: 5px 0;">Carregando mensagens da nuvem...</p>
-                    </div>
+                <div style="display:flex;justify-content:center;gap:6px;margin-top:13px;flex-wrap:wrap;">
+                    <span style="background:#2c3e50;color:#fff;padding:5px 10px;border-radius:999px;font-size:9px;font-weight:800;">#Parabéns</span>
+                    <span style="background:#1abc9c;color:#fff;padding:5px 10px;border-radius:999px;font-size:9px;font-weight:800;">#EquipeDGF</span>
+                    <span style="background:#fd79a8;color:#fff;padding:5px 10px;border-radius:999px;font-size:9px;font-weight:800;">#Celebração</span>
                 </div>
-
-                <div style="background: #f8f9fa; border-radius: 12px; padding: 12px; border: 1px solid #e9ecef; text-align: left;">
-                    <label style="font-size: 10px; font-weight: bold; color: #7f8c8d; text-transform: uppercase; display: block; margin-bottom: 4px;">Deixe sua mensagem:</label>
-                    <textarea id="msg-input-${chaveUsuario}-${index}" placeholder="Deseje um feliz aniversário..." style="width: 100%; height: 55px; padding: 8px; border-radius: 6px; border: 1px solid #cccccc; font-size: 11px; font-family: sans-serif; resize: none; box-sizing: border-box; outline: none; margin-bottom: 6px;"></textarea>
-                    
-                    <label style="font-size: 10px; font-weight: bold; color: #7f8c8d; text-transform: uppercase; display: block; margin-bottom: 4px;">Sua Assinatura (Max 15 carac.):</label>
-                    <input type="text" id="assinatura-input-${chaveUsuario}-${index}" maxlength="15" placeholder="Seu nome..." style="width: 100%; padding: 6px; border-radius: 6px; border: 1px solid #cccccc; font-size: 11px; font-family: sans-serif; box-sizing: border-box; outline: none; margin-bottom: 8px;" />
-
-                    <button onclick="window.enviarParabensDGF('${chaveUsuario}', '${index}')" style="width: 100%; padding: 8px; background: #3498db; color: white; border: none; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 6px;">
-                        Enviar Mensagem 📩
-                    </button>
-                    
-                    <button onclick="window.baixarMuralDGF('${chaveUsuario}', '${pessoa.nome}', '${pessoa.superintendência || 'DGF'}')" style="width: 100%; padding: 6px; background: #e17055; color: white; border: none; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;">
-                        Ver Meu Mural (PDF 📸)
-                    </button>
-                </div>
-
-                <div style="margin-top: 12px; display: flex; justify-content: center; gap: 5px;">
-                    <span style="background: #2c3e50; color: white; padding: 4px 12px; border-radius: 12px; font-size: 10px;">#Parabéns</span>
-                    <span style="background: #2ecc71; color: white; padding: 4px 12px; border-radius: 12px; font-size: 10px;">🎈 Celebração</span>
-                </div>
-            </div>`;
+            </article>
+        `;
     });
 
+    /* ============================================================
+       12. HTML DA PÁGINA
+       ============================================================ */
     conteudo.innerHTML = `
-        <h2 style="color: #2c3e50; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 30px;">🎂</span> Aniversariantes
-        </h2>
+        <section>
+            <h2 class="dgf-aniv-titulo">
+                <span style="font-size:30px;">🎂</span> Aniversariantes
+            </h2>
+            <p class="dgf-aniv-subtitulo">Envie uma mensagem, acompanhe os parabéns recebidos e monte uma arte pronta para compartilhar.</p>
 
-        <div style="margin-bottom: 30px;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; justify-items: start;">
+            <div class="dgf-aniv-grid">
                 ${hojeHTML || `
-                    <div style="grid-column: 1 / -1; width: 100%; padding: 20px; background: white; border-radius: 12px; border: 1px dashed #bdc3c7; text-align: center; color: #95a5a6;">
+                    <div style="grid-column:1 / -1;width:100%;padding:28px;background:#fff;border-radius:18px;border:1px dashed #cbd3da;text-align:center;color:#8b98a4;box-sizing:border-box;">
+                        <div style="font-size:36px;margin-bottom:8px;">🎈</div>
                         Ninguém faz aniversário hoje, ${hojeString}.
                     </div>
                 `}
             </div>
-        </div>
 
-        <div style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-            <p style="margin: 0 0 10px 0; font-size: 12px; font-weight: bold; color: #7f8c8d; text-transform: uppercase; letter-spacing: 1px;">Consultar por mês:</p>
-            <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px;">
-                ${["01","02","03","04","05","06","07","08","09","10","11","12"].map((m, i) => `
-                    <button onclick="renderizarMes('${m}')" style="padding: 8px; border: 1px solid #f1f2f6; background: ${m === mesAtual ? '#3498db' : '#f8f9fa'}; color: ${m === mesAtual ? 'white' : '#34495e'}; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: bold; transition: 0.2s;" onmouseover="this.style.background='#3498db'; this.style.color='white'" onmouseout="${m === mesAtual ? '' : "this.style.background='#f8f9fa'; this.style.color='#34495e'"}">
-                        ${["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"][i]}
-                    </button>
-                `).join('')}
+            <div class="dgf-month-box">
+                <p style="margin:0 0 12px 0;font-size:12px;font-weight:900;color:#7f8c8d;text-transform:uppercase;letter-spacing:1px;">Consultar aniversariantes por mês</p>
+                <div class="dgf-month-grid">
+                    ${["01","02","03","04","05","06","07","08","09","10","11","12"].map((m, i) => `
+                        <button class="dgf-month-btn ${m === mesAtual ? 'ativo' : ''}" onclick="window.renderizarMes('${m}')">
+                            ${abreviacoesMeses[i]}
+                        </button>
+                    `).join('')}
+                </div>
+                <div id="container-lista-mes"></div>
             </div>
-            <div id="container-lista-mes"></div>
-        </div>
+        </section>
     `;
 
-    renderizarMes(mesAtual);
-    window.carregarMensagensOnlineDGF(); // Busca imediatamente na nuvem e mostra para todos
+    /* ============================================================
+       13. INICIALIZAÇÃO
+       ============================================================ */
+    injetarEstilosMuralDGF();
+    garantirModalMuralDGF();
+    window.renderizarMes(mesAtual);
+    window.carregarMensagensOnlineDGF();
+
+    // Atualização automática do mural visível a cada 60 segundos.
+    // Não altera a lógica de envio; apenas mantém a tela atualizada.
+    if (window.dgfAniversariantesInterval) {
+        clearInterval(window.dgfAniversariantesInterval);
+    }
+    window.dgfAniversariantesInterval = setInterval(() => {
+        if (document.visibilityState === 'visible') {
+            window.carregarMensagensOnlineDGF();
+        }
+    }, 60000);
 }
-if(pagina === "organograma"){
-        conteudo.innerHTML = `
-            <h2>📊 Organograma DGF</h2>
-            <div class="organograma-container">
-                <iframe src="https://dmourajunior.github.io/consilta-online/" 
-                        style="width:100%; height:100%; border:none;" 
-                        title="Organograma"></iframe>
-            </div>
-        `;
-    }
-
-    if(pagina === "senha_page"){
-        conteudo.innerHTML = `
-            <h2>🔑 Alterar Minha Senha</h2>
-            <div class="form-container">
-                <div class="form-group">
-                    <label>Senha Atual:</label>
-                    <input type="password" id="senha_atual" placeholder="Digite a senha atual">
-                    <span class="toggle-password" onclick="toggleVisibility('senha_atual')">👁️</span>
-                </div>
-                <div class="form-group">
-                    <label>Nova Senha:</label>
-                    <input type="password" id="nova_senha_input" placeholder="Digite a nova senha">
-                    <span class="toggle-password" onclick="toggleVisibility('nova_senha_input')">👁️</span>
-                </div>
-                <div class="form-group">
-                    <label>Repetir Nova Senha:</label>
-                    <input type="password" id="repetir_senha_input" placeholder="Repita a nova senha">
-                    <span class="toggle-password" onclick="toggleVisibility('repetir_senha_input')">👁️</span>
-                </div>
-                <button class="btn-enviar" onclick="salvarNovaSenha()">Salvar Alteração</button>
-            </div>
-        `;
-    }
-
+	
     if (pagina === "reserva") {
     // 1. Define e força a atualização da senha no localStorage
     localStorage.setItem('senha_conformidade', 'CCF01072026');

@@ -777,7 +777,7 @@ function mostrar(pagina){
                 gap: 15px;
             ">
 
-                <!-- COLUNA DA ESQUERDA: CLUBE DO LIVRO + CARD COMPACTO DO QUEBRA-CABEÇA -->
+                <!-- COLUNA DA ESQUERDA: CLUBE DO LIVRO + CARD COMPACTO DO XADREZ -->
                 <div style="display: flex; flex-direction: column; gap: 10px; width: 210px;">
                     
                     <!-- BOTÃO CLUBE DO LIVRO MANTIDO -->
@@ -805,7 +805,7 @@ function mostrar(pagina){
                         <span style="font-size: 11px; opacity: 0.9; margin-top: 2px;">Cultura & Conhecimento</span>
                     </button>
 
-                    <!-- CARD COMPACTO QUEBRA-CABEÇA -->
+                    <!-- CARD COMPACTO XADREZ -->
                     <div onclick="mostrar('noticias')" style="
                         display: flex;
                         flex-direction: column;
@@ -826,17 +826,17 @@ function mostrar(pagina){
                     onmouseover="this.style.background='rgba(142, 68, 173, 1)'; this.style.transform='scale(1.02)';"
                     onmouseout="this.style.background='rgba(142, 68, 173, 0.85)'; this.style.transform='scale(1)'"
                     >
-                        <!-- IMAGEM EM MODO PAISAGEM (ASPECT-RATIO 16/9 + COVER) -->
-                        <img src="./qubra.png" alt="Quebra-Cabeça" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin-bottom: 6px;">
+                        <!-- IMAGEM TROCADA PARA XADREZ.PNG -->
+                        <img src="./xadrez.png" alt="Xadrez DGF" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin-bottom: 6px;">
                         
                         <!-- BARRINHA DE PROGRESSO (99%) -->
-<div style="width: 100%; background: rgba(0,0,0,0.25); border-radius: 10px; height: 12px; margin-bottom: 6px; overflow: hidden; position: relative;">
-    <div style="width: 99%; background: #2ecc71; height: 100%; border-radius: 10px; transition: width 0.3s ease;"></div>
-    <span style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-size: 9px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.8);">99%</span>
-</div>
+                        <div style="width: 100%; background: rgba(0,0,0,0.25); border-radius: 10px; height: 12px; margin-bottom: 6px; overflow: hidden; position: relative;">
+                            <div style="width: 99%; background: #2ecc71; height: 100%; border-radius: 10px; transition: width 0.3s ease;"></div>
+                            <span style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-size: 9px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.8);">99%</span>
+                        </div>
 
                         <span style="font-size: 11px; font-weight: bold; line-height: 1.2; text-align: center; color: #fff;">
-                            🧩 1000 peças depois, a prova de que a nossa equipe dá conta de qualquer desafio. Parabéns pelo empenho e pela paciência de todos!
+                            ♟️ Torneio de Xadrez DGF: Estratégia, foco e integração para nossa equipe!
                         </span>
                     </div>
 
@@ -910,7 +910,7 @@ function mostrar(pagina){
                     </div>
                 </div>
 
-                <!-- CARD MURAL DE AVISOS - APENAS VÍDEO INSTITUCIONAL -->
+                <!-- CARD MURAL DE AVISOS - IMAGEM BEBE.PNG -->
                 <div style="
                     background: #fff9c4 !important; 
                     border: 1px solid #fbc02d; 
@@ -936,12 +936,9 @@ function mostrar(pagina){
                         <span onclick="mostrar('noticias')" style="font-size: 11px; color: #8e44ad; font-weight: bold; cursor: pointer; text-decoration: underline;">Ver tudo</span>
                     </div>
 
-                    <!-- VÍDEO NO MURAL DE AVISOS -->
+                    <!-- IMAGEM TROCADA PARA BEBE.PNG NO MURAL DE AVISOS -->
                     <div style="width: 100%; border-radius: 4px; overflow: hidden; margin-top: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-                        <video controls style="width: 100%; height: auto; max-height: 120px; display: block; background: #000;">
-                            <source src="./institucional.mp4" type="video/mp4">
-                            Seu navegador não suporta vídeos.
-                        </video>
+                        <img src="./bebe.png" alt="Aviso DGF" style="width: 100%; height: auto; max-height: 120px; display: block; object-fit: cover;">
                     </div>
 
                 </div>
@@ -961,7 +958,7 @@ function mostrar(pagina){
                 </div>
             </div>
 
-            <!-- CARD 2: CALENDÁRIO Financeiro (SUBSTITUIU O COORDETECH) -->
+            <!-- CARD 2: CALENDÁRIO Financeiro -->
 <div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #34495e; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
     <img src="calendario.png" alt="CALENDÁRIO Financeiro" onclick="mostrar('agenda')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
     <div style="padding: 15px;">
@@ -1467,7 +1464,7 @@ if (pagina === "plano_anual_de_contratacoes") {
                     <span id="seta-noticia1" style="color: #003366; font-size: 18px; font-weight: bold; transition: transform 0.3s;">▼</span>
                 </div>
                 <div id="noticia1" style="display: none; padding: 20px; border-top: 1px solid #f1f5f9; background: #fafafa; color: #334155; font-size: 14px; line-height: 1.7;">
-                    <p style="margin-top: 0;">Se a sua gerência precisa incluir, excluir ou redimensionar demandas de contratação planejadas para o próximo ano, marque esta data no calendário! No período de 15 de setembro a 15 de novembro de 2026, o sistema PE-Integrado estará oficialmente aberto para a revisão do Plano de Contratações Anual (PCA 2026 E 2027).</p>
+                    <p style="margin-top: 0;">Se a sua gerência precisa incluir, excluir ou redimensionar demandas de contratação planejadas para o próximo ano, marque esta data no calendário! No período de 15 de setembro a 15 de novembro de 2026, o sistema PE-Integrado estará officially aberto para a revisão do Plano de Contratações Anual (PCA 2026 E 2027).</p>
                     <strong style="color: #003366; display: block; margin-top: 15px; font-size: 15px;">Por que essa abertura ocorre agora?</strong>
                     <p style="margin-bottom: 0;">Essa janela é aberta para que possamos adequar o nosso planejamento físico de compras à Proposta Orçamentária enviada pelo Poder Executivo ao Poder Legislativo. Trata-se da oportunidade perfeita para alinhar as estimativas financeiras das nossas demandas de saúde às previsões reais de recursos para o exercício de 2026 e 2027. Organize a sua equipe e revise seus Documentos de Formalização de Demanda (DFDs) dentro do prazo legal!</p>
                 </div>
@@ -1580,7 +1577,59 @@ if(pagina === "noticias"){
 
     const hoje = new Date().toLocaleDateString('pt-BR');
 
-    // 0. TREINAMENTO DE RCP (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    // 1ª NOTÍCIA: BEBE.PNG (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #8e44ad; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-bebe')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #8e44ad; font-size: 16px; text-transform: uppercase;">
+                        👶 AVISO ESPECIAL E COMUNICADO DGF
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Confira as últimas orientações e atualizações da nossa diretoria...</p>
+                </div>
+                <span id="icon-noticia-bebe" style="font-size: 18px; color: #8e44ad; font-weight: bold;">▲</span>
+            </div>
+
+            <div id="noticia-bebe" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0 10px 0;">
+                    Acompanhe o destaque e comunicado oficial registrado para os colaboradores da DGF:
+                </p>
+
+                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; text-align: center;">
+                    <img src="./bebe.png" alt="Aviso Especial" style="max-width: 100%; max-height: 400px; width: auto; height: auto; display: block; margin: 0 auto; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 2ª NOTÍCIA: XADREZ.PNG (SEGUNDA NOTÍCIA)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #27ae60; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-xadrez')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #27ae60; font-size: 16px; text-transform: uppercase;">
+                        ♟️ TORNEIO DE XADREZ DGF
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Integração, estratégia e raciocínio lógico na rotina de trabalho...</p>
+                </div>
+                <span id="icon-noticia-xadrez" style="font-size: 18px; color: #27ae60; font-weight: bold;">▼</span>
+            </div>
+
+            <div id="noticia-xadrez" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0 10px 0;">
+                    O xadrez estimula a tomada de decisão, paciência e pensamento estratégico. Confira os momentos do nosso encontro do Xadrez DGF:
+                </p>
+
+                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; text-align: center;">
+                    <img src="./xadrez.png" alt="Torneio de Xadrez DGF" style="max-width: 100%; max-height: 400px; width: auto; height: auto; display: block; margin: 0 auto; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 3. TREINAMENTO DE RCP
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2980b9; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-rcp')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1591,10 +1640,10 @@ if(pagina === "noticias"){
                     </h3>
                     <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Capacitação prática realizada na SES contou com a participação de servidores da DGF...</p>
                 </div>
-                <span id="icon-noticia-rcp" style="font-size: 18px; color: #2980b9; font-weight: bold;">▲</span>
+                <span id="icon-noticia-rcp" style="font-size: 18px; color: #2980b9; font-weight: bold;">▼</span>
             </div>
 
-            <div id="noticia-rcp" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+            <div id="noticia-rcp" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
                 <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0 10px 0;">
                     No dia 22/09, foi realizado na Secretaria de Saúde (SES) o <strong>Treinamento de Reanimação Cardiopulmonar (RCP) com uso de Desfibrilador Externo Automático (DEA) e Manobras de Desengasgo</strong> em adultos, crianças e bebês.
                 </p>
@@ -1614,7 +1663,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 1. FOLHETO INFORMATIVO DE EVACUAÇÃO (SEGUNDA NOTÍCIA)
+    // 4. FOLHETO INFORMATIVO DE EVACUAÇÃO
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e74c3c; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-evacuacao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1675,33 +1724,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 2. ANDAMENTO DO QUEBRA-CABEÇA
-    html += `
-        <div class="noticia-card" style="border-left: 5px solid #9b59b6; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleNoticia('noticia-quebracabeca')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
-                    <h3 style="margin: 5px 0 0 0; color: #8e44ad; font-size: 16px; text-transform: uppercase;">
-                        🧩 ANDAMENTO DO NOSSO QUEBRA-CABEÇA DGF
-                    </h3>
-                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Confira o progresso da montagem da nossa equipe...</p>
-                </div>
-                <span id="icon-noticia-quebracabeca" style="font-size: 18px; color: #8e44ad; font-weight: bold;">▼</span>
-            </div>
-
-            <div id="noticia-quebracabeca" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
-                <p style="line-height: 1.6; color: #555; font-size: 14px; margin: 15px 0 10px 0;">
-                    A cada peça encaixada, vemos o resultado do nosso trabalho em equipe! Veja abaixo o andamento atual da montagem do nosso quebra-cabeça:
-                </p>
-                
-                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 10px;">
-                    <img src="./qubra.png" alt="Andamento do Quebra-Cabeça" style="width: 100%; height: auto; display: block; object-fit: contain;">
-                </div>
-            </div>
-        </div>
-    `;
-
-    // 3. FACHADA E ESTRUTURA DGF
+    // 5. FACHADA E ESTRUTURA DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #27ae60; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-frente')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1727,7 +1750,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 4. VÍDEO INSTITUCIONAL DGF
+    // 6. VÍDEO INSTITUCIONAL DGF
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #e74c3c; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-video')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1754,7 +1777,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 5. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026
+    // 7. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026
     html += `
         <div class="noticia-card" style="border-left: 5px solid #d35400; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-cge')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1780,7 +1803,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 6. MISSA DE 7º DIA
+    // 8. MISSA DE 7º DIA
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2c3e50; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-missa')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1822,7 +1845,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 7. Resultado do Bolão DGF
+    // 9. Resultado do Bolão DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2ecc71; background: #f4fbf7; font-family: 'Arial', sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-bolao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1874,7 +1897,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 8. São João DGF
+    // 10. São João DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-saojoao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1897,7 +1920,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 9. Guia de Ajuda
+    // 11. Guia de Ajuda
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #3498db; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-guia')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1917,7 +1940,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 10. Demais notícias
+    // 12. Demais notícias
     if (typeof listaNoticias !== 'undefined') {
         listaNoticias.forEach((n, i) => {
             html += `

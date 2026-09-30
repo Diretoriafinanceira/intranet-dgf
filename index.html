@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
 <style>
-/* --- ESTILIZAÇÃO DAS BARRAS DE ROLAGEM CORPORATIVAS (SUBSTITUINDO O CINZA) --- */
+/* --- ESTILIZAÇÃO DAS BARRAS DE ROLAGEM CORPORATIVAS (SUBSTITUINDO O CINZA POR ROSA) --- */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -18,18 +18,18 @@
     background: #1e2b37;
 }
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #1abc9c 0%, #2c3e50 100%);
+    background: linear-gradient(180deg, #ec407a 0%, #2c3e50 100%);
     border-radius: 5px;
     border: 2px solid #1e2b37;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #16a085;
+    background: #d81b60;
 }
 
 /* Suporte de barra de rolagem para o Firefox */
 * {
     scrollbar-width: thin;
-    scrollbar-color: #1abc9c #1e2b37;
+    scrollbar-color: #ec407a #1e2b37;
 }
 
 /* --- SEUS ESTILOS ORIGINAIS AJUSTADOS --- */
@@ -107,11 +107,11 @@ nav {
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    border: 3px solid #1abc9c;
+    border: 3px solid #ec407a;
 }
 
 nav button {
-    background: #1abc9c;
+    background: #ec407a;
     border: none;
     padding: 10px;
     cursor: pointer;
@@ -134,7 +134,7 @@ nav button {
 }
 
 .submenu button {
-    background: #16a085;
+    background: #d81b60;
     font-size: 13px;
 }
 
@@ -184,7 +184,7 @@ section {
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
-    border-left: 5px solid #1abc9c;
+    border-left: 5px solid #ec407a;
 }
 .aniv-item {
     padding: 8px 0;
@@ -201,7 +201,7 @@ section {
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 15px;
-    border-left: 5px solid #1abc9c;
+    border-left: 5px solid #ec407a;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
@@ -242,7 +242,7 @@ section {
 }
 
 .btn-enviar {
-    background: #1abc9c;
+    background: #ec407a;
     color: white;
     border: none;
     padding: 14px;
@@ -254,7 +254,7 @@ section {
     margin-top: 10px;
 }
 .btn-enviar:hover {
-    background: #16a085;
+    background: #d81b60;
 }
 
 /* ESTILO PARA O ORGANOGRAMA */
@@ -299,7 +299,7 @@ section {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 15px;
     text-align: center;
-    border-top: 5px solid #1abc9c;
+    border-top: 5px solid #ec407a;
 }
 .livro-capa-placeholder {
     background: #bdc3c7;
@@ -311,6 +311,222 @@ section {
     margin-bottom: 10px;
     color: white;
     font-weight: bold;
+}
+
+/* ==============================
+   XADREZ DGF
+   ============================== */
+
+.xadrez-dgf {
+    animation: xadrezEntrada 0.4s ease;
+}
+
+@keyframes xadrezEntrada {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.xadrez-cabecalho {
+    background: linear-gradient(135deg, #1e2b37 0%, #34495e 100%);
+    color: white;
+    padding: 28px;
+    border-radius: 14px;
+    margin-bottom: 22px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.xadrez-cabecalho::after {
+    content: "♟ ♞ ♜ ♛ ♚ ♝";
+    position: absolute;
+    right: 25px;
+    bottom: 8px;
+    font-size: 42px;
+    opacity: 0.08;
+    letter-spacing: 8px;
+}
+
+.xadrez-cabecalho h2 {
+    margin: 0 0 8px 0;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.xadrez-cabecalho p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 15px;
+}
+
+.xadrez-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.xadrez-card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border-top: 5px solid #ec407a;
+}
+
+.xadrez-card h3 {
+    margin: 0 0 15px 0;
+    color: #2c3e50;
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    font-size: 19px;
+}
+
+.xadrez-card p {
+    color: #555;
+    line-height: 1.6;
+    margin: 8px 0;
+}
+
+.xadrez-card strong {
+    color: #2c3e50;
+}
+
+.xadrez-vencedores {
+    grid-column: 1 / -1;
+}
+
+.xadrez-imagem-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f4f6f9;
+}
+
+.xadrez-imagem-wrapper img {
+    width: 100%;
+    display: block;
+    max-height: 500px;
+    object-fit: cover;
+}
+
+.xadrez-faixa-vencedora {
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    background: linear-gradient(135deg, #f1c40f, #f39c12);
+    color: #1e2b37;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    font-family: 'Montserrat', 'Segoe UI', sans-serif;
+}
+
+.xadrez-equipe {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #f1c40f;
+}
+
+.xadrez-equipe-titulo {
+    font-weight: 800;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.xadrez-equipe-nomes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.xadrez-equipe-nomes span {
+    background: #2c3e50;
+    color: white;
+    padding: 7px 11px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.xadrez-regra {
+    background: #f8f9fa;
+    padding: 14px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border-left: 4px solid #ec407a;
+}
+
+.xadrez-peao {
+    background: linear-gradient(135deg, #fdf2f8, #f8f9fa);
+    border-left: 4px solid #ec407a;
+}
+
+.xadrez-peao h4 {
+    margin: 0 0 8px 0;
+    color: #d81b60;
+    font-size: 17px;
+}
+
+.xadrez-video {
+    width: 100%;
+    border-radius: 12px;
+    background: #000;
+    display: block;
+    max-height: 500px;
+}
+
+.xadrez-video-desc {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.xadrez-novidades {
+    grid-column: 1 / -1;
+}
+
+.xadrez-novidade-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.xadrez-novidade-item:last-child {
+    border-bottom: none;
+}
+
+.xadrez-icone {
+    min-width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ec407a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+@media (max-width: 900px) {
+    .xadrez-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .xadrez-vencedores,
+    .xadrez-novidades {
+        grid-column: auto;
+    }
 }
 
 </style>
@@ -352,6 +568,7 @@ section {
                 <button onclick="mostrar('chegou')">🆕 Quem Chegou</button>
                 <button onclick="mostrar('Funcionários')">👤 Funcionários</button>
 				<button onclick="mostrar('TV DGF')">📺 TV DGF</button>
+				<button onclick="mostrar('Xadrez DGF')">♟️ Xadrez DGF</button>
             </div>
 
             <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">🏢 Corporativo</button>
@@ -380,6 +597,7 @@ section {
         </div>
     </div>
 </div>
+
 
 <script>
 
@@ -582,6 +800,7 @@ const listaAniversariantes = [
     { nome: "IVANDETE SEVERINA DA SILVA", data: "11/12", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Anna Beatryz Calado de Carvalho Santos", data: "03/05", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Edson Elias de Moura Junior", data: "31/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
+	{ nome: "pedro", data: "24/09", superintendência: "Superintendência..." },
 	{ nome: "Diane Calas", data: "25/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Monica Bernardo da silva", data: "10/05", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Alexandre Gomes do Nascimento", data: "30/05", superintendência: "Superintendência Financeira de Prestação de Contas" },
@@ -665,19 +884,19 @@ function mostrar(pagina){
         padding: 15px;
         background: #f4f7f6;
         border-radius: 8px;
-        border-top: 10px solid #27ae60;
+        border-top: 10px solid #e91e63;
     ">
         
         <!-- ========================================================================================= -->
-        <!-- BANNER INFORMATIVO: SETEMBRO AMARELO (NOVO) -->
+        <!-- BANNER INFORMATIVO: OUTUBRO ROSA -->
         <!-- ========================================================================================= -->
         <div style="
-            background: linear-gradient(135deg, #fffde7 0%, #fff59d 100%);
-            border: 1px solid #fbc02d;
-            border-left: 8px solid #fbc02d;
+            background: linear-gradient(135deg, #fff5f8 0%, #f8bbd0 100%);
+            border: 1px solid #ec407a;
+            border-left: 8px solid #ec407a;
             border-radius: 8px;
             padding: 16px 20px;
-            box-shadow: 0 4px 12px rgba(251, 192, 45, 0.2);
+            box-shadow: 0 4px 12px rgba(236, 64, 122, 0.2);
             display: flex;
             align-items: center;
             gap: 18px;
@@ -686,8 +905,8 @@ function mostrar(pagina){
             flex-shrink: 0;
         ">
             <div style="
-                background: #fbc02d;
-                color: #333;
+                background: #ec407a;
+                color: #fff;
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
@@ -698,13 +917,13 @@ function mostrar(pagina){
                 flex-shrink: 0;
                 box-shadow: 0 2px 6px rgba(0,0,0,0.15);
             ">
-                🎗️
+                🎀
             </div>
             
             <div style="flex: 1; min-width: 280px;">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
                     <span style="
-                        background: #f57f17;
+                        background: #ad1457;
                         color: white;
                         font-size: 11px;
                         font-weight: 800;
@@ -713,23 +932,23 @@ function mostrar(pagina){
                         text-transform: uppercase;
                         letter-spacing: 0.5px;
                     ">Campanha de Conscientização</span>
-                    <strong style="color: #f57f17; font-size: 16px;">Setembro Amarelo: Mês de Prevenção ao Suicídio</strong>
+                    <strong style="color: #ad1457; font-size: 16px;">Outubro Rosa: Prevenção e Cuidado com a Saúde da Mulher</strong>
                 </div>
                 <p style="margin: 0; color: #424242; font-size: 13px; line-height: 1.5;">
-                    O <strong>Setembro Amarelo</strong> é a campanha brasileira dedicada à prevenção do suicídio e ao cuidado com a saúde mental, com destaque especial para o dia <strong>10 de setembro (Dia Mundial de Prevenção do Suicídio)</strong>. Instituída officially pela <strong>Lei nº 15.199/2025</strong>, a iniciativa reforça a importância do diálogo, do acolhimento e da busca por apoio emocional profissional.
+                    O <strong>Outubro Rosa</strong> é um movimento de conscientização que reforça a importância da prevenção, do diagnóstico precoce e dos cuidados com a saúde da mulher, com atenção especial ao <strong>câncer de mama</strong>.
                 </p>
             </div>
 
             <div style="display: flex; align-items: center; gap: 10px;">
                 <div style="
                     background: rgba(255, 255, 255, 0.8);
-                    border: 1px dashed #f57f17;
+                    border: 1px dashed #ec407a;
                     padding: 8px 12px;
                     border-radius: 6px;
                     text-align: center;
                 ">
-                    <span style="display: block; font-size: 10px; color: #616161; font-weight: bold;">Precisa conversar?</span>
-                    <strong style="font-size: 14px; color: #d84315;">Ligue 188 (CVV)</strong>
+                    <span style="display: block; font-size: 10px; color: #616161; font-weight: bold;">Cuide-se e previna-se</span>
+                    <strong style="font-size: 14px; color: #c2185b;">Sua saúde importa!</strong>
                 </div>
             </div>
         </div>
@@ -760,7 +979,7 @@ function mostrar(pagina){
                 left: 0;
                 width: 100%;
                 height: 6px;
-                background: repeating-linear-gradient(90deg, #27ae60, #27ae60 20px, #fff 20px, #fff 40px);
+                background: repeating-linear-gradient(90deg, #e91e63, #e91e63 20px, #fff 20px, #fff 40px);
                 opacity: 0.6;
                 pointer-events: none;
             "></div>
@@ -777,7 +996,7 @@ function mostrar(pagina){
                 gap: 15px;
             ">
 
-                <!-- COLUNA DA ESQUERDA: CLUBE DO LIVRO + CARD COMPACTO DO XADREZ -->
+                <!-- COLUNA DA ESQUERDA: CLUBE DO LIVRO + CARD COMPACTO DO QUEBRA-CABEÇA -->
                 <div style="display: flex; flex-direction: column; gap: 10px; width: 210px;">
                     
                     <!-- BOTÃO CLUBE DO LIVRO MANTIDO -->
@@ -787,7 +1006,7 @@ function mostrar(pagina){
                         align-items: center;
                         justify-content: center;
                         color: white;
-                        background: rgba(39, 174, 96, 0.85);
+                        background: rgba(233, 30, 99, 0.85);
                         padding: 10px 14px;
                         border-radius: 6px;
                         border: none;
@@ -798,14 +1017,14 @@ function mostrar(pagina){
                         font-family: inherit;
                         width: 100%;
                     "
-                    onmouseover="this.style.background='rgba(39, 174, 96, 1)'; this.style.transform='scale(1.02)';"
-                    onmouseout="this.style.background='rgba(39, 174, 96, 0.85)'; this.style.transform='scale(1)'"
+                    onmouseover="this.style.background='rgba(233, 30, 99, 1)'; this.style.transform='scale(1.02)';"
+                    onmouseout="this.style.background='rgba(233, 30, 99, 0.85)'; this.style.transform='scale(1)'"
                     >
                         <span style="font-size: 18px; font-weight: bold; letter-spacing: 0.5px;">📚 CLUBE DO LIVRO</span>
                         <span style="font-size: 11px; opacity: 0.9; margin-top: 2px;">Cultura & Conhecimento</span>
                     </button>
 
-                    <!-- CARD COMPACTO XADREZ -->
+                    <!-- CARD COMPACTO QUEBRA-CABEÇA -->
                     <div onclick="mostrar('noticias')" style="
                         display: flex;
                         flex-direction: column;
@@ -826,11 +1045,17 @@ function mostrar(pagina){
                     onmouseover="this.style.background='rgba(142, 68, 173, 1)'; this.style.transform='scale(1.02)';"
                     onmouseout="this.style.background='rgba(142, 68, 173, 0.85)'; this.style.transform='scale(1)'"
                     >
-                        <!-- IMAGEM TROCADA PARA XADREZ.PNG -->
-                        <img src="./xadrez.png" alt="Xadrez DGF" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin-bottom: 6px;">
+                        <!-- IMAGEM EM MODO PAISAGEM (ASPECT-RATIO 16/9 + COVER) -->
+                        <img src="./qubra.png" alt="Quebra-Cabeça" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin-bottom: 6px;">
                         
+                        <!-- BARRINHA DE PROGRESSO (99%) -->
+<div style="width: 100%; background: rgba(0,0,0,0.25); border-radius: 10px; height: 12px; margin-bottom: 6px; overflow: hidden; position: relative;">
+    <div style="width: 99%; background: #ec407a; height: 100%; border-radius: 10px; transition: width 0.3s ease;"></div>
+    <span style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-size: 9px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.8);">99%</span>
+</div>
+
                         <span style="font-size: 11px; font-weight: bold; line-height: 1.2; text-align: center; color: #fff;">
-                            ♟️ Xadrez DGF: Estratégia, foco e integração para nossa equipe!
+                            🧩 1000 peças depois, a prova de que a nossa equipe dá conta de qualquer desafio. Parabéns pelo empenho e pela paciência de todos!
                         </span>
                     </div>
 
@@ -855,7 +1080,7 @@ function mostrar(pagina){
                     <div style="
                         font-size:20px;
                         font-weight:600;
-                        color:#27ae60;
+                        color:#ec407a;
                         margin-top:4px;
                         text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
                     ">
@@ -904,7 +1129,7 @@ function mostrar(pagina){
                     </div>
                 </div>
 
-                <!-- CARD MURAL DE AVISOS - IMAGEM BEBE.PNG -->
+                <!-- CARD MURAL DE AVISOS - APENAS VÍDEO INSTITUCIONAL -->
                 <div style="
                     background: #fff9c4 !important; 
                     border: 1px solid #fbc02d; 
@@ -930,9 +1155,12 @@ function mostrar(pagina){
                         <span onclick="mostrar('noticias')" style="font-size: 11px; color: #8e44ad; font-weight: bold; cursor: pointer; text-decoration: underline;">Ver tudo</span>
                     </div>
 
-                    <!-- IMAGEM TROCADA PARA BEBE.PNG NO MURAL DE AVISOS -->
+                    <!-- VÍDEO NO MURAL DE AVISOS -->
                     <div style="width: 100%; border-radius: 4px; overflow: hidden; margin-top: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-                        <img src="./bebe.png" alt="Aviso DGF" style="width: 100%; height: auto; max-height: 120px; display: block; object-fit: cover;">
+                        <video controls style="width: 100%; height: auto; max-height: 120px; display: block; background: #000;">
+                            <source src="./institucional.mp4" type="video/mp4">
+                            Seu navegador não suporta vídeos.
+                        </video>
                     </div>
 
                 </div>
@@ -952,7 +1180,7 @@ function mostrar(pagina){
                 </div>
             </div>
 
-            <!-- CARD 2: CALENDÁRIO Financeiro -->
+            <!-- CARD 2: CALENDÁRIO Financeiro (SUBSTITUIU O COORDETECH) -->
 <div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #34495e; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
     <img src="calendario.png" alt="CALENDÁRIO Financeiro" onclick="mostrar('agenda')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
     <div style="padding: 15px;">
@@ -984,7 +1212,7 @@ function mostrar(pagina){
             </div>
 
             <!-- CARD 4: PLANO ANUAL DE CONTRATAÇÕES (PCA) -->
-            <div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #27ae60; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
+            <div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #e91e63; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
                 <img src="pca.png" alt="Plano Anual de Contratações" onclick="mostrar('plano_anual_de_contratacoes')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
                 <div style="padding: 15px;">
                     <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📊 Plano Anual de Contratações</h3>
@@ -1083,7 +1311,7 @@ function mostrar(pagina){
         </div>
 
         ${anivHoje.length > 0 ? `
-        <div onclick="mostrar('aniversariantes')" style="cursor: pointer; background: #111; border-radius: 8px; border-left: 5px solid #00ffcc; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); font-family: sans-serif; flex-shrink: 0;">
+        <div onclick="mostrar('aniversariantes')" style="cursor: pointer; background: #111; border-radius: 8px; border-left: 5px solid #ec407a; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); font-family: sans-serif; flex-shrink: 0;">
             <div style="display: flex; align-items: center; gap: 15px;">
                 <span style="font-size: 30px;">🎂</span>
                 <div style="flex: 1; display: flex; align-items: center;">
@@ -1103,15 +1331,15 @@ function mostrar(pagina){
         /* --- ESTILOS ORIGINAIS INTACTOS --- */
         #lider-card:hover {
             transform: translateY(-4px) !important;
-            box-shadow: 0 12px 30px rgba(0, 255, 117, 0.45) !important;
+            box-shadow: 0 12px 30px rgba(236, 64, 122, 0.45) !important;
         }
         @keyframes neonPulsar {
             0%, 100% {
-                color: #00ffcc;
-                text-shadow: 0 0 2px #fff, 0 0 6px #00ffcc, 0 0 12px #00ffcc, 0 0 20px #00ffcc;
+                color: #ec407a;
+                text-shadow: 0 0 2px #fff, 0 0 6px #ec407a, 0 0 12px #ec407a, 0 0 20px #ec407a;
             }
             50% {
-                color: #003322;
+                color: #4a0022;
                 text-shadow: none;
             }
         }
@@ -1249,8 +1477,8 @@ function mostrar(pagina){
 
             if (encontrado) {
                 resEl.innerHTML = `
-                    <div style="background: #f4fbf7; padding: 12px; border-left: 4px solid #2ecc71; border-radius: 4px; text-align: left; color: #2c3e50; font-size: 13px; line-height: 1.6;">
-                        <strong style="color: #27ae60; font-size: 14px;">✅ Processo Encontrado!</strong><br>
+                    <div style="background: #fcf4f7; padding: 12px; border-left: 4px solid #ec407a; border-radius: 4px; text-align: left; color: #2c3e50; font-size: 13px; line-height: 1.6;">
+                        <strong style="color: #d81b60; font-size: 14px;">✅ Processo Encontrado!</strong><br>
                         <b>📍 SETOR ORIGEM:</b> ${encontrado.setorOrigem}<br>
                         <b>📄 SEI:</b> ${encontrado.sei}<br>
                         <b>📅 DATA LEITURA:</b> ${encontrado.dataLeitura}<br>
@@ -1335,7 +1563,7 @@ function mostrar(pagina){
             clearInterval(window.intervaloRadarDGF);
         }
     }, 10000);
-
+	    
     // =========================================================================
     // VISUALIZAÇÃO DA AGENDA DGF (ADICIONADA PARA O CLIQUE DO CARD FUNCIONAR)
     // =========================================================================
@@ -1424,6 +1652,489 @@ if (pagina === "TV DGF") {
 
 }
 
+
+if (pagina === "Xadrez DGF") {
+
+    let html = `
+    <div style="
+        padding:20px;
+        max-width:1200px;
+        margin:auto;
+        font-family:'Segoe UI', Arial, sans-serif;
+    ">
+
+        <!-- CABEÇALHO -->
+        <div style="
+            background:linear-gradient(135deg,#1e2b37,#34495e);
+            color:white;
+            padding:30px;
+            border-radius:15px;
+            margin-bottom:25px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.15);
+            text-align:center;
+        ">
+
+            <div style="
+                font-size:42px;
+                margin-bottom:5px;
+            ">
+                ♟️
+            </div>
+
+            <h1 style="
+                margin:0;
+                font-size:42px;
+                font-weight:800;
+                letter-spacing:1px;
+            ">
+                Xadrez DGF
+            </h1>
+
+            <p style="
+                margin:10px 0 0 0;
+                font-size:17px;
+                opacity:0.9;
+            ">
+                Estratégia, concentração, integração e conhecimento
+            </p>
+
+        </div>
+
+
+        <!-- DESTAQUE DA SEMANA -->
+        <div style="
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom:25px;
+            border-top:6px solid #f1c40f;
+        ">
+
+            <h2 style="
+                color:#2c3e50;
+                margin-top:0;
+                font-size:26px;
+                text-align:center;
+            ">
+                🏆 Vencedores da Semana
+            </h2>
+
+            <div style="
+                position:relative;
+                overflow:hidden;
+                border-radius:12px;
+                background:#f4f6f9;
+            ">
+
+                <img
+                    src="xadrez.png"
+                    alt="Equipe da SFES vencedora da semana"
+                    style="
+                        width:100%;
+                        display:block;
+                        max-height:550px;
+                        object-fit:cover;
+                    "
+                >
+
+                <div style="
+                    position:absolute;
+                    top:20px;
+                    left:20px;
+                    background:linear-gradient(135deg,#f1c40f,#f39c12);
+                    color:#1e2b37;
+                    padding:10px 20px;
+                    border-radius:30px;
+                    font-size:17px;
+                    font-weight:bold;
+                    box-shadow:0 3px 10px rgba(0,0,0,0.2);
+                ">
+                    🏆 VENCEDORES DA SEMANA
+                </div>
+
+            </div>
+
+
+            <div style="
+                margin-top:18px;
+                padding:18px;
+                background:#f8f9fa;
+                border-left:5px solid #f1c40f;
+                border-radius:10px;
+                text-align:center;
+            ">
+
+                <h3 style="
+                    margin:0 0 12px 0;
+                    color:#2c3e50;
+                ">
+                    Equipe SFES
+                </h3>
+
+                <div style="
+                    display:flex;
+                    justify-content:center;
+                    flex-wrap:wrap;
+                    gap:10px;
+                ">
+
+                    <span style="
+                        background:#2c3e50;
+                        color:white;
+                        padding:8px 14px;
+                        border-radius:20px;
+                    ">Renan</span>
+
+                    <span style="
+                        background:#2c3e50;
+                        color:white;
+                        padding:8px 14px;
+                        border-radius:20px;
+                    ">José</span>
+
+                    <span style="
+                        background:#2c3e50;
+                        color:white;
+                        padding:8px 14px;
+                        border-radius:20px;
+                    ">Jane</span>
+
+                    <span style="
+                        background:#2c3e50;
+                        color:white;
+                        padding:8px 14px;
+                        border-radius:20px;
+                    ">Alyson</span>
+
+                    <span style="
+                        background:#2c3e50;
+                        color:white;
+                        padding:8px 14px;
+                        border-radius:20px;
+                    ">Flavia</span>
+
+                </div>
+
+                <p style="
+                    margin:15px 0 0 0;
+                    color:#555;
+                    font-size:15px;
+                ">
+                    A equipe da SFES foi a grande vencedora da semana!
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ÁREA DE REGRAS -->
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:20px;
+            margin-bottom:25px;
+        ">
+
+            <div style="
+                background:white;
+                padding:25px;
+                border-radius:15px;
+                box-shadow:0 3px 12px rgba(0,0,0,0.08);
+                border-top:5px solid #ec407a;
+            ">
+
+                <h2 style="
+                    color:#2c3e50;
+                    margin-top:0;
+                ">
+                    📖 Regras do Xadrez
+                </h2>
+
+                <div style="
+                    background:#f8f9fa;
+                    padding:15px;
+                    border-radius:10px;
+                    margin-bottom:12px;
+                ">
+                    <strong>🎯 Objetivo</strong>
+
+                    <p style="
+                        color:#555;
+                        line-height:1.6;
+                        margin-bottom:0;
+                    ">
+                        O objetivo do xadrez é colocar o rei adversário em uma posição
+                        em que ele esteja ameaçado de captura e não consiga escapar.
+                        Essa situação é chamada de <strong>xeque-mate</strong>.
+                    </p>
+                </div>
+
+                <div style="
+                    background:#f8f9fa;
+                    padding:15px;
+                    border-radius:10px;
+                    margin-bottom:12px;
+                ">
+                    <strong>♟️ Movimento das peças</strong>
+
+                    <p style="
+                        color:#555;
+                        line-height:1.6;
+                        margin-bottom:0;
+                    ">
+                        Cada peça possui uma maneira específica de se movimentar.
+                        Conhecer esses movimentos é fundamental para desenvolver
+                        estratégias durante a partida.
+                    </p>
+                </div>
+
+                <div style="
+                    background:#f8f9fa;
+                    padding:15px;
+                    border-radius:10px;
+                ">
+                    <strong>👑 Proteção do Rei</strong>
+
+                    <p style="
+                        color:#555;
+                        line-height:1.6;
+                        margin-bottom:0;
+                    ">
+                        O rei não pode permanecer em uma casa onde possa ser capturado
+                        pelo adversário.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- PEÃO -->
+            <div style="
+                background:linear-gradient(135deg,#fff4f8,#f8f9fa);
+                padding:25px;
+                border-radius:15px;
+                box-shadow:0 3px 12px rgba(0,0,0,0.08);
+                border-top:5px solid #ec407a;
+            ">
+
+                <h2 style="
+                    color:#d81b60;
+                    margin-top:0;
+                ">
+                    ♟️ Conheça o Peão
+                </h2>
+
+                <img
+                    src="xadreez.png"
+                    alt="Movimento do peão no xadrez"
+                    style="
+                        width:100%;
+                        max-height:350px;
+                        object-fit:cover;
+                        border-radius:12px;
+                        margin-bottom:15px;
+                    "
+                >
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                ">
+                    O peão avança pelo tabuleiro em direção ao lado adversário.
+                </p>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                ">
+                    Em seu primeiro movimento, pode avançar
+                    <strong>uma ou duas casas</strong>, desde que o caminho esteja livre.
+                </p>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                ">
+                    Depois disso, normalmente avança
+                    <strong>uma casa por vez</strong>.
+                </p>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                ">
+                    Para capturar uma peça adversária, o peão captura
+                    <strong>uma casa na diagonal para frente</strong>.
+                </p>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                    margin-bottom:0;
+                ">
+                    Ao chegar à última fileira do adversário,
+                    o peão pode ser <strong>promovido</strong> a outra peça,
+                    como dama, torre, bispo ou cavalo.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- VÍDEO -->
+        <div style="
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom:25px;
+        ">
+
+            <h2 style="
+                color:#2c3e50;
+                margin-top:0;
+                text-align:center;
+            ">
+                🎥 Xadrez na Prática
+            </h2>
+
+            <video
+                controls
+                preload="metadata"
+                style="
+                    width:100%;
+                    border-radius:12px;
+                    background:#000;
+                    max-height:600px;
+                    display:block;
+                "
+            >
+                <source src="xadrez.mp4" type="video/mp4">
+                Seu navegador não suporta a reprodução de vídeo.
+            </video>
+
+            <p style="
+                text-align:center;
+                color:#777;
+                margin-bottom:0;
+            ">
+                Assista ao vídeo e acompanhe mais sobre o Xadrez DGF.
+            </p>
+
+        </div>
+
+
+        <!-- NOVIDADES -->
+        <div style="
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom:20px;
+            border-left:6px solid #ec407a;
+        ">
+
+            <h2 style="
+                color:#2c3e50;
+                margin-top:0;
+            ">
+                📰 Novidades do Xadrez DGF
+            </h2>
+
+            <div style="
+                padding:15px 0;
+                border-bottom:1px solid #eee;
+            ">
+
+                <strong style="color:#2c3e50;">
+                    🏆 Destaque da semana
+                </strong>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                    margin-bottom:0;
+                ">
+                    A equipe da SFES, formada por Renan, José, Jane,
+                    Alyson e Flavia, foi a vencedora da semana.
+                </p>
+
+            </div>
+
+
+            <div style="
+                padding:15px 0;
+                border-bottom:1px solid #eee;
+            ">
+
+                <strong style="color:#2c3e50;">
+                    ♟️ Aprendizado da semana
+                </strong>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                    margin-bottom:0;
+                ">
+                    O destaque desta semana é o movimento do peão,
+                    uma das peças fundamentais para a construção de estratégias.
+                </p>
+
+            </div>
+
+
+            <div style="
+                padding:15px 0;
+                border-bottom:1px solid #eee;
+            ">
+
+                <strong style="color:#2c3e50;">
+                    🤝 Integração
+                </strong>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                    margin-bottom:0;
+                ">
+                    O Xadrez DGF também é um espaço de integração,
+                    concentração e interação entre as equipes.
+                </p>
+
+            </div>
+
+
+            <div style="
+                padding:15px 0;
+            ">
+
+                <strong style="color:#2c3e50;">
+                    📅 Acompanhe por aqui
+                </strong>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                    margin-bottom:0;
+                ">
+                    As novidades, resultados, destaques e acontecimentos
+                    das partidas poderão ser atualizados nesta área.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+    `;
+
+    conteudo.innerHTML = html;
+
+}
+
 if (pagina === "plano_anual_de_contratacoes") {
     let html = `
     <div style="padding: 20px; max-width: 1200px; margin: auto; font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%); border-radius: 16px; box-sizing: border-box;">
@@ -1458,7 +2169,7 @@ if (pagina === "plano_anual_de_contratacoes") {
                     <span id="seta-noticia1" style="color: #003366; font-size: 18px; font-weight: bold; transition: transform 0.3s;">▼</span>
                 </div>
                 <div id="noticia1" style="display: none; padding: 20px; border-top: 1px solid #f1f5f9; background: #fafafa; color: #334155; font-size: 14px; line-height: 1.7;">
-                    <p style="margin-top: 0;">Se a sua gerência precisa incluir, excluir ou redimensionar demandas de contratação planejadas para o próximo ano, marque esta data no calendário! No período de 15 de setembro a 15 de novembro de 2026, o sistema PE-Integrado estará officially aberto para a revisão do Plano de Contratações Anual (PCA 2026 E 2027).</p>
+                    <p style="margin-top: 0;">Se a sua gerência precisa incluir, excluir ou redimensionar demandas de contratação planejadas para o próximo ano, marque esta data no calendário! No período de 15 de setembro a 15 de novembro de 2026, o sistema PE-Integrado estará oficialmente aberto para a revisão do Plano de Contratações Anual (PCA 2026 E 2027).</p>
                     <strong style="color: #003366; display: block; margin-top: 15px; font-size: 15px;">Por que essa abertura ocorre agora?</strong>
                     <p style="margin-bottom: 0;">Essa janela é aberta para que possamos adequar o nosso planejamento físico de compras à Proposta Orçamentária enviada pelo Poder Executivo ao Poder Legislativo. Trata-se da oportunidade perfeita para alinhar as estimativas financeiras das nossas demandas de saúde às previsões reais de recursos para o exercício de 2026 e 2027. Organize a sua equipe e revise seus Documentos de Formalização de Demanda (DFDs) dentro do prazo legal!</p>
                 </div>
@@ -1571,59 +2282,7 @@ if(pagina === "noticias"){
 
     const hoje = new Date().toLocaleDateString('pt-BR');
 
-    // 1ª NOTÍCIA: BEBE.PNG (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
-    html += `
-        <div class="noticia-card" style="border-left: 5px solid #8e44ad; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleNoticia('noticia-bebe')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
-                    <h3 style="margin: 5px 0 0 0; color: #8e44ad; font-size: 16px; text-transform: uppercase;">
-                        👶 AVISO ESPECIAL E COMUNICADO DGF
-                    </h3>
-                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Confira as últimas orientações e atualizações da nossa diretoria...</p>
-                </div>
-                <span id="icon-noticia-bebe" style="font-size: 18px; color: #8e44ad; font-weight: bold;">▲</span>
-            </div>
-
-            <div id="noticia-bebe" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
-                <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0 10px 0;">
-                    Acompanhe o destaque e comunicado oficial registrado para os colaboradores da DGF:
-                </p>
-
-                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; text-align: center;">
-                    <img src="./bebe.png" alt="Aviso Especial" style="max-width: 100%; max-height: 400px; width: auto; height: auto; display: block; margin: 0 auto; object-fit: contain;">
-                </div>
-            </div>
-        </div>
-    `;
-
-    // 2ª NOTÍCIA: XADREZ.PNG (SEGUNDA NOTÍCIA)
-    html += `
-        <div class="noticia-card" style="border-left: 5px solid #27ae60; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleNoticia('noticia-xadrez')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
-                    <h3 style="margin: 5px 0 0 0; color: #27ae60; font-size: 16px; text-transform: uppercase;">
-                        ♟️ TORNEIO DE XADREZ DGF
-                    </h3>
-                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Integração, estratégia e raciocínio lógico na rotina de trabalho...</p>
-                </div>
-                <span id="icon-noticia-xadrez" style="font-size: 18px; color: #27ae60; font-weight: bold;">▼</span>
-            </div>
-
-            <div id="noticia-xadrez" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
-                <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0 10px 0;">
-                    O xadrez estimula a tomada de decisão, paciência e pensamento estratégico. Confira os momentos do nosso encontro do Xadrez DGF:
-                </p>
-
-                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; text-align: center;">
-                    <img src="./xadrez.png" alt="Torneio de Xadrez DGF" style="max-width: 100%; max-height: 400px; width: auto; height: auto; display: block; margin: 0 auto; object-fit: contain;">
-                </div>
-            </div>
-        </div>
-    `;
-
-    // 3. TREINAMENTO DE RCP
+    // 0. TREINAMENTO DE RCP (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2980b9; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-rcp')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1634,10 +2293,10 @@ if(pagina === "noticias"){
                     </h3>
                     <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Capacitação prática realizada na SES contou com a participação de servidores da DGF...</p>
                 </div>
-                <span id="icon-noticia-rcp" style="font-size: 18px; color: #2980b9; font-weight: bold;">▼</span>
+                <span id="icon-noticia-rcp" style="font-size: 18px; color: #2980b9; font-weight: bold;">▲</span>
             </div>
 
-            <div id="noticia-rcp" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+            <div id="noticia-rcp" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
                 <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0 10px 0;">
                     No dia 22/09, foi realizado na Secretaria de Saúde (SES) o <strong>Treinamento de Reanimação Cardiopulmonar (RCP) com uso de Desfibrilador Externo Automático (DEA) e Manobras de Desengasgo</strong> em adultos, crianças e bebês.
                 </p>
@@ -1657,7 +2316,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 4. FOLHETO INFORMATIVO DE EVACUAÇÃO
+    // 1. FOLHETO INFORMATIVO DE EVACUAÇÃO (SEGUNDA NOTÍCIA)
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e74c3c; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-evacuacao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1718,7 +2377,33 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 5. FACHADA E ESTRUTURA DGF
+    // 2. ANDAMENTO DO QUEBRA-CABEÇA
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #9b59b6; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-quebracabeca')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #8e44ad; font-size: 16px; text-transform: uppercase;">
+                        🧩 ANDAMENTO DO NOSSO QUEBRA-CABEÇA DGF
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Confira o progresso da montagem da nossa equipe...</p>
+                </div>
+                <span id="icon-noticia-quebracabeca" style="font-size: 18px; color: #8e44ad; font-weight: bold;">▼</span>
+            </div>
+
+            <div id="noticia-quebracabeca" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="line-height: 1.6; color: #555; font-size: 14px; margin: 15px 0 10px 0;">
+                    A cada peça encaixada, vemos o resultado do nosso trabalho em equipe! Veja abaixo o andamento atual da montagem do nosso quebra-cabeça:
+                </p>
+                
+                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 10px;">
+                    <img src="./qubra.png" alt="Andamento do Quebra-Cabeça" style="width: 100%; height: auto; display: block; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 3. FACHADA E ESTRUTURA DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #27ae60; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-frente')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1744,7 +2429,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 6. VÍDEO INSTITUCIONAL DGF
+    // 4. VÍDEO INSTITUCIONAL DGF
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #e74c3c; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-video')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1771,7 +2456,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 7. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026
+    // 5. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026
     html += `
         <div class="noticia-card" style="border-left: 5px solid #d35400; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-cge')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1797,7 +2482,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 8. MISSA DE 7º DIA
+    // 6. MISSA DE 7º DIA
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2c3e50; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-missa')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1839,7 +2524,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 9. Resultado do Bolão DGF
+    // 7. Resultado do Bolão DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2ecc71; background: #f4fbf7; font-family: 'Arial', sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-bolao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1891,7 +2576,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 10. São João DGF
+    // 8. São João DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-saojoao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1914,7 +2599,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 11. Guia de Ajuda
+    // 9. Guia de Ajuda
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #3498db; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-guia')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -1934,7 +2619,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 12. Demais notícias
+    // 10. Demais notícias
     if (typeof listaNoticias !== 'undefined') {
         listaNoticias.forEach((n, i) => {
             html += `
@@ -3570,7 +4255,7 @@ if (pagina === "aniversariantes") {
                             <div class="dgf-msg-conteudo" style="display:none;margin-top:8px;">
                                 <p class="dgf-msg-mini-text">“${escapeHTMLDGF(m.texto)}”</p>
                                 <div class="dgf-msg-mini-meta">
-                                    <span>✍️ ${escapeHTMLDGF(m.assinatura || 'Anônimo')}</span>
+                                    <span>✍️️ ${escapeHTMLDGF(m.assinatura || 'Anônimo')}</span>
                                     <span>📅 ${escapeHTMLDGF(formatarDataDGF(m.criado_em))}</span>
                                 </div>
                             </div>
@@ -4332,6 +5017,16 @@ if (pagina === "aniversariantes") {
                     💬
                     <span class="dgf-atrasado-indicador" style="display:${totalMensagens > 0 ? 'inline-flex' : 'none'};">${totalMensagens > 99 ? '99+' : totalMensagens}</span>
                 </button>
+                <button
+                    type="button"
+                    class="dgf-atrasado-btn"
+                    onclick='window.abrirMuralDGF(${jsArgDGF(chaveUsuario)}, ${jsArgDGF(pessoa.nome)}, ${jsArgDGF(pessoa.superintendência || 'DGF')})'
+                    title="Abrir poster de ${escapeHTMLDGF(pessoa.nome)}"
+                    aria-label="Abrir poster de ${escapeHTMLDGF(pessoa.nome)}"
+                    style="background:linear-gradient(135deg,#ff7675,#fd79a8);color:#fff;border-color:transparent;box-shadow:0 4px 10px rgba(253,121,168,.18);"
+                >
+                    🎨
+                </button>
                 <span class="dgf-atrasado-label">${naoLidas > 0 ? 'novas mensagens' : 'parabéns atrasado'}</span>
             ` : '';
 
@@ -4486,7 +5181,44 @@ if (pagina === "aniversariantes") {
     }
 }
 
-	
+
+
+
+if(pagina === "organograma"){
+        conteudo.innerHTML = `
+            <h2>📊 Organograma DGF</h2>
+            <div class="organograma-container">
+                <iframe src="https://dmourajunior.github.io/consilta-online/" 
+                        style="width:100%; height:100%; border:none;" 
+                        title="Organograma"></iframe>
+            </div>
+        `;
+    }
+
+    if(pagina === "senha_page"){
+        conteudo.innerHTML = `
+            <h2>🔑 Alterar Minha Senha</h2>
+            <div class="form-container">
+                <div class="form-group">
+                    <label>Senha Atual:</label>
+                    <input type="password" id="senha_atual" placeholder="Digite a senha atual">
+                    <span class="toggle-password" onclick="toggleVisibility('senha_atual')">👁️</span>
+                </div>
+                <div class="form-group">
+                    <label>Nova Senha:</label>
+                    <input type="password" id="nova_senha_input" placeholder="Digite a nova senha">
+                    <span class="toggle-password" onclick="toggleVisibility('nova_senha_input')">👁️</span>
+                </div>
+                <div class="form-group">
+                    <label>Repetir Nova Senha:</label>
+                    <input type="password" id="repetir_senha_input" placeholder="Repita a nova senha">
+                    <span class="toggle-password" onclick="toggleVisibility('repetir_senha_input')">👁️</span>
+                </div>
+                <button class="btn-enviar" onclick="salvarNovaSenha()">Salvar Alteração</button>
+            </div>
+        `;
+    }
+
     if (pagina === "reserva") {
     // 1. Define e força a atualização da senha no localStorage
     localStorage.setItem('senha_conformidade', 'CCF01072026');

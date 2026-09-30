@@ -809,7 +809,7 @@ const listaAniversariantes = [
 	{ nome: "Rosevalda da Silva Alves", data: "11/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Ana Carolina Tomé da Silva", data: "18/07", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Joana D'arc e Silva Pessoa Campello", data: "30/04", superintendência: "Superintendência do Fundo Estadual de Saúde" },
-	{ nome: "Janaína Ferreira de Pontes", data: "14/09", superintendência: "Superintendência Financeira de Prestação de Contas" },
+	{ nome: "Janaína Ferreira de Pontes", data: "08/07", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Joelma lima da Silva ", data: "08/11", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Aleteia Mara Ferreira Ramos", data: "30/06", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Nilciane Ferreira Gaia", data: "25/04", superintendência: "Superintendência Financeira de Prestação de Contas" },
@@ -996,7 +996,7 @@ function mostrar(pagina){
                 gap: 15px;
             ">
 
-                <!-- COLUNA DA ESQUERDA: CLUBE DO LIVRO + CARD COMPACTO DO QUEBRA-CABEÇA -->
+                <!-- COLUNA DA ESQUERDA: CLUBE DO LIVRO + CARD COMPACTO DO XADREZ DGF -->
                 <div style="display: flex; flex-direction: column; gap: 10px; width: 210px;">
                     
                     <!-- BOTÃO CLUBE DO LIVRO MANTIDO -->
@@ -1024,8 +1024,8 @@ function mostrar(pagina){
                         <span style="font-size: 11px; opacity: 0.9; margin-top: 2px;">Cultura & Conhecimento</span>
                     </button>
 
-                    <!-- CARD COMPACTO QUEBRA-CABEÇA -->
-                    <div onclick="mostrar('noticias')" style="
+                    <!-- CARD COMPACTO XADREZ DGF -->
+                    <div onclick="mostrar('Xadrez DGF')" style="
                         display: flex;
                         flex-direction: column;
                         align-items: center;
@@ -1046,16 +1046,10 @@ function mostrar(pagina){
                     onmouseout="this.style.background='rgba(142, 68, 173, 0.85)'; this.style.transform='scale(1)'"
                     >
                         <!-- IMAGEM EM MODO PAISAGEM (ASPECT-RATIO 16/9 + COVER) -->
-                        <img src="./qubra.png" alt="Quebra-Cabeça" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin-bottom: 6px;">
+                        <img src="./xadrez.png" alt="Xadrez DGF" onclick="event.stopPropagation(); mostrar('Xadrez DGF');" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; margin-bottom: 6px; cursor: pointer;">
                         
-                        <!-- BARRINHA DE PROGRESSO (99%) -->
-<div style="width: 100%; background: rgba(0,0,0,0.25); border-radius: 10px; height: 12px; margin-bottom: 6px; overflow: hidden; position: relative;">
-    <div style="width: 99%; background: #ec407a; height: 100%; border-radius: 10px; transition: width 0.3s ease;"></div>
-    <span style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-size: 9px; font-weight: bold; display: flex; align-items: center; justify-content: center; color: white; text-shadow: 0 0 2px rgba(0,0,0,0.8);">99%</span>
-</div>
-
                         <span style="font-size: 11px; font-weight: bold; line-height: 1.2; text-align: center; color: #fff;">
-                            🧩 1000 peças depois, a prova de que a nossa equipe dá conta de qualquer desafio. Parabéns pelo empenho e pela paciência de todos!
+                            🏆 SFES equipe vencedora da semana
                         </span>
                     </div>
 
@@ -1129,7 +1123,7 @@ function mostrar(pagina){
                     </div>
                 </div>
 
-                <!-- CARD MURAL DE AVISOS - APENAS VÍDEO INSTITUCIONAL -->
+                <!-- CARD MURAL DE AVISOS -->
                 <div style="
                     background: #fff9c4 !important; 
                     border: 1px solid #fbc02d; 
@@ -1155,12 +1149,9 @@ function mostrar(pagina){
                         <span onclick="mostrar('noticias')" style="font-size: 11px; color: #8e44ad; font-weight: bold; cursor: pointer; text-decoration: underline;">Ver tudo</span>
                     </div>
 
-                    <!-- VÍDEO NO MURAL DE AVISOS -->
+                    <!-- IMAGEM NO MURAL DE AVISOS -->
                     <div style="width: 100%; border-radius: 4px; overflow: hidden; margin-top: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-                        <video controls style="width: 100%; height: auto; max-height: 120px; display: block; background: #000;">
-                            <source src="./institucional.mp4" type="video/mp4">
-                            Seu navegador não suporta vídeos.
-                        </video>
+                        <img src="./bebe.png" alt="Aviso" style="width: 100%; height: auto; max-height: 120px; object-fit: cover; display: block;">
                     </div>
 
                 </div>
@@ -1181,13 +1172,13 @@ function mostrar(pagina){
             </div>
 
             <!-- CARD 2: CALENDÁRIO Financeiro (SUBSTITUIU O COORDETECH) -->
-<div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #34495e; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
-    <img src="calendario.png" alt="CALENDÁRIO Financeiro" onclick="mostrar('agenda')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
-    <div style="padding: 15px;">
-        <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📅 Calendário Financeiro</h3>
-        <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Acompanhe compromissos, reuniões e eventos importantes agendados pela Diretoria Geral de Finanças.</p>
-    </div>
-</div>
+            <div style="flex: 1; min-width: 200px; background: white; border-radius: 8px; border-top: 4px solid #34495e; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; font-family: sans-serif;">
+                <img src="calendario.png" alt="CALENDÁRIO Financeiro" onclick="mostrar('agenda')" style="width: 100%; height: 160px; object-fit: contain; background: #fff; display: block; cursor: pointer;">
+                <div style="padding: 15px;">
+                    <h3 style="margin: 0 0 8px 0; color: #2c3e50; font-size: 16px;">📅 Calendário Financeiro</h3>
+                    <p style="margin: 0; color: #7f8c8d; font-size: 13px; line-height: 1.4;">Acompanhe compromissos, reuniões e eventos importantes agendados pela Diretoria Geral de Finanças.</p>
+                </div>
+            </div>
 
             <!-- CARD 3: SIMPA -->
             <div onclick="window.open('https://diretoriafinanceira.github.io/simpa-monitoramento/', '_blank')" 
@@ -1389,7 +1380,7 @@ function mostrar(pagina){
         const resEl = document.getElementById('resultado-sei-home');
 
         if (!inputVal) {
-            resEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>⚠️ Digite o número do processo!</span>";
+            resEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>⚠️️ Digite o número do processo!</span>";
             return;
         }
 
@@ -1563,7 +1554,7 @@ function mostrar(pagina){
             clearInterval(window.intervaloRadarDGF);
         }
     }, 10000);
-	    
+        
     // =========================================================================
     // VISUALIZAÇÃO DA AGENDA DGF (ADICIONADA PARA O CLIQUE DO CARD FUNCIONAR)
     // =========================================================================
@@ -1687,7 +1678,7 @@ if (pagina === "Xadrez DGF") {
                 font-weight:800;
                 letter-spacing:1px;
             ">
-                Xadrez DGF
+                Escolinha de Xadrez DGF
             </h1>
 
             <p style="
@@ -1730,11 +1721,13 @@ if (pagina === "Xadrez DGF") {
                 <img
                     src="xadrez.png"
                     alt="Equipe da SFES vencedora da semana"
+                    onclick="mostrar('Xadrez DGF')"
                     style="
                         width:100%;
                         display:block;
                         max-height:550px;
                         object-fit:cover;
+                        cursor:pointer;
                     "
                 >
 

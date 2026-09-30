@@ -2687,6 +2687,138 @@ if (pagina === "aniversariantes") {
     const mesAtual = (agora.getMonth() + 1).toString().padStart(2, '0');
     const hojeString = `${diaAtual}/${mesAtual}`;
 
+    // Controle da seleção do mês e cache das mensagens para os indicadores de leitura.
+    let mesSelecionadoAtualDGF = mesAtual;
+    let mensagensGlobaisDGF = [];
+
+    const obterDataMaisProximaDGF = (dataString) => {
+        const partes = String(dataString || '').split('/');
+        const dia = parseInt(partes[0], 10);
+        const mes = parseInt(partes[1], 10);
+        if (!dia || !mes) return null;
+
+        const hojeBase = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
+        let melhorData = null;
+        let menorDistancia = Infinity;
+
+        [agora.getFullYear() - 1, agora.getFullYear(), agora.getFullYear() + 1].forEach(ano => {
+            const candidata = new Date(ano, mes - 1, dia);
+            const distancia = Math.abs(candidata.getTime() - hojeBase.getTime());
+            if (distancia < menorDistancia) {
+                menorDistancia = distancia;
+                melhorData = candidata;
+            }
+        });
+
+        return melhorData;
+    };
+
+    const obterDiasDesdeAniversarioDGF = (dataString) => {
+        const aniversario = obterDataMaisProximaDGF(dataString);
+        if (!aniversario) return null;
+
+        const hojeBase = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
+        return Math.round((hojeBase.getTime() - aniversario.getTime()) / 86400000);
+    };
+
+    const estaNaJanelaDe3DiasDGF = (dataString) => {
+        const dias = obterDiasDesdeAniversarioDGF(dataString);
+        return dias !== null && dias >= 0 && dias <= 2;
+    };
+
+    const obterStatusCardDGF = (dataString) => {
+        const dias = obterDiasDesdeAniversarioDGF(dataString);
+        if (dias === 0) return 'ANIVERSARIANTE • HOJE';
+        if (dias === 1) return 'ANIVERSARIANTE • 1º DIA APÓS';
+        if (dias === 2) return 'ANIVERSARIANTE • ÚLTIMO DIA';
+        return 'ANIVERSARIANTE';
+    };
+
+    const ehAniversarioAtrasadoNoMesDGF = (pessoa, mesSelecionado) => {
+        if (String(mesSelecionado) !== mesAtual) return false;
+
+        const partes = String(pessoa?.data || '').split('/');
+        const dia = parseInt(partes[0], 10);
+        const mes = String(partes[1] || '').padStart(2, '0');
+
+        return Boolean(dia) && mes === mesAtual && dia < parseInt(diaAtual, 10);
+    };
+
+    const chaveUltimaLeituraDGF = (nomeUsuario) => `dgf_aniv_ultima_leitura_${nomeUsuario}`;
+
+    const obterUltimaLeituraDGF = (nomeUsuario) => {
+        try {
+            return localStorage.getItem(chaveUltimaLeituraDGF(nomeUsuario)) || '';
+        } catch (_) {
+            return '';
+        }
+    };
+
+    const contarMensagensNaoLidasDGF = (nomeUsuario, mensagens = []) => {
+        const ultimaLeitura = obterUltimaLeituraDGF(nomeUsuario);
+        if (!ultimaLeitura) return mensagens.length;
+
+        const referencia = new Date(ultimaLeitura).getTime();
+        if (Number.isNaN(referencia)) return mensagens.length;
+
+        return mensagens.filter(m => {
+            const dataMensagem = new Date(m?.criado_em || '').getTime();
+            return !Number.isNaN(dataMensagem) && dataMensagem > referencia;
+        }).length;
+    };
+
+    const marcarMensagensComoLidasDGF = (nomeUsuario, mensagens = []) => {
+        try {
+            const datas = mensagens
+                .map(m => new Date(m?.criado_em || '').getTime())
+                .filter(valor => !Number.isNaN(valor));
+
+            const maiorData = datas.length
+                ? new Date(Math.max(...datas)).toISOString()
+                : new Date().toISOString();
+
+            localStorage.setItem(chaveUltimaLeituraDGF(nomeUsuario), maiorData);
+        } catch (_) {
+            // localStorage pode estar indisponível em alguns modos de navegação.
+        }
+    };
+
+    const obterMensagensCacheDGF = (nomeUsuario) => {
+        return mensagensGlobaisDGF.filter(m => m.usuario_destino === nomeUsuario);
+    };
+
+    const atualizarIndicadoresAtrasadosDGF = (mesSelecionado = mesSelecionadoAtualDGF) => {
+        const pessoasDoMes = listaAniversariantes
+            .filter(p => p.data.split('/')[1] === mesSelecionado);
+
+        pessoasDoMes.forEach(pessoa => {
+            const chaveUsuario = criarChaveUsuarioDGF(pessoa.nome);
+            const mensagens = obterMensagensCacheDGF(chaveUsuario);
+            const botao = document.getElementById(`btn-atrasado-${chaveUsuario}`);
+
+            if (!botao) return;
+
+            const naoLidas = contarMensagensNaoLidasDGF(chaveUsuario, mensagens);
+            const total = mensagens.length;
+            const indicador = botao.querySelector('.dgf-atrasado-indicador');
+
+            if (naoLidas > 0) {
+                botao.classList.add('tem-novas');
+            } else {
+                botao.classList.remove('tem-novas');
+            }
+
+            if (indicador) {
+                indicador.textContent = naoLidas > 99 ? '99+' : String(naoLidas);
+                indicador.style.display = naoLidas > 0 ? 'inline-flex' : 'none';
+            }
+
+            botao.title = naoLidas > 0
+                ? `${naoLidas} mensagem(ns) ainda não lida(s) • ${total} no total`
+                : (total ? `${total} mensagem(ns) recebida(s)` : 'Continue dando os parabéns');
+        });
+    };
+
     const nomesMeses = [
         "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
         "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
@@ -3014,6 +3146,70 @@ if (pagina === "aniversariantes") {
                 color: white;
             }
 
+            .dgf-atrasado-wrap {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 7px;
+                flex-wrap: wrap;
+            }
+
+            .dgf-atrasado-btn {
+                border: 1px solid #e6eaee;
+                background: #f8fafc;
+                color: #34495e;
+                border-radius: 999px;
+                min-width: 38px;
+                height: 32px;
+                padding: 0 10px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 900;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                position: relative;
+                transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+            }
+
+            .dgf-atrasado-btn:hover {
+                transform: translateY(-1px);
+                filter: brightness(1.02);
+                box-shadow: 0 5px 12px rgba(44,62,80,.10);
+            }
+
+            .dgf-atrasado-btn.tem-novas {
+                border-color: #ff7675;
+                background: #fff4f4;
+                color: #d63031;
+                box-shadow: 0 0 0 3px rgba(255,118,117,.10);
+            }
+
+            .dgf-atrasado-indicador {
+                min-width: 18px;
+                height: 18px;
+                padding: 0 5px;
+                box-sizing: border-box;
+                border-radius: 999px;
+                background: #e74c3c;
+                color: #fff;
+                font-size: 9px;
+                font-weight: 900;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+                box-shadow: 0 3px 8px rgba(231,76,60,.28);
+            }
+
+            .dgf-atrasado-label {
+                font-size: 9px;
+                color: #d35400;
+                font-weight: 900;
+                text-transform: uppercase;
+                letter-spacing: .3px;
+            }
+
             /* MODAL */
             .dgf-mural-overlay {
                 position: fixed;
@@ -3201,6 +3397,110 @@ if (pagina === "aniversariantes") {
 
             .dgf-art-footer { margin-top: 22px; text-align: center; color: #95a1aa; font-size: 9px; font-weight: 700; letter-spacing: .4px; }
 
+            .dgf-atrasado-overlay {
+                position: fixed;
+                inset: 0;
+                z-index: 100000;
+                background: rgba(14,22,32,.76);
+                backdrop-filter: blur(10px);
+                display: none;
+                align-items: center;
+                justify-content: center;
+                padding: 18px;
+                box-sizing: border-box;
+            }
+
+            .dgf-atrasado-overlay.ativo { display: flex; }
+
+            .dgf-atrasado-modal {
+                width: min(760px, 100%);
+                max-height: 90vh;
+                overflow: auto;
+                background: #f5f7fa;
+                border-radius: 24px;
+                box-shadow: 0 35px 80px rgba(0,0,0,.35);
+                position: relative;
+                padding: 22px;
+                box-sizing: border-box;
+            }
+
+            .dgf-atrasado-topo {
+                display: flex;
+                justify-content: space-between;
+                gap: 15px;
+                align-items: flex-start;
+                margin-bottom: 18px;
+                padding-right: 42px;
+            }
+
+            .dgf-atrasado-titulo {
+                margin: 0;
+                color: #243342;
+                font-size: 20px;
+                font-weight: 900;
+            }
+
+            .dgf-atrasado-subtitulo {
+                margin: 5px 0 0;
+                color: #7f8c8d;
+                font-size: 11px;
+                line-height: 1.45;
+            }
+
+            .dgf-atrasado-close {
+                position: absolute;
+                right: 18px;
+                top: 16px;
+                width: 36px;
+                height: 36px;
+                border: 0;
+                border-radius: 50%;
+                background: #243342;
+                color: #fff;
+                cursor: pointer;
+                font-size: 17px;
+            }
+
+            .dgf-atrasado-historico {
+                background: #fff;
+                border: 1px solid #e7ebee;
+                border-radius: 18px;
+                padding: 13px;
+                margin-bottom: 14px;
+            }
+
+            .dgf-atrasado-historico-feed {
+                max-height: 230px;
+                overflow: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .dgf-atrasado-msg {
+                border: 1px solid #edf0f3;
+                border-left: 4px solid #1abc9c;
+                border-radius: 13px;
+                padding: 10px 11px;
+                background: #fbfcfd;
+            }
+
+            .dgf-atrasado-form {
+                background: #fff;
+                border: 1px solid #e7ebee;
+                border-radius: 18px;
+                padding: 14px;
+            }
+
+            .dgf-atrasado-status {
+                min-height: 18px;
+                margin-top: 8px;
+                font-size: 10px;
+                font-weight: 800;
+                color: #16a085;
+                text-align: center;
+            }
+
             @media (max-width: 900px) {
                 .dgf-mural-modal { grid-template-columns: 1fr; height: 92vh; }
                 .dgf-mural-sidebar { max-height: 310px; }
@@ -3233,12 +3533,13 @@ if (pagina === "aniversariantes") {
        5. BANCO — LEITURA
        ============================================================ */
     window.carregarMensagensOnlineDGF = async () => {
-        const containers = aniversariantesHoje || [];
+        const containers = aniversariantesJanelaDGF || [];
 
         try {
             const url = `${SUPABASE_REST_URL}?select=id,usuario_destino,texto,assinatura,criado_em&order=criado_em.desc`;
             const mensagensGlobais = await requisicaoSupabaseDGF(url, { method: 'GET' });
             const listaMensagens = Array.isArray(mensagensGlobais) ? mensagensGlobais : [];
+            mensagensGlobaisDGF = listaMensagens;
 
             containers.forEach((pessoa, index) => {
                 const chaveUsuario = criarChaveUsuarioDGF(pessoa.nome);
@@ -3278,6 +3579,7 @@ if (pagina === "aniversariantes") {
                 `;
             });
 
+            atualizarIndicadoresAtrasadosDGF(mesSelecionadoAtualDGF);
             return listaMensagens;
         } catch (erro) {
             console.error('Erro ao buscar mensagens do PostgreSQL:', erro);
@@ -3384,6 +3686,242 @@ if (pagina === "aniversariantes") {
         const url = `${SUPABASE_REST_URL}?select=id,usuario_destino,texto,assinatura,criado_em&usuario_destino=eq.${parametro}&order=criado_em.desc`;
         const dados = await requisicaoSupabaseDGF(url, { method: 'GET' });
         return Array.isArray(dados) ? dados : [];
+    };
+
+    /* ============================================================
+       7.1. PARABÉNS ATRASADOS + MENSAGENS NÃO LIDAS
+       ============================================================ */
+    const garantirModalAtrasadoDGF = () => {
+        if (document.getElementById('dgf-atrasado-overlay')) return;
+
+        const overlay = document.createElement('div');
+        overlay.id = 'dgf-atrasado-overlay';
+        overlay.className = 'dgf-atrasado-overlay';
+        overlay.innerHTML = `
+            <div id="dgf-atrasado-modal" class="dgf-atrasado-modal">
+                <button class="dgf-atrasado-close" type="button" onclick="window.fecharParabensAtrasadoDGF()">✕</button>
+
+                <div class="dgf-atrasado-topo">
+                    <div>
+                        <div style="font-size:10px;letter-spacing:1.4px;font-weight:900;color:#1abc9c;text-transform:uppercase;margin-bottom:5px;">INTRANET DGF</div>
+                        <h3 id="dgf-atrasado-titulo" class="dgf-atrasado-titulo">Parabéns atrasados 🎈</h3>
+                        <p id="dgf-atrasado-subtitulo" class="dgf-atrasado-subtitulo">Continue deixando seu carinho até o fim do mês.</p>
+                    </div>
+                </div>
+
+                <div class="dgf-atrasado-historico">
+                    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+                        <strong style="font-size:10px;color:#586674;text-transform:uppercase;">💬 Mensagens recebidas</strong>
+                        <div style="display:flex;align-items:center;gap:7px;">
+                            <span id="dgf-atrasado-contagem" style="font-size:9px;font-weight:900;color:#8b98a4;"></span>
+                            <button
+                                id="dgf-atrasado-lida"
+                                type="button"
+                                onclick="window.marcarParabensAtrasadoComoLidosDGF()"
+                                style="border:1px solid #dfe7eb;background:#f8fbfc;color:#138d75;border-radius:999px;padding:6px 10px;font-size:9px;font-weight:900;cursor:pointer;display:none;align-items:center;gap:5px;"
+                                title="Marcar as mensagens como lidas"
+                            >✓ Lida</button>
+                        </div>
+                    </div>
+                    <div id="dgf-atrasado-historico-feed" class="dgf-atrasado-historico-feed"></div>
+                </div>
+
+                <div class="dgf-atrasado-form">
+                    <label style="font-size:10px;font-weight:900;color:#7f8c8d;text-transform:uppercase;display:block;margin-bottom:5px;">Deixe seu parabéns</label>
+                    <textarea id="dgf-atrasado-msg-input" maxlength="600" placeholder="Escreva uma mensagem de carinho…" style="width:100%;height:92px;padding:10px;border-radius:11px;border:1px solid #dfe5ea;font-size:11px;font-family:inherit;resize:vertical;box-sizing:border-box;outline:none;"></textarea>
+                    <input id="dgf-atrasado-assinatura-input" maxlength="50" placeholder="Seu nome (opcional)" style="width:100%;padding:10px;border-radius:11px;border:1px solid #dfe5ea;font-size:11px;font-family:inherit;box-sizing:border-box;outline:none;margin-top:8px;" />
+                    <button id="dgf-atrasado-enviar" class="dgf-btn dgf-btn-green" type="button" style="margin-top:9px;">
+                        Enviar parabéns <span>📩</span>
+                    </button>
+                    <div id="dgf-atrasado-status" class="dgf-atrasado-status"></div>
+                </div>
+            </div>
+        `;
+
+        overlay.addEventListener('click', (evento) => {
+            if (evento.target === overlay) window.fecharParabensAtrasadoDGF();
+        });
+
+        document.body.appendChild(overlay);
+    };
+
+    const renderizarHistoricoAtrasadoDGF = (mensagens) => {
+        const feed = document.getElementById('dgf-atrasado-historico-feed');
+        const contagem = document.getElementById('dgf-atrasado-contagem');
+        if (!feed || !contagem) return;
+
+        const overlay = document.getElementById('dgf-atrasado-overlay');
+        const nomeUsuarioAtual = overlay?.dataset?.nomeUsuario || '';
+        const naoLidas = nomeUsuarioAtual ? contarMensagensNaoLidasDGF(nomeUsuarioAtual, mensagens) : 0;
+        const botaoLida = document.getElementById('dgf-atrasado-lida');
+
+        contagem.textContent = mensagens.length
+            ? `${mensagens.length} mensagem(ns)`
+            : 'Nenhuma mensagem';
+
+        if (botaoLida) {
+            botaoLida.style.display = naoLidas > 0 ? 'inline-flex' : 'none';
+        }
+
+        if (!mensagens.length) {
+            feed.innerHTML = `<div style="padding:24px;text-align:center;color:#9aa6af;font-size:10px;font-style:italic;">Ainda não há mensagens. Seja o primeiro a deixar seu carinho! ✨</div>`;
+            return;
+        }
+
+        feed.innerHTML = mensagens.slice(0, 30).map(m => `
+            <article class="dgf-atrasado-msg">
+                <p style="margin:0;color:#2d3436;font-size:11px;line-height:1.5;">“${escapeHTMLDGF(m.texto)}”</p>
+                <div style="display:flex;justify-content:space-between;gap:8px;margin-top:6px;color:#a3adb7;font-size:9px;">
+                    <span>✍️ ${escapeHTMLDGF(m.assinatura || 'Anônimo')}</span>
+                    <span>📅 ${escapeHTMLDGF(formatarDataDGF(m.criado_em))}</span>
+                </div>
+            </article>
+        `).join('');
+    };
+
+    window.marcarParabensAtrasadoComoLidosDGF = () => {
+        const overlay = document.getElementById('dgf-atrasado-overlay');
+        const nomeUsuario = overlay?.dataset?.nomeUsuario || '';
+        if (!nomeUsuario) return;
+
+        const mensagens = obterMensagensCacheDGF(nomeUsuario);
+        marcarMensagensComoLidasDGF(nomeUsuario, mensagens);
+
+        const contagem = document.getElementById('dgf-atrasado-contagem');
+        const botaoLida = document.getElementById('dgf-atrasado-lida');
+        const status = document.getElementById('dgf-atrasado-status');
+
+        if (botaoLida) botaoLida.style.display = 'none';
+        if (contagem) contagem.textContent = mensagens.length ? `${mensagens.length} mensagem(ns) • lidas` : 'Nenhuma mensagem';
+        if (status) status.textContent = 'Mensagens marcadas como lidas. ✓';
+
+        atualizarIndicadoresAtrasadosDGF(mesSelecionadoAtualDGF);
+    };
+
+    window.fecharParabensAtrasadoDGF = () => {
+        const overlay = document.getElementById('dgf-atrasado-overlay');
+        if (overlay) overlay.classList.remove('ativo');
+        document.body.style.overflow = '';
+    };
+
+    window.enviarParabensAtrasadoDGF = async () => {
+        const overlay = document.getElementById('dgf-atrasado-overlay');
+        const nomeUsuario = overlay?.dataset?.nomeUsuario || '';
+        const campoTexto = document.getElementById('dgf-atrasado-msg-input');
+        const campoAssinatura = document.getElementById('dgf-atrasado-assinatura-input');
+        const botao = document.getElementById('dgf-atrasado-enviar');
+        const status = document.getElementById('dgf-atrasado-status');
+
+        const texto = campoTexto ? campoTexto.value.trim() : '';
+        const assinatura = campoAssinatura ? campoAssinatura.value.trim() : '';
+
+        if (!nomeUsuario) return;
+
+        if (!texto) {
+            if (status) status.textContent = 'Digite uma mensagem antes de enviar.';
+            return;
+        }
+
+        if (texto.length > 600) {
+            if (status) status.textContent = 'A mensagem pode ter no máximo 600 caracteres.';
+            return;
+        }
+
+        if (assinatura.length > 50) {
+            if (status) status.textContent = 'A assinatura pode ter no máximo 50 caracteres.';
+            return;
+        }
+
+        try {
+            if (botao) {
+                botao.disabled = true;
+                botao.innerHTML = 'Enviando...';
+            }
+
+            await requisicaoSupabaseDGF(SUPABASE_REST_URL, {
+                method: 'POST',
+                headers: {
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({
+                    usuario_destino: nomeUsuario,
+                    texto,
+                    assinatura: assinatura || null
+                })
+            });
+
+            if (campoTexto) campoTexto.value = '';
+            if (campoAssinatura) campoAssinatura.value = '';
+            if (status) status.textContent = 'Mensagem enviada com sucesso! 🎉';
+
+            const novasMensagens = await buscarMensagensDoUsuarioDGF(nomeUsuario);
+            mensagensGlobaisDGF = [
+                ...mensagensGlobaisDGF.filter(m => m.usuario_destino !== nomeUsuario),
+                ...novasMensagens
+            ].sort((a, b) => new Date(b.criado_em) - new Date(a.criado_em));
+
+            renderizarHistoricoAtrasadoDGF(novasMensagens);
+            atualizarIndicadoresAtrasadosDGF(mesSelecionadoAtualDGF);
+
+            setTimeout(() => {
+                if (status) status.textContent = '';
+            }, 2200);
+        } catch (erro) {
+            console.error('Erro ao salvar mensagem atrasada:', erro);
+            if (status) status.textContent = `Não foi possível salvar a mensagem: ${erro.message}`;
+        } finally {
+            if (botao) {
+                botao.disabled = false;
+                botao.innerHTML = 'Enviar parabéns <span>📩</span>';
+            }
+        }
+    };
+
+    window.abrirParabensAtrasadoDGF = async (nomeUsuario, nomeCompleto, dataAniversario, depto) => {
+        garantirModalAtrasadoDGF();
+
+        const overlay = document.getElementById('dgf-atrasado-overlay');
+        const titulo = document.getElementById('dgf-atrasado-titulo');
+        const subtitulo = document.getElementById('dgf-atrasado-subtitulo');
+        const feed = document.getElementById('dgf-atrasado-historico-feed');
+        const status = document.getElementById('dgf-atrasado-status');
+        const campoTexto = document.getElementById('dgf-atrasado-msg-input');
+        const campoAssinatura = document.getElementById('dgf-atrasado-assinatura-input');
+        const botao = document.getElementById('dgf-atrasado-enviar');
+
+        if (!overlay) return;
+
+        overlay.dataset.nomeUsuario = nomeUsuario;
+        titulo.textContent = `Parabéns para ${nomeCompleto} 🎈`;
+        subtitulo.textContent = `${dataAniversario} • ${depto || 'DGF'} • mensagens abertas até o fim do mês`;
+
+        if (feed) feed.innerHTML = `<div style="padding:24px;text-align:center;color:#8b98a4;font-size:10px;">Carregando mensagens…</div>`;
+        if (status) status.textContent = '';
+        if (campoTexto) campoTexto.value = '';
+        if (campoAssinatura) campoAssinatura.value = '';
+
+        if (botao) {
+            botao.onclick = () => window.enviarParabensAtrasadoDGF();
+        }
+
+        overlay.classList.add('ativo');
+        document.body.style.overflow = 'hidden';
+
+        try {
+            const mensagens = await buscarMensagensDoUsuarioDGF(nomeUsuario);
+            mensagensGlobaisDGF = [
+                ...mensagensGlobaisDGF.filter(m => m.usuario_destino !== nomeUsuario),
+                ...mensagens
+            ].sort((a, b) => new Date(b.criado_em) - new Date(a.criado_em));
+
+            renderizarHistoricoAtrasadoDGF(mensagens);
+            atualizarIndicadoresAtrasadosDGF(mesSelecionadoAtualDGF);
+        } catch (erro) {
+            console.error('Erro ao carregar parabéns atrasados:', erro);
+            if (feed) {
+                feed.innerHTML = `<div style="padding:24px;text-align:center;color:#d35400;font-size:10px;">Não foi possível carregar as mensagens agora.</div>`;
+            }
+        }
     };
 
     /* ============================================================
@@ -3765,6 +4303,8 @@ if (pagina === "aniversariantes") {
        10. RENDERIZAÇÃO DOS MESES — MESMA LÓGICA DA FUNÇÃO ORIGINAL
        ============================================================ */
     window.renderizarMes = (mesSelecionado) => {
+        mesSelecionadoAtualDGF = String(mesSelecionado);
+
         const listaFiltrada = listaAniversariantes
             .filter(p => p.data.split('/')[1] === mesSelecionado)
             .sort((a, b) => parseInt(a.data.split('/')[0]) - parseInt(b.data.split('/')[0]));
@@ -3773,14 +4313,40 @@ if (pagina === "aniversariantes") {
 
         listaFiltrada.forEach(pessoa => {
             const ehHoje = pessoa.data === hojeString;
+            const ehAtrasado = ehAniversarioAtrasadoNoMesDGF(pessoa, mesSelecionado);
+
+            const chaveUsuario = criarChaveUsuarioDGF(pessoa.nome);
+            const mensagens = obterMensagensCacheDGF(chaveUsuario);
+            const naoLidas = contarMensagensNaoLidasDGF(chaveUsuario, mensagens);
+            const totalMensagens = mensagens.length;
+
+            const botaoAtrasado = ehAtrasado ? `
+                <button
+                    id="btn-atrasado-${escaparAtributoDGF(chaveUsuario)}"
+                    type="button"
+                    class="dgf-atrasado-btn ${naoLidas > 0 ? 'tem-novas' : ''}"
+                    onclick='window.abrirParabensAtrasadoDGF(${jsArgDGF(chaveUsuario)}, ${jsArgDGF(pessoa.nome)}, ${jsArgDGF(pessoa.data)}, ${jsArgDGF(pessoa.superintendência || 'DGF')})'
+                    title="${naoLidas > 0 ? `${naoLidas} mensagem(ns) ainda não lida(s)` : (totalMensagens ? `${totalMensagens} mensagem(ns) recebida(s)` : 'Continue dando os parabéns')}"
+                    aria-label="Dar parabéns atrasado para ${escapeHTMLDGF(pessoa.nome)}"
+                >
+                    💬
+                    <span class="dgf-atrasado-indicador" style="display:${totalMensagens > 0 ? 'inline-flex' : 'none'};">${totalMensagens > 99 ? '99+' : totalMensagens}</span>
+                </button>
+                <span class="dgf-atrasado-label">${naoLidas > 0 ? 'novas mensagens' : 'parabéns atrasado'}</span>
+            ` : '';
+
             htmlFinal += `
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;margin-bottom:8px;background:${ehHoje ? '#e8f4fd' : 'white'};border-radius:10px;border-left:4px solid ${ehHoje ? '#3498db' : '#bdc3c7'};box-shadow:0 2px 4px rgba(0,0,0,.05);">
-                    <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;margin-bottom:8px;background:${ehHoje ? '#e8f4fd' : 'white'};border-radius:10px;border-left:4px solid ${ehHoje ? '#3498db' : '#bdc3c7'};box-shadow:0 2px 4px rgba(0,0,0,.05);gap:10px;">
+                    <div style="min-width:0;flex:1;">
                         <div style="font-weight:bold;color:#2c3e50;font-size:14px;">${escapeHTMLDGF(pessoa.nome).toUpperCase()}</div>
                         <div style="font-size:11px;color:#7f8c8d;text-transform:uppercase;">${escapeHTMLDGF(pessoa.superintendência || 'DGF')}</div>
                     </div>
-                    <div style="font-weight:bold;color:#34495e;background:#f1f2f6;padding:5px 10px;border-radius:20px;font-size:12px;min-width:50px;text-align:center;">
-                        ${escapeHTMLDGF(pessoa.data)}
+
+                    <div class="dgf-atrasado-wrap">
+                        ${botaoAtrasado}
+                        <div style="font-weight:bold;color:#34495e;background:#f1f2f6;padding:5px 10px;border-radius:20px;font-size:12px;min-width:50px;text-align:center;">
+                            ${escapeHTMLDGF(pessoa.data)}
+                        </div>
                     </div>
                 </div>`;
         });
@@ -3792,22 +4358,27 @@ if (pagina === "aniversariantes") {
                 ${htmlFinal || "<p style='color:#95a5a6;font-style:italic;'>Nenhum aniversariante encontrado.</p>"}
             `;
         }
+
+        atualizarIndicadoresAtrasadosDGF(mesSelecionado);
     };
 
     /* ============================================================
-       11. CARDS DE HOJE
+       11. CARDS DE 3 DIAS — HOJE + 2 DIAS APÓS
        ============================================================ */
-    const aniversariantesHoje = listaAniversariantes.filter(p => p.data === hojeString);
+    const aniversariantesJanelaDGF = listaAniversariantes.filter(p => estaNaJanelaDe3DiasDGF(p.data));
 
     let hojeHTML = '';
 
-    aniversariantesHoje.forEach((pessoa, index) => {
+    aniversariantesJanelaDGF.forEach((pessoa, index) => {
+        const diasDesdeAniversario = obterDiasDesdeAniversarioDGF(pessoa.data);
+        const statusCard = obterStatusCardDGF(pessoa.data);
+        const ehHoje = diasDesdeAniversario === 0;
         const chaveUsuario = criarChaveUsuarioDGF(pessoa.nome);
         const primeiroNome = escapeHTMLDGF(String(pessoa.nome || '').trim().split(/\s+/)[0] || '?');
 
         hojeHTML += `
             <article class="dgf-aniv-card">
-                <div class="dgf-hoje-badge">ANIVERSARIANTE • HOJE</div>
+                <div class="dgf-hoje-badge">${statusCard}</div>
 
                 <div class="dgf-avatar">
                     ${primeiroNome.charAt(0).toUpperCase()}
@@ -3818,6 +4389,7 @@ if (pagina === "aniversariantes") {
                 <div class="dgf-tag-setor">${escapeHTMLDGF(pessoa.superintendência || 'DGF')}</div>
 
                 <div style="margin-top:12px;color:#8996a2;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;">✨ Data especial: ${escapeHTMLDGF(pessoa.data)}</div>
+                ${!ehHoje ? `<div style="margin-top:6px;color:#d35400;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;">💌 Ainda dá tempo de deixar seu carinho!</div>` : ''}
 
                 <div class="dgf-mensagem-box">
                     <label style="font-size:10px;font-weight:900;color:#586674;text-transform:uppercase;display:block;margin-bottom:8px;">💬 Mensagens recebidas</label>
@@ -3864,7 +4436,7 @@ if (pagina === "aniversariantes") {
                 ${hojeHTML || `
                     <div style="grid-column:1 / -1;width:100%;padding:28px;background:#fff;border-radius:18px;border:1px dashed #cbd3da;text-align:center;color:#8b98a4;box-sizing:border-box;">
                         <div style="font-size:36px;margin-bottom:8px;">🎈</div>
-                        Ninguém faz aniversário hoje, ${hojeString}.
+                        Não há aniversariantes na janela de 3 dias.
                     </div>
                 `}
             </div>
@@ -3888,6 +4460,7 @@ if (pagina === "aniversariantes") {
        ============================================================ */
     injetarEstilosMuralDGF();
     garantirModalMuralDGF();
+    garantirModalAtrasadoDGF();
     window.renderizarMes(mesAtual);
     window.carregarMensagensOnlineDGF();
 
@@ -3901,7 +4474,18 @@ if (pagina === "aniversariantes") {
             window.carregarMensagensOnlineDGF();
         }
     }, 60000);
+
+    if (!window.dgfAniversariantesEscapeListener) {
+        window.dgfAniversariantesEscapeListener = (evento) => {
+            if (evento.key === 'Escape') {
+                window.fecharParabensAtrasadoDGF();
+                window.fecharMuralDGF();
+            }
+        };
+        document.addEventListener('keydown', window.dgfAniversariantesEscapeListener);
+    }
 }
+
 	
     if (pagina === "reserva") {
     // 1. Define e força a atualização da senha no localStorage

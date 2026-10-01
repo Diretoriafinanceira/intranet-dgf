@@ -3339,17 +3339,6 @@ if (pagina === "radar_dgf") {
     `;
 }
 		
-/* ================================================================
-   ANIVERSARIANTES DGF — PostgreSQL + Supabase
-   Substitui o bloco atual if(pagina === "aniversariantes") { ... }
-
-   IMPORTANTE:
-   1) Troque SUPABASE_URL e SUPABASE_PUBLISHABLE_KEY abaixo.
-   2) Não use a chave service_role no HTML.
-   3) O restante da intranet (listaAniversariantes/conteudo/pagina)
-      permanece como está.
-================================================================ */
-
 if (pagina === "aniversariantes") {
 
     /* ============================================================
@@ -3508,7 +3497,7 @@ if (pagina === "aniversariantes") {
     ];
 
     /* ============================================================
-       2. SEGURANÇA / UTILITÁRIOS
+       2. SEGURANÇA / UTILITÁRIOS & EMOJIS
        ============================================================ */
     const escapeHTMLDGF = (valor) => String(valor ?? '')
         .replace(/&/g, '&amp;')
@@ -3535,17 +3524,36 @@ if (pagina === "aniversariantes") {
             : data.toLocaleDateString('pt-BR');
     };
 
-    // Usa JSON para passar nomes com apóstrofo/acentos com segurança aos onclicks.
     const jsArgDGF = (valor) => JSON.stringify(String(valor ?? ''))
         .replace(/</g, '\\u003c')
         .replace(/>/g, '\\u003e')
         .replace(/&/g, '\\u0026');
 
+    window.inserirEmojiDGF = (idCampo, emoji) => {
+        const campo = document.getElementById(idCampo);
+        if (!campo) return;
+
+        const inicio = campo.selectionStart ?? campo.value.length;
+        const fim = campo.selectionEnd ?? campo.value.length;
+        const textoAtual = campo.value;
+
+        campo.value = textoAtual.substring(0, inicio) + emoji + textoAtual.substring(fim);
+        campo.selectionStart = campo.selectionEnd = inicio + emoji.length;
+        campo.focus();
+    };
+
+    const emojisSugeridosDGF = ['🎂', '🥳', '🎉', '🎈', '👏', '🎁', '✨', '❤️', '🥂', '⭐', '🎊', '🙌'];
+
+    const gerarBarraEmojisDGF = (idCampo) => `
+        <div class="dgf-emoji-bar">
+            ${emojisSugeridosDGF.map(e => `
+                <button type="button" class="dgf-emoji-btn" onclick="window.inserirEmojiDGF('${escaparAtributoDGF(idCampo)}', '${e}')" title="Inserir ${e}">${e}</button>
+            `).join('')}
+        </div>
+    `;
+
     /* ============================================================
        3. ACESSO AO POSTGRESQL — REST API NATIVA
-       Sem supabase-js, html2canvas ou jsPDF.
-       Isso permite manter a intranet aberta normalmente pelo seu link
-       atual, inclusive quando o HTML é aberto localmente.
        ============================================================ */
     const SUPABASE_REST_URL = `${SUPABASE_URL}/rest/v1/aniversariantes_mensagens`;
 
@@ -3734,6 +3742,29 @@ if (pagina === "aniversariantes") {
                 padding: 14px;
             }
 
+            .dgf-emoji-bar {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+                margin-bottom: 6px;
+            }
+
+            .dgf-emoji-btn {
+                background: #ffffff;
+                border: 1px solid #e1e8ed;
+                border-radius: 6px;
+                padding: 3px 6px;
+                font-size: 13px;
+                cursor: pointer;
+                transition: transform 0.1s ease, background 0.1s ease;
+                line-height: 1;
+            }
+
+            .dgf-emoji-btn:hover {
+                background: #f0f4f8;
+                transform: scale(1.15);
+            }
+
             .dgf-feed-mini {
                 max-height: 160px;
                 overflow: auto;
@@ -3905,14 +3936,14 @@ if (pagina === "aniversariantes") {
             .dgf-mural-overlay.ativo { display: flex; }
 
             .dgf-mural-modal {
-                width: min(1180px, 100%);
-                height: min(90vh, 900px);
+                width: min(1380px, 100%);
+                height: min(92vh, 950px);
                 background: #f5f7fa;
                 border-radius: 28px;
                 box-shadow: 0 35px 80px rgba(0,0,0,.35);
                 overflow: hidden;
                 display: grid;
-                grid-template-columns: 340px 1fr;
+                grid-template-columns: 320px 1fr;
             }
 
             .dgf-mural-sidebar {
@@ -3982,13 +4013,13 @@ if (pagina === "aniversariantes") {
             }
 
             .dgf-mural-art {
-                width: 720px;
+                width: 900px;
                 max-width: 100%;
                 box-sizing: border-box;
-                border-radius: 24px;
+                border-radius: 30px;
                 overflow: hidden;
-                box-shadow: 0 24px 54px rgba(44,62,80,.2);
-                background: #fff;
+                box-shadow: 0 28px 70px rgba(30, 41, 59, .28);
+                background: #ffffff;
             }
 
             .dgf-art-inner {
@@ -3996,84 +4027,238 @@ if (pagina === "aniversariantes") {
                 box-sizing: border-box;
                 padding: 34px;
                 background:
-                    radial-gradient(circle at 10% 10%, rgba(26,188,156,.22), transparent 22%),
-                    radial-gradient(circle at 90% 5%, rgba(255,118,117,.16), transparent 23%),
-                    linear-gradient(145deg,#ffffff 0%,#f7fbfa 48%,#fff7f8 100%);
+                    radial-gradient(circle at 8% 8%, rgba(255, 93, 143, .28), transparent 20%),
+                    radial-gradient(circle at 94% 8%, rgba(255, 193, 7, .30), transparent 20%),
+                    radial-gradient(circle at 92% 92%, rgba(0, 194, 203, .25), transparent 22%),
+                    radial-gradient(circle at 6% 88%, rgba(108, 92, 231, .22), transparent 22%),
+                    linear-gradient(135deg, #fff8fb 0%, #f8fbff 48%, #fffaf2 100%);
                 position: relative;
             }
 
-            .dgf-art-inner::after {
-                content: "✦   ✧   •   ✦   •   ✧";
+            .dgf-art-inner::before {
+                content: "✦   ✧   ✦   •   ✧   ✦";
                 position: absolute;
-                top: 20px;
-                right: 28px;
-                color: rgba(44,62,80,.12);
-                font-size: 18px;
-                letter-spacing: 8px;
+                left: 28px;
+                top: 18px;
+                color: rgba(108, 92, 231, .20);
+                font-size: 17px;
+                letter-spacing: 7px;
+                pointer-events: none;
+            }
+
+            .dgf-art-inner::after {
+                content: "●  ●  ●";
+                position: absolute;
+                right: 25px;
+                bottom: 18px;
+                color: rgba(255, 93, 143, .18);
+                font-size: 19px;
+                letter-spacing: 7px;
                 pointer-events: none;
             }
 
             .dgf-art-header {
-                padding-bottom: 18px;
-                border-bottom: 1px solid rgba(44,62,80,.08);
+                padding: 18px 20px 20px;
+                border: 0;
+                border-radius: 24px;
                 margin-bottom: 18px;
+                background:
+                    linear-gradient(135deg, rgba(108, 92, 231, .98), rgba(255, 93, 143, .96) 54%, rgba(255, 193, 7, .96));
+                box-shadow: 0 14px 30px rgba(108, 92, 231, .18);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .dgf-art-header::after {
+                content: "🎉  ✨  🎈  ✨  🎂";
+                position: absolute;
+                right: 18px;
+                bottom: 10px;
+                font-size: 18px;
+                opacity: .92;
+                transform: rotate(-4deg);
             }
 
             .dgf-art-brand {
-                font-size: 13px;
-                letter-spacing: 2px;
-                font-weight: 900;
-                color: #2c3e50;
+                font-size: 12px;
+                letter-spacing: 2.4px;
+                font-weight: 950;
+                color: #ffffff;
                 text-transform: uppercase;
             }
 
-            .dgf-art-brand span { color: #1abc9c; }
-            .dgf-art-title { font-size: clamp(26px,4vw,42px); margin: 8px 0 4px; color: #243342; font-weight: 950; line-height: 1.05; }
-            .dgf-art-subtitle { color: #768594; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; }
+            .dgf-art-brand span { color: #ffe082; }
+
+            .dgf-art-title {
+                font-size: clamp(26px,4vw,42px);
+                margin: 8px 0 5px;
+                color: #ffffff;
+                font-weight: 950;
+                line-height: 1.02;
+                max-width: 82%;
+                text-shadow: 0 4px 16px rgba(44, 24, 94, .20);
+            }
+
+            .dgf-art-subtitle {
+                color: rgba(255,255,255,.88);
+                font-size: 10px;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                font-weight: 800;
+            }
 
             .dgf-art-person {
                 margin: 20px 0;
-                background: rgba(255,255,255,.82);
-                border: 1px solid rgba(255,255,255,.9);
-                border-radius: 22px;
-                padding: 18px;
-                box-shadow: 0 12px 26px rgba(44,62,80,.06);
+                background: rgba(255,255,255,.88);
+                border: 2px solid rgba(255,255,255,.96);
+                border-radius: 24px;
+                padding: 18px 20px;
+                box-shadow: 0 12px 26px rgba(77, 65, 130, .10);
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 gap: 14px;
+                position: relative;
+                overflow: hidden;
             }
 
-            .dgf-art-person-name { font-size: 19px; font-weight: 900; color: #243342; }
-            .dgf-art-person-depto { font-size: 10px; color: #73808c; margin-top: 3px; text-transform: uppercase; font-weight: 700; }
-            .dgf-art-person-emoji { font-size: 42px; }
+            .dgf-art-person::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 7px;
+                background: linear-gradient(180deg, #ff5d8f, #6c5ce7, #00c2cb);
+            }
 
-            .dgf-art-message-grid { display: flex; flex-direction: column; gap: 12px; }
+            .dgf-art-person-name {
+                font-size: 20px;
+                font-weight: 950;
+                color: #352f63;
+                padding-left: 4px;
+            }
+
+            .dgf-art-person-depto {
+                font-size: 10px;
+                color: #7f7a9d;
+                margin-top: 4px;
+                text-transform: uppercase;
+                font-weight: 800;
+                letter-spacing: .6px;
+                padding-left: 4px;
+            }
+
+            .dgf-art-person-emoji {
+                font-size: 44px;
+                filter: drop-shadow(0 7px 10px rgba(255, 93, 143, .18));
+            }
+
+            /* MURAL EM 3 COLUNAS POR LINHA COM QUADRADOS MAIORES E COMPLETO */
+            .dgf-art-message-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+                align-items: start;
+            }
 
             .dgf-art-message {
-                background: rgba(255,255,255,.88);
-                border-radius: 18px;
-                padding: 16px 17px;
-                border: 1px solid rgba(44,62,80,.07);
-                box-shadow: 0 8px 20px rgba(44,62,80,.045);
+                box-sizing: border-box;
+                background: #ffffff;
+                border-radius: 22px;
+                padding: 20px 18px 16px;
+                border: 0;
+                box-shadow: 0 10px 24px rgba(60, 53, 105, .10);
                 position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                min-height: 180px;
+                word-break: break-word;
+            }
+
+            .dgf-art-message:nth-child(5n + 1) {
+                border-left: 7px solid #ff5d8f;
+            }
+
+            .dgf-art-message:nth-child(5n + 2) {
+                border-left: 7px solid #6c5ce7;
+            }
+
+            .dgf-art-message:nth-child(5n + 3) {
+                border-left: 7px solid #00a8b5;
+            }
+
+            .dgf-art-message:nth-child(5n + 4) {
+                border-left: 7px solid #ffb300;
+            }
+
+            .dgf-art-message:nth-child(5n + 5) {
+                border-left: 7px solid #35b66f;
             }
 
             .dgf-art-message::before {
                 content: "“";
                 position: absolute;
-                top: -6px;
-                left: 12px;
-                font-size: 40px;
-                color: rgba(255,118,117,.25);
-                font-weight: 900;
+                top: 2px;
+                right: 14px;
+                font-size: 58px;
+                line-height: 1;
+                color: rgba(108, 92, 231, .10);
+                font-weight: 950;
+                pointer-events: none;
             }
 
-            .dgf-art-message-text { margin: 8px 0 10px; color: #273542; font-size: 12px; line-height: 1.65; white-space: pre-wrap; }
-            .dgf-art-message-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #98a4af; font-size: 9px; border-top: 1px dashed #e7ebee; padding-top: 9px; }
-            .dgf-art-message-tag { background: linear-gradient(135deg,#ff7675,#fd79a8); color: #fff; padding: 4px 8px; border-radius: 999px; font-weight: 800; }
+            .dgf-art-message-text {
+                margin: 0 0 14px 0;
+                color: #322d52;
+                font-size: 12.5px;
+                line-height: 1.6;
+                white-space: pre-wrap;
+                position: relative;
+                z-index: 1;
+            }
 
-            .dgf-art-footer { margin-top: 22px; text-align: center; color: #95a1aa; font-size: 9px; font-weight: 700; letter-spacing: .4px; }
+            .dgf-art-message-meta {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+                color: #918da8;
+                font-size: 8.5px;
+                border-top: 1px dashed #e8e4f0;
+                padding-top: 9px;
+                position: relative;
+                z-index: 1;
+                flex-wrap: wrap;
+            }
+
+            .dgf-art-message-meta span:first-child {
+                min-width: 0;
+            }
+
+            .dgf-art-message-tag {
+                background: linear-gradient(135deg, #6c5ce7, #ff5d8f);
+                color: #ffffff;
+                padding: 5px 9px;
+                border-radius: 999px;
+                font-weight: 900;
+                white-space: nowrap;
+                box-shadow: 0 5px 12px rgba(108, 92, 231, .16);
+            }
+
+            .dgf-art-footer {
+                margin-top: 24px;
+                padding: 11px 14px;
+                border-radius: 999px;
+                text-align: center;
+                color: #756f93;
+                background: rgba(255,255,255,.70);
+                border: 1px solid rgba(108,92,231,.09);
+                font-size: 9px;
+                font-weight: 800;
+                letter-spacing: .4px;
+            }
 
             .dgf-atrasado-overlay {
                 position: fixed;
@@ -4183,6 +4368,7 @@ if (pagina === "aniversariantes") {
                 .dgf-mural-modal { grid-template-columns: 1fr; height: 92vh; }
                 .dgf-mural-sidebar { max-height: 310px; }
                 .dgf-mural-stage { padding: 18px; }
+                .dgf-art-message-grid { grid-template-columns: repeat(2, 1fr); }
             }
 
             @media (max-width: 600px) {
@@ -4193,6 +4379,7 @@ if (pagina === "aniversariantes") {
                 .dgf-mural-stage { padding: 10px; }
                 .dgf-art-inner { padding: 20px; }
                 .dgf-formato-grid { grid-template-columns: 1fr 1fr; }
+                .dgf-art-message-grid { grid-template-columns: 1fr; }
             }
 
             @media print {
@@ -4248,7 +4435,7 @@ if (pagina === "aniversariantes") {
                             <div class="dgf-msg-conteudo" style="display:none;margin-top:8px;">
                                 <p class="dgf-msg-mini-text">“${escapeHTMLDGF(m.texto)}”</p>
                                 <div class="dgf-msg-mini-meta">
-                                    <span>✍️️ ${escapeHTMLDGF(m.assinatura || 'Anônimo')}</span>
+                                    <span>✍ ${escapeHTMLDGF(m.assinatura || 'Anônimo')}</span>
                                     <span>📅 ${escapeHTMLDGF(formatarDataDGF(m.criado_em))}</span>
                                 </div>
                             </div>
@@ -4291,7 +4478,7 @@ if (pagina === "aniversariantes") {
             conteudo.style.display = abrir ? 'block' : 'none';
         });
 
-        botao.textContent = abrir ? '🙈' : '👁️';
+        botao.textContent = abrir ? '🙈' : '👁️️';
         botao.setAttribute('aria-label', abrir ? 'Ocultar mensagens' : 'Mostrar mensagens');
         botao.title = abrir ? 'Clique para ocultar todas as mensagens' : 'Clique para mostrar todas as mensagens';
     };
@@ -4406,6 +4593,7 @@ if (pagina === "aniversariantes") {
 
                 <div class="dgf-atrasado-form">
                     <label style="font-size:10px;font-weight:900;color:#7f8c8d;text-transform:uppercase;display:block;margin-bottom:5px;">Deixe seu parabéns</label>
+                    ${gerarBarraEmojisDGF('dgf-atrasado-msg-input')}
                     <textarea id="dgf-atrasado-msg-input" maxlength="600" placeholder="Escreva uma mensagem de carinho…" style="width:100%;height:92px;padding:10px;border-radius:11px;border:1px solid #dfe5ea;font-size:11px;font-family:inherit;resize:vertical;box-sizing:border-box;outline:none;"></textarea>
                     <input id="dgf-atrasado-assinatura-input" maxlength="50" placeholder="Seu nome (opcional)" style="width:100%;padding:10px;border-radius:11px;border:1px solid #dfe5ea;font-size:11px;font-family:inherit;box-sizing:border-box;outline:none;margin-top:8px;" />
                     <button id="dgf-atrasado-enviar" class="dgf-btn dgf-btn-green" type="button" style="margin-top:9px;">
@@ -4665,14 +4853,7 @@ if (pagina === "aniversariantes") {
         document.body.appendChild(overlay);
     };
 
-    const montarArteMuralDGF = (nomeCompleto, depto, mensagens, formato = 'feed') => {
-        const tamanhos = {
-            stories: { largura: 540, altura: 960 },
-            feed: { largura: 540, altura: 675 },
-            reels: { largura: 540, altura: 960 }
-        };
-
-        const tamanho = tamanhos[formato] || tamanhos.feed;
+    const montarArteMuralDGF = (nomeCompleto, depto, mensagens) => {
         const tagsDecorativas = ['✨ Gratidão', '🎈 Celebração', '❤️ Carinho', '🌟 Sucesso', '💚 Equipe DGF'];
 
         const htmlMensagens = mensagens.length
@@ -4686,16 +4867,14 @@ if (pagina === "aniversariantes") {
                     </div>
                 </article>
             `).join('')
-            : `<div style="padding:24px;border-radius:18px;background:rgba(255,255,255,.82);text-align:center;color:#8a97a3;">Ainda não há mensagens recebidas.</div>`;
+            : `<div style="grid-column: 1 / -1; padding:32px;border-radius:18px;background:rgba(255,255,255,.82);text-align:center;color:#8a97a3;">Ainda não há mensagens recebidas.</div>`;
 
         const arte = document.createElement('div');
         arte.id = 'dgf-mural-art';
         arte.className = 'dgf-mural-art';
-        arte.style.width = `${tamanho.largura}px`;
-        arte.style.minHeight = `${tamanho.altura}px`;
 
         arte.innerHTML = `
-            <div class="dgf-art-inner" style="min-height:${tamanho.altura}px;">
+            <div class="dgf-art-inner">
                 <div class="dgf-art-header">
                     <div class="dgf-art-brand">📌 DGF<span>.</span></div>
                     <div class="dgf-art-title">Feliz aniversário! 🎂</div>
@@ -4749,7 +4928,7 @@ if (pagina === "aniversariantes") {
             muralAtualDGF.mensagens = mensagens;
             contagem.textContent = mensagens.length;
 
-            const arte = montarArteMuralDGF(nomeCompleto, depto || 'DGF', mensagens, 'feed');
+            const arte = montarArteMuralDGF(nomeCompleto, depto || 'DGF', mensagens);
             previewWrap.innerHTML = '';
             previewWrap.appendChild(arte);
         } catch (erro) {
@@ -4772,7 +4951,7 @@ if (pagina === "aniversariantes") {
     };
 
     /* ============================================================
-       9. EXPORTAÇÕES — CANVAS NATIVO + IMPRESSÃO/PDF
+       9. EXPORTAÇÕES — CANVAS NATIVO (FIEL AO MURAL EM 3 COLUNAS)
        ============================================================ */
     const carregarFonteCanvasDGF = (ctx, tamanho, peso = 700) => {
         ctx.font = `${peso} ${tamanho}px Arial, "Segoe UI", sans-serif`;
@@ -4808,20 +4987,6 @@ if (pagina === "aniversariantes") {
         ctx.closePath();
     };
 
-    const desenharTextoLimitadoDGF = (ctx, texto, x, y, larguraMax, alturaMax, tamanho, cor, peso = 500, lineHeight = 1.45) => {
-        carregarFonteCanvasDGF(ctx, tamanho, peso);
-        ctx.fillStyle = cor;
-        const linhas = quebrarTextoCanvasDGF(ctx, texto, larguraMax);
-        const maxLinhas = Math.max(1, Math.floor(alturaMax / (tamanho * lineHeight)));
-        const usadas = linhas.slice(0, maxLinhas);
-
-        usadas.forEach((linha, i) => {
-            ctx.fillText(linha, x, y + (i * tamanho * lineHeight));
-        });
-
-        return usadas.length * tamanho * lineHeight;
-    };
-
     const obterDimensaoArteDGF = (formato) => ({
         stories: { largura: 1080, altura: 1920 },
         feed: { largura: 1080, altura: 1350 },
@@ -4837,113 +5002,140 @@ if (pagina === "aniversariantes") {
         canvas.height = altura;
         const ctx = canvas.getContext('2d');
 
+        // Fundo decorativo
         const gradiente = ctx.createLinearGradient(0, 0, largura, altura);
-        gradiente.addColorStop(0, '#ffffff');
-        gradiente.addColorStop(.48, '#f2faf8');
-        gradiente.addColorStop(1, '#fff2f4');
+        gradiente.addColorStop(0, '#fff8fb');
+        gradiente.addColorStop(.48, '#f8fbff');
+        gradiente.addColorStop(1, '#fffaf2');
         ctx.fillStyle = gradiente;
         ctx.fillRect(0, 0, largura, altura);
 
-        // Elementos decorativos
-        ctx.fillStyle = 'rgba(26,188,156,.15)';
-        ctx.beginPath(); ctx.arc(90, 110, 210, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = 'rgba(255,118,117,.12)';
-        ctx.beginPath(); ctx.arc(largura - 70, altura * .20, 250, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = 'rgba(255, 93, 143, .18)';
+        ctx.beginPath(); ctx.arc(100, 100, 220, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = 'rgba(108, 92, 231, .15)';
+        ctx.beginPath(); ctx.arc(largura - 100, altura - 100, 250, 0, Math.PI * 2); ctx.fill();
 
-        const margem = 78;
-        let y = 86;
+        const margem = 60;
+        let y = 60;
 
-        carregarFonteCanvasDGF(ctx, formato === 'feed' ? 30 : 28, 900);
-        ctx.fillStyle = '#2c3e50';
-        ctx.fillText('📌 DGF', margem, y);
-        y += 70;
-
-        carregarFonteCanvasDGF(ctx, formato === 'feed' ? 66 : 60, 900);
-        ctx.fillStyle = '#243342';
-        ctx.fillText('Feliz aniversário! 🎂', margem, y);
-        y += 44;
-
-        carregarFonteCanvasDGF(ctx, 22, 600);
-        ctx.fillStyle = '#768594';
-        ctx.fillText('UM CARINHO DA DIRETORIA GERAL DE FINANÇAS', margem, y);
-        y += 58;
-
-        // Pessoa
-        const pessoaAltura = 128;
-        arredondarRetanguloCanvasDGF(ctx, margem, y, largura - (margem * 2), pessoaAltura, 28);
-        ctx.fillStyle = 'rgba(255,255,255,.88)';
+        // Cabeçalho da Arte
+        const gradHeader = ctx.createLinearGradient(margem, y, largura - margem, y + 140);
+        gradHeader.addColorStop(0, '#6c5ce7');
+        gradHeader.addColorStop(0.5, '#ff5d8f');
+        gradHeader.addColorStop(1, '#ffc107');
+        arredondarRetanguloCanvasDGF(ctx, margem, y, largura - (margem * 2), 140, 28);
+        ctx.fillStyle = gradHeader;
         ctx.fill();
-        ctx.strokeStyle = 'rgba(44,62,80,.08)';
+
+        carregarFonteCanvasDGF(ctx, 20, 950);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText('📌 DGF', margem + 30, y + 42);
+
+        carregarFonteCanvasDGF(ctx, 42, 950);
+        ctx.fillText('Feliz aniversário! 🎂', margem + 30, y + 90);
+
+        carregarFonteCanvasDGF(ctx, 15, 800);
+        ctx.fillStyle = 'rgba(255,255,255,0.9)';
+        ctx.fillText('UM CARINHO DA DIRETORIA GERAL DE FINANÇAS', margem + 30, y + 118);
+
+        y += 165;
+
+        // Cartão da Pessoa
+        const pessoaAltura = 100;
+        arredondarRetanguloCanvasDGF(ctx, margem, y, largura - (margem * 2), pessoaAltura, 24);
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(108, 92, 231, 0.1)';
         ctx.lineWidth = 2;
         ctx.stroke();
 
-        carregarFonteCanvasDGF(ctx, 30, 900);
-        ctx.fillStyle = '#243342';
-        ctx.fillText(String(muralAtualDGF.nomeCompleto || '').toUpperCase(), margem + 28, y + 48);
-        carregarFonteCanvasDGF(ctx, 17, 800);
-        ctx.fillStyle = '#73808c';
-        ctx.fillText(String(muralAtualDGF.depto || 'DGF').toUpperCase(), margem + 28, y + 80);
-        carregarFonteCanvasDGF(ctx, 54, 700);
-        ctx.fillText('🥳', largura - margem - 80, y + 76);
-        y += pessoaAltura + 32;
+        carregarFonteCanvasDGF(ctx, 26, 950);
+        ctx.fillStyle = '#352f63';
+        ctx.fillText(String(muralAtualDGF.nomeCompleto || '').toUpperCase(), margem + 30, y + 45);
+        carregarFonteCanvasDGF(ctx, 15, 800);
+        ctx.fillStyle = '#7f7a9d';
+        ctx.fillText(String(muralAtualDGF.depto || 'DGF').toUpperCase(), margem + 30, y + 75);
+        carregarFonteCanvasDGF(ctx, 48, 700);
+        ctx.fillText('🥳', largura - margem - 80, y + 68);
 
+        y += pessoaAltura + 30;
+
+        // Renderização em 3 Colunas Fiel ao Mês/Mural
         const mensagens = Array.isArray(muralAtualDGF.mensagens) ? muralAtualDGF.mensagens : [];
-        const maxMensagens = formato === 'feed' ? 5 : 6;
-        const selecionadas = mensagens.slice(0, maxMensagens);
-        const restante = Math.max(0, mensagens.length - selecionadas.length);
+        const numColunas = 3;
+        const gap = 16;
+        const larguraColuna = (largura - (margem * 2) - (gap * (numColunas - 1))) / numColunas;
+        const colunasY = [y, y, y];
+        const coresBorda = ['#ff5d8f', '#6c5ce7', '#00a8b5', '#ffb300', '#35b66f'];
         const tags = ['✨ Gratidão', '🎈 Celebração', '❤️ Carinho', '🌟 Sucesso', '💚 Equipe DGF'];
 
-        if (!selecionadas.length) {
-            arredondarRetanguloCanvasDGF(ctx, margem, y, largura - (margem * 2), 150, 24);
-            ctx.fillStyle = 'rgba(255,255,255,.88)';
+        if (!mensagens.length) {
+            arredondarRetanguloCanvasDGF(ctx, margem, y, largura - (margem * 2), 120, 20);
+            ctx.fillStyle = '#ffffff';
             ctx.fill();
-            carregarFonteCanvasDGF(ctx, 24, 700);
+            carregarFonteCanvasDGF(ctx, 20, 700);
             ctx.fillStyle = '#8a97a3';
-            ctx.fillText('Ainda não há mensagens recebidas.', margem + 32, y + 75);
-            y += 190;
+            ctx.fillText('Ainda não há mensagens recebidas.', margem + 30, y + 65);
+            colunasY[0] += 140;
+            colunasY[1] += 140;
+            colunasY[2] += 140;
         } else {
-            const gap = 18;
-            const larguraCard = largura - (margem * 2);
-            selecionadas.forEach((m, idx) => {
-                carregarFonteCanvasDGF(ctx, 21, 500);
-                const linhas = quebrarTextoCanvasDGF(ctx, `“${m.texto}”`, larguraCard - 70);
-                const alturaCard = Math.min(220, 92 + Math.max(2, linhas.length) * 31);
-                arredondarRetanguloCanvasDGF(ctx, margem, y, larguraCard, alturaCard, 24);
-                ctx.fillStyle = 'rgba(255,255,255,.90)';
+            mensagens.forEach((m, idx) => {
+                // Escolhe a coluna com menor altura para equilibrar o layout
+                let col = 0;
+                if (colunasY[1] < colunasY[col]) col = 1;
+                if (colunasY[2] < colunasY[col]) col = 2;
+
+                const xCard = margem + (col * (larguraColuna + gap));
+                const yCard = colunasY[col];
+
+                carregarFonteCanvasDGF(ctx, 17, 500);
+                const linhasTexto = quebrarTextoCanvasDGF(ctx, `“${m.texto}”`, larguraColuna - 36);
+                const alturaTexto = linhasTexto.length * 25;
+                const alturaCard = Math.max(160, 85 + alturaTexto);
+
+                // Fundo do Card
+                arredondarRetanguloCanvasDGF(ctx, xCard, yCard, larguraColuna, alturaCard, 20);
+                ctx.fillStyle = '#ffffff';
                 ctx.fill();
-                ctx.strokeStyle = 'rgba(44,62,80,.07)';
-                ctx.lineWidth = 2;
-                ctx.stroke();
 
-                desenharTextoLimitadoDGF(ctx, `“${m.texto}”`, margem + 30, y + 47, larguraCard - 60, alturaCard - 83, 21, '#273542', 500, 1.45);
+                // Borda Esquerda Colorida
+                ctx.fillStyle = coresBorda[idx % coresBorda.length];
+                ctx.fillRect(xCard, yCard + 15, 6, alturaCard - 30);
 
-                carregarFonteCanvasDGF(ctx, 15, 800);
-                ctx.fillStyle = '#7f8c98';
-                ctx.fillText(`✍️ ${m.assinatura || 'Anônimo'}`, margem + 30, y + alturaCard - 25);
+                // Texto do Card
+                carregarFonteCanvasDGF(ctx, 17, 500);
+                ctx.fillStyle = '#322d52';
+                linhasTexto.forEach((linha, i) => {
+                    ctx.fillText(linha, xCard + 18, yCard + 40 + (i * 25));
+                });
 
-                carregarFonteCanvasDGF(ctx, 14, 700);
-                ctx.fillStyle = '#ff7675';
-                const tag = tags[idx % tags.length];
-                ctx.fillText(tag, largura - margem - 195, y + alturaCard - 25);
+                // Assinatura & Tag
+                carregarFonteCanvasDGF(ctx, 12, 800);
+                ctx.fillStyle = '#918da8';
+                ctx.fillText(`✍️ ${m.assinatura || 'Anônimo'}`, xCard + 18, yCard + alturaCard - 18);
 
-                y += alturaCard + gap;
+                colunasY[col] += alturaCard + gap;
             });
-
-            if (restante > 0) {
-                carregarFonteCanvasDGF(ctx, 17, 800);
-                ctx.fillStyle = '#758493';
-                ctx.textAlign = 'center';
-                ctx.fillText(`+ ${restante} mensagem(ns) recebida(s)`, largura / 2, y + 8);
-                ctx.textAlign = 'left';
-                y += 35;
-            }
         }
 
-        carregarFonteCanvasDGF(ctx, 16, 700);
-        ctx.fillStyle = '#95a1aa';
+        const alturaFinalMural = Math.max(...colunasY) + 40;
+
+        carregarFonteCanvasDGF(ctx, 15, 800);
+        ctx.fillStyle = '#756f93';
         ctx.textAlign = 'center';
-        ctx.fillText('Gerado pela Intranet DGF • Mural de Parabéns ✨', largura / 2, altura - 45);
+        ctx.fillText('Gerado pela Intranet DGF • Mural de Parabéns ✨', largura / 2, alturaFinalMural);
         ctx.textAlign = 'left';
+
+        // Ajusta dimensões dinamicamente para comportar todas as mensagens se exceder a base
+        if (alturaFinalMural > altura) {
+            const canvasAjustado = document.createElement('canvas');
+            canvasAjustado.width = largura;
+            canvasAjustado.height = alturaFinalMural + 30;
+            const ctxAjustado = canvasAjustado.getContext('2d');
+            ctxAjustado.drawImage(canvas, 0, 0);
+            return canvasAjustado;
+        }
 
         return canvas;
     };
@@ -5063,6 +5255,7 @@ if (pagina === "aniversariantes") {
         const ehHoje = diasDesdeAniversario === 0;
         const chaveUsuario = criarChaveUsuarioDGF(pessoa.nome);
         const primeiroNome = escapeHTMLDGF(String(pessoa.nome || '').trim().split(/\s+/)[0] || '?');
+        const idCampoMsg = `msg-input-${chaveUsuario}-${index}`;
 
         hojeHTML += `
             <article class="dgf-aniv-card">
@@ -5087,7 +5280,8 @@ if (pagina === "aniversariantes") {
 
                     <div style="border-top:1px solid #e9eef2;padding-top:12px;margin-top:2px;">
                         <label style="font-size:10px;font-weight:900;color:#7f8c8d;text-transform:uppercase;display:block;margin-bottom:5px;">Deixe seu parabéns</label>
-                        <textarea id="msg-input-${escaparAtributoDGF(chaveUsuario)}-${index}" maxlength="600" placeholder="Escreva uma mensagem de carinho…" style="width:100%;height:72px;padding:9px;border-radius:10px;border:1px solid #dfe5ea;font-size:11px;font-family:inherit;resize:vertical;box-sizing:border-box;outline:none;"></textarea>
+                        ${gerarBarraEmojisDGF(idCampoMsg)}
+                        <textarea id="${escaparAtributoDGF(idCampoMsg)}" maxlength="600" placeholder="Escreva uma mensagem de carinho…" style="width:100%;height:72px;padding:9px;border-radius:10px;border:1px solid #dfe5ea;font-size:11px;font-family:inherit;resize:vertical;box-sizing:border-box;outline:none;"></textarea>
 
                         <input id="assinatura-input-${escaparAtributoDGF(chaveUsuario)}-${index}" maxlength="50" placeholder="Seu nome (opcional)" style="width:100%;padding:9px;border-radius:10px;border:1px solid #dfe5ea;font-size:11px;font-family:inherit;box-sizing:border-box;outline:none;margin-top:7px;" />
 
@@ -5152,8 +5346,6 @@ if (pagina === "aniversariantes") {
     window.renderizarMes(mesAtual);
     window.carregarMensagensOnlineDGF();
 
-    // Atualização automática do mural visível a cada 60 segundos.
-    // Não altera a lógica de envio; apenas mantém a tela atualizada.
     if (window.dgfAniversariantesInterval) {
         clearInterval(window.dgfAniversariantesInterval);
     }
@@ -5173,10 +5365,7 @@ if (pagina === "aniversariantes") {
         document.addEventListener('keydown', window.dgfAniversariantesEscapeListener);
     }
 }
-
-
-
-
+    
 if(pagina === "organograma"){
         conteudo.innerHTML = `
             <h2>📊 Organograma DGF</h2>

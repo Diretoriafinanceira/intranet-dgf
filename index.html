@@ -809,7 +809,7 @@ const listaAniversariantes = [
 	{ nome: "Rosevalda da Silva Alves", data: "11/05", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Ana Carolina Tomé da Silva", data: "18/07", superintendência: "Superintendência do Fundo Estadual de Saúde" },
 	{ nome: "Joana D'arc e Silva Pessoa Campello", data: "30/04", superintendência: "Superintendência do Fundo Estadual de Saúde" },
-	{ nome: "Janaína Ferreira de Pontes", data: "08/07", superintendência: "Superintendência Financeira de Prestação de Contas" },
+	{ nome: "Janaína Ferreira de Pontes", data: "14/09", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Joelma lima da Silva ", data: "08/11", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Aleteia Mara Ferreira Ramos", data: "30/06", superintendência: "Superintendência Financeira de Prestação de Contas" },
 	{ nome: "Nilciane Ferreira Gaia", data: "25/04", superintendência: "Superintendência Financeira de Prestação de Contas" },
@@ -1123,11 +1123,11 @@ function mostrar(pagina){
                     </div>
                 </div>
 
-                <!-- CARD MURAL DE AVISOS -->
+                <!-- CARD MURAL DE AVISOS (ATUALIZADO COM DIA DAS CRIANÇAS) -->
                 <div style="
                     background: #fff9c4 !important; 
                     border: 1px solid #fbc02d; 
-                    border-left: 5px solid #8e44ad;
+                    border-left: 5px solid #ff6b6b;
                     border-radius: 6px; 
                     padding: 12px 15px; 
                     width: 270px; 
@@ -1144,15 +1144,24 @@ function mostrar(pagina){
                     <div style="display: flex; align-items: center; justify-content: space-between;">
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <span style="font-size: 18px; line-height: 1;">📌</span>
-                            <span style="color: #f57f17; font-weight: 800; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Mural de Avisos</span>
+                            <span style="color: #d32f2f; font-weight: 800; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase;">Dia das Crianças</span>
                         </div>
-                        <span onclick="mostrar('noticias')" style="font-size: 11px; color: #8e44ad; font-weight: bold; cursor: pointer; text-decoration: underline;">Ver tudo</span>
+                        <span onclick="mostrar('noticias')" style="font-size: 11px; color: #ff6b6b; font-weight: bold; cursor: pointer; text-decoration: underline;">Ver tudo</span>
                     </div>
 
-                    <!-- IMAGEM NO MURAL DE AVISOS -->
-                    <div style="width: 100%; border-radius: 4px; overflow: hidden; margin-top: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.15);">
-                        <img src="./bebe.png" alt="Aviso" style="width: 100%; height: auto; max-height: 120px; object-fit: cover; display: block;">
+                    <p style="margin: 4px 0; color: #333; font-size: 11px; line-height: 1.3;">
+                        <strong>💕🎉 Brincadeira Especial DGF/SES!</strong> Envie sua foto de infância até o dia <strong>08/10</strong>.
+                    </p>
+
+                    <!-- IMAGEM NO MURAL DE AVISOS COM CLIQUE PARA NOTÍCIAS -->
+                    <div style="width: 100%; border-radius: 4px; overflow: hidden; margin-top: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.15); cursor: pointer;" onclick="mostrar('noticias')">
+                        <img src="./criança.png" alt="Dia das Crianças DGF" style="width: 100%; height: auto; max-height: 110px; object-fit: cover; display: block;">
                     </div>
+
+                    <!-- LINK DO FORMULÁRIO -->
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSffzj3BOqBGYX0ieCQuUk8-JL6uZZqy5T9ICe77magEdsiVMw/viewform?usp=header" target="_blank" style="margin-top: 4px; color: #c62828; font-weight: bold; font-size: 11px; text-decoration: underline; text-align: center; display: block;">
+                        👉 Clique aqui para enviar sua foto
+                    </a>
 
                 </div>
 
@@ -1380,7 +1389,7 @@ function mostrar(pagina){
         const resEl = document.getElementById('resultado-sei-home');
 
         if (!inputVal) {
-            resEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>⚠️️ Digite o número do processo!</span>";
+            resEl.innerHTML = "<span style='color: #e74c3c; font-weight: bold;'>⚠ Digite o número do processo!</span>";
             return;
         }
 
@@ -2275,7 +2284,52 @@ if(pagina === "noticias"){
 
     const hoje = new Date().toLocaleDateString('pt-BR');
 
-    // 0. TREINAMENTO DE RCP (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    // 0. DIA DAS CRIANÇAS - DGF/SES (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #ff6b6b; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-criancas')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #ff6b6b; font-size: 16px; text-transform: uppercase;">
+                        🎈 BRINCADEIRA ESPECIAL – DIA DAS CRIANÇAS DGF/SES 💕🎉
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Envie sua foto de infância e entre nessa brincadeira com a gente...</p>
+                </div>
+                <span id="icon-noticia-criancas" style="font-size: 18px; color: #ff6b6b; font-weight: bold;">▲</span>
+            </div>
+
+            <div id="noticia-criancas" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0 10px 0;">
+                    Bom dia a todos!<br><br>
+                    Em comemoração ao <strong>Dia das Crianças – DGF/SES</strong>, preparamos uma brincadeira especial para toda a equipe! 💕🎉<br><br>
+                    📸 <strong>Você está convidado(a) a participar!</strong><br>
+                    É só apontar a câmera do celular para o QR Code da divulgação e enviar uma foto sua de quando era pequeno(a).
+                </p>
+
+                <!-- IMAGEM DO DIA DAS CRIANÇAS -->
+                <div style="width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 15px 0; text-align: center;">
+                    <img src="./criança.png" alt="Dia das Crianças DGF/SES" style="max-width: 100%; max-height: 380px; width: auto; height: auto; display: block; margin: 0 auto; object-fit: contain;">
+                </div>
+
+                <div style="margin: 15px 0;">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSffzj3BOqBGYX0ieCQuUk8-JL6uZZqy5T9ICe77magEdsiVMw/viewform?usp=header" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #ff6b6b; font-weight: bold; text-decoration: underline; font-size: 14px;">
+                        👉 Clique aqui para acessar o Formulário de Envio da Foto
+                    </a>
+                    <span style="display: block; color: #7f8c8d; font-size: 12px; margin-top: 4px;">(Caso não consiga enviar através do QR Code)</span>
+                </div>
+
+                <p style="line-height: 1.6; color: #333; font-size: 14px; margin-bottom: 15px;">
+                    E não esqueça de compartilhar a divulgação com a equipe para que todo mundo possa participar! 🎈🎨✨
+                </p>
+
+                <div style="background: #fff0f0; border: 1px solid #ffcdd2; border-left: 5px solid #ff6b6b; padding: 12px; border-radius: 4px; color: #c62828; font-size: 13px; font-weight: bold;">
+                    ⏰ Obs: Enviar as fotos até o dia 08/10.
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 1. TREINAMENTO DE RCP
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2980b9; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-rcp')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2286,10 +2340,10 @@ if(pagina === "noticias"){
                     </h3>
                     <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Capacitação prática realizada na SES contou com a participação de servidores da DGF...</p>
                 </div>
-                <span id="icon-noticia-rcp" style="font-size: 18px; color: #2980b9; font-weight: bold;">▲</span>
+                <span id="icon-noticia-rcp" style="font-size: 18px; color: #2980b9; font-weight: bold;">▼</span>
             </div>
 
-            <div id="noticia-rcp" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+            <div id="noticia-rcp" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
                 <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0 10px 0;">
                     No dia 22/09, foi realizado na Secretaria de Saúde (SES) o <strong>Treinamento de Reanimação Cardiopulmonar (RCP) com uso de Desfibrilador Externo Automático (DEA) e Manobras de Desengasgo</strong> em adultos, crianças e bebês.
                 </p>
@@ -2309,7 +2363,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 1. FOLHETO INFORMATIVO DE EVACUAÇÃO (SEGUNDA NOTÍCIA)
+    // 2. FOLHETO INFORMATIVO DE EVACUAÇÃO
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e74c3c; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-evacuacao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2364,13 +2418,13 @@ if(pagina === "noticias"){
                 </ul>
 
                 <div style="background: #fff3cd; border: 1px solid #ffeeba; border-left: 5px solid #ffc107; padding: 12px; border-radius: 4px; margin-top: 15px; color: #856404;">
-                    <strong>ATENÇÃO EM CASO DE FUMAÇA DENSA nos corredores:</strong> Abaixe-se e desloque-se agachado. O ar limpo e respirável fica mais próximo ao chão. Se possível, cubra o nariz e a boca com um lenço ou pedaço de pano umedecido.
+                    <strong>ATENÇÃO EM CASO DE FUMAÇA DENSA nos corredores:</strong> Abaixe-se e desloque-se agachado. O ar limpo e respirável fica mais próximo ao chão. Se possible, cubra o nariz e a boca com um lenço ou pedaço de pano umedecido.
                 </div>
             </div>
         </div>
     `;
 
-    // 2. ANDAMENTO DO QUEBRA-CABEÇA
+    // 3. ANDAMENTO DO QUEBRA-CABEÇA
     html += `
         <div class="noticia-card" style="border-left: 5px solid #9b59b6; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-quebracabeca')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2396,7 +2450,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 3. FACHADA E ESTRUTURA DGF
+    // 4. FACHADA E ESTRUTURA DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #27ae60; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-frente')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2422,7 +2476,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 4. VÍDEO INSTITUCIONAL DGF
+    // 5. VÍDEO INSTITUCIONAL DGF
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #e74c3c; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-video')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2449,7 +2503,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 5. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026
+    // 6. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026
     html += `
         <div class="noticia-card" style="border-left: 5px solid #d35400; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-cge')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2475,7 +2529,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 6. MISSA DE 7º DIA
+    // 7. MISSA DE 7º DIA
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2c3e50; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-missa')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2517,7 +2571,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 7. Resultado do Bolão DGF
+    // 8. Resultado do Bolão DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2ecc71; background: #f4fbf7; font-family: 'Arial', sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-bolao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2569,7 +2623,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 8. São João DGF
+    // 9. São João DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-saojoao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2592,7 +2646,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 9. Guia de Ajuda
+    // 10. Guia de Ajuda
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #3498db; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-guia')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -2612,7 +2666,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 10. Demais notícias
+    // 11. Demais notícias
     if (typeof listaNoticias !== 'undefined') {
         listaNoticias.forEach((n, i) => {
             html += `

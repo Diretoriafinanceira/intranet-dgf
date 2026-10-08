@@ -886,6 +886,31 @@ function mostrar(pagina){
         border-radius: 8px;
         border-top: 10px solid #e91e63;
     ">
+        <!-- CONTADOR DISCRETO DE ACESSOS — CANTO SUPERIOR DIREITO -->
+        <div id="contador-acessos-dgf" style="
+            position: fixed;
+            top: 8px;
+            right: 12px;
+            z-index: 99999;
+            background: rgba(15,32,66,0.88);
+            color: rgba(255,255,255,0.88);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 4px 8px;
+            box-shadow: 0 2px 7px rgba(0,0,0,0.12);
+            backdrop-filter: blur(3px);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.1;
+            font-size: 10px;
+            font-weight: 700;
+            opacity: .72;
+            pointer-events: none;
+            white-space: nowrap;
+        ">
+            🟢 <span id="usuarios-online-dgf">0</span> online
+            <span style="opacity:.42; margin:0 4px;">•</span>
+            👁 <span id="total-acessos-dgf">0</span> acessos
+        </div>
         
         <!-- ========================================================================================= -->
         <!-- BANNER INFORMATIVO: OUTUBRO ROSA -->
@@ -949,6 +974,109 @@ function mostrar(pagina){
                 ">
                     <span style="display: block; font-size: 10px; color: #616161; font-weight: bold;">Cuide-se e previna-se</span>
                     <strong style="font-size: 14px; color: #c2185b;">Sua saúde importa!</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================================================= -->
+        <!-- EXPERIÊNCIA INTERATIVA: DIA DO NORDESTINO -->
+        <!-- ========================================================================================= -->
+        <div id="desafio-nordestino-dgf" style="
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f2042 0%, #173b67 55%, #1d5a7a 100%);
+            box-shadow: 0 6px 20px rgba(15,32,66,0.18);
+            flex-shrink: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            position: relative;
+        ">
+            <div style="
+                position: absolute;
+                inset: 0;
+                background:
+                    radial-gradient(circle at 8% 20%, rgba(255,193,7,0.18) 0 90px, transparent 91px),
+                    radial-gradient(circle at 92% 85%, rgba(233,30,99,0.13) 0 110px, transparent 111px);
+                pointer-events: none;
+            "></div>
+
+            <div style="position: relative; z-index: 1; padding: 22px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:15px; flex-wrap:wrap;">
+                    <div style="display:flex; align-items:center; gap:14px;">
+                        <div style="
+                            width:58px; height:58px; border-radius:16px;
+                            display:flex; align-items:center; justify-content:center;
+                            background:linear-gradient(135deg,#ffca28,#f59e0b);
+                            box-shadow:0 5px 12px rgba(0,0,0,0.22);
+                            font-size:30px;
+                        ">🌵</div>
+                        <div>
+                            <div style="font-size:11px; font-weight:900; letter-spacing:1px; text-transform:uppercase; color:#ffd54f;">08 de outubro • Dia do Nordestino</div>
+                            <div style="font-size:24px; font-weight:900; color:#fff; margin-top:2px;">DESAFIO NORDESTINO DGF</div>
+                            <div style="font-size:12px; color:rgba(255,255,255,0.82); margin-top:3px;">10 perguntas • pontuação • ranking da Diretoria</div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:9px; flex-wrap:wrap; justify-content:center;">
+                        <div style="background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.16); border-radius:12px; padding:9px 13px; text-align:center; min-width:110px;">
+                            <div style="font-size:10px; color:rgba(255,255,255,0.75); font-weight:800; text-transform:uppercase;">Seu recorde</div>
+                            <div id="recorde-nordestino-dgf" style="font-size:20px; font-weight:900; color:#fff; margin-top:2px;">0/10</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.16); border-radius:12px; padding:9px 13px; text-align:center; min-width:110px;">
+                            <div style="font-size:10px; color:rgba(255,255,255,0.75); font-weight:800; text-transform:uppercase;">Ranking</div>
+                            <div style="font-size:14px; font-weight:900; color:#ffd54f; margin-top:5px;">🌵 ONLINE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="inicio-nordestino-dgf" style="margin-top:18px; display:grid; grid-template-columns:minmax(250px,1.2fr) minmax(230px,.8fr); gap:14px;">
+                    <div style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); border-radius:12px; padding:18px;">
+                        <div style="font-size:15px; font-weight:800; color:#fff;">🎯 Tá preparado para mostrar que é arretado?</div>
+                        <p style="margin:7px 0 14px; color:rgba(255,255,255,0.84); font-size:12px; line-height:1.5;">
+                            São <strong style="color:#ffd54f;">10 perguntas</strong> sobre Pernambuco e o Nordeste. Digite seu nome, jogue e tente entrar no ranking da Diretoria.
+                        </p>
+
+                        <div style="display:flex; gap:9px; flex-wrap:wrap; align-items:center;">
+                            <input id="nome-nordestino-dgf" type="text" maxlength="40" placeholder="Digite seu nome para começar" onkeydown="if(event.key === 'Enter') window.iniciarDesafioNordestinoDGF()" style="
+                                flex:1; min-width:220px; padding:11px 12px; border-radius:9px; border:1px solid rgba(255,255,255,0.25);
+                                background:rgba(255,255,255,0.96); color:#263238; outline:none; font-size:12px; font-weight:700;
+                            ">
+                            <button onclick="window.iniciarDesafioNordestinoDGF()" style="
+                                border:none; border-radius:10px; padding:11px 18px;
+                                background:linear-gradient(135deg,#ffca28,#f59e0b);
+                                color:#17324d; font-size:13px; font-weight:900;
+                                cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.18);
+                                transition:transform .2s ease;
+                            " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                                🌵 COMEÇAR
+                            </button>
+                        </div>
+                        <div id="aviso-nome-nordestino-dgf" style="display:none; margin-top:7px; color:#ffebee; font-size:11px; font-weight:800;"></div>
+                    </div>
+
+                    <div style="background:rgba(255,255,255,0.97); border-radius:12px; padding:15px; color:#263238;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px;">
+                            <strong style="font-size:13px; color:#0f2042;">🏆 TOP 10 DA DIRETORIA</strong>
+                            <button onclick="window.carregarRankingOnlineNordestinoDGF(true)" style="border:none; background:#eef6ff; color:#1565c0; border-radius:7px; padding:6px 8px; font-size:10px; font-weight:900; cursor:pointer;">↻ ATUALIZAR</button>
+                        </div>
+                        <div id="ranking-nordestino-dgf" style="font-size:11px; color:#78909c; line-height:1.45;">
+                            Carregando ranking...
+                        </div>
+                    </div>
+                </div>
+
+                <div id="jogo-nordestino-dgf" style="display:none; margin-top:18px; background:#fff; border-radius:12px; padding:18px; color:#263238;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:10px;">
+                        <div id="progresso-nordestino-dgf" style="font-size:11px; font-weight:900; color:#1565c0; text-transform:uppercase; letter-spacing:.5px;"></div>
+                        <div id="jogador-nordestino-dgf" style="font-size:11px; font-weight:900; color:#546e7a;"></div>
+                        <div id="cronometro-nordestino-dgf" style="font-size:12px; font-weight:900; color:#1565c0; background:#eef6ff; border-radius:8px; padding:5px 8px;">⏱ 00:00</div>
+                        <div id="pontuacao-nordestino-dgf" style="font-size:12px; font-weight:900; color:#f59e0b;"></div>
+                    </div>
+                    <div style="height:7px; background:#eceff1; border-radius:10px; overflow:hidden; margin-bottom:16px;">
+                        <div id="barra-nordestino-dgf" style="height:100%; width:0%; background:linear-gradient(90deg,#1565c0,#26a69a,#f59e0b); transition:width .3s ease;"></div>
+                    </div>
+                    <div id="pergunta-nordestino-dgf"></div>
+                    <div id="feedback-nordestino-dgf" style="margin-top:12px;"></div>
                 </div>
             </div>
         </div>
@@ -1383,7 +1511,580 @@ function mostrar(pagina){
         }
     };
 
-    // Consulta do Processo via JSONP direcionado à nova planilha
+    // =========================================================================================
+    // DESAFIO NORDESTINO DGF — 10 perguntas + nome + ranking online
+    // =========================================================================================
+
+    // COLE A URL DO SEU GOOGLE APPS SCRIPT WEB APP AQUI.
+    // Exemplo: https://script.google.com/macros/s/SEU_ID/exec
+    const URL_RANKING_ONLINE_DGF = "https://script.google.com/macros/s/AKfycbxAHIDh5taPP8R6ml_U6ryuZQp_qwTzZWCCaZFvPz6wJPd4tiiht11TfJXbhv7_UpEf/exec";
+
+    function escaparHTMLNordestinoDGF(texto) {
+        return String(texto ?? "").replace(/[&<>'"]/g, function(c) {
+            return ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'})[c];
+        });
+    }
+
+    // =========================================================================================
+    // CONTADOR ONLINE DO SISTEMA — acessos totais + usuários online agora
+    // =========================================================================================
+    window.atualizarPresencaOnlineDGF = function(modo) {
+        if (!URL_RANKING_ONLINE_DGF) return;
+
+        let sessao = '';
+        try {
+            sessao = sessionStorage.getItem('dgf_sessao_online');
+            if (!sessao) {
+                sessao = 'dgf_' + Date.now() + '_' + Math.random().toString(36).slice(2, 12);
+                sessionStorage.setItem('dgf_sessao_online', sessao);
+            }
+        } catch (e) {
+            sessao = 'dgf_' + Date.now() + '_' + Math.random().toString(36).slice(2, 12);
+        }
+
+        const callback = 'dgfPresencaCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+        const scriptId = 'script-presenca-online-dgf';
+        const antigo = document.getElementById(scriptId);
+        if (antigo) antigo.remove();
+
+        window[callback] = function(resposta) {
+            try {
+                if (!resposta || !resposta.ok) return;
+                const onlineEl = document.getElementById('usuarios-online-dgf');
+                const totalEl = document.getElementById('total-acessos-dgf');
+                if (onlineEl) onlineEl.textContent = Number(resposta.online) || 0;
+                if (totalEl) totalEl.textContent = Number(resposta.totalAcessos) || 0;
+            } finally {
+                delete window[callback];
+                const el = document.getElementById(scriptId);
+                if (el) el.remove();
+            }
+        };
+
+        const script = document.createElement('script');
+        script.id = scriptId;
+        script.src = URL_RANKING_ONLINE_DGF + (URL_RANKING_ONLINE_DGF.indexOf('?') >= 0 ? '&' : '?') +
+            'action=presenca&modo=' + encodeURIComponent(modo || 'heartbeat') +
+            '&session=' + encodeURIComponent(sessao) + '&_=' + Date.now();
+        script.onerror = function() {
+            delete window[callback];
+            script.remove();
+        };
+        script.src += '&callback=' + encodeURIComponent(callback);
+        document.body.appendChild(script);
+    };
+
+    window.iniciarContadorPresencaDGF = function() {
+        if (window.intervaloPresencaDGF) {
+            clearInterval(window.intervaloPresencaDGF);
+        }
+
+        window.atualizarPresencaOnlineDGF('entrada');
+        window.intervaloPresencaDGF = setInterval(function() {
+            window.atualizarPresencaOnlineDGF('heartbeat');
+        }, 20000);
+
+        if (!window.eventoSaidaPresencaDGF) {
+            window.eventoSaidaPresencaDGF = true;
+            window.addEventListener('beforeunload', function() {
+                let sessao = '';
+                try { sessao = sessionStorage.getItem('dgf_sessao_online') || ''; } catch (e) {}
+                if (!sessao || !URL_RANKING_ONLINE_DGF) return;
+                const url = URL_RANKING_ONLINE_DGF + (URL_RANKING_ONLINE_DGF.indexOf('?') >= 0 ? '&' : '?') +
+                    'action=presenca&modo=saida&session=' + encodeURIComponent(sessao) + '&_=' + Date.now();
+                try { fetch(url, { method:'GET', mode:'no-cors', keepalive:true }); } catch (e) {}
+            });
+        }
+    };
+
+    window.carregarRankingOnlineNordestinoDGF = function(forcar) {
+        const rankingEl = document.getElementById('ranking-nordestino-dgf');
+        if (!rankingEl) return;
+
+        if (!URL_RANKING_ONLINE_DGF || URL_RANKING_ONLINE_DGF.indexOf('COLE_AQUI') !== -1) {
+            rankingEl.innerHTML = `
+                <div style="background:#fff8e1; border:1px solid #ffe082; border-radius:8px; padding:9px; color:#795548; line-height:1.45;">
+                    <strong>⚙ Ranking ainda não conectado.</strong><br>
+                    O jogo já está pronto. Falta apenas configurar a URL do Google Apps Script na linha <strong>URL_RANKING_ONLINE_DGF</strong>.
+                </div>
+            `;
+            return;
+        }
+
+        rankingEl.innerHTML = '<div style="text-align:center; padding:8px; color:#78909c;">🔄 Atualizando ranking...</div>';
+
+        const callback = 'dgfRankingCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+        const scriptId = 'script-ranking-nordestino-dgf';
+        const antigo = document.getElementById(scriptId);
+        if (antigo) antigo.remove();
+
+        window[callback] = function(resposta) {
+            try {
+                if (!resposta || !resposta.ok) {
+                    throw new Error(resposta && resposta.error ? resposta.error : 'Resposta inválida');
+                }
+
+                const ranking = Array.isArray(resposta.ranking) ? resposta.ranking : [];
+                if (!ranking.length) {
+                    rankingEl.innerHTML = '<div style="text-align:center; padding:10px; color:#78909c;">Ainda não há participantes. Seja o primeiro! 🌵</div>';
+                    return;
+                }
+
+                rankingEl.innerHTML = ranking.slice(0, 10).map(function(item, idx) {
+                    const medalha = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : (idx + 1) + 'º';
+                    const pontosItem = Number(item.pontos) || 0;
+                    const faixa = pontosItem === 10 ? '👑' : pontosItem >= 8 ? '🔥' : pontosItem >= 6 ? '🌵' : '⭐';
+                    const tempoItem = Number(item.tempoMs);
+                    const tempoTexto = Number.isFinite(tempoItem) && tempoItem > 0 ? window.formatarTempoDesafioNordestinoDGF(tempoItem) : '--:--';
+                    return `
+                        <div style="display:flex; align-items:center; gap:8px; padding:7px 6px; border-bottom:1px solid #edf1f4;">
+                            <div style="width:26px; text-align:center; font-weight:900; color:#1565c0;">${medalha}</div>
+                            <div style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:800; color:#263238;" title="${escaparHTMLNordestinoDGF(item.nome)}">${escaparHTMLNordestinoDGF(item.nome)}</div>
+                            <div style="font-weight:900; color:#f59e0b; white-space:nowrap;">${faixa} ${pontosItem}/10</div>
+                            <div style="font-size:10px; font-weight:800; color:#607d8b; white-space:nowrap;">⏱ ${tempoTexto}</div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (erro) {
+                rankingEl.innerHTML = '<div style="text-align:center; padding:8px; color:#c62828;">❌ Não foi possível carregar o ranking agora.</div>';
+            } finally {
+                delete window[callback];
+                const el = document.getElementById(scriptId);
+                if (el) el.remove();
+            }
+        };
+
+        const script = document.createElement('script');
+        script.id = scriptId;
+        script.src = URL_RANKING_ONLINE_DGF + (URL_RANKING_ONLINE_DGF.indexOf('?') >= 0 ? '&' : '?') +
+            'action=ranking&callback=' + encodeURIComponent(callback) + '&_=' + Date.now();
+        script.onerror = function() {
+            rankingEl.innerHTML = '<div style="text-align:center; padding:8px; color:#c62828;">❌ Erro ao acessar o ranking online.</div>';
+            delete window[callback];
+            script.remove();
+        };
+        document.body.appendChild(script);
+    };
+
+    window.salvarRankingOnlineNordestinoDGF = function(nome, pontos, tempoMs, concluidoCallback) {
+        if (!URL_RANKING_ONLINE_DGF || URL_RANKING_ONLINE_DGF.indexOf('COLE_AQUI') !== -1) {
+            if (typeof concluidoCallback === 'function') concluidoCallback(false);
+            return;
+        }
+
+        const callback = 'dgfSalvarRankingCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+        const scriptId = 'script-salvar-ranking-nordestino-dgf';
+        const antigo = document.getElementById(scriptId);
+        if (antigo) antigo.remove();
+
+        window[callback] = function(resposta) {
+            if (typeof concluidoCallback === 'function') concluidoCallback(!!(resposta && resposta.ok));
+            delete window[callback];
+            const el = document.getElementById(scriptId);
+            if (el) el.remove();
+        };
+
+        const script = document.createElement('script');
+        script.id = scriptId;
+        script.src = URL_RANKING_ONLINE_DGF + (URL_RANKING_ONLINE_DGF.indexOf('?') >= 0 ? '&' : '?') +
+            'action=salvar&nome=' + encodeURIComponent(nome) + '&pontos=' + encodeURIComponent(pontos) +
+            '&tempoMs=' + encodeURIComponent(tempoMs) + '&callback=' + encodeURIComponent(callback) + '&_=' + Date.now();
+        script.onerror = function() {
+            if (typeof concluidoCallback === 'function') concluidoCallback(false);
+            delete window[callback];
+            script.remove();
+        };
+        document.body.appendChild(script);
+    };
+
+    // =========================================================================================
+    // CRONÔMETRO DO DESAFIO — usado como desempate no ranking
+    // =========================================================================================
+    window.formatarTempoDesafioNordestinoDGF = function(ms) {
+        const totalSegundos = Math.max(0, Math.floor(Number(ms || 0) / 1000));
+        const horas = Math.floor(totalSegundos / 3600);
+        const minutos = Math.floor((totalSegundos % 3600) / 60);
+        const segundos = totalSegundos % 60;
+
+        const dois = function(n) { return String(n).padStart(2, '0'); };
+        return horas > 0
+            ? `${dois(horas)}:${dois(minutos)}:${dois(segundos)}`
+            : `${dois(minutos)}:${dois(segundos)}`;
+    };
+
+    window.atualizarCronometroNordestinoDGF = function() {
+        const estado = window.estadoDesafioNordestinoDGF;
+        const el = document.getElementById('cronometro-nordestino-dgf');
+        if (!estado || !el || !estado.inicioTempo) return;
+        const tempoAtual = Date.now() - estado.inicioTempo;
+        estado.tempoMs = tempoAtual;
+        el.textContent = `⏱ ${window.formatarTempoDesafioNordestinoDGF(tempoAtual)}`;
+    };
+
+    window.iniciarCronometroNordestinoDGF = function() {
+        if (window.intervaloCronometroNordestinoDGF) {
+            clearInterval(window.intervaloCronometroNordestinoDGF);
+        }
+        window.atualizarCronometroNordestinoDGF();
+        window.intervaloCronometroNordestinoDGF = setInterval(function() {
+            window.atualizarCronometroNordestinoDGF();
+        }, 250);
+    };
+
+    window.pararCronometroNordestinoDGF = function() {
+        const estado = window.estadoDesafioNordestinoDGF;
+        if (estado && estado.inicioTempo) {
+            estado.tempoMs = Math.max(0, Date.now() - estado.inicioTempo);
+        }
+        if (window.intervaloCronometroNordestinoDGF) {
+            clearInterval(window.intervaloCronometroNordestinoDGF);
+            window.intervaloCronometroNordestinoDGF = null;
+        }
+        const el = document.getElementById('cronometro-nordestino-dgf');
+        if (el && estado) el.textContent = `⏱ ${window.formatarTempoDesafioNordestinoDGF(estado.tempoMs)}`;
+    };
+
+        window.iniciarDesafioNordestinoDGF = function() {
+        const inicio = document.getElementById('inicio-nordestino-dgf');
+        const jogo = document.getElementById('jogo-nordestino-dgf');
+        const nomeInput = document.getElementById('nome-nordestino-dgf');
+        const avisoNome = document.getElementById('aviso-nome-nordestino-dgf');
+        if (!inicio || !jogo || !nomeInput) return;
+
+        const nome = nomeInput.value.trim().replace(/\s+/g, ' ');
+        if (!nome || nome.length < 2) {
+            if (avisoNome) {
+                avisoNome.textContent = '⚠️ Digite seu nome antes de começar o desafio.';
+                avisoNome.style.display = 'block';
+            }
+            nomeInput.focus();
+            return;
+        }
+
+        if (avisoNome) avisoNome.style.display = 'none';
+
+        const perguntas = [
+    // =====================================================================================
+    // 5 PERGUNTAS — MODO FÁCIL
+    // =====================================================================================
+    {
+        nivel: "Fácil",
+        q: "Qual destes ritmos é um dos grandes símbolos culturais de Pernambuco?",
+        op: ["Frevo", "Xaxado", "Pagode", "Cururu"],
+        r: "Frevo",
+        explicacao: "O frevo é um dos grandes símbolos culturais de Pernambuco, especialmente do Carnaval de Recife e Olinda."
+    },
+    {
+        nivel: "Fácil",
+        q: "Qual doce tradicional de Pernambuco é famoso por suas finíssimas camadas enroladas?",
+        op: ["Bolo de rolo", "Cuscuz", "Brigadeiro", "Quebra-queixo"],
+        r: "Bolo de rolo",
+        explicacao: "O bolo de rolo é uma das preparações mais conhecidas da doçaria pernambucana."
+    },
+    {
+        nivel: "Fácil",
+        q: "Qual expressão é muito associada ao modo de falar nordestino?",
+        op: ["Oxente", "Uai", "Tchê", "Guri"],
+        r: "Oxente",
+        explicacao: "Oxente é uma expressão muito associada ao falar nordestino e aparece em várias situações do cotidiano."
+    },
+    {
+        nivel: "Fácil",
+        q: "Qual destes pratos é tradicional da culinária nordestina?",
+        op: ["Baião de dois", "Mandioca", "Ratatouille", "Paella"],
+        r: "Baião de dois",
+        explicacao: "Baião de dois combina, tradicionalmente, arroz e feijão, com muitas variações regionais."
+    },
+    {
+        nivel: "Fácil",
+        q: "Qual festa é tradicional em várias cidades do Nordeste durante o mês de junho?",
+        op: ["São João", "Carnaval", "Natal", "Festival das Lanternas"],
+        r: "São João",
+        explicacao: "As festas juninas, especialmente o São João, são muito fortes em diversos estados nordestinos."
+    },
+
+    // =====================================================================================
+    // 3 PERGUNTAS — MODO MÉDIO
+    // =====================================================================================
+    {
+        nivel: "Médio",
+        q: "Qual cidade pernambucana é conhecida nacionalmente por seu Galo da Madrugada?",
+        op: ["Recife", "Caruaru", "Petrolina", "Olinda"],
+        r: "Recife",
+        explicacao: "O Galo da Madrugada é um dos grandes símbolos do Carnaval do Recife."
+    },
+    {
+        nivel: "Médio",
+        q: "Qual cidade pernambucana é famosa pelo Festival de Inverno?",
+        op: ["Garanhuns", "Triúnfo", "recife", "Itamaracá"],
+        r: "Garanhuns",
+        explicacao: "Garanhuns é conhecida pelo tradicional Festival de Inverno, evento cultural de grande destaque em Pernambuco."
+    },
+    {
+        nivel: "Médio",
+        q: "Qual manifestação cultural pernambucana é marcada por cortejo, percussão, dança e tradições populares?",
+        op: ["Maracatu", "Catira", "Carimbó", "Fandango caiçara"],
+        r: "Maracatu",
+        explicacao: "O maracatu é uma importante manifestação cultural pernambucana, com forte presença de cortejo, percussão e dança."
+    },
+
+    // =====================================================================================
+    // 2 PERGUNTAS — MODO DIFÍCIL
+    // =====================================================================================
+    {
+        nivel: "Difícil",
+        q: "Qual destes conjuntos reúne apenas estados que fazem parte da Região Nordeste do Brasil?",
+        op: [
+            "Pernambuco, Ceará e Bahia",
+            "Goiás, Bahia e Pará",
+            "Minas Gerais, Sergipe e Alagoas",
+            "Maranhão, Tocantins e Piauí"
+        ],
+        r: "Pernambuco, Ceará e Bahia",
+        explicacao: "Pernambuco, Ceará e Bahia estão entre os nove estados que formam a Região Nordeste."
+    },
+    {
+        nivel: "Difícil",
+        q: "Qual alternativa apresenta apenas manifestações fortemente associadas à cultura popular pernambucana?",
+        op: [
+            "Frevo, maracatu e caboclinho",
+            "Fandango, vaneira e chula",
+            "Carimbó, siriá e boi-bumbá",
+            "Choro, milonga e chamamé"
+        ],
+        r: "Frevo, maracatu e caboclinho",
+        explicacao: "Frevo, maracatu e caboclinho são manifestações culturais de grande importância na identidade popular de Pernambuco."
+    }
+];
+
+        perguntas.sort(function() { return Math.random() - 0.5; });
+
+        window.estadoDesafioNordestinoDGF = {
+            perguntas: perguntas,
+            atual: 0,
+            pontos: 0,
+            respondeu: false,
+            nome: nome,
+            inicioTempo: Date.now(),
+            tempoMs: 0
+        };
+
+        inicio.style.display = 'none';
+        jogo.style.display = 'block';
+        window.iniciarCronometroNordestinoDGF();
+        window.renderizarPerguntaNordestinoDGF();
+    };
+
+    window.renderizarPerguntaNordestinoDGF = function() {
+        const estado = window.estadoDesafioNordestinoDGF;
+        const perguntaEl = document.getElementById('pergunta-nordestino-dgf');
+        const feedbackEl = document.getElementById('feedback-nordestino-dgf');
+        const progressoEl = document.getElementById('progresso-nordestino-dgf');
+        const pontosEl = document.getElementById('pontuacao-nordestino-dgf');
+        const jogadorEl = document.getElementById('jogador-nordestino-dgf');
+        const barraEl = document.getElementById('barra-nordestino-dgf');
+        if (!estado || !perguntaEl) return;
+
+        if (estado.atual >= estado.perguntas.length) {
+            window.finalizarDesafioNordestinoDGF();
+            return;
+        }
+
+        const item = estado.perguntas[estado.atual];
+        const opcoes = item.op.slice().sort(function() { return Math.random() - 0.5; });
+        estado.opcoesAtuais = opcoes;
+        estado.respondeu = false;
+
+        progressoEl.textContent = `Pergunta ${estado.atual + 1} de ${estado.perguntas.length}`;
+        jogadorEl.textContent = `👤 ${estado.nome}`;
+        pontosEl.textContent = `⭐ ${estado.pontos} ponto${estado.pontos === 1 ? '' : 's'}`;
+        barraEl.style.width = `${(estado.atual / estado.perguntas.length) * 100}%`;
+        feedbackEl.innerHTML = '';
+
+        perguntaEl.innerHTML = `
+            <div style="font-size:18px; font-weight:900; color:#1f2937; line-height:1.35; margin-bottom:14px;">${item.q}</div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:9px;">
+                ${opcoes.map(function(opcao, i) { return `
+                    <button type="button" data-opcao="${i}" onclick="window.responderDesafioNordestinoDGF(this)" style="
+                        width:100%; text-align:left; border:1px solid #d7dee5; background:#f8fafc;
+                        color:#263238; padding:11px 12px; border-radius:9px; cursor:pointer;
+                        font-size:12px; font-weight:800; transition:all .2s ease;
+                    " onmouseover="this.style.background='#eef6ff'; this.style.borderColor='#90caf9'" onmouseout="this.style.background='#f8fafc'; this.style.borderColor='#d7dee5'">
+                        <span style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; margin-right:7px; border-radius:50%; background:#e3f2fd; color:#1565c0;">${String.fromCharCode(65 + i)}</span>
+                        ${opcao}
+                    </button>
+                `; }).join('')}
+            </div>
+        `;
+    };
+
+    window.responderDesafioNordestinoDGF = function(botao) {
+        const estado = window.estadoDesafioNordestinoDGF;
+        const feedbackEl = document.getElementById('feedback-nordestino-dgf');
+        if (!estado || !feedbackEl || estado.respondeu) return;
+
+        const item = estado.perguntas[estado.atual];
+        const indice = Number(botao.dataset.opcao);
+        const resposta = estado.opcoesAtuais[indice];
+        const botoes = document.querySelectorAll('#pergunta-nordestino-dgf button[data-opcao]');
+
+        estado.respondeu = true;
+        botoes.forEach(function(btn) {
+            btn.disabled = true;
+            btn.style.cursor = 'default';
+            const btnIndice = Number(btn.dataset.opcao);
+            const btnResposta = estado.opcoesAtuais[btnIndice];
+            if (btnResposta === item.r) {
+                btn.style.background = '#e8f5e9';
+                btn.style.borderColor = '#66bb6a';
+            } else if (btn === botao) {
+                btn.style.background = '#ffebee';
+                btn.style.borderColor = '#ef5350';
+            }
+        });
+
+        if (resposta === item.r) {
+            estado.pontos += 1;
+            feedbackEl.innerHTML = `
+                <div style="background:#e8f5e9; border:1px solid #a5d6a7; border-radius:9px; padding:11px 12px; color:#1b5e20; font-size:12px; line-height:1.45;">
+                    <strong>✅ Acertou, ${escaparHTMLNordestinoDGF(estado.nome)}!</strong> ${item.explicacao}
+                </div>
+                <button type="button" onclick="window.proximaPerguntaNordestinoDGF()" style="margin-top:9px; border:none; border-radius:8px; padding:9px 14px; background:#1565c0; color:#fff; font-size:12px; font-weight:900; cursor:pointer;">PRÓXIMA →</button>
+            `;
+        } else {
+            feedbackEl.innerHTML = `
+                <div style="background:#fff8e1; border:1px solid #ffe082; border-radius:9px; padding:11px 12px; color:#795548; font-size:12px; line-height:1.45;">
+                    <strong>😅 Quase!</strong> A resposta certa é <strong>${item.r}</strong>. ${item.explicacao}
+                </div>
+                <button type="button" onclick="window.proximaPerguntaNordestinoDGF()" style="margin-top:9px; border:none; border-radius:8px; padding:9px 14px; background:#1565c0; color:#fff; font-size:12px; font-weight:900; cursor:pointer;">PRÓXIMA →</button>
+            `;
+        }
+
+        document.getElementById('pontuacao-nordestino-dgf').textContent = `⭐ ${estado.pontos} ponto${estado.pontos === 1 ? '' : 's'}`;
+    };
+
+    window.proximaPerguntaNordestinoDGF = function() {
+        const estado = window.estadoDesafioNordestinoDGF;
+        if (!estado) return;
+        estado.atual += 1;
+        window.renderizarPerguntaNordestinoDGF();
+    };
+
+    window.finalizarDesafioNordestinoDGF = function() {
+        const estado = window.estadoDesafioNordestinoDGF;
+        const perguntaEl = document.getElementById('pergunta-nordestino-dgf');
+        const feedbackEl = document.getElementById('feedback-nordestino-dgf');
+        const progressoEl = document.getElementById('progresso-nordestino-dgf');
+        const pontosEl = document.getElementById('pontuacao-nordestino-dgf');
+        const barraEl = document.getElementById('barra-nordestino-dgf');
+        const jogadorEl = document.getElementById('jogador-nordestino-dgf');
+        if (!estado || !perguntaEl) return;
+
+        window.pararCronometroNordestinoDGF();
+
+        let faixa = '';
+        let emoji = '';
+        if (estado.pontos === 10) {
+            faixa = 'NORDESTINIDADE MASTER';
+            emoji = '🏆👑';
+        } else if (estado.pontos >= 17) {
+            faixa = 'ARRETADO(A) DEMAIS';
+            emoji = '🌵🔥';
+        } else if (estado.pontos >= 14) {
+            faixa = 'CABRA BOM / CABRA DA PESTE';
+            emoji = '😎🌵';
+        } else if (estado.pontos >= 10) {
+            faixa = 'TÁ ARRETANDO!';
+            emoji = '☀️🌵';
+        } else if (estado.pontos >= 6) {
+            faixa = 'TÁ NO CAMINHO';
+            emoji = '👏';
+        } else {
+            faixa = 'OXENTE... VAMOS DE NOVO!';
+            emoji = '😂🌵';
+        }
+
+        progressoEl.textContent = 'DESAFIO CONCLUÍDO';
+        jogadorEl.textContent = `👤 ${estado.nome}`;
+        pontosEl.textContent = `⭐ ${estado.pontos}/10`;
+        barraEl.style.width = '100%';
+
+        perguntaEl.innerHTML = `
+            <div style="text-align:center; padding:10px 4px 4px;">
+                <div style="font-size:42px;">${emoji}</div>
+                <div style="font-size:26px; font-weight:900; color:#0f2042; margin-top:5px;">${estado.pontos}/10</div>
+                <div style="font-size:14px; font-weight:900; color:#f59e0b; margin-top:3px; text-transform:uppercase; letter-spacing:.6px;">${faixa}</div>
+                <div style="font-size:12px; font-weight:900; color:#1565c0; margin-top:6px;">⏱ Tempo: ${window.formatarTempoDesafioNordestinoDGF(estado.tempoMs)}</div>
+                <p style="margin:9px auto 0; max-width:610px; color:#607d8b; font-size:12px; line-height:1.5;">${escaparHTMLNordestinoDGF(estado.nome)}, agora tente entrar no <strong>TOP 10 da Diretoria</strong>! Chame um colega e descubra quem conhece mais o Nordeste. 🌵</p>
+            </div>
+        `;
+
+        feedbackEl.innerHTML = `
+            <div id="status-ranking-nordestino-dgf" style="text-align:center; background:#f8fafc; border:1px solid #e2e8f0; border-radius:9px; padding:10px; color:#607d8b; font-size:11px;">
+                ⏳ Enviando seu resultado para o ranking online...
+            </div>
+            <div style="display:flex; justify-content:center; gap:9px; flex-wrap:wrap; margin-top:9px;">
+                <button type="button" onclick="window.iniciarDesafioNordestinoDGF()" style="border:none; border-radius:8px; padding:10px 15px; background:#1565c0; color:#fff; font-size:12px; font-weight:900; cursor:pointer;">🔄 JOGAR DE NOVO</button>
+                <button type="button" onclick="window.compartilharResultadoNordestinoDGF()" style="border:1px solid #1565c0; border-radius:8px; padding:10px 15px; background:#fff; color:#1565c0; font-size:12px; font-weight:900; cursor:pointer;">📣 COPIAR RESULTADO</button>
+                <button type="button" onclick="window.mostrarRankingNordestinoDGF()" style="border:1px solid #f59e0b; border-radius:8px; padding:10px 15px; background:#fffaf0; color:#a65d00; font-size:12px; font-weight:900; cursor:pointer;">🏆 VER RANKING</button>
+            </div>
+            <div style="text-align:center; margin-top:8px; font-size:10px; color:#78909c;">Seu recorde local é salvo neste navegador; o ranking da Diretoria é compartilhado online.</div>
+        `;
+
+        const recordeEl = document.getElementById('recorde-nordestino-dgf');
+        if (recordeEl) recordeEl.textContent = `${recorde}/10`;
+
+        window.salvarRankingOnlineNordestinoDGF(estado.nome, estado.pontos, estado.tempoMs, function(sucesso) {
+            const status = document.getElementById('status-ranking-nordestino-dgf');
+            if (status) {
+                status.innerHTML = sucesso
+                    ? '✅ Resultado enviado! Confira sua posição no TOP 10 abaixo.'
+                    : '⚠️ O jogo foi concluído, mas o ranking online ainda não está configurado ou não respondeu.';
+                status.style.background = sucesso ? '#e8f5e9' : '#fff8e1';
+                status.style.color = sucesso ? '#1b5e20' : '#795548';
+            }
+            window.carregarRankingOnlineNordestinoDGF(true);
+        });
+    };
+
+    window.mostrarRankingNordestinoDGF = function() {
+        const rankingEl = document.getElementById('ranking-nordestino-dgf');
+        const jogo = document.getElementById('jogo-nordestino-dgf');
+        if (rankingEl) rankingEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (jogo) {
+            const pai = document.getElementById('desafio-nordestino-dgf');
+            if (pai) pai.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        window.carregarRankingOnlineNordestinoDGF(true);
+    };
+
+    window.compartilharResultadoNordestinoDGF = function() {
+        const estado = window.estadoDesafioNordestinoDGF;
+        if (!estado) return;
+        const texto = `🌵 Desafio Nordestino DGF: ${estado.nome} fez ${estado.pontos}/10 em ${window.formatarTempoDesafioNordestinoDGF(estado.tempoMs)}! E você, quanto faz? 😎`;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(texto).then(function() {
+                alert('Resultado copiado! Agora é só mandar para um colega e desafiar. 🌵');
+            }).catch(function() {
+                window.prompt('Copie seu resultado e desafie um colega:', texto);
+            });
+        } else {
+            window.prompt('Copie seu resultado e desafie um colega:', texto);
+        }
+    };
+
+    try {
+        const recordeInicial = Number(localStorage.getItem('dgf_recorde_desafio_nordestino')) || 0;
+        const recordeEl = document.getElementById('recorde-nordestino-dgf');
+        if (recordeEl) recordeEl.textContent = `${recordeInicial}/10`;
+    } catch (e) {}
+
+    setTimeout(function() {
+        window.carregarRankingOnlineNordestinoDGF(false);
+        window.iniciarContadorPresencaDGF();
+    }, 150);
+
     window.consultarSeiHome = function() {
         const inputVal = document.getElementById('input-sei-home').value.trim();
         const resEl = document.getElementById('resultado-sei-home');
@@ -1534,7 +2235,7 @@ function mostrar(pagina){
     const graficosRadar = [
         { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - MÃO DE OBRA", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1274663355&format=interactive" },
         { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1845858557&format=interactive" },
-        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive" },
+        { nome: "COORDENAÇÃO DE LIQUIDAÇÃO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEPpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=1196512457&format=interactive" },
         { nome: "GERÊNCIA DE EMPENHO COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=2090176071&format=interactive" },
         { nome: "COORDENAÇÃO DE PAGAMENTO - TESOURO", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=649200678&format=interactive" },
         { nome: "COORDENAÇÃO DE PAGAMENTO - SUS", url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQfmAYY2Owf6w5YRPVYGcdVjpkZQFcX1FboBiPEpoJ6WcWTeYABiG2PrXI5zNY34w0gBkOXcvOdBqIF/pubchart?oid=326452568&format=interactive" }

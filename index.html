@@ -8643,7 +8643,7 @@ if(pagina === "Funcionários"){
                 </div>
             </div>
 
-            <input type="text" id="buscaFuncionario" placeholder="🔍 Buscar por nome ou cargo..." 
+            <input type="text" id="buscaFuncionario" placeholder="🔍 Buscar por nome..." 
                 style="width: 100%; padding: 12px; margin-bottom: 25px; border: 1px solid #ddd; border-radius: 25px; font-size: 16px; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
 
             <!-- Container com Status de Carregamento Inicial -->
@@ -8714,7 +8714,7 @@ if(pagina === "Funcionários"){
                         </div>
                         <div>
                             <label style="font-size: 11px; font-weight: 700; color: #334155;">🔍 Busca Geral (Qualquer campo):</label>
-                            <input type="text" id="filtroGeralDash" placeholder="Digite nome, cargo, CPF, setor..." style="width: 100%; padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; outline: none;">
+                            <input type="text" id="filtroGeralDash" placeholder="Digite nome, CPF, setor..." style="width: 100%; padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; outline: none;">
                         </div>
                     </div>
                 </div>
@@ -8744,7 +8744,6 @@ if(pagina === "Funcionários"){
                                 <th>Endereço</th>
                                 <th>Bairro</th>
                                 <th>Cidade</th>
-                                <th>Cargo</th>
                                 <th>Setor</th>
                             </tr>
                         </thead>
@@ -8827,10 +8826,8 @@ if(pagina === "Funcionários"){
 
         // Identifica os índices das colunas de Nome e Cargo
         let idxNome = cols.findIndex(c => c && c.label && c.label.toLowerCase().includes('nome'));
-        let idxCargo = cols.findIndex(c => c && c.label && (c.label.toLowerCase().includes('cargo') || c.label.toLowerCase().includes('função')));
 
         if (idxNome === -1) idxNome = 0;
-        if (idxCargo === -1) idxCargo = 1;
 
         // Extrai todas as linhas da planilha garantindo extração integral das células
         let linhasProcessadas = dados.table.rows.map(row => {
@@ -8857,7 +8854,6 @@ if(pagina === "Funcionários"){
         let cardsHtml = '';
         window.dadosPlanilhaGlobal.forEach((row, index) => {
             const nome = row[idxNome] || 'Sem Nome';
-            const cargo = row[idxCargo] || 'Cargo não informado';
 
             const inicial = nome.trim().charAt(0).toUpperCase();
             const eJaqueline = nome === "Jaqueline Castelo Branco Simões";
@@ -8885,7 +8881,6 @@ if(pagina === "Funcionários"){
                     ${avatarHtml}
                     <div>
                         <h4 class="nome-funcionario" data-index="${index}" style="margin: 0; color: #2c3e50; font-size: 15px; cursor: pointer; text-decoration: underline;" title="Clique para ver a ficha completa">${nome}</h4>
-                        <p style="margin: 5px 0 0 0; color: #1abc9c; font-size: 12px; font-weight: bold; text-transform: uppercase;">${cargo}</p>
                     </div>
                 </div>
             `;
@@ -8908,7 +8903,6 @@ if(pagina === "Funcionários"){
                 const conteudoFicha = document.getElementById('conteudoFicha');
 
                 const nomeFunc = dadosFunc[idxNome] || this.innerText;
-                const cargoFunc = dadosFunc[idxCargo] || 'Servidor Corporativo';
 
                 // Avatar / Foto no Modal
                 const inicial = nomeFunc.charAt(0).toUpperCase();
@@ -8935,6 +8929,11 @@ if(pagina === "Funcionários"){
 
                     const hLower = header.toLowerCase();
 
+                    // Oculta a exibição da coluna/campo de cargo
+                    if (hLower.includes('cargo') || hLower.includes('função') || hLower.includes('funcao')) {
+                        return;
+                    }
+
                     // Descarta campos de data de cadastro ou imagens/fotos
                     if (hLower.includes('data') || hLower.includes('cadastro') || hLower.includes('foto') || hLower.includes('imagem') || hLower.includes('avatar') || hLower.includes('img')) {
                         return;
@@ -8960,11 +8959,10 @@ if(pagina === "Funcionários"){
                 const colDireita = listaCardsCampos.slice(meio).join('');
 
                 conteudoFicha.innerHTML = `
-                    <!-- Topo do Modal: Avatar/Inicial + Nome e Cargo -->
+                    <!-- Topo do Modal: Avatar/Inicial + Nome -->
                     <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 2px dashed #00b894;">
                         ${avatarModalHtml}
-                        <h3 style="margin: 12px 0 4px 0; color: #0f172a; font-size: 22px; font-weight: 800; letter-spacing: -0.3px;">${nomeFunc}</h3>
-                        <p style="margin: 0 0 12px 0; color: #0984e3; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">${cargoFunc}</p>
+                        <h3 style="margin: 12px 0 10px 0; color: #0f172a; font-size: 22px; font-weight: 800; letter-spacing: -0.3px;">${nomeFunc}</h3>
                         <span style="background: #ffffff; color: #00b894; border: 2px solid #00b894; font-size: 11px; font-weight: 800; padding: 4px 14px; border-radius: 20px; text-transform: uppercase; box-shadow: 0 3px 8px rgba(0,184,148,0.2);">✓ Perfil Verificado</span>
                     </div>
 
@@ -9012,7 +9010,6 @@ if(pagina === "Funcionários"){
         const idxEndereco = obterIndiceColuna(['endereço', 'endereco', 'logradouro', 'rua']);
         const idxBairro = obterIndiceColuna(['bairro']);
         const idxCidade = obterIndiceColuna(['cidade', 'município', 'municipio']);
-        const idxCargo = obterIndiceColuna(['cargo', 'função', 'funcao']);
         const idxSetor = obterIndiceColuna(['setor', 'lotacao', 'lotação', 'departamento']);
 
         const pegarVal = (row, idx) => (idx !== -1 && row[idx] && row[idx].trim() !== '') ? row[idx] : '-';
@@ -9035,14 +9032,13 @@ if(pagina === "Funcionários"){
                     <td>${pegarVal(row, idxEndereco)}</td>
                     <td style="font-weight: 700; color: #0284c7;">${pegarVal(row, idxBairro)}</td>
                     <td style="font-weight: 700; color: #00b894;">${pegarVal(row, idxCidade)}</td>
-                    <td>${pegarVal(row, idxCargo)}</td>
                     <td>${pegarVal(row, idxSetor)}</td>
                 </tr>
             `;
         });
 
         if (linhas.length === 0) {
-            html = `<tr><td colspan="16" style="text-align:center; padding: 20px; color: #ef4444; font-weight: bold;">❌ Nenhum funcionário localizado para o filtro selecionado.</td></tr>`;
+            html = `<tr><td colspan="15" style="text-align:center; padding: 20px; color: #ef4444; font-weight: bold;">❌ Nenhum funcionário localizado para o filtro selecionado.</td></tr>`;
         }
 
         corpo.innerHTML = html;
@@ -9147,8 +9143,7 @@ if(pagina === "Funcionários"){
 
         cards.forEach(card => {
             const nome = card.querySelector('h4').innerText.toLowerCase();
-            const cargo = card.querySelector('p').innerText.toLowerCase();
-            if (nome.includes(termo) || cargo.includes(termo)) {
+            if (nome.includes(termo)) {
                 card.style.display = 'flex';
             } else {
                 card.style.display = 'none';

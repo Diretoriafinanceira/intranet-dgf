@@ -3993,7 +3993,35 @@ if(pagina === "noticias"){
 
     const hoje = new Date().toLocaleDateString('pt-BR');
 
-    // 0. DIA DAS CRIANÇAS - DGF/SES (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    // 0. DECRETO Nº 61.416/2026 (PRIMEIRA NOTÍCIA - ABERTA POR PADRÃO)
+    html += `
+        <div class="noticia-card" style="border-left: 5px solid #e74c3c; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+            <div onclick="window.toggleNoticia('noticia-decreto')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
+                    <h3 style="margin: 5px 0 0 0; color: #c0392b; font-size: 16px; text-transform: uppercase;">
+                        📄 DECRETO Nº 61.416, DE 8 DE OUTUBRO DE 2026 – ENCERRAMENTO DO EXERCÍCIO FINANCEIRO
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Prazos e procedimentos relativos ao encerramento de 2026 e abertura do exercício de 2027...</p>
+                </div>
+                <span id="icon-noticia-decreto" style="font-size: 18px; color: #c0392b; font-weight: bold;">▲</span>
+            </div>
+
+            <div id="noticia-decreto" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+                <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0 10px 0;">
+                    Confira abaixo o documento oficial do Decreto nº 61.416/2026, que dispõe sobre os prazos e procedimentos referentes ao encerramento do exercício financeiro de 2026 e a abertura de 2027.
+                </p>
+
+                <div style="margin: 15px 0;">
+                    <a href="./Decreto 61416_2026  Encerramento do Exercicio (3).pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #e74c3c; font-weight: bold; text-decoration: underline; font-size: 14px;">
+                        📄 Clique aqui para abrir e visualizar o Decreto nº 61.416/2026 (PDF)
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 1. DIA DAS CRIANÇAS - DGF/SES
     html += `
         <div class="noticia-card" style="border-left: 5px solid #ff6b6b; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-criancas')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -4004,10 +4032,10 @@ if(pagina === "noticias"){
                     </h3>
                     <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Envie sua foto de infância e entre nessa brincadeira com a gente...</p>
                 </div>
-                <span id="icon-noticia-criancas" style="font-size: 18px; color: #ff6b6b; font-weight: bold;">▲</span>
+                <span id="icon-noticia-criancas" style="font-size: 18px; color: #ff6b6b; font-weight: bold;">▼</span>
             </div>
 
-            <div id="noticia-criancas" style="display: block; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
+            <div id="noticia-criancas" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
                 <p style="line-height: 1.6; color: #333; font-size: 14px; margin: 15px 0 10px 0;">
                     Bom dia a todos!<br><br>
                     Em comemoração ao <strong>Dia das Crianças – DGF/SES</strong>, preparamos uma brincadeira especial para toda a equipe! 💕🎉<br><br>
@@ -4038,7 +4066,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 1. TREINAMENTO DE RCP
+    // 2. TREINAMENTO DE RCP
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2980b9; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-rcp')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -4072,7 +4100,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 2. FOLHETO INFORMATIVO DE EVACUAÇÃO
+    // 3. FOLHETO INFORMATIVO DE EVACUAÇÃO
     html += `
         <div class="noticia-card" style="border-left: 5px solid #e74c3c; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-evacuacao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -4127,13 +4155,13 @@ if(pagina === "noticias"){
                 </ul>
 
                 <div style="background: #fff3cd; border: 1px solid #ffeeba; border-left: 5px solid #ffc107; padding: 12px; border-radius: 4px; margin-top: 15px; color: #856404;">
-                    <strong>ATENÇÃO EM CASO DE FUMAÇA DENSA nos corredores:</strong> Abaixe-se e desloque-se agachado. O ar limpo e respirável fica mais próximo ao chão. Se possible, cubra o nariz e a boca com um lenço ou pedaço de pano umedecido.
+                    <strong>ATENÇÃO EM CASO DE FUMAÇA DENSA nos corredores:</strong> Abaixe-se e desloque-se agachado. O ar limpo e respirável fica mais próximo ao chão. Se possível, cubra o nariz e a boca com um lenço ou pedaço de pano umedecido.
                 </div>
             </div>
         </div>
     `;
 
-    // 3. ANDAMENTO DO QUEBRA-CABEÇA
+    // 4. ANDAMENTO DO QUEBRA-CABEÇA
     html += `
         <div class="noticia-card" style="border-left: 5px solid #9b59b6; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-quebracabeca')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -4159,7 +4187,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 4. FACHADA E ESTRUTURA DGF
+    // 5. FACHADA E ESTRUTURA DGF
     html += `
         <div class="noticia-card" style="border-left: 5px solid #27ae60; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-frente')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -4185,7 +4213,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 5. VÍDEO INSTITUCIONAL DGF
+    // 6. VÍDEO INSTITUCIONAL DGF
     html += `
         <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #e74c3c; background: #fff;">
             <div onclick="window.toggleNoticia('noticia-video')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -4212,7 +4240,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 6. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026
+    // 7. COMUNICADO OFÍCIO CIRCULAR CGE Nº 10/2026
     html += `
         <div class="noticia-card" style="border-left: 5px solid #d35400; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-cge')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -4238,7 +4266,7 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 7. MISSA DE 7º DIA
+    // 8. MISSA DE 7º DIA
     html += `
         <div class="noticia-card" style="border-left: 5px solid #2c3e50; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-missa')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
@@ -4280,123 +4308,6 @@ if(pagina === "noticias"){
         </div>
     `;
 
-    // 8. Resultado do Bolão DGF
-    html += `
-        <div class="noticia-card" style="border-left: 5px solid #2ecc71; background: #f4fbf7; font-family: 'Arial', sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleNoticia('noticia-bolao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <small style="color:#7f8c8d;">📅 ${hoje}</small>
-                    <h3 style="margin: 5px 0 0 0; color: #1b5e20; text-transform: uppercase; font-size: 16px;">
-                        🏆 HISTÓRICO! Divulgada a Classificação do Bolão DGF!
-                    </h3>
-                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Clique para ver o pódio completo e os vencedores da COPA DGF...</p>
-                </div>
-                <span id="icon-noticia-bolao" style="font-size: 18px; color: #2ecc71; font-weight: bold;">▼</span>
-            </div>
-
-            <div id="noticia-bolao" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #e0f2e9;">
-                <p style="line-height: 1.6; color: #2c3e50; font-size: 14px; margin-top: 10px;">
-                    A disputa foi acirrada e o clima de Copa do Mundo tomou conta de vez! Com palpites cirúrgicos e muita intuição técnica, os nossos craques da tabela assumiram o topo do ranking. Confira como ficou o pódio da nossa primeira COPA DGF:
-                </p>
-
-                <div style="background: #081e09; padding: 20px 15px; margin: 15px 0; border: 2px solid #1b5e20; display: flex; flex-direction: column; gap: 12px;">
-                    <div style="display: flex; align-items: center; background: linear-gradient(90deg, #1e4620 0%, #153617 100%); border: 2px solid #f1c40f; padding: 12px 15px;">
-                        <div style="font-size: 20px; font-weight: 900; color: #f1c40f; width: 50px;">1º 👑</div>
-                        <div style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #f1c40f; overflow: hidden; background: #fff; margin-right: 15px; flex-shrink: 0;">
-                            <img src="./joelson.png" alt="Joelson" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div style="color: #fff; font-weight: 900; font-size: 16px; text-transform: uppercase;">Joelson</div>
-                        <div style="margin-left: auto; background: #f1c40f; color: #081e09; font-weight: 900; padding: 4px 10px; font-size: 11px; text-transform: uppercase;">Campeão</div>
-                    </div>
-
-                    <div style="display: flex; align-items: center; background: linear-gradient(90deg, #163818 0%, #0f2b10 100%); border: 1px solid #bdc3c7; padding: 12px 15px;">
-                        <div style="font-size: 18px; font-weight: 900; color: #bdc3c7; width: 50px;">2º</div>
-                        <div style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid #bdc3c7; overflow: hidden; background: #fff; margin-right: 15px; flex-shrink: 0;">
-                            <img src="./renan.png" alt="Renan" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div style="color: #eee; font-weight: 900; font-size: 15px; text-transform: uppercase;">Renan</div>
-                        <div style="margin-left: auto; background: #bdc3c7; color: #1a252f; font-weight: 900; padding: 4px 10px; font-size: 11px; text-transform: uppercase;">Vice-Campeão</div>
-                    </div>
-
-                    <div style="display: flex; align-items: center; background: linear-gradient(90deg, #0f2b10 0%, #081e09 100%); border: 1px solid #e67e22; padding: 12px 15px;">
-                        <div style="font-size: 18px; font-weight: 900; color: #e67e22; width: 50px;">3º</div>
-                        <div style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid #e67e22; overflow: hidden; background: #fff; margin-right: 15px; flex-shrink: 0;">
-                            <img src="./rosicleide.png" alt="Rosicleide" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div style="color: #ccc; font-weight: 900; font-size: 15px; text-transform: uppercase;">Rosicleide</div>
-                        <div style="margin-left: auto; background: #e67e22; color: #fff; font-weight: 900; padding: 4px 10px; font-size: 11px; text-transform: uppercase;">3º Colocado</div>
-                    </div>
-                </div>
-                <p style="color: #2c3e50; font-size: 13px; font-weight: bold; text-align: center;">Parabéns aos participantes. #JuntosSomosFortes</p>
-            </div>
-        </div>
-    `;
-
-    // 9. São João DGF
-    html += `
-        <div class="noticia-card" style="border-left: 5px solid #e67e22; background: #fffcf9; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
-            <div onclick="window.toggleNoticia('noticia-saojoao')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <small style="color:#7f8c8d;">📅 ${hoje}</small>
-                    <h3 style="margin: 5px 0 0 0; color: #e67e22; font-size: 16px;">🔥 Confirme sua presença no SÃO JOÃO da SEAF</h3>
-                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Clique para ver os detalhes e link do formulário...</p>
-                </div>
-                <span id="icon-noticia-saojoao" style="font-size: 18px; color: #e67e22; font-weight: bold;">▼</span>
-            </div>
-
-            <div id="noticia-saojoao" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f2e3d5;">
-                <p style="font-size: 14px; color: #333; margin-top: 10px;">Clique no banner abaixo para abrir o formulário de confirmação:</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScty8A8n2tU5Gp1UbC1mUGUKoKIYijCz8EwAicOo6Qub_F1og/viewform?usp=header" target="_blank" style="text-decoration: none; display: block; width: 100%; margin-top: 10px;">
-                    <div style="width: 100%; height: 180px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                        <img src="./saojoao.png" alt="Confirme sua Presença" style="width: 100%; height: 100%; display: block; object-fit: contain; object-position: center;">
-                    </div>
-                </a>
-            </div>
-        </div>
-    `;
-
-    // 10. Guia de Ajuda
-    html += `
-        <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #3498db; background: #fff;">
-            <div onclick="window.toggleNoticia('noticia-guia')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <small style="color:#7f8c8d;">📅 ${hoje}</small>
-                    <h3 style="margin: 5px 0 0 0; color: #2c3e50; font-size: 16px;">📌 Guia de Ajuda</h3>
-                    <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Clique para abrir as orientações e instruções...</p>
-                </div>
-                <span id="icon-noticia-guia" style="font-size: 18px; color: #3498db; font-weight: bold;">▼</span>
-            </div>
-
-            <div id="noticia-guia" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
-                <p style="font-size: 14px; color: #555; margin-top: 10px;">
-                    Acesse as principais instruções e procedimentos internos da DGF através dos nossos canais oficiais e central de suporte.
-                </p>
-            </div>
-        </div>
-    `;
-
-    // 11. Demais notícias
-    if (typeof listaNoticias !== 'undefined') {
-        listaNoticias.forEach((n, i) => {
-            html += `
-                <div class="noticia-card" style="margin-bottom: 15px; border-radius: 6px; overflow: hidden; border-left: 5px solid #95a5a6; background: #fff;">
-                    <div onclick="window.toggleNoticia('noticia-lista-${i}')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <small style="color:#7f8c8d;">📅 ${n.data}</small>
-                            <h3 style="margin: 5px 0 0 0; color: #2c3e50; font-size: 16px;">${n.titulo}</h3>
-                            <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Clique para ler a notícia completa...</p>
-                        </div>
-                        <span id="icon-noticia-lista-${i}" style="font-size: 18px; color: #7f8c8d; font-weight: bold;">▼</span>
-                    </div>
-
-                    <div id="noticia-lista-${i}" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
-                        <p style="font-size: 14px; color: #555; margin-top: 10px; line-height: 1.5;">${n.texto}</p>
-                    </div>
-                </div>
-            `;
-        });
-    }
-    
     conteudo.innerHTML = html;
 
     window.toggleNoticia = function(id) {

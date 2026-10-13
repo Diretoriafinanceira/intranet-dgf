@@ -1019,324 +1019,6 @@ function mostrar(pagina){
                 </div>
             </div>
 
-            
-<!-- DESAFIO DIA DAS CRIANÇAS DGF -->
-<div id="desafio-criancas-dgf" style="
-    width:100%;
-    border-radius:16px;
-    overflow:hidden;
-    background:linear-gradient(135deg,#fff5e8,#f5ebff 55%,#e7f7ff);
-    border:1px solid #e9d8f5;
-    box-shadow:0 8px 24px rgba(67,43,105,.13);
-    flex-shrink:0;
-    font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-    color:#342744;
-">
-    <style>
-        #desafio-criancas-dgf *{box-sizing:border-box}
-        #desafio-criancas-dgf [hidden]{display:none!important}
-        #desafio-criancas-dgf .dcc-topo{
-            padding:22px;
-            background:linear-gradient(120deg,#593584,#9753a8,#e7749b);
-            color:#fff;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap:15px;
-            flex-wrap:wrap
-        }
-        #desafio-criancas-dgf .dcc-titulo{
-            font-size:25px;
-            font-weight:900;
-            margin:4px 0
-        }
-        #desafio-criancas-dgf .dcc-subtitulo{
-            font-size:12px;
-            color:rgba(255,255,255,.88)
-        }
-        #desafio-criancas-dgf .dcc-etiqueta{
-            font-size:10px;
-            font-weight:900;
-            letter-spacing:1.4px;
-            color:#ffe5a3
-        }
-        #desafio-criancas-dgf .dcc-selo{
-            border:1px solid rgba(255,255,255,.35);
-            background:rgba(255,255,255,.15);
-            border-radius:12px;
-            padding:10px 14px;
-            text-align:center;
-            font-weight:900
-        }
-        #desafio-criancas-dgf .dcc-corpo{padding:22px}
-        #desafio-criancas-dgf .dcc-inicio{
-            padding:18px;
-            border-radius:13px;
-            background:rgba(255,255,255,.8);
-            border:1px solid #eadcf3
-        }
-        #desafio-criancas-dgf .dcc-inicio label{
-            display:block;
-            font-size:12px;
-            font-weight:800;
-            margin-bottom:8px
-        }
-        #desafio-criancas-dgf .dcc-linha{
-            display:flex;
-            gap:10px;
-            flex-wrap:wrap
-        }
-        #desafio-criancas-dgf input{
-            flex:1;
-            min-width:200px;
-            padding:12px;
-            border:1px solid #d9c9e7;
-            border-radius:10px;
-            font-size:13px
-        }
-        #desafio-criancas-dgf button{
-            border:0;
-            border-radius:10px;
-            padding:11px 15px;
-            cursor:pointer;
-            font-weight:900;
-            transition:transform .15s,opacity .15s
-        }
-        #desafio-criancas-dgf button:hover{transform:translateY(-1px)}
-        #desafio-criancas-dgf button:disabled{
-            cursor:not-allowed;
-            opacity:.65;
-            transform:none
-        }
-        #desafio-criancas-dgf .dcc-botao-principal{
-            background:linear-gradient(135deg,#79449e,#c25591);
-            color:white
-        }
-        #desafio-criancas-dgf .dcc-status{
-            margin:14px 0 0;
-            padding:11px 13px;
-            border-radius:10px;
-            background:rgba(255,255,255,.7);
-            color:#6d587b;
-            font-size:12px;
-            line-height:1.5
-        }
-        #desafio-criancas-dgf .dcc-progresso{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap:10px;
-            flex-wrap:wrap;
-            color:#70458b;
-            font-size:12px;
-            font-weight:900;
-            margin-bottom:15px
-        }
-        #desafio-criancas-dgf .dcc-foto-infancia{
-            display:block;
-            width:min(100%,360px);
-            aspect-ratio:1/1;
-            object-fit:cover;
-            margin:16px auto;
-            border:6px solid white;
-            border-radius:20px;
-            box-shadow:0 7px 23px rgba(56,32,80,.15);
-            background:#eee5f4
-        }
-        #desafio-criancas-dgf .dcc-pergunta{
-            text-align:center;
-            font-size:17px;
-            font-weight:900;
-            color:#4c3268
-        }
-        #desafio-criancas-dgf .dcc-opcoes{
-            display:grid;
-            grid-template-columns:repeat(2,minmax(0,1fr));
-            gap:10px;
-            margin:16px 0
-        }
-        #desafio-criancas-dgf .dcc-opcao{
-            min-height:50px;
-            text-align:left;
-            color:#4d3c5e;
-            background:#fff;
-            border:1px solid #e3d6ee;
-            overflow-wrap:anywhere
-        }
-        #desafio-criancas-dgf .dcc-opcao.dcc-correta{
-            background:#e4f7e9;
-            color:#205d35;
-            border:1px solid #65bd7f
-        }
-        #desafio-criancas-dgf .dcc-opcao.dcc-errada{
-            background:#fff0ee;
-            color:#963b36;
-            border:1px solid #df8c86
-        }
-        #desafio-criancas-dgf .dcc-feedback{
-            min-height:24px;
-            font-size:13px;
-            font-weight:800;
-            line-height:1.5;
-            margin:12px 0
-        }
-        #desafio-criancas-dgf .dcc-revelacao{
-            margin:16px 0;
-            padding:16px;
-            border-radius:14px;
-            background:white;
-            border:1px solid #e8ddee;
-            text-align:center
-        }
-        #desafio-criancas-dgf .dcc-foto-atual{
-            display:block;
-            width:min(100%,300px);
-            aspect-ratio:1/1;
-            object-fit:cover;
-            margin:12px auto 0;
-            border-radius:16px;
-            background:#eee5f4
-        }
-        #desafio-criancas-dgf .dcc-ranking{
-            border-top:1px solid #e7d9ef;
-            padding-top:18px;
-            margin-top:25px
-        }
-        #desafio-criancas-dgf .dcc-ranking h3{
-            margin:0 0 7px;
-            color:#593584
-        }
-        #desafio-criancas-dgf .dcc-ranking-linha{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap:10px;
-            padding:10px;
-            margin:6px 0;
-            border:1px solid #eee4f4;
-            border-radius:9px;
-            background:rgba(255,255,255,.8);
-            font-size:12px
-        }
-        #desafio-criancas-dgf .dcc-pontos{
-            white-space:nowrap;
-            font-weight:900;
-            color:#8148a0
-        }
-        @media(max-width:600px){
-            #desafio-criancas-dgf .dcc-topo,
-            #desafio-criancas-dgf .dcc-corpo{padding:15px}
-            #desafio-criancas-dgf .dcc-titulo{font-size:21px}
-            #desafio-criancas-dgf .dcc-opcoes{grid-template-columns:1fr}
-        }
-    </style>
-
-    <div class="dcc-topo">
-        <div>
-            <div class="dcc-etiqueta">ESPECIAL • DIA DAS CRIANÇAS</div>
-            <div class="dcc-titulo">🧸 Quem é essa criança?</div>
-            <div class="dcc-subtitulo">
-                Uma viagem pela infância dos colegas da DGF!
-            </div>
-        </div>
-        <div class="dcc-selo">
-            <div style="font-size:10px;opacity:.85">DESAFIO</div>
-            <div style="font-size:19px">10 rodadas 🎉</div>
-        </div>
-    </div>
-
-    <div class="dcc-corpo">
-        <div id="dcc-inicio" class="dcc-inicio">
-            <div style="font-size:15px;font-weight:900;color:#593584;margin-bottom:7px">
-                🎯 Você reconhece seus colegas quando eram crianças?
-            </div>
-            <p style="font-size:12px;color:#786883;line-height:1.6;margin:0 0 13px">
-                Serão sorteadas 10 pessoas diferentes. Observe a foto de infância,
-                escolha uma das quatro opções e descubra a foto atual após responder.
-                Cada acerto vale um ponto!
-            </p>
-
-            <label for="dcc-nome">Digite seu nome para participar do ranking</label>
-            <div class="dcc-linha">
-                <input id="dcc-nome" type="text" maxlength="80"
-                    placeholder="Seu nome">
-                <button type="button" class="dcc-botao-principal"
-                    onclick="window.iniciarDesafioCriancasDGF()">
-                    🎮 COMEÇAR
-                </button>
-            </div>
-        </div>
-
-        <div id="dcc-status" class="dcc-status" role="status" aria-live="polite">
-            Aguardando início do jogo...
-        </div>
-
-        <div id="dcc-jogo" hidden style="margin-top:20px">
-            <div class="dcc-progresso">
-                <span id="dcc-rodada">PERGUNTA 1 DE 10</span>
-                <span>⭐ <span id="dcc-pontos">0</span>/10 pontos</span>
-            </div>
-
-            <div class="dcc-pergunta">Quem é essa criança?</div>
-
-            <img id="dcc-foto-infancia" class="dcc-foto-infancia"
-                alt="Foto de infância">
-
-            <div id="dcc-opcoes" class="dcc-opcoes"></div>
-            <div id="dcc-feedback" class="dcc-feedback" aria-live="polite"></div>
-
-            <div id="dcc-revelacao" class="dcc-revelacao" hidden>
-                <div style="font-size:18px;font-weight:900;color:#593584">
-                    Olha quem cresceu! 🎉
-                </div>
-                <div id="dcc-nome-revelado"
-                    style="font-size:14px;font-weight:800;margin-top:5px"></div>
-                <img id="dcc-foto-atual" class="dcc-foto-atual"
-                    alt="Foto atual do participante">
-            </div>
-
-            <button id="dcc-proxima" type="button"
-                class="dcc-botao-principal"
-                onclick="window.proximaPerguntaCriancasDGF()" hidden>
-                PRÓXIMA PERGUNTA →
-            </button>
-        </div>
-
-        <div id="dcc-final" hidden style="
-            margin-top:20px;padding:20px;background:white;border-radius:14px;
-            text-align:center;border:1px solid #eadcf3
-        ">
-            <div style="font-size:38px">🏆🎉</div>
-            <h3 style="color:#593584;margin:8px 0">Desafio concluído!</h3>
-            <div id="dcc-final-pontos"
-                style="font-size:22px;font-weight:900;color:#8148a0"></div>
-            <div id="dcc-final-status"
-                style="font-size:12px;color:#786883;margin:12px 0"></div>
-            <button type="button" class="dcc-botao-principal"
-                onclick="window.iniciarDesafioCriancasDGF()">
-                🔄 JOGAR NOVAMENTE
-            </button>
-        </div>
-
-        <div class="dcc-ranking">
-            <h3>🏆 TOP 10 DA DIRETORIA</h3>
-            <p style="font-size:11px;color:#85748f;margin:0 0 12px">
-                Ranking online — vale a melhor pontuação de cada participante.
-            </p>
-            <div id="dcc-ranking-lista"
-                style="font-size:12px;color:#796b83">
-                Carregando ranking...
-            </div>
-            <button type="button" style="
-                margin-top:10px;background:#eee5f8;color:#654184;font-size:11px
-            " onclick="window.carregarRankingOnlineCriancasDGF()">
-                ↻ ATUALIZAR RANKING
-            </button>
-        </div>
-    </div>
-</div>
-<!-- FIM DO DESAFIO DIA DAS CRIANÇAS DGF -->
-
             <!-- BLOCO PRINCIPAL DA HOME -->
             <div style="
                 width:100%;
@@ -2520,567 +2202,10 @@ function mostrar(pagina){
         };
 
         /* =====================================================================================
-           CARREGAR RANKING — DIA DAS CRIANÇAS
-           ===================================================================================== */
-
-        window.carregarRankingOnlineCriancasDGF = function(forcar) {
-            const rankingEl = document.getElementById('dcc-ranking-lista');
-            if (!rankingEl) { return; }
-
-            rankingEl.innerHTML = '<div style="text-align:center;padding:8px;color:#78909c;">🔄 Atualizando ranking...</div>';
-
-            const callback = 'dgfRankingCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
-            const scriptId = 'script-ranking-criancas-dgf';
-            const antigo = document.getElementById(scriptId);
-
-            if (antigo) { antigo.remove(); }
-
-            window[callback] = function(resposta) {
-                try {
-                    if (!resposta || !resposta.ok) {
-                        throw new Error(resposta && resposta.error ? resposta.error : 'Resposta inválida');
-                    }
-
-                    const ranking = Array.isArray(resposta.ranking) ? resposta.ranking : [];
-
-                    if (!ranking.length) {
-                        rankingEl.innerHTML = '<div style="text-align:center;padding:10px;color:#78909c;">Ainda não há participantes. Seja o primeiro! 🧸</div>';
-                        return;
-                    }
-
-                    rankingEl.innerHTML = ranking.slice(0,10).map(function(item,idx) {
-                        const medalha = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : (idx + 1) + 'º';
-                        const pontosItem = Number(item.pontos) || 0;
-
-                        return `
-                            <div class="dcc-ranking-linha">
-                                <div style="width:26px;text-align:center;font-weight:900;color:#593584;">
-                                    ${medalha}
-                                </div>
-                                <div style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800;color:#342744;" title="${escaparHTMLDGF(item.nome)}">
-                                    ${escaparHTMLDGF(item.nome)}
-                                </div>
-                                <div class="dcc-pontos">
-                                    ⭐ ${pontosItem}/10
-                                </div>
-                            </div>
-                        `;
-                    }).join('');
-
-                } catch(erro) {
-                    rankingEl.innerHTML = '<div style="text-align:center;padding:8px;color:#c62828;">❌ Não foi possível carregar o ranking agora.</div>';
-                } finally {
-                    delete window[callback];
-                    const el = document.getElementById(scriptId);
-                    if (el) { el.remove(); }
-                }
-            };
-
-            const script = document.createElement('script');
-            script.id = scriptId;
-            script.src = URL_RANKING_ONLINE_DGF +
-                (URL_RANKING_ONLINE_DGF.indexOf('?') >= 0 ? '&' : '?') +
-                'action=ranking' +
-                '&callback=' + encodeURIComponent(callback) +
-                '&_=' + Date.now();
-
-            script.onerror = function() {
-                rankingEl.innerHTML = '<div style="text-align:center;padding:8px;color:#c62828;">❌ Erro ao acessar o ranking online.</div>';
-                delete window[callback];
-                script.remove();
-            };
-
-            document.body.appendChild(script);
-        };
-
-        /* =====================================================================================
-           SALVAR RANKING — DIA DAS CRIANÇAS
-           ===================================================================================== */
-
-        window.salvarRankingOnlineCriancasDGF = function(nome, pontos, concluidoCallback) {
-            if (!URL_RANKING_ONLINE_DGF) {
-                if (typeof concluidoCallback === 'function') {
-                    concluidoCallback(false);
-                }
-                return;
-            }
-
-            const callback = 'dgfSalvarRankingCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
-            const scriptId = 'script-salvar-ranking-criancas-dgf';
-            const antigo = document.getElementById(scriptId);
-
-            if (antigo) { antigo.remove(); }
-
-            window[callback] = function(resposta) {
-                const sucesso = !!(resposta && resposta.ok);
-
-                if (typeof concluidoCallback === 'function') {
-                    concluidoCallback(sucesso);
-                }
-
-                delete window[callback];
-                const el = document.getElementById(scriptId);
-                if (el) { el.remove(); }
-            };
-
-            const script = document.createElement('script');
-            script.id = scriptId;
-            script.src = URL_RANKING_ONLINE_DGF +
-                (URL_RANKING_ONLINE_DGF.indexOf('?') >= 0 ? '&' : '?') +
-                'action=salvar' +
-                '&nome=' + encodeURIComponent(nome) +
-                '&pontos=' + encodeURIComponent(pontos) +
-                '&callback=' + encodeURIComponent(callback) +
-                '&_=' + Date.now();
-
-            script.onerror = function() {
-                if (typeof concluidoCallback === 'function') {
-                    concluidoCallback(false);
-                }
-                delete window[callback];
-                script.remove();
-            };
-
-            document.body.appendChild(script);
-        };
-
-                /* ============================================================
-           DESAFIO DIA DAS CRIANÇAS DGF — FOTOS REAIS
-           ============================================================ */
-
-        window.fotosDesafioCriancasDGF =
-            window.fotosDesafioCriancasDGF || [];
-
-        window.carregandoFotosCriancasDGF = false;
-        window.nomePendenteDesafioCriancasDGF = '';
-
-        /* CARREGAR FOTOS DO APPS SCRIPT */
-        window.carregarFotosCriancasDGF = function() {
-            const status = document.getElementById('dcc-status');
-
-            if (!document.getElementById('desafio-criancas-dgf')) return;
-
-            if (window.fotosDesafioCriancasDGF.length >= 10) {
-                if (status) {
-                    status.textContent =
-                        '✅ Fotos carregadas! Digite seu nome e clique em COMEÇAR.';
-                }
-                return;
-            }
-
-            if (window.carregandoFotosCriancasDGF) return;
-
-            window.carregandoFotosCriancasDGF = true;
-
-            if (status) {
-                status.textContent = '🔄 Carregando fotos dos participantes...';
-            }
-
-            const callback = 'dccFotos_' + Date.now() + '_' +
-                Math.floor(Math.random() * 1000000);
-
-            const script = document.createElement('script');
-            script.id = callback;
-
-            let finalizado = false;
-            let temporizador;
-
-            function limpar() {
-                clearTimeout(temporizador);
-
-                if (script.parentNode) {
-                    script.parentNode.removeChild(script);
-                }
-
-                try {
-                    delete window[callback];
-                } catch (e) {
-                    window[callback] = undefined;
-                }
-            }
-
-            function falhar(mensagem) {
-                if (finalizado) return;
-
-                finalizado = true;
-                window.carregandoFotosCriancasDGF = false;
-
-                limpar();
-
-                if (status) status.textContent = mensagem;
-
-                console.error('[Desafio Crianças DGF]', mensagem);
-            }
-
-            window[callback] = function(resposta) {
-                if (finalizado) return;
-
-                finalizado = true;
-                window.carregandoFotosCriancasDGF = false;
-
-                limpar();
-
-                const fotos = resposta && Array.isArray(resposta.fotos)
-                    ? resposta.fotos
-                    : [];
-
-                if (!resposta || resposta.ok === false || !fotos.length) {
-                    if (status) {
-                        status.textContent =
-                            '❌ A API não retornou fotos. Verifique o Apps Script.';
-                    }
-
-                    console.error('Resposta da API:', resposta);
-                    return;
-                }
-
-                const nomes = new Set();
-
-                window.fotosDesafioCriancasDGF = fotos.map(function(pessoa) {
-                    if (!pessoa) return null;
-
-                    const nome = String(pessoa.nome || '').trim();
-                    const infancia = String(pessoa.infancia || '').trim();
-                    const atual = String(pessoa.atual || '').trim();
-
-                    if (!nome || !infancia || !atual) return null;
-
-                    const chave = nome.toLocaleLowerCase('pt-BR');
-
-                    if (nomes.has(chave)) return null;
-                    nomes.add(chave);
-
-                    return {
-                        nome: nome,
-                        fotoInfancia: infancia,
-                        fotoAtual: atual
-                    };
-                }).filter(Boolean);
-
-                if (window.fotosDesafioCriancasDGF.length < 10) {
-                    if (status) {
-                        status.textContent =
-                            '⚠️ São necessárias 10 pessoas com as duas fotos. ' +
-                            'Encontradas: ' +
-                            window.fotosDesafioCriancasDGF.length + '.';
-                    }
-                    return;
-                }
-
-                if (status) {
-                    status.textContent =
-                        '✅ Fotos carregadas! Digite seu nome e clique em COMEÇAR.';
-                }
-
-                window.carregarRankingOnlineCriancasDGF();
-
-                const nomePendente =
-                    window.nomePendenteDesafioCriancasDGF;
-
-                if (nomePendente) {
-                    window.nomePendenteDesafioCriancasDGF = '';
-
-                    const campo = document.getElementById('dcc-nome');
-
-                    if (campo) campo.value = nomePendente;
-
-                    window.iniciarDesafioCriancasDGF();
-                }
-            };
-
-            script.onerror = function() {
-                falhar(
-                    '❌ Não foi possível acessar o Apps Script para carregar as fotos.'
-                );
-            };
-
-            const separador =
-    URL_RANKING_ONLINE_DGF.includes('?') ? '&' : '?';
-
-script.src = URL_RANKING_ONLINE_DGF +
-    separador +
-    'action=fotos' +
-    '&callback=' + encodeURIComponent(callback) +
-    '&_=' + Date.now();
-
-            temporizador = setTimeout(function() {
-                falhar(
-                    '⚠️ A API não respondeu como esperado. ' +
-                    'Verifique se o Apps Script aceita o parâmetro callback.'
-                );
-            }, 15000);
-
-            document.head.appendChild(script);
-        };
-
-        /* INICIAR O DESAFIO */
-        window.iniciarDesafioCriancasDGF = function() {
-            const inicio = document.getElementById('dcc-inicio');
-            const jogo = document.getElementById('dcc-jogo');
-            const final = document.getElementById('dcc-final');
-            const campo = document.getElementById('dcc-nome');
-            const status = document.getElementById('dcc-status');
-
-            if (!inicio || !jogo || !campo) return;
-
-            const nome = campo.value.trim().replace(/\s+/g, ' ');
-
-            if (nome.length < 2) {
-                if (status) {
-                    status.textContent = '⚠️ Digite seu nome antes de começar.';
-                }
-
-                campo.focus();
-                return;
-            }
-
-            if (window.fotosDesafioCriancasDGF.length < 10) {
-                window.nomePendenteDesafioCriancasDGF = nome;
-
-                if (status) {
-                    status.textContent =
-                        '⏳ Carregando fotos. O jogo começará automaticamente.';
-                }
-
-                window.carregarFotosCriancasDGF();
-                return;
-            }
-
-            const participantes =
-                window.fotosDesafioCriancasDGF.slice();
-
-            for (let i = participantes.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [participantes[i], participantes[j]] =
-                    [participantes[j], participantes[i]];
-            }
-
-            window.estadoDesafioCriancasDGF = {
-                participantes: participantes.slice(0, 10),
-                atual: 0,
-                pontos: 0,
-                respondeu: false,
-                nome: nome,
-                opcoesAtuais: []
-            };
-
-            inicio.hidden = true;
-            jogo.hidden = false;
-
-            if (final) final.hidden = true;
-
-            if (status) status.textContent = '🎉 Boa sorte, ' + nome + '!';
-
-            window.renderizarPerguntaCriancasDGF();
-        };
-
-        /* EXIBIR PERGUNTA */
-        window.renderizarPerguntaCriancasDGF = function() {
-            const estado = window.estadoDesafioCriancasDGF;
-            if (!estado) return;
-
-            if (estado.atual >= estado.participantes.length) {
-                window.finalizarDesafioCriancasDGF();
-                return;
-            }
-
-            const pessoa = estado.participantes[estado.atual];
-
-            const rodada = document.getElementById('dcc-rodada');
-            const pontos = document.getElementById('dcc-pontos');
-            const foto = document.getElementById('dcc-foto-infancia');
-            const opcoesEl = document.getElementById('dcc-opcoes');
-            const feedback = document.getElementById('dcc-feedback');
-            const revelacao = document.getElementById('dcc-revelacao');
-            const proxima = document.getElementById('dcc-proxima');
-
-            if (!rodada || !pontos || !foto || !opcoesEl) return;
-
-            rodada.textContent =
-                'PERGUNTA ' + (estado.atual + 1) + ' DE 10';
-
-            pontos.textContent = estado.pontos;
-
-            foto.onerror = function() {
-                if (feedback) {
-                    feedback.textContent =
-                        '⚠️ Não foi possível abrir esta foto. Verifique o compartilhamento no Google Drive.';
-                }
-
-                console.error('Erro ao abrir foto:', pessoa.fotoInfancia);
-            };
-
-            foto.src = pessoa.fotoInfancia;
-            foto.alt = 'Foto de infância';
-
-            if (feedback) feedback.textContent = '';
-            if (revelacao) revelacao.hidden = true;
-            if (proxima) proxima.hidden = true;
-
-            estado.respondeu = false;
-
-            const incorretas =
-                window.fotosDesafioCriancasDGF.filter(function(item) {
-                    return item.nome !== pessoa.nome;
-                });
-
-            for (let i = incorretas.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [incorretas[i], incorretas[j]] =
-                    [incorretas[j], incorretas[i]];
-            }
-
-            const alternativas = [pessoa].concat(incorretas.slice(0, 3));
-
-            for (let i = alternativas.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [alternativas[i], alternativas[j]] =
-                    [alternativas[j], alternativas[i]];
-            }
-
-            estado.opcoesAtuais = alternativas;
-
-            opcoesEl.innerHTML = alternativas.map(function(item, indice) {
-                return `
-                    <button
-                        type="button"
-                        class="dcc-opcao"
-                        data-indice="${indice}"
-                        onclick="window.responderDesafioCriancasDGF(this)">
-                        ${escaparHTMLDGF(item.nome)}
-                    </button>
-                `;
-            }).join('');
-        };
-
-        /* RESPONDER PERGUNTA */
-        window.responderDesafioCriancasDGF = function(botao) {
-            const estado = window.estadoDesafioCriancasDGF;
-
-            if (!estado || estado.respondeu || !botao) return;
-
-            const indice = Number(botao.dataset.indice);
-            const escolhida = estado.opcoesAtuais[indice];
-            const correta = estado.participantes[estado.atual];
-
-            if (!escolhida || !correta) return;
-
-            estado.respondeu = true;
-
-            const acertou = escolhida.nome === correta.nome;
-
-            if (acertou) estado.pontos++;
-
-            document.querySelectorAll('#dcc-opcoes .dcc-opcao')
-                .forEach(function(opcao) {
-                    opcao.disabled = true;
-
-                    const alternativa =
-                        estado.opcoesAtuais[Number(opcao.dataset.indice)];
-
-                    if (alternativa.nome === correta.nome) {
-                        opcao.classList.add('dcc-correta');
-                    } else if (opcao === botao) {
-                        opcao.classList.add('dcc-errada');
-                    }
-                });
-
-            const pontos = document.getElementById('dcc-pontos');
-            const feedback = document.getElementById('dcc-feedback');
-            const revelacao = document.getElementById('dcc-revelacao');
-            const nomeRevelado = document.getElementById('dcc-nome-revelado');
-            const fotoAtual = document.getElementById('dcc-foto-atual');
-            const proxima = document.getElementById('dcc-proxima');
-
-            if (pontos) pontos.textContent = estado.pontos;
-
-            if (feedback) {
-                feedback.textContent = acertou
-                    ? '✅ Acertou! Muito bem!'
-                    : '😅 Não foi dessa vez. Veja quem era!';
-            }
-
-            if (nomeRevelado) nomeRevelado.textContent = correta.nome;
-
-            if (fotoAtual) {
-                fotoAtual.onerror = function() {
-                    if (feedback) {
-                        feedback.textContent +=
-                            ' ⚠️ Não foi possível abrir a foto atual.';
-                    }
-
-                    console.error('Erro ao abrir foto:', correta.fotoAtual);
-                };
-
-                fotoAtual.src = correta.fotoAtual;
-                fotoAtual.alt = 'Foto atual de ' + correta.nome;
-            }
-
-            if (revelacao) revelacao.hidden = false;
-            if (proxima) proxima.hidden = false;
-        };
-
-        /* PRÓXIMA PERGUNTA */
-        window.proximaPerguntaCriancasDGF = function() {
-            const estado = window.estadoDesafioCriancasDGF;
-
-            if (!estado || !estado.respondeu) return;
-
-            estado.atual++;
-            window.renderizarPerguntaCriancasDGF();
-        };
-
-        /* FINALIZAR E SALVAR RESULTADO */
-        window.finalizarDesafioCriancasDGF = function() {
-            const estado = window.estadoDesafioCriancasDGF;
-            if (!estado) return;
-
-            const jogo = document.getElementById('dcc-jogo');
-            const final = document.getElementById('dcc-final');
-            const pontos = document.getElementById('dcc-final-pontos');
-            const statusFinal = document.getElementById('dcc-final-status');
-
-            if (jogo) jogo.hidden = true;
-            if (final) final.hidden = false;
-
-            if (pontos) {
-                pontos.textContent = estado.pontos + '/10 pontos ⭐';
-            }
-
-            if (statusFinal) {
-                statusFinal.textContent = '⏳ Salvando seu resultado...';
-            }
-
-            window.salvarRankingOnlineCriancasDGF(
-                estado.nome,
-                estado.pontos,
-                function(sucesso) {
-                    if (statusFinal) {
-                        statusFinal.textContent = sucesso
-                            ? '✅ Pontuação enviada ao ranking!'
-                            : '⚠️ Não foi possível confirmar o salvamento online.';
-                    }
-
-                    window.carregarRankingOnlineCriancasDGF(true);
-                }
-            );
-        };
-
-        /* CARREGAMENTO INICIAL */
-        setTimeout(function() {
-            if (!document.getElementById('desafio-criancas-dgf')) return;
-
-            window.carregarFotosCriancasDGF();
-            window.carregarRankingOnlineCriancasDGF();
-            window.iniciarContadorPresencaDGF();
-        }, 300);
-
-        /* =====================================================================================
-           INICIALIZAÇÃO DO RANKING
+           INICIALIZAÇÃO DO CONTADOR
            ===================================================================================== */
 
         setTimeout(function() {
-            window.carregarRankingOnlineCriancasDGF();
             window.iniciarContadorPresencaDGF();
         }, 150);
 
@@ -3288,80 +2413,6 @@ script.src = URL_RANKING_ONLINE_DGF +
         `;
     }
 
-if (pagina === "TV DGF") {
-
-    let html = `
-    <div style="padding:20px; max-width:1200px; margin:auto;">
-
-        <h1 style="
-            color:#003366;
-            font-family:'Segoe UI', Arial, sans-serif;
-            font-size:50px;
-            font-weight:bold;
-            text-align:center;
-            margin-bottom:20px;
-        ">
-            📺 TV DGF
-        </h1>
-
-        <div style="
-            background:#fff;
-            padding:30px;
-            border-radius:10px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.1);
-            line-height:1.8;
-            font-size:16px;
-        ">
-
-            <div style="
-                text-align:center;
-            ">
-                <iframe
-                    src="https://docs.google.com/presentation/d/e/2PACX-1vROMOHz7dAdKFgtZanL6Gmh_Lh3A5zgQO9T5refE35Rk7pUrLU1B2QoTVghYcWoWV4H6ijMJNu4UVVU/embed?start=false&loop=false&delayms=3000&rm=minimal"
-                    frameborder="0"
-                    width="100%"
-                    height="700"
-                    allowfullscreen="true"
-                    mozallowfullscreen="true"
-                    webkitallowfullscreen="true"
-                    style="
-                        border:none;
-                        border-radius:10px;
-                    ">
-                </iframe>
-            </div>
-
-            <div style="
-                text-align:center;
-                margin-top:25px;
-                margin-bottom:10px;
-            ">
-                <a href="https://docs.google.com/presentation/d/e/2PACX-1vROMOHz7dAdKFgtZanL6Gmh_Lh3A5zgQO9T5refE35Rk7pUrLU1B2QoTVghYcWoWV4H6ijMJNu4UVVU/pub?start=false&loop=false&delayms=3000"
-                   target="_blank"
-                   style="
-                       background:#003366;
-                       color:white;
-                       padding:15px 35px;
-                       text-decoration:none;
-                       border-radius:8px;
-                       font-weight:bold;
-                       font-size:20px;
-                       display:inline-block;
-                   ">
-                    📺 ABRIR EM TELA CHEIA
-                </a>
-            </div>
-
-        </div>
-
-    </div>
-    `;
-
-    conteudo.innerHTML = html;
-
-}
-
-
 if (pagina === "Xadrez DGF") {
 
     let html = `
@@ -3540,7 +2591,7 @@ if (pagina === "Xadrez DGF") {
         </div>
 
 
-        <!-- ÁREA DE REGRAS -->
+        <!-- ÁREA DE REGRAS E PEÇAS -->
         <div style="
             display:grid;
             grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
@@ -3692,48 +2743,185 @@ if (pagina === "Xadrez DGF") {
 
             </div>
 
+
+            <!-- TORRE -->
+            <div style="
+                background:linear-gradient(135deg,#e8f4f8,#f8f9fa);
+                padding:25px;
+                border-radius:15px;
+                box-shadow:0 3px 12px rgba(0,0,0,0.08);
+                border-top:5px solid #2980b9;
+            ">
+
+                <h2 style="
+                    color:#2980b9;
+                    margin-top:0;
+                ">
+                    🏰 Conheça a Torre
+                </h2>
+
+                <img
+                    src="torre.png"
+                    alt="Movimento da torre no xadrez"
+                    style="
+                        width:100%;
+                        max-height:350px;
+                        object-fit:cover;
+                        border-radius:12px;
+                        margin-bottom:15px;
+                    "
+                >
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                ">
+                    A torre é uma peça forte e de longo alcance, ideal para dominar colunas e fileiras abertas.
+                </p>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                ">
+                    Movimenta-se em <strong>linha reta</strong>, seja na horizontal (fileiras) ou na vertical (colunas).
+                </p>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                ">
+                    Pode avançar ou recuar quantas casas quiser, desde que o caminho esteja completamente livre.
+                </p>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                    margin-bottom:0;
+                ">
+                    Participa de uma jogada especial importante com o rei chamada <strong>roque</strong>, que ajuda na proteção do rei.
+                </p>
+
+            </div>
+
         </div>
 
 
-        <!-- VÍDEO -->
+        <!-- VÍDEOS -->
         <div style="
-            background:white;
-            padding:25px;
-            border-radius:15px;
-            box-shadow:0 3px 12px rgba(0,0,0,0.08);
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:20px;
             margin-bottom:25px;
         ">
 
-            <h2 style="
-                color:#2c3e50;
-                margin-top:0;
-                text-align:center;
+            <!-- VÍDEO 1 -->
+            <div style="
+                background:white;
+                padding:25px;
+                border-radius:15px;
+                box-shadow:0 3px 12px rgba(0,0,0,0.08);
+                display:flex;
+                flex-direction:column;
+                align-items:center;
             ">
-                🎥 Xadrez na Prática
-            </h2>
 
-            <video
-                controls
-                preload="metadata"
-                style="
+                <h2 style="
+                    color:#2c3e50;
+                    margin-top:0;
+                    text-align:center;
+                ">
+                    🎥 Xadrez na Prática
+                </h2>
+
+                <div style="
                     width:100%;
+                    max-width:320px;
+                    height:480px;
                     border-radius:12px;
+                    overflow:hidden;
                     background:#000;
-                    max-height:600px;
-                    display:block;
-                "
-            >
-                <source src="xadrez.mp4" type="video/mp4">
-                Seu navegador não suporta a reprodução de vídeo.
-            </video>
+                ">
+                    <video
+                        controls
+                        playsinline
+                        preload="auto"
+                        style="
+                            width:100%;
+                            height:100%;
+                            object-fit:contain;
+                            display:block;
+                        "
+                    >
+                        <source src="xadrez.mp4" type="video/mp4">
+                        Seu navegador não suporta a reprodução de vídeo.
+                    </video>
+                </div>
 
-            <p style="
-                text-align:center;
-                color:#777;
-                margin-bottom:0;
+                <p style="
+                    text-align:center;
+                    color:#777;
+                    margin-bottom:0;
+                    margin-top:10px;
+                ">
+                    Assista ao vídeo e acompanhe mais sobre o Xadrez DGF.
+                </p>
+
+            </div>
+
+
+            <!-- VÍDEO 2 (TORRE) -->
+            <div style="
+                background:white;
+                padding:25px;
+                border-radius:15px;
+                box-shadow:0 3px 12px rgba(0,0,0,0.08);
+                display:flex;
+                flex-direction:column;
+                align-items:center;
             ">
-                Assista ao vídeo e acompanhe mais sobre o Xadrez DGF.
-            </p>
+
+                <h2 style="
+                    color:#2c3e50;
+                    margin-top:0;
+                    text-align:center;
+                ">
+                    🏰 Movimento da Torre na Prática
+                </h2>
+
+                <div style="
+                    width:100%;
+                    max-width:320px;
+                    height:480px;
+                    border-radius:12px;
+                    overflow:hidden;
+                    background:#000;
+                ">
+                    <video
+                        controls
+                        playsinline
+                        preload="auto"
+                        style="
+                            width:100%;
+                            height:100%;
+                            object-fit:contain;
+                            display:block;
+                        "
+                    >
+                        <source src="torre_xadrez.mp4" type="video/mp4">
+                        Seu navegador não suporta a reprodução de vídeo.
+                    </video>
+                </div>
+
+                <p style="
+                    text-align:center;
+                    color:#777;
+                    margin-bottom:0;
+                    margin-top:10px;
+                ">
+                    Aprenda a dominar o tabuleiro utilizando a Torre.
+                </p>
+
+            </div>
 
         </div>
 
@@ -3790,8 +2978,8 @@ if (pagina === "Xadrez DGF") {
                     line-height:1.6;
                     margin-bottom:0;
                 ">
-                    O destaque desta semana é o movimento do peão,
-                    uma das peças fundamentais para a construção de estratégias.
+                    O destaque desta semana é o movimento do peão e da torre,
+                    peças fundamentais para a construção de estratégias no tabuleiro.
                 </p>
 
             </div>

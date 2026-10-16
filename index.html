@@ -545,6 +545,7 @@ section {
 			
             <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">📢 Comunicação</button>
             <div id="submenuComunicacao" class="submenu">
+			<button onclick="mostrar('Outubro Rosa')">📰 Outubro ROSA</button>
 			<button onclick="mostrar('noticias')">📰 Notícias</button>
 			<button onclick="mostrar('plano_anual_de_contratacoes')">📊 Plano Anual de Contratações</button>
 			<button onclick="mostrar('central_notas')">📝 Central de Notas</button>
@@ -856,10 +857,1057 @@ function detalharSetor(nome, resp, ramal) {
     document.getElementById('detalhes-setor').scrollIntoView({ behavior: 'smooth' });
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function mostrar(pagina){
     let conteudo = document.getElementById("conteudo");
 
-    if (pagina === "home") {
+    // Aceita variações de maiúsculas/minúsculas vindas do botão
+    if (pagina === "Outubro Rosa" || pagina === "Outubro ROSA") {
+        conteudo.innerHTML = `
+        <style>
+            @keyframes girarSpinnerDGF {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            .spinner-rosa-dgf {
+                display: inline-block;
+                width: 22px;
+                height: 22px;
+                border: 3px solid rgba(233, 30, 99, 0.2);
+                border-radius: 50%;
+                border-top-color: #e91e63;
+                animation: girarSpinnerDGF 0.8s linear infinite;
+                vertical-align: middle;
+                margin-right: 6px;
+            }
+            #comentario-foto-outubro-rosa-dgf:empty::before,
+            [id^="comentario-texto-"][contenteditable="true"]:empty::before {
+                content: attr(data-placeholder);
+                color: #a98c99;
+                pointer-events: none;
+            }
+            [contenteditable="true"]:focus {
+                border-color: #e91e63 !important;
+                box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.08);
+                outline: none;
+            }
+        </style>
+        <div style="display:flex;flex-direction:column;gap:20px;height:85vh;overflow-y:auto;padding:15px;background:#fdf6f9;border-radius:12px;border-top:10px solid #e91e63;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+            
+            <!-- BANNER TOPO ESTILO REFERÊNCIA -->
+            <div id="mural-outubro-rosa-dgf" style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 10px 25px rgba(233,30,99,.08);position:relative;overflow:hidden;border:1px solid #fce4ec;flex-shrink:0;">
+                
+                <!-- Gradiente Fluído de Fundo (Prevalecendo Rosa) -->
+                <div style="position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(135deg, #e91e63 0%, #ff4081 40%, #ffb74d 80%, #ffd54f 100%);z-index:1;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;box-sizing:border-box;">
+                    <div>
+                        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.25);backdrop-filter:blur(6px);padding:3px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:bold;letter-spacing:.5px;">
+                            🎀 DGF • SAÚDE RECIFE
+                        </div>
+                        <h2 style="margin:4px 0 0 0;color:#fff;font-size:26px;font-weight:900;text-shadow:0 2px 4px rgba(0,0,0,0.15);">Mural Outubro Rosa</h2>
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;z-index:2;">
+                        <button type="button" onclick="abrirStoriesOutubroRosaDGF()" style="background:#fff;color:#e91e63;border:0;border-radius:20px;padding:9px 16px;cursor:pointer;font-weight:bold;font-size:12px;box-shadow:0 4px 12px rgba(0,0,0,0.12);display:flex;align-items:center;gap:6px;transition:transform .2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">📲 Gerar Stories</button>
+                        <button type="button" onclick="abrirAdminOutubroRosaDGF()" style="background:rgba(0,0,0,0.25);color:#fff;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.4);border-radius:20px;padding:9px 16px;cursor:pointer;font-weight:bold;font-size:12px;">🔐 Administração</button>
+                    </div>
+                </div>
+
+                <div style="margin-top:110px;position:relative;z-index:2;">
+                    <p style="color:#555;font-size:14px;line-height:1.5;margin-bottom:18px;">Compartilhe sua foto, mensagem e atitude! Apoie a campanha de prevenção e união da equipe DGF.</p>
+                    
+                    <!-- FORMULÁRIO DE PUBLICAÇÃO -->
+                    <form id="form-foto-outubro-rosa-dgf" onsubmit="enviarFotoOutubroRosaDGF(event)" style="background:linear-gradient(135deg, #fff5f8 0%, #fff 100%);padding:18px;border-radius:12px;border:1px solid #f8bbd0;display:flex;flex-direction:column;gap:12px;box-shadow:0 4px 12px rgba(233,30,99,0.04);">
+                        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+                            <div>
+                                <label for="nome-foto-outubro-rosa-dgf" style="font-weight:bold;color:#ad1457;font-size:12px;display:block;margin-bottom:4px;">👤 Seu nome</label>
+                                <input id="nome-foto-outubro-rosa-dgf" type="text" maxlength="100" required placeholder="Digite seu nome completo" style="padding:10px 12px;border:1px solid #f48fb1;border-radius:8px;box-sizing:border-box;width:100%;outline:none;font-size:13px;">
+                            </div>
+                            <div>
+                                <label for="arquivo-foto-outubro-rosa-dgf" style="font-weight:bold;color:#ad1457;font-size:12px;display:block;margin-bottom:4px;">📸 Escolha sua foto</label>
+                                <input id="arquivo-foto-outubro-rosa-dgf" type="file" accept="image/*" required style="width:100%;font-size:12px;padding:6px;background:#fff;border:1px solid #f48fb1;border-radius:8px;box-sizing:border-box;">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="comentario-foto-outubro-rosa-dgf" style="font-weight:bold;color:#ad1457;font-size:12px;display:block;margin-bottom:4px;">💬 Sua Mensagem de Apoio</label>
+                            
+                            <!-- BARRA DE FERRAMENTAS: TECLADO DE EMOJIS, FORMATACAO DE TEXTO E CORES DA FONTE -->
+                            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#fff0f5;padding:6px 10px;border:1px solid #f48fb1;border-bottom:none;border-top-left-radius:8px;border-top-right-radius:8px;">
+                                <button type="button" onclick="inserirTextoNaMensagem('🌸')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Flor Rosa">🌸</button>
+                                <button type="button" onclick="inserirTextoNaMensagem('💖')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Coração Brilhante">💖</button>
+                                <button type="button" onclick="inserirTextoNaMensagem('🎀')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:16px;box-shadow:0 0 4px rgba(233,30,99,0.3);" title="Laço Rosa Outubro Rosa">🎀</button>
+                                <button type="button" onclick="inserirTextoNaMensagem('✨')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Brilho">✨</button>
+                                <button type="button" onclick="inserirTextoNaMensagem('💕')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Corações">💕</button>
+                                <button type="button" onclick="inserirTextoNaMensagem('⭐')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Estrela">⭐</button>
+                                
+                                <span style="color:#d81b60;font-weight:bold;margin:0 2px;">|</span>
+                                
+                                <button type="button" onclick="formatarTextoMensagem('bold')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 8px;font-weight:bold;font-size:12px;color:#ad1457;" title="Negrito"><b>B</b></button>
+                                <button type="button" onclick="formatarTextoMensagem('italic')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 8px;font-style:italic;font-size:12px;color:#ad1457;" title="Itálico"><i>I</i></button>
+                                <button type="button" onclick="formatarTextoMensagem('underline')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 8px;text-decoration:underline;font-size:12px;color:#ad1457;" title="Sublinhado"><u>U</u></button>
+                                
+                                <span style="color:#d81b60;font-weight:bold;margin:0 2px;">|</span>
+                                <span style="font-size:11px;color:#ad1457;font-weight:bold;">Cor:</span>
+                                <button type="button" onclick="aplicarCorNaMensagem('#e91e63')" style="background:#e91e63;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Rosa Principal"></button>
+                                <button type="button" onclick="aplicarCorNaMensagem('#ad1457')" style="background:#ad1457;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Rosa Escuro"></button>
+                                <button type="button" onclick="aplicarCorNaMensagem('#ff4081')" style="background:#ff4081;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Pink"></button>
+                                <button type="button" onclick="aplicarCorNaMensagem('#9c27b0')" style="background:#9c27b0;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Roxo"></button>
+                                <button type="button" onclick="aplicarCorNaMensagem('#e65100')" style="background:#e65100;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Laranja"></button>
+                                <button type="button" onclick="aplicarCorNaMensagem('#006064')" style="background:#006064;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Azul Turquesa"></button>
+                            </div>
+
+                            <div
+                                id="comentario-foto-outubro-rosa-dgf"
+                                contenteditable="true"
+                                role="textbox"
+                                aria-label="Sua mensagem de apoio"
+                                aria-multiline="true"
+                                data-placeholder="Escreva um carinho ou mensagem inspiradora..."
+                                oninput="limitarTextoEditorDGF(this,300)"
+                                style="min-height:76px;padding:10px 12px;border:1px solid #f48fb1;border-bottom-left-radius:8px;border-bottom-right-radius:8px;box-sizing:border-box;width:100%;font-family:inherit;outline:none;font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;"
+                            ></div>
+                        </div>
+
+                        <button type="submit" style="background:linear-gradient(45deg,#d81b60,#e91e63,#ff4081);color:white;border:0;border-radius:25px;padding:12px;cursor:pointer;font-weight:bold;font-size:14px;box-shadow:0 4px 12px rgba(233,30,99,.3);display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .2s;" onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">
+                            <span>✨</span> Publicar no Mural Rosa
+                        </button>
+                        <div id="status-foto-outubro-rosa-dgf" role="status" style="font-size:13px;color:#880e4f;font-weight:bold;text-align:center;"></div>
+                    </form>
+
+                    <!-- FEED DE PUBLICAÇÕES (FORMATO INSTAGRAM - UMA FOTO ABAIXO DA OUTRA) -->
+                    <div id="mural-feed-instagram" style="margin-top:30px;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;border-bottom:2px dashed #f8bbd0;padding-bottom:10px;margin-bottom:20px;">
+                            <h3 style="margin:0;color:#ad1457;font-size:20px;font-weight:800;display:flex;align-items:center;gap:8px;">
+                                <span>💖</span> Feed do Mural Rosa
+                            </h3>
+                            <span style="font-size:12px;color:#fff;background:linear-gradient(45deg,#e91e63,#ab47bc);padding:5px 12px;border-radius:15px;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,0.1);">#OutubroRosaDGF</span>
+                        </div>
+
+                        <div style="max-width:680px;margin:0 auto 14px;width:100%;box-sizing:border-box;background:#fff;padding:14px;border:1px solid #f8bbd0;border-radius:12px;box-shadow:0 3px 12px rgba(233,30,99,.06);">
+                            <label for="filtro-nome-funcionario-dgf" style="display:block;font-weight:800;color:#ad1457;font-size:13px;margin-bottom:7px;">
+                                🔎 Pesquisar funcionário pelo nome
+                            </label>
+                            <input
+                                id="filtro-nome-funcionario-dgf"
+                                type="search"
+                                placeholder="Digite um nome, por exemplo: Edson"
+                                oninput="filtrarFeedOutubroRosaDGF()"
+                                autocomplete="off"
+                                style="display:block;width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid #f48fb1;border-radius:9px;font-size:14px;outline-color:#e91e63;"
+                            >
+                            <div style="margin-top:6px;font-size:11px;color:#8b6677;">
+                                A pesquisa considera todas as fotos carregadas no mural.
+                            </div>
+                        </div>
+
+                        <div id="lista-fotos-outubro-rosa-dgf" style="display:flex;flex-direction:column;gap:26px;max-width:680px;margin:0 auto;">
+                            <p style="color:#777;font-size:13px;text-align:center;"><span class="spinner-rosa-dgf"></span>Carregando fotos do mural...</p>
+                        </div>
+
+                        <!-- CONTROLES DE PAGINAÇÃO -->
+                        <div id="paginacao-mural-outubro-rosa-dgf" style="display:none;justify-content:center;align-items:center;gap:12px;margin-top:25px;"></div>
+                    </div>
+
+                    <!-- ADMINISTRAÇÃO -->
+                    <div id="painel-admin-outubro-rosa-dgf" style="display:none;margin-top:20px;padding:18px;background:#fff0f5;border:1px solid #f3b4cc;border-radius:12px;">
+                        <h3 style="margin-top:0;color:#ad1457;">🔐 Administração do Mural</h3>
+                        <label for="senha-admin-outubro-rosa-dgf" style="font-size:12px;font-weight:bold;color:#880e4f;">Senha administrativa</label>
+                        <input id="senha-admin-outubro-rosa-dgf" type="password" autocomplete="current-password" placeholder="Digite a senha" style="display:block;width:100%;box-sizing:border-box;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:6px;">
+                        <button type="button" onclick="entrarAdminOutubroRosaDGF()" style="background:#ad1457;color:white;border:0;border-radius:6px;padding:9px 16px;cursor:pointer;font-weight:bold;">Entrar</button>
+                        <button type="button" onclick="fecharAdminOutubroRosaDGF()" style="background:#777;color:white;border:0;border-radius:6px;padding:9px 16px;cursor:pointer;">Fechar</button>
+                        <div id="status-admin-outubro-rosa-dgf" role="status" style="margin-top:10px;font-size:13px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL STORIES -->
+        <div id="modal-stories-outubro-rosa-dgf" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(20,0,12,.92);overflow:auto;padding:18px;box-sizing:border-box;backdrop-filter:blur(6px);">
+            <div style="max-width:440px;margin:0 auto;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px rgba(233,30,99,.35);border:1px solid rgba(255,182,193,.5);">
+                <div style="padding:16px 20px;background:linear-gradient(135deg,#880e4f,#c2185b,#e91e63,#ff4081);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:10px;">
+                    <div>
+                        <strong style="font-size:16px;display:block;letter-spacing:.3px;">✨ Gerador de Stories Instagram</strong>
+                        <span style="font-size:11px;opacity:.88;">#OutubroRosaDGF • Espalhe essa causa!</span>
+                    </div>
+                    <button type="button" onclick="fecharStoriesOutubroRosaDGF()" style="border:0;border-radius:20px;padding:6px 12px;cursor:pointer;background:rgba(255,255,255,.2);color:#fff;font-weight:bold;font-size:12px;backdrop-filter:blur(4px);">Fechar ✕</button>
+                </div>
+                <div id="preview-stories-outubro-rosa-dgf" style="padding:15px;background:#fce4ec;display:flex;justify-content:center;"></div>
+                <div style="padding:18px;background:#fff;display:flex;flex-direction:column;gap:10px;text-align:center;">
+                    <button type="button" onclick="baixarStoriesOutubroRosaDGF()" style="background:linear-gradient(45deg,#d81b60,#e91e63,#ff4081);color:#fff;border:0;border-radius:30px;padding:14px 20px;font-weight:bold;font-size:14px;cursor:pointer;box-shadow:0 6px 20px rgba(233,30,99,.4);display:flex;align-items:center;justify-content:center;gap:8px;">
+                        <span>📸</span> Baixar Story Instagram (1080 × 1920)
+                    </button>
+                    <p style="margin:4px 0 0;color:#666;font-size:12px;line-height:1.45;">
+                        💖 <strong>Dica de Influencer:</strong> Baixe a imagem acima, abra seu Instagram, poste no Stories e marque a hashtag <strong>#OutubroRosaDGF</strong>!
+                    </p>
+                    <div id="status-stories-outubro-rosa-dgf" role="status" style="font-size:12px;color:#ad1457;font-weight:bold;"></div>
+                </div>
+            </div>
+        </div>`;
+
+        (function() {
+            const URL_FEED_OUTUBRO_ROSA_DGF = "https://script.google.com/macros/s/AKfycbw2x1pbG-BsUF1jtyRTIWWzK8u0RJ_mHvP4bHfhvAKk9P7Gfy6WrhVtrDJkMWUoWTRhIg/exec";
+            let isAdminAutenticado = false;
+            let postsOutubroRosaDGF = [];
+            let paginaAtualFeed = 1;
+            const itensPorPagina = 8;
+
+            // PALETA MULTICOLORIDA COM FOCO NO ROSA
+            const paletaCoresCard = [
+                { border: '#e91e63', badgeBg: '#fce4ec', badgeColor: '#c2185b', nameColor: '#880e4f', icon: '🌸' }, // Rosa Principal
+                { border: '#ff9800', badgeBg: '#fff3e0', badgeColor: '#e65100', nameColor: '#e65100', icon: '🌼' }, // Laranja Vivo
+                { border: '#00bcd4', badgeBg: '#e0f7fa', badgeColor: '#006064', nameColor: '#006064', icon: '💙' }, // Azul Turquesa
+                { border: '#9c27b0', badgeBg: '#f3e5f5', badgeColor: '#4a148c', nameColor: '#4a148c', icon: '💜' }, // Roxo Elegante
+                { border: '#4caf50', badgeBg: '#e8f5e9', badgeColor: '#1b5e20', nameColor: '#1b5e20', icon: '🌿' }, // Verde Vida
+                { border: '#ff4081', badgeBg: '#f8bbd0', badgeColor: '#ad1457', nameColor: '#ad1457', icon: '🎀' }, // Pink Vivo
+                { border: '#ffc107', badgeBg: '#fff8e1', badgeColor: '#f57f17', nameColor: '#f57f17', icon: '⭐' }  // Amarelo Sol
+            ];
+
+            // FUNÇÕES DA BARRA DE FERRAMENTAS — EDITOR VISUAL
+            // O conteúdo é formatado no editor, e não como tags visíveis dentro de um textarea.
+            function normalizarTextoBuscaDGF(valor) {
+                return String(valor == null ? '' : valor)
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .toLocaleLowerCase('pt-BR')
+                    .trim();
+            }
+
+            function sanitizarHtmlMensagemDGF(html) {
+                const modelo = document.createElement('template');
+                modelo.innerHTML = String(html || '');
+
+                const tagsPermitidas = new Set([
+                    'B', 'STRONG', 'I', 'EM', 'U', 'BR',
+                    'SPAN', 'FONT', 'DIV', 'P'
+                ]);
+
+                function limparNo(pai) {
+                    Array.from(pai.childNodes || []).forEach(function(no) {
+                        if (no.nodeType !== 1) return;
+
+                        limparNo(no);
+
+                        if (!tagsPermitidas.has(no.tagName)) {
+                            no.replaceWith(document.createTextNode(no.textContent || ''));
+                            return;
+                        }
+
+                        let cor = '';
+                        let pesoFonte = '';
+                        let estiloFonte = '';
+                        let decoracaoTexto = '';
+
+                        if (no.style) {
+                            cor = no.style.color || '';
+                            pesoFonte = no.style.fontWeight || '';
+                            estiloFonte = no.style.fontStyle || '';
+                            decoracaoTexto = no.style.textDecoration || '';
+                        }
+
+                        if (!cor && no.tagName === 'FONT') {
+                            cor = no.getAttribute('color') || '';
+                        }
+
+                        // Remove atributos originais para não permitir eventos ou estilos arbitrários.
+                        Array.from(no.attributes || []).forEach(function(attr) {
+                            no.removeAttribute(attr.name);
+                        });
+
+                        const estilos = [];
+                        cor = String(cor).trim();
+                        const corHexValida = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(cor);
+                        const corRgbValida = /^rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)$/i.test(cor);
+
+                        if (corHexValida || corRgbValida) {
+                            estilos.push('color:' + cor);
+                        }
+
+                        if (/^(bold|bolder|[6-9]00)$/i.test(String(pesoFonte).trim())) {
+                            estilos.push('font-weight:bold');
+                        }
+                        if (/^(italic|oblique)$/i.test(String(estiloFonte).trim())) {
+                            estilos.push('font-style:italic');
+                        }
+                        if (/underline/i.test(String(decoracaoTexto))) {
+                            estilos.push('text-decoration:underline');
+                        }
+
+                        if (estilos.length) {
+                            no.setAttribute('style', estilos.join(';'));
+                        }
+                    });
+                }
+
+                limparNo(modelo.content);
+                return modelo.innerHTML;
+            }
+
+            // Limita a mensagem a 300 caracteres sem expor ou digitar códigos HTML.
+            window.limitarTextoEditorDGF = function(editor, limite) {
+                if (!editor) return;
+
+                const walker = document.createTreeWalker(editor, NodeFilter.SHOW_TEXT);
+                const nosTexto = [];
+                let total = 0;
+                let no;
+
+                while ((no = walker.nextNode())) {
+                    nosTexto.push(no);
+                    total += (no.nodeValue || '').length;
+                }
+
+                if (total <= limite) return;
+
+                let restante = limite;
+                nosTexto.forEach(function(noTexto) {
+                    const texto = noTexto.nodeValue || '';
+                    if (restante <= 0) {
+                        noTexto.nodeValue = '';
+                    } else if (texto.length > restante) {
+                        noTexto.nodeValue = texto.slice(0, restante);
+                        restante = 0;
+                    } else {
+                        restante -= texto.length;
+                    }
+                });
+            };
+
+            // Impede que o clique na barra tire a seleção do editor antes da formatação.
+            if (!window.__dgfProtecaoCursorFormatacao) {
+                document.addEventListener('mousedown', function(evento) {
+                    const botao = evento.target && evento.target.closest
+                        ? evento.target.closest('button')
+                        : null;
+                    if (!botao) return;
+
+                    const acao = botao.getAttribute('onclick') || '';
+                    if (/inserirTextoNaMensagem|formatarTextoMensagem|aplicarCorNaMensagem/.test(acao)) {
+                        evento.preventDefault();
+                    }
+                }, true);
+                window.__dgfProtecaoCursorFormatacao = true;
+            }
+
+            window.inserirTextoNaMensagem = function(texto, targetId = 'comentario-foto-outubro-rosa-dgf') {
+                const area = document.getElementById(targetId);
+                if (!area) return;
+
+                area.focus();
+                if (area.isContentEditable) {
+                    document.execCommand('insertText', false, String(texto));
+                    window.limitarTextoEditorDGF(area, 300);
+                    return;
+                }
+
+                // Compatibilidade com eventuais campos de texto simples.
+                if (typeof area.selectionStart === 'number') {
+                    const inicio = area.selectionStart;
+                    const fim = area.selectionEnd;
+                    area.value = area.value.substring(0, inicio) + texto + area.value.substring(fim);
+                    area.selectionStart = area.selectionEnd = inicio + String(texto).length;
+                }
+            };
+
+            window.formatarTextoMensagem = function(tipo, targetId = 'comentario-foto-outubro-rosa-dgf') {
+                const area = document.getElementById(targetId);
+                if (!area || !area.isContentEditable) return;
+
+                area.focus();
+                try { document.execCommand('styleWithCSS', false, true); } catch (e) {}
+
+                const comandos = { bold: 'bold', italic: 'italic', underline: 'underline' };
+                if (comandos[tipo]) {
+                    document.execCommand(comandos[tipo], false, null);
+                }
+            };
+
+            window.aplicarCorNaMensagem = function(cor, targetId = 'comentario-foto-outubro-rosa-dgf') {
+                const area = document.getElementById(targetId);
+                if (!area || !area.isContentEditable) return;
+                if (!/^#[0-9a-f]{6}$/i.test(String(cor))) return;
+
+                area.focus();
+                try { document.execCommand('styleWithCSS', false, true); } catch (e) {}
+                document.execCommand('foreColor', false, cor);
+            };
+
+            function escaparTexto(valor) {
+                return String(valor == null ? '' : valor).replace(/[&<>"']/g, function(c) {
+                    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]);
+                });
+            }
+
+            function chaveComentarios(id) {
+                return 'comentariosOutubroRosaDGF_' + String(id);
+            }
+
+            function lerComentarios(id) {
+                try { return JSON.parse(localStorage.getItem(chaveComentarios(id)) || '[]'); }
+                catch(e) { return []; }
+            }
+
+            window.excluirComentarioOutubroRosaDGF = function(id, comentarioIndex) {
+                if (!isAdminAutenticado) return;
+                if (!confirm('Deseja realmente apagar este comentário?')) return;
+                let comentarios = lerComentarios(id);
+                comentarios.splice(comentarioIndex, 1);
+                try {
+                    localStorage.setItem(chaveComentarios(id), JSON.stringify(comentarios));
+                    window.carregarFeedOutubroRosaDGF();
+                    setTimeout(function() {
+                        const area = document.getElementById('comentarios-area-' + id);
+                        if (area) area.style.display = 'block';
+                    }, 350);
+                } catch(e) {
+                    alert('Erro ao excluir o comentário.');
+                }
+            };
+
+            window.mudarPaginaFeedOutubroRosaDGF = function(novaPagina) {
+                paginaAtualFeed = novaPagina;
+                window.renderizarFeedPaginadoDGF();
+            };
+
+            window.filtrarFeedOutubroRosaDGF = function() {
+                paginaAtualFeed = 1;
+                window.renderizarFeedPaginadoDGF();
+            };
+
+            window.renderizarFeedPaginadoDGF = function() {
+                const container = document.getElementById('lista-fotos-outubro-rosa-dgf');
+                const paginacaoContainer = document.getElementById('paginacao-mural-outubro-rosa-dgf');
+                if (!container) return;
+
+                const filtroEl = document.getElementById('filtro-nome-funcionario-dgf');
+                const termoBusca = normalizarTextoBuscaDGF(filtroEl ? filtroEl.value : '');
+                const postsFiltrados = postsOutubroRosaDGF.filter(function(post) {
+                    return normalizarTextoBuscaDGF(post && post.name ? post.name : '').includes(termoBusca);
+                });
+
+                if (!postsFiltrados.length) {
+                    container.innerHTML = termoBusca
+                        ? "<p style='color:#ad1457;font-size:13px;text-align:center;padding:18px;background:#fff;border:1px dashed #f48fb1;border-radius:10px;'>Nenhum funcionário encontrado com esse nome. Tente outro termo.</p>"
+                        : "<p style='color:#777;font-size:13px;text-align:center;'>Nenhuma foto no mural no momento. Seja o primeiro a publicar!</p>";
+                    if (paginacaoContainer) paginacaoContainer.style.display = 'none';
+                    return;
+                }
+
+                const totalPaginas = Math.ceil(postsFiltrados.length / itensPorPagina);
+                if (paginaAtualFeed > totalPaginas) paginaAtualFeed = totalPaginas;
+                if (paginaAtualFeed < 1) paginaAtualFeed = 1;
+
+                const inicio = (paginaAtualFeed - 1) * itensPorPagina;
+                const fim = inicio + itensPorPagina;
+                const postsPagina = postsFiltrados.slice(inicio, fim);
+
+                container.innerHTML = postsPagina.map(function(post, index) {
+                    const id = escaparTexto(post.id);
+                    const nome = escaparTexto(post.name || 'Equipe DGF');
+                    const legenda = sanitizarHtmlMensagemDGF(post.caption || '');
+                    const comentarios = lerComentarios(post.id);
+                    
+                    const idxGlobal = inicio + index;
+                    const estilo = paletaCoresCard[idxGlobal % paletaCoresCard.length];
+
+                    const comentariosHtml = comentarios.map(function(c, cIdx) {
+                        const comentarioFormatado = c.html
+                            ? sanitizarHtmlMensagemDGF(c.html)
+                            : escaparTexto(c.texto || '');
+
+                        return '<div style="padding:4px 0;border-bottom:1px solid #ffe4ec;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;"><div style="overflow-wrap:anywhere;"><strong style="color:' + estilo.badgeColor + ';">' + escaparTexto(c.nome) + ':</strong> ' + comentarioFormatado + '</div>' +
+                        (isAdminAutenticado ? '<button type="button" onclick="excluirComentarioOutubroRosaDGF(\'' + id + '\',' + cIdx + ')" style="background:none;border:none;color:#b71c1c;cursor:pointer;font-size:11px;font-weight:bold;margin-left:8px;flex-shrink:0;" title="Apagar Comentário">🗑️</button>' : '') + '</div>';
+                    }).join('');
+
+                    return `
+                    <article style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.08);border:1px solid #fce4ec;border-left:6px solid ${estilo.border};display:flex;flex-direction:column;width:100%;box-sizing:border-box;">
+                        <div style="padding:14px 18px;display:flex;align-items:center;gap:12px;background:#fafafa;border-bottom:1px solid #f0f0f0;">
+                            <div style="width:40px;height:40px;flex:0 0 40px;border-radius:50%;background:${estilo.border};color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 6px rgba(0,0,0,0.12);">
+                                ${estilo.icon}
+                            </div>
+                            <strong style="color:${estilo.nameColor};font-size:15px;overflow-wrap:anywhere;font-weight:700;">${nome}</strong>
+                        </div>
+                        <div style="width:100%;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:8px;box-sizing:border-box;">
+                            <img src="${escaparTexto(post.imageUrl || '')}" alt="Foto de ${nome}" loading="lazy" style="width:100%;height:auto;max-height:650px;object-fit:contain;display:block;border-radius:10px;background:#fff;">
+                        </div>
+                        <div style="padding:16px;display:flex;flex-direction:column;gap:12px;">
+                            ${legenda ? `<div style="margin:0;font-size:14px;color:#333;line-height:1.5;background:${estilo.badgeBg};padding:12px 14px;border-radius:10px;border-left:4px solid ${estilo.border};overflow-wrap:anywhere;">${legenda}</div>` : ''}
+                            
+                            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px;">
+                                <button type="button" id="btn-curtir-${id}" onclick="curtirFotoOutubroRosaDGF('${id}')" style="background:#fff5f8;border:1px solid #f8bbd0;color:#e91e63;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:bold;display:flex;align-items:center;gap:4px;">❤️ ${Number(post.likes) || 0}</button>
+                                <button type="button" onclick="alternarComentariosOutubroRosaDGF('${id}')" style="background:${estilo.badgeBg};border:1px solid ${estilo.border};color:${estilo.badgeColor};padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:bold;">💬 (${comentarios.length})</button>
+                                <button type="button" onclick="abrirStoriesOutubroRosaDGF()" style="background:linear-gradient(45deg,#e91e63,#ff4081);color:#fff;border:0;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:bold;margin-left:auto;box-shadow:0 2px 6px rgba(233,30,99,0.2);">📲 Stories</button>
+                                ${isAdminAutenticado ? `<button type="button" onclick="excluirFotoOutubroRosaDGF('${id}')" style="background:#b71c1c;color:#fff;border:0;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:12px;">🗑️ Excluir Foto</button>` : ''}
+                            </div>
+
+                            <div id="comentarios-area-${id}" style="display:none;border-top:1px dashed #ddd;padding-top:12px;margin-top:4px;">
+                                <div id="comentarios-lista-${id}" style="max-height:160px;overflow:auto;margin-bottom:10px;font-size:13px;color:#444;">${comentariosHtml || '<span style="color:#888;">Ainda não há comentários nesta foto.</span>'}</div>
+                                
+                                <!-- BARRA DE FERRAMENTAS / TECLADO DE EMOJIS NOS COMENTÁRIOS -->
+                                <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;background:#fff0f5;padding:4px 8px;border:1px solid #ddd;border-bottom:none;border-top-left-radius:6px;border-top-right-radius:6px;">
+                                    <button type="button" onclick="inserirTextoNaMensagem('🌸', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">🌸</button>
+                                    <button type="button" onclick="inserirTextoNaMensagem('💖', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">💖</button>
+                                    <button type="button" onclick="inserirTextoNaMensagem('🎀', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:13px;">🎀</button>
+                                    <button type="button" onclick="inserirTextoNaMensagem('✨', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">✨</button>
+                                    <button type="button" onclick="inserirTextoNaMensagem('💕', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">💕</button>
+                                    <button type="button" onclick="inserirTextoNaMensagem('⭐', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">⭐</button>
+                                    <span style="color:#d81b60;font-weight:bold;margin:0 1px;">|</span>
+                                    <button type="button" onclick="formatarTextoMensagem('bold', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 6px;font-weight:bold;font-size:11px;color:#ad1457;"><b>B</b></button>
+                                    <button type="button" onclick="formatarTextoMensagem('italic', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 6px;font-style:italic;font-size:11px;color:#ad1457;"><i>I</i></button>
+                                    <button type="button" onclick="formatarTextoMensagem('underline', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 6px;text-decoration:underline;font-size:11px;color:#ad1457;"><u>U</u></button>
+                                    <span style="color:#d81b60;font-weight:bold;margin:0 1px;">|</span>
+                                    <button type="button" onclick="aplicarCorNaMensagem('#e91e63', 'comentario-texto-${id}')" style="background:#e91e63;border:none;width:14px;height:14px;border-radius:50%;cursor:pointer;"></button>
+                                    <button type="button" onclick="aplicarCorNaMensagem('#ad1457', 'comentario-texto-${id}')" style="background:#ad1457;border:none;width:14px;height:14px;border-radius:50%;cursor:pointer;"></button>
+                                    <button type="button" onclick="aplicarCorNaMensagem('#9c27b0', 'comentario-texto-${id}')" style="background:#9c27b0;border:none;width:14px;height:14px;border-radius:50%;cursor:pointer;"></button>
+                                </div>
+
+                                <form onsubmit="enviarComentarioOutubroRosaDGF(event,'${id}')" style="display:flex;flex-direction:column;gap:8px;">
+                                    <input id="comentario-nome-${id}" type="text" maxlength="60" placeholder="Seu nome" required style="padding:8px 10px;border:1px solid #ddd;border-radius:6px;box-sizing:border-box;width:100%;font-size:12px;">
+                                    <div style="display:flex;gap:6px;">
+                                        <div id="comentario-texto-${id}" contenteditable="true" role="textbox" aria-label="Escreva um comentário" aria-multiline="true" data-placeholder="Escreva um comentário..." oninput="limitarTextoEditorDGF(this,300)" style="flex:1;min-width:0;min-height:36px;padding:8px 10px;border:1px solid #ddd;border-bottom-left-radius:6px;border-bottom-right-radius:6px;font-size:12px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;"></div>
+                                        <button type="submit" id="btn-comentario-${id}" style="background:${estilo.border};color:#fff;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;font-weight:bold;font-size:12px;display:flex;align-items:center;justify-content:center;">Enviar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </article>`;
+                }).join('');
+
+                if (paginacaoContainer) {
+                    if (totalPaginas > 1) {
+                        let btns = '';
+                        btns += `<button type="button" onclick="mudarPaginaFeedOutubroRosaDGF(${paginaAtualFeed - 1})" ${paginaAtualFeed === 1 ? 'disabled' : ''} style="background:#fff;border:1px solid #f48fb1;color:#ad1457;padding:6px 14px;border-radius:20px;cursor:pointer;font-weight:bold;font-size:12px;opacity:${paginaAtualFeed === 1 ? '0.5' : '1'};">← Anterior</button>`;
+                        btns += `<span style="font-size:13px;font-weight:bold;color:#ad1457;">Página ${paginaAtualFeed} de ${totalPaginas}</span>`;
+                        btns += `<button type="button" onclick="mudarPaginaFeedOutubroRosaDGF(${paginaAtualFeed + 1})" ${paginaAtualFeed === totalPaginas ? 'disabled' : ''} style="background:#fff;border:1px solid #f48fb1;color:#ad1457;padding:6px 14px;border-radius:20px;cursor:pointer;font-weight:bold;font-size:12px;opacity:${paginaAtualFeed === totalPaginas ? '0.5' : '1'};">Próxima →</button>`;
+                        paginacaoContainer.innerHTML = btns;
+                        paginacaoContainer.style.display = 'flex';
+                    } else {
+                        paginacaoContainer.style.display = 'none';
+                    }
+                }
+            };
+
+            window.carregarFeedOutubroRosaDGF = function() {
+                const callback = 'dgfFeedCallback_' + Date.now();
+                const script = document.createElement('script');
+                window[callback] = function(res) {
+                    delete window[callback];
+                    script.remove();
+                    const container = document.getElementById('lista-fotos-outubro-rosa-dgf');
+                    if (!container) return;
+                    if (!res || !res.ok || !Array.isArray(res.posts)) {
+                        container.innerHTML = "<p style='color:#777;font-size:13px;text-align:center;'>Não foi possível carregar as fotos. Tente atualizar a página.</p>";
+                        return;
+                    }
+                    // A última foto publicada agora fica em primeiro lugar
+                    postsOutubroRosaDGF = Array.isArray(res.posts) ? [...res.posts] : [];
+                    window.renderizarFeedPaginadoDGF();
+                };
+                script.onerror = function() {
+                    delete window[callback];
+                    script.remove();
+                    const container = document.getElementById('lista-fotos-outubro-rosa-dgf');
+                    if (container) container.innerHTML = "<p style='color:#777;font-size:13px;text-align:center;'>Falha ao conectar ao mural. Atualize a página e tente novamente.</p>";
+                };
+                script.src = `${URL_FEED_OUTUBRO_ROSA_DGF}?action=list&callback=${callback}&_=${Date.now()}`;
+                document.body.appendChild(script);
+            };
+
+            window.alternarComentariosOutubroRosaDGF = function(id) {
+                const area = document.getElementById('comentarios-area-' + id);
+                if (area) area.style.display = area.style.display === 'none' ? 'block' : 'none';
+            };
+
+            window.enviarComentarioOutubroRosaDGF = function(event, id) {
+                event.preventDefault();
+
+                const nomeEl = document.getElementById('comentario-nome-' + id);
+                const textoEl = document.getElementById('comentario-texto-' + id);
+                const btnEnv = document.getElementById('btn-comentario-' + id);
+                const nome = nomeEl ? nomeEl.value.trim() : '';
+                const textoPlano = textoEl
+                    ? String(textoEl.innerText || textoEl.textContent || '').replace(/\u00a0/g, ' ').trim()
+                    : '';
+
+                if (!nome || !textoPlano) {
+                    if (textoEl) textoEl.focus();
+                    return;
+                }
+
+                if (textoPlano.length > 300) {
+                    alert('O comentário pode ter no máximo 300 caracteres.');
+                    return;
+                }
+
+                const comentarios = lerComentarios(id);
+                comentarios.push({
+                    nome: nome,
+                    texto: textoPlano,
+                    html: sanitizarHtmlMensagemDGF(textoEl.innerHTML),
+                    data: new Date().toISOString()
+                });
+
+                try {
+                    localStorage.setItem(chaveComentarios(id), JSON.stringify(comentarios));
+                } catch (e) {
+                    alert('Não foi possível salvar o comentário neste navegador.');
+                    return;
+                }
+
+                if (btnEnv) {
+                    btnEnv.disabled = true;
+                    btnEnv.innerHTML = '<span class="spinner-rosa-dgf" style="width:16px;height:16px;border-width:2px;margin:0;"></span>';
+                }
+
+                window.carregarFeedOutubroRosaDGF();
+                setTimeout(function() {
+                    const area = document.getElementById('comentarios-area-' + id);
+                    if (area) area.style.display = 'block';
+                }, 350);
+            };
+
+            /* =====================================================================================
+               GERADOR DE STORIES ESTILO REFERÊNCIA (MULTICOLORIDO + PREVALÊNCIA DO ROSA)
+               ===================================================================================== */
+
+            window.abrirStoriesOutubroRosaDGF = function() {
+                const modal = document.getElementById('modal-stories-outubro-rosa-dgf');
+                const preview = document.getElementById('preview-stories-outubro-rosa-dgf');
+                if (!modal || !preview) return;
+                modal.style.display = 'block';
+                const fotos = postsOutubroRosaDGF.filter(p => p && p.imageUrl);
+                if (!fotos.length) {
+                    preview.innerHTML = '<p style="text-align:center;color:#ad1457;padding:20px;">Ainda não há fotos publicadas para montar o mural de Stories.</p>';
+                    return;
+                }
+
+                // PRÉVIA VISUAL DO STORIES DO INSTAGRAM (REAPLICANDO ESTILO DA IMAGEM)
+                preview.innerHTML = `
+                    <div style="width:280px;height:497px;border-radius:24px;overflow:hidden;position:relative;background:#faf5f8;box-shadow:0 12px 35px rgba(233,30,99,.25);display:flex;flex-direction:column;justify-content:space-between;padding:12px;box-sizing:border-box;color:#333;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;border:3px solid #ffb74d;">
+                        
+                        <!-- Header do Story estilo Banner da Imagem de Referência -->
+                        <div style="background:linear-gradient(135deg,#e91e63 0%,#ff4081 40%,#ffb74d 100%);border-radius:14px;padding:10px 12px;color:#fff;text-align:center;box-shadow:0 4px 10px rgba(233,30,99,.2);">
+                            <div style="display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:10px;font-size:8px;font-weight:bold;">
+                                🎀 DGF • SAÚDE RECIFE
+                            </div>
+                            <div style="font-size:16px;font-weight:900;margin-top:2px;text-shadow:0 1px 2px rgba(0,0,0,0.2);">OUTUBRO ROSA</div>
+                            <div style="font-size:8.5px;opacity:.9;font-weight:600;">Mural de Conscientização e União 💞</div>
+                        </div>
+
+                        <!-- Grid Dinâmico dos Cards com Bordas Coloridas Intercaladas -->
+                        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:8px 0;max-height:330px;overflow:hidden;padding:2px;">
+                            ${fotos.slice(0,6).map((p, idx) => {
+                                const corBorder = paletaCoresCard[idx % paletaCoresCard.length].border;
+                                return `
+                                <div style="border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.08);border:1px solid #eee;border-left:4px solid ${corBorder};display:flex;flex-direction:column;padding:4px;">
+                                    <div style="width:100%;aspect-ratio:1;border-radius:6px;overflow:hidden;background:#f9f9f9;">
+                                        <img src="${escaparTexto(p.imageUrl)}" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+                                    </div>
+                                    <div style="font-size:8px;font-weight:bold;color:${corBorder};margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;">
+                                        ${escaparTexto(p.name || 'DGF')}
+                                    </div>
+                                </div>`;
+                            }).join('')}
+                        </div>
+
+                        <!-- Footer com a Hashtag -->
+                        <div style="text-align:center;background:#fff;padding:6px;border-radius:12px;border:1px solid #f8bbd0;">
+                            <div style="font-size:8px;color:#666;font-weight:bold;margin-bottom:2px;">🌸 Previna-se • Cuide-se • Se Ame!</div>
+                            <div style="background:linear-gradient(45deg,#e91e63,#ff4081);color:#fff;font-size:9.5px;font-weight:900;padding:4px 10px;border-radius:12px;display:inline-block;">
+                                #OutubroRosaDGF
+                            </div>
+                        </div>
+                    </div>`;
+
+                const status = document.getElementById('status-stories-outubro-rosa-dgf');
+                if (status) status.textContent = 'Mural montado com ' + fotos.length + ' foto(s)!';
+            };
+
+            window.fecharStoriesOutubroRosaDGF = function() {
+                const modal = document.getElementById('modal-stories-outubro-rosa-dgf');
+                if (modal) modal.style.display = 'none';
+            };
+
+            function obterImagemBase64StoriesOutubroRosaDGF(url) {
+                return new Promise(function(resolve, reject) {
+                    const callback = 'dgfStoryImageCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+                    const script = document.createElement('script');
+                    let finalizado = false;
+
+                    const temporizador = setTimeout(function() {
+                        concluirErro(new Error('O Google Apps Script não respondeu ao buscar a imagem.'));
+                    }, 45000);
+
+                    function limpar() {
+                        if (finalizado) return;
+                        finalizado = true;
+                        clearTimeout(temporizador);
+                        delete window[callback];
+                        script.remove();
+                    }
+
+                    function concluirErro(erro) {
+                        limpar();
+                        reject(erro);
+                    }
+
+                    window[callback] = function(res) {
+                        limpar();
+                        if (!res || !res.ok || !res.data) {
+                            reject(new Error(res && res.error ? res.error : 'O Apps Script não conseguiu obter os dados da foto.'));
+                            return;
+                        }
+
+                        const tipo = /^image\//i.test(String(res.contentType || '')) ? String(res.contentType) : 'image/jpeg';
+                        resolve('data:' + tipo + ';base64,' + res.data);
+                    };
+
+                    script.onerror = function() {
+                        concluirErro(new Error('A ação imageData não existe na versão publicada do Google Apps Script.'));
+                    };
+
+                    script.src = URL_FEED_OUTUBRO_ROSA_DGF
+                        + '?action=imageData&url=' + encodeURIComponent(String(url || ''))
+                        + '&callback=' + callback + '&_=' + Date.now();
+                    document.body.appendChild(script);
+                });
+            }
+
+            // GERADOR CANVAS HD DO STORIES (ESTILO IMAGEM DE REFERÊNCIA)
+            window.baixarStoriesOutubroRosaDGF = async function() {
+                const status = document.getElementById('status-stories-outubro-rosa-dgf');
+                const fotos = postsOutubroRosaDGF.filter(p => p && p.imageUrl);
+                if (!fotos.length) {
+                    if (status) status.textContent = 'Não há fotos para baixar.';
+                    return;
+                }
+                if (status) status.innerHTML = '<span class="spinner-rosa-dgf"></span>Gerando arte estilo referência em alta definição (1080×1920)... Aguarde!';
+
+                const canvas = document.createElement('canvas');
+                canvas.width = 1080;
+                canvas.height = 1920;
+                const ctx = canvas.getContext('2d');
+
+                // Fundo Geral Suave (Mantendo Rosa Prevalente)
+                ctx.fillStyle = '#fdf6f9';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Círculos fluídos decorativos de fundo
+                ctx.fillStyle = 'rgba(233, 30, 99, 0.05)';
+                ctx.beginPath(); ctx.arc(1080, 1920, 500, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = 'rgba(255, 183, 77, 0.08)';
+                ctx.beginPath(); ctx.arc(0, 0, 400, 0, Math.PI * 2); ctx.fill();
+
+                // Banner do Topo (Gradiente estilo Imagem de Referência)
+                const bannerGrad = ctx.createLinearGradient(0, 60, 1080, 320);
+                bannerGrad.addColorStop(0, '#e91e63');
+                bannerGrad.addColorStop(0.5, '#ff4081');
+                bannerGrad.addColorStop(0.85, '#ffb74d');
+                bannerGrad.addColorStop(1, '#ffd54f');
+
+                ctx.fillStyle = bannerGrad;
+                ctx.beginPath();
+                ctx.roundRect(50, 60, 980, 260, 32);
+                ctx.fill();
+
+                // Detalhe Badge do Banner
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+                ctx.beginPath(); ctx.roundRect(90, 95, 380, 44, 22); ctx.fill();
+
+                ctx.fillStyle = '#ffffff';
+                ctx.textAlign = 'left';
+                ctx.font = 'bold 22px Arial';
+                ctx.fillText('🎀 DGF • SECRETARIA DE SAÚDE', 115, 125);
+
+                // Títulos do Banner
+                ctx.font = '900 60px Arial';
+                ctx.fillText('Mural Outubro Rosa', 90, 210);
+
+                ctx.font = 'bold 26px Arial';
+                ctx.fillStyle = '#fff5f8';
+                ctx.fillText('Conscientização, Prevenção e União da nossa Equipe 💞', 90, 260);
+
+                // Montagem do Grid Multicor dos Cards
+                const maxFotos = Math.min(6, fotos.length);
+                const cols = maxFotos > 2 ? 2 : 1;
+                const rows = Math.ceil(maxFotos / cols);
+                const gap = 30;
+                const areaW = 980;
+                const cellW = cols === 2 ? (areaW - gap) / 2 : areaW;
+                const cellH = rows === 3 ? 420 : (rows === 2 ? 600 : 850);
+                const startX = (1080 - areaW) / 2;
+                const startY = 360;
+
+                for (let i = 0; i < maxFotos; i++) {
+                    const img = new Image();
+
+                    try {
+                        const urlOriginal = String(fotos[i].imageUrl || '');
+                        let fonteImagem = urlOriginal;
+
+                        if (!/^data:image\//i.test(urlOriginal)) {
+                            fonteImagem = await obterImagemBase64StoriesOutubroRosaDGF(urlOriginal);
+                        }
+
+                        await new Promise((resolve, reject) => {
+                            img.onload = resolve;
+                            img.onerror = () => reject(new Error('A imagem recebida não pôde ser aberta.'));
+                            img.src = fonteImagem;
+                        });
+
+                        const c = i % cols;
+                        const r = Math.floor(i / cols);
+                        const x = startX + c * (cellW + gap);
+                        const y = startY + r * (cellH + gap);
+
+                        const estiloColor = paletaCoresCard[i % paletaCoresCard.length];
+
+                        // Sombra e Fundo do Card
+                        ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                        ctx.beginPath(); ctx.roundRect(x + 4, y + 6, cellW, cellH, 24); ctx.fill();
+
+                        ctx.fillStyle = '#ffffff';
+                        ctx.beginPath(); ctx.roundRect(x, y, cellW, cellH, 24); ctx.fill();
+
+                        // Borda Colorida Lateral
+                        ctx.fillStyle = estiloColor.border;
+                        ctx.beginPath(); ctx.roundRect(x, y, 16, cellH, [24, 0, 0, 24]); ctx.fill();
+
+                        // Imagem centralizada no Card
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.roundRect(x + 30, y + 20, cellW - 50, cellH - 100, 16);
+                        ctx.clip();
+
+                        const imgRatio = img.width / img.height;
+                        const targetW = cellW - 50;
+                        const targetH = cellH - 100;
+                        const targetRatio = targetW / targetH;
+                        let renderW, renderH, offsetX, offsetY;
+
+                        if (imgRatio > targetRatio) {
+                            renderH = targetH; renderW = targetH * imgRatio;
+                            offsetX = x + 30 - (renderW - targetW) / 2; offsetY = y + 20;
+                        } else {
+                            renderW = targetW; renderH = targetW / imgRatio;
+                            offsetX = x + 30; offsetY = y + 20 - (renderH - targetH) / 2;
+                        }
+                        ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
+                        ctx.restore();
+
+                        // Nome com a cor correspondente do Card
+                        ctx.fillStyle = estiloColor.nameColor;
+                        ctx.textAlign = 'center';
+                        ctx.font = 'bold 28px Arial';
+                        ctx.fillText(fotos[i].name || 'Equipe DGF', x + cellW / 2 + 8, y + cellH - 32);
+
+                    } catch (e) {
+                        console.error('Não foi possível incluir a foto no Story:', i + 1, e);
+                        if (status) {
+                            status.style.color = '#b71c1c';
+                            status.textContent = 'Download cancelado para evitar um arquivo sem fotos. Não foi possível carregar a foto ' + (i + 1) + '. ' +
+                                (e && e.message ? e.message : 'Erro desconhecido.') +
+                                ' Confira se a correção imageData foi incluída e publicada no Google Apps Script.';
+                        }
+                        return;
+                    }
+                }
+
+                // Rodapé com Destaque
+                ctx.fillStyle = '#ad1457';
+                ctx.textAlign = 'center';
+                ctx.font = 'bold 34px Arial';
+                ctx.fillText('🌸 Se toque, se cuide, se ame!', 540, 1750);
+
+                const footerGrad = ctx.createLinearGradient(300, 1790, 780, 1860);
+                footerGrad.addColorStop(0, '#e91e63');
+                footerGrad.addColorStop(1, '#ab47bc');
+
+                ctx.fillStyle = footerGrad;
+                ctx.beginPath(); ctx.roundRect(290, 1790, 500, 75, 38); ctx.fill();
+
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '900 38px Arial';
+                ctx.fillText('#OutubroRosaDGF', 540, 1842);
+
+                try {
+                    const link = document.createElement('a');
+                    link.download = 'Outubro-Rosa-DGF-Story.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    if (status) status.textContent = '🚀 Story baixado com sucesso!';
+                } catch (e) {
+                    console.error('Erro ao exportar Story Outubro Rosa DGF:', e);
+                    if (status) {
+                        status.style.color = '#b71c1c';
+                        status.textContent = 'Não foi possível concluir o download da imagem. Tente novamente; se persistir, confira o console do navegador.';
+                    }
+                }
+            };
+
+            window.abrirAdminOutubroRosaDGF = function() {
+                const painel = document.getElementById('painel-admin-outubro-rosa-dgf');
+                if (painel) painel.style.display = 'block';
+            };
+            window.fecharAdminOutubroRosaDGF = function() {
+                const painel = document.getElementById('painel-admin-outubro-rosa-dgf');
+                if (painel) painel.style.display = 'none';
+            };
+            window.entrarAdminOutubroRosaDGF = function() {
+                const senhaEl = document.getElementById('senha-admin-outubro-rosa-dgf');
+                const status = document.getElementById('status-admin-outubro-rosa-dgf');
+                const senha = senhaEl ? senhaEl.value : '';
+                if (!senha) {
+                    status.style.color = '#b71c1c';
+                    status.textContent = 'Digite a senha administrativa.';
+                    return;
+                }
+                const callback = 'dgfAdminCallback_' + Date.now();
+                const script = document.createElement('script');
+                window[callback] = function(res) {
+                    delete window[callback];
+                    script.remove();
+                    if (res && res.ok) {
+                        isAdminAutenticado = true;
+                        status.style.color = '#2e7d32';
+                        status.textContent = 'Autenticado com sucesso!';
+                        window.carregarFeedOutubroRosaDGF();
+                    } else {
+                        status.style.color = '#b71c1c';
+                        status.textContent = 'Senha incorreta.';
+                    }
+                };
+                script.src = `${URL_FEED_OUTUBRO_ROSA_DGF}?action=adminCheck&password=${encodeURIComponent(senha)}&callback=${callback}`;
+                document.body.appendChild(script);
+            };
+            window.enviarFotoOutubroRosaDGF = function(event) {
+                event.preventDefault();
+                const status = document.getElementById('status-foto-outubro-rosa-dgf');
+                const nome = document.getElementById('nome-foto-outubro-rosa-dgf').value;
+                const comentarioEl = document.getElementById('comentario-foto-outubro-rosa-dgf');
+                const comentarioTexto = comentarioEl
+                    ? String(comentarioEl.innerText || comentarioEl.textContent || '').replace(/\u00a0/g, ' ').trim()
+                    : '';
+
+                if (comentarioTexto.length > 300) {
+                    status.style.color = '#b71c1c';
+                    status.textContent = 'A mensagem pode ter no máximo 300 caracteres.';
+                    return;
+                }
+
+                const comentario = comentarioEl && comentarioTexto
+                    ? sanitizarHtmlMensagemDGF(comentarioEl.innerHTML)
+                    : '';
+                const fileInput = document.getElementById('arquivo-foto-outubro-rosa-dgf');
+                if (!fileInput.files || !fileInput.files[0]) {
+                    status.style.color = '#b71c1c';
+                    status.textContent = 'Selecione uma foto.';
+                    return;
+                }
+                status.style.color = '#ad1457';
+                status.innerHTML = '<span class="spinner-rosa-dgf"></span>Enviando foto... Aguarde.';
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    fetch(URL_FEED_OUTUBRO_ROSA_DGF, {
+                        method: 'POST',
+                        body: JSON.stringify({action:'upload', name:nome, caption:comentario, base64:e.target.result})
+                    })
+                    .then(res => res.json())
+                    .then(res => {
+                        if (res.ok) {
+                            status.style.color = '#2e7d32';
+                            status.textContent = 'Foto publicada com sucesso!';
+                            document.getElementById('form-foto-outubro-rosa-dgf').reset();
+                            const editorMensagem = document.getElementById('comentario-foto-outubro-rosa-dgf');
+                            if (editorMensagem) editorMensagem.innerHTML = '';
+                            setTimeout(window.carregarFeedOutubroRosaDGF, 1000);
+                        } else {
+                            status.style.color = '#b71c1c';
+                            status.textContent = 'Erro ao publicar foto: ' + (res.error || '');
+                        }
+                    })
+                    .catch(() => {
+                        status.style.color = '#b71c1c';
+                        status.textContent = 'Erro de conexão ao enviar foto.';
+                    });
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            };
+            window.curtirFotoOutubroRosaDGF = function(id) {
+                const btnCurtir = document.getElementById('btn-curtir-' + id);
+                if (btnCurtir) {
+                    btnCurtir.disabled = true;
+                    btnCurtir.innerHTML = '<span class="spinner-rosa-dgf" style="width:16px;height:16px;border-width:2px;margin:0;"></span>';
+                }
+                const callback = 'dgfLikeCallback_' + Date.now();
+                const script = document.createElement('script');
+                window[callback] = function() {
+                    delete window[callback];
+                    script.remove();
+                    window.carregarFeedOutubroRosaDGF();
+                };
+                script.src = `${URL_FEED_OUTUBRO_ROSA_DGF}?action=like&id=${encodeURIComponent(id)}&callback=${callback}`;
+                document.body.appendChild(script);
+            };
+            window.excluirFotoOutubroRosaDGF = function(id) {
+                if (!confirm('Deseja realmente excluir esta foto do mural?')) return;
+                const senhaEl = document.getElementById('senha-admin-outubro-rosa-dgf');
+                const senha = senhaEl ? senhaEl.value : '';
+                const callback = 'dgfDeleteCallback_' + Date.now();
+                const script = document.createElement('script');
+                window[callback] = function(res) {
+                    delete window[callback];
+                    script.remove();
+                    if (res && res.ok) {
+                        alert('Foto excluída com sucesso!');
+                        window.carregarFeedOutubroRosaDGF();
+                    } else {
+                        alert('Erro ao excluir foto: ' + ((res && res.error) || ''));
+                    }
+                };
+                script.src = `${URL_FEED_OUTUBRO_ROSA_DGF}?action=deletePost&id=${encodeURIComponent(id)}&password=${encodeURIComponent(senha)}&callback=${callback}`;
+                document.body.appendChild(script);
+            };
+            setTimeout(window.carregarFeedOutubroRosaDGF, 300);
+        })();
+
+     } else if (pagina === "home") {
         const hojeData = new Date().toLocaleDateString('pt-BR', {
             day: '2-digit',
             month: '2-digit'
@@ -915,7 +1963,7 @@ function mostrar(pagina){
                 👁 <span id="total-acessos-dgf">0</span> acessos
             </div>
 
-            <!-- OUTUBRO ROSA -->
+            <!-- BANNER OUTUBRO ROSA NA HOME -->
             <div style="
                 background:linear-gradient(135deg,#fff5f8 0%,#f8bbd0 100%);
                 border:1px solid #ec407a;
@@ -993,29 +2041,18 @@ function mostrar(pagina){
                     align-items:center;
                     gap:10px;
                 ">
-                    <div style="
-                        background:rgba(255,255,255,0.8);
-                        border:1px dashed #ec407a;
-                        padding:8px 12px;
+                    <button onclick="mostrar('Outubro Rosa')" style="
+                        background:#ec407a;
+                        color:white;
+                        border:none;
+                        padding:10px 16px;
                         border-radius:6px;
-                        text-align:center;
+                        font-weight:bold;
+                        cursor:pointer;
+                        box-shadow:0 2px 6px rgba(0,0,0,0.15);
                     ">
-                        <span style="
-                            display:block;
-                            font-size:10px;
-                            color:#616161;
-                            font-weight:bold;
-                        ">
-                            Cuide-se e previna-se
-                        </span>
-
-                        <strong style="
-                            font-size:14px;
-                            color:#c2185b;
-                        ">
-                            Sua saúde importa!
-                        </strong>
-                    </div>
+                        📰 Ver Mural Rosa
+                    </button>
                 </div>
             </div>
 
@@ -1328,12 +2365,12 @@ function mostrar(pagina){
                                     letter-spacing:.5px;
                                     text-transform:uppercase;
                                 ">
-                                    Dia das Crianças
+                                    Outubro Rosa
                                 </span>
                             </div>
 
                             <span
-                                onclick="mostrar('noticias')"
+                                onclick="mostrar('Outubro Rosa')"
                                 style="
                                     font-size:11px;
                                     color:#ff6b6b;
@@ -1352,12 +2389,12 @@ function mostrar(pagina){
                             font-size:11px;
                             line-height:1.3;
                         ">
-                            <strong>💕🎉 Brincadeira Especial DGF/SES!</strong>
-                            Envie sua foto de infância até o dia <strong>08/10</strong>.
+                            <strong>🎀 Campanha Outubro Rosa DGF!</strong>
+                            Participe do nosso mural, compartilhe sua foto e apoie esta causa.
                         </p>
 
                         <div
-                            onclick="mostrar('noticias')"
+                            onclick="mostrar('Outubro Rosa')"
                             style="
                                 width:100%;
                                 border-radius:4px;
@@ -1368,8 +2405,8 @@ function mostrar(pagina){
                             "
                         >
                             <img
-                                src="./criança.png"
-                                alt="Dia das Crianças DGF"
+                                src="./rosa.png"
+                                alt="Outubro Rosa DGF"
                                 style="
                                     width:100%;
                                     height:auto;
@@ -1381,8 +2418,8 @@ function mostrar(pagina){
                         </div>
 
                         <a
-                            href="https://docs.google.com/forms/d/e/1FAIpQLSffzj3BOqBGYX0ieCQuUk8-JL6uZZqy5T9ICe77magEdsiVMw/viewform?usp=header"
-                            target="_blank"
+                            href="#"
+                            onclick="mostrar('Outubro Rosa'); return false;"
                             style="
                                 margin-top:4px;
                                 color:#c62828;
@@ -1393,7 +2430,7 @@ function mostrar(pagina){
                                 display:block;
                             "
                         >
-                            👉 Clique aqui para enviar sua foto
+                            👉 Clique aqui para publicar no Mural Rosa
                         </a>
                     </div>
                 </div>
@@ -2062,6 +3099,7 @@ function mostrar(pagina){
                     background:#005a8e;
                 }
             </style>
+        </div>
         `;
 
         /* =====================================================================================
@@ -2085,7 +3123,7 @@ function mostrar(pagina){
         };
 
         /* =====================================================================================
-           URL DO APPS SCRIPT
+           URL DO APPS SCRIPT CONTADOR
            ===================================================================================== */
 
         const URL_RANKING_ONLINE_DGF = "https://script.google.com/macros/s/AKfycbzaWoG1nIKh2f94_v-VdQUFahveBSVLh9lEzvgORjSYJtjJaLEQJZc2irb-0l6mUM2_/exec";
@@ -2226,7 +3264,7 @@ function mostrar(pagina){
                 return;
             }
 
-            resEl.innerHTML = "<span style='color:#7f8c8d;'>🔍 Pesquisando processo na planilha... Por favor, aguarde.</span>";
+            resEl.innerHTML = "<span style='color:#7f8c8d;'><span class='spinner-rosa-dgf'></span>Pesquisando processo na planilha... Por favor, aguarde.</span>";
 
             const docId = "1Lz169HkURx2K1BEYqjLp1x921pzJOWSizYVv4bt3dk0";
             const sheetName = "controle sei";
@@ -2376,7 +3414,7 @@ function mostrar(pagina){
                 return;
             }
 
-            resEl.innerHTML = "<span style='color:#d35400;'>🔎 Consultando contrato na base de dados...</span>";
+            resEl.innerHTML = "<span style='color:#d35400;'><span class='spinner-rosa-dgf'></span>Consultando contrato na base de dados...</span>";
 
             setTimeout(function() {
                 resEl.innerHTML = `

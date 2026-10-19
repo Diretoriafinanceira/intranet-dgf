@@ -856,46 +856,6 @@ function detalharSetor(nome, resp, ramal) {
     document.getElementById('det-ramal').innerText = ramal;
     document.getElementById('detalhes-setor').scrollIntoView({ behavior: 'smooth' });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function mostrar(pagina){
     let conteudo = document.getElementById("conteudo");
 
@@ -1027,7 +987,7 @@ function mostrar(pagina){
                             <input
                                 id="filtro-nome-funcionario-dgf"
                                 type="search"
-                                placeholder="Digite um nome, por exemplo: Pedro"
+                                placeholder="Digite um nome, por exemplo: Edson"
                                 oninput="filtrarFeedOutubroRosaDGF()"
                                 autocomplete="off"
                                 style="display:block;width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid #f48fb1;border-radius:9px;font-size:14px;outline-color:#e91e63;"
@@ -1274,30 +1234,232 @@ function mostrar(pagina){
                 });
             }
 
+            // Comentários compartilhados: o armazenamento principal passa a ser o Apps Script.
+            // O localStorage é mantido apenas para migrar comentários antigos já existentes neste PC.
+            let comentariosServidorDGF = {};
+            let comentariosServidorDisponivelDGF = false;
+
             function chaveComentarios(id) {
                 return 'comentariosOutubroRosaDGF_' + String(id);
             }
 
-            function lerComentarios(id) {
-                try { return JSON.parse(localStorage.getItem(chaveComentarios(id)) || '[]'); }
-                catch(e) { return []; }
+            function lerComentariosLocaisDGF(id) {
+                try {
+                    const valor = JSON.parse(localStorage.getItem(chaveComentarios(id)) || '[]');
+                    return Array.isArray(valor) ? valor : [];
+                } catch (e) {
+                    return [];
+                }
             }
 
-            window.excluirComentarioOutubroRosaDGF = function(id, comentarioIndex) {
-                if (!isAdminAutenticado) return;
-                if (!confirm('Deseja realmente apagar este comentário?')) return;
-                let comentarios = lerComentarios(id);
-                comentarios.splice(comentarioIndex, 1);
+            function salvarComentariosLocaisDGF(id, comentarios) {
                 try {
                     localStorage.setItem(chaveComentarios(id), JSON.stringify(comentarios));
+                    return true;
+                } catch (e) {
+                    return false;
+                }
+            }
+
+            function lerComentarios(id) {
+                if (comentariosServidorDisponivelDGF) {
+                    return comentariosServidorDGF[String(id)] || [];
+                }
+                return lerComentariosLocaisDGF(id);
+            }
+
+            function gerarClientIdComentarioDGF() {
+                return 'dgf_' + Date.now() + '_' + Math.random().toString(36).slice(2, 12);
+            }
+
+            // Chamada JSONP ao Apps Script existente para que comentários fiquem visíveis em todos os computadores.
+            function chamarApiComentariosDGF(parametros, concluir) {
+                const callback = 'dgfComentariosCallback_' + Date.now() + '_' + Math.floor(Math.random() * 1000000);
+                const script = document.createElement('script');
+                let finalizado = false;
+                const timeout = setTimeout(function() {
+                    finalizar(null);
+                }, 15000);
+
+                function finalizar(resposta) {
+                    if (finalizado) return;
+                    finalizado = true;
+                    clearTimeout(timeout);
+                    delete window[callback];
+                    script.remove();
+                    concluir(resposta);
+                }
+
+                window[callback] = function(resposta) {
+                    finalizar(resposta || null);
+                };
+                script.onerror = function() {
+                    finalizar(null);
+                };
+
+                const query = Object.keys(parametros).map(function(chave) {
+                    return encodeURIComponent(chave) + '=' + encodeURIComponent(String(parametros[chave] == null ? '' : parametros[chave]));
+                }).join('&');
+                script.src = URL_FEED_OUTUBRO_ROSA_DGF + '?' + query +
+                    '&callback=' + encodeURIComponent(callback) + '&_=' + Date.now();
+                document.body.appendChild(script);
+            }
+
+            function organizarComentariosServidorDGF(lista) {
+                const agrupados = {};
+                (Array.isArray(lista) ? lista : []).forEach(function(item) {
+                    const postId = String(item.postId || item.idPost || item.fotoId || '');
+                    if (!postId) return;
+                    if (!agrupados[postId]) agrupados[postId] = [];
+                    agrupados[postId].push({
+                        id: String(item.commentId || item.id || ''),
+                        postId: postId,
+                        nome: String(item.nome || item.name || ''),
+                        texto: String(item.texto || item.text || ''),
+                        html: String(item.html || ''),
+                        data: String(item.data || item.date || ''),
+                        clientId: String(item.clientId || '')
+                    });
+                });
+                comentariosServidorDGF = agrupados;
+            }
+
+            // Migra comentários antigos do localStorage para o servidor uma única vez por navegador.
+            // O clientId torna a importação idempotente, evitando cópias duplicadas em tentativas posteriores.
+            function migrarComentariosLocaisDGF(concluir) {
+                let jaMigrado = false;
+                try {
+                    jaMigrado = localStorage.getItem('comentariosOutubroRosaDGF_migracao_servidor_v1') === '1';
+                } catch (e) {}
+                if (jaMigrado) {
+                    concluir(true, false);
+                    return;
+                }
+
+                const tarefas = [];
+                postsOutubroRosaDGF.forEach(function(post) {
+                    const comentarios = lerComentariosLocaisDGF(post.id);
+                    let alterou = false;
+                    comentarios.forEach(function(c, indice) {
+                        if (c && c._dgfEnviadoServidor) return;
+                        if (!c || !(c.texto || c.html)) return;
+                        if (!c.clientId) {
+                            c.clientId = gerarClientIdComentarioDGF();
+                            alterou = true;
+                        }
+                        tarefas.push({ postId: String(post.id), comentario: c, indice: indice });
+                    });
+                    if (alterou) salvarComentariosLocaisDGF(post.id, comentarios);
+                });
+
+                if (!tarefas.length) {
+                    try { localStorage.setItem('comentariosOutubroRosaDGF_migracao_servidor_v1', '1'); } catch (e) {}
+                    concluir(true, false);
+                    return;
+                }
+
+                let indiceTarefa = 0;
+                let tudoCerto = true;
+                function proximaTarefa() {
+                    if (indiceTarefa >= tarefas.length) {
+                        if (tudoCerto) {
+                            try { localStorage.setItem('comentariosOutubroRosaDGF_migracao_servidor_v1', '1'); } catch (e) {}
+                        }
+                        concluir(tudoCerto, true);
+                        return;
+                    }
+
+                    const tarefa = tarefas[indiceTarefa++];
+                    const c = tarefa.comentario;
+                    chamarApiComentariosDGF({
+                        action: 'addComment',
+                        postId: tarefa.postId,
+                        name: String(c.nome || c.name || 'Servidor DGF').slice(0, 60),
+                        text: String(c.texto || '').slice(0, 300),
+                        html: String(c.html || escaparTexto(c.texto || '')).slice(0, 7000),
+                        data: String(c.data || new Date().toISOString()),
+                        clientId: String(c.clientId)
+                    }, function(resposta) {
+                        if (resposta && resposta.ok) {
+                            const locais = lerComentariosLocaisDGF(tarefa.postId);
+                            const comentarioLocal = locais.find(function(x) { return x && x.clientId === c.clientId; });
+                            if (comentarioLocal) comentarioLocal._dgfEnviadoServidor = true;
+                            salvarComentariosLocaisDGF(tarefa.postId, locais);
+                        } else {
+                            tudoCerto = false;
+                        }
+                        proximaTarefa();
+                    });
+                }
+                proximaTarefa();
+            }
+
+            function carregarComentariosCompartilhadosDGF(concluir) {
+                chamarApiComentariosDGF({ action: 'listComments' }, function(resposta) {
+                    if (!resposta || !resposta.ok || !Array.isArray(resposta.comments)) {
+                        comentariosServidorDisponivelDGF = false;
+                        concluir(false);
+                        return;
+                    }
+
+                    comentariosServidorDisponivelDGF = true;
+                    organizarComentariosServidorDGF(resposta.comments);
+                    migrarComentariosLocaisDGF(function(migracaoOk, houveMigracao) {
+                        if (!houveMigracao) {
+                            concluir(true);
+                            return;
+                        }
+                        // Busca a lista novamente para incluir o que acabou de ser migrado.
+                        chamarApiComentariosDGF({ action: 'listComments' }, function(respostaAtualizada) {
+                            if (respostaAtualizada && respostaAtualizada.ok && Array.isArray(respostaAtualizada.comments)) {
+                                organizarComentariosServidorDGF(respostaAtualizada.comments);
+                                comentariosServidorDisponivelDGF = true;
+                            }
+                            concluir(!!respostaAtualizada || migracaoOk);
+                        });
+                    });
+                });
+            }
+
+            window.excluirComentarioOutubroRosaDGF = function(postId, comentarioId) {
+                if (!isAdminAutenticado) return;
+                if (!confirm('Deseja realmente apagar este comentário?')) return;
+
+                // Compatibilidade: comentários locais antigos ainda não migrados.
+                if (String(comentarioId).indexOf('local-') === 0) {
+                    const indiceLocal = Number(String(comentarioId).slice(6));
+                    const locais = lerComentariosLocaisDGF(postId);
+                    if (Number.isInteger(indiceLocal) && indiceLocal >= 0 && indiceLocal < locais.length) {
+                        locais.splice(indiceLocal, 1);
+                        salvarComentariosLocaisDGF(postId, locais);
+                        window.renderizarFeedPaginadoDGF();
+                    }
+                    return;
+                }
+
+                const senhaEl = document.getElementById('senha-admin-outubro-rosa-dgf');
+                const senha = senhaEl ? senhaEl.value : '';
+                if (!senha) {
+                    alert('Entre novamente na administração para confirmar a exclusão do comentário.');
+                    return;
+                }
+
+                chamarApiComentariosDGF({
+                    action: 'deleteComment',
+                    postId: String(postId),
+                    commentId: String(comentarioId),
+                    password: senha
+                }, function(resposta) {
+                    if (!resposta || !resposta.ok) {
+                        alert((resposta && resposta.error) || 'Não foi possível excluir o comentário compartilhado. Confirme se a atualização do Apps Script foi publicada.');
+                        return;
+                    }
                     window.carregarFeedOutubroRosaDGF();
                     setTimeout(function() {
-                        const area = document.getElementById('comentarios-area-' + id);
+                        const area = document.getElementById('comentarios-area-' + postId);
                         if (area) area.style.display = 'block';
-                    }, 350);
-                } catch(e) {
-                    alert('Erro ao excluir o comentário.');
-                }
+                    }, 500);
+                });
             };
 
             window.mudarPaginaFeedOutubroRosaDGF = function(novaPagina) {
@@ -1350,9 +1512,10 @@ function mostrar(pagina){
                         const comentarioFormatado = c.html
                             ? sanitizarHtmlMensagemDGF(c.html)
                             : escaparTexto(c.texto || '');
+                        const comentarioId = escaparTexto(c.id || ('local-' + cIdx));
 
                         return '<div style="padding:4px 0;border-bottom:1px solid #ffe4ec;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;"><div style="overflow-wrap:anywhere;"><strong style="color:' + estilo.badgeColor + ';">' + escaparTexto(c.nome) + ':</strong> ' + comentarioFormatado + '</div>' +
-                        (isAdminAutenticado ? '<button type="button" onclick="excluirComentarioOutubroRosaDGF(\'' + id + '\',' + cIdx + ')" style="background:none;border:none;color:#b71c1c;cursor:pointer;font-size:11px;font-weight:bold;margin-left:8px;flex-shrink:0;" title="Apagar Comentário">🗑️</button>' : '') + '</div>';
+                        (isAdminAutenticado ? '<button type="button" onclick="excluirComentarioOutubroRosaDGF(\'' + id + '\',\'' + comentarioId + '\')" style="background:none;border:none;color:#b71c1c;cursor:pointer;font-size:11px;font-weight:bold;margin-left:8px;flex-shrink:0;" title="Apagar Comentário">🗑️</button>' : '') + '</div>';
                     }).join('');
 
                     return `
@@ -1435,9 +1598,11 @@ function mostrar(pagina){
                         container.innerHTML = "<p style='color:#777;font-size:13px;text-align:center;'>Não foi possível carregar as fotos. Tente atualizar a página.</p>";
                         return;
                     }
-                    // A última foto publicada agora fica em primeiro lugar
+                    // A última foto publicada agora fica em primeiro lugar.
                     postsOutubroRosaDGF = Array.isArray(res.posts) ? [...res.posts] : [];
-                    window.renderizarFeedPaginadoDGF();
+                    carregarComentariosCompartilhadosDGF(function() {
+                        window.renderizarFeedPaginadoDGF();
+                    });
                 };
                 script.onerror = function() {
                     delete window[callback];
@@ -1475,31 +1640,43 @@ function mostrar(pagina){
                     return;
                 }
 
-                const comentarios = lerComentarios(id);
-                comentarios.push({
-                    nome: nome,
-                    texto: textoPlano,
-                    html: sanitizarHtmlMensagemDGF(textoEl.innerHTML),
-                    data: new Date().toISOString()
-                });
-
-                try {
-                    localStorage.setItem(chaveComentarios(id), JSON.stringify(comentarios));
-                } catch (e) {
-                    alert('Não foi possível salvar o comentário neste navegador.');
+                if (!comentariosServidorDisponivelDGF) {
+                    alert('Os comentários compartilhados ainda não estão disponíveis. É necessário atualizar e publicar o Google Apps Script do mural; o comentário não foi enviado.');
                     return;
                 }
 
+                const clientId = gerarClientIdComentarioDGF();
                 if (btnEnv) {
                     btnEnv.disabled = true;
                     btnEnv.innerHTML = '<span class="spinner-rosa-dgf" style="width:16px;height:16px;border-width:2px;margin:0;"></span>';
                 }
 
-                window.carregarFeedOutubroRosaDGF();
-                setTimeout(function() {
-                    const area = document.getElementById('comentarios-area-' + id);
-                    if (area) area.style.display = 'block';
-                }, 350);
+                chamarApiComentariosDGF({
+                    action: 'addComment',
+                    postId: String(id),
+                    name: nome.slice(0, 60),
+                    text: textoPlano,
+                    html: sanitizarHtmlMensagemDGF(textoEl.innerHTML),
+                    data: new Date().toISOString(),
+                    clientId: clientId
+                }, function(resposta) {
+                    if (!resposta || !resposta.ok) {
+                        if (btnEnv) {
+                            btnEnv.disabled = false;
+                            btnEnv.textContent = 'Enviar';
+                        }
+                        alert((resposta && resposta.error) || 'Não foi possível salvar o comentário no servidor. Verifique se a atualização do Apps Script foi publicada.');
+                        return;
+                    }
+
+                    if (textoEl) textoEl.innerHTML = '';
+                    if (nomeEl) nomeEl.value = '';
+                    window.carregarFeedOutubroRosaDGF();
+                    setTimeout(function() {
+                        const area = document.getElementById('comentarios-area-' + id);
+                        if (area) area.style.display = 'block';
+                    }, 500);
+                });
             };
 
             /* =====================================================================================
@@ -3435,7 +3612,7 @@ function mostrar(pagina){
                 `;
             }, 10000);
         };
-        
+
     // =========================================================================
     // VISUALIZAÇÃO DA AGENDA DGF (ADICIONADA PARA O CLIQUE DO CARD FUNCIONAR)
     // =========================================================================

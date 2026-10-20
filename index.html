@@ -8296,634 +8296,1766 @@ if(pagina === "chegou"){
     };
 }
 
-if(pagina === "Funcionários"){
+if (pagina === "Funcionários") {
 
-    // 🔒 CHAVE / SENHA DE ACESSO CORPORATIVO
-    const SENHA_AUTORIZADA = "123456";
+    // URL DO APLICATIVO DA WEB DO APPS SCRIPT
+    const API_URL = 'https://script.google.com/macros/s/AKfycbwuuPifiWMsFerW_vyp9QXHzb-Brtg26cgOsZ6aTjXquYWmhdM5Mem46pqzkVb79ErX/exec';
 
-    // Garante que o estado de autorização seja sempre resetado ao entrar na página
-    window.servidorAutorizadoLocal = false;
+    let senhaAcesso = '';
+    let autorizado = false;
+    let registrosPrivados = [];
+    let registrosPublicos = [];
+    let matriculaFichaAtual = '';
+    let termoBuscaAtual = '';
 
-    // Estrutura Base do HTML da Página + Estilos CSS Injetados
     conteudo.innerHTML = `
         <style>
-            @keyframes modalFadeIn {
-                from { opacity: 0; transform: translateY(-20px) scale(0.96); }
-                to { opacity: 1; transform: translateY(0) scale(1); }
+            .dgf-equipe {
+                padding: 22px;
+                color: #1e293b;
             }
-            .modal-card-content::-webkit-scrollbar, .dash-scroll::-webkit-scrollbar {
-                width: 6px;
-                height: 6px;
+
+            .dgf-topo {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 14px;
+                margin-bottom: 20px;
             }
-            .modal-card-content::-webkit-scrollbar-thumb, .dash-scroll::-webkit-scrollbar-thumb {
-                background-color: #00b894;
-                border-radius: 10px;
+
+            .dgf-topo h2 {
+                margin: 0 0 6px;
+                color: #172554;
+                font-size: 25px;
             }
-            .info-grid-container {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
+
+            .dgf-subtitulo {
+                margin: 0;
+                color: #64748b;
+                font-size: 13px;
             }
-            @media (max-width: 580px) {
-                .info-grid-container {
-                    grid-template-columns: 1fr;
-                }
+
+            .dgf-botoes {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
             }
-            .info-item-card {
-                background: #ffffff;
-                border: 1px solid #b2bec3;
-                border-left: 5px solid #00b894;
-                border-radius: 10px;
-                padding: 12px 14px;
-                box-shadow: 0 4px 10px rgba(9, 132, 227, 0.08);
-                transition: all 0.2s ease;
-            }
-            .info-item-card:hover {
-                background: #ffffff;
-                border-color: #00b894;
-                box-shadow: 0 6px 15px rgba(0, 184, 148, 0.25);
-                transform: translateY(-2px);
-            }
-            .btn-quick-filter {
-                background: #e0f2fe;
-                color: #0284c7;
-                border: 1px solid #38bdf8;
-                padding: 5px 12px;
-                border-radius: 15px;
-                font-size: 11px;
-                font-weight: 700;
+
+            .dgf-btn {
+                border: 0;
+                border-radius: 9px;
+                padding: 10px 14px;
                 cursor: pointer;
-                transition: all 0.2s;
-            }
-            .btn-quick-filter:hover {
-                background: #0284c7;
-                color: white;
-            }
-            .tabla-dashboard {
-                width: 100%;
-                border-collapse: collapse;
+                font-weight: 700;
                 font-size: 12px;
-                background: white;
+                transition: .2s;
             }
-            .tabla-dashboard th {
-                background: #0984e3;
+
+            .dgf-btn:hover {
+                filter: brightness(.95);
+                transform: translateY(-1px);
+            }
+
+            .dgf-btn-azul {
+                background: #2563eb;
                 color: white;
-                padding: 10px 8px;
-                text-align: left;
-                white-space: nowrap;
-                position: sticky;
-                top: 0;
-                z-index: 10;
             }
-            .tabla-dashboard td {
-                padding: 8px;
-                border-bottom: 1px solid #e2e8f0;
-                white-space: nowrap;
+
+            .dgf-btn-verde {
+                background: #059669;
+                color: white;
+            }
+
+            .dgf-btn-cinza {
+                background: #e2e8f0;
                 color: #334155;
             }
-            .tabla-dashboard tr:hover {
-                background-color: #f1f5f9;
+
+            .dgf-btn-vermelho {
+                background: #fee2e2;
+                color: #991b1b;
+            }
+
+            .dgf-busca {
+                width: 100%;
+                box-sizing: border-box;
+                border: 1px solid #cbd5e1;
+                border-radius: 13px;
+                padding: 13px 16px;
+                font-size: 14px;
+                margin-bottom: 20px;
+                outline: none;
+            }
+
+            .dgf-busca:focus,
+            .dgf-form input:focus,
+            .dgf-form select:focus {
+                border-color: #2563eb;
+                box-shadow: 0 0 0 3px #dbeafe;
+            }
+
+            .dgf-lista {
+                display: grid;
+                grid-template-columns:
+                    repeat(auto-fill, minmax(260px, 1fr));
+                gap: 16px;
+            }
+
+            .card-user {
+                display: flex;
+                align-items: center;
+                gap: 13px;
+                padding: 17px;
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-left: 5px solid #0d9488;
+                border-radius: 14px;
+                box-shadow: 0 4px 12px rgba(15,23,42,.06);
+                transition: .2s;
+                min-width: 0;
+            }
+
+            .card-user:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 9px 22px rgba(15,23,42,.10);
+            }
+
+            .card-user.ferista-card {
+                border: 2px solid #d97706;
+                border-left: 7px solid #d97706;
+                background: linear-gradient(
+                    115deg, #fffaf0, #ffffff
+                );
+            }
+
+            .dgf-foto {
+                width: 64px;
+                height: 64px;
+                flex: 0 0 64px;
+                position: relative;
+                overflow: hidden;
+                border-radius: 50%;
+                background: #dbeafe;
+                border: 2px solid #dbeafe;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+
+            .ferista-card .dgf-foto {
+                border-color: #f59e0b;
+            }
+
+            .dgf-foto span {
+                font-size: 23px;
+                font-weight: 800;
+                color: #1d4ed8;
+            }
+
+            .dgf-foto img {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 1;
+            }
+
+            .dgf-dados-card {
+                min-width: 0;
+            }
+
+            .dgf-nome {
+                border: 0;
+                background: transparent;
+                color: #172554;
+                padding: 0;
+                font-size: 14px;
+                font-weight: 800;
+                text-align: left;
+                line-height: 1.5;
+                cursor: pointer;
+                overflow-wrap: anywhere;
+                text-decoration: underline;
+                text-decoration-color: #bfdbfe;
+                text-underline-offset: 3px;
+            }
+
+            .dgf-nome:hover {
+                color: #2563eb;
+            }
+
+            .dgf-matricula {
+                display: block;
+                margin-top: 5px;
+                color: #64748b;
+                font-size: 12px;
+            }
+
+            .dgf-aviso {
+                padding: 28px 16px;
+                text-align: center;
+                color: #64748b;
+                background: #f8fafc;
+                border: 1px dashed #cbd5e1;
+                border-radius: 14px;
+                grid-column: 1 / -1;
+            }
+
+            .dgf-modal {
+                display: none;
+                position: fixed;
+                inset: 0;
+                z-index: 99999;
+                background: rgba(15,23,42,.77);
+                backdrop-filter: blur(4px);
+                align-items: center;
+                justify-content: center;
+                padding: 12px;
+                box-sizing: border-box;
+            }
+
+            .dgf-modal-caixa {
+                width: 100%;
+                max-width: 760px;
+                max-height: 94vh;
+                overflow-y: auto;
+                background: #ffffff;
+                border-radius: 16px;
+                box-shadow: 0 25px 70px rgba(0,0,0,.25);
+            }
+
+            .dgf-modal-topo {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                padding: 17px 21px;
+                color: white;
+                background: linear-gradient(
+                    120deg, #172554, #2563eb
+                );
+                position: sticky;
+                top: 0;
+                z-index: 5;
+            }
+
+            .dgf-modal-topo h3 {
+                font-size: 17px;
+                margin: 0;
+            }
+
+            .dgf-fechar {
+                width: 32px;
+                height: 32px;
+                border: 0;
+                border-radius: 50%;
+                cursor: pointer;
+                color: white;
+                background: rgba(255,255,255,.18);
+                font-size: 23px;
+            }
+
+            .dgf-modal-corpo {
+                padding: 21px;
+            }
+
+            .dgf-perfil {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+                border-bottom: 1px solid #e2e8f0;
+            }
+
+            .dgf-perfil .dgf-foto {
+                width: 100px;
+                height: 100px;
+                flex-basis: 100px;
+                border: 3px solid #2563eb;
+                margin-bottom: 9px;
+            }
+
+            .dgf-perfil h4 {
+                font-size: 21px;
+                color: #172554;
+                margin: 5px 0;
+                overflow-wrap: anywhere;
+            }
+
+            .dgf-selo {
+                display: inline-block;
+                margin-top: 7px;
+                padding: 6px 12px;
+                border-radius: 20px;
+                background: #dbeafe;
+                color: #1d4ed8;
+                font-size: 10px;
+                font-weight: 900;
+                letter-spacing: .5px;
+            }
+
+            .dgf-selo-ferista {
+                background: #fef3c7;
+                color: #92400e;
+                border: 1px solid #f59e0b;
+            }
+
+            .dgf-info-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0,1fr));
+                gap: 10px;
+            }
+
+            .dgf-info {
+                padding: 12px;
+                border: 1px solid #e2e8f0;
+                border-left: 4px solid #2563eb;
+                border-radius: 9px;
+                background: #f8fafc;
+                min-width: 0;
+            }
+
+            .dgf-info-ferista {
+                border-left-color: #d97706;
+            }
+
+            .dgf-info small {
+                display: block;
+                margin-bottom: 5px;
+                font-size: 10px;
+                font-weight: 800;
+                color: #64748b;
+                text-transform: uppercase;
+                letter-spacing: .4px;
+            }
+
+            .dgf-info strong {
+                display: block;
+                font-size: 13px;
+                line-height: 1.5;
+                overflow-wrap: anywhere;
+                color: #1e293b;
+            }
+
+            .dgf-acoes-ficha {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: 20px;
+                justify-content: flex-end;
+            }
+
+            .dgf-form {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0,1fr));
+                gap: 13px;
+            }
+
+            .dgf-campo {
+                min-width: 0;
+            }
+
+            .dgf-campo.largura-total {
+                grid-column: 1 / -1;
+            }
+
+            .dgf-campo label {
+                display: block;
+                margin-bottom: 5px;
+                color: #334155;
+                font-size: 11px;
+                font-weight: 800;
+            }
+
+            .dgf-form input,
+            .dgf-form select {
+                box-sizing: border-box;
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #cbd5e1;
+                border-radius: 8px;
+                background: #ffffff;
+                color: #1e293b;
+                outline: none;
+                font-size: 13px;
+            }
+
+            .dgf-form input[type="file"] {
+                padding: 8px;
+                background: #f8fafc;
+            }
+
+            .dgf-foto-preview {
+                width: 92px;
+                height: 92px;
+                border-radius: 50%;
+                object-fit: cover;
+                display: none;
+                border: 3px solid #2563eb;
+                margin-top: 10px;
+            }
+
+            .dgf-legenda-ferista {
+                padding: 10px 13px;
+                margin-bottom: 17px;
+                background: #fffbeb;
+                border: 1px solid #fcd34d;
+                border-radius: 9px;
+                color: #92400e;
+                font-size: 11px;
+            }
+
+            .dgf-dashboard-conteudo {
+                padding: 16px;
+            }
+
+            .dgf-dashboard-filtros {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0,1fr));
+                gap: 9px;
+                margin-bottom: 12px;
+            }
+
+            .dgf-dashboard-filtros input {
+                box-sizing: border-box;
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #cbd5e1;
+                border-radius: 7px;
+            }
+
+            .dgf-tabela-wrap {
+                width: 100%;
+                overflow: auto;
+                max-height: 55vh;
+            }
+
+            .dgf-tabela {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 11px;
+                white-space: nowrap;
+            }
+
+            .dgf-tabela th {
+                position: sticky;
+                top: 0;
+                background: #172554;
+                color: white;
+                padding: 10px;
+                text-align: left;
+            }
+
+            .dgf-tabela td {
+                padding: 9px 10px;
+                border-bottom: 1px solid #e2e8f0;
+            }
+
+            .dgf-tabela tr.ferista-linha {
+                background: #fff7ed;
+                color: #7c2d12;
+            }
+
+            .dgf-status {
+                margin: 0 0 15px;
+                font-size: 12px;
+                color: #64748b;
+            }
+
+            .dgf-modal-foto-img {
+                max-width: 85vw;
+                max-height: 85vh;
+                border-radius: 12px;
+                object-fit: contain;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                border: 3px solid #ffffff;
+            }
+
+            @media (max-width: 620px) {
+                .dgf-equipe {
+                    padding: 12px;
+                }
+
+                .dgf-info-grid,
+                .dgf-form,
+                .dgf-dashboard-filtros {
+                    grid-template-columns: 1fr;
+                }
+
+                .dgf-campo.largura-total {
+                    grid-column: auto;
+                }
+
+                .dgf-modal-corpo {
+                    padding: 14px;
+                }
+
+                .dgf-topo h2 {
+                    font-size: 22px;
+                }
             }
         </style>
 
-        <div style="padding: 20px;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+        <div class="dgf-equipe">
+            <div class="dgf-topo">
                 <div>
-                    <h2 style="color: #2c3e50; margin: 0 0 5px 0;">👥 Nossa Equipe</h2>
-                    <p style="color: #7f8c8d; margin: 0;">Conheça os profissionais que compõem o nosso setor.</p>
+                    <h2>👥 Nossa Equipe</h2>
+                    <p class="dgf-subtitulo">
+                        Cadastro e identificação dos profissionais da diretoria.
+                    </p>
                 </div>
-                
-                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <!-- Botão do Dashboard Restrito (Oculto por padrão, aparece ao digitar DASH) -->
-                    <button id="btnAbrirDashboard" style="display: none; background: #00b894; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 12px; cursor: pointer; align-items: center; gap: 6px; box-shadow: 0 2px 5px rgba(0,184,148,0.3); transition: all 0.2s;" onmouseover="this.style.background='#00a884'" onmouseout="this.style.background='#00b894'">
-                        📊 Dashboard Corporativo
+
+                <div class="dgf-botoes">
+                    <button id="btnAcessoDGF"
+                        class="dgf-btn dgf-btn-cinza">
+                        🔒 Acesso restrito
                     </button>
 
-                    <!-- Botão Discreto Apenas Autorizados -->
-                    <button id="btnApenasAutorizados" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 6px; font-weight: 600; font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease;" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
-                        🔒 Apenas Autorizados <span id="statusAutorizacao" style="font-size: 11px; font-weight: bold; color: #e74c3c;">(Restrito)</span>
+                    <button id="btnCadastroDGF"
+                        class="dgf-btn dgf-btn-verde">
+                        ＋ Fazer meu cadastro
+                    </button>
+
+                    <button id="btnDashboardDGF"
+                        class="dgf-btn dgf-btn-azul"
+                        style="display:none">
+                        📊 Dashboard
                     </button>
                 </div>
             </div>
 
-            <input type="text" id="buscaFuncionario" placeholder="🔍 Buscar por nome..." 
-                style="width: 100%; padding: 12px; margin-bottom: 25px; border: 1px solid #ddd; border-radius: 25px; font-size: 16px; outline: none; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <input id="buscaFuncionario"
+                class="dgf-busca"
+                type="text"
+                placeholder="🔎 Buscar funcionário por nome ou matrícula...">
 
-            <!-- Container com Status de Carregamento Inicial -->
-            <div id="listaCards" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
-                <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #7f8c8d;">
-                    <div style="font-size: 32px; margin-bottom: 10px;">⏳</div>
-                    <p style="font-size: 16px; margin: 0;">Carregando funcionários da planilha...</p>
+            <p id="statusCarregamentoDGF" class="dgf-status">
+                ⏳ Carregando funcionários...
+            </p>
+
+            <div id="listaCards" class="dgf-lista"></div>
+
+            <div style="margin-top:20px;font-size:10px;color:#94a3b8">
+                Cadastro corporativo da equipe.
+            </div>
+        </div>
+
+        <!-- FICHA COMPLETA -->
+        <div id="modalFicha" class="dgf-modal">
+            <div class="dgf-modal-caixa">
+                <div class="dgf-modal-topo">
+                    <h3>📇 Ficha do servidor</h3>
+                    <button id="fecharModalFicha"
+                        class="dgf-fechar" type="button">×</button>
+                </div>
+                <div id="conteudoFicha" class="dgf-modal-corpo"></div>
+            </div>
+        </div>
+
+        <!-- CADASTRO / EDIÇÃO -->
+        <div id="modalCadastroDGF" class="dgf-modal">
+            <div class="dgf-modal-caixa">
+                <div class="dgf-modal-topo">
+                    <h3 id="tituloCadastroDGF">＋ Cadastrar funcionário</h3>
+                    <button id="fecharModalCadastro"
+                        class="dgf-fechar" type="button">×</button>
+                </div>
+
+                <div class="dgf-modal-corpo">
+                    <div class="dgf-legenda-ferista">
+                        🟡 <strong>Feristas:</strong> recebem identificação
+                        visual dourada nos cards e na base de dados.
+                    </div>
+
+                    <form id="formFuncionario" class="dgf-form">
+                        <input type="hidden" name="id">
+
+                        <div class="dgf-campo largura-total">
+                            <label>TIPO DE CADASTRO *</label>
+                            <select name="tipoCadastro" required>
+                                <option value="REGULAR">Regular</option>
+                                <option value="FERISTA">Ferista</option>
+                            </select>
+                        </div>
+
+                        <div class="dgf-campo largura-total">
+                            <label>NOME COMPLETO *</label>
+                            <input name="nomeCompleto"
+                                maxlength="180" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>MATRÍCULA *</label>
+                            <input name="matricula" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>CPF *</label>
+                            <input name="cpf"
+                                placeholder="000.000.000-00"
+                                required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>SEXO *</label>
+                            <select name="sexo" required>
+                                <option value="">Selecione</option>
+                                <option>Feminino</option>
+                                <option>Masculino</option>
+                                <option>Outro</option>
+                                <option>Prefere não informar</option>
+                            </select>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>DATA DE NASCIMENTO *</label>
+                            <input type="date" name="dataNascimento" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>TIPO SANGUÍNEO *</label>
+                            <select name="tipoSanguineo" required>
+                                <option value="">Selecione</option>
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                                <option>Não informado</option>
+                            </select>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>ESTADO CIVIL *</label>
+                            <select name="estadoCivil" required>
+                                <option value="">Selecione</option>
+                                <option>Solteiro(a)</option>
+                                <option>Casado(a)</option>
+                                <option>União estável</option>
+                                <option>Divorciado(a)</option>
+                                <option>Separado(a)</option>
+                                <option>Viúvo(a)</option>
+                                <option>Não informado</option>
+                            </select>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>ESCOLARIDADE *</label>
+                            <select name="escolaridade" required>
+                                <option value="">Selecione</option>
+                                <option>Ensino Fundamental Incompleto</option>
+                                <option>Ensino Fundamental Completo</option>
+                                <option>Ensino Médio Incompleto</option>
+                                <option>Ensino Médio Completo</option>
+                                <option>Ensino Superior Incompleto</option>
+                                <option>Ensino Superior Completo</option>
+                                <option>Especialização</option>
+                                <option>Mestrado</option>
+                                <option>Doutorado</option>
+                                <option>Pós-doutorado</option>
+                                <option>Não informado</option>
+                            </select>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>E-MAIL INSTITUCIONAL *</label>
+                            <input type="email" name="emailInstitucional" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>TELEFONE / WHATSAPP *</label>
+                            <input name="telefoneWhatsapp" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>CONTATO DE URGÊNCIA *</label>
+                            <input name="contatoUrgencia" required>
+                        </div>
+
+                        <div class="dgf-campo largura-total">
+                            <label>ENDEREÇO RESIDENCIAL *</label>
+                            <input name="enderecoResidencial" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>BAIRRO *</label>
+                            <input name="bairro" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>CIDADE *</label>
+                            <input name="cidade" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>SETOR *</label>
+                            <input name="setor" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>CARGO *</label>
+                            <input name="cargo" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>DATA DE ADMISSÃO *</label>
+                            <input type="date" name="dataAdmissao" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>LOGIN DE REDE *</label>
+                            <input name="loginRede" required>
+                        </div>
+
+                        <div class="dgf-campo">
+                            <label>LOGIN DO SEI *</label>
+                            <input name="loginSEI" required>
+                        </div>
+
+                        <div class="dgf-campo largura-total">
+                            <label>FOTO DO SERVIDOR *</label>
+                            <input type="file"
+                                id="fotoArquivoDGF"
+                                accept="image/jpeg,image/png,image/webp"
+                                required>
+                            <small style="display:block;color:#64748b;margin-top:6px">
+                                Selecione uma foto JPG, PNG ou WEBP.
+                            </small>
+                            <img id="fotoPreviewDGF"
+                                class="dgf-foto-preview" alt="Prévia da foto">
+                        </div>
+
+                        <div class="dgf-campo largura-total dgf-botoes"
+                            style="justify-content:flex-end;margin-top:6px">
+                            <button type="button" id="cancelarCadastroDGF"
+                                class="dgf-btn dgf-btn-cinza">
+                                Cancelar
+                            </button>
+                            <button type="submit" id="salvarCadastroDGF"
+                                class="dgf-btn dgf-btn-verde">
+                                💾 Salvar cadastro
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
 
-        <!-- Estrutura do Modal Corporativo Redesenhado com Cores Vivas -->
-        <div id="modalFicha" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(6px); z-index: 9999; justify-content: center; align-items: center; padding: 15px;">
-            <div style="background: linear-gradient(180deg, #e6fffa 0%, #e0f2fe 100%); width: 100%; max-width: 650px; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 184, 148, 0.35); animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); border: 2.5px solid #00b894;">
-                <!-- Cabeçalho Corporativo Vivo -->
-                <div style="background: linear-gradient(135deg, #0984e3 0%, #00b894 100%); color: white; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 24px;">📇</span>
-                        <div>
-                            <h3 style="margin: 0; font-size: 19px; font-weight: 700; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">Ficha Corporativa</h3>
-                            <span style="font-size: 11px; color: #e0f2fe; text-transform: uppercase; font-weight: 600; letter-spacing: 1px;">Registro Oficial de Servidor</span>
-                        </div>
-                    </div>
-                    <span id="fecharModal" style="cursor: pointer; font-size: 22px; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-weight: bold;" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">&times;</span>
+        <!-- DASHBOARD RESTRITO -->
+        <div id="modalDashboardDGF" class="dgf-modal">
+            <div class="dgf-modal-caixa" style="max-width:1250px">
+                <div class="dgf-modal-topo">
+                    <h3>📊 Dashboard corporativo</h3>
+                    <button id="fecharDashboardDGF"
+                        class="dgf-fechar" type="button">×</button>
                 </div>
-                <!-- Conteúdo da Ficha -->
-                <div id="conteudoFicha" class="modal-card-content" style="padding: 24px; max-height: 75vh; overflow-y: auto; background: transparent;">
+
+                <div class="dgf-dashboard-conteudo">
+                    <div class="dgf-botoes" style="margin-bottom:12px">
+                        <button class="dgf-btn dgf-btn-cinza"
+                            id="filtroRecifeDGF" type="button">
+                            📍 Moradores em Recife
+                        </button>
+                        <button class="dgf-btn dgf-btn-cinza"
+                            id="filtroBongiDGF" type="button">
+                            🏠 Bairro Bongi
+                        </button>
+                        <button class="dgf-btn dgf-btn-cinza"
+                            id="limparDashboardDGF" type="button">
+                            🔄 Mostrar todos
+                        </button>
+                    </div>
+
+                    <div class="dgf-dashboard-filtros">
+                        <input id="filtroCidadeDash"
+                            placeholder="Filtrar por cidade">
+                        <input id="filtroBairroDash"
+                            placeholder="Filtrar por bairro">
+                        <input id="filtroGeralDash"
+                            placeholder="Buscar nos dados autorizados">
+                    </div>
+
+                    <p id="qtdRegistrosDash"
+                        style="font-size:12px;color:#64748b"></p>
+
+                    <div class="dgf-tabela-wrap">
+                        <table class="dgf-tabela">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Nome completo</th>
+                                    <th>Matrícula</th>
+                                    <th>CPF</th>
+                                    <th>Telefone</th>
+                                    <th>E-mail</th>
+                                    <th>Cidade</th>
+                                    <th>Bairro</th>
+                                    <th>Setor</th>
+                                    <th>Cargo</th>
+                                    <th>Login de rede</th>
+                                    <th>Login do SEI</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpoTabelaDash"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Estrutura do Modal Dashboard Corporativo -->
-        <div id="modalDashboard" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); z-index: 10000; justify-content: center; align-items: center; padding: 15px;">
-            <div style="background: #ffffff; width: 95%; max-width: 1300px; height: 90vh; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); display: flex; flex-direction: column; border: 2px solid #00b894;">
-                
-                <!-- Cabeçalho Dashboard -->
-                <div style="background: linear-gradient(135deg, #0984e3 0%, #00b894 100%); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-size: 24px;">📊</span>
-                        <div>
-                            <h3 style="margin: 0; font-size: 18px; font-weight: 700;">Dashboard Corporativo - Visão Geral</h3>
-                            <span style="font-size: 11px; color: #e0f2fe;">Relatórios Dinâmicos e Consultas Especiais</span>
-                        </div>
-                    </div>
-                    <span id="fecharModalDash" style="cursor: pointer; font-size: 22px; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-weight: bold;">&times;</span>
-                </div>
-
-                <!-- Painel de Controles e Perguntas Rápidas -->
-                <div style="padding: 15px 20px; background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
-                    <div style="margin-bottom: 10px;">
-                        <span style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;">💡 Perguntas Rápidas / Filtros Sugeridos:</span>
-                        <div style="display: flex; gap: 8px; margin-top: 5px; flex-wrap: wrap;">
-                            <button class="btn-quick-filter" onclick="aplicarFiltroDash('Cidade', 'Recife')">📍 Moradores em Recife</button>
-                            <button class="btn-quick-filter" onclick="aplicarFiltroDash('Bairro', 'Bongi')">🏠 Moradores no Bongi</button>
-                            <button class="btn-quick-filter" onclick="limparFiltrosDash()">🔄 Mostrar Todos</button>
-                        </div>
-                    </div>
-
-                    <!-- Campos de Filtro por Cidade e Bairro Diretos -->
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px;">
-                        <div>
-                            <label style="font-size: 11px; font-weight: 700; color: #334155;">📍 Filtrar por Cidade:</label>
-                            <input type="text" id="filtroCidadeDash" placeholder="Ex: Recife, Olinda..." style="width: 100%; padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; outline: none;">
-                        </div>
-                        <div>
-                            <label style="font-size: 11px; font-weight: 700; color: #334155;">🏠 Filtrar por Bairro:</label>
-                            <input type="text" id="filtroBairroDash" placeholder="Ex: Bongi, Boa Viagem..." style="width: 100%; padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; outline: none;">
-                        </div>
-                        <div>
-                            <label style="font-size: 11px; font-weight: 700; color: #334155;">🔍 Busca Geral (Qualquer campo):</label>
-                            <input type="text" id="filtroGeralDash" placeholder="Digite nome, CPF, setor..." style="width: 100%; padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; outline: none;">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Resumo Geral de Registros -->
-                <div style="padding: 8px 20px; background: #e0f2fe; color: #0369a1; font-size: 12px; font-weight: 700; display: flex; justify-content: space-between;">
-                    <span id="qtdRegistrosDash">Mostrando: 0 registros</span>
-                    <span>🔒 Acesso Exclusivo para Servidores Autorizados</span>
-                </div>
-
-                <!-- Tabela de Dados Ampliada -->
-                <div class="dash-scroll" style="flex: 1; overflow: auto; padding: 0;">
-                    <table class="tabla-dashboard">
-                        <thead>
-                            <tr>
-                                <th>Nome Completo</th>
-                                <th>Matrícula</th>
-                                <th>CPF</th>
-                                <th>Sexo</th>
-                                <th>Data Nasc.</th>
-                                <th>Tipo Sang.</th>
-                                <th>Estado Civil</th>
-                                <th>Escolaridade</th>
-                                <th>E-mail</th>
-                                <th>Fone</th>
-                                <th>Ctt. Urgência</th>
-                                <th>Endereço</th>
-                                <th>Bairro</th>
-                                <th>Cidade</th>
-                                <th>Setor</th>
-                            </tr>
-                        </thead>
-                        <tbody id="corpoTabelaDash">
-                            <!-- Preenchido via JS -->
-                        </tbody>
-                    </table>
-                </div>
-
+        <!-- ZOOM DA FOTO -->
+        <div id="modalFotoZoom" class="dgf-modal" style="z-index: 100000;">
+            <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
+                <button id="fecharFotoZoom" class="dgf-fechar" type="button" style="position: absolute; top: -40px; right: 0;">×</button>
+                <img id="imgAmpliada" class="dgf-modal-foto-img" src="" alt="Foto ampliada">
             </div>
         </div>
     `;
 
-    // Armazenamento em memória dos dados da planilha
-    window.dadosPlanilhaGlobal = [];
-    window.cabecalhosPlanilhaGlobal = [];
 
-    // Lógica do Botão Apenas Autorizados e Dashboard
-    const btnAutorizados = document.getElementById('btnApenasAutorizados');
-    const btnAbrirDashboard = document.getElementById('btnAbrirDashboard');
+    // -------------------------------------------------
+    // FUNÇÕES GERAIS
+    // -------------------------------------------------
 
-    function atualizarStatusBotao() {
-        if (window.servidorAutorizadoLocal === true) {
-            btnAutorizados.style.borderColor = "#00b894";
-            btnAutorizados.innerHTML = `🔓 Acesso Liberado <span style="font-size: 11px; font-weight: bold; color: #00b894;">(✓ Autorizado)</span>`;
-        } else {
-            btnAutorizados.style.borderColor = "#cbd5e1";
-            btnAutorizados.innerHTML = `🔒 Apenas Autorizados <span id="statusAutorizacao" style="font-size: 11px; font-weight: bold; color: #e74c3c;">(Restrito)</span>`;
-            if (btnAbrirDashboard) {
-                btnAbrirDashboard.style.display = 'none';
-            }
-        }
+    const listaCards = document.getElementById('listaCards');
+    const buscaFuncionario = document.getElementById('buscaFuncionario');
+    const btnAcesso = document.getElementById('btnAcessoDGF');
+    const btnCadastro = document.getElementById('btnCadastroDGF');
+    const btnDashboard = document.getElementById('btnDashboardDGF');
+
+    const modalFicha = document.getElementById('modalFicha');
+    const modalCadastro = document.getElementById('modalCadastroDGF');
+    const modalDash = document.getElementById('modalDashboardDGF');
+    const modalFotoZoom = document.getElementById('modalFotoZoom');
+    const imgAmpliada = document.getElementById('imgAmpliada');
+
+    function abrirFotoAmpliada(url) {
+        if (!url) return;
+        imgAmpliada.src = url;
+        modalFotoZoom.style.display = 'flex';
     }
 
-    atualizarStatusBotao();
+    function escapingHTML(valor) {
+        return String(valor ?? '').replace(/[&<>"']/g, function(caractere) {
+            return {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[caractere];
+        });
+    }
 
-    btnAutorizados.addEventListener('click', () => {
-        if (window.servidorAutorizadoLocal === true) {
-            alert("Você já está autenticado como servidor autorizado!");
-            return;
+    function escaparHTML(valor) {
+        return escapingHTML(valor);
+    }
+
+    function formatarData(valor) {
+        if (!valor) return 'Não informado';
+
+        const partes = String(valor).split('-');
+
+        if (partes.length === 3 && partes[0].length === 4) {
+            return partes[2] + '/' + partes[1] + '/' + partes[0];
         }
 
-        const senhaDigitada = prompt("🔒 Digite a senha corporativa para acessar as fichas de cadastro:");
-        if (senhaDigitada === SENHA_AUTORIZADA) {
-            window.servidorAutorizadoLocal = true;
-            atualizarStatusBotao();
-            alert("Acesso autorizado com sucesso! Agora você pode clicar nos nomes para ver as fichas.");
-        } else if (senhaDigitada !== null) {
-            alert("❌ Senha incorreta! Acesso negado.");
-        }
-    });
+        return escaparHTML(valor);
+    }
 
-    // Evento de abertura do Modal Dashboard
-    btnAbrirDashboard.addEventListener('click', () => {
-        if (window.servidorAutorizadoLocal !== true) {
-            alert("🔒 Acesso negado!");
-            return;
-        }
-        renderizarTabelaDashboard();
-        document.getElementById('modalDashboard').style.display = 'flex';
-    });
+    function apiConfigurada() {
+        return API_URL.indexOf('COLE_AQUI') === -1 &&
+            API_URL.indexOf('/exec') !== -1;
+    }
 
-    // Callback JSONP para processamento dos dados da planilha
-    window.carregarFuncionariosSheet = function(dados) {
-        const containerLista = document.getElementById('listaCards');
-
-        if (!dados || !dados.table || !dados.table.rows) {
-            containerLista.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; color: #e74c3c; padding: 30px;">
-                    ❌ Não foi possível carregar os dados da planilha. Verifique as permissões de compartilhamento.
-                </div>
-            `;
-            return;
+    async function enviarAPI(acao, dados = {}, senha = senhaAcesso) {
+        if (!apiConfigurada()) {
+            throw new Error(
+                'Cole a URL do aplicativo da Web na constante API_URL.'
+            );
         }
 
-        const cols = dados.table.cols;
-        
-        // Mapeamento preciso de cabeçalhos
-        window.cabecalhosPlanilhaGlobal = cols.map((c, i) => (c && c.label && c.label.trim() !== '') ? c.label.trim() : `Coluna ${i+1}`);
-
-        // Identifica os índices das colunas de Nome e Cargo
-        let idxNome = cols.findIndex(c => c && c.label && c.label.toLowerCase().includes('nome'));
-
-        if (idxNome === -1) idxNome = 0;
-
-        // Extrai todas as linhas da planilha garantindo extração integral das células
-        let linhasProcessadas = dados.table.rows.map(row => {
-            if (!row || !row.c) return [];
-            return cols.map((_, i) => {
-                const cell = row.c[i];
-                if (!cell) return '';
-                if (cell.f) return String(cell.f).trim();
-                if (cell.v !== null && cell.v !== undefined) return String(cell.v).trim();
-                return '';
-            });
+        const resposta = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8'
+            },
+            redirect: 'follow',
+            body: JSON.stringify({
+                ...dados,
+                action: acao,
+                senha: senha
+            })
         });
 
-        // Ordenação alfabética pelo Nome
-        linhasProcessadas.sort((a, b) => {
-            const nomeA = (a[idxNome] || '').toLowerCase();
-            const nomeB = (b[idxNome] || '').toLowerCase();
-            return nomeA.localeCompare(nomeB, 'pt-BR');
-        });
+        const texto = await resposta.text();
 
-        window.dadosPlanilhaGlobal = linhasProcessadas;
+        let resultado;
 
-        // Gera os cards dos funcionários
-        let cardsHtml = '';
-        window.dadosPlanilhaGlobal.forEach((row, index) => {
-            const nome = row[idxNome] || 'Sem Nome';
+        try {
+            resultado = JSON.parse(texto);
+        } catch (erro) {
+            throw new Error(
+                'O servidor não retornou uma resposta válida. ' +
+                'Confira a implantação do Apps Script e a URL da API.'
+            );
+        }
 
-            const inicial = nome.trim().charAt(0).toUpperCase();
-            const eJaqueline = nome === "Jaqueline Castelo Branco Simões";
-            const eJanainaPontes = nome === "Janaina Ferreira de Pontes";
-            const eJanainaMelo = nome.toLowerCase().includes("janaina") && nome.toLowerCase().includes("melo");
-            const eRayan = nome === "Rayan Vinicius Torres de Santana";
-            const eEdson = nome.toLowerCase().includes("edson elias");
+        if (!resultado.ok) {
+            throw new Error(resultado.mensagem || 'Operação não concluída.');
+        }
 
-            let avatarHtml = `<div style="background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;">${inicial}</div>`;
+        return resultado;
+    }
 
-            if (eJaqueline) {
-                avatarHtml = `<img src="jaqueline.png" alt="${nome}" onerror="this.onerror=null; this.outerHTML='<div style=\\'background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;\\'>${inicial}</div>';" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">`;
-            } else if (eJanainaPontes) {
-                avatarHtml = `<img src="janaina.png" alt="${nome}" onerror="this.onerror=null; this.outerHTML='<div style=\\'background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;\\'>${inicial}</div>';" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">`;
-            } else if (eJanainaMelo) {
-                avatarHtml = `<img src="jana.png" alt="${nome}" onerror="this.onerror=null; this.outerHTML='<div style=\\'background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;\\'>${inicial}</div>';" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">`;
-            } else if (eRayan) {
-                avatarHtml = `<img src="rayan.png" alt="${nome}" onerror="this.onerror=null; this.outerHTML='<div style=\\'background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;\\'>${inicial}</div>';" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">`;
-            } else if (eEdson) {
-                avatarHtml = `<img src="edson.png" alt="${nome}" onerror="this.onerror=null; this.outerHTML='<div style=\\'background: #ecf0f1; color: #1abc9c; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;\\'>${inicial}</div>';" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">`;
+
+    // A lista pública recebe apenas nome, matrícula, foto e destaque de ferista.
+    function carregarListaPublica() {
+        return new Promise(function(resolve, reject) {
+            if (!apiConfigurada()) {
+                reject(new Error(
+                    'Configure primeiro a URL do Apps Script.'
+                ));
+                return;
             }
 
-            cardsHtml += `
-                <div class="card-user" style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.07); display: flex; align-items: center; gap: 15px; border-left: 5px solid #1abc9c; transition: transform 0.2s;">
-                    ${avatarHtml}
-                    <div>
-                        <h4 class="nome-funcionario" data-index="${index}" style="margin: 0; color: #2c3e50; font-size: 15px; cursor: pointer; text-decoration: underline;" title="Clique para ver a ficha completa">${nome}</h4>
-                    </div>
-                </div>
-            `;
-        });
+            const callback = 'receberListaDGF' + Date.now();
+            const script = document.createElement('script');
 
-        containerLista.innerHTML = cardsHtml;
+            window[callback] = function(resultado) {
+                delete window[callback];
+                script.remove();
 
-        // Atribui os eventos de clique aos nomes
-        document.querySelectorAll('.nome-funcionario').forEach(el => {
-            el.addEventListener('click', function() {
-                // Verifica autorização antes de abrir a ficha
-                if (window.servidorAutorizadoLocal !== true) {
-                    alert("🔒 Acesso restrito!\n\nClique no botão 'Apenas Autorizados' no topo da página e digite a senha corporativa para liberar a visualização das fichas.");
+                if (!resultado || !resultado.ok) {
+                    reject(new Error(
+                        resultado?.mensagem || 'Falha ao consultar a base.'
+                    ));
                     return;
                 }
 
-                const idx = parseInt(this.getAttribute('data-index'));
-                const dadosFunc = window.dadosPlanilhaGlobal[idx];
-                const modal = document.getElementById('modalFicha');
-                const conteudoFicha = document.getElementById('conteudoFicha');
+                resolve(resultado.registros || []);
+            };
 
-                const nomeFunc = dadosFunc[idxNome] || this.innerText;
+            script.onerror = function() {
+                delete window[callback];
+                script.remove();
 
-                // Avatar / Foto no Modal
-                const inicial = nomeFunc.charAt(0).toUpperCase();
-                const eJaqueline = nomeFunc === "Jaqueline Castelo Branco Simões";
-                const eJanainaPontes = nomeFunc === "Janaina Ferreira de Pontes";
-                const eJanainaMelo = nomeFunc.toLowerCase().includes("janaina") && nomeFunc.toLowerCase().includes("melo");
-                const eRayan = nomeFunc === "Rayan Vinicius Torres de Santana";
-                const eEdson = nomeFunc.toLowerCase().includes("edson elias");
+                reject(new Error(
+                    'Não foi possível acessar a lista pública. ' +
+                    'Confira a URL e a implantação do Apps Script.'
+                ));
+            };
 
-                let avatarModalHtml = `<div style="background: linear-gradient(135deg, #0984e3 0%, #00b894 100%); color: white; width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 800; box-shadow: 0 8px 20px rgba(0, 184, 148, 0.45); border: 4px solid white;">${inicial}</div>`;
+            script.src = API_URL +
+                '?action=listaPublica&callback=' + callback;
 
-                if (eJaqueline) avatarModalHtml = `<img src="jaqueline.png" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 20px rgba(0,0,0,0.25); border: 4px solid white;">`;
-                else if (eJanainaPontes) avatarModalHtml = `<img src="janaina.png" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 20px rgba(0,0,0,0.25); border: 4px solid white;">`;
-                else if (eJanainaMelo) avatarModalHtml = `<img src="jana.png" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 20px rgba(0,0,0,0.25); border: 4px solid white;">`;
-                else if (eRayan) avatarModalHtml = `<img src="rayan.png" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 20px rgba(0,0,0,0.25); border: 4px solid white;">`;
-                else if (eEdson) avatarModalHtml = `<img src="edson.png" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; box-shadow: 0 8px 20px rgba(0,0,0,0.25); border: 4px solid white;">`;
-
-                // Agrupa os campos da planilha apenas do "Nome Completo" até "Login do SEI"
-                let listaCardsCampos = [];
-                let atingiuLimite = false;
-
-                window.cabecalhosPlanilhaGlobal.forEach((header, i) => {
-                    if (atingiuLimite) return;
-
-                    const hLower = header.toLowerCase();
-
-                    // Oculta a exibição da coluna/campo de cargo
-                    if (hLower.includes('cargo') || hLower.includes('função') || hLower.includes('funcao')) {
-                        return;
-                    }
-
-                    // Descarta campos de data de cadastro ou imagens/fotos
-                    if (hLower.includes('data') || hLower.includes('cadastro') || hLower.includes('foto') || hLower.includes('imagem') || hLower.includes('avatar') || hLower.includes('img')) {
-                        return;
-                    }
-
-                    const valor = (dadosFunc[i] && dadosFunc[i].trim() !== '') ? dadosFunc[i] : 'Não informado';
-                    listaCardsCampos.push(`
-                        <div class="info-item-card">
-                            <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; color: #0984e3; letter-spacing: 0.8px; display: block; margin-bottom: 3px;">📌 ${header}</span>
-                            <span style="font-size: 13px; color: #2d3436; font-weight: 700; line-height: 1.4; word-break: break-word;">${valor}</span>
-                        </div>
-                    `);
-
-                    // Interrompe a inclusão após processar a coluna "Login do SEI"
-                    if (hLower.includes('login do sei') || hLower.includes('login sei') || hLower === 'sei') {
-                        atingiuLimite = true;
-                    }
-                });
-
-                // Separa os itens igualmente em 2 Colunas (Metade de um lado, metade do outro)
-                const meio = Math.ceil(listaCardsCampos.length / 2);
-                const colEsquerda = listaCardsCampos.slice(0, meio).join('');
-                const colDireita = listaCardsCampos.slice(meio).join('');
-
-                conteudoFicha.innerHTML = `
-                    <!-- Topo do Modal: Avatar/Inicial + Nome -->
-                    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 2px dashed #00b894;">
-                        ${avatarModalHtml}
-                        <h3 style="margin: 12px 0 10px 0; color: #0f172a; font-size: 22px; font-weight: 800; letter-spacing: -0.3px;">${nomeFunc}</h3>
-                        <span style="background: #ffffff; color: #00b894; border: 2px solid #00b894; font-size: 11px; font-weight: 800; padding: 4px 14px; border-radius: 20px; text-transform: uppercase; box-shadow: 0 3px 8px rgba(0,184,148,0.2);">✓ Perfil Verificado</span>
-                    </div>
-
-                    <!-- Corpo do Modal em 2 Colunas Lado a Lado -->
-                    <div class="info-grid-container">
-                        <div>${colEsquerda}</div>
-                        <div>${colDireita}</div>
-                    </div>
-                `;
-
-                modal.style.display = 'flex';
-            });
-        });
-    };
-
-    // ==========================================
-    // LÓGICA DO DASHBOARD CORPORATIVO RESTREITO
-    // ==========================================
-    function obterIndiceColuna(termos) {
-        if (!window.cabecalhosPlanilhaGlobal) return -1;
-        return window.cabecalhosPlanilhaGlobal.findIndex(h => {
-            const hLow = h.toLowerCase();
-            return termos.some(termo => hLow.includes(termo));
+            document.body.appendChild(script);
         });
     }
 
-    function renderizerLinhasTabelaDash(linhas) {
-        const corpo = document.getElementById('corpoTabelaDash');
-        const qtdLabel = document.getElementById('qtdRegistrosDash');
-        
-        if (!corpo) return;
 
-        // Mapeamento Inteligente dos Campos Solicitados aos Índices da Planilha
-        const idxNome = obterIndiceColuna(['nome']);
-        const idxMatricula = obterIndiceColuna(['matrícula', 'matricula']);
-        const idxCPF = obterIndiceColuna(['cpf']);
-        const idxSexo = obterIndiceColuna(['sexo', 'gênero', 'genero']);
-        const idxDataNasc = obterIndiceColuna(['nascimento', 'data nasc']);
-        const idxTipoSang = obterIndiceColuna(['sangue', 'sangüíneo', 'tipo sang']);
-        const idxEstadoCivil = obterIndiceColuna(['civil', 'estado civil']);
-        const idxEscolaridade = obterIndiceColuna(['escolaridade', 'instrução', 'instrucao']);
-        const idxEmail = obterIndiceColuna(['email', 'e-mail']);
-        const idxFone = obterIndiceColuna(['fone', 'telefone', 'celular', 'whatsapp']);
-        const idxCttUrg = obterIndiceColuna(['urgência', 'urgencia', 'contato urg']);
-        const idxEndereco = obterIndiceColuna(['endereço', 'endereco', 'logradouro', 'rua']);
-        const idxBairro = obterIndiceColuna(['bairro']);
-        const idxCidade = obterIndiceColuna(['cidade', 'município', 'municipio']);
-        const idxSetor = obterIndiceColuna(['setor', 'lotacao', 'lotação', 'departamento']);
+    function exibirStatus(mensagem) {
+        document.getElementById('statusCarregamentoDGF')
+            .textContent = mensagem;
+    }
 
-        const pegarVal = (row, idx) => (idx !== -1 && row[idx] && row[idx].trim() !== '') ? row[idx] : '-';
 
-        let html = '';
-        linhas.forEach(row => {
-            html += `
-                <tr>
-                    <td style="font-weight: 700; color: #0f172a;">${pegarVal(row, idxNome)}</td>
-                    <td>${pegarVal(row, idxMatricula)}</td>
-                    <td>${pegarVal(row, idxCPF)}</td>
-                    <td>${pegarVal(row, idxSexo)}</td>
-                    <td>${pegarVal(row, idxDataNasc)}</td>
-                    <td><span style="background: #fee2e2; color: #991b1b; padding: 2px 6px; border-radius: 4px; font-weight:bold;">${pegarVal(row, idxTipoSang)}</span></td>
-                    <td>${pegarVal(row, idxEstadoCivil)}</td>
-                    <td>${pegarVal(row, idxEscolaridade)}</td>
-                    <td>${pegarVal(row, idxEmail)}</td>
-                    <td>${pegarVal(row, idxFone)}</td>
-                    <td>${pegarVal(row, idxCttUrg)}</td>
-                    <td>${pegarVal(row, idxEndereco)}</td>
-                    <td style="font-weight: 700; color: #0284c7;">${pegarVal(row, idxBairro)}</td>
-                    <td style="font-weight: 700; color: #00b894;">${pegarVal(row, idxCidade)}</td>
-                    <td>${pegarVal(row, idxSetor)}</td>
-                </tr>
+    // O botão de cadastro fica disponível com ou sem senha.
+    function atualizarBotoes() {
+        btnCadastro.style.display = 'inline-block';
+
+        btnCadastro.textContent = autorizado
+            ? '＋ Novo cadastro'
+            : '＋ Fazer meu cadastro';
+
+        if (autorizado) {
+            btnAcesso.className = 'dgf-btn dgf-btn-verde';
+            btnAcesso.textContent = '🔓 Acesso liberado / sair';
+
+            btnDashboard.style.display =
+                termoBuscaAtual.trim().toLowerCase() === 'dash'
+                ? 'inline-block'
+                : 'none';
+        } else {
+            btnAcesso.className = 'dgf-btn dgf-btn-cinza';
+            btnAcesso.textContent = '🔒 Acesso restrito';
+
+            btnDashboard.style.display = 'none';
+        }
+    }
+
+
+    // -------------------------------------------------
+    // CARDS PÚBLICOS
+    // Mostra somente foto, nome e matrícula.
+    // -------------------------------------------------
+
+    function renderizarCards() {
+        if (!registrosPublicos.length) {
+            listaCards.innerHTML = `
+                <div class="dgf-aviso">
+                    Nenhum funcionário cadastrado nesta base.
+                </div>
             `;
-        });
-
-        if (linhas.length === 0) {
-            html = `<tr><td colspan="15" style="text-align:center; padding: 20px; color: #ef4444; font-weight: bold;">❌ Nenhum funcionário localizado para o filtro selecionado.</td></tr>`;
+            exibirStatus('0 funcionários cadastrados.');
+            return;
         }
 
-        corpo.innerHTML = html;
-        if (qtdLabel) qtdLabel.innerText = `Mostrando: ${linhas.length} registro(s) encontrado(s)`;
+        listaCards.innerHTML = registrosPublicos.map(function(registro) {
+            const nome = registro.nomeCompleto || 'Sem nome';
+            const matricula = registro.matricula || 'Não informada';
+            const inicial = nome.trim().charAt(0).toUpperCase() || '?';
+            const ferista = registro.destaqueFerista ? 'ferista-card' : '';
+
+            const foto = registro.fotoUrl
+                ? `<img src="${escaparHTML(registro.fotoUrl)}"
+                    alt="Foto do servidor"
+                    onerror="this.style.display='none'">`
+                : '';
+
+            return `
+                <div class="card-user ${ferista}"
+                    data-search="${escaparHTML(
+                        nome + ' ' + matricula
+                    ).toLowerCase()}">
+
+                    <div class="dgf-foto" data-fotourl="${escaparHTML(registro.fotoUrl || '')}">
+                        <span>${escaparHTML(inicial)}</span>
+                        ${foto}
+                    </div>
+
+                    <div class="dgf-dados-card">
+                        <button type="button"
+                            class="dgf-nome nome-funcionario"
+                            data-matricula="${escaparHTML(
+                                matricula === 'Não informada' ? '' : matricula
+                            )}">
+                            ${escaparHTML(nome)}
+                        </button>
+
+                        <span class="dgf-matricula">
+                            Matrícula: ${escaparHTML(matricula)}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        aplicarBuscaCards();
+
+        exibirStatus(
+            registrosPublicos.length +
+            ' funcionário(s) na lista pública.'
+        );
+
+        document.querySelectorAll('.dgf-foto').forEach(function(elFoto) {
+            elFoto.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const url = this.getAttribute('data-fotourl');
+                if (url) {
+                    abrirFotoAmpliada(url);
+                }
+            });
+        });
+
+        document.querySelectorAll('.nome-funcionario').forEach(function(botao) {
+            botao.addEventListener('click', function() {
+                if (!autorizado) {
+                    alert(
+                        '🔒 A ficha completa é restrita.\n\n' +
+                        'Clique em "Acesso restrito" e digite a senha autorizada.'
+                    );
+                    return;
+                }
+
+                const matricula = this.getAttribute('data-matricula');
+
+                const registro = registrosPrivados.find(function(r) {
+                    return String(r.matricula) === String(matricula);
+                });
+
+                if (!registro) {
+                    alert(
+                        'Não foi possível localizar a ficha privada. ' +
+                        'Atualize a lista e tente novamente.'
+                    );
+                    return;
+                }
+
+                abrirFicha(registro);
+            });
+        });
     }
 
-    function renderizarTabelaDashboard() {
-        renderizerLinhasTabelaDash(window.dadosPlanilhaGlobal);
+
+    function aplicarBuscaCards() {
+        const termo = termoBuscaAtual.trim().toLowerCase();
+
+        document.querySelectorAll('.card-user').forEach(function(card) {
+            const texto = card.getAttribute('data-search') || '';
+            card.style.display = texto.includes(termo) ? 'flex' : 'none';
+        });
+
+        atualizarBotoes();
     }
 
-    // Função de Filtro Cruzado do Dashboard
-    function filtrarDashboard() {
-        const valCidade = (document.getElementById('filtroCidadeDash')?.value || '').toLowerCase().trim();
-        const valBairro = (document.getElementById('filtroBairroDash')?.value || '').toLowerCase().trim();
-        const valGeral = (document.getElementById('filtroGeralDash')?.value || '').toLowerCase().trim();
 
-        const idxCidade = obterIndiceColuna(['cidade', 'município', 'municipio']);
-        const idxBairro = obterIndiceColuna(['bairro']);
+    async function recarregarListaPublica() {
+        exibirStatus('⏳ Atualizando a lista...');
 
-        const linhasFiltradas = window.dadosPlanilhaGlobal.filter(row => {
-            const txtCidade = (idxCidade !== -1 && row[idxCidade]) ? row[idxCidade].toLowerCase() : '';
-            const txtBairro = (idxBairro !== -1 && row[idxBairro]) ? row[idxBairro].toLowerCase() : '';
-            const txtTudo = row.join(' ').toLowerCase();
+        try {
+            registrosPublicos = await carregarListaPublica();
+            renderizarCards();
+        } catch (erro) {
+            listaCards.innerHTML = `
+                <div class="dgf-aviso">
+                    ❌ ${escaparHTML(erro.message)}
+                </div>
+            `;
 
-            const bateCidade = valCidade === '' || txtCidade.includes(valCidade);
-            const bateBairro = valBairro === '' || txtBairro.includes(valBairro);
-            const bateGeral = valGeral === '' || txtTudo.includes(valGeral);
+            exibirStatus('Não foi possível carregar os funcionários.');
+        }
+    }
+
+
+    // -------------------------------------------------
+    // LOGIN / ACESSO RESTRITO
+    // -------------------------------------------------
+
+    btnAcesso.addEventListener('click', async function() {
+        if (autorizado) {
+            const sair = confirm(
+                'Deseja encerrar o acesso às fichas e aos cadastros?'
+            );
+
+            if (sair) {
+                senhaAcesso = '';
+                autorizado = false;
+                registrosPrivados = [];
+
+                modalFicha.style.display = 'none';
+                modalCadastro.style.display = 'none';
+                modalDash.style.display = 'none';
+
+                atualizarBotoes();
+                exibirStatus('Acesso restrito encerrado.');
+            }
+
+            return;
+        }
+
+        const senha = prompt(
+            '🔒 Digite a senha corporativa para liberar as fichas e os cadastros:'
+        );
+
+        if (senha === null || !senha.trim()) {
+            return;
+        }
+
+        btnAcesso.disabled = true;
+        btnAcesso.textContent = '⏳ Validando...';
+
+        try {
+            await enviarAPI('autenticar', {}, senha);
+
+            senhaAcesso = senha;
+            autorizado = true;
+
+            const resposta = await enviarAPI('listarPrivados');
+
+            registrosPrivados = resposta.registros || [];
+
+            atualizarBotoes();
+            renderizarDashboard();
+
+            alert(
+                '✅ Acesso autorizado!\n\n' +
+                'As fichas completas e os cadastros estão liberados.'
+            );
+        } catch (erro) {
+            senhaAcesso = '';
+            autorizado = false;
+            registrosPrivados = [];
+
+            atualizarBotoes();
+
+            alert('❌ ' + erro.message);
+        } finally {
+            btnAcesso.disabled = false;
+            atualizarBotoes();
+        }
+    });
+
+
+    // -------------------------------------------------
+    // FICHA COMPLETA DO FUNCIONÁRIO
+    // -------------------------------------------------
+
+    function abrirFicha(registro) {
+        matriculaFichaAtual = registro.matricula;
+
+        const nome = registro.nomeCompleto || 'Sem nome';
+        const inicial = nome.trim().charAt(0).toUpperCase() || '?';
+        const ferista = registro.tipoCadastro === 'FERISTA';
+
+        const foto = registro.fotoUrl
+            ? `<img src="${escaparHTML(registro.fotoUrl)}"
+                alt="Foto do servidor"
+                onerror="this.style.display='none'">`
+            : '';
+
+        const campos = [
+            ['Matrícula', registro.matricula],
+            ['CPF', registro.cpf],
+            ['Sexo', registro.sexo],
+            ['Data de nascimento', formatarData(registro.dataNascimento)],
+            ['Tipo sanguíneo', registro.tipoSanguineo],
+            ['Estado civil', registro.estadoCivil],
+            ['Escolaridade', registro.escolaridade],
+            ['E-mail institucional', registro.emailInstitucional],
+            ['Telefone / WhatsApp', registro.telefoneWhatsapp],
+            ['Contato de urgência', registro.contatoUrgencia],
+            ['Endereço residencial', registro.enderecoResidencial],
+            ['Bairro', registro.bairro],
+            ['Cidade', registro.cidade],
+            ['Setor', registro.setor],
+            ['Cargo', registro.cargo],
+            ['Data de admissão', formatarData(registro.dataAdmissao)],
+            ['Login de rede', registro.loginRede],
+            ['Login do SEI', registro.loginSEI],
+            ['Tipo de cadastro', ferista ? 'FERISTA' : 'REGULAR'],
+            ['Cadastro criado em', registro.criadoEm],
+            ['Última atualização', registro.atualizadoEm]
+        ];
+
+        const camposHtml = campos.map(function(item) {
+            return `
+                <div class="dgf-info ${ferista ? 'dgf-info-ferista' : ''}">
+                    <small>${escaparHTML(item[0])}</small>
+                    <strong>${escaparHTML(item[1] || 'Não informado')}</strong>
+                </div>
+            `;
+        }).join('');
+
+        document.getElementById('conteudoFicha').innerHTML = `
+            <div class="dgf-perfil">
+                <div class="dgf-foto" id="fotoFichaServidor" data-fotourl="${escaparHTML(registro.fotoUrl || '')}">
+                    <span>${escaparHTML(inicial)}</span>
+                    ${foto}
+                </div>
+
+                <h4>${escaparHTML(nome)}</h4>
+
+                <span class="dgf-selo ${
+                    ferista ? 'dgf-selo-ferista' : ''
+                }">
+                    ${ferista ? '★ FERISTA' : '✓ REGULAR CADASTRADO'}
+                </span>
+            </div>
+
+            <div class="dgf-info-grid">
+                ${camposHtml}
+            </div>
+
+            <div class="dgf-acoes-ficha">
+                <button type="button" id="editarFichaDGF"
+                    class="dgf-btn dgf-btn-azul">
+                    ✏️ Editar ficha
+                </button>
+
+                <button type="button" id="excluirFichaDGF"
+                    class="dgf-btn dgf-btn-vermelho">
+                    🗑️ Excluir cadastro
+                </button>
+            </div>
+        `;
+
+        const elFotoFicha = document.getElementById('fotoFichaServidor');
+        if (elFotoFicha) {
+            elFotoFicha.addEventListener('click', function() {
+                const url = this.getAttribute('data-fotourl');
+                if (url) {
+                    abrirFotoAmpliada(url);
+                }
+            });
+        }
+
+        document.getElementById('editarFichaDGF').onclick = function() {
+            if (!autorizado) {
+                alert('Acesso restrito.');
+                return;
+            }
+
+            const registroAtual = registrosPrivados.find(function(r) {
+                return String(r.matricula) === String(matriculaFichaAtual);
+            });
+
+            if (!registroAtual) {
+                alert('Registro não encontrado para edição.');
+                return;
+            }
+
+            modalFicha.style.display = 'none';
+            abrirFormulario(registroAtual);
+        };
+
+        document.getElementById('excluirFichaDGF').onclick = async function() {
+            if (!autorizado) {
+                alert('Acesso restrito.');
+                return;
+            }
+
+            if (!confirm(
+                'Deseja realmente excluir o cadastro de ' + nome + '?\n\n' +
+                'Esta operação não pode ser desfeita.'
+            )) {
+                return;
+            }
+
+            const registroAtual = registrosPrivados.find(function(r) {
+                return String(r.matricula) === String(matriculaFichaAtual);
+            });
+
+            if (!registroAtual) {
+                alert('Não foi possível localizar o registro.');
+                return;
+            }
+
+            this.disabled = true;
+            this.textContent = 'Excluindo...';
+
+            try {
+                await enviarAPI('excluir', {
+                    id: registroAtual.id
+                });
+
+                modalFicha.style.display = 'none';
+
+                await recarregarDadosPrivados();
+                await recarregarListaPublica();
+
+                alert('Cadastro excluído com sucesso.');
+            } catch (erro) {
+                alert('Erro ao excluir: ' + erro.message);
+
+                this.disabled = false;
+                this.textContent = '🗑️ Excluir cadastro';
+            }
+        };
+
+        modalFicha.style.display = 'flex';
+    }
+
+
+    // -------------------------------------------------
+    // CADASTRO E EDIÇÃO
+    // Novo cadastro: liberado para todos.
+    // Edição de cadastro existente: exige senha.
+    // -------------------------------------------------
+
+    btnCadastro.addEventListener('click', function() {
+        abrirFormulario(null);
+    });
+
+
+    function abrirFormulario(registro) {
+        if (!autorizado && registro) {
+            alert(
+                'Para editar um cadastro existente, ' +
+                'é necessário informar a senha corporativa.'
+            );
+            return;
+        }
+
+        formulario.reset();
+
+        document.getElementById('tituloCadastroDGF').textContent =
+            registro ? '✏️ Editar cadastro' : '＋ Cadastrar funcionário';
+
+        const campos = formulario.querySelectorAll('[name]');
+
+        campos.forEach(function(campo) {
+            const nome = campo.name;
+
+            if (nome === 'id') {
+                campo.value = registro ? (registro.id || '') : '';
+                return;
+            }
+
+            campo.value = registro && registro[nome] != null
+                ? registro[nome]
+                : '';
+        });
+
+        // Libera a seleção entre Regular ou Ferista para qualquer usuário
+        const seletorTipo = formulario.elements.namedItem('tipoCadastro');
+        if (seletorTipo) {
+            seletorTipo.disabled = false;
+        }
+
+        previewFoto.removeAttribute('src');
+        previewFoto.style.display = 'none';
+
+        if (registro && registro.fotoUrl) {
+            previewFoto.src = registro.fotoUrl;
+            previewFoto.style.display = 'block';
+            inputFoto.required = false;
+        } else {
+            inputFoto.required = true;
+        }
+
+        modalCadastro.style.display = 'flex';
+    }
+
+
+    function comprimirImagem(arquivo) {
+        return new Promise(function(resolve, reject) {
+            if (!arquivo) {
+                resolve('');
+                return;
+            }
+
+            if (!arquivo.type.startsWith('image/')) {
+                reject(new Error('Selecione um arquivo de imagem válido.'));
+                return;
+            }
+
+            const leitor = new FileReader();
+
+            leitor.onerror = function() {
+                reject(new Error('Não foi possível ler a foto.'));
+            };
+
+            leitor.onload = function() {
+                const imagem = new Image();
+
+                imagem.onerror = function() {
+                    reject(new Error('A foto selecionada não pôde ser aberta.'));
+                };
+
+                imagem.onload = function() {
+                    const limite = 900;
+
+                    const escala = Math.min(
+                        1,
+                        limite / Math.max(imagem.width, imagem.height)
+                    );
+
+                    const canvas = document.createElement('canvas');
+
+                    canvas.width = Math.max(
+                        1,
+                        Math.round(imagem.width * escala)
+                    );
+
+                    canvas.height = Math.max(
+                        1,
+                        Math.round(imagem.height * escala)
+                    );
+
+                    const contexto = canvas.getContext('2d');
+
+                    contexto.drawImage(
+                        imagem,
+                        0,
+                        0,
+                        canvas.width,
+                        canvas.height
+                    );
+
+                    try {
+                        resolve(canvas.toDataURL('image/jpeg', 0.82));
+                    } catch (erro) {
+                        reject(new Error('Não foi possível preparar a foto.'));
+                    }
+                };
+
+                imagem.src = leitor.result;
+            };
+
+            leitor.readAsDataURL(arquivo);
+        });
+    }
+
+
+    inputFoto.addEventListener('change', function() {
+        const arquivo = this.files && this.files[0];
+
+        if (!arquivo) {
+            return;
+        }
+
+        if (!arquivo.type.startsWith('image/')) {
+            alert('Selecione um arquivo de imagem válido.');
+            this.value = '';
+            return;
+        }
+
+        const leitor = new FileReader();
+
+        leitor.onload = function() {
+            previewFoto.src = leitor.result;
+            previewFoto.style.display = 'block';
+        };
+
+        leitor.readAsDataURL(arquivo);
+    });
+
+
+    formulario.addEventListener('submit', async function(evento) {
+        evento.preventDefault();
+
+        const idAtual = formulario.elements.namedItem('id').value;
+
+        if (!autorizado && idAtual) {
+            alert(
+                'Você pode realizar um novo cadastro sem senha. ' +
+                'Para editar um cadastro existente, informe a senha corporativa.'
+            );
+            return;
+        }
+
+        const botaoSalvar = document.getElementById('salvarCadastroDGF');
+        const arquivo = inputFoto.files && inputFoto.files[0];
+
+        botaoSalvar.disabled = true;
+        botaoSalvar.textContent = '⏳ Salvando...';
+
+        try {
+            const dados = {};
+
+            new FormData(formulario).forEach(function(valor, chave) {
+                if (chave !== 'id') {
+                    dados[chave] = valor;
+                }
+            });
+
+            dados.id = idAtual;
+
+            if (arquivo) {
+                dados.fotoData = await comprimirImagem(arquivo);
+            }
+
+            await enviarAPI(
+                autorizado ? 'salvar' : 'salvarPublico',
+                dados
+            );
+
+            modalCadastro.style.display = 'none';
+
+            if (autorizado) {
+                await recarregarDadosPrivados();
+            }
+
+            await recarregarListaPublica();
+
+            alert(
+                autorizado
+                    ? '✅ Cadastro salvo com sucesso!'
+                    : '✅ Cadastro enviado com sucesso!'
+            );
+
+        } catch (erro) {
+            alert('❌ Não foi possível salvar: ' + erro.message);
+
+        } finally {
+            botaoSalvar.disabled = false;
+            botaoSalvar.textContent = '💾 Salvar cadastro';
+        }
+    });
+
+
+    async function recarregarDadosPrivados() {
+        if (!autorizado) {
+            return;
+        }
+
+        const resposta = await enviarAPI('listarPrivados');
+
+        registrosPrivados = resposta.registros || [];
+
+        renderizarDashboard();
+    }
+
+
+    // -------------------------------------------------
+    // DASHBOARD PRIVADO E FILTROS
+    // -------------------------------------------------
+
+    btnDashboard.addEventListener('click', function() {
+        if (!autorizado) {
+            alert('Acesso restrito.');
+            return;
+        }
+
+        modalDash.style.display = 'flex';
+        renderizarDashboard();
+    });
+
+
+    function renderizarDashboard() {
+        if (!autorizado) {
+            return;
+        }
+
+        const cidade = (
+            document.getElementById('filtroCidadeDash').value || ''
+        ).toLowerCase().trim();
+
+        const bairro = (
+            document.getElementById('filtroBairroDash').value || ''
+        ).toLowerCase().trim();
+
+        const geral = (
+            document.getElementById('filtroGeralDash').value || ''
+        ).toLowerCase().trim();
+
+        const filtrados = registrosPrivados.filter(function(r) {
+            const bateCidade = !cidade ||
+                String(r.cidade || '').toLowerCase().includes(cidade);
+
+            const bateBairro = !bairro ||
+                String(r.bairro || '').toLowerCase().includes(bairro);
+
+            const bateGeral = !geral ||
+                Object.keys(r).some(function(chave) {
+                    return String(r[chave] ?? '')
+                        .toLowerCase()
+                        .includes(geral);
+                });
 
             return bateCidade && bateBairro && bateGeral;
         });
 
-        renderizerLinhasTabelaDash(linhasFiltradas);
+        const corpo = document.getElementById('corpoTabelaDash');
+
+        document.getElementById('qtdRegistrosDash').textContent =
+            'Mostrando ' + filtrados.length +
+            ' de ' + registrosPrivados.length + ' registro(s).';
+
+        if (!filtrados.length) {
+            corpo.innerHTML = `
+                <tr>
+                    <td colspan="12" style="text-align:center;padding:20px">
+                        Nenhum registro encontrado.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        corpo.innerHTML = filtrados.map(function(r) {
+            const ferista = r.tipoCadastro === 'FERISTA';
+
+            const valores = [
+                ferista ? 'FERISTA' : 'REGULAR',
+                r.nomeCompleto,
+                r.matricula,
+                r.cpf,
+                r.telefoneWhatsapp,
+                r.emailInstitucional,
+                r.cidade,
+                r.bairro,
+                r.setor,
+                r.cargo,
+                r.loginRede,
+                r.loginSEI
+            ];
+
+            return `
+                <tr class="${ferista ? 'ferista-linha' : ''}">
+                    ${valores.map(function(valor) {
+                        return '<td>' +
+                            escaparHTML(valor || '—') +
+                            '</td>';
+                    }).join('')}
+                </tr>
+            `;
+        }).join('');
     }
 
-    // Funções Globais para Botões de Atalho do Dashboard
-    window.aplicarFiltroDash = function(tipo, valor) {
-        if (tipo === 'Cidade') {
-            const input = document.getElementById('filtroCidadeDash');
-            if (input) input.value = valor;
-        } else if (tipo === 'Bairro') {
-            const input = document.getElementById('filtroBairroDash');
-            if (input) input.value = valor;
-        }
-        filtrarDashboard();
-    };
 
-    window.limparFiltrosDash = function() {
-        const fC = document.getElementById('filtroCidadeDash');
-        const fB = document.getElementById('filtroBairroDash');
-        const fG = document.getElementById('filtroGeralDash');
-        if (fC) fC.value = '';
-        if (fB) fB.value = '';
-        if (fG) fG.value = '';
-        renderizarTabelaDashboard();
-    };
-
-    // Listeners dos Filtros
-    document.addEventListener('input', (e) => {
-        if (['filtroCidadeDash', 'filtroBairroDash', 'filtroGeralDash'].includes(e.target.id)) {
-            filtrarDashboard();
-        }
+    [
+        'filtroCidadeDash',
+        'filtroBairroDash',
+        'filtroGeralDash'
+    ].forEach(function(id) {
+        document.getElementById(id).addEventListener(
+            'input',
+            renderizarDashboard
+        );
     });
 
-    // Fechar Modal Dashboard
-    document.addEventListener('click', (e) => {
-        const modalDash = document.getElementById('modalDashboard');
-        const fecharBtn = document.getElementById('fecharModalDash');
-        if (e.target === modalDash || e.target === fecharBtn) {
-            modalDash.style.display = 'none';
-        }
+
+    document.getElementById('filtroRecifeDGF').onclick = function() {
+        document.getElementById('filtroCidadeDash').value = 'Recife';
+        renderizarDashboard();
+    };
+
+    document.getElementById('filtroBongiDGF').onclick = function() {
+        document.getElementById('filtroBairroDash').value = 'Bongi';
+        renderizarDashboard();
+    };
+
+    document.getElementById('limparDashboardDGF').onclick = function() {
+        document.getElementById('filtroCidadeDash').value = '';
+        document.getElementById('filtroBairroDash').value = '';
+        document.getElementById('filtroGeralDash').value = '';
+
+        renderizarDashboard();
+    };
+
+
+    // -------------------------------------------------
+    // BUSCA, FECHAMENTO DOS MODAIS E INICIALIZAÇÃO
+    // -------------------------------------------------
+
+    buscaFuncionario.addEventListener('input', function(evento) {
+        termoBuscaAtual = evento.target.value || '';
+        aplicarBuscaCards();
     });
 
-    // Requisição via JSONP para carregar a planilha
-    const sheetId = '1Oh9X6Lu-YjgRlm7GFW5J5NoV5tE7Y6oQsVk_78kiXpA';
-    const scriptAntigo = document.getElementById('scriptCarregaSheet');
-    if (scriptAntigo) scriptAntigo.remove();
 
-    const script = document.createElement('script');
-    script.id = 'scriptCarregaSheet';
-    script.src = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=responseHandler:carregarFuncionariosSheet`;
-    script.onerror = function() {
-        document.getElementById('listaCards').innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; color: #e74c3c; padding: 30px;">
-                ❌ Não foi possível se conectar à planilha. Certifique-se de que a permissão da planilha esteja como "Qualquer pessoa com o link".
-            </div>
-        `;
+    document.getElementById('fecharModalFicha').onclick = function() {
+        modalFicha.style.display = 'none';
     };
-    document.body.appendChild(script);
 
-    // Lógica da Busca Dinâmica na página principal + Gatilho Secreto para o Dashboard ao digitar "DASH"
-    document.getElementById('buscaFuncionario').addEventListener('input', function(e) {
-        const termo = e.target.value.toLowerCase().trim();
-        const cards = document.querySelectorAll('.card-user');
-        const btnDash = document.getElementById('btnAbrirDashboard');
+    document.getElementById('fecharModalCadastro').onclick = function() {
+        modalCadastro.style.display = 'none';
+    };
 
-        // Exibe o botão do Dashboard SOMENTE se a busca for exatamente "dash"
-        if (termo === 'dash') {
-            if (btnDash) btnDash.style.display = 'inline-flex';
-        } else {
-            if (btnDash) btnDash.style.display = 'none';
-        }
+    document.getElementById('cancelarCadastroDGF').onclick = function() {
+        modalCadastro.style.display = 'none';
+    };
 
-        cards.forEach(card => {
-            const nome = card.querySelector('h4').innerText.toLowerCase();
-            if (nome.includes(termo)) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
+    document.getElementById('fecharDashboardDGF').onclick = function() {
+        modalDash.style.display = 'none';
+    };
+
+    document.getElementById('fecharFotoZoom').onclick = function() {
+        modalFotoZoom.style.display = 'none';
+    };
+
+
+    [modalFicha, modalCadastro, modalDash, modalFotoZoom].forEach(function(modal) {
+        modal.addEventListener('click', function(evento) {
+            if (evento.target === modal) {
+                modal.style.display = 'none';
             }
         });
     });
 
-    // Fechar Modal Ficha
-    document.getElementById('fecharModal').onclick = () => {
-        document.getElementById('modalFicha').style.display = 'none';
-    };
-    window.onclick = (event) => {
-        const modal = document.getElementById('modalFicha');
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    };
+
+    atualizarBotoes();
+    recarregarListaPublica();
 }
 
 if(pagina === "documentos"){ conteudo.innerHTML = "<h2>Documentos</h2><p>Central de documentos.</p>"; }

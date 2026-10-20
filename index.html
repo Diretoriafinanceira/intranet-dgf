@@ -8441,7 +8441,6 @@ if (pagina === "Funcionários") {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                cursor: pointer;
             }
 
             .ferista-card .dgf-foto {
@@ -8767,15 +8766,6 @@ if (pagina === "Funcionários") {
                 color: #64748b;
             }
 
-            .dgf-modal-foto-img {
-                max-width: 85vw;
-                max-height: 85vh;
-                border-radius: 12px;
-                object-fit: contain;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-                border: 3px solid #ffffff;
-            }
-
             @media (max-width: 620px) {
                 .dgf-equipe {
                     padding: 12px;
@@ -8878,7 +8868,7 @@ if (pagina === "Funcionários") {
                         <div class="dgf-campo largura-total">
                             <label>TIPO DE CADASTRO *</label>
                             <select name="tipoCadastro" required>
-                                <option value="REGULAR">Regular</option>
+                                <option value="Regular">Regular(a)</option>
                                 <option value="FERISTA">Ferista</option>
                             </select>
                         </div>
@@ -9110,14 +9100,6 @@ if (pagina === "Funcionários") {
                 </div>
             </div>
         </div>
-
-        <!-- ZOOM DA FOTO -->
-        <div id="modalFotoZoom" class="dgf-modal" style="z-index: 100000;">
-            <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
-                <button id="fecharFotoZoom" class="dgf-fechar" type="button" style="position: absolute; top: -40px; right: 0;">×</button>
-                <img id="imgAmpliada" class="dgf-modal-foto-img" src="" alt="Foto ampliada">
-            </div>
-        </div>
     `;
 
 
@@ -9134,16 +9116,12 @@ if (pagina === "Funcionários") {
     const modalFicha = document.getElementById('modalFicha');
     const modalCadastro = document.getElementById('modalCadastroDGF');
     const modalDash = document.getElementById('modalDashboardDGF');
-    const modalFotoZoom = document.getElementById('modalFotoZoom');
-    const imgAmpliada = document.getElementById('imgAmpliada');
 
-    function abrirFotoAmpliada(url) {
-        if (!url) return;
-        imgAmpliada.src = url;
-        modalFotoZoom.style.display = 'flex';
-    }
+    const formulario = document.getElementById('formFuncionario');
+    const inputFoto = document.getElementById('fotoArquivoDGF');
+    const previewFoto = document.getElementById('fotoPreviewDGF');
 
-    function escapingHTML(valor) {
+    function escaparHTML(valor) {
         return String(valor ?? '').replace(/[&<>"']/g, function(caractere) {
             return {
                 '&': '&amp;',
@@ -9153,10 +9131,6 @@ if (pagina === "Funcionários") {
                 "'": '&#39;'
             }[caractere];
         });
-    }
-
-    function escaparHTML(valor) {
-        return escapingHTML(valor);
     }
 
     function formatarData(valor) {
@@ -9327,7 +9301,7 @@ if (pagina === "Funcionários") {
                         nome + ' ' + matricula
                     ).toLowerCase()}">
 
-                    <div class="dgf-foto" data-fotourl="${escaparHTML(registro.fotoUrl || '')}">
+                    <div class="dgf-foto">
                         <span>${escaparHTML(inicial)}</span>
                         ${foto}
                     </div>
@@ -9355,16 +9329,6 @@ if (pagina === "Funcionários") {
             registrosPublicos.length +
             ' funcionário(s) na lista pública.'
         );
-
-        document.querySelectorAll('.dgf-foto').forEach(function(elFoto) {
-            elFoto.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const url = this.getAttribute('data-fotourl');
-                if (url) {
-                    abrirFotoAmpliada(url);
-                }
-            });
-        });
 
         document.querySelectorAll('.nome-funcionario').forEach(function(botao) {
             botao.addEventListener('click', function() {
@@ -9547,7 +9511,7 @@ if (pagina === "Funcionários") {
 
         document.getElementById('conteudoFicha').innerHTML = `
             <div class="dgf-perfil">
-                <div class="dgf-foto" id="fotoFichaServidor" data-fotourl="${escaparHTML(registro.fotoUrl || '')}">
+                <div class="dgf-foto">
                     <span>${escaparHTML(inicial)}</span>
                     ${foto}
                 </div>
@@ -9577,16 +9541,6 @@ if (pagina === "Funcionários") {
                 </button>
             </div>
         `;
-
-        const elFotoFicha = document.getElementById('fotoFichaServidor');
-        if (elFotoFicha) {
-            elFotoFicha.addEventListener('click', function() {
-                const url = this.getAttribute('data-fotourl');
-                if (url) {
-                    abrirFotoAmpliada(url);
-                }
-            });
-        }
 
         document.getElementById('editarFichaDGF').onclick = function() {
             if (!autorizado) {
@@ -10040,12 +9994,8 @@ if (pagina === "Funcionários") {
         modalDash.style.display = 'none';
     };
 
-    document.getElementById('fecharFotoZoom').onclick = function() {
-        modalFotoZoom.style.display = 'none';
-    };
 
-
-    [modalFicha, modalCadastro, modalDash, modalFotoZoom].forEach(function(modal) {
+    [modalFicha, modalCadastro, modalDash].forEach(function(modal) {
         modal.addEventListener('click', function(evento) {
             if (evento.target === modal) {
                 modal.style.display = 'none';
@@ -10174,11 +10124,6 @@ if(pagina === "avaliacao"){
         ` : ''}
     `;
 }
-
-
-
-
-
 
 if (pagina === "mapa") {
     conteudo.style.maxWidth = "100%";

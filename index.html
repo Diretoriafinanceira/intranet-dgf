@@ -8441,6 +8441,7 @@ if (pagina === "Funcionários") {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                cursor: pointer;
             }
 
             .ferista-card .dgf-foto {
@@ -8764,6 +8765,29 @@ if (pagina === "Funcionários") {
                 margin: 0 0 15px;
                 font-size: 12px;
                 color: #64748b;
+            }
+
+            /* MODAL EXCLUSIVO PARA FOTO EXPANDIDA */
+            .dgf-modal-foto-expandida {
+                display: none;
+                position: fixed;
+                inset: 0;
+                z-index: 100000;
+                background: rgba(0,0,0,.88);
+                backdrop-filter: blur(5px);
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                cursor: pointer;
+            }
+
+            .dgf-modal-foto-expandida img {
+                max-width: 90vw;
+                max-height: 85vh;
+                border-radius: 12px;
+                box-shadow: 0 20px 50px rgba(0,0,0,.5);
+                object-fit: contain;
+                border: 3px solid #ffffff;
             }
 
             @media (max-width: 620px) {
@@ -9100,6 +9124,11 @@ if (pagina === "Funcionários") {
                 </div>
             </div>
         </div>
+
+        <!-- MODAL DE VISUALIZAÇÃO DE FOTO GRANDE -->
+        <div id="modalFotoExpandida" class="dgf-modal-foto-expandida">
+            <img id="imgFotoExpandida" src="" alt="Foto expandida do funcionário">
+        </div>
     `;
 
 
@@ -9116,10 +9145,23 @@ if (pagina === "Funcionários") {
     const modalFicha = document.getElementById('modalFicha');
     const modalCadastro = document.getElementById('modalCadastroDGF');
     const modalDash = document.getElementById('modalDashboardDGF');
+    const modalFotoExpandida = document.getElementById('modalFotoExpandida');
+    const imgFotoExpandida = document.getElementById('imgFotoExpandida');
 
     const formulario = document.getElementById('formFuncionario');
     const inputFoto = document.getElementById('fotoArquivoDGF');
     const previewFoto = document.getElementById('fotoPreviewDGF');
+
+    function expandirFoto(urlFoto) {
+        if (!urlFoto) return;
+        imgFotoExpandida.src = urlFoto;
+        modalFotoExpandida.style.display = 'flex';
+    }
+
+    modalFotoExpandida.addEventListener('click', function() {
+        modalFotoExpandida.style.display = 'none';
+        imgFotoExpandida.src = '';
+    });
 
     function escaparHTML(valor) {
         return String(valor ?? '').replace(/[&<>"']/g, function(caractere) {
@@ -9301,7 +9343,7 @@ if (pagina === "Funcionários") {
                         nome + ' ' + matricula
                     ).toLowerCase()}">
 
-                    <div class="dgf-foto">
+                    <div class="dgf-foto" data-fotourl="${escaparHTML(registro.fotoUrl || '')}">
                         <span>${escaparHTML(inicial)}</span>
                         ${foto}
                     </div>
@@ -9329,6 +9371,17 @@ if (pagina === "Funcionários") {
             registrosPublicos.length +
             ' funcionário(s) na lista pública.'
         );
+
+        // Clique na foto para expandir
+        document.querySelectorAll('.dgf-foto').forEach(function(divFoto) {
+            divFoto.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const url = this.getAttribute('data-fotourl');
+                if (url) {
+                    expandirFoto(url);
+                }
+            });
+        });
 
         document.querySelectorAll('.nome-funcionario').forEach(function(botao) {
             botao.addEventListener('click', function() {
@@ -9511,7 +9564,7 @@ if (pagina === "Funcionários") {
 
         document.getElementById('conteudoFicha').innerHTML = `
             <div class="dgf-perfil">
-                <div class="dgf-foto">
+                <div class="dgf-foto" id="fotoFichaExpandir" data-fotourl="${escaparHTML(registro.fotoUrl || '')}">
                     <span>${escaparHTML(inicial)}</span>
                     ${foto}
                 </div>
@@ -9541,6 +9594,16 @@ if (pagina === "Funcionários") {
                 </button>
             </div>
         `;
+
+        const fotoFicha = document.getElementById('fotoFichaExpandir');
+        if (fotoFicha) {
+            fotoFicha.addEventListener('click', function() {
+                const url = this.getAttribute('data-fotourl');
+                if (url) {
+                    expandirFoto(url);
+                }
+            });
+        }
 
         document.getElementById('editarFichaDGF').onclick = function() {
             if (!autorizado) {

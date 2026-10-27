@@ -3676,7 +3676,7 @@ if (pagina === "Xadrez DGF") {
         </div>
 
 
-        <!-- DESTAQUE DA SEMANA -->
+        <!-- DESTAQUE DA SEMANA (COM NAVEGAÇÃO DE FOTOS: duelo.png -> heber.png -> xadrez.png) -->
         <div style="
             background:white;
             padding:25px;
@@ -3692,7 +3692,7 @@ if (pagina === "Xadrez DGF") {
                 font-size:26px;
                 text-align:center;
             ">
-                🏆 Vencedores da Semana
+                
             </h2>
 
             <div style="
@@ -3703,8 +3703,9 @@ if (pagina === "Xadrez DGF") {
             ">
 
                 <img
-                    src="xadrez.png"
-                    alt="Equipe da SFES vencedora da semana"
+                    id="imgDestaqueSemana"
+                    src="duelo.png"
+                    alt="Vencedores da semana"
                     onclick="mostrar('Xadrez DGF')"
                     style="
                         width:100%;
@@ -3714,21 +3715,42 @@ if (pagina === "Xadrez DGF") {
                         cursor:pointer;
                     "
                 >
+              
 
-                <div style="
-                    position:absolute;
-                    top:20px;
-                    left:20px;
-                    background:linear-gradient(135deg,#f1c40f,#f39c12);
-                    color:#1e2b37;
-                    padding:10px 20px;
-                    border-radius:30px;
-                    font-size:17px;
-                    font-weight:bold;
-                    box-shadow:0 3px 10px rgba(0,0,0,0.2);
-                ">
-                    🏆 VENCEDORES DA SEMANA
-                </div>
+                <!-- SETAS DE NAVEGAÇÃO -->
+                <button 
+                    onclick="let img = document.getElementById('imgDestaqueSemana'); if(img.src.includes('duelo.png')){ img.src = 'xadrez.png'; } else if(img.src.includes('heber.png')){ img.src = 'duelo.png'; } else { img.src = 'heber.png'; }"
+                    style="
+                        position:absolute;
+                        top:50%;
+                        left:15px;
+                        transform:translateY(-50%);
+                        background:rgba(0,0,0,0.5);
+                        color:white;
+                        border:none;
+                        border-radius:50%;
+                        width:40px;
+                        height:40px;
+                        font-size:20px;
+                        cursor:pointer;
+                    ">❮</button>
+
+                <button 
+                    onclick="let img = document.getElementById('imgDestaqueSemana'); if(img.src.includes('duelo.png')){ img.src = 'heber.png'; } else if(img.src.includes('heber.png')){ img.src = 'xadrez.png'; } else { img.src = 'duelo.png'; }"
+                    style="
+                        position:absolute;
+                        top:50%;
+                        right:15px;
+                        transform:translateY(-50%);
+                        background:rgba(0,0,0,0.5);
+                        color:white;
+                        border:none;
+                        border-radius:50%;
+                        width:40px;
+                        height:40px;
+                        font-size:20px;
+                        cursor:pointer;
+                    ">❯</button>
 
             </div>
 
@@ -3742,74 +3764,11 @@ if (pagina === "Xadrez DGF") {
                 text-align:center;
             ">
 
-                <h3 style="
-                    margin:0 0 12px 0;
-                    color:#2c3e50;
-                ">
-                    Equipe SFES
-                </h3>
-
-                <div style="
-                    display:flex;
-                    justify-content:center;
-                    flex-wrap:wrap;
-                    gap:10px;
-                ">
-
-                    <span style="
-                        background:#2c3e50;
-                        color:white;
-                        padding:8px 14px;
-                        border-radius:20px;
-                    ">Renan</span>
-
-                    <span style="
-                        background:#2c3e50;
-                        color:white;
-                        padding:8px 14px;
-                        border-radius:20px;
-                    ">José</span>
-
-                    <span style="
-                        background:#2c3e50;
-                        color:white;
-                        padding:8px 14px;
-                        border-radius:20px;
-                    ">Jane</span>
-
-                    <span style="
-                        background:#2c3e50;
-                        color:white;
-                        padding:8px 14px;
-                        border-radius:20px;
-                    ">Alyson</span>
-
-                    <span style="
-                        background:#2c3e50;
-                        color:white;
-                        padding:8px 14px;
-                        border-radius:20px;
-                    ">Flavia</span>
-
-                </div>
-
-                <p style="
-                    margin:15px 0 0 0;
-                    color:#555;
-                    font-size:15px;
-                ">
-                    A equipe da SFES foi a grande vencedora da semana!
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- ÁREA DE REGRAS E PEÇAS -->
+               
+        <!-- ÁREA DE REGRAS E PEÇAS (PEÃO, TORRE E BISPO) -->
         <div style="
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
             gap:20px;
             margin-bottom:25px;
         ">
@@ -4018,13 +3977,73 @@ if (pagina === "Xadrez DGF") {
 
             </div>
 
+
+            <!-- BISPO -->
+            <div style="
+                background:linear-gradient(135deg,#f3e5f5,#f8f9fa);
+                padding:25px;
+                border-radius:15px;
+                box-shadow:0 3px 12px rgba(0,0,0,0.08);
+                border-top:5px solid #8e44ad;
+            ">
+
+                <h2 style="
+                    color:#8e44ad;
+                    margin-top:0;
+                ">
+                    📐 Conheça o Bispo
+                </h2>
+
+                <img
+                    src="bispo.png"
+                    alt="Movimento do bispo no xadrez"
+                    style="
+                        width:100%;
+                        max-height:350px;
+                        object-fit:cover;
+                        border-radius:12px;
+                        margin-bottom:15px;
+                    "
+                >
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                ">
+                    O bispo é uma peça de longo alcance que atua promovendo ataques à distância pelas diagonais.
+                </p>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                ">
+                    Movimenta-se exclusivamente nas <strong>diagonais</strong>, quantas casas desejar, desde que desimpedidas.
+                </p>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                ">
+                    Cada bispo permanece sempre nas casas da <strong>mesma cor</strong> em que iniciou a partida.
+                </p>
+
+                <p style="
+                    color:#555;
+                    line-height:1.6;
+                    margin-bottom:0;
+                ">
+                    Trabalham muito bem em par (o par de bispos), dominando tanto as diagonais claras quanto as escuras.
+                </p>
+
+            </div>
+
         </div>
 
 
         <!-- VÍDEOS -->
         <div style="
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
             gap:20px;
             margin-bottom:25px;
         ">
@@ -4100,7 +4119,7 @@ if (pagina === "Xadrez DGF") {
                     margin-top:0;
                     text-align:center;
                 ">
-                    🏰 Movimento da Torre na Prática
+                    🏰 Movimento da Torre
                 </h2>
 
                 <div style="
@@ -4134,6 +4153,61 @@ if (pagina === "Xadrez DGF") {
                     margin-top:10px;
                 ">
                     Aprenda a dominar o tabuleiro utilizando a Torre.
+                </p>
+
+            </div>
+
+
+            <!-- VÍDEO 3 (BISPO) -->
+            <div style="
+                background:white;
+                padding:25px;
+                border-radius:15px;
+                box-shadow:0 3px 12px rgba(0,0,0,0.08);
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+            ">
+
+                <h2 style="
+                    color:#2c3e50;
+                    margin-top:0;
+                    text-align:center;
+                ">
+                    📐 Movimento do Bispo
+                </h2>
+
+                <div style="
+                    width:100%;
+                    max-width:320px;
+                    height:480px;
+                    border-radius:12px;
+                    overflow:hidden;
+                    background:#000;
+                ">
+                    <video
+                        controls
+                        playsinline
+                        preload="auto"
+                        style="
+                            width:100%;
+                            height:100%;
+                            object-fit:contain;
+                            display:block;
+                        "
+                    >
+                        <source src="bispo.mp4" type="video/mp4">
+                        Seu navegador não suporta a reprodução de vídeo.
+                    </video>
+                </div>
+
+                <p style="
+                    text-align:center;
+                    color:#777;
+                    margin-bottom:0;
+                    margin-top:10px;
+                ">
+                    Aprenda a dominar as diagonais com o Bispo.
                 </p>
 
             </div>
@@ -4193,7 +4267,7 @@ if (pagina === "Xadrez DGF") {
                     line-height:1.6;
                     margin-bottom:0;
                 ">
-                    O destaque desta semana é o movimento do peão e da torre,
+                    O destaque desta semana é o movimento do peão, da torre e do bispo,
                     peças fundamentais para a construção de estratégias no tabuleiro.
                 </p>
 

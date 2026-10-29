@@ -530,6 +530,42 @@ section {
 }
 
 </style>
+<!-- AJUSTE DEFINITIVO DE CORES DOS BOTÕES HALLOWEEN DGF; somente menu e mural -->
+<style id="dgf-halloween-botoes-global">
+    nav button[onclick*="Outubro Rosa"] {
+        background: linear-gradient(135deg, #24102f 0%, #4a148c 52%, #e65100 100%) !important;
+        color: #fff !important;
+        border: 1px solid #ff9100 !important;
+        box-shadow: 0 3px 10px rgba(30, 10, 45, .3) !important;
+    }
+
+    #mural-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]),
+    #modal-stories-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]),
+    #painel-admin-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]),
+    [id^="modal-"][id*="outubro-rosa"] button:not([onclick^="aplicarCorNaMensagem"]) {
+        background: linear-gradient(135deg, #24102f 0%, #4a148c 52%, #e65100 100%) !important;
+        background-color: #4a148c !important;
+        color: #fff !important;
+        border: 1px solid #ff9100 !important;
+        border-radius: 10px !important;
+        box-shadow: 0 4px 12px rgba(30, 10, 45, .28), inset 0 0 0 1px rgba(255, 145, 0, .12) !important;
+    }
+
+    #mural-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]):hover,
+    #modal-stories-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]):hover,
+    #painel-admin-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]):hover,
+    [id^="modal-"][id*="outubro-rosa"] button:not([onclick^="aplicarCorNaMensagem"]):hover {
+        filter: brightness(1.15) !important;
+        border-color: #ffd54f !important;
+    }
+
+    /* Os botões usados para escolher a cor do texto não são alterados. */
+    #mural-outubro-rosa-dgf button[onclick^="aplicarCorNaMensagem"],
+    #modal-stories-outubro-rosa-dgf button[onclick^="aplicarCorNaMensagem"] {
+        box-shadow: none;
+    }
+</style>
+
 </head>
 
 <body>
@@ -545,7 +581,7 @@ section {
 			
             <button style="cursor: default; background: #2c3e50; color: #ffffff; font-weight: bold;">📢 Comunicação</button>
             <div id="submenuComunicacao" class="submenu">
-			<button onclick="mostrar('Outubro Rosa')">📰 Outubro ROSA</button>
+			<button onclick="mostrar('Halloween DGF')">🎃 Halloween DGF</button>
 			<button onclick="mostrar('noticias')">📰 Notícias</button>
 			<button onclick="mostrar('plano_anual_de_contratacoes')">📊 Plano Anual de Contratações</button>
 			<button onclick="mostrar('central_notas')">📝 Central de Notas</button>
@@ -856,11 +892,149 @@ function detalharSetor(nome, resp, ramal) {
     document.getElementById('det-ramal').innerText = ramal;
     document.getElementById('detalhes-setor').scrollIntoView({ behavior: 'smooth' });
 }
+
+if (pagina === "TV DGF" || pagina === "TV DGF") {
+        conteudo.innerHTML = `
+        <div style="
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            height: 85vh;
+            padding: 15px;
+            background: #f4f7f6;
+            border-radius: 8px;
+            border-top: 10px solid #2196f3;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            box-sizing: border-box;
+        ">
+            <!-- CABEÇALHO TV DGF -->
+            <div style="
+                background: linear-gradient(135deg, #0f2042 0%, #1b365d 100%);
+                color: #fff;
+                padding: 16px 20px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            ">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 24px;">📺</span>
+                    <div>
+                        <h2 style="margin: 0; font-size: 20px; font-weight: 800;">TV DGF</h2>
+                        <span style="font-size: 12px; opacity: 0.8;">Informativos e Apresentações Institucionais</span>
+                    </div>
+                </div>
+                <span style="
+                    background: rgba(255,255,255,0.15);
+                    padding: 4px 12px;
+                    border-radius: 12px;
+                    font-size: 11px;
+                    font-weight: bold;
+                    letter-spacing: 0.5px;
+                ">
+                    🔒 Modo de Visualização
+                </span>
+            </div>
+
+            <!-- CONTAINER DA APRESENTAÇÃO (EMBED SECURE) -->
+            <div style="
+                flex: 1;
+                width: 100%;
+                background: #000;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                position: relative;
+            ">
+                <iframe 
+                    src="https://docs.google.com/presentation/d/1ki3B0pzbJIB4r1z9tlKjz-FVh_ZjBrwaSoD0xKdAKxI/embed?start=false&loop=false&delayms=3000#slide=id.h7e106e88973f1236_0_6" 
+                    frameborder="0" 
+                    width="100%" 
+                    height="100%" 
+                    allowfullscreen="true" 
+                    mozallowfullscreen="true" 
+                    webkitallowfullscreen="true"
+                    style="border: none; display: block;"
+                ></iframe>
+            </div>
+        </div>
+        `;
+    }
+
 function mostrar(pagina){
     let conteudo = document.getElementById("conteudo");
 
+    if (pagina === "TV DGF" || pagina === "TV DGF") {
+        conteudo.innerHTML = `
+        <div style="
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            height: 85vh;
+            padding: 15px;
+            background: #f4f7f6;
+            border-radius: 8px;
+            border-top: 10px solid #2196f3;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            box-sizing: border-box;
+        ">
+            <!-- CABEÇALHO TV DGF -->
+            <div style="
+                background: linear-gradient(135deg, #0f2042 0%, #1b365d 100%);
+                color: #fff;
+                padding: 16px 20px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            ">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 24px;">📺</span>
+                    <div>
+                        <h2 style="margin: 0; font-size: 20px; font-weight: 800;">TV DGF</h2>
+                        <span style="font-size: 12px; opacity: 0.8;">Informativos e Apresentações Institucionais</span>
+                    </div>
+                </div>
+                <span style="
+                    background: rgba(255,255,255,0.15);
+                    padding: 4px 12px;
+                    border-radius: 12px;
+                    font-size: 11px;
+                    font-weight: bold;
+                    letter-spacing: 0.5px;
+                ">
+                    🔒 Modo de Visualização
+                </span>
+            </div>
+
+            <!-- CONTAINER DA APRESENTAÇÃO (EMBED SECURE) -->
+            <div style="
+                flex: 1;
+                width: 100%;
+                background: #000;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                position: relative;
+            ">
+                <iframe 
+                    src="https://docs.google.com/presentation/d/1ki3B0pzbJIB4r1z9tlKjz-FVh_ZjBrwaSoD0xKdAKxI/embed?start=false&loop=false&delayms=3000#slide=id.h7e106e88973f1236_0_6" 
+                    frameborder="0" 
+                    width="100%" 
+                    height="100%" 
+                    allowfullscreen="true" 
+                    mozallowfullscreen="true" 
+                    webkitallowfullscreen="true"
+                    style="border: none; display: block;"
+                ></iframe>
+            </div>
+        </div>
+        `;
+    }
     // Aceita variações de maiúsculas/minúsculas vindas do botão
-    if (pagina === "Outubro Rosa" || pagina === "Outubro ROSA") {
+    else if (pagina === "Halloween DGF" || pagina === "Outubro Rosa" || pagina === "Outubro ROSA") {
         conteudo.innerHTML = `
         <style>
             @keyframes girarSpinnerDGF {
@@ -871,9 +1045,9 @@ function mostrar(pagina){
                 display: inline-block;
                 width: 22px;
                 height: 22px;
-                border: 3px solid rgba(233, 30, 99, 0.2);
+                border: 3px solid rgba(255, 109, 0, 0.2);
                 border-radius: 50%;
-                border-top-color: #e91e63;
+                border-top-color: #ff6d00;
                 animation: girarSpinnerDGF 0.8s linear infinite;
                 vertical-align: middle;
                 margin-right: 6px;
@@ -881,73 +1055,105 @@ function mostrar(pagina){
             #comentario-foto-outubro-rosa-dgf:empty::before,
             [id^="comentario-texto-"][contenteditable="true"]:empty::before {
                 content: attr(data-placeholder);
-                color: #a98c99;
+                color: #8d7ca6;
                 pointer-events: none;
             }
             [contenteditable="true"]:focus {
-                border-color: #e91e63 !important;
-                box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.08);
+                border-color: #ff6d00 !important;
+                box-shadow: 0 0 0 2px rgba(255, 109, 0, 0.08);
                 outline: none;
             }
+
+            /* BOTÕES DO MURAL COM IDENTIDADE VISUAL HALLOWEEN — ESTILO ISOLADO */
+            #mural-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]),
+            #modal-stories-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]) {
+                background: linear-gradient(135deg, #24102f 0%, #4a148c 52%, #e65100 100%) !important;
+                color: #ffffff !important;
+                border: 1px solid #ff9100 !important;
+                border-radius: 10px !important;
+                box-shadow: 0 4px 12px rgba(30, 10, 45, 0.28), inset 0 0 0 1px rgba(255, 145, 0, 0.12) !important;
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+                transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+            }
+
+            #mural-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]):hover,
+            #modal-stories-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]):hover {
+                filter: brightness(1.12) !important;
+                border-color: #ffd54f !important;
+                box-shadow: 0 0 0 2px rgba(255, 145, 0, 0.18), 0 6px 16px rgba(30, 10, 45, 0.35) !important;
+            }
+
+            #mural-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]):disabled,
+            #modal-stories-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]):disabled {
+                opacity: 0.48 !important;
+                cursor: not-allowed !important;
+                filter: grayscale(0.35) !important;
+            }
+
+            /* Os botões circulares de escolha de cor mantêm a cor que representam. */
+            #mural-outubro-rosa-dgf button[onclick^="aplicarCorNaMensagem"] {
+                border: 2px solid #311b4b !important;
+                box-shadow: 0 0 0 2px #ff9100 !important;
+            }
         </style>
-        <div style="display:flex;flex-direction:column;gap:20px;height:85vh;overflow-y:auto;padding:15px;background:#fdf6f9;border-radius:12px;border-top:10px solid #e91e63;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+        <div style="display:flex;flex-direction:column;gap:20px;height:85vh;overflow-y:auto;padding:15px;background:#120b1b;border-radius:12px;border-top:10px solid #ff6d00;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
             
             <!-- BANNER TOPO ESTILO REFERÊNCIA -->
-            <div id="mural-outubro-rosa-dgf" style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 10px 25px rgba(233,30,99,.08);position:relative;overflow:hidden;border:1px solid #fce4ec;flex-shrink:0;">
+            <div id="mural-outubro-rosa-dgf" style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 10px 25px rgba(255,109,0,.08);position:relative;overflow:hidden;border:1px solid #ede7f6;flex-shrink:0;">
                 
-                <!-- Gradiente Fluído de Fundo (Prevalecendo Rosa) -->
-                <div style="position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(135deg, #e91e63 0%, #ff4081 40%, #ffb74d 80%, #ffd54f 100%);z-index:1;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;box-sizing:border-box;">
+                <!-- Gradiente Halloween em laranja, roxo e ameixa -->
+                <div style="position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(135deg, #ff6d00 0%, #ff9100 35%, #7b1fa2 70%, #311b4b 100%);z-index:1;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;box-sizing:border-box;">
                     <div>
                         <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.25);backdrop-filter:blur(6px);padding:3px 10px;border-radius:20px;color:#fff;font-size:11px;font-weight:bold;letter-spacing:.5px;">
-                            🎀 DGF • SAÚDE RECIFE
+                            🎃 DGF • SAÚDE RECIFE
                         </div>
-                        <h2 style="margin:4px 0 0 0;color:#fff;font-size:26px;font-weight:900;text-shadow:0 2px 4px rgba(0,0,0,0.15);">Mural Outubro Rosa</h2>
+                        <h2 style="margin:4px 0 0 0;color:#fff;font-size:26px;font-weight:900;text-shadow:0 2px 4px rgba(0,0,0,0.15);">Mural Halloween DGF</h2>
                     </div>
                     <div style="display:flex;gap:8px;flex-wrap:wrap;z-index:2;">
-                        <button type="button" onclick="abrirStoriesOutubroRosaDGF()" style="background:#fff;color:#e91e63;border:0;border-radius:20px;padding:9px 16px;cursor:pointer;font-weight:bold;font-size:12px;box-shadow:0 4px 12px rgba(0,0,0,0.12);display:flex;align-items:center;gap:6px;transition:transform .2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">📲 Gerar Stories</button>
+                        <button type="button" onclick="abrirStoriesOutubroRosaDGF()" style="background:#fff;color:#ff6d00;border:0;border-radius:20px;padding:9px 16px;cursor:pointer;font-weight:bold;font-size:12px;box-shadow:0 4px 12px rgba(0,0,0,0.12);display:flex;align-items:center;gap:6px;transition:transform .2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">📲 Gerar Stories</button>
                         <button type="button" onclick="abrirAdminOutubroRosaDGF()" style="background:rgba(0,0,0,0.25);color:#fff;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.4);border-radius:20px;padding:9px 16px;cursor:pointer;font-weight:bold;font-size:12px;">🔐 Administração</button>
                     </div>
                 </div>
 
                 <div style="margin-top:110px;position:relative;z-index:2;">
-                    <p style="color:#555;font-size:14px;line-height:1.5;margin-bottom:18px;">Compartilhe sua foto, mensagem e atitude! Apoie a campanha de prevenção e união da equipe DGF.</p>
+                    <p style="color:#555;font-size:14px;line-height:1.5;margin-bottom:18px;">Entre no clima do Halloween DGF! Compartilhe sua fantasia, decoração ou momento assustador com a equipe.</p>
                     
                     <!-- FORMULÁRIO DE PUBLICAÇÃO -->
-                    <form id="form-foto-outubro-rosa-dgf" onsubmit="enviarFotoOutubroRosaDGF(event)" style="background:linear-gradient(135deg, #fff5f8 0%, #fff 100%);padding:18px;border-radius:12px;border:1px solid #f8bbd0;display:flex;flex-direction:column;gap:12px;box-shadow:0 4px 12px rgba(233,30,99,0.04);">
+                    <form id="form-foto-outubro-rosa-dgf" onsubmit="enviarFotoOutubroRosaDGF(event)" style="background:linear-gradient(135deg, #fff3e0 0%, #fff 100%);padding:18px;border-radius:12px;border:1px solid #d1c4e9;display:flex;flex-direction:column;gap:12px;box-shadow:0 4px 12px rgba(255,109,0,0.04);">
                         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
                             <div>
-                                <label for="nome-foto-outubro-rosa-dgf" style="font-weight:bold;color:#ad1457;font-size:12px;display:block;margin-bottom:4px;">👤 Seu nome</label>
-                                <input id="nome-foto-outubro-rosa-dgf" type="text" maxlength="100" required placeholder="Digite seu nome completo" style="padding:10px 12px;border:1px solid #f48fb1;border-radius:8px;box-sizing:border-box;width:100%;outline:none;font-size:13px;">
+                                <label for="nome-foto-outubro-rosa-dgf" style="font-weight:bold;color:#4a148c;font-size:12px;display:block;margin-bottom:4px;">👤 Seu nome</label>
+                                <input id="nome-foto-outubro-rosa-dgf" type="text" maxlength="100" required placeholder="Digite seu nome completo" style="padding:10px 12px;border:1px solid #9575cd;border-radius:8px;box-sizing:border-box;width:100%;outline:none;font-size:13px;">
                             </div>
                             <div>
-                                <label for="arquivo-foto-outubro-rosa-dgf" style="font-weight:bold;color:#ad1457;font-size:12px;display:block;margin-bottom:4px;">📸 Escolha sua foto</label>
-                                <input id="arquivo-foto-outubro-rosa-dgf" type="file" accept="image/*" required style="width:100%;font-size:12px;padding:6px;background:#fff;border:1px solid #f48fb1;border-radius:8px;box-sizing:border-box;">
+                                <label for="arquivo-foto-outubro-rosa-dgf" style="font-weight:bold;color:#4a148c;font-size:12px;display:block;margin-bottom:4px;">📸 Escolha sua foto</label>
+                                <input id="arquivo-foto-outubro-rosa-dgf" type="file" accept="image/*" required style="width:100%;font-size:12px;padding:6px;background:#fff;border:1px solid #9575cd;border-radius:8px;box-sizing:border-box;">
                             </div>
                         </div>
 
                         <div>
-                            <label for="comentario-foto-outubro-rosa-dgf" style="font-weight:bold;color:#ad1457;font-size:12px;display:block;margin-bottom:4px;">💬 Sua Mensagem de Apoio</label>
+                            <label for="comentario-foto-outubro-rosa-dgf" style="font-weight:bold;color:#4a148c;font-size:12px;display:block;margin-bottom:4px;">💬 Sua Legenda de Halloween</label>
                             
                             <!-- BARRA DE FERRAMENTAS: TECLADO DE EMOJIS, FORMATACAO DE TEXTO E CORES DA FONTE -->
-                            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#fff0f5;padding:6px 10px;border:1px solid #f48fb1;border-bottom:none;border-top-left-radius:8px;border-top-right-radius:8px;">
-                                <button type="button" onclick="inserirTextoNaMensagem('🌸')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Flor Rosa">🌸</button>
-                                <button type="button" onclick="inserirTextoNaMensagem('💖')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Coração Brilhante">💖</button>
-                                <button type="button" onclick="inserirTextoNaMensagem('🎀')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:16px;box-shadow:0 0 4px rgba(233,30,99,0.3);" title="Laço Rosa Outubro Rosa">🎀</button>
-                                <button type="button" onclick="inserirTextoNaMensagem('✨')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Brilho">✨</button>
-                                <button type="button" onclick="inserirTextoNaMensagem('💕')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Corações">💕</button>
-                                <button type="button" onclick="inserirTextoNaMensagem('⭐')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Estrela">⭐</button>
+                            <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#ede7f6;padding:6px 10px;border:1px solid #9575cd;border-bottom:none;border-top-left-radius:8px;border-top-right-radius:8px;">
+                                <button type="button" onclick="inserirTextoNaMensagem('🎃')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Abóbora">🎃</button>
+                                <button type="button" onclick="inserirTextoNaMensagem('👻')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Fantasma">👻</button>
+                                <button type="button" onclick="inserirTextoNaMensagem('🦇')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:16px;box-shadow:0 0 4px rgba(255,109,0,0.3);" title="Morcego">🦇</button>
+                                <button type="button" onclick="inserirTextoNaMensagem('🕸️')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Teia">🕸️</button>
+                                <button type="button" onclick="inserirTextoNaMensagem('💀')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Caveira">💀</button>
+                                <button type="button" onclick="inserirTextoNaMensagem('🕷️')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:3px 6px;font-size:14px;" title="Aranha">🕷️</button>
                                 
-                                <span style="color:#d81b60;font-weight:bold;margin:0 2px;">|</span>
+                                <span style="color:#e65100;font-weight:bold;margin:0 2px;">|</span>
                                 
-                                <button type="button" onclick="formatarTextoMensagem('bold')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 8px;font-weight:bold;font-size:12px;color:#ad1457;" title="Negrito"><b>B</b></button>
-                                <button type="button" onclick="formatarTextoMensagem('italic')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 8px;font-style:italic;font-size:12px;color:#ad1457;" title="Itálico"><i>I</i></button>
-                                <button type="button" onclick="formatarTextoMensagem('underline')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:3px 8px;text-decoration:underline;font-size:12px;color:#ad1457;" title="Sublinhado"><u>U</u></button>
+                                <button type="button" onclick="formatarTextoMensagem('bold')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:3px 8px;font-weight:bold;font-size:12px;color:#4a148c;" title="Negrito"><b>B</b></button>
+                                <button type="button" onclick="formatarTextoMensagem('italic')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:3px 8px;font-style:italic;font-size:12px;color:#4a148c;" title="Itálico"><i>I</i></button>
+                                <button type="button" onclick="formatarTextoMensagem('underline')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:3px 8px;text-decoration:underline;font-size:12px;color:#4a148c;" title="Sublinhado"><u>U</u></button>
                                 
-                                <span style="color:#d81b60;font-weight:bold;margin:0 2px;">|</span>
-                                <span style="font-size:11px;color:#ad1457;font-weight:bold;">Cor:</span>
-                                <button type="button" onclick="aplicarCorNaMensagem('#e91e63')" style="background:#e91e63;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Rosa Principal"></button>
-                                <button type="button" onclick="aplicarCorNaMensagem('#ad1457')" style="background:#ad1457;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Rosa Escuro"></button>
-                                <button type="button" onclick="aplicarCorNaMensagem('#ff4081')" style="background:#ff4081;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Pink"></button>
+                                <span style="color:#e65100;font-weight:bold;margin:0 2px;">|</span>
+                                <span style="font-size:11px;color:#4a148c;font-weight:bold;">Cor:</span>
+                                <button type="button" onclick="aplicarCorNaMensagem('#ff6d00')" style="background:#ff6d00;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Laranja Halloween"></button>
+                                <button type="button" onclick="aplicarCorNaMensagem('#4a148c')" style="background:#4a148c;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Roxo Escuro"></button>
+                                <button type="button" onclick="aplicarCorNaMensagem('#ff9100')" style="background:#ff9100;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Laranja Vivo"></button>
                                 <button type="button" onclick="aplicarCorNaMensagem('#9c27b0')" style="background:#9c27b0;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Roxo"></button>
                                 <button type="button" onclick="aplicarCorNaMensagem('#e65100')" style="background:#e65100;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Laranja"></button>
                                 <button type="button" onclick="aplicarCorNaMensagem('#006064')" style="background:#006064;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;" title="Azul Turquesa"></button>
@@ -957,31 +1163,31 @@ function mostrar(pagina){
                                 id="comentario-foto-outubro-rosa-dgf"
                                 contenteditable="true"
                                 role="textbox"
-                                aria-label="Sua mensagem de apoio"
+                                aria-label="Sua legenda de Halloween"
                                 aria-multiline="true"
-                                data-placeholder="Escreva um carinho ou mensagem inspiradora..."
+                                data-placeholder="Escreva sua legenda de Halloween ou conte uma travessura..."
                                 oninput="limitarTextoEditorDGF(this,300)"
-                                style="min-height:76px;padding:10px 12px;border:1px solid #f48fb1;border-bottom-left-radius:8px;border-bottom-right-radius:8px;box-sizing:border-box;width:100%;font-family:inherit;outline:none;font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;"
+                                style="min-height:76px;padding:10px 12px;border:1px solid #9575cd;border-bottom-left-radius:8px;border-bottom-right-radius:8px;box-sizing:border-box;width:100%;font-family:inherit;outline:none;font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;"
                             ></div>
                         </div>
 
-                        <button type="submit" style="background:linear-gradient(45deg,#d81b60,#e91e63,#ff4081);color:white;border:0;border-radius:25px;padding:12px;cursor:pointer;font-weight:bold;font-size:14px;box-shadow:0 4px 12px rgba(233,30,99,.3);display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .2s;" onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">
-                            <span>✨</span> Publicar no Mural Rosa
+                        <button type="submit" style="background:linear-gradient(45deg,#e65100,#ff6d00,#ff9100);color:white;border:0;border-radius:25px;padding:12px;cursor:pointer;font-weight:bold;font-size:14px;box-shadow:0 4px 12px rgba(255,109,0,.3);display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .2s;" onmouseover="this.style.transform='scale(1.01)'" onmouseout="this.style.transform='scale(1)'">
+                            <span>✨</span> Publicar no Mural Halloween
                         </button>
-                        <div id="status-foto-outubro-rosa-dgf" role="status" style="font-size:13px;color:#880e4f;font-weight:bold;text-align:center;"></div>
+                        <div id="status-foto-outubro-rosa-dgf" role="status" style="font-size:13px;color:#311b4b;font-weight:bold;text-align:center;"></div>
                     </form>
 
                     <!-- FEED DE PUBLICAÇÕES (FORMATO INSTAGRAM - UMA FOTO ABAIXO DA OUTRA) -->
                     <div id="mural-feed-instagram" style="margin-top:30px;">
-                        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;border-bottom:2px dashed #f8bbd0;padding-bottom:10px;margin-bottom:20px;">
-                            <h3 style="margin:0;color:#ad1457;font-size:20px;font-weight:800;display:flex;align-items:center;gap:8px;">
-                                <span>💖</span> Feed do Mural Rosa
+                        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;border-bottom:2px dashed #d1c4e9;padding-bottom:10px;margin-bottom:20px;">
+                            <h3 style="margin:0;color:#4a148c;font-size:20px;font-weight:800;display:flex;align-items:center;gap:8px;">
+                                <span>💖</span> Feed do Mural Halloween
                             </h3>
-                            <span style="font-size:12px;color:#fff;background:linear-gradient(45deg,#e91e63,#ab47bc);padding:5px 12px;border-radius:15px;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,0.1);">#OutubroRosaDGF</span>
+                            <span style="font-size:12px;color:#fff;background:linear-gradient(45deg,#ff6d00,#6a1b9a);padding:5px 12px;border-radius:15px;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,0.1);">#HalloweenDGF</span>
                         </div>
 
-                        <div style="max-width:680px;margin:0 auto 14px;width:100%;box-sizing:border-box;background:#fff;padding:14px;border:1px solid #f8bbd0;border-radius:12px;box-shadow:0 3px 12px rgba(233,30,99,.06);">
-                            <label for="filtro-nome-funcionario-dgf" style="display:block;font-weight:800;color:#ad1457;font-size:13px;margin-bottom:7px;">
+                        <div style="max-width:680px;margin:0 auto 14px;width:100%;box-sizing:border-box;background:#fff;padding:14px;border:1px solid #d1c4e9;border-radius:12px;box-shadow:0 3px 12px rgba(255,109,0,.06);">
+                            <label for="filtro-nome-funcionario-dgf" style="display:block;font-weight:800;color:#4a148c;font-size:13px;margin-bottom:7px;">
                                 🔎 Pesquisar funcionário pelo nome
                             </label>
                             <input
@@ -990,7 +1196,7 @@ function mostrar(pagina){
                                 placeholder="Digite um nome, por exemplo: Edson"
                                 oninput="filtrarFeedOutubroRosaDGF()"
                                 autocomplete="off"
-                                style="display:block;width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid #f48fb1;border-radius:9px;font-size:14px;outline-color:#e91e63;"
+                                style="display:block;width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid #9575cd;border-radius:9px;font-size:14px;outline-color:#ff6d00;"
                             >
                             <div style="margin-top:6px;font-size:11px;color:#8b6677;">
                                 A pesquisa considera todas as fotos carregadas no mural.
@@ -998,7 +1204,7 @@ function mostrar(pagina){
                         </div>
 
                         <div id="lista-fotos-outubro-rosa-dgf" style="display:flex;flex-direction:column;gap:26px;max-width:680px;margin:0 auto;">
-                            <p style="color:#777;font-size:13px;text-align:center;"><span class="spinner-rosa-dgf"></span>Carregando fotos do mural...</p>
+                            <p style="color:#777;font-size:13px;text-align:center;"><span class="spinner-rosa-dgf"></span>Carregando fotos do Mural Halloween...</p>
                         </div>
 
                         <!-- CONTROLES DE PAGINAÇÃO -->
@@ -1006,37 +1212,38 @@ function mostrar(pagina){
                     </div>
 
                     <!-- ADMINISTRAÇÃO -->
-                    <div id="painel-admin-outubro-rosa-dgf" style="display:none;margin-top:20px;padding:18px;background:#fff0f5;border:1px solid #f3b4cc;border-radius:12px;">
-                        <h3 style="margin-top:0;color:#ad1457;">🔐 Administração do Mural</h3>
-                        <label for="senha-admin-outubro-rosa-dgf" style="font-size:12px;font-weight:bold;color:#880e4f;">Senha administrativa</label>
+                    <div id="painel-admin-outubro-rosa-dgf" style="display:none;margin-top:20px;padding:18px;background:#ede7f6;border:1px solid #7e57c2;border-radius:12px;">
+                        <h3 style="margin-top:0;color:#4a148c;">🔐 Administração do Mural</h3>
+                        <label for="senha-admin-outubro-rosa-dgf" style="font-size:12px;font-weight:bold;color:#311b4b;">Senha administrativa</label>
                         <input id="senha-admin-outubro-rosa-dgf" type="password" autocomplete="current-password" placeholder="Digite a senha" style="display:block;width:100%;box-sizing:border-box;padding:10px;margin:8px 0;border:1px solid #ddd;border-radius:6px;">
-                        <button type="button" onclick="entrarAdminOutubroRosaDGF()" style="background:#ad1457;color:white;border:0;border-radius:6px;padding:9px 16px;cursor:pointer;font-weight:bold;">Entrar</button>
+                        <button type="button" onclick="entrarAdminOutubroRosaDGF()" style="background:#4a148c;color:white;border:0;border-radius:6px;padding:9px 16px;cursor:pointer;font-weight:bold;">Entrar</button>
                         <button type="button" onclick="fecharAdminOutubroRosaDGF()" style="background:#777;color:white;border:0;border-radius:6px;padding:9px 16px;cursor:pointer;">Fechar</button>
                         <div id="status-admin-outubro-rosa-dgf" role="status" style="margin-top:10px;font-size:13px;"></div>
                     </div>
                 </div>
             </div>
         </div>
+        
 
         <!-- MODAL STORIES -->
-        <div id="modal-stories-outubro-rosa-dgf" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(20,0,12,.92);overflow:auto;padding:18px;box-sizing:border-box;backdrop-filter:blur(6px);">
-            <div style="max-width:440px;margin:0 auto;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px rgba(233,30,99,.35);border:1px solid rgba(255,182,193,.5);">
-                <div style="padding:16px 20px;background:linear-gradient(135deg,#880e4f,#c2185b,#e91e63,#ff4081);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:10px;">
+        <div id="modal-stories-outubro-rosa-dgf" style="display:none;position:fixed;inset:0;z-index:999999;background:rgba(12,5,24,.94);overflow:auto;padding:18px;box-sizing:border-box;backdrop-filter:blur(6px);">
+            <div style="max-width:440px;margin:0 auto;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px rgba(255,109,0,.35);border:1px solid rgba(179,157,219,.5);">
+                <div style="padding:16px 20px;background:linear-gradient(135deg,#311b4b,#6a1b9a,#ff6d00,#ff9100);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:10px;">
                     <div>
                         <strong style="font-size:16px;display:block;letter-spacing:.3px;">✨ Gerador de Stories Instagram</strong>
-                        <span style="font-size:11px;opacity:.88;">#OutubroRosaDGF • Espalhe essa causa!</span>
+                        <span style="font-size:11px;opacity:.88;">#HalloweenDGF • Espalhe o clima assustador!</span>
                     </div>
                     <button type="button" onclick="fecharStoriesOutubroRosaDGF()" style="border:0;border-radius:20px;padding:6px 12px;cursor:pointer;background:rgba(255,255,255,.2);color:#fff;font-weight:bold;font-size:12px;backdrop-filter:blur(4px);">Fechar ✕</button>
                 </div>
-                <div id="preview-stories-outubro-rosa-dgf" style="padding:15px;background:#fce4ec;display:flex;justify-content:center;"></div>
+                <div id="preview-stories-outubro-rosa-dgf" style="padding:15px;background:#ede7f6;display:flex;justify-content:center;"></div>
                 <div style="padding:18px;background:#fff;display:flex;flex-direction:column;gap:10px;text-align:center;">
-                    <button type="button" onclick="baixarStoriesOutubroRosaDGF()" style="background:linear-gradient(45deg,#d81b60,#e91e63,#ff4081);color:#fff;border:0;border-radius:30px;padding:14px 20px;font-weight:bold;font-size:14px;cursor:pointer;box-shadow:0 6px 20px rgba(233,30,99,.4);display:flex;align-items:center;justify-content:center;gap:8px;">
+                    <button type="button" onclick="baixarStoriesOutubroRosaDGF()" style="background:linear-gradient(45deg,#e65100,#ff6d00,#ff9100);color:#fff;border:0;border-radius:30px;padding:14px 20px;font-weight:bold;font-size:14px;cursor:pointer;box-shadow:0 6px 20px rgba(255,109,0,.4);display:flex;align-items:center;justify-content:center;gap:8px;">
                         <span>📸</span> Baixar Story Instagram (1080 × 1920)
                     </button>
                     <p style="margin:4px 0 0;color:#666;font-size:12px;line-height:1.45;">
-                        💖 <strong>Dica de Influencer:</strong> Baixe a imagem acima, abra seu Instagram, poste no Stories e marque a hashtag <strong>#OutubroRosaDGF</strong>!
+                        🎃 <strong>Dica de Halloween:</strong> Baixe a imagem acima, abra seu Instagram, publique nos Stories e use a hashtag <strong>#HalloweenDGF</strong>!
                     </p>
-                    <div id="status-stories-outubro-rosa-dgf" role="status" style="font-size:12px;color:#ad1457;font-weight:bold;"></div>
+                    <div id="status-stories-outubro-rosa-dgf" role="status" style="font-size:12px;color:#4a148c;font-weight:bold;"></div>
                 </div>
             </div>
         </div>`;
@@ -1048,19 +1255,16 @@ function mostrar(pagina){
             let paginaAtualFeed = 1;
             const itensPorPagina = 8;
 
-            // PALETA MULTICOLORIDA COM FOCO NO ROSA
             const paletaCoresCard = [
-                { border: '#e91e63', badgeBg: '#fce4ec', badgeColor: '#c2185b', nameColor: '#880e4f', icon: '🌸' }, // Rosa Principal
-                { border: '#ff9800', badgeBg: '#fff3e0', badgeColor: '#e65100', nameColor: '#e65100', icon: '🌼' }, // Laranja Vivo
-                { border: '#00bcd4', badgeBg: '#e0f7fa', badgeColor: '#006064', nameColor: '#006064', icon: '💙' }, // Azul Turquesa
-                { border: '#9c27b0', badgeBg: '#f3e5f5', badgeColor: '#4a148c', nameColor: '#4a148c', icon: '💜' }, // Roxo Elegante
-                { border: '#4caf50', badgeBg: '#e8f5e9', badgeColor: '#1b5e20', nameColor: '#1b5e20', icon: '🌿' }, // Verde Vida
-                { border: '#ff4081', badgeBg: '#f8bbd0', badgeColor: '#ad1457', nameColor: '#ad1457', icon: '🎀' }, // Pink Vivo
-                { border: '#ffc107', badgeBg: '#fff8e1', badgeColor: '#f57f17', nameColor: '#f57f17', icon: '⭐' }  // Amarelo Sol
+                { border: '#ff6d00', badgeBg: '#fff3e0', badgeColor: '#e65100', nameColor: '#bf360c', icon: '🎃' },
+                { border: '#6a1b9a', badgeBg: '#ede7f6', badgeColor: '#4a148c', nameColor: '#311b4b', icon: '👻' },
+                { border: '#43a047', badgeBg: '#e8f5e9', badgeColor: '#1b5e20', nameColor: '#1b5e20', icon: '🧪' },
+                { border: '#424242', badgeBg: '#eeeeee', badgeColor: '#212121', nameColor: '#212121', icon: '🦇' },
+                { border: '#7b1fa2', badgeBg: '#f3e5f5', badgeColor: '#4a148c', nameColor: '#4a148c', icon: '🕸️' },
+                { border: '#e65100', badgeBg: '#fff3e0', badgeColor: '#e65100', nameColor: '#bf360c', icon: '🧛' },
+                { border: '#ffb300', badgeBg: '#fff8e1', badgeColor: '#f57f17', nameColor: '#f57f17', icon: '🕷️' }
             ];
 
-            // FUNÇÕES DA BARRA DE FERRAMENTAS — EDITOR VISUAL
-            // O conteúdo é formatado no editor, e não como tags visíveis dentro de um textarea.
             function normalizarTextoBuscaDGF(valor) {
                 return String(valor == null ? '' : valor)
                     .normalize('NFD')
@@ -1105,7 +1309,6 @@ function mostrar(pagina){
                             cor = no.getAttribute('color') || '';
                         }
 
-                        // Remove atributos originais para não permitir eventos ou estilos arbitrários.
                         Array.from(no.attributes || []).forEach(function(attr) {
                             no.removeAttribute(attr.name);
                         });
@@ -1139,7 +1342,6 @@ function mostrar(pagina){
                 return modelo.innerHTML;
             }
 
-            // Limita a mensagem a 300 caracteres sem expor ou digitar códigos HTML.
             window.limitarTextoEditorDGF = function(editor, limite) {
                 if (!editor) return;
 
@@ -1169,7 +1371,6 @@ function mostrar(pagina){
                 });
             };
 
-            // Impede que o clique na barra tire a seleção do editor antes da formatação.
             if (!window.__dgfProtecaoCursorFormatacao) {
                 document.addEventListener('mousedown', function(evento) {
                     const botao = evento.target && evento.target.closest
@@ -1196,7 +1397,6 @@ function mostrar(pagina){
                     return;
                 }
 
-                // Compatibilidade com eventuais campos de texto simples.
                 if (typeof area.selectionStart === 'number') {
                     const inicio = area.selectionStart;
                     const fim = area.selectionEnd;
@@ -1234,8 +1434,6 @@ function mostrar(pagina){
                 });
             }
 
-            // Comentários compartilhados: o armazenamento principal passa a ser o Apps Script.
-            // O localStorage é mantido apenas para migrar comentários antigos já existentes neste PC.
             let comentariosServidorDGF = {};
             let comentariosServidorDisponivelDGF = false;
 
@@ -1272,7 +1470,6 @@ function mostrar(pagina){
                 return 'dgf_' + Date.now() + '_' + Math.random().toString(36).slice(2, 12);
             }
 
-            // Chamada JSONP ao Apps Script existente para que comentários fiquem visíveis em todos os computadores.
             function chamarApiComentariosDGF(parametros, concluir) {
                 const callback = 'dgfComentariosCallback_' + Date.now() + '_' + Math.floor(Math.random() * 1000000);
                 const script = document.createElement('script');
@@ -1324,8 +1521,6 @@ function mostrar(pagina){
                 comentariosServidorDGF = agrupados;
             }
 
-            // Migra comentários antigos do localStorage para o servidor uma única vez por navegador.
-            // O clientId torna a importação idempotente, evitando cópias duplicadas em tentativas posteriores.
             function migrarComentariosLocaisDGF(concluir) {
                 let jaMigrado = false;
                 try {
@@ -1409,7 +1604,6 @@ function mostrar(pagina){
                             concluir(true);
                             return;
                         }
-                        // Busca a lista novamente para incluir o que acabou de ser migrado.
                         chamarApiComentariosDGF({ action: 'listComments' }, function(respostaAtualizada) {
                             if (respostaAtualizada && respostaAtualizada.ok && Array.isArray(respostaAtualizada.comments)) {
                                 organizarComentariosServidorDGF(respostaAtualizada.comments);
@@ -1425,7 +1619,6 @@ function mostrar(pagina){
                 if (!isAdminAutenticado) return;
                 if (!confirm('Deseja realmente apagar este comentário?')) return;
 
-                // Compatibilidade: comentários locais antigos ainda não migrados.
                 if (String(comentarioId).indexOf('local-') === 0) {
                     const indiceLocal = Number(String(comentarioId).slice(6));
                     const locais = lerComentariosLocaisDGF(postId);
@@ -1451,7 +1644,7 @@ function mostrar(pagina){
                     password: senha
                 }, function(resposta) {
                     if (!resposta || !resposta.ok) {
-                        alert((resposta && resposta.error) || 'Não foi possível excluir o comentário compartilhado. Confirme se a atualização do Apps Script foi publicada.');
+                        alert((resposta && resposta.error) || 'Não foi possível excluir o comentário compartilhado.');
                         return;
                     }
                     window.carregarFeedOutubroRosaDGF();
@@ -1485,7 +1678,7 @@ function mostrar(pagina){
 
                 if (!postsFiltrados.length) {
                     container.innerHTML = termoBusca
-                        ? "<p style='color:#ad1457;font-size:13px;text-align:center;padding:18px;background:#fff;border:1px dashed #f48fb1;border-radius:10px;'>Nenhum funcionário encontrado com esse nome. Tente outro termo.</p>"
+                        ? "<p style='color:#4a148c;font-size:13px;text-align:center;padding:18px;background:#fff;border:1px dashed #9575cd;border-radius:10px;'>Nenhum funcionário encontrado com esse nome. Tente outro termo.</p>"
                         : "<p style='color:#777;font-size:13px;text-align:center;'>Nenhuma foto no mural no momento. Seja o primeiro a publicar!</p>";
                     if (paginacaoContainer) paginacaoContainer.style.display = 'none';
                     return;
@@ -1519,7 +1712,7 @@ function mostrar(pagina){
                     }).join('');
 
                     return `
-                    <article style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.08);border:1px solid #fce4ec;border-left:6px solid ${estilo.border};display:flex;flex-direction:column;width:100%;box-sizing:border-box;">
+                    <article style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.08);border:1px solid #ede7f6;border-left:6px solid ${estilo.border};display:flex;flex-direction:column;width:100%;box-sizing:border-box;">
                         <div style="padding:14px 18px;display:flex;align-items:center;gap:12px;background:#fafafa;border-bottom:1px solid #f0f0f0;">
                             <div style="width:40px;height:40px;flex:0 0 40px;border-radius:50%;background:${estilo.border};color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 6px rgba(0,0,0,0.12);">
                                 ${estilo.icon}
@@ -1533,31 +1726,30 @@ function mostrar(pagina){
                             ${legenda ? `<div style="margin:0;font-size:14px;color:#333;line-height:1.5;background:${estilo.badgeBg};padding:12px 14px;border-radius:10px;border-left:4px solid ${estilo.border};overflow-wrap:anywhere;">${legenda}</div>` : ''}
                             
                             <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px;">
-                                <button type="button" id="btn-curtir-${id}" onclick="curtirFotoOutubroRosaDGF('${id}')" style="background:#fff5f8;border:1px solid #f8bbd0;color:#e91e63;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:bold;display:flex;align-items:center;gap:4px;">❤️ ${Number(post.likes) || 0}</button>
+                                <button type="button" id="btn-curtir-${id}" onclick="curtirFotoOutubroRosaDGF('${id}')" style="background:#fff3e0;border:1px solid #d1c4e9;color:#ff6d00;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:bold;display:flex;align-items:center;gap:4px;">❤️ ${Number(post.likes) || 0}</button>
                                 <button type="button" onclick="alternarComentariosOutubroRosaDGF('${id}')" style="background:${estilo.badgeBg};border:1px solid ${estilo.border};color:${estilo.badgeColor};padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:bold;">💬 (${comentarios.length})</button>
-                                <button type="button" onclick="abrirStoriesOutubroRosaDGF()" style="background:linear-gradient(45deg,#e91e63,#ff4081);color:#fff;border:0;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:bold;margin-left:auto;box-shadow:0 2px 6px rgba(233,30,99,0.2);">📲 Stories</button>
+                                <button type="button" onclick="abrirStoriesOutubroRosaDGF()" style="background:linear-gradient(45deg,#ff6d00,#ff9100);color:#fff;border:0;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:bold;margin-left:auto;box-shadow:0 2px 6px rgba(255,109,0,0.2);">📲 Stories</button>
                                 ${isAdminAutenticado ? `<button type="button" onclick="excluirFotoOutubroRosaDGF('${id}')" style="background:#b71c1c;color:#fff;border:0;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:12px;">🗑️ Excluir Foto</button>` : ''}
                             </div>
 
                             <div id="comentarios-area-${id}" style="display:none;border-top:1px dashed #ddd;padding-top:12px;margin-top:4px;">
                                 <div id="comentarios-lista-${id}" style="max-height:160px;overflow:auto;margin-bottom:10px;font-size:13px;color:#444;">${comentariosHtml || '<span style="color:#888;">Ainda não há comentários nesta foto.</span>'}</div>
                                 
-                                <!-- BARRA DE FERRAMENTAS / TECLADO DE EMOJIS NOS COMENTÁRIOS -->
-                                <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;background:#fff0f5;padding:4px 8px;border:1px solid #ddd;border-bottom:none;border-top-left-radius:6px;border-top-right-radius:6px;">
-                                    <button type="button" onclick="inserirTextoNaMensagem('🌸', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">🌸</button>
-                                    <button type="button" onclick="inserirTextoNaMensagem('💖', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">💖</button>
-                                    <button type="button" onclick="inserirTextoNaMensagem('🎀', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:13px;">🎀</button>
-                                    <button type="button" onclick="inserirTextoNaMensagem('✨', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">✨</button>
-                                    <button type="button" onclick="inserirTextoNaMensagem('💕', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">💕</button>
-                                    <button type="button" onclick="inserirTextoNaMensagem('⭐', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">⭐</button>
-                                    <span style="color:#d81b60;font-weight:bold;margin:0 1px;">|</span>
-                                    <button type="button" onclick="formatarTextoMensagem('bold', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 6px;font-weight:bold;font-size:11px;color:#ad1457;"><b>B</b></button>
-                                    <button type="button" onclick="formatarTextoMensagem('italic', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 6px;font-style:italic;font-size:11px;color:#ad1457;"><i>I</i></button>
-                                    <button type="button" onclick="formatarTextoMensagem('underline', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #f8bbd0;border-radius:4px;cursor:pointer;padding:2px 6px;text-decoration:underline;font-size:11px;color:#ad1457;"><u>U</u></button>
-                                    <span style="color:#d81b60;font-weight:bold;margin:0 1px;">|</span>
-                                    <button type="button" onclick="aplicarCorNaMensagem('#e91e63', 'comentario-texto-${id}')" style="background:#e91e63;border:none;width:14px;height:14px;border-radius:50%;cursor:pointer;"></button>
-                                    <button type="button" onclick="aplicarCorNaMensagem('#ad1457', 'comentario-texto-${id}')" style="background:#ad1457;border:none;width:14px;height:14px;border-radius:50%;cursor:pointer;"></button>
-                                    <button type="button" onclick="aplicarCorNaMensagem('#9c27b0', 'comentario-texto-${id}')" style="background:#9c27b0;border:none;width:14px;height:14px;border-radius:50%;cursor:pointer;"></button>
+                                <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;background:#ede7f6;padding:4px 8px;border:1px solid #ddd;border-bottom:none;border-top-left-radius:6px;border-top-right-radius:6px;">
+                                    <button type="button" onclick="inserirTextoNaMensagem('🌸', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">🌸</button>
+                                    <button type="button" onclick="inserirTextoNaMensagem('💖', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">💖</button>
+                                    <button type="button" onclick="inserirTextoNaMensagem('🎀', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:13px;">🎀</button>
+                                    <button type="button" onclick="inserirTextoNaMensagem('✨', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">✨</button>
+                                    <button type="button" onclick="inserirTextoNaMensagem('💕', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">💕</button>
+                                    <button type="button" onclick="inserirTextoNaMensagem('⭐', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:2px 5px;font-size:12px;">⭐</button>
+                                    <span style="color:#e65100;font-weight:bold;margin:0 1px;">|</span>
+                                    <button type="button" onclick="formatarTextoMensagem('bold', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:2px 6px;font-weight:bold;font-size:11px;color:#4a148c;"><b>B</b></button>
+                                    <button type="button" onclick="formatarTextoMensagem('italic', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:2px 6px;font-style:italic;font-size:11px;color:#4a148c;"><i>I</i></button>
+                                    <button type="button" onclick="formatarTextoMensagem('underline', 'comentario-texto-${id}')" style="background:#fff;border:1px solid #d1c4e9;border-radius:4px;cursor:pointer;padding:2px 6px;text-decoration:underline;font-size:11px;color:#4a148c;"><u>U</u></button>
+                                    <span style="color:#e65100;font-weight:bold;margin:0 1px;">|</span>
+                                    <button type="button" onclick="aplicarCorNaMensagem('#ff6d00', 'comentario-texto-${id}')" style="background:#ff6d00;border:none;width:14px;height:14px;border-radius:50%;cursor:pointer;"></button>
+                                    <button type="button" onclick="aplicarCorNaMensagem('#4a148c', 'background:#4a148c;border:none;width:14px;height:14px;border-radius:50%;cursor:pointer;"></button>
+                                    <button type="button" onclick="aplicarCorNaMensagem('#9c27b0', 'background:#9c27b0;border:none;width:14px;height:14px;border-radius:50%;cursor:pointer;"></button>
                                 </div>
 
                                 <form onsubmit="enviarComentarioOutubroRosaDGF(event,'${id}')" style="display:flex;flex-direction:column;gap:8px;">
@@ -1575,9 +1767,9 @@ function mostrar(pagina){
                 if (paginacaoContainer) {
                     if (totalPaginas > 1) {
                         let btns = '';
-                        btns += `<button type="button" onclick="mudarPaginaFeedOutubroRosaDGF(${paginaAtualFeed - 1})" ${paginaAtualFeed === 1 ? 'disabled' : ''} style="background:#fff;border:1px solid #f48fb1;color:#ad1457;padding:6px 14px;border-radius:20px;cursor:pointer;font-weight:bold;font-size:12px;opacity:${paginaAtualFeed === 1 ? '0.5' : '1'};">← Anterior</button>`;
-                        btns += `<span style="font-size:13px;font-weight:bold;color:#ad1457;">Página ${paginaAtualFeed} de ${totalPaginas}</span>`;
-                        btns += `<button type="button" onclick="mudarPaginaFeedOutubroRosaDGF(${paginaAtualFeed + 1})" ${paginaAtualFeed === totalPaginas ? 'disabled' : ''} style="background:#fff;border:1px solid #f48fb1;color:#ad1457;padding:6px 14px;border-radius:20px;cursor:pointer;font-weight:bold;font-size:12px;opacity:${paginaAtualFeed === totalPaginas ? '0.5' : '1'};">Próxima →</button>`;
+                        btns += `<button type="button" onclick="mudarPaginaFeedOutubroRosaDGF(${paginaAtualFeed - 1})" ${paginaAtualFeed === 1 ? 'disabled' : ''} style="background:#fff;border:1px solid #9575cd;color:#4a148c;padding:6px 14px;border-radius:20px;cursor:pointer;font-weight:bold;font-size:12px;opacity:${paginaAtualFeed === 1 ? '0.5' : '1'};">← Anterior</button>`;
+                        btns += `<span style="font-size:13px;font-weight:bold;color:#4a148c;">Página ${paginaAtualFeed} de ${totalPaginas}</span>`;
+                        btns += `<button type="button" onclick="mudarPaginaFeedOutubroRosaDGF(${paginaAtualFeed + 1})" ${paginaAtualFeed === totalPaginas ? 'disabled' : ''} style="background:#fff;border:1px solid #9575cd;color:#4a148c;padding:6px 14px;border-radius:20px;cursor:pointer;font-weight:bold;font-size:12px;opacity:${paginaAtualFeed === totalPaginas ? '0.5' : '1'};">Próxima →</button>`;
                         paginacaoContainer.innerHTML = btns;
                         paginacaoContainer.style.display = 'flex';
                     } else {
@@ -1598,7 +1790,6 @@ function mostrar(pagina){
                         container.innerHTML = "<p style='color:#777;font-size:13px;text-align:center;'>Não foi possível carregar as fotos. Tente atualizar a página.</p>";
                         return;
                     }
-                    // A última foto publicada agora fica em primeiro lugar.
                     postsOutubroRosaDGF = Array.isArray(res.posts) ? [...res.posts] : [];
                     carregarComentariosCompartilhadosDGF(function() {
                         window.renderizarFeedPaginadoDGF();
@@ -1641,7 +1832,7 @@ function mostrar(pagina){
                 }
 
                 if (!comentariosServidorDisponivelDGF) {
-                    alert('Os comentários compartilhados ainda não estão disponíveis. É necessário atualizar e publicar o Google Apps Script do mural; o comentário não foi enviado.');
+                    alert('Os comentários compartilhados ainda não estão disponíveis.');
                     return;
                 }
 
@@ -1665,7 +1856,7 @@ function mostrar(pagina){
                             btnEnv.disabled = false;
                             btnEnv.textContent = 'Enviar';
                         }
-                        alert((resposta && resposta.error) || 'Não foi possível salvar o comentário no servidor. Verifique se a atualização do Apps Script foi publicada.');
+                        alert((resposta && resposta.error) || 'Não foi possível salvar o comentário.');
                         return;
                     }
 
@@ -1679,10 +1870,6 @@ function mostrar(pagina){
                 });
             };
 
-            /* =====================================================================================
-               GERADOR DE STORIES ESTILO REFERÊNCIA (MULTICOLORIDO + PREVALÊNCIA DO ROSA)
-               ===================================================================================== */
-
             window.abrirStoriesOutubroRosaDGF = function() {
                 const modal = document.getElementById('modal-stories-outubro-rosa-dgf');
                 const preview = document.getElementById('preview-stories-outubro-rosa-dgf');
@@ -1690,24 +1877,20 @@ function mostrar(pagina){
                 modal.style.display = 'block';
                 const fotos = postsOutubroRosaDGF.filter(p => p && p.imageUrl);
                 if (!fotos.length) {
-                    preview.innerHTML = '<p style="text-align:center;color:#ad1457;padding:20px;">Ainda não há fotos publicadas para montar o mural de Stories.</p>';
+                    preview.innerHTML = '<p style="text-align:center;color:#4a148c;padding:20px;">Ainda não há fotos publicadas para montar os Stories de Halloween.</p>';
                     return;
                 }
 
-                // PRÉVIA VISUAL DO STORIES DO INSTAGRAM (REAPLICANDO ESTILO DA IMAGEM)
                 preview.innerHTML = `
-                    <div style="width:280px;height:497px;border-radius:24px;overflow:hidden;position:relative;background:#faf5f8;box-shadow:0 12px 35px rgba(233,30,99,.25);display:flex;flex-direction:column;justify-content:space-between;padding:12px;box-sizing:border-box;color:#333;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;border:3px solid #ffb74d;">
-                        
-                        <!-- Header do Story estilo Banner da Imagem de Referência -->
-                        <div style="background:linear-gradient(135deg,#e91e63 0%,#ff4081 40%,#ffb74d 100%);border-radius:14px;padding:10px 12px;color:#fff;text-align:center;box-shadow:0 4px 10px rgba(233,30,99,.2);">
+                    <div style="width:280px;height:497px;border-radius:24px;overflow:hidden;position:relative;background:#faf5f8;box-shadow:0 12px 35px rgba(255,109,0,.25);display:flex;flex-direction:column;justify-content:space-between;padding:12px;box-sizing:border-box;color:#333;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;border:3px solid #7b1fa2;">
+                        <div style="background:linear-gradient(135deg,#ff6d00 0%,#ff9100 40%,#7b1fa2 100%);border-radius:14px;padding:10px 12px;color:#fff;text-align:center;box-shadow:0 4px 10px rgba(255,109,0,.2);">
                             <div style="display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:10px;font-size:8px;font-weight:bold;">
-                                🎀 DGF • SAÚDE RECIFE
+                                🎃 DGF • SAÚDE RECIFE
                             </div>
-                            <div style="font-size:16px;font-weight:900;margin-top:2px;text-shadow:0 1px 2px rgba(0,0,0,0.2);">OUTUBRO ROSA</div>
-                            <div style="font-size:8.5px;opacity:.9;font-weight:600;">Mural de Conscientização e União 💞</div>
+                            <div style="font-size:16px;font-weight:900;margin-top:2px;text-shadow:0 1px 2px rgba(0,0,0,0.2);">HALLOWEEN DGF</div>
+                            <div style="font-size:8.5px;opacity:.9;font-weight:600;">Mural de Fantasias e Travessuras 🎃</div>
                         </div>
 
-                        <!-- Grid Dinâmico dos Cards com Bordas Coloridas Intercaladas -->
                         <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:8px 0;max-height:330px;overflow:hidden;padding:2px;">
                             ${fotos.slice(0,6).map((p, idx) => {
                                 const corBorder = paletaCoresCard[idx % paletaCoresCard.length].border;
@@ -1723,17 +1906,16 @@ function mostrar(pagina){
                             }).join('')}
                         </div>
 
-                        <!-- Footer com a Hashtag -->
-                        <div style="text-align:center;background:#fff;padding:6px;border-radius:12px;border:1px solid #f8bbd0;">
-                            <div style="font-size:8px;color:#666;font-weight:bold;margin-bottom:2px;">🌸 Previna-se • Cuide-se • Se Ame!</div>
-                            <div style="background:linear-gradient(45deg,#e91e63,#ff4081);color:#fff;font-size:9.5px;font-weight:900;padding:4px 10px;border-radius:12px;display:inline-block;">
-                                #OutubroRosaDGF
+                        <div style="text-align:center;background:#fff;padding:6px;border-radius:12px;border:1px solid #d1c4e9;">
+                            <div style="font-size:8px;color:#666;font-weight:bold;margin-bottom:2px;">👻 Vista sua fantasia • Divirta-se • Compartilhe!</div>
+                            <div style="background:linear-gradient(45deg,#ff6d00,#ff9100);color:#fff;font-size:9.5px;font-weight:900;padding:4px 10px;border-radius:12px;display:inline-block;">
+                                #HalloweenDGF
                             </div>
                         </div>
                     </div>`;
 
                 const status = document.getElementById('status-stories-outubro-rosa-dgf');
-                if (status) status.textContent = 'Mural montado com ' + fotos.length + ' foto(s)!';
+                if (status) status.textContent = 'Mural Halloween montado com ' + fotos.length + ' foto(s)!';
             };
 
             window.fecharStoriesOutubroRosaDGF = function() {
@@ -1748,7 +1930,7 @@ function mostrar(pagina){
                     let finalizado = false;
 
                     const temporizador = setTimeout(function() {
-                        concluirErro(new Error('O Google Apps Script não respondeu ao buscar a imagem.'));
+                        concluirErro(new Error('O Google Apps Script não respondeu.'));
                     }, 45000);
 
                     function limpar() {
@@ -1767,16 +1949,15 @@ function mostrar(pagina){
                     window[callback] = function(res) {
                         limpar();
                         if (!res || !res.ok || !res.data) {
-                            reject(new Error(res && res.error ? res.error : 'O Apps Script não conseguiu obter os dados da foto.'));
+                            reject(new Error('Falha nos dados da imagem.'));
                             return;
                         }
-
                         const tipo = /^image\//i.test(String(res.contentType || '')) ? String(res.contentType) : 'image/jpeg';
                         resolve('data:' + tipo + ';base64,' + res.data);
                     };
 
                     script.onerror = function() {
-                        concluirErro(new Error('A ação imageData não existe na versão publicada do Google Apps Script.'));
+                        concluirErro(new Error('Erro de carregamento.'));
                     };
 
                     script.src = URL_FEED_OUTUBRO_ROSA_DGF
@@ -1786,7 +1967,6 @@ function mostrar(pagina){
                 });
             }
 
-            // GERADOR CANVAS HD DO STORIES (ESTILO IMAGEM DE REFERÊNCIA)
             window.baixarStoriesOutubroRosaDGF = async function() {
                 const status = document.getElementById('status-stories-outubro-rosa-dgf');
                 const fotos = postsOutubroRosaDGF.filter(p => p && p.imageUrl);
@@ -1794,53 +1974,47 @@ function mostrar(pagina){
                     if (status) status.textContent = 'Não há fotos para baixar.';
                     return;
                 }
-                if (status) status.innerHTML = '<span class="spinner-rosa-dgf"></span>Gerando arte estilo referência em alta definição (1080×1920)... Aguarde!';
+                if (status) status.innerHTML = '<span class="spinner-rosa-dgf"></span>Gerando arte... Aguarde!';
 
                 const canvas = document.createElement('canvas');
                 canvas.width = 1080;
                 canvas.height = 1920;
                 const ctx = canvas.getContext('2d');
 
-                // Fundo Geral Suave (Mantendo Rosa Prevalente)
-                ctx.fillStyle = '#fdf6f9';
+                ctx.fillStyle = '#120b1b';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                // Círculos fluídos decorativos de fundo
-                ctx.fillStyle = 'rgba(233, 30, 99, 0.05)';
+                ctx.fillStyle = 'rgba(255, 109, 0, 0.05)';
                 ctx.beginPath(); ctx.arc(1080, 1920, 500, 0, Math.PI * 2); ctx.fill();
                 ctx.fillStyle = 'rgba(255, 183, 77, 0.08)';
                 ctx.beginPath(); ctx.arc(0, 0, 400, 0, Math.PI * 2); ctx.fill();
 
-                // Banner do Topo (Gradiente estilo Imagem de Referência)
                 const bannerGrad = ctx.createLinearGradient(0, 60, 1080, 320);
-                bannerGrad.addColorStop(0, '#e91e63');
-                bannerGrad.addColorStop(0.5, '#ff4081');
-                bannerGrad.addColorStop(0.85, '#ffb74d');
-                bannerGrad.addColorStop(1, '#ffd54f');
+                bannerGrad.addColorStop(0, '#ff6d00');
+                bannerGrad.addColorStop(0.5, '#ff9100');
+                bannerGrad.addColorStop(0.85, '#7b1fa2');
+                bannerGrad.addColorStop(1, '#311b4b');
 
                 ctx.fillStyle = bannerGrad;
                 ctx.beginPath();
                 ctx.roundRect(50, 60, 980, 260, 32);
                 ctx.fill();
 
-                // Detalhe Badge do Banner
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
                 ctx.beginPath(); ctx.roundRect(90, 95, 380, 44, 22); ctx.fill();
 
                 ctx.fillStyle = '#ffffff';
                 ctx.textAlign = 'left';
                 ctx.font = 'bold 22px Arial';
-                ctx.fillText('🎀 DGF • SECRETARIA DE SAÚDE', 115, 125);
+                ctx.fillText('🎃 DGF • SECRETARIA DE SAÚDE', 115, 125);
 
-                // Títulos do Banner
                 ctx.font = '900 60px Arial';
-                ctx.fillText('Mural Outubro Rosa', 90, 210);
+                ctx.fillText('Mural Halloween DGF', 90, 210);
 
                 ctx.font = 'bold 26px Arial';
-                ctx.fillStyle = '#fff5f8';
-                ctx.fillText('Conscientização, Prevenção e União da nossa Equipe 💞', 90, 260);
+                ctx.fillStyle = '#fff3e0';
+                ctx.fillText('Mistério, Fantasias e União da nossa Equipe 👻', 90, 260);
 
-                // Montagem do Grid Multicor dos Cards
                 const maxFotos = Math.min(6, fotos.length);
                 const cols = maxFotos > 2 ? 2 : 1;
                 const rows = Math.ceil(maxFotos / cols);
@@ -1864,7 +2038,7 @@ function mostrar(pagina){
 
                         await new Promise((resolve, reject) => {
                             img.onload = resolve;
-                            img.onerror = () => reject(new Error('A imagem recebida não pôde ser aberta.'));
+                            img.onerror = () => reject(new Error('Erro ao carregar foto.'));
                             img.src = fonteImagem;
                         });
 
@@ -1875,18 +2049,15 @@ function mostrar(pagina){
 
                         const estiloColor = paletaCoresCard[i % paletaCoresCard.length];
 
-                        // Sombra e Fundo do Card
                         ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
                         ctx.beginPath(); ctx.roundRect(x + 4, y + 6, cellW, cellH, 24); ctx.fill();
 
                         ctx.fillStyle = '#ffffff';
                         ctx.beginPath(); ctx.roundRect(x, y, cellW, cellH, 24); ctx.fill();
 
-                        // Borda Colorida Lateral
                         ctx.fillStyle = estiloColor.border;
                         ctx.beginPath(); ctx.roundRect(x, y, 16, cellH, [24, 0, 0, 24]); ctx.fill();
 
-                        // Imagem centralizada no Card
                         ctx.save();
                         ctx.beginPath();
                         ctx.roundRect(x + 30, y + 20, cellW - 50, cellH - 100, 16);
@@ -1908,52 +2079,46 @@ function mostrar(pagina){
                         ctx.drawImage(img, offsetX, offsetY, renderW, renderH);
                         ctx.restore();
 
-                        // Nome com a cor correspondente do Card
                         ctx.fillStyle = estiloColor.nameColor;
                         ctx.textAlign = 'center';
                         ctx.font = 'bold 28px Arial';
                         ctx.fillText(fotos[i].name || 'Equipe DGF', x + cellW / 2 + 8, y + cellH - 32);
 
                     } catch (e) {
-                        console.error('Não foi possível incluir a foto no Story:', i + 1, e);
                         if (status) {
                             status.style.color = '#b71c1c';
-                            status.textContent = 'Download cancelado para evitar um arquivo sem fotos. Não foi possível carregar a foto ' + (i + 1) + '. ' +
-                                (e && e.message ? e.message : 'Erro desconhecido.') +
-                                ' Confira se a correção imageData foi incluída e publicada no Google Apps Script.';
+                            status.textContent = 'Erro ao incluir foto no Story.';
                         }
                         return;
                     }
                 }
 
-                // Rodapé com Destaque
-                ctx.fillStyle = '#ad1457';
+                ctx.fillStyle = '#4a148c';
                 ctx.textAlign = 'center';
                 ctx.font = 'bold 34px Arial';
-                ctx.fillText('🌸 Se toque, se cuide, se ame!', 540, 1750);
+                ctx.fillText('🎃 Doces, travessuras e diversão!', 540, 1750);
 
                 const footerGrad = ctx.createLinearGradient(300, 1790, 780, 1860);
-                footerGrad.addColorStop(0, '#e91e63');
-                footerGrad.addColorStop(1, '#ab47bc');
+                footerGrad.addColorStop(0, '#ff6d00');
+                footerGrad.addColorStop(1, '#6a1b9a');
 
                 ctx.fillStyle = footerGrad;
                 ctx.beginPath(); ctx.roundRect(290, 1790, 500, 75, 38); ctx.fill();
 
                 ctx.fillStyle = '#ffffff';
                 ctx.font = '900 38px Arial';
-                ctx.fillText('#OutubroRosaDGF', 540, 1842);
+                ctx.fillText('#HalloweenDGF', 540, 1842);
 
                 try {
                     const link = document.createElement('a');
-                    link.download = 'Outubro-Rosa-DGF-Story.png';
+                    link.download = 'Halloween-DGF-Story.png';
                     link.href = canvas.toDataURL('image/png');
                     link.click();
                     if (status) status.textContent = '🚀 Story baixado com sucesso!';
                 } catch (e) {
-                    console.error('Erro ao exportar Story Outubro Rosa DGF:', e);
                     if (status) {
                         status.style.color = '#b71c1c';
-                        status.textContent = 'Não foi possível concluir o download da imagem. Tente novamente; se persistir, confira o console do navegador.';
+                        status.textContent = 'Erro na exportação da imagem.';
                     }
                 }
             };
@@ -2017,7 +2182,7 @@ function mostrar(pagina){
                     status.textContent = 'Selecione uma foto.';
                     return;
                 }
-                status.style.color = '#ad1457';
+                status.style.color = '#4a148c';
                 status.innerHTML = '<span class="spinner-rosa-dgf"></span>Enviando foto... Aguarde.';
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -2103,6 +2268,28 @@ function mostrar(pagina){
         }
 
         conteudo.innerHTML = `
+        <style>
+            @keyframes animarBordaHalloween {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+            @keyframes flutuarItem {
+                0%, 100% { transform: translateY(0px) rotate(0deg); }
+                50% { transform: translateY(-8px) rotate(5deg); }
+            }
+            .card-halloween-animado {
+                background: linear-gradient(-45deg, #120024, #3a005c, #ff6600, #1a002c);
+                background-size: 300% 300%;
+                animation: animarBordaHalloween 6s ease infinite;
+                border: 2px solid #ff6600;
+                box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
+            }
+            .item-flutuante {
+                animation: flutuarItem 3s ease-in-out infinite;
+                display: inline-block;
+            }
+        </style>
         <div style="
             display:flex;
             flex-direction:column;
@@ -2112,7 +2299,7 @@ function mostrar(pagina){
             padding:15px;
             background:#f4f7f6;
             border-radius:8px;
-            border-top:10px solid #e91e63;
+            border-top:10px solid #ff6600;
         ">
             <!-- CONTADOR DISCRETO — CANTO SUPERIOR DIREITO -->
             <div id="contador-acessos-dgf" style="
@@ -2140,96 +2327,119 @@ function mostrar(pagina){
                 👁 <span id="total-acessos-dgf">0</span> acessos
             </div>
 
-            <!-- BANNER OUTUBRO ROSA NA HOME -->
-            <div style="
-                background:linear-gradient(135deg,#fff5f8 0%,#f8bbd0 100%);
-                border:1px solid #ec407a;
-                border-left:8px solid #ec407a;
-                border-radius:8px;
-                padding:16px 20px;
-                box-shadow:0 4px 12px rgba(236,64,122,0.2);
+            <!-- BANNER ESPECIAL HALLOWEEN NA HOME -->
+            <div class="card-halloween-animado" style="
+                border-radius:12px;
+                padding:18px 24px;
                 display:flex;
                 align-items:center;
-                gap:18px;
+                gap:20px;
                 flex-wrap:wrap;
                 font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
                 flex-shrink:0;
+                position:relative;
+                overflow:hidden;
             ">
-                <div style="
-                    background:#ec407a;
+                <div class="item-flutuante" style="
+                    background:rgba(255,102,0,0.2);
                     color:#fff;
-                    width:50px;
-                    height:50px;
+                    width:60px;
+                    height:60px;
                     border-radius:50%;
                     display:flex;
                     align-items:center;
                     justify-content:center;
-                    font-size:26px;
+                    font-size:32px;
                     flex-shrink:0;
-                    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+                    border:2px solid #ff6600;
+                    box-shadow:0 0 15px rgba(255,102,0,0.6);
                 ">
-                    🎀
+                    🎃
                 </div>
 
-                <div style="flex:1;min-width:280px;">
+                <div style="flex:1;min-width:280px;color:#fff;">
                     <div style="
                         display:flex;
                         align-items:center;
                         gap:8px;
-                        margin-bottom:4px;
+                        margin-bottom:6px;
                         flex-wrap:wrap;
                     ">
                         <span style="
-                            background:#ad1457;
-                            color:white;
+                            background:#ff6600;
+                            color:#000;
                             font-size:11px;
-                            font-weight:800;
-                            padding:2px 8px;
+                            font-weight:900;
+                            padding:3px 10px;
                             border-radius:12px;
                             text-transform:uppercase;
-                            letter-spacing:.5px;
+                            letter-spacing:1px;
                         ">
-                            Campanha de Conscientização
+                            Doces ou Travessuras? 🕸️
                         </span>
 
                         <strong style="
-                            color:#ad1457;
-                            font-size:16px;
+                            color:#ffb74d;
+                            font-size:18px;
+                            text-shadow:0 2px 4px rgba(0,0,0,0.8);
                         ">
-                            Outubro Rosa: Prevenção e Cuidado com a Saúde da Mulher
+                            Especial de Halloween DGF! 👻
                         </strong>
                     </div>
 
                     <p style="
                         margin:0;
-                        color:#424242;
+                        color:#e0e0e0;
                         font-size:13px;
                         line-height:1.5;
                     ">
-                        O <strong>Outubro Rosa</strong> é um movimento de conscientização
-                        que reforça a importância da prevenção, do diagnóstico precoce
-                        e dos cuidados com a saúde da mulher, com atenção especial ao
-                        <strong>câncer de mama</strong>.
+                        Escolha seu companheiro das trevas para navegar pela Intranet! Clique abaixo para alterar o ponteiro do seu mouse.
                     </p>
                 </div>
 
+                <!-- SELETOR OBRIGATÓRIO DE CURSOR (FANTASMA x MORCEGO) -->
                 <div style="
                     display:flex;
+                    flex-direction:column;
                     align-items:center;
-                    gap:10px;
+                    gap:8px;
+                    background:rgba(0,0,0,0.4);
+                    padding:12px 16px;
+                    border-radius:10px;
+                    border:1px solid rgba(255,102,0,0.4);
                 ">
-                    <button onclick="mostrar('Outubro Rosa')" style="
-                        background:#ec407a;
-                        color:white;
-                        border:none;
-                        padding:10px 16px;
-                        border-radius:6px;
-                        font-weight:bold;
-                        cursor:pointer;
-                        box-shadow:0 2px 6px rgba(0,0,0,0.15);
-                    ">
-                        📰 Ver Mural Rosa
-                    </button>
+                    <span style="color:#ffb74d;font-size:11px;font-weight:bold;text-transform:uppercase;">Escolha seu Cursor:</span>
+                    <div style="display:flex;gap:12px;">
+                        <button type="button" onclick="mudarCursorDGF('fantasma')" style="
+                            background:linear-gradient(135deg, #ffffff, #e0e0e0);
+                            color:#1a002c;
+                            border:none;
+                            padding:8px 14px;
+                            border-radius:20px;
+                            font-weight:bold;
+                            font-size:13px;
+                            cursor:pointer;
+                            box-shadow:0 4px 10px rgba(255,255,255,0.3);
+                            transition:transform .2s;
+                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            👻 Fantasminha
+                        </button>
+
+                        <button type="button" onclick="mudarCursorDGF('morcego')" style="
+                            background:linear-gradient(135deg, #3a005c, #120024);
+                            color:#ff9800;
+                            border:1px solid #ff9800;
+                            padding:8px 14px;
+                            border-radius:20px;
+                            font-weight:bold;
+                            font-size:13px;
+                            cursor:pointer;
+                            box-shadow:0 4px 10px rgba(255,152,0,0.3);
+                            transition:transform .2s;
+                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                            🦇 Morcego
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -2266,12 +2476,12 @@ function mostrar(pagina){
                     height:6px;
                     background:repeating-linear-gradient(
                         90deg,
-                        #e91e63,
-                        #e91e63 20px,
-                        #fff 20px,
-                        #fff 40px
+                        #ff6600,
+                        #ff6600 20px,
+                        #8e44ad 20px,
+                        #8e44ad 40px
                     );
-                    opacity:.6;
+                    opacity:.8;
                     pointer-events:none;
                 "></div>
 
@@ -2355,7 +2565,7 @@ function mostrar(pagina){
                             onmouseout="this.style.background='rgba(142,68,173,.85)';this.style.transform='scale(1)'"
                         >
                             <img
-                                src="./xadrez.png"
+                                src="./duelo.png"
                                 alt="Xadrez DGF"
                                 onclick="event.stopPropagation();mostrar('Xadrez DGF');"
                                 style="
@@ -2400,7 +2610,7 @@ function mostrar(pagina){
                         <div style="
                             font-size:20px;
                             font-weight:600;
-                            color:#ec407a;
+                            color:#ff9800;
                             margin-top:4px;
                             text-shadow:1px 1px 0 rgba(0,0,0,.2);
                         ">
@@ -2503,9 +2713,9 @@ function mostrar(pagina){
 
                     <!-- MURAL -->
                     <div style="
-                        background:#fff9c4 !important;
-                        border:1px solid #fbc02d;
-                        border-left:5px solid #ff6b6b;
+                        background:#f3e5f5 !important;
+                        border:1px solid #7e57c2;
+                        border-left:5px solid #ff6d00;
                         border-radius:6px;
                         padding:12px 15px;
                         width:270px;
@@ -2536,21 +2746,21 @@ function mostrar(pagina){
                                 </span>
 
                                 <span style="
-                                    color:#d32f2f;
+                                    color:#6a1b9a;
                                     font-weight:800;
                                     font-size:12px;
                                     letter-spacing:.5px;
                                     text-transform:uppercase;
                                 ">
-                                    Outubro Rosa
+                                    Halloween DGF
                                 </span>
                             </div>
 
                             <span
-                                onclick="mostrar('Outubro Rosa')"
+                                onclick="mostrar('Halloween DGF')"
                                 style="
                                     font-size:11px;
-                                    color:#ff6b6b;
+                                    color:#ff6d00;
                                     font-weight:bold;
                                     cursor:pointer;
                                     text-decoration:underline;
@@ -2566,12 +2776,12 @@ function mostrar(pagina){
                             font-size:11px;
                             line-height:1.3;
                         ">
-                            <strong>🎀 Campanha Outubro Rosa DGF!</strong>
-                            Participe do nosso mural, compartilhe sua foto e apoie esta causa.
+                            <strong>🎃 Especial de Halloween DGF!</strong>
+                            Entre no clima: publique sua foto, fantasia ou decoração assustadora no mural.
                         </p>
 
                         <div
-                            onclick="mostrar('Outubro Rosa')"
+                            onclick="mostrar('Halloween DGF')"
                             style="
                                 width:100%;
                                 border-radius:4px;
@@ -2581,25 +2791,15 @@ function mostrar(pagina){
                                 cursor:pointer;
                             "
                         >
-                            <img
-                                src="./rosa.png"
-                                alt="Outubro Rosa DGF"
-                                style="
-                                    width:100%;
-                                    height:auto;
-                                    max-height:110px;
-                                    object-fit:cover;
-                                    display:block;
-                                "
-                            >
+                            <div aria-label="Ilustração de Halloween DGF" style="width:100%;height:110px;display:flex;align-items:center;justify-content:center;gap:14px;background:radial-gradient(circle at 18% 25%,#6a1b9a 0%,transparent 34%),linear-gradient(135deg,#120b1b 0%,#311b4b 52%,#e65100 100%);color:#fff;font-size:30px;letter-spacing:3px;text-shadow:0 3px 8px rgba(0,0,0,.55);">🎃 👻 🦇 🕸️</div>
                         </div>
 
                         <a
                             href="#"
-                            onclick="mostrar('Outubro Rosa'); return false;"
+                            onclick="mostrar('Halloween DGF'); return false;"
                             style="
                                 margin-top:4px;
-                                color:#c62828;
+                                color:#e65100;
                                 font-weight:bold;
                                 font-size:11px;
                                 text-decoration:underline;
@@ -2607,7 +2807,7 @@ function mostrar(pagina){
                                 display:block;
                             "
                         >
-                            👉 Clique aqui para publicar no Mural Rosa
+                            👉 Clique aqui para publicar no Mural Halloween
                         </a>
                     </div>
                 </div>
@@ -3280,6 +3480,120 @@ function mostrar(pagina){
         `;
 
         /* =====================================================================================
+           EFEITO DE ÁUDIO - RISADA DE VILÃO ULTRAMALÉFICA / CAVERNOSA
+           ===================================================================================== */
+
+        window.tocarRisadaBruxaDGF = function() {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                const ctx = new AudioCtx();
+                if (ctx.state === 'suspended') {
+                    ctx.resume();
+                }
+
+                const agora = ctx.currentTime;
+
+                // Gargalhadas com frequências bem graves, oscilações fortes e ritmo macabro
+                const risadaPassos = [
+                    { tempo: 0.00, fInic: 180, fFim: 75,  dur: 0.42, vol: 0.50 }, // MUA...
+                    { tempo: 0.45, fInic: 210, fFim: 85,  dur: 0.32, vol: 0.55 }, // HA...
+                    { tempo: 0.80, fInic: 195, fFim: 70,  dur: 0.28, vol: 0.50 }, // HA...
+                    { tempo: 1.10, fInic: 170, fFim: 60,  dur: 0.25, vol: 0.45 }, // HA...
+                    { tempo: 1.38, fInic: 150, fFim: 55,  dur: 0.22, vol: 0.40 }, // HA...
+                    { tempo: 1.62, fInic: 130, fFim: 45,  dur: 0.38, vol: 0.35 }  // HA... (sumindo no túmulo)
+                ];
+
+                risadaPassos.forEach(p => {
+                    const tInic = agora + p.tempo;
+                    const tFim = tInic + p.dur;
+
+                    // Oscilador 1: Dente de serra para voz rasgada
+                    const osc1 = ctx.createOscillator();
+                    osc1.type = 'sawtooth';
+                    osc1.frequency.setValueAtTime(p.fInic, tInic);
+                    osc1.frequency.exponentialRampToValueAtTime(p.fFim, tFim);
+
+                    // Oscilador 2: Sub-grave levemente desafinado para corpo cavernoso
+                    const osc2 = ctx.createOscillator();
+                    osc2.type = 'sawtooth';
+                    osc2.frequency.setValueAtTime(p.fInic * 0.98 - 3, tInic);
+                    osc2.frequency.exponentialRampToValueAtTime(p.fFim * 0.98, tFim);
+
+                    // Filtro ressonante com garganta monstruosa
+                    const filter = ctx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.Q.value = 6; // Ressonância para timbre macabro
+                    filter.frequency.setValueAtTime(650, tInic);
+                    filter.frequency.exponentialRampToValueAtTime(180, tFim);
+
+                    // Controle de Ganho
+                    const gain = ctx.createGain();
+                    gain.gain.setValueAtTime(0.001, tInic);
+                    gain.gain.linearRampToValueAtTime(p.vol, tInic + 0.05);
+                    gain.gain.exponentialRampToValueAtTime(0.001, tFim);
+
+                    // Conexões
+                    osc1.connect(filter);
+                    osc2.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(ctx.destination);
+
+                    osc1.start(tInic);
+                    osc2.start(tInic);
+                    osc1.stop(tFim);
+                    osc2.stop(tFim);
+                });
+
+            } catch (e) {
+                console.log("Aguardando interação do usuário para reproduzir o áudio.");
+            }
+        };
+
+        // Executa a risada imediatamente ao carregar a home e programa a cada 1 minuto (60.000 ms)
+        window.tocarRisadaBruxaDGF();
+        if (window.intervaloRisadaHalloweenDGF) {
+            clearInterval(window.intervaloRisadaHalloweenDGF);
+        }
+        window.intervaloRisadaHalloweenDGF = setInterval(function() {
+            window.tocarRisadaBruxaDGF();
+        }, 60000);
+
+        // Desbloqueio do áudio no primeiro clique do usuário caso o navegador bloqueie o autoplay
+        const desbloquearAudio = function() {
+            window.tocarRisadaBruxaDGF();
+            document.removeEventListener('click', desbloquearAudio);
+        };
+        document.addEventListener('click', desbloquearAudio);
+
+        /* =====================================================================================
+           FUNÇÃO PARA ALTERAR O CURSOR DO MOUSE (FANTASMA / MORCEGO)
+           ===================================================================================== */
+
+        window.mudarCursorDGF = function(tipo) {
+            let svgIcon = "";
+            if (tipo === 'fantasma') {
+                svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="0" y="24" font-size="24">👻</text></svg>`;
+            } else if (tipo === 'morcego') {
+                svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="0" y="24" font-size="24">🦇</text></svg>`;
+            }
+
+            if (svgIcon) {
+                const encodedSvg = encodeURIComponent(svgIcon);
+                document.body.style.cursor = `url("data:image/svg+xml,${encodedSvg}"), auto`;
+                
+                // Aplica a todos os elementos clicáveis
+                const estilosCursor = document.createElement('style');
+                estilosCursor.id = 'estilo-cursor-halloween-dgf';
+                const estiloAntigo = document.getElementById('estilo-cursor-halloween-dgf');
+                if (estiloAntigo) estiloAntigo.remove();
+
+                estilosCursor.innerHTML = `* { cursor: url("data:image/svg+xml,${encodedSvg}"), auto !important; }`;
+                document.head.appendChild(estilosCursor);
+            }
+        };
+
+        /* =====================================================================================
            BOTÕES MONITORE / PRIORIZE
            ===================================================================================== */
 
@@ -3437,7 +3751,7 @@ function mostrar(pagina){
             const inputVal = input.value.trim();
 
             if (!inputVal) {
-                resEl.innerHTML = "<span style='color:#e74c3c;font-weight:bold;'>⚠ Digite o número do processo!</span>";
+                resEl.innerHTML = "<span style='color:#e74c3c;font-weight:bold;'>⚠️ Digite o número do processo!</span>";
                 return;
             }
 
@@ -4405,6 +4719,38 @@ if (pagina === "plano_anual_de_contratacoes") {
                 </div>
             </div>
 
+            <!-- NOTÍCIA 4 (PERGUNTAS FREQUENTES) -->
+            <div style="background: white; border: 1px solid #cbd5e1; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.03); transition: all 0.2s;">
+                <div onclick="window.toggleNoticiaPca('noticia4')" style="padding: 18px 20px; background: #ffffff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; user-select: none;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="background: #d97706; color: white; font-size: 11px; font-weight: bold; padding: 4px 8px; border-radius: 4px; text-transform: uppercase;">Dúvidas</span>
+                        <h3 style="margin: 0; color: #003366; font-size: 17px; font-weight: 700; line-height: 1.4;">
+                            ⚠️ PERGUNTAS FREQUENTES — SIPAE, POAS E PLANO DE CONTRATAÇÃO ANUAL (PCA)
+                        </h3>
+                    </div>
+                    <span id="seta-noticia4" style="color: #003366; font-size: 18px; font-weight: bold; transition: transform 0.3s;">▼</span>
+                </div>
+                <div id="noticia4" style="display: none; padding: 20px; border-top: 1px solid #f1f5f9; background: #fafafa; color: #334155; font-size: 14px; line-height: 1.7;">
+                    <p style="margin-top: 0;">Esta seção tem como objetivo orientar as unidades da Secretaria Estadual de Saúde de Pernambuco (SES-PE) quanto ao preenchimento dos Documentos de Formalização de Demanda (DFDs) no sistema SIPAE e à sua vinculação ao Plano Orçamentário Anual Setorial (POAS), especialmente para fins de mapeamento e planejamento das contratações.</p>
+                    <p style="margin-bottom: 15px;">As orientações serão atualizadas conforme a necessidade. Em caso de dúvidas, as equipes poderão consultar as perguntas e respostas abaixo ou encaminhar novos questionamentos por meio desta seção da intranet.</p>
+                    
+                    <strong style="color: #003366; display: block; margin-top: 15px; font-size: 15px;">1. Qual é o prazo para cadastrar os DFDs no SIPAE?</strong>
+                    <p style="margin-top: 5px;"><strong>Resposta:</strong> Neste momento, a orientação é que as unidades elaborem seus Documentos de Formalização de Demanda (DFDs) e realizem a vinculação de cada documento à respectiva linha do POAS no SIPAE.</p>
+                    <p style="margin-top: 5px;">O prazo para encaminhamento do processo no Sistema Eletrônico de Informações (SEI) será definido oportunamente pelo Diretor-Geral de Finanças. Até que essa orientação seja formalizada, as equipes devem concentrar seus esforços na elaboração dos DFDs e na correta vinculação ao POAS.</p>
+
+                    <strong style="color: #003366; display: block; margin-top: 15px; font-size: 15px;">2. O valor do DFD precisa ser exatamente igual ao valor previsto no POAS?</strong>
+                    <p style="margin-top: 5px;"><strong>Resposta:</strong> Neste momento, recomenda-se que o valor estimado do DFD seja o mais próximo possível do valor previsto no POAS correspondente.</p>
+                    <p style="margin-top: 5px;">É importante destacar que o valor estimado poderá ser ajustado ao longo do exercício, caso haja necessidade, observadas as orientações e os procedimentos aplicáveis.</p>
+                    <p style="margin-top: 5px;"><strong>Atenção:</strong> Independentemente de eventuais diferenças entre os valores, é fundamental que o DFD esteja vinculado à linha correta do POAS. Essa vinculação permite mapear as demandas de contratação em relação ao planejamento orçamentário das unidades.</p>
+
+                    <strong style="color: #003366; display: block; margin-top: 15px; font-size: 15px;">3. Se o DFD utilizar recursos orçamentários de outra unidade, em qual POAS ele deverá ser vinculado?</strong>
+                    <p style="margin-top: 5px;"><strong>Resposta:</strong> O DFD deverá ser vinculado à linha do POAS da unidade à qual pertence o recurso orçamentário que financiará a despesa, e não necessariamente à unidade responsável pela elaboração do documento.</p>
+                    <p style="margin-top: 5px; margin-bottom: 5px;"><strong>Exemplo prático:</strong></p>
+                    <p style="margin-top: 0; padding-left: 10px; border-left: 3px solid #cbd5e1;">Uma unidade da Secretaria Executiva de Controle Interno (SECI) elabora um DFD para uma demanda que utilizará recursos orçamentários da Secretaria Executiva de Vigilância em Saúde e Atenção Primária (SEVSAP).<br>Nesse caso, o DFD deverá ser vinculado à linha correspondente do POAS da SEVSAP, uma vez que essa é a unidade à qual pertence o recurso orçamentário previsto para custear a despesa.</p>
+                    <p style="margin-top: 10px; margin-bottom: 0;"><strong>Em resumo:</strong> a vinculação deve refletir a relação entre a demanda e o orçamento que dará suporte à sua execução.</p>
+                </div>
+            </div>
+
         </div>
     </div>
     `;
@@ -4489,9 +4835,12 @@ if(pagina === "noticias"){
                     Confira abaixo o documento oficial do Decreto nº 61.416/2026, que dispõe sobre os prazos e procedimentos referentes ao encerramento do exercício financeiro de 2026 e a abertura de 2027.
                 </p>
 
-                <div style="margin: 15px 0;">
+                <div style="margin: 15px 0; display: flex; flex-direction: column; gap: 10px;">
                     <a href="./Decreto 61416_2026  Encerramento do Exercicio (3).pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #e74c3c; font-weight: bold; text-decoration: underline; font-size: 14px;">
                         📄 Clique aqui para abrir e visualizar o Decreto nº 61.416/2026 (PDF)
+                    </a>
+                    <a href="./bo.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #e74c3c; font-weight: bold; text-decoration: underline; font-size: 14px;">
+                        📄 Clique aqui para abrir e visualizar o Boletim Oficial (bo.pdf)
                     </a>
                 </div>
             </div>
@@ -7516,7 +7865,9 @@ if (pagina === "aniversariantes") {
         document.addEventListener('keydown', window.dgfAniversariantesEscapeListener);
     }
 }
-    
+
+
+
 if(pagina === "organograma"){
         conteudo.innerHTML = `
             <h2>📊 Organograma DGF</h2>
@@ -8370,6 +8721,7 @@ if(pagina === "chegou"){
     };
 }
 
+
 if (pagina === "Funcionários") {
 
     // URL DO APLICATIVO DA WEB DO APPS SCRIPT
@@ -8381,6 +8733,9 @@ if (pagina === "Funcionários") {
     let registrosPublicos = [];
     let matriculaFichaAtual = '';
     let termoBuscaAtual = '';
+    let mapaNadaConsta = {};
+    let nadaConstaConexaoOK = false;
+    let mensagemErroNadaConsta = '';
 
     conteudo.innerHTML = `
         <style>
@@ -8841,6 +9196,115 @@ if (pagina === "Funcionários") {
                 color: #64748b;
             }
 
+            /* ÁREA DO NADA CONSTA */
+            .dgf-nc-aviso {
+                padding: 12px 14px;
+                margin-bottom: 14px;
+                border: 1px solid #fcd34d;
+                border-radius: 9px;
+                background: #fffbeb;
+                color: #92400e;
+                font-size: 12px;
+                line-height: 1.5;
+            }
+
+            .dgf-nc-resumo {
+                padding: 12px 14px;
+                margin-bottom: 14px;
+                border: 1px solid #bfdbfe;
+                border-radius: 9px;
+                background: #eff6ff;
+                color: #1e40af;
+                font-size: 13px;
+                font-weight: 800;
+            }
+
+            .dgf-nc-tabela-wrap {
+                width: 100%;
+                overflow: auto;
+                max-height: 60vh;
+                border: 1px solid #e2e8f0;
+                border-radius: 10px;
+            }
+
+            .dgf-nc-tabela {
+                width: 100%;
+                border-collapse: collapse;
+                min-width: 720px;
+                font-size: 12px;
+            }
+
+            .dgf-nc-tabela th {
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                padding: 12px 10px;
+                background: #172554;
+                color: #ffffff;
+                text-align: center;
+                white-space: nowrap;
+            }
+
+            .dgf-nc-tabela th:first-child,
+            .dgf-nc-tabela td:first-child {
+                text-align: left;
+            }
+
+            .dgf-nc-tabela td {
+                padding: 12px 10px;
+                border-bottom: 1px solid #e2e8f0;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .dgf-nc-tabela tbody tr:nth-child(even) {
+                background: #f8fafc;
+            }
+
+            .dgf-nc-nome {
+                display: block;
+                color: #172554;
+                font-weight: 800;
+                line-height: 1.4;
+                overflow-wrap: anywhere;
+            }
+
+            .dgf-nc-matricula {
+                display: block;
+                margin-top: 4px;
+                color: #64748b;
+                font-size: 10px;
+            }
+
+            .dgf-nc-check {
+                width: 20px;
+                height: 20px;
+                accent-color: #059669;
+                cursor: pointer;
+            }
+
+            .dgf-nc-check:disabled {
+                cursor: not-allowed;
+                opacity: .55;
+            }
+
+            .dgf-nc-progresso {
+                font-weight: 800;
+                color: #475569;
+                white-space: nowrap;
+            }
+
+            .dgf-nc-progresso.completo {
+                color: #047857;
+            }
+
+            .dgf-nc-status {
+                min-height: 18px;
+                margin: 12px 0 0;
+                color: #64748b;
+                font-size: 11px;
+            }
+
             /* MODAL EXCLUSIVO PARA FOTO EXPANDIDA */
             .dgf-modal-foto-expandida {
                 display: none;
@@ -8913,6 +9377,12 @@ if (pagina === "Funcionários") {
                         class="dgf-btn dgf-btn-azul"
                         style="display:none">
                         📊 Dashboard
+                    </button>
+
+                    <button id="btnNadaConstaDGF"
+                        class="dgf-btn dgf-btn-azul"
+                        style="display:none" type="button">
+                        📋 Nada Consta
                     </button>
                 </div>
             </div>
@@ -9199,6 +9669,39 @@ if (pagina === "Funcionários") {
             </div>
         </div>
 
+        <!-- MODAL NADA CONSTA -->
+        <div id="modalNadaConstaDGF" class="dgf-modal">
+            <div class="dgf-modal-caixa" style="max-width:1100px">
+                <div class="dgf-modal-topo">
+                    <h3>📋 Controle de Nada Consta</h3>
+                    <button id="fecharNadaConstaDGF" class="dgf-fechar" type="button">×</button>
+                </div>
+                <div class="dgf-modal-corpo">
+                    <p style="margin:0 0 14px;color:#64748b;font-size:12px;line-height:1.5">
+                        Marque cada quadradinho quando a baixa ou regularização daquele item estiver concluída para o funcionário.
+                    </p>
+                    <div id="avisoNadaConstaDGF" class="dgf-nc-aviso" style="display:none"></div>
+                    <div id="resumoNadaConstaDGF" class="dgf-nc-resumo">Carregando situação dos itens...</div>
+                    <div class="dgf-nc-tabela-wrap">
+                        <table class="dgf-nc-tabela">
+                            <thead>
+                                <tr>
+                                    <th>Funcionário</th>
+                                    <th>SEI</th>
+                                    <th>EFISCO</th>
+                                    <th>E-MAIL</th>
+                                    <th>VÍNCULO</th>
+                                    <th>Progresso</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpoNadaConstaDGF"></tbody>
+                        </table>
+                    </div>
+                    <p id="statusNadaConstaDGF" class="dgf-nc-status" aria-live="polite"></p>
+                </div>
+            </div>
+        </div>
+
         <!-- MODAL DE VISUALIZAÇÃO DE FOTO GRANDE -->
         <div id="modalFotoExpandida" class="dgf-modal-foto-expandida">
             <img id="imgFotoExpandida" src="" alt="Foto expandida do funcionário">
@@ -9215,10 +9718,12 @@ if (pagina === "Funcionários") {
     const btnAcesso = document.getElementById('btnAcessoDGF');
     const btnCadastro = document.getElementById('btnCadastroDGF');
     const btnDashboard = document.getElementById('btnDashboardDGF');
+    const btnNadaConsta = document.getElementById('btnNadaConstaDGF');
 
     const modalFicha = document.getElementById('modalFicha');
     const modalCadastro = document.getElementById('modalCadastroDGF');
     const modalDash = document.getElementById('modalDashboardDGF');
+    const modalNadaConsta = document.getElementById('modalNadaConstaDGF');
     const modalFotoExpandida = document.getElementById('modalFotoExpandida');
     const imgFotoExpandida = document.getElementById('imgFotoExpandida');
 
@@ -9374,11 +9879,14 @@ if (pagina === "Funcionários") {
                 termoBuscaAtual.trim().toLowerCase() === 'dash'
                 ? 'inline-block'
                 : 'none';
+
+            btnNadaConsta.style.display = 'inline-block';
         } else {
             btnAcesso.className = 'dgf-btn dgf-btn-cinza';
             btnAcesso.textContent = '🔒 Acesso restrito';
 
             btnDashboard.style.display = 'none';
+            btnNadaConsta.style.display = 'none';
         }
     }
 
@@ -9535,6 +10043,10 @@ if (pagina === "Funcionários") {
                 modalFicha.style.display = 'none';
                 modalCadastro.style.display = 'none';
                 modalDash.style.display = 'none';
+                modalNadaConsta.style.display = 'none';
+                mapaNadaConsta = {};
+                nadaConstaConexaoOK = false;
+                mensagemErroNadaConsta = '';
 
                 atualizarBotoes();
                 exibirStatus('Acesso restrito encerrado.');
@@ -9563,6 +10075,7 @@ if (pagina === "Funcionários") {
             const resposta = await enviarAPI('listarPrivados');
 
             registrosPrivados = resposta.registros || [];
+            await carregarDadosNadaConsta();
 
             atualizarBotoes();
             renderizarDashboard();
@@ -9972,9 +10485,223 @@ if (pagina === "Funcionários") {
         const resposta = await enviarAPI('listarPrivados');
 
         registrosPrivados = resposta.registros || [];
+        await carregarDadosNadaConsta();
 
         renderizarDashboard();
+        if (modalNadaConsta.style.display === 'flex') {
+            renderizarNadaConsta();
+        }
     }
+
+
+    // -------------------------------------------------
+    // NADA CONSTA - CONTROLE DAS BAIXAS
+    // As ações listarNadaConsta e salvarNadaConsta precisam existir no Apps Script.
+    // -------------------------------------------------
+
+    function valorBooleanoNadaConsta(valor) {
+        return valor === true || valor === 1 ||
+            ['true', '1', 'sim', 'yes'].includes(String(valor ?? '').trim().toLowerCase());
+    }
+
+    function statusVazioNadaConsta() {
+        return { sei: false, efisco: false, email: false, vinculo: false };
+    }
+
+    function normalizarStatusNadaConsta(registro) {
+        return {
+            sei: valorBooleanoNadaConsta(registro.sei ?? registro.SEI),
+            efisco: valorBooleanoNadaConsta(registro.efisco ?? registro.EFISCO),
+            email: valorBooleanoNadaConsta(registro.email ?? registro.EMAIL),
+            vinculo: valorBooleanoNadaConsta(registro.vinculo ?? registro.VINCULO)
+        };
+    }
+
+    async function carregarDadosNadaConsta() {
+        try {
+            const resposta = await enviarAPI('listarNadaConsta');
+            const mapaNovo = {};
+
+            (resposta.registros || []).forEach(function(item) {
+                const matricula = String(item.matricula ?? item.MATRICULA ?? '').trim();
+                if (!matricula) return;
+                mapaNovo[matricula] = normalizarStatusNadaConsta(item);
+            });
+
+            mapaNadaConsta = mapaNovo;
+            nadaConstaConexaoOK = true;
+            mensagemErroNadaConsta = '';
+        } catch (erro) {
+            nadaConstaConexaoOK = false;
+            mensagemErroNadaConsta = erro && erro.message
+                ? erro.message
+                : 'Não foi possível consultar o armazenamento do Nada Consta.';
+        }
+    }
+
+    function contarMarcadosNadaConsta(status) {
+        return ['sei', 'efisco', 'email', 'vinculo'].filter(function(chave) {
+            return !!status[chave];
+        }).length;
+    }
+
+    function atualizarResumoNadaConsta() {
+        const linhas = Array.from(document.querySelectorAll('#corpoNadaConstaDGF tr[data-matricula]'));
+        const total = linhas.length * 4;
+        let marcados = 0;
+        let completos = 0;
+
+        linhas.forEach(function(linha) {
+            const caixas = Array.from(linha.querySelectorAll('.dgf-nc-check'));
+            const qtd = caixas.filter(function(caixa) { return caixa.checked; }).length;
+            marcados += qtd;
+            if (qtd === 4) completos++;
+        });
+
+        const resumo = document.getElementById('resumoNadaConstaDGF');
+        if (resumo) {
+            resumo.textContent = marcados + ' de ' + total +
+                ' itens concluídos · ' + completos + ' funcionário(s) com os 4 itens concluídos.';
+        }
+    }
+
+    function atualizarProgressoLinhaNadaConsta(linha) {
+        if (!linha) return;
+        const caixas = Array.from(linha.querySelectorAll('.dgf-nc-check'));
+        const qtd = caixas.filter(function(caixa) { return caixa.checked; }).length;
+        const progresso = linha.querySelector('[data-nc-progresso]');
+        if (progresso) {
+            progresso.textContent = qtd + '/4';
+            progresso.classList.toggle('completo', qtd === 4);
+        }
+    }
+
+    function renderizarNadaConsta() {
+        if (!autorizado) {
+            alert('Acesso restrito. Informe a senha corporativa primeiro.');
+            return;
+        }
+
+        const aviso = document.getElementById('avisoNadaConstaDGF');
+        const corpo = document.getElementById('corpoNadaConstaDGF');
+        const status = document.getElementById('statusNadaConstaDGF');
+
+        if (!nadaConstaConexaoOK) {
+            aviso.style.display = 'block';
+            aviso.textContent = 'A tela foi adicionada, mas o Apps Script ainda não confirmou a ação listarNadaConsta. Os quadradinhos ficarão desativados para evitar que pareça que os dados foram salvos. Atualize o Apps Script com as ações listarNadaConsta e salvarNadaConsta. Detalhe: ' + mensagemErroNadaConsta;
+        } else {
+            aviso.style.display = 'none';
+            aviso.textContent = '';
+        }
+
+        if (!registrosPrivados.length) {
+            corpo.innerHTML = '<tr><td colspan="6" style="padding:22px;text-align:center;color:#64748b">Nenhum funcionário encontrado na base privada.</td></tr>';
+            atualizarResumoNadaConsta();
+            return;
+        }
+
+        corpo.innerHTML = registrosPrivados.map(function(registro) {
+            const nome = registro.nomeCompleto || 'Sem nome';
+            const matricula = String(registro.matricula ?? '').trim();
+            const statusItem = mapaNadaConsta[matricula] || statusVazioNadaConsta();
+            const marcados = contarMarcadosNadaConsta(statusItem);
+            const desabilitado = nadaConstaConexaoOK ? '' : 'disabled';
+
+            function caixa(campo, rotulo) {
+                return '<td><input type="checkbox" class="dgf-nc-check" ' +
+                    'aria-label="' + escaparHTML(rotulo + ' - ' + nome) + '" ' +
+                    'data-matricula="' + escaparHTML(matricula) + '" ' +
+                    'data-campo="' + campo + '" ' +
+                    (statusItem[campo] ? 'checked ' : '') + desabilitado + '></td>';
+            }
+
+            return '<tr data-matricula="' + escaparHTML(matricula) + '">' +
+                '<td><span class="dgf-nc-nome">' + escaparHTML(nome) + '</span>' +
+                '<span class="dgf-nc-matricula">Matrícula: ' + escaparHTML(matricula || 'não informada') + '</span></td>' +
+                caixa('sei', 'SEI') +
+                caixa('efisco', 'EFISCO') +
+                caixa('email', 'E-MAIL') +
+                caixa('vinculo', 'VÍNCULO') +
+                '<td><span class="dgf-nc-progresso ' + (marcados === 4 ? 'completo' : '') + '" data-nc-progresso>' + marcados + '/4</span></td>' +
+                '</tr>';
+        }).join('');
+
+        corpo.querySelectorAll('.dgf-nc-check').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                salvarMarcacaoNadaConsta(this);
+            });
+        });
+
+        atualizarResumoNadaConsta();
+        status.textContent = nadaConstaConexaoOK
+            ? 'As alterações são enviadas ao armazenamento central a cada marcação.'
+            : 'Aguardando configuração do Apps Script; nenhum item pode ser marcado ainda.';
+    }
+
+    async function salvarMarcacaoNadaConsta(checkbox) {
+        if (!autorizado || !nadaConstaConexaoOK) {
+            checkbox.checked = false;
+            return;
+        }
+
+        const linha = checkbox.closest('tr');
+        const matricula = String(checkbox.getAttribute('data-matricula') || '').trim();
+        const campo = checkbox.getAttribute('data-campo');
+        const funcionario = registrosPrivados.find(function(item) {
+            return String(item.matricula ?? '').trim() === matricula;
+        });
+        const anterior = Object.assign(statusVazioNadaConsta(), mapaNadaConsta[matricula] || {});
+        const novoStatus = Object.assign({}, anterior, { [campo]: checkbox.checked });
+        const caixasLinha = Array.from(linha.querySelectorAll('.dgf-nc-check'));
+        const mensagem = document.getElementById('statusNadaConstaDGF');
+
+        caixasLinha.forEach(function(caixa) { caixa.disabled = true; });
+        mensagem.textContent = 'Salvando alteração de ' + (funcionario?.nomeCompleto || matricula) + '...';
+
+        try {
+            await enviarAPI('salvarNadaConsta', {
+                matricula: matricula,
+                nomeCompleto: funcionario?.nomeCompleto || '',
+                sei: novoStatus.sei,
+                efisco: novoStatus.efisco,
+                email: novoStatus.email,
+                vinculo: novoStatus.vinculo
+            });
+
+            mapaNadaConsta[matricula] = novoStatus;
+            atualizarProgressoLinhaNadaConsta(linha);
+            atualizarResumoNadaConsta();
+            mensagem.textContent = '✅ Alteração salva para ' + (funcionario?.nomeCompleto || matricula) + '.';
+        } catch (erro) {
+            checkbox.checked = !!anterior[campo];
+            atualizarProgressoLinhaNadaConsta(linha);
+            atualizarResumoNadaConsta();
+            mensagem.textContent = '❌ Não foi possível salvar: ' + (erro.message || 'erro desconhecido');
+            alert('Não foi possível salvar o Nada Consta. Confira se as ações listarNadaConsta e salvarNadaConsta foram adicionadas ao Apps Script.\n\n' + (erro.message || 'Erro desconhecido.'));
+        } finally {
+            caixasLinha.forEach(function(caixa) { caixa.disabled = !nadaConstaConexaoOK; });
+        }
+    }
+
+    btnNadaConsta.addEventListener('click', async function() {
+        if (!autorizado) {
+            alert('Acesso restrito. Informe a senha corporativa primeiro.');
+            return;
+        }
+
+        btnNadaConsta.disabled = true;
+        const textoOriginal = btnNadaConsta.textContent;
+        btnNadaConsta.textContent = '⏳ Carregando...';
+        await carregarDadosNadaConsta();
+        renderizarNadaConsta();
+        modalNadaConsta.style.display = 'flex';
+        btnNadaConsta.disabled = false;
+        btnNadaConsta.textContent = textoOriginal;
+    });
+
+    document.getElementById('fecharNadaConstaDGF').onclick = function() {
+        modalNadaConsta.style.display = 'none';
+    };
 
 
     // -------------------------------------------------
@@ -10132,7 +10859,7 @@ if (pagina === "Funcionários") {
     };
 
 
-    [modalFicha, modalCadastro, modalDash].forEach(function(modal) {
+    [modalFicha, modalCadastro, modalDash, modalNadaConsta].forEach(function(modal) {
         modal.addEventListener('click', function(evento) {
             if (evento.target === modal) {
                 modal.style.display = 'none';
@@ -11524,6 +12251,863 @@ if (pagina === "mapa") {
 }
 }
 </script>
+
+
+<script>
+(function instalarHalloweenDGFV4() {
+    'use strict';
+    if (window.__DGF_HALLOWEEN_V4_INSTALADO) return;
+
+    const mostrarOriginal = window.mostrar;
+    if (typeof mostrarOriginal !== 'function') {
+        console.error('Halloween DGF: a função mostrar(pagina) não foi encontrada.');
+        return;
+    }
+
+    window.__DGF_HALLOWEEN_V4_INSTALADO = true;
+    const API = 'https://script.google.com/macros/s/AKfycbwzinGUYwT_groidaqXetlOWNb7zsP5i4r6ID54COcXK5LESy9UVK1rzYu3l9plR5uU/exec';
+    const STATE_KEY = 'DGF_HALLOWEEN_STATE_V4';
+    const LAUGH_URL = 'https://upload.wikimedia.org/wikipedia/commons/4/48/Evil_laugh.ogg';
+    const HUNT_LIMIT_MS = 120000;
+
+    const PREGUNTAS = [
+        { pergunta: 'Em que dia é comemorado o Halloween?', opcoes: ['31 de outubro', '1º de janeiro', '25 de dezembro'], correta: 0 },
+        { pergunta: 'Qual é um símbolo tradicional do Halloween?', opcoes: ['Abóbora iluminada', 'Guarda-chuva azul', 'Concha do mar'], correta: 0 },
+        { pergunta: 'Qual frase é tradicionalmente associada ao Halloween?', opcoes: ['Bom apetite!', 'Doces ou travessuras!', 'Feliz Ano-Novo!'], correta: 1 },
+        { pergunta: 'Qual destes animais é muito associado ao Halloween?', opcoes: ['Morcego', 'Golfinho', 'Pinguim'], correta: 0 },
+        { pergunta: 'Qual personagem aparece em muitas decorações de Halloween?', opcoes: ['Fantasma', 'Marinheiro', 'Astronauta'], correta: 0 },
+        { pergunta: 'A Perna Cabeluda ficou conhecida por qual característica nas histórias do Recife?', opcoes: ['Uma perna que pulava e dava chutes', 'Um barco fantasma', 'Uma casa que voava'], correta: 0 },
+        { pergunta: 'Na lenda recifense do Papa-Figo, qual figura assombra as histórias populares?', opcoes: ['Um homem misterioso associado a histórias sobre fígados', 'Uma sereia do Capibaribe', 'Um cavalo sem cabeça que só aparece no mar'], correta: 0 },
+        { pergunta: 'Onde a Galega de Santo Amaro costuma aparecer nas narrativas populares?', opcoes: ['Nas redondezas do Cemitério de Santo Amaro', 'No topo do Marco Zero ao meio-dia', 'No interior de um farol de Fernando de Noronha'], correta: 0 },
+        { pergunta: 'Segundo a lenda da Emparedada da Rua Nova, o que teria originado a história?', opcoes: ['Uma jovem que teria sido emparedada em um sobrado', 'Uma estátua que ganhou vida no porto', 'Um navio que desapareceu no Capibaribe'], correta: 0 },
+        { pergunta: 'Qual é o fenômeno associado à lenda da Praça Chora Menino?', opcoes: ['Relatos do choro de uma criança', 'O som de sinos debaixo do mar', 'Uma procissão de cavalos luminosos'], correta: 0 }
+    ];
+
+    const PORTAS_RECOMPENSAS = [
+        { pontos: 25, mensagem: '🎁 Um tesouro escondido! Você ganhou 25 pontos.' },
+        { pontos: 20, mensagem: '✨ Uma poção rara! Você ganhou 20 pontos.' },
+        { pontos: 15, mensagem: '🧙 Um feitiço de sorte! Você ganhou 15 pontos.' },
+        { pontos: 10, mensagem: '🦇 Um morcego guardião! Você ganhou 10 pontos.' },
+        { pontos: 5, mensagem: '🍬 Você achou doces! Ganhou 5 pontos.' },
+        { pontos: 0, mensagem: '🕸️ A sala estava vazia. Nenhum ponto desta vez.' },
+        { pontos: -5, mensagem: '👻 Um fantasma roubou 5 pontos!' },
+        { pontos: -10, mensagem: '🧛 Uma armadilha! Você perdeu 10 pontos.' },
+        { pontos: -15, mensagem: '☠️ Uma maldição! Você perdeu 15 pontos.' },
+        { pontos: -20, mensagem: '🕷️ A porta era uma cilada! Você perdeu 20 pontos.' }
+    ];
+
+    function embaralharPortas() {
+        const a = PORTAS_RECOMPENSAS.map(x => ({ pontos: x.pontos, mensagem: x.mensagem }));
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    function novoEstado() {
+        return {
+            sessionId: 'hwdgf_' + Date.now() + '_' + Math.random().toString(36).slice(2, 12),
+            nome: '', pontos: 0, aboboras: [],
+            huntStarted: false, huntEnded: false, huntStartedAt: 0,
+            huntTimeSeconds: null, quizIndice: 0, quizAcertos: 0,
+            quizRespostas: [], quizConcluido: false,
+            portaEscolhida: false, portaResultado: null,
+            portasRecompensas: embaralharPortas(),
+            startedAt: 0, tempoSegundos: 0, finalizada: false, versao: 0
+        };
+    }
+
+    function lerEstado() {
+        const padrao = novoEstado();
+        try {
+            const raw = sessionStorage.getItem(STATE_KEY);
+            if (!raw) return padrao;
+            const data = JSON.parse(raw);
+            if (!data || typeof data !== 'object') return padrao;
+            const s = Object.assign(padrao, data);
+            if (!Array.isArray(s.aboboras)) s.aboboras = [];
+            if (!Array.isArray(s.quizRespostas)) s.quizRespostas = [];
+            if (!Array.isArray(s.portasRecompensas) || s.portasRecompensas.length !== 10) s.portasRecompensas = embaralharPortas();
+            if (!/^[A-Za-z0-9_-]{8,100}$/.test(String(s.sessionId || ''))) s.sessionId = padrao.sessionId;
+            s.pontos = Number.isFinite(Number(s.pontos)) ? Number(s.pontos) : 0;
+            s.quizAcertos = Math.max(0, Math.min(10, Number(s.quizAcertos) || 0));
+            s.versao = Math.max(0, Number(s.versao) || 0);
+            return s;
+        } catch (e) { return padrao; }
+    }
+
+    let estado = lerEstado();
+    let intervaloRelogio = null;
+    let intervaloCaca = null;
+    let intervaloSalvamento = null;
+    let timersMovimento = [];
+    let overlayAboboras = null;
+    let badgeTempo = null;
+    let scrollHome = null;
+    let audioRisada = null;
+    let fallbackAudioArmed = false;
+    let fallbackAudioHandler = null;
+    let primeiraTentativaAudio = false;
+
+    function guardar() {
+        try { sessionStorage.setItem(STATE_KEY, JSON.stringify(estado)); } catch (e) {}
+    }
+
+    function formatarTempo(segundos) {
+        segundos = Math.max(0, Math.floor(Number(segundos) || 0));
+        const m = Math.floor(segundos / 60);
+        const s = segundos % 60;
+        return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    }
+
+    function tempoAtual() {
+        if (estado.finalizada) return Math.max(0, Number(estado.tempoSegundos) || 0);
+        return estado.startedAt ? Math.max(0, Math.floor((Date.now() - estado.startedAt) / 1000)) : 0;
+    }
+
+    function atualizarTempo() {
+        if (!estado.startedAt || estado.finalizada) return;
+        estado.tempoSegundos = tempoAtual();
+        const label = document.getElementById('halloween-tempo-v4');
+        if (label) label.textContent = formatarTempo(estado.tempoSegundos);
+        if (Date.now() - (estado.ultimaGravacaoTempo || 0) >= 15000) {
+            estado.ultimaGravacaoTempo = Date.now();
+            guardar();
+            salvarPontuacao();
+        }
+    }
+
+    function iniciarRelogioParticipacao() {
+        if (intervaloRelogio) clearInterval(intervaloRelogio);
+        if (intervaloSalvamento) clearInterval(intervaloSalvamento);
+        intervaloRelogio = setInterval(atualizarTempo, 1000);
+        intervaloSalvamento = setInterval(function() {
+            if (estado.nome && !estado.finalizada) salvarPontuacao();
+        }, 15000);
+    }
+
+    function htmlHalloween() {
+        return `
+        <div id="halloween-dgf-card-v4">
+            <span class="h-dgf-decor-v4" style="top:12px;right:19%;font-size:31px;animation:hDgfMorcegoV4 4s infinite">🦇</span>
+            <span class="h-dgf-decor-v4" style="top:30px;right:5%;font-size:25px;animation:hDgfFlutuarV4 3.8s infinite">👻</span>
+            <span class="h-dgf-decor-v4" style="bottom:13px;right:30%;font-size:24px;animation:hDgfBrilhoV4 2s infinite">✨</span>
+            <span class="h-dgf-decor-v4" style="top:10px;left:48%;font-size:24px;animation:hDgfBrilhoV4 2.7s infinite">🕸️</span>
+            <span class="h-dgf-decor-v4" style="bottom:12px;left:24%;font-size:23px;animation:hDgfMorcegoV4 5s infinite">🦇</span>
+            <div class="h-dgf-conteudo-v4">
+                <div class="h-dgf-abobora-v4" aria-hidden="true">🎃</div>
+                <div style="flex:1;min-width:250px">
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px">
+                        <span style="background:#ff8a00;color:#160b20;border-radius:20px;padding:5px 12px;font-size:11px;font-weight:900;letter-spacing:.7px">🕸️ EVENTO ESPECIAL • DGF</span>
+                        <span style="color:#ffd28c;font-size:12px;font-weight:800">31 DE OUTUBRO</span>
+                    </div>
+                    <h2 style="margin:0 0 8px;color:#ffd18a;font-size:clamp(22px,2.2vw,30px);font-weight:900;text-shadow:0 3px 9px #000">A Noite dos Mistérios 👻</h2>
+                    <p style="margin:0 0 14px;color:#f3eaf9;font-size:13px;line-height:1.6">Encontre cinco abóboras escondidas pela página, encare dez perguntas — incluindo lendas de Pernambuco — e escolha uma entre dez portas misteriosas. A pontuação usa o tempo de participação como desempate.</p>
+                    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+                        <label for="halloween-nome-v4" style="font-size:12px;font-weight:800;color:#ffd18a">Como vamos chamar você?</label>
+                        <input id="halloween-nome-v4" type="text" maxlength="50" autocomplete="nickname" placeholder="Seu nome ou apelido">
+                        <button type="button" class="h-dgf-botao-v4 h-dgf-principal-v4" id="halloween-entrar-v4">🔓 Entrar no mistério</button>
+                        <button type="button" class="h-dgf-botao-v4 h-dgf-secundario-v4" id="halloween-audio-v4">🔊 Ouvir risada</button>
+                    </div>
+                    <p id="halloween-boasvindas-v4" aria-live="polite" style="margin:10px 0 0;color:#f5e9ff;font-size:12px;line-height:1.5">Digite seu nome ou apelido para começar. A risada pode ser bloqueada pelo navegador até a primeira interação.</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:9px;align-items:center;background:rgba(0,0,0,.32);border:1px solid rgba(255,150,50,.25);padding:12px;border-radius:13px">
+                    <span style="color:#ffd18a;font-size:11px;font-weight:900;text-transform:uppercase">Escolha seu cursor</span>
+                    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:7px">
+                        <button type="button" class="h-dgf-botao-v4 h-dgf-secundario-v4" id="halloween-cursor-fantasma-v4">👻 Fantasminha</button>
+                        <button type="button" class="h-dgf-botao-v4 h-dgf-secundario-v4" id="halloween-cursor-morcego-v4">🦇 Morcego</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section id="halloween-jogos-dgf-v4" hidden>
+            <div class="h-topo-jogos-v4">
+                <div>
+                    <div style="color:#ffb55c;font-size:11px;font-weight:900;letter-spacing:1px">A MISSÃO COMEÇOU</div>
+                    <h2 style="margin:4px 0;color:#ffd18a;font-size:24px">🎃 Os desafios da noite</h2>
+                    <div id="halloween-boasvindas-jogos-v4" style="color:#e9d8f5;font-size:13px"></div>
+                    <div style="margin-top:6px;color:#d9c1ea;font-size:12px">⏱️ Tempo de participação: <b id="halloween-tempo-v4" style="color:#ffc46d">00:00</b></div>
+                </div>
+                <div class="h-pontos-box-v4"><div style="font-size:11px;color:#d9c1ea;font-weight:800">SUA PONTUAÇÃO</div><div style="color:#ffc46d;font-size:27px;font-weight:900"><span id="halloween-pontos-v4">0</span> pts</div></div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px">
+                <span class="h-pilula-v4">🎃 Abóboras: <b id="halloween-contagem-aboboras-v4">0/5</b></span>
+                <span class="h-pilula-v4">👻 Acertos no quiz: <b id="halloween-contagem-quiz-v4">0/10</b></span>
+                <span class="h-pilula-v4">🚪 Porta: <b id="halloween-contagem-porta-v4">Ainda não escolhida</b></span>
+            </div>
+            <div class="h-grade-v4">
+                <article class="h-card-v4">
+                    <div style="font-size:35px;margin-bottom:7px">🎃🔎</div><h3>1. Caça às Abóboras</h3>
+                    <p>As cinco abóboras aparecem em diferentes tamanhos e lugares da página inicial. Algumas se movem. Você tem <b style="color:#ffc46d">2 minutos</b> para encontrar todas.</p>
+                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0"><button type="button" class="h-btn-v4" id="halloween-iniciar-caca-v4">🎃 Começar caça (02:00)</button><strong id="halloween-tempo-caca-v4" style="color:#ffc46d;font-size:20px">02:00</strong></div>
+                    <p id="halloween-status-aboboras-v4" aria-live="polite">Clique em “Começar caça” para espalhar as abóboras pela página inicial.</p>
+                </article>
+                <article class="h-card-v4">
+                    <div style="font-size:35px;margin-bottom:7px">👻❓</div><h3>2. Quiz do Além</h3>
+                    <p>Dez perguntas, incluindo cinco sobre lendas urbanas e histórias populares de Pernambuco. Cada resposta correta vale <b style="color:#ffc46d">10 pontos</b>.</p>
+                    <div id="halloween-quiz-conteudo-v4" style="margin-top:12px">Entre no mistério para começar.</div>
+                    <p id="halloween-status-quiz-v4" aria-live="polite"></p>
+                </article>
+                <article class="h-card-v4">
+                    <div style="font-size:35px;margin-bottom:7px">🚪🕯️</div><h3>3. As Dez Portas</h3>
+                    <p>Escolha uma porta. Há prêmios, portas vazias e armadilhas que podem tirar pontos. Só é permitido escolher uma por partida.</p>
+                    <div id="halloween-portas-v4" class="h-portas-grid-v4"></div>
+                    <p id="halloween-status-portas-v4" aria-live="polite"></p>
+                </article>
+                <article class="h-card-v4">
+                    <div style="font-size:35px;margin-bottom:7px">🏆⏱️</div><h3>Placar dos Mistérios</h3>
+                    <p>O placar usa primeiro a maior pontuação. Em caso de empate, fica à frente quem tiver o menor tempo de participação finalizado.</p>
+                    <button type="button" class="h-btn-v4" id="halloween-atualizar-ranking-v4">🔄 Atualizar placar</button>
+                    <div id="halloween-ranking-v4" style="margin-top:10px;font-size:13px" aria-live="polite">Clique para consultar o ranking.</div>
+                </article>
+            </div>
+            <div style="margin-top:15px;padding:12px;border-radius:10px;background:rgba(0,0,0,.2)">
+                <div id="halloween-status-geral-v4" aria-live="polite">A pontuação será enviada à planilha quando a conexão estiver ativa.</div>
+                <button type="button" class="h-btn-v4" id="halloween-finalizar-v4">🏁 Finalizar participação e registrar meu tempo</button>
+                <button type="button" class="h-btn-v4" id="halloween-nova-partida-v4">🔁 Começar uma nova partida</button>
+            </div>
+        </section>`;
+    }
+
+    function instalarEstilos() {
+        if (document.getElementById('dgf-halloween-interativo-style-v4')) return;
+        const s = document.createElement('style');
+        s.id = 'dgf-halloween-interativo-style-v4';
+        s.textContent = `
+            @keyframes hDgfFundoV4{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+            @keyframes hDgfFlutuarV4{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-13px) rotate(7deg)}}
+            @keyframes hDgfBrilhoV4{0%,100%{opacity:.22;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
+            @keyframes hDgfMorcegoV4{0%,100%{transform:translate(0,0) rotate(-5deg)}50%{transform:translate(16px,-10px) rotate(9deg)}}
+            @keyframes hDgfPulsarV4{0%,100%{filter:drop-shadow(0 0 2px #ff7900)}50%{filter:drop-shadow(0 0 9px #ffae42)}}
+            #halloween-dgf-card-v4{background:linear-gradient(120deg,#180022,#3a064d,#21091f,#66220b);background-size:300% 300%;animation:hDgfFundoV4 11s ease infinite;border:2px solid #ff7a00;border-radius:18px;padding:22px 24px;color:#fff;position:relative;overflow:hidden;flex:0 0 auto;width:100%;box-shadow:0 0 22px rgba(255,102,0,.27);box-sizing:border-box;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+            #halloween-dgf-card-v4 *{box-sizing:border-box}
+            #halloween-dgf-card-v4 .h-dgf-decor-v4{position:absolute;pointer-events:none;user-select:none;opacity:.8;z-index:0}
+            #halloween-dgf-card-v4 .h-dgf-conteudo-v4{position:relative;z-index:1;display:flex;align-items:center;flex-wrap:wrap;gap:20px}
+            #halloween-dgf-card-v4 .h-dgf-abobora-v4{width:82px;height:82px;flex:0 0 82px;border-radius:50%;background:radial-gradient(circle,#ffb13b,#ff7900 60%,#7b2700);border:2px solid #ffd58c;display:flex;align-items:center;justify-content:center;font-size:45px;box-shadow:0 0 25px rgba(255,132,0,.7);animation:hDgfFlutuarV4 3.2s ease-in-out infinite}
+            #halloween-dgf-card-v4 .h-dgf-botao-v4{border:1px solid rgba(255,190,100,.6);border-radius:24px;padding:10px 15px;font-weight:800;cursor:pointer;transition:transform .2s,filter .2s}
+            #halloween-dgf-card-v4 .h-dgf-botao-v4:hover{transform:translateY(-2px) scale(1.03);filter:brightness(1.13)}
+            #halloween-dgf-card-v4 .h-dgf-principal-v4{background:linear-gradient(135deg,#ffb000,#ff6500);color:#180d20;border:0;box-shadow:0 4px 14px rgba(255,111,0,.27)}
+            #halloween-dgf-card-v4 .h-dgf-secundario-v4{color:#fff;background:rgba(20,0,28,.72)}
+            #halloween-dgf-card-v4 input{min-width:180px;max-width:100%;border-radius:24px;border:1px solid #a879b9;background:#170b20;color:#fff;padding:11px 15px;font:inherit}
+            #halloween-dgf-card-v4 input:focus{outline:2px solid #ff9a2f;outline-offset:2px}
+            #halloween-jogos-dgf-v4[hidden]{display:none!important}
+            #halloween-jogos-dgf-v4:not([hidden]){display:block!important;position:relative!important;width:100%!important;height:auto!important;min-height:460px!important;max-height:none!important;overflow:visible!important;flex:0 0 auto!important;align-self:stretch!important;box-sizing:border-box!important;padding:20px;border:1px solid #57306c;border-radius:16px;color:#f8efff;background:radial-gradient(circle at top left,#39174e,#170d22 65%,#0d0813);font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+            #halloween-jogos-dgf-v4 *{box-sizing:border-box}
+            #halloween-jogos-dgf-v4 .h-topo-jogos-v4{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+            #halloween-jogos-dgf-v4 .h-pontos-box-v4{background:#11091a;border:1px solid #87539e;padding:12px 18px;border-radius:12px;text-align:center}
+            #halloween-jogos-dgf-v4 .h-pilula-v4{background:#30203a;padding:7px 11px;border-radius:20px;font-size:12px}
+            #halloween-jogos-dgf-v4 .h-grade-v4{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:15px;width:100%;margin-top:18px}
+            #halloween-jogos-dgf-v4 .h-card-v4{min-width:0;min-height:235px;padding:17px;border:1px solid rgba(255,166,74,.3);border-radius:14px;background:linear-gradient(145deg,rgba(67,27,83,.94),rgba(21,13,32,.97));box-shadow:0 7px 18px rgba(0,0,0,.2);overflow:visible}
+            #halloween-jogos-dgf-v4 .h-card-v4 h3{margin:0 0 8px;color:#ffd18a;font-size:18px}
+            #halloween-jogos-dgf-v4 .h-card-v4 p{font-size:13px;line-height:1.6;color:#e4d8ed}
+            #halloween-jogos-dgf-v4 .h-btn-v4{color:#fff;background:#321745;border:1px solid #9661b0;border-radius:10px;padding:10px;margin:4px;cursor:pointer;font:inherit;font-weight:700;transition:transform .2s,background .2s}
+            #halloween-jogos-dgf-v4 .h-btn-v4:hover:not(:disabled){transform:translateY(-2px);background:#54266f}
+            #halloween-jogos-dgf-v4 .h-btn-v4:disabled{cursor:default;opacity:.55}
+            #halloween-jogos-dgf-v4 .h-portas-grid-v4{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-top:12px}
+            #halloween-jogos-dgf-v4 .h-portas-grid-v4 button{margin:0;padding:9px 2px;min-width:0;font-size:12px}
+            #halloween-jogos-dgf-v4 .h-ranking-row-v4{display:flex;justify-content:space-between;gap:10px;padding:10px;border-bottom:1px solid rgba(255,255,255,.1);overflow-wrap:anywhere}
+            #halloween-jogos-dgf-v4 .h-ranking-row-v4 strong{color:#ffc46d;white-space:nowrap;text-align:right}
+            #halloween-caca-badge-v4{position:fixed;top:52px;right:12px;z-index:99996;background:#180022;color:#ffd18a;border:2px solid #ff7a00;border-radius:12px;padding:9px 13px;font:800 14px 'Segoe UI',sans-serif;box-shadow:0 4px 15px #0005;display:none;pointer-events:none}
+            #halloween-aboboras-overlay-v4{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:900;background:transparent;overflow:visible}
+            #halloween-aboboras-overlay-v4 .h-pumpkin-v4{position:absolute;pointer-events:auto;display:flex;align-items:center;justify-content:center;border:0;background:transparent;padding:0;margin:0;line-height:1;cursor:pointer;animation:hDgfPulsarV4 2.6s ease-in-out infinite;filter:drop-shadow(0 0 5px #ff8a00);transition:transform .14s}
+            #halloween-aboboras-overlay-v4 .h-pumpkin-v4:hover{transform:scale(1.3)!important}
+            @media(max-width:650px){#halloween-dgf-card-v4{padding:15px}#halloween-dgf-card-v4 .h-dgf-conteudo-v4{align-items:flex-start;gap:14px}#halloween-dgf-card-v4 .h-dgf-abobora-v4{width:60px;height:60px;flex-basis:60px;font-size:34px}#halloween-jogos-dgf-v4:not([hidden]){padding:12px}#halloween-jogos-dgf-v4 .h-grade-v4{grid-template-columns:minmax(0,1fr)}#halloween-jogos-dgf-v4 .h-portas-grid-v4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+            @media(prefers-reduced-motion:reduce){#halloween-dgf-card-v4,#halloween-dgf-card-v4 .h-dgf-abobora-v4,#halloween-aboboras-overlay-v4 .h-pumpkin-v4{animation:none!important}}
+        `;
+        document.head.appendChild(s);
+    }
+
+    function criarSomRisada() {
+        if (!audioRisada) {
+            audioRisada = new Audio(LAUGH_URL);
+            audioRisada.preload = 'none';
+            audioRisada.volume = 0.75;
+        }
+        return audioRisada;
+    }
+
+    function removerFallbackAudio() {
+        if (!fallbackAudioArmed || !fallbackAudioHandler) return;
+        document.removeEventListener('pointerdown', fallbackAudioHandler, true);
+        document.removeEventListener('keydown', fallbackAudioHandler, true);
+        fallbackAudioArmed = false;
+        fallbackAudioHandler = null;
+    }
+
+    function armarFallbackAudio() {
+        if (fallbackAudioArmed) return;
+        fallbackAudioArmed = true;
+        fallbackAudioHandler = function() {
+            removerFallbackAudio();
+            tocarRisadaHumana(false);
+        };
+        document.addEventListener('pointerdown', fallbackAudioHandler, true);
+        document.addEventListener('keydown', fallbackAudioHandler, true);
+    }
+
+    function tocarRisadaHumana(autoplay) {
+        try {
+            const audio = criarSomRisada();
+            audio.pause();
+            audio.currentTime = 0;
+            const p = audio.play();
+            if (p && typeof p.catch === 'function') {
+                p.catch(function() {
+                    if (autoplay) armarFallbackAudio();
+                    else {
+                        const msg = document.getElementById('halloween-boasvindas-v4');
+                        if (msg) msg.textContent = '⚠️ O navegador bloqueou o áudio. Clique novamente em “Ouvir risada”.';
+                    }
+                });
+            }
+        } catch (e) {
+            if (autoplay) armarFallbackAudio();
+        }
+    }
+
+    window.tocarRisadaBruxaDGF = function() { tocarRisadaHumana(false); };
+
+    function chamarAPI(parametros, callbackFinal) {
+        const callback = 'halloweenDGFJsonpV4_' + Date.now() + '_' + Math.floor(Math.random() * 1000000);
+        const script = document.createElement('script');
+        let terminou = false;
+        const timeout = setTimeout(function() {
+            finalizar({ ok: false, error: 'A planilha demorou para responder.' });
+        }, 15000);
+
+        function finalizar(resposta) {
+            if (terminou) return;
+            terminou = true;
+            clearTimeout(timeout);
+            try { delete window[callback]; } catch (e) { window[callback] = undefined; }
+            if (script.parentNode) script.parentNode.removeChild(script);
+            callbackFinal(resposta || { ok: false, error: 'Resposta vazia do Apps Script.' });
+        }
+
+        window[callback] = finalizar;
+        script.onerror = function() {
+            finalizar({ ok: false, error: 'Não foi possível acessar a API do Halloween DGF.' });
+        };
+
+        const query = Object.keys(parametros).map(function(k) {
+            return encodeURIComponent(k) + '=' + encodeURIComponent(String(parametros[k] == null ? '' : parametros[k]));
+        }).join('&');
+
+        script.async = true;
+        script.src = API + (API.indexOf('?') >= 0 ? '&' : '?') + query +
+            '&callback=' + encodeURIComponent(callback) + '&_=' + Date.now();
+        document.body.appendChild(script);
+    }
+
+    function setStatus(texto) {
+        const e = document.getElementById('halloween-status-geral-v4');
+        if (e) e.textContent = texto;
+    }
+
+    function salvarEstado() {
+        estado.tempoSegundos = tempoAtual();
+        try { sessionStorage.setItem(STATE_KEY, JSON.stringify(estado)); } catch (e) {}
+    }
+
+    function salvarPontuacao() {
+        if (!estado.nome || !estado.sessionId) return;
+        if (!estado.finalizada) estado.tempoSegundos = tempoAtual();
+        estado.versao = (Number(estado.versao) || 0) + 1;
+        guardar();
+        setStatus('⏳ Salvando pontuação e tempo na planilha...');
+
+        chamarAPI({
+            action: 'saveScore', sessionId: estado.sessionId, name: estado.nome,
+            score: estado.pontos, pumpkins: estado.aboboras.length,
+            quizCorrect: estado.quizAcertos,
+            doorChosen: estado.portaEscolhida ? 'sim' : 'nao',
+            timeSeconds: estado.tempoSegundos,
+            finished: estado.finalizada ? 'sim' : 'nao',
+            pumpkinTimeSeconds: estado.huntTimeSeconds == null ? '' : estado.huntTimeSeconds,
+            version: estado.versao
+        }, function(r) {
+            if (r && r.ok) {
+                const tempo = Number(estado.tempoSegundos) || 0;
+                setStatus('✅ Pontuação salva: ' + estado.pontos + ' pontos • Tempo: ' + formatarTempo(tempo) + (estado.finalizada ? ' • participação finalizada' : ''));
+            } else {
+                setStatus('⚠️ ' + ((r && r.error) || 'Não foi possível salvar. Confira a implantação do Apps Script.'));
+            }
+        });
+    }
+
+    function carregarRanking() {
+        const el = document.getElementById('halloween-ranking-v4');
+        if (!el) return;
+        el.textContent = '⏳ Carregando placar...';
+        chamarAPI({ action: 'leaderboard' }, function(r) {
+            if (!el) return;
+            if (!r || !r.ok || !Array.isArray(r.leaderboard)) {
+                el.textContent = '⚠️ Não foi possível carregar o ranking. Confira o Apps Script.';
+                return;
+            }
+            el.textContent = '';
+            if (!r.leaderboard.length) {
+                el.textContent = 'Ainda não há pontuações. Seja a primeira pessoa a jogar!';
+                return;
+            }
+            r.leaderboard.forEach(function(p, i) {
+                const row = document.createElement('div');
+                row.className = 'h-ranking-row-v4';
+                const name = document.createElement('span');
+                name.textContent = (i + 1) + '. ' + String(p.name || 'Participante');
+                const meta = document.createElement('strong');
+                meta.textContent = (Number(p.bestScore) || 0) + ' pts • ' + formatarTempo(p.timeSeconds) + (p.finished ? '' : ' *');
+                row.appendChild(name);
+                row.appendChild(meta);
+                el.appendChild(row);
+            });
+            const nota = document.createElement('p');
+            nota.style.cssText = 'font-size:11px;color:#c6b0d4;margin-top:8px';
+            nota.textContent = '* Participação ainda não finalizada.';
+            el.appendChild(nota);
+        });
+    }
+
+    function desenharQuiz() {
+        const box = document.getElementById('halloween-quiz-conteudo-v4');
+        if (!box) return;
+        if (!estado.nome) { box.textContent = 'Entre no mistério para começar.'; return; }
+        if (estado.quizConcluido || estado.quizIndice >= PREGUNTAS.length) {
+            estado.quizConcluido = true;
+            box.innerHTML = '<div style="padding:12px;background:rgba(255,255,255,.06);border-radius:10px"><strong style="color:#ffd18a">🏆 Quiz concluído!</strong><p style="line-height:1.6">Você acertou ' + estado.quizAcertos + ' de 10 perguntas e ganhou ' + (estado.quizAcertos * 10) + ' pontos.</p></div>';
+            return;
+        }
+        const q = PREGUNTAS[estado.quizIndice];
+        box.textContent = '';
+        const n = document.createElement('div');
+        n.style.cssText = 'color:#d9c1ea;font-size:11px;font-weight:800;margin-bottom:7px';
+        n.textContent = 'PERGUNTA ' + (estado.quizIndice + 1) + ' DE 10';
+        const pergunta = document.createElement('div');
+        pergunta.style.cssText = 'font-weight:800;line-height:1.5;margin-bottom:10px';
+        pergunta.textContent = q.pergunta;
+        box.appendChild(n);
+        box.appendChild(pergunta);
+        q.opcoes.forEach(function(opcao, i) {
+            const b = document.createElement('button');
+            b.type = 'button'; b.className = 'h-btn-v4'; b.textContent = opcao;
+            b.addEventListener('click', function() { responderQuiz(i); });
+            box.appendChild(b);
+        });
+    }
+
+    function atualizarPainel() {
+        const ePontos = document.getElementById('halloween-pontos-v4');
+        const eAbob = document.getElementById('halloween-contagem-aboboras-v4');
+        const eQuiz = document.getElementById('halloween-contagem-quiz-v4');
+        const ePorta = document.getElementById('halloween-contagem-porta-v4');
+        const eNome = document.getElementById('halloween-boasvindas-jogos-v4');
+        const eTempo = document.getElementById('halloween-tempo-v4');
+        if (ePontos) ePontos.textContent = estado.pontos;
+        if (eAbob) eAbob.textContent = estado.aboboras.length + '/5';
+        if (eQuiz) eQuiz.textContent = estado.quizAcertos + '/10';
+        if (ePorta) ePorta.textContent = estado.portaEscolhida ? 'Escolhida' : 'Ainda não escolhida';
+        if (eNome) eNome.textContent = 'Boa sorte, ' + estado.nome + '!';
+        if (eTempo) eTempo.textContent = formatarTempo(tempoAtual());
+
+        const huntStart = document.getElementById('halloween-iniciar-caca-v4');
+        if (huntStart) {
+            huntStart.disabled = estado.huntStarted || estado.huntEnded || !estado.nome || estado.finalizada;
+            huntStart.textContent = estado.huntEnded ? '✅ Caça encerrada' : (estado.huntStarted ? '🎃 Caça em andamento' : '🎃 Começar caça (02:00)');
+        }
+
+        const huntStatus = document.getElementById('halloween-status-aboboras-v4');
+        if (huntStatus && estado.huntEnded && !huntStatus.dataset.custom) {
+            huntStatus.textContent = 'Caça encerrada: ' + estado.aboboras.length + ' de 5 encontradas.';
+        }
+
+        const startTimer = document.getElementById('halloween-tempo-caca-v4');
+        if (startTimer && !estado.huntStarted) startTimer.textContent = estado.huntEnded ? '00:00' : '02:00';
+
+        const portas = document.getElementById('halloween-portas-v4');
+        if (portas && !portas.children.length) {
+            for (let i = 0; i < 10; i++) {
+                const b = document.createElement('button');
+                b.type = 'button'; b.className = 'h-btn-v4';
+                b.textContent = '🚪 ' + (i + 1);
+                b.setAttribute('data-porta-v4', String(i));
+                b.title = 'Escolher porta ' + (i + 1);
+                b.addEventListener('click', function() { escolherPorta(i); });
+                portas.appendChild(b);
+            }
+        }
+        if (portas) portas.querySelectorAll('[data-porta-v4]').forEach(function(b) { b.disabled = estado.portaEscolhida || !estado.nome || estado.finalizada; });
+        desenharQuiz();
+        if (estado.finalizada) {
+            const f = document.getElementById('halloween-finalizar-v4');
+            if (f) { f.disabled = true; f.textContent = '✅ Participação finalizada'; }
+        }
+    }
+
+    function responderQuiz(i) {
+        if (!estado.nome || estado.finalizada || estado.quizConcluido) return;
+        const idx = estado.quizIndice;
+        const q = PREGUNTAS[idx];
+        if (!q || estado.quizRespostas[idx] !== undefined) return;
+        estado.quizRespostas[idx] = i;
+        const status = document.getElementById('halloween-status-quiz-v4');
+        if (i === q.correta) {
+            estado.quizAcertos++;
+            estado.pontos += 10;
+            if (status) status.textContent = '✅ Resposta correta! +10 pontos.';
+        } else if (status) {
+            status.textContent = '👻 Não foi dessa vez! A próxima pergunta espera por você.';
+        }
+        estado.quizIndice++;
+        if (estado.quizIndice >= PREGUNTAS.length) estado.quizConcluido = true;
+        guardar(); atualizarPainel(); salvarPontuacao();
+    }
+
+    function criarOverlayAboboras() {
+        if (!scrollHome) return;
+        removerOverlayAboboras();
+        const computed = window.getComputedStyle(scrollHome);
+        if (computed.position === 'static') scrollHome.style.position = 'relative';
+        const alturaBase = Math.max(scrollHome.scrollHeight, scrollHome.clientHeight, 700);
+        const largura = Math.max(scrollHome.clientWidth, 320);
+        const overlay = document.createElement('div');
+        overlay.id = 'halloween-aboboras-overlay-v4';
+        overlay.style.height = (alturaBase + 10) + 'px';
+        overlay.setAttribute('aria-label', 'Caça às cinco abóboras escondidas');
+        scrollHome.appendChild(overlay);
+        overlayAboboras = overlay;
+        const tamanhos = [18, 22, 27, 35, 46];
+        const opacidades = [0.68, 0.74, 0.85, 0.92, 1];
+
+        for (let i = 0; i < 5; i++) {
+            if (estado.aboboras.indexOf(i) >= 0) continue;
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'h-pumpkin-v4';
+            btn.id = 'halloween-abobora-oculta-v4-' + i;
+            btn.textContent = '🎃';
+            btn.style.fontSize = tamanhos[i] + 'px';
+            btn.style.opacity = String(opacidades[i]);
+            btn.setAttribute('aria-label', 'Abóbora escondida ' + (i + 1));
+            btn.title = 'Abóbora misteriosa';
+            btn.addEventListener('click', function(ev) {
+                ev.preventDefault(); ev.stopPropagation(); encontrarAbobora(i, btn);
+            });
+            overlay.appendChild(btn);
+            posicionarAbobora(btn, overlay, largura, alturaBase, true);
+            programarMovimento(btn, i, overlay, largura, alturaBase);
+        }
+    }
+
+    function posicionarAbobora(btn, overlay, largura, altura, inicial) {
+        if (!btn || !overlay || estado.aboboras.indexOf(Number(btn.id.split('-').pop())) >= 0) return;
+        const size = Math.max(18, parseFloat(btn.style.fontSize) || 26);
+        const maxLeft = Math.max(2, 96 - (size / Math.max(largura, 320) * 100));
+        const left = 2 + Math.random() * maxLeft;
+        const maxTop = Math.max(120, altura - size - 50);
+        let top = 100 + Math.random() * Math.max(20, maxTop - 100);
+        if (inicial && overlay.children.length === 1) top = Math.max(80, Math.random() * Math.min(altura - size, 350));
+        btn.style.left = left + '%';
+        btn.style.top = Math.floor(top) + 'px';
+    }
+
+    function programarMovimento(btn, indice, overlay, largura, altura) {
+        const atrasos = [4200, 6800, 5300, 8700, 6200];
+        const timer = setTimeout(function mover() {
+            if (!estado.huntStarted || estado.huntEnded || estado.aboboras.indexOf(indice) >= 0 || !btn.isConnected) return;
+            posicionarAbobora(btn, overlay, largura, altura, false);
+            const novoTimer = setTimeout(mover, atrasos[indice] + Math.random() * 3500);
+            timersMovimento.push(novoTimer);
+        }, atrasos[indice] + Math.random() * 2000);
+        timersMovimento.push(timer);
+    }
+
+    function removerOverlayAboboras() {
+        timersMovimento.forEach(clearTimeout);
+        timersMovimento = [];
+        if (overlayAboboras && overlayAboboras.parentNode) overlayAboboras.parentNode.removeChild(overlayAboboras);
+        overlayAboboras = null;
+    }
+
+    function criarBadgeCaca() {
+        if (!badgeTempo) {
+            badgeTempo = document.createElement('div');
+            badgeTempo.id = 'halloween-caca-badge-v4';
+            document.body.appendChild(badgeTempo);
+        }
+        badgeTempo.style.display = 'block';
+        atualizarBadgeCaca();
+    }
+
+    function atualizarBadgeCaca() {
+        if (!badgeTempo || !estado.huntStarted || estado.huntEnded) return;
+        const restante = Math.max(0, Math.ceil((HUNT_LIMIT_MS - (Date.now() - estado.huntStartedAt)) / 1000));
+        badgeTempo.textContent = '🎃 Caça: ' + formatarTempo(restante);
+        const label = document.getElementById('halloween-tempo-caca-v4');
+        if (label) label.textContent = formatarTempo(restante);
+        if (restante <= 0) finalizarCaca('⏰ O tempo acabou! A caça às abóboras terminou.');
+    }
+
+    function iniciarCaca() {
+        if (!estado.nome || estado.finalizada || estado.huntStarted || estado.huntEnded) return;
+        estado.huntStarted = true;
+        estado.huntStartedAt = Date.now();
+        guardar();
+        criarOverlayAboboras();
+        criarBadgeCaca();
+        const status = document.getElementById('halloween-status-aboboras-v4');
+        if (status) { status.dataset.custom = '1'; status.textContent = '👀 As cinco abóboras estão escondidas pela página. Algumas se movem. Você tem dois minutos!'; }
+        if (intervaloCaca) clearInterval(intervaloCaca);
+        intervaloCaca = setInterval(atualizarBadgeCaca, 250);
+        atualizarPainel();
+    }
+
+    function encontrarAbobora(indice, btn) {
+        if (!estado.huntStarted || estado.huntEnded || estado.finalizada) return;
+        if (estado.aboboras.indexOf(indice) >= 0) return;
+        estado.aboboras.push(indice);
+        estado.pontos += 10;
+        if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+        guardar(); atualizarPainel(); salvarPontuacao();
+        const status = document.getElementById('halloween-status-aboboras-v4');
+        if (status) {
+            status.dataset.custom = '1';
+            status.textContent = estado.aboboras.length === 5
+                ? '🏆 Todas as cinco encontradas! +50 pontos na caça.'
+                : '🎉 Abóbora encontrada! +10 pontos. Faltam ' + (5 - estado.aboboras.length) + '.';
+        }
+        if (estado.aboboras.length >= 5) {
+            estado.huntTimeSeconds = Math.floor((Date.now() - estado.huntStartedAt) / 1000);
+            finalizarCaca('🏆 Parabéns! Você encontrou todas as abóboras em ' + formatarTempo(estado.huntTimeSeconds) + '.');
+        }
+    }
+
+    function finalizarCaca(mensagem) {
+        if (estado.huntEnded) return;
+        estado.huntEnded = true;
+        if (estado.huntStartedAt) {
+            const decorrido = Math.min(120, Math.floor((Date.now() - estado.huntStartedAt) / 1000));
+            estado.huntTimeSeconds = estado.huntTimeSeconds == null ? decorrido : estado.huntTimeSeconds;
+        }
+        if (intervaloCaca) clearInterval(intervaloCaca);
+        intervaloCaca = null;
+        removerOverlayAboboras();
+        if (badgeTempo) badgeTempo.style.display = 'none';
+        const status = document.getElementById('halloween-status-aboboras-v4');
+        if (status) { status.dataset.custom = '1'; status.textContent = mensagem + ' Você encontrou ' + estado.aboboras.length + ' de 5 abóboras.'; }
+        guardar(); atualizarPainel(); salvarPontuacao();
+    }
+
+    function escolherPorta(indice) {
+        if (!estado.nome || estado.finalizada || estado.portaEscolhida) return;
+        const premio = estado.portasRecompensas[indice];
+        if (!premio) return;
+        estado.portaEscolhida = true;
+        estado.portaResultado = { porta: indice + 1, pontos: premio.pontos, mensagem: premio.mensagem };
+        estado.pontos = Math.max(0, estado.pontos + premio.pontos);
+        const status = document.getElementById('halloween-status-portas-v4');
+        if (status) status.textContent = '🚪 Porta ' + (indice + 1) + ': ' + premio.mensagem + (premio.pontos < 0 ? ' Sua pontuação não fica abaixo de zero.' : '');
+        guardar(); atualizarPainel(); salvarPontuacao();
+    }
+
+    function iniciarNovaPartida() {
+        const nome = estado.nome;
+        estado = novoEstado();
+        estado.nome = nome;
+        estado.startedAt = Date.now();
+        guardar();
+        removerOverlayAboboras();
+        if (badgeTempo) badgeTempo.style.display = 'none';
+        if (intervaloCaca) clearInterval(intervaloCaca);
+        intervaloCaca = null;
+        iniciarRelogioParticipacao();
+        limparMensagensJogo();
+        atualizarPainel();
+        salvarPontuacao();
+        const jogos = document.getElementById('halloween-jogos-dgf-v4');
+        if (jogos) jogos.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function limparMensagensJogo() {
+        ['halloween-status-aboboras-v4','halloween-status-quiz-v4','halloween-status-portas-v4'].forEach(function(id) {
+            const el = document.getElementById(id);
+            if (el) { el.textContent = ''; delete el.dataset.custom; }
+        });
+        const ab = document.getElementById('halloween-status-aboboras-v4');
+        if (ab) ab.textContent = 'Clique em “Começar caça” para espalhar as abóboras pela página inicial.';
+        const port = document.getElementById('halloween-status-portas-v4');
+        if (port) port.textContent = 'Escolha uma das dez portas.';
+        const rank = document.getElementById('halloween-ranking-v4');
+        if (rank) rank.textContent = 'Clique para consultar o ranking.';
+        const finalBtn = document.getElementById('halloween-finalizar-v4');
+        if (finalBtn) { finalBtn.disabled = false; finalBtn.textContent = '🏁 Finalizar participação e registrar meu tempo'; }
+    }
+
+    function finalizarParticipacao() {
+        if (!estado.nome || estado.finalizada) return;
+        if (estado.huntStarted && !estado.huntEnded) finalizarCaca('🏁 A participação foi finalizada.');
+        estado.tempoSegundos = tempoAtual();
+        estado.finalizada = true;
+        if (intervaloRelogio) clearInterval(intervaloRelogio);
+        if (intervaloSalvamento) clearInterval(intervaloSalvamento);
+        intervaloRelogio = null;
+        intervaloSalvamento = null;
+        guardar(); atualizarPainel(); salvarPontuacao(); carregarRanking();
+        const finalBtn = document.getElementById('halloween-finalizar-v4');
+        if (finalBtn) { finalBtn.disabled = true; finalBtn.textContent = '✅ Participação finalizada'; }
+    }
+
+    function iniciarJogo() {
+        const input = document.getElementById('halloween-nome-v4');
+        const nome = String(input ? input.value : '').trim().replace(/[<>]/g, '').replace(/\s+/g, ' ').slice(0, 50);
+        const aviso = document.getElementById('halloween-boasvindas-v4');
+        if (!nome) {
+            if (aviso) aviso.textContent = '🎃 Digite seu nome ou apelido para começar.';
+            if (input) input.focus();
+            return;
+        }
+
+        const nomeAnterior = String(estado.nome || '').toLocaleLowerCase('pt-BR');
+        if (estado.finalizada || (nomeAnterior && nomeAnterior !== nome.toLocaleLowerCase('pt-BR'))) {
+            estado = novoEstado();
+        }
+        estado.nome = nome;
+        if (!estado.startedAt) estado.startedAt = Date.now();
+        if (aviso) aviso.textContent = '🎃 Bem-vindo(a), ' + nome + '! Que comecem os mistérios!';
+        guardar();
+
+        const jogos = document.getElementById('halloween-jogos-dgf-v4');
+        if (!jogos) {
+            if (aviso) aviso.textContent = '⚠️ Não encontrei a área dos jogos. Confira se o card de Halloween foi inserido.';
+            return;
+        }
+        jogos.hidden = false;
+        jogos.removeAttribute('hidden');
+        jogos.style.setProperty('display', 'block', 'important');
+        atualizarPainel();
+        iniciarRelogioParticipacao();
+        salvarPontuacao();
+        carregarRanking();
+        jogos.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function instalarEventos(shell) {
+        const entrar = shell.querySelector('#halloween-entrar-v4');
+        if (entrar) entrar.addEventListener('click', iniciarJogo);
+        const nomeInput = shell.querySelector('#halloween-nome-v4');
+        if (nomeInput) nomeInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') iniciarJogo(); });
+
+        const audioBtn = shell.querySelector('#halloween-audio-v4');
+        if (audioBtn) audioBtn.addEventListener('click', function() { removerFallbackAudio(); tocarRisadaHumana(false); });
+
+        const f = shell.querySelector('#halloween-cursor-fantasma-v4');
+        if (f) f.addEventListener('click', function() { if (typeof window.mudarCursorDGF === 'function') window.mudarCursorDGF('fantasma'); });
+        const m = shell.querySelector('#halloween-cursor-morcego-v4');
+        if (m) m.addEventListener('click', function() { if (typeof window.mudarCursorDGF === 'function') window.mudarCursorDGF('morcego'); });
+
+        const caca = shell.querySelector('#halloween-iniciar-caca-v4');
+        if (caca) caca.addEventListener('click', iniciarCaca);
+        const rank = shell.querySelector('#halloween-atualizar-ranking-v4');
+        if (rank) rank.addEventListener('click', carregarRanking);
+        const fim = shell.querySelector('#halloween-finalizar-v4');
+        if (fim) fim.addEventListener('click', finalizarParticipacao);
+        const novo = shell.querySelector('#halloween-nova-partida-v4');
+        if (novo) novo.addEventListener('click', iniciarNovaPartida);
+    }
+
+    function instalarNoHome() {
+        const conteudo = document.getElementById('conteudo');
+        if (!conteudo || conteudo.querySelector('#halloween-dgf-shell-v4')) return;
+        const cardAntigo = conteudo.querySelector('.card-halloween-animado');
+        if (!cardAntigo) return;
+
+        instalarEstilos();
+        scrollHome = cardAntigo.parentElement;
+        const posicao = window.getComputedStyle(scrollHome).position;
+        if (posicao === 'static') scrollHome.style.position = 'relative';
+
+        const shell = document.createElement('div');
+        shell.id = 'halloween-dgf-shell-v4';
+        shell.style.cssText = 'display:flex;flex-direction:column;gap:18px;width:100%;flex:0 0 auto;box-sizing:border-box;position:relative;z-index:2';
+        shell.innerHTML = htmlHalloween();
+        cardAntigo.parentNode.insertBefore(shell, cardAntigo);
+        cardAntigo.remove();
+        instalarEventos(shell);
+
+        if (estado.nome) {
+            const input = shell.querySelector('#halloween-nome-v4');
+            if (input) input.value = estado.nome;
+        }
+        if (estado.nome) {
+            const jogos = shell.querySelector('#halloween-jogos-dgf-v4');
+            if (jogos) { jogos.hidden = false; jogos.removeAttribute('hidden'); }
+            atualizarPainel();
+            iniciarRelogioParticipacao();
+            carregarRanking();
+            if (estado.huntStarted && !estado.huntEnded && Date.now() - estado.huntStartedAt < HUNT_LIMIT_MS) {
+                criarOverlayAboboras();
+                criarBadgeCaca();
+                if (intervaloCaca) clearInterval(intervaloCaca);
+                intervaloCaca = setInterval(atualizarBadgeCaca, 250);
+            } else if (estado.huntStarted && !estado.huntEnded) {
+                finalizarCaca('⏰ O tempo acabou enquanto a página não estava aberta.');
+            }
+        }
+
+        if (!primeiraTentativaAudio) {
+            primeiraTentativaAudio = true;
+            setTimeout(function() { tocarRisadaHumana(true); }, 300);
+        }
+    }
+
+    function aoSairHome() {
+        if (estado.huntStarted && !estado.huntEnded) {
+            removerOverlayAboboras();
+            if (intervaloCaca) clearInterval(intervaloCaca);
+            intervaloCaca = null;
+            if (badgeTempo) badgeTempo.style.display = 'none';
+        }
+        removerFallbackAudio();
+    }
+
+    window.mostrar = function(pagina) {
+        const ehHome = String(pagina == null ? '' : pagina).toLowerCase() === 'home';
+        if (!ehHome) {
+            aoSairHome();
+            return mostrarOriginal.apply(this, arguments);
+        }
+
+        const audioContextOriginal = window.AudioContext;
+        const webkitAudioContextOriginal = window.webkitAudioContext;
+        const addEventListenerOriginal = document.addEventListener;
+        try {
+            window.AudioContext = undefined;
+            window.webkitAudioContext = undefined;
+            document.addEventListener = function(tipo, listener, options) {
+                const fonte = typeof listener === 'function' ? String(listener) : '';
+                if (String(tipo).toLowerCase() === 'click' && /desbloquearAudio/.test(fonte)) return;
+                return addEventListenerOriginal.call(this, tipo, listener, options);
+            };
+            const resultado = mostrarOriginal.apply(this, arguments);
+            if (window.intervaloRisadaHalloweenDGF) {
+                clearInterval(window.intervaloRisadaHalloweenDGF);
+                window.intervaloRisadaHalloweenDGF = null;
+            }
+            window.tocarRisadaBruxaDGF = function() { tocarRisadaHumana(false); };
+            setTimeout(instalarNoHome, 60);
+            setTimeout(instalarNoHome, 250);
+            return resultado;
+        } finally {
+            window.AudioContext = audioContextOriginal;
+            window.webkitAudioContext = webkitAudioContextOriginal;
+            document.addEventListener = addEventListenerOriginal;
+        }
+    };
+
+    setTimeout(instalarNoHome, 100);
+})();
+</script>
+
 
 </body>
 </html>

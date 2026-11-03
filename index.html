@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
 <style>
-/* --- ESTILIZAÇÃO DAS BARRAS DE ROLAGEM CORPORATIVAS (SUBSTITUINDO O CINZA POR ROSA) --- */
+/* --- ESTILIZAÇÃO DAS BARRAS DE ROLAGEM CORPORATIVAS — NOVEMBRO AZUL --- */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -18,18 +18,18 @@
     background: #1e2b37;
 }
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #ec407a 0%, #2c3e50 100%);
+    background: linear-gradient(180deg, #1976d2 0%, #2c3e50 100%);
     border-radius: 5px;
     border: 2px solid #1e2b37;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #d81b60;
+    background: #0d47a1;
 }
 
 /* Suporte de barra de rolagem para o Firefox */
 * {
     scrollbar-width: thin;
-    scrollbar-color: #ec407a #1e2b37;
+    scrollbar-color: #1976d2 #1e2b37;
 }
 
 /* --- SEUS ESTILOS ORIGINAIS AJUSTADOS --- */
@@ -107,11 +107,11 @@ nav {
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    border: 3px solid #ec407a;
+    border: 3px solid #1976d2;
 }
 
 nav button {
-    background: #ec407a;
+    background: #1976d2;
     border: none;
     padding: 10px;
     cursor: pointer;
@@ -134,7 +134,7 @@ nav button {
 }
 
 .submenu button {
-    background: #d81b60;
+    background: #0d47a1;
     font-size: 13px;
 }
 
@@ -184,7 +184,7 @@ section {
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
-    border-left: 5px solid #ec407a;
+    border-left: 5px solid #1976d2;
 }
 .aniv-item {
     padding: 8px 0;
@@ -201,7 +201,7 @@ section {
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 15px;
-    border-left: 5px solid #ec407a;
+    border-left: 5px solid #1976d2;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
@@ -242,7 +242,7 @@ section {
 }
 
 .btn-enviar {
-    background: #ec407a;
+    background: #1976d2;
     color: white;
     border: none;
     padding: 14px;
@@ -254,7 +254,7 @@ section {
     margin-top: 10px;
 }
 .btn-enviar:hover {
-    background: #d81b60;
+    background: #0d47a1;
 }
 
 /* ESTILO PARA O ORGANOGRAMA */
@@ -299,7 +299,7 @@ section {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding: 15px;
     text-align: center;
-    border-top: 5px solid #ec407a;
+    border-top: 5px solid #1976d2;
 }
 .livro-capa-placeholder {
     background: #bdc3c7;
@@ -377,7 +377,7 @@ section {
     border-radius: 14px;
     padding: 20px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    border-top: 5px solid #ec407a;
+    border-top: 5px solid #1976d2;
 }
 
 .xadrez-card h3 {
@@ -462,17 +462,17 @@ section {
     padding: 14px;
     border-radius: 10px;
     margin-top: 10px;
-    border-left: 4px solid #ec407a;
+    border-left: 4px solid #1976d2;
 }
 
 .xadrez-peao {
-    background: linear-gradient(135deg, #fdf2f8, #f8f9fa);
-    border-left: 4px solid #ec407a;
+    background: linear-gradient(135deg, #eaf4ff, #f8f9fa);
+    border-left: 4px solid #1976d2;
 }
 
 .xadrez-peao h4 {
     margin: 0 0 8px 0;
-    color: #d81b60;
+    color: #0d47a1;
     font-size: 17px;
 }
 
@@ -510,7 +510,7 @@ section {
     min-width: 38px;
     height: 38px;
     border-radius: 50%;
-    background: #ec407a;
+    background: #1976d2;
     color: white;
     display: flex;
     align-items: center;
@@ -563,6 +563,300 @@ section {
     #mural-outubro-rosa-dgf button[onclick^="aplicarCorNaMensagem"],
     #modal-stories-outubro-rosa-dgf button[onclick^="aplicarCorNaMensagem"] {
         box-shadow: none;
+    }
+</style>
+
+
+<style id="dgf-novembro-azul-home-theme">
+    /* Identidade azul aplicada somente enquanto a página inicial estiver aberta. */
+    body.dgf-home-novembro-azul ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #42a5f5 0%, #1565c0 100%) !important;
+    }
+    body.dgf-home-novembro-azul ::-webkit-scrollbar-thumb:hover {
+        background: #0d47a1 !important;
+    }
+    body.dgf-home-novembro-azul * {
+        scrollbar-color: #2196f3 #1e2b37 !important;
+    }
+    body.dgf-home-novembro-azul nav .img-nav {
+        border-color: #64b5f6 !important;
+    }
+    body.dgf-home-novembro-azul nav button[onclick] {
+        background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%) !important;
+        border: 1px solid rgba(144, 202, 249, .45) !important;
+        box-shadow: 0 3px 10px rgba(13, 71, 161, .22) !important;
+    }
+    body.dgf-home-novembro-azul nav button[onclick]:hover {
+        background: linear-gradient(135deg, #2196f3 0%, #1565c0 100%) !important;
+    }
+</style>
+
+
+<style id="dgf-novembro-azul-theme-global">
+    :root {
+        --dgf-azul-escuro: #082b50;
+        --dgf-azul-profundo: #0d47a1;
+        --dgf-azul: #1976d2;
+        --dgf-azul-claro: #42a5f5;
+        --dgf-azul-borda: #90caf9;
+        --dgf-azul-fundo: #eaf4ff;
+    }
+
+    /* A identidade Novembro Azul permanece ativa em todas as páginas. */
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #42a5f5 0%, #1565c0 100%) !important;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: #0d47a1 !important; }
+    * { scrollbar-color: #2196f3 #1e2b37; }
+
+    body { background: #f1f6fc; }
+    .main-content > header {
+        background-color: #0d2b50 !important;
+        border-bottom: 3px solid #1976d2;
+    }
+    nav {
+        background-color: #102f50 !important;
+        border-right: 1px solid rgba(144,202,249,.25);
+    }
+    nav .img-nav { border-color: #64b5f6 !important; }
+
+    /* Todos os botões de navegação permanecem azuis ao trocar de módulo. */
+    nav button {
+        background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%) !important;
+        color: #fff !important;
+        border: 1px solid rgba(144,202,249,.45) !important;
+        box-shadow: 0 3px 9px rgba(13,71,161,.20) !important;
+    }
+    nav button:hover {
+        background: linear-gradient(135deg, #2196f3 0%, #1565c0 100%) !important;
+        filter: brightness(1.04);
+    }
+    nav button[style*="cursor: default"] {
+        background: linear-gradient(135deg, #16466f 0%, #0b3158 100%) !important;
+        color: #fff !important;
+    }
+
+    /* Botões das telas, formulários, modais e painéis usam o mesmo padrão azul.
+       Os seletores de cor do mural continuam preservando as cores escolhidas. */
+    body button:not([onclick^="aplicarCorNaMensagem"]) {
+        background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%) !important;
+        background-color: #1565c0 !important;
+        color: #fff !important;
+        border-color: #64b5f6 !important;
+        box-shadow: 0 3px 9px rgba(13,71,161,.16) !important;
+    }
+    body button:not([onclick^="aplicarCorNaMensagem"]):hover {
+        background: linear-gradient(135deg, #2196f3 0%, #1565c0 100%) !important;
+        filter: brightness(1.04);
+    }
+    body button:not([onclick^="aplicarCorNaMensagem"]):disabled {
+        opacity: .52 !important;
+        cursor: not-allowed !important;
+        filter: grayscale(.15);
+    }
+    body button[onclick^="aplicarCorNaMensagem"] {
+        box-shadow: none !important;
+    }
+
+    /* Campos e áreas de edição com foco azul em todos os módulos. */
+    #conteudo input:not([type="color"]),
+    #conteudo select,
+    #conteudo textarea,
+    body [id*="modal"] input:not([type="color"]),
+    body [id*="modal"] select,
+    body [id*="modal"] textarea {
+        border-color: #b7d5f2;
+    }
+    #conteudo input:focus,
+    #conteudo select:focus,
+    #conteudo textarea:focus,
+    body [id*="modal"] input:focus,
+    body [id*="modal"] select:focus,
+    body [id*="modal"] textarea:focus {
+        border-color: #1976d2 !important;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(33,150,243,.14) !important;
+    }
+
+    /* Cartões e áreas recorrentes recebem acentos da campanha. */
+    #conteudo .aniv-secao,
+    #conteudo .noticia-card,
+    #conteudo .form-container,
+    #conteudo .card-contracheque,
+    #conteudo .organograma-container {
+        border-color: #bbdefb;
+    }
+    #conteudo .aniv-secao,
+    #conteudo .noticia-card {
+        border-left-color: #1976d2 !important;
+    }
+    #conteudo .livro-card,
+    #conteudo .xadrez-card {
+        border-top-color: #1976d2 !important;
+    }
+    #conteudo .xadrez-icone {
+        background: linear-gradient(135deg, #2196f3, #0d47a1) !important;
+    }
+    #conteudo .xadrez-regra,
+    #conteudo .xadrez-peao {
+        border-left-color: #1976d2 !important;
+        background: linear-gradient(135deg, #eaf4ff, #f8fbff) !important;
+    }
+
+    /* O destaque do Novembro Azul fica mais baixo e confortável na Home. */
+    .card-novembro-azul-dgf {
+        padding: 13px 18px !important;
+        gap: 14px !important;
+        border-color: #90caf9 !important;
+    }
+
+    @media (max-width: 700px) {
+        nav button { padding: 9px 8px; }
+        .card-novembro-azul-dgf { padding: 12px !important; gap: 10px !important; }
+        .card-novembro-azul-dgf > div[aria-hidden="true"] {
+            width: 44px !important;
+            height: 44px !important;
+            min-width: 44px !important;
+            font-size: 24px !important;
+        }
+    }
+</style>
+
+
+<style id="dgf-novembro-azul-page-overrides">
+    /* Especificidade maior para substituir temas locais antigos nos módulos. */
+    html body #mural-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]),
+    html body #modal-stories-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]),
+    html body #painel-admin-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]),
+    html body [id^="modal-"][id*="outubro-rosa"] button:not([onclick^="aplicarCorNaMensagem"]) {
+        background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%) !important;
+        background-color: #1565c0 !important;
+        color: #fff !important;
+        border: 1px solid #90caf9 !important;
+        box-shadow: 0 3px 9px rgba(13,71,161,.18) !important;
+    }
+    html body #mural-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]):hover,
+    html body #modal-stories-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]):hover,
+    html body #painel-admin-outubro-rosa-dgf button:not([onclick^="aplicarCorNaMensagem"]):hover,
+    html body [id^="modal-"][id*="outubro-rosa"] button:not([onclick^="aplicarCorNaMensagem"]):hover {
+        background: linear-gradient(135deg, #2196f3 0%, #1565c0 100%) !important;
+        border-color: #bbdefb !important;
+    }
+
+    /* Faixas e superfícies antigas de campanha recebem o mesmo acabamento azul. */
+    #conteudo > div[style*="border-top:"] {
+        border-top-color: #1976d2 !important;
+    }
+    #conteudo > div[style*="background:#120b1b"] {
+        background: #f4f8fe !important;
+        border-top-color: #1976d2 !important;
+    }
+    html body #mural-outubro-rosa-dgf [style*="color:#4a148c"],
+    html body #mural-outubro-rosa-dgf [style*="color:#ff6d00"],
+    html body #mural-outubro-rosa-dgf [style*="color:#e65100"] {
+        color: #0d47a1 !important;
+    }
+    html body #mural-outubro-rosa-dgf {
+        border-color: #bbdefb !important;
+        box-shadow: 0 8px 22px rgba(13,71,161,.10) !important;
+    }
+    html body #mural-outubro-rosa-dgf > div:first-child {
+        background: linear-gradient(135deg, #082b50 0%, #0d47a1 55%, #1976d2 100%) !important;
+    }
+    html body #form-foto-outubro-rosa-dgf {
+        background: linear-gradient(135deg, #eaf4ff 0%, #ffffff 100%) !important;
+        border-color: #bbdefb !important;
+    }
+    html body #modal-stories-outubro-rosa-dgf,
+    html body #painel-admin-outubro-rosa-dgf {
+        border-color: #bbdefb !important;
+    }
+
+    /* Mantém sem alteração os botões-paleta usados para escolher a cor da mensagem. */
+    html body #mural-outubro-rosa-dgf button[onclick^="aplicarCorNaMensagem"],
+    html body #modal-stories-outubro-rosa-dgf button[onclick^="aplicarCorNaMensagem"] {
+        box-shadow: none !important;
+    }
+</style>
+
+
+<style id="dgf-novembro-azul-ajustes-menu-card">
+    /* Diferenciação visual do menu: grupos, início e botões das funções. */
+    html body nav > button[style*="cursor: default"] {
+        background: linear-gradient(135deg, #155b83 0%, #073b60 100%) !important;
+        background-color: #0b456d !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(144, 202, 249, .62) !important;
+        box-shadow: 0 3px 10px rgba(7, 59, 96, .28) !important;
+    }
+    html body nav > button[style*="cursor: default"]:hover {
+        background: linear-gradient(135deg, #1d719f 0%, #0b4f78 100%) !important;
+        filter: brightness(1.05);
+    }
+
+    html body nav > button[onclick*="mostrar('home')"] {
+        background: linear-gradient(135deg, #4fc3f7 0%, #0288d1 100%) !important;
+        background-color: #0288d1 !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(179, 229, 252, .9) !important;
+        box-shadow: 0 4px 12px rgba(2, 136, 209, .30) !important;
+        font-weight: 800;
+    }
+    html body nav > button[onclick*="mostrar('home')"]:hover {
+        background: linear-gradient(135deg, #81d4fa 0%, #039be5 100%) !important;
+        filter: brightness(1.04);
+    }
+
+    /* Os botões dos módulos continuam no azul principal já adotado no sistema. */
+    html body nav .submenu button {
+        background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%) !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(144, 202, 249, .48) !important;
+    }
+    html body nav .submenu button:hover {
+        background: linear-gradient(135deg, #2196f3 0%, #1565c0 100%) !important;
+    }
+
+    /* Card superior um pouco maior, sem alterar seu conteúdo nem sua função. */
+    html body #conteudo .card-novembro-azul-dgf {
+        min-height: 116px !important;
+        padding: 18px 22px !important;
+        gap: 18px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 8px 24px rgba(13, 71, 161, .22) !important;
+    }
+    html body #conteudo .card-novembro-azul-dgf > div[aria-hidden="true"] {
+        width: 58px !important;
+        height: 58px !important;
+        min-width: 58px !important;
+        font-size: 32px !important;
+    }
+    html body #conteudo .card-novembro-azul-dgf strong {
+        font-size: 18px !important;
+    }
+    html body #conteudo .card-novembro-azul-dgf p {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+    }
+
+    @media (max-width: 700px) {
+        html body #conteudo .card-novembro-azul-dgf {
+            min-height: 0 !important;
+            padding: 15px !important;
+            gap: 12px !important;
+        }
+        html body #conteudo .card-novembro-azul-dgf > div[aria-hidden="true"] {
+            width: 50px !important;
+            height: 50px !important;
+            min-width: 50px !important;
+            font-size: 27px !important;
+        }
+        html body #conteudo .card-novembro-azul-dgf strong {
+            font-size: 16px !important;
+        }
+        html body #conteudo .card-novembro-azul-dgf p {
+            font-size: 12px !important;
+        }
     }
 </style>
 
@@ -723,7 +1017,6 @@ const listaAniversariantes = [
     { nome: "Rosileide Correia Brasil", data: "14/04", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Teresa Cristina Souto Maior Pifano Ferreira", data: "03/10", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Jorge José de Souza Rodrigues", data: "10/03", superintendência: "Superintendência Financeira de Prestação de Contas" },
-    { nome: "Jose Caetano Da Silva Filho", data: "03/11", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Medyson da Silva Lima", data: "03/09", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Ana Elizabeth Gomes Lessa", data: "22/12", superintendência: "Superintendência Financeira de Prestação de Contas" },
     { nome: "Sueli Durval da silva", data: "19/01", superintendência: "Superintendência Financeira de Prestação de Contas" },
@@ -964,6 +1257,10 @@ if (pagina === "TV DGF" || pagina === "TV DGF") {
     }
 
 function mostrar(pagina){
+    document.body.classList.toggle(
+        'dgf-home-novembro-azul',
+        String(pagina == null ? '' : pagina).toLowerCase() === 'home'
+    );
     let conteudo = document.getElementById("conteudo");
 
     if (pagina === "TV DGF" || pagina === "TV DGF") {
@@ -2270,37 +2567,40 @@ function mostrar(pagina){
 
         conteudo.innerHTML = `
         <style>
-            @keyframes animarBordaHalloween {
-                0% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-                100% { background-position: 0% 50%; }
+            @keyframes pulsarNovembroAzulDGF {
+                0%, 100% { box-shadow: 0 8px 24px rgba(13, 71, 161, .20); }
+                50% { box-shadow: 0 10px 30px rgba(33, 150, 243, .34); }
             }
-            @keyframes flutuarItem {
-                0%, 100% { transform: translateY(0px) rotate(0deg); }
-                50% { transform: translateY(-8px) rotate(5deg); }
+            .card-novembro-azul-dgf {
+                background: linear-gradient(120deg, #082b50 0%, #0d47a1 48%, #1976d2 100%);
+                border: 1px solid #64b5f6;
+                animation: pulsarNovembroAzulDGF 4s ease-in-out infinite;
             }
-            .card-halloween-animado {
-                background: linear-gradient(-45deg, #120024, #3a005c, #ff6600, #1a002c);
-                background-size: 300% 300%;
-                animation: animarBordaHalloween 6s ease infinite;
-                border: 2px solid #ff6600;
-                box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
-            }
-            .item-flutuante {
-                animation: flutuarItem 3s ease-in-out infinite;
+            .spinner-novembro-azul-dgf {
                 display: inline-block;
+                width: 16px;
+                height: 16px;
+                border: 3px solid rgba(33, 150, 243, .18);
+                border-top-color: #1976d2;
+                border-radius: 50%;
+                animation: girarSpinnerNovembroAzulDGF .8s linear infinite;
+                vertical-align: middle;
+                margin-right: 6px;
+            }
+            @keyframes girarSpinnerNovembroAzulDGF {
+                to { transform: rotate(360deg); }
             }
         </style>
         <div style="
             display:flex;
             flex-direction:column;
-            gap:25px;
+            gap:14px;
             height:85vh;
             overflow-y:auto;
             padding:15px;
             background:#f4f7f6;
             border-radius:8px;
-            border-top:10px solid #ff6600;
+            border-top:10px solid #1976d2;
         ">
             <!-- CONTADOR DISCRETO — CANTO SUPERIOR DIREITO -->
             <div id="contador-acessos-dgf" style="
@@ -2328,121 +2628,68 @@ function mostrar(pagina){
                 👁 <span id="total-acessos-dgf">0</span> acessos
             </div>
 
-            <!-- BANNER ESPECIAL HALLOWEEN NA HOME -->
-            <div class="card-halloween-animado" style="
-                border-radius:12px;
-                padding:18px 24px;
+            <!-- CAMPANHA NOVEMBRO AZUL NA HOME -->
+            <section class="card-novembro-azul-dgf" aria-label="Campanha Novembro Azul" style="
+                border-radius:14px;
+                padding:13px 18px;
                 display:flex;
                 align-items:center;
-                gap:20px;
+                gap:14px;
                 flex-wrap:wrap;
                 font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
                 flex-shrink:0;
-                position:relative;
-                overflow:hidden;
+                color:#fff;
+                box-sizing:border-box;
             ">
-                <div class="item-flutuante" style="
-                    background:rgba(255,102,0,0.2);
-                    color:#fff;
-                    width:60px;
-                    height:60px;
+                <div aria-hidden="true" style="
+                    width:50px;
+                    height:50px;
+                    min-width:50px;
                     border-radius:50%;
                     display:flex;
                     align-items:center;
                     justify-content:center;
-                    font-size:32px;
-                    flex-shrink:0;
-                    border:2px solid #ff6600;
-                    box-shadow:0 0 15px rgba(255,102,0,0.6);
-                ">
-                    🎃
-                </div>
+                    background:rgba(255,255,255,.13);
+                    border:2px solid rgba(144,202,249,.8);
+                    font-size:28px;
+                    box-shadow:0 0 18px rgba(144,202,249,.20);
+                ">🎗️</div>
 
-                <div style="flex:1;min-width:280px;color:#fff;">
-                    <div style="
-                        display:flex;
-                        align-items:center;
-                        gap:8px;
-                        margin-bottom:6px;
-                        flex-wrap:wrap;
-                    ">
+                <div style="flex:1;min-width:260px;">
+                    <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:7px;">
                         <span style="
-                            background:#ff6600;
-                            color:#000;
-                            font-size:11px;
+                            background:#bbdefb;
+                            color:#0d47a1;
+                            padding:4px 11px;
+                            border-radius:20px;
+                            font-size:9px;
                             font-weight:900;
-                            padding:3px 10px;
-                            border-radius:12px;
-                            text-transform:uppercase;
                             letter-spacing:1px;
-                        ">
-                            Doces ou Travessuras? 🕸️
-                        </span>
-
-                        <strong style="
-                            color:#ffb74d;
-                            font-size:18px;
-                            text-shadow:0 2px 4px rgba(0,0,0,0.8);
-                        ">
-                            Especial de Halloween DGF! 👻
+                            text-transform:uppercase;
+                        ">Novembro Azul • Saúde do Homem</span>
+                        <strong style="font-size:16px;color:#fff;text-shadow:0 2px 5px rgba(0,0,0,.22);">
+                            Prevenção também é cuidado.
                         </strong>
                     </div>
-
-                    <p style="
-                        margin:0;
-                        color:#e0e0e0;
-                        font-size:13px;
-                        line-height:1.5;
-                    ">
-                        Escolha seu companheiro das trevas para navegar pela Intranet! Clique abaixo para alterar o ponteiro do seu mouse.
+                    <p style="margin:0;color:#eaf4ff;font-size:12px;line-height:1.45;max-width:850px;">
+                        Cuidar da saúde deve fazer parte da rotina. Neste Novembro Azul, informe-se, converse com um profissional de saúde e mantenha seus cuidados preventivos em dia, considerando sua idade e seu histórico de saúde.
                     </p>
                 </div>
-
-                <!-- SELETOR OBRIGATÓRIO DE CURSOR (FANTASMA x MORCEGO) -->
                 <div style="
-                    display:flex;
-                    flex-direction:column;
-                    align-items:center;
-                    gap:8px;
-                    background:rgba(0,0,0,0.4);
-                    padding:12px 16px;
+                    padding:8px 11px;
+                    border:1px solid rgba(187,222,251,.55);
                     border-radius:10px;
-                    border:1px solid rgba(255,102,0,0.4);
+                    background:rgba(3,24,48,.28);
+                    color:#fff;
+                    font-size:12px;
+                    line-height:1.45;
+                    font-weight:700;
+                    text-align:center;
+                    max-width:165px;
                 ">
-                    <span style="color:#ffb74d;font-size:11px;font-weight:bold;text-transform:uppercase;">Escolha seu Cursor:</span>
-                    <div style="display:flex;gap:12px;">
-                        <button type="button" onclick="mudarCursorDGF('fantasma')" style="
-                            background:linear-gradient(135deg, #ffffff, #e0e0e0);
-                            color:#1a002c;
-                            border:none;
-                            padding:8px 14px;
-                            border-radius:20px;
-                            font-weight:bold;
-                            font-size:13px;
-                            cursor:pointer;
-                            box-shadow:0 4px 10px rgba(255,255,255,0.3);
-                            transition:transform .2s;
-                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                            👻 Fantasminha
-                        </button>
-
-                        <button type="button" onclick="mudarCursorDGF('morcego')" style="
-                            background:linear-gradient(135deg, #3a005c, #120024);
-                            color:#ff9800;
-                            border:1px solid #ff9800;
-                            padding:8px 14px;
-                            border-radius:20px;
-                            font-weight:bold;
-                            font-size:13px;
-                            cursor:pointer;
-                            box-shadow:0 4px 10px rgba(255,152,0,0.3);
-                            transition:transform .2s;
-                        " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                            🦇 Morcego
-                        </button>
-                    </div>
+                    💙 Informação e prevenção salvam vidas.
                 </div>
-            </div>
+            </section>
 
             <!-- BLOCO PRINCIPAL DA HOME -->
             <div style="
@@ -2477,10 +2724,10 @@ function mostrar(pagina){
                     height:6px;
                     background:repeating-linear-gradient(
                         90deg,
-                        #ff6600,
-                        #ff6600 20px,
-                        #8e44ad 20px,
-                        #8e44ad 40px
+                        #64b5f6,
+                        #64b5f6 20px,
+                        #1565c0 20px,
+                        #1565c0 40px
                     );
                     opacity:.8;
                     pointer-events:none;
@@ -2512,7 +2759,7 @@ function mostrar(pagina){
                                 align-items:center;
                                 justify-content:center;
                                 color:white;
-                                background:rgba(233,30,99,0.85);
+                                background:rgba(30,136,229,0.88);
                                 padding:10px 14px;
                                 border-radius:6px;
                                 border:none;
@@ -2523,8 +2770,8 @@ function mostrar(pagina){
                                 font-family:inherit;
                                 width:100%;
                             "
-                            onmouseover="this.style.background='rgba(233,30,99,1)';this.style.transform='scale(1.02)'"
-                            onmouseout="this.style.background='rgba(233,30,99,.85)';this.style.transform='scale(1)'"
+                            onmouseover="this.style.background='rgba(30,136,229,1)';this.style.transform='scale(1.02)'"
+                            onmouseout="this.style.background='rgba(30,136,229,.88)';this.style.transform='scale(1)'"
                         >
                             <span style="
                                 font-size:18px;
@@ -2611,7 +2858,7 @@ function mostrar(pagina){
                         <div style="
                             font-size:20px;
                             font-weight:600;
-                            color:#ff9800;
+                            color:#90caf9;
                             margin-top:4px;
                             text-shadow:1px 1px 0 rgba(0,0,0,.2);
                         ">
@@ -2712,104 +2959,40 @@ function mostrar(pagina){
                         </div>
                     </div>
 
-                    <!-- MURAL -->
+                    <!-- DESTAQUE NOVEMBRO AZUL -->
                     <div style="
-                        background:#f3e5f5 !important;
-                        border:1px solid #7e57c2;
-                        border-left:5px solid #ff6d00;
-                        border-radius:6px;
-                        padding:12px 15px;
+                        background:#eaf4ff;
+                        border:1px solid #bbdefb;
+                        border-left:5px solid #1976d2;
+                        border-radius:8px;
+                        padding:13px 15px;
                         width:270px;
                         display:flex;
                         flex-direction:column;
                         justify-content:center;
-                        gap:6px;
-                        box-shadow:0 4px 15px rgba(0,0,0,.2);
+                        gap:8px;
+                        box-shadow:0 4px 15px rgba(0,0,0,.12);
                         box-sizing:border-box;
                         font-family:inherit;
                         position:relative;
                     ">
-                        <div style="
-                            display:flex;
-                            align-items:center;
-                            justify-content:space-between;
-                        ">
-                            <div style="
-                                display:flex;
-                                align-items:center;
-                                gap:8px;
-                            ">
-                                <span style="
-                                    font-size:18px;
-                                    line-height:1;
-                                ">
-                                    📌
-                                </span>
-
-                                <span style="
-                                    color:#6a1b9a;
-                                    font-weight:800;
-                                    font-size:12px;
-                                    letter-spacing:.5px;
-                                    text-transform:uppercase;
-                                ">
-                                    Halloween DGF
-                                </span>
-                            </div>
-
-                            <span
-                                onclick="mostrar('Halloween DGF')"
-                                style="
-                                    font-size:11px;
-                                    color:#ff6d00;
-                                    font-weight:bold;
-                                    cursor:pointer;
-                                    text-decoration:underline;
-                                "
-                            >
-                                Ver tudo
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                            <span style="color:#0d47a1;font-weight:900;font-size:12px;letter-spacing:.5px;text-transform:uppercase;">
+                                🎗️ Novembro Azul
                             </span>
+                            <span style="font-size:10px;color:#1565c0;font-weight:800;">DGF • Saúde</span>
                         </div>
-
-                        <p style="
-                            margin:4px 0;
-                            color:#333;
-                            font-size:11px;
-                            line-height:1.3;
-                        ">
-                            <strong>🎃 Especial de Halloween DGF!</strong>
-                            Entre no clima: publique sua foto, fantasia ou decoração assustadora no mural.
+                        <p style="margin:2px 0;color:#23415f;font-size:11px;line-height:1.5;">
+                            <strong>Seu cuidado importa.</strong> Não deixe a prevenção para depois. Procure orientação profissional e converse sobre os cuidados adequados para você.
                         </p>
-
-                        <div
-                            onclick="mostrar('Halloween DGF')"
-                            style="
-                                width:100%;
-                                border-radius:4px;
-                                overflow:hidden;
-                                margin-top:2px;
-                                box-shadow:0 2px 5px rgba(0,0,0,.15);
-                                cursor:pointer;
-                            "
-                        >
-                            <div aria-label="Ilustração de Halloween DGF" style="width:100%;height:110px;display:flex;align-items:center;justify-content:center;gap:14px;background:radial-gradient(circle at 18% 25%,#6a1b9a 0%,transparent 34%),linear-gradient(135deg,#120b1b 0%,#311b4b 52%,#e65100 100%);color:#fff;font-size:30px;letter-spacing:3px;text-shadow:0 3px 8px rgba(0,0,0,.55);">🎃 👻 🦇 🕸️</div>
-                        </div>
-
-                        <a
-                            href="#"
-                            onclick="mostrar('Halloween DGF'); return false;"
-                            style="
-                                margin-top:4px;
-                                color:#e65100;
-                                font-weight:bold;
-                                font-size:11px;
-                                text-decoration:underline;
-                                text-align:center;
-                                display:block;
-                            "
-                        >
-                            👉 Clique aqui para publicar no Mural Halloween
-                        </a>
+                        <div aria-label="Laço azul da campanha Novembro Azul" style="
+                            width:100%;height:92px;display:flex;align-items:center;justify-content:center;gap:12px;
+                            border-radius:6px;background:linear-gradient(135deg,#0d47a1 0%,#1976d2 55%,#64b5f6 100%);
+                            color:#fff;font-size:38px;text-shadow:0 3px 8px rgba(0,0,0,.25);
+                        ">🎗️ 💙 🎗️</div>
+                        <span style="color:#0d47a1;font-weight:800;font-size:11px;text-align:center;">
+                            Informação, diálogo e prevenção.
+                        </span>
                     </div>
                 </div>
             </div>
@@ -3021,7 +3204,7 @@ function mostrar(pagina){
                     min-width:200px;
                     background:white;
                     border-radius:8px;
-                    border-top:4px solid #e91e63;
+                    border-top:4px solid #2196f3;
                     box-shadow:0 2px 10px rgba(0,0,0,.05);
                     overflow:hidden;
                     font-family:sans-serif;
@@ -3356,7 +3539,7 @@ function mostrar(pagina){
                             cursor:pointer;
                             background:#111;
                             border-radius:8px;
-                            border-left:5px solid #ec407a;
+                            border-left:5px solid #2196f3;
                             padding:20px;
                             box-shadow:0 2px 10px rgba(0,0,0,.05);
                             font-family:sans-serif;
@@ -3436,20 +3619,20 @@ function mostrar(pagina){
             <style>
                 #lider-card:hover {
                     transform:translateY(-4px) !important;
-                    box-shadow:0 12px 30px rgba(236,64,122,.45) !important;
+                    box-shadow:0 12px 30px rgba(33,150,243,.35) !important;
                 }
 
                 @keyframes neonPulsar {
                     0%,100% {
-                        color:#ec407a;
+                        color:#2196f3;
                         text-shadow:
                             0 0 2px #fff,
-                            0 0 6px #ec407a,
-                            0 0 12px #ec407a,
-                            0 0 20px #ec407a;
+                            0 0 6px #2196f3,
+                            0 0 12px #2196f3,
+                            0 0 20px #2196f3;
                     }
                     50% {
-                        color:#4a0022;
+                        color:#0d47a1;
                         text-shadow:none;
                     }
                 }
@@ -3480,119 +3663,7 @@ function mostrar(pagina){
         </div>
         `;
 
-        /* =====================================================================================
-           EFEITO DE ÁUDIO - RISADA DE VILÃO ULTRAMALÉFICA / CAVERNOSA
-           ===================================================================================== */
-
-        window.tocarRisadaBruxaDGF = function() {
-            try {
-                const AudioCtx = window.AudioContext || window.webkitAudioContext;
-                if (!AudioCtx) return;
-                const ctx = new AudioCtx();
-                if (ctx.state === 'suspended') {
-                    ctx.resume();
-                }
-
-                const agora = ctx.currentTime;
-
-                // Gargalhadas com frequências bem graves, oscilações fortes e ritmo macabro
-                const risadaPassos = [
-                    { tempo: 0.00, fInic: 180, fFim: 75,  dur: 0.42, vol: 0.50 }, // MUA...
-                    { tempo: 0.45, fInic: 210, fFim: 85,  dur: 0.32, vol: 0.55 }, // HA...
-                    { tempo: 0.80, fInic: 195, fFim: 70,  dur: 0.28, vol: 0.50 }, // HA...
-                    { tempo: 1.10, fInic: 170, fFim: 60,  dur: 0.25, vol: 0.45 }, // HA...
-                    { tempo: 1.38, fInic: 150, fFim: 55,  dur: 0.22, vol: 0.40 }, // HA...
-                    { tempo: 1.62, fInic: 130, fFim: 45,  dur: 0.38, vol: 0.35 }  // HA... (sumindo no túmulo)
-                ];
-
-                risadaPassos.forEach(p => {
-                    const tInic = agora + p.tempo;
-                    const tFim = tInic + p.dur;
-
-                    // Oscilador 1: Dente de serra para voz rasgada
-                    const osc1 = ctx.createOscillator();
-                    osc1.type = 'sawtooth';
-                    osc1.frequency.setValueAtTime(p.fInic, tInic);
-                    osc1.frequency.exponentialRampToValueAtTime(p.fFim, tFim);
-
-                    // Oscilador 2: Sub-grave levemente desafinado para corpo cavernoso
-                    const osc2 = ctx.createOscillator();
-                    osc2.type = 'sawtooth';
-                    osc2.frequency.setValueAtTime(p.fInic * 0.98 - 3, tInic);
-                    osc2.frequency.exponentialRampToValueAtTime(p.fFim * 0.98, tFim);
-
-                    // Filtro ressonante com garganta monstruosa
-                    const filter = ctx.createBiquadFilter();
-                    filter.type = 'lowpass';
-                    filter.Q.value = 6; // Ressonância para timbre macabro
-                    filter.frequency.setValueAtTime(650, tInic);
-                    filter.frequency.exponentialRampToValueAtTime(180, tFim);
-
-                    // Controle de Ganho
-                    const gain = ctx.createGain();
-                    gain.gain.setValueAtTime(0.001, tInic);
-                    gain.gain.linearRampToValueAtTime(p.vol, tInic + 0.05);
-                    gain.gain.exponentialRampToValueAtTime(0.001, tFim);
-
-                    // Conexões
-                    osc1.connect(filter);
-                    osc2.connect(filter);
-                    filter.connect(gain);
-                    gain.connect(ctx.destination);
-
-                    osc1.start(tInic);
-                    osc2.start(tInic);
-                    osc1.stop(tFim);
-                    osc2.stop(tFim);
-                });
-
-            } catch (e) {
-                console.log("Aguardando interação do usuário para reproduzir o áudio.");
-            }
-        };
-
-        // Executa a risada imediatamente ao carregar a home e programa a cada 1 minuto (60.000 ms)
-        window.tocarRisadaBruxaDGF();
-        if (window.intervaloRisadaHalloweenDGF) {
-            clearInterval(window.intervaloRisadaHalloweenDGF);
-        }
-        window.intervaloRisadaHalloweenDGF = setInterval(function() {
-            window.tocarRisadaBruxaDGF();
-        }, 60000);
-
-        // Desbloqueio do áudio no primeiro clique do usuário caso o navegador bloqueie o autoplay
-        const desbloquearAudio = function() {
-            window.tocarRisadaBruxaDGF();
-            document.removeEventListener('click', desbloquearAudio);
-        };
-        document.addEventListener('click', desbloquearAudio);
-
-        /* =====================================================================================
-           FUNÇÃO PARA ALTERAR O CURSOR DO MOUSE (FANTASMA / MORCEGO)
-           ===================================================================================== */
-
-        window.mudarCursorDGF = function(tipo) {
-            let svgIcon = "";
-            if (tipo === 'fantasma') {
-                svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="0" y="24" font-size="24">👻</text></svg>`;
-            } else if (tipo === 'morcego') {
-                svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="0" y="24" font-size="24">🦇</text></svg>`;
-            }
-
-            if (svgIcon) {
-                const encodedSvg = encodeURIComponent(svgIcon);
-                document.body.style.cursor = `url("data:image/svg+xml,${encodedSvg}"), auto`;
-                
-                // Aplica a todos os elementos clicáveis
-                const estilosCursor = document.createElement('style');
-                estilosCursor.id = 'estilo-cursor-halloween-dgf';
-                const estiloAntigo = document.getElementById('estilo-cursor-halloween-dgf');
-                if (estiloAntigo) estiloAntigo.remove();
-
-                estilosCursor.innerHTML = `* { cursor: url("data:image/svg+xml,${encodedSvg}"), auto !important; }`;
-                document.head.appendChild(estilosCursor);
-            }
-        };
+        /* Recursos da Home sem efeitos sazonais. */
 
         /* =====================================================================================
            BOTÕES MONITORE / PRIORIZE
@@ -3756,7 +3827,7 @@ function mostrar(pagina){
                 return;
             }
 
-            resEl.innerHTML = "<span style='color:#7f8c8d;'><span class='spinner-rosa-dgf'></span>Pesquisando processo na planilha... Por favor, aguarde.</span>";
+            resEl.innerHTML = "<span style='color:#7f8c8d;'><span class='spinner-novembro-azul-dgf'></span>Pesquisando processo na planilha... Por favor, aguarde.</span>";
 
             const docId = "1Lz169HkURx2K1BEYqjLp1x921pzJOWSizYVv4bt3dk0";
             const sheetName = "controle sei";
@@ -3834,9 +3905,9 @@ function mostrar(pagina){
                 if (encontrado) {
                     resEl.innerHTML = `
                         <div style="
-                            background:#fcf4f7;
+                            background:#eaf4ff;
                             padding:12px;
-                            border-left:4px solid #ec407a;
+                            border-left:4px solid #2196f3;
                             border-radius:4px;
                             text-align:left;
                             color:#2c3e50;
@@ -3844,7 +3915,7 @@ function mostrar(pagina){
                             line-height:1.6;
                         ">
                             <strong style="
-                                color:#d81b60;
+                                color:#1565c0;
                                 font-size:14px;
                             ">
                                 ✅ Processo Encontrado!
@@ -3906,7 +3977,7 @@ function mostrar(pagina){
                 return;
             }
 
-            resEl.innerHTML = "<span style='color:#d35400;'><span class='spinner-rosa-dgf'></span>Consultando contrato na base de dados...</span>";
+            resEl.innerHTML = "<span style='color:#d35400;'><span class='spinner-novembro-azul-dgf'></span>Consultando contrato na base de dados...</span>";
 
             setTimeout(function() {
                 resEl.innerHTML = `
@@ -4093,7 +4164,7 @@ if (pagina === "Xadrez DGF") {
                 padding:25px;
                 border-radius:15px;
                 box-shadow:0 3px 12px rgba(0,0,0,0.08);
-                border-top:5px solid #ec407a;
+                border-top:5px solid #1976d2;
             ">
 
                 <h2 style="
@@ -4167,11 +4238,11 @@ if (pagina === "Xadrez DGF") {
                 padding:25px;
                 border-radius:15px;
                 box-shadow:0 3px 12px rgba(0,0,0,0.08);
-                border-top:5px solid #ec407a;
+                border-top:5px solid #1976d2;
             ">
 
                 <h2 style="
-                    color:#d81b60;
+                    color:#0d47a1;
                     margin-top:0;
                 ">
                     ♟️ Conheça o Peão
@@ -4537,7 +4608,7 @@ if (pagina === "Xadrez DGF") {
             border-radius:15px;
             box-shadow:0 3px 12px rgba(0,0,0,0.08);
             margin-bottom:20px;
-            border-left:6px solid #ec407a;
+            border-left:6px solid #1976d2;
         ">
 
             <h2 style="
@@ -4850,16 +4921,16 @@ if(pagina === "noticias"){
 
     // 1. DIA DAS CRIANÇAS - DGF/SES
     html += `
-        <div class="noticia-card" style="border-left: 5px solid #ff6b6b; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
+        <div class="noticia-card" style="border-left: 5px solid #1976d2; background: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; margin-bottom: 15px; border-radius: 6px; overflow: hidden;">
             <div onclick="window.toggleNoticia('noticia-criancas')" style="padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
                 <div>
                     <small style="color:#7f8c8d; font-weight: bold;">📅 ${hoje}</small>
-                    <h3 style="margin: 5px 0 0 0; color: #ff6b6b; font-size: 16px; text-transform: uppercase;">
+                    <h3 style="margin: 5px 0 0 0; color: #1976d2; font-size: 16px; text-transform: uppercase;">
                         🎈 BRINCADEIRA ESPECIAL – DIA DAS CRIANÇAS DGF/SES 💕🎉
                     </h3>
                     <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 13px;">Envie sua foto de infância e entre nessa brincadeira com a gente...</p>
                 </div>
-                <span id="icon-noticia-criancas" style="font-size: 18px; color: #ff6b6b; font-weight: bold;">▼</span>
+                <span id="icon-noticia-criancas" style="font-size: 18px; color: #1976d2; font-weight: bold;">▼</span>
             </div>
 
             <div id="noticia-criancas" style="display: none; padding: 0 15px 15px 15px; border-top: 1px solid #f0f0f0;">
@@ -4876,7 +4947,7 @@ if(pagina === "noticias"){
                 </div>
 
                 <div style="margin: 15px 0;">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSffzj3BOqBGYX0ieCQuUk8-JL6uZZqy5T9ICe77magEdsiVMw/viewform?usp=header" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #ff6b6b; font-weight: bold; text-decoration: underline; font-size: 14px;">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSffzj3BOqBGYX0ieCQuUk8-JL6uZZqy5T9ICe77magEdsiVMw/viewform?usp=header" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: #1976d2; font-weight: bold; text-decoration: underline; font-size: 14px;">
                         👉 Clique aqui para acessar o Formulário de Envio da Foto
                     </a>
                     <span style="display: block; color: #7f8c8d; font-size: 12px; margin-top: 4px;">(Caso não consiga enviar através do QR Code)</span>
@@ -4886,7 +4957,7 @@ if(pagina === "noticias"){
                     E não esqueça de compartilhar a divulgação com a equipe para que todo mundo possa participar! 🎈🎨✨
                 </p>
 
-                <div style="background: #fff0f0; border: 1px solid #ffcdd2; border-left: 5px solid #ff6b6b; padding: 12px; border-radius: 4px; color: #c62828; font-size: 13px; font-weight: bold;">
+                <div style="background: #eaf4ff; border: 1px solid #bbdefb; border-left: 5px solid #1976d2; padding: 12px; border-radius: 4px; color: #c62828; font-size: 13px; font-weight: bold;">
                     ⏰ Obs: Enviar as fotos até o dia 08/10.
                 </div>
             </div>
@@ -12254,860 +12325,7 @@ if (pagina === "mapa") {
 </script>
 
 
-<script>
-(function instalarHalloweenDGFV4() {
-    'use strict';
-    if (window.__DGF_HALLOWEEN_V4_INSTALADO) return;
 
-    const mostrarOriginal = window.mostrar;
-    if (typeof mostrarOriginal !== 'function') {
-        console.error('Halloween DGF: a função mostrar(pagina) não foi encontrada.');
-        return;
-    }
-
-    window.__DGF_HALLOWEEN_V4_INSTALADO = true;
-    const API = 'https://script.google.com/macros/s/AKfycbwzinGUYwT_groidaqXetlOWNb7zsP5i4r6ID54COcXK5LESy9UVK1rzYu3l9plR5uU/exec';
-    const STATE_KEY = 'DGF_HALLOWEEN_STATE_V4';
-    const LAUGH_URL = 'https://upload.wikimedia.org/wikipedia/commons/4/48/Evil_laugh.ogg';
-    const HUNT_LIMIT_MS = 120000;
-
-    const PREGUNTAS = [
-        { pergunta: 'Em que dia é comemorado o Halloween?', opcoes: ['31 de outubro', '1º de janeiro', '25 de dezembro'], correta: 0 },
-        { pergunta: 'Qual é um símbolo tradicional do Halloween?', opcoes: ['Abóbora iluminada', 'Guarda-chuva azul', 'Concha do mar'], correta: 0 },
-        { pergunta: 'Qual frase é tradicionalmente associada ao Halloween?', opcoes: ['Bom apetite!', 'Doces ou travessuras!', 'Feliz Ano-Novo!'], correta: 1 },
-        { pergunta: 'Qual destes animais é muito associado ao Halloween?', opcoes: ['Morcego', 'Golfinho', 'Pinguim'], correta: 0 },
-        { pergunta: 'Qual personagem aparece em muitas decorações de Halloween?', opcoes: ['Fantasma', 'Marinheiro', 'Astronauta'], correta: 0 },
-        { pergunta: 'A Perna Cabeluda ficou conhecida por qual característica nas histórias do Recife?', opcoes: ['Uma perna que pulava e dava chutes', 'Um barco fantasma', 'Uma casa que voava'], correta: 0 },
-        { pergunta: 'Na lenda recifense do Papa-Figo, qual figura assombra as histórias populares?', opcoes: ['Um homem misterioso associado a histórias sobre fígados', 'Uma sereia do Capibaribe', 'Um cavalo sem cabeça que só aparece no mar'], correta: 0 },
-        { pergunta: 'Onde a Galega de Santo Amaro costuma aparecer nas narrativas populares?', opcoes: ['Nas redondezas do Cemitério de Santo Amaro', 'No topo do Marco Zero ao meio-dia', 'No interior de um farol de Fernando de Noronha'], correta: 0 },
-        { pergunta: 'Segundo a lenda da Emparedada da Rua Nova, o que teria originado a história?', opcoes: ['Uma jovem que teria sido emparedada em um sobrado', 'Uma estátua que ganhou vida no porto', 'Um navio que desapareceu no Capibaribe'], correta: 0 },
-        { pergunta: 'Qual é o fenômeno associado à lenda da Praça Chora Menino?', opcoes: ['Relatos do choro de uma criança', 'O som de sinos debaixo do mar', 'Uma procissão de cavalos luminosos'], correta: 0 }
-    ];
-
-    const PORTAS_RECOMPENSAS = [
-        { pontos: 25, mensagem: '🎁 Um tesouro escondido! Você ganhou 25 pontos.' },
-        { pontos: 20, mensagem: '✨ Uma poção rara! Você ganhou 20 pontos.' },
-        { pontos: 15, mensagem: '🧙 Um feitiço de sorte! Você ganhou 15 pontos.' },
-        { pontos: 10, mensagem: '🦇 Um morcego guardião! Você ganhou 10 pontos.' },
-        { pontos: 5, mensagem: '🍬 Você achou doces! Ganhou 5 pontos.' },
-        { pontos: 0, mensagem: '🕸️ A sala estava vazia. Nenhum ponto desta vez.' },
-        { pontos: -5, mensagem: '👻 Um fantasma roubou 5 pontos!' },
-        { pontos: -10, mensagem: '🧛 Uma armadilha! Você perdeu 10 pontos.' },
-        { pontos: -15, mensagem: '☠️ Uma maldição! Você perdeu 15 pontos.' },
-        { pontos: -20, mensagem: '🕷️ A porta era uma cilada! Você perdeu 20 pontos.' }
-    ];
-
-    function embaralharPortas() {
-        const a = PORTAS_RECOMPENSAS.map(x => ({ pontos: x.pontos, mensagem: x.mensagem }));
-        for (let i = a.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [a[i], a[j]] = [a[j], a[i]];
-        }
-        return a;
-    }
-
-    function novoEstado() {
-        return {
-            sessionId: 'hwdgf_' + Date.now() + '_' + Math.random().toString(36).slice(2, 12),
-            nome: '', pontos: 0, aboboras: [],
-            huntStarted: false, huntEnded: false, huntStartedAt: 0,
-            huntTimeSeconds: null, quizIndice: 0, quizAcertos: 0,
-            quizRespostas: [], quizConcluido: false,
-            portaEscolhida: false, portaResultado: null,
-            portasRecompensas: embaralharPortas(),
-            startedAt: 0, tempoSegundos: 0, finalizada: false, versao: 0
-        };
-    }
-
-    function lerEstado() {
-        const padrao = novoEstado();
-        try {
-            const raw = sessionStorage.getItem(STATE_KEY);
-            if (!raw) return padrao;
-            const data = JSON.parse(raw);
-            if (!data || typeof data !== 'object') return padrao;
-            const s = Object.assign(padrao, data);
-            if (!Array.isArray(s.aboboras)) s.aboboras = [];
-            if (!Array.isArray(s.quizRespostas)) s.quizRespostas = [];
-            if (!Array.isArray(s.portasRecompensas) || s.portasRecompensas.length !== 10) s.portasRecompensas = embaralharPortas();
-            if (!/^[A-Za-z0-9_-]{8,100}$/.test(String(s.sessionId || ''))) s.sessionId = padrao.sessionId;
-            s.pontos = Number.isFinite(Number(s.pontos)) ? Number(s.pontos) : 0;
-            s.quizAcertos = Math.max(0, Math.min(10, Number(s.quizAcertos) || 0));
-            s.versao = Math.max(0, Number(s.versao) || 0);
-            return s;
-        } catch (e) { return padrao; }
-    }
-
-    let estado = lerEstado();
-    let intervaloRelogio = null;
-    let intervaloCaca = null;
-    let intervaloSalvamento = null;
-    let timersMovimento = [];
-    let overlayAboboras = null;
-    let badgeTempo = null;
-    let scrollHome = null;
-    let audioRisada = null;
-    let fallbackAudioArmed = false;
-    let fallbackAudioHandler = null;
-    let primeiraTentativaAudio = false;
-
-    function guardar() {
-        try { sessionStorage.setItem(STATE_KEY, JSON.stringify(estado)); } catch (e) {}
-    }
-
-    function formatarTempo(segundos) {
-        segundos = Math.max(0, Math.floor(Number(segundos) || 0));
-        const m = Math.floor(segundos / 60);
-        const s = segundos % 60;
-        return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
-    }
-
-    function tempoAtual() {
-        if (estado.finalizada) return Math.max(0, Number(estado.tempoSegundos) || 0);
-        return estado.startedAt ? Math.max(0, Math.floor((Date.now() - estado.startedAt) / 1000)) : 0;
-    }
-
-    function atualizarTempo() {
-        if (!estado.startedAt || estado.finalizada) return;
-        estado.tempoSegundos = tempoAtual();
-        const label = document.getElementById('halloween-tempo-v4');
-        if (label) label.textContent = formatarTempo(estado.tempoSegundos);
-        if (Date.now() - (estado.ultimaGravacaoTempo || 0) >= 15000) {
-            estado.ultimaGravacaoTempo = Date.now();
-            guardar();
-            salvarPontuacao();
-        }
-    }
-
-    function iniciarRelogioParticipacao() {
-        if (intervaloRelogio) clearInterval(intervaloRelogio);
-        if (intervaloSalvamento) clearInterval(intervaloSalvamento);
-        intervaloRelogio = setInterval(atualizarTempo, 1000);
-        intervaloSalvamento = setInterval(function() {
-            if (estado.nome && !estado.finalizada) salvarPontuacao();
-        }, 15000);
-    }
-
-    function htmlHalloween() {
-        return `
-        <div id="halloween-dgf-card-v4">
-            <span class="h-dgf-decor-v4" style="top:12px;right:19%;font-size:31px;animation:hDgfMorcegoV4 4s infinite">🦇</span>
-            <span class="h-dgf-decor-v4" style="top:30px;right:5%;font-size:25px;animation:hDgfFlutuarV4 3.8s infinite">👻</span>
-            <span class="h-dgf-decor-v4" style="bottom:13px;right:30%;font-size:24px;animation:hDgfBrilhoV4 2s infinite">✨</span>
-            <span class="h-dgf-decor-v4" style="top:10px;left:48%;font-size:24px;animation:hDgfBrilhoV4 2.7s infinite">🕸️</span>
-            <span class="h-dgf-decor-v4" style="bottom:12px;left:24%;font-size:23px;animation:hDgfMorcegoV4 5s infinite">🦇</span>
-            <div class="h-dgf-conteudo-v4">
-                <div class="h-dgf-abobora-v4" aria-hidden="true">🎃</div>
-                <div style="flex:1;min-width:250px">
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px">
-                        <span style="background:#ff8a00;color:#160b20;border-radius:20px;padding:5px 12px;font-size:11px;font-weight:900;letter-spacing:.7px">🕸️ EVENTO ESPECIAL • DGF</span>
-                        <span style="color:#ffd28c;font-size:12px;font-weight:800">31 DE OUTUBRO</span>
-                    </div>
-                    <h2 style="margin:0 0 8px;color:#ffd18a;font-size:clamp(22px,2.2vw,30px);font-weight:900;text-shadow:0 3px 9px #000">A Noite dos Mistérios 👻</h2>
-                    <p style="margin:0 0 14px;color:#f3eaf9;font-size:13px;line-height:1.6">Encontre cinco abóboras escondidas pela página, encare dez perguntas — incluindo lendas de Pernambuco — e escolha uma entre dez portas misteriosas. A pontuação usa o tempo de participação como desempate.</p>
-                    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
-                        <label for="halloween-nome-v4" style="font-size:12px;font-weight:800;color:#ffd18a">Como vamos chamar você?</label>
-                        <input id="halloween-nome-v4" type="text" maxlength="50" autocomplete="nickname" placeholder="Seu nome ou apelido">
-                        <button type="button" class="h-dgf-botao-v4 h-dgf-principal-v4" id="halloween-entrar-v4">🔓 Entrar no mistério</button>
-                        <button type="button" class="h-dgf-botao-v4 h-dgf-secundario-v4" id="halloween-audio-v4">🔊 Ouvir risada</button>
-                    </div>
-                    <p id="halloween-boasvindas-v4" aria-live="polite" style="margin:10px 0 0;color:#f5e9ff;font-size:12px;line-height:1.5">Digite seu nome ou apelido para começar. A risada pode ser bloqueada pelo navegador até a primeira interação.</p>
-                </div>
-                <div style="display:flex;flex-direction:column;gap:9px;align-items:center;background:rgba(0,0,0,.32);border:1px solid rgba(255,150,50,.25);padding:12px;border-radius:13px">
-                    <span style="color:#ffd18a;font-size:11px;font-weight:900;text-transform:uppercase">Escolha seu cursor</span>
-                    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:7px">
-                        <button type="button" class="h-dgf-botao-v4 h-dgf-secundario-v4" id="halloween-cursor-fantasma-v4">👻 Fantasminha</button>
-                        <button type="button" class="h-dgf-botao-v4 h-dgf-secundario-v4" id="halloween-cursor-morcego-v4">🦇 Morcego</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <section id="halloween-jogos-dgf-v4" hidden>
-            <div class="h-topo-jogos-v4">
-                <div>
-                    <div style="color:#ffb55c;font-size:11px;font-weight:900;letter-spacing:1px">A MISSÃO COMEÇOU</div>
-                    <h2 style="margin:4px 0;color:#ffd18a;font-size:24px">🎃 Os desafios da noite</h2>
-                    <div id="halloween-boasvindas-jogos-v4" style="color:#e9d8f5;font-size:13px"></div>
-                    <div style="margin-top:6px;color:#d9c1ea;font-size:12px">⏱️ Tempo de participação: <b id="halloween-tempo-v4" style="color:#ffc46d">00:00</b></div>
-                </div>
-                <div class="h-pontos-box-v4"><div style="font-size:11px;color:#d9c1ea;font-weight:800">SUA PONTUAÇÃO</div><div style="color:#ffc46d;font-size:27px;font-weight:900"><span id="halloween-pontos-v4">0</span> pts</div></div>
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px">
-                <span class="h-pilula-v4">🎃 Abóboras: <b id="halloween-contagem-aboboras-v4">0/5</b></span>
-                <span class="h-pilula-v4">👻 Acertos no quiz: <b id="halloween-contagem-quiz-v4">0/10</b></span>
-                <span class="h-pilula-v4">🚪 Porta: <b id="halloween-contagem-porta-v4">Ainda não escolhida</b></span>
-            </div>
-            <div class="h-grade-v4">
-                <article class="h-card-v4">
-                    <div style="font-size:35px;margin-bottom:7px">🎃🔎</div><h3>1. Caça às Abóboras</h3>
-                    <p>As cinco abóboras aparecem em diferentes tamanhos e lugares da página inicial. Algumas se movem. Você tem <b style="color:#ffc46d">2 minutos</b> para encontrar todas.</p>
-                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0"><button type="button" class="h-btn-v4" id="halloween-iniciar-caca-v4">🎃 Começar caça (02:00)</button><strong id="halloween-tempo-caca-v4" style="color:#ffc46d;font-size:20px">02:00</strong></div>
-                    <p id="halloween-status-aboboras-v4" aria-live="polite">Clique em “Começar caça” para espalhar as abóboras pela página inicial.</p>
-                </article>
-                <article class="h-card-v4">
-                    <div style="font-size:35px;margin-bottom:7px">👻❓</div><h3>2. Quiz do Além</h3>
-                    <p>Dez perguntas, incluindo cinco sobre lendas urbanas e histórias populares de Pernambuco. Cada resposta correta vale <b style="color:#ffc46d">10 pontos</b>.</p>
-                    <div id="halloween-quiz-conteudo-v4" style="margin-top:12px">Entre no mistério para começar.</div>
-                    <p id="halloween-status-quiz-v4" aria-live="polite"></p>
-                </article>
-                <article class="h-card-v4">
-                    <div style="font-size:35px;margin-bottom:7px">🚪🕯️</div><h3>3. As Dez Portas</h3>
-                    <p>Escolha uma porta. Há prêmios, portas vazias e armadilhas que podem tirar pontos. Só é permitido escolher uma por partida.</p>
-                    <div id="halloween-portas-v4" class="h-portas-grid-v4"></div>
-                    <p id="halloween-status-portas-v4" aria-live="polite"></p>
-                </article>
-                <article class="h-card-v4">
-                    <div style="font-size:35px;margin-bottom:7px">🏆⏱️</div><h3>Placar dos Mistérios</h3>
-                    <p>O placar usa primeiro a maior pontuação. Em caso de empate, fica à frente quem tiver o menor tempo de participação finalizado.</p>
-                    <button type="button" class="h-btn-v4" id="halloween-atualizar-ranking-v4">🔄 Atualizar placar</button>
-                    <div id="halloween-ranking-v4" style="margin-top:10px;font-size:13px" aria-live="polite">Clique para consultar o ranking.</div>
-                </article>
-            </div>
-            <div style="margin-top:15px;padding:12px;border-radius:10px;background:rgba(0,0,0,.2)">
-                <div id="halloween-status-geral-v4" aria-live="polite">A pontuação será enviada à planilha quando a conexão estiver ativa.</div>
-                <button type="button" class="h-btn-v4" id="halloween-finalizar-v4">🏁 Finalizar participação e registrar meu tempo</button>
-                <button type="button" class="h-btn-v4" id="halloween-nova-partida-v4">🔁 Começar uma nova partida</button>
-            </div>
-        </section>`;
-    }
-
-    function instalarEstilos() {
-        if (document.getElementById('dgf-halloween-interativo-style-v4')) return;
-        const s = document.createElement('style');
-        s.id = 'dgf-halloween-interativo-style-v4';
-        s.textContent = `
-            @keyframes hDgfFundoV4{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-            @keyframes hDgfFlutuarV4{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-13px) rotate(7deg)}}
-            @keyframes hDgfBrilhoV4{0%,100%{opacity:.22;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
-            @keyframes hDgfMorcegoV4{0%,100%{transform:translate(0,0) rotate(-5deg)}50%{transform:translate(16px,-10px) rotate(9deg)}}
-            @keyframes hDgfPulsarV4{0%,100%{filter:drop-shadow(0 0 2px #ff7900)}50%{filter:drop-shadow(0 0 9px #ffae42)}}
-            #halloween-dgf-card-v4{background:linear-gradient(120deg,#180022,#3a064d,#21091f,#66220b);background-size:300% 300%;animation:hDgfFundoV4 11s ease infinite;border:2px solid #ff7a00;border-radius:18px;padding:22px 24px;color:#fff;position:relative;overflow:hidden;flex:0 0 auto;width:100%;box-shadow:0 0 22px rgba(255,102,0,.27);box-sizing:border-box;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
-            #halloween-dgf-card-v4 *{box-sizing:border-box}
-            #halloween-dgf-card-v4 .h-dgf-decor-v4{position:absolute;pointer-events:none;user-select:none;opacity:.8;z-index:0}
-            #halloween-dgf-card-v4 .h-dgf-conteudo-v4{position:relative;z-index:1;display:flex;align-items:center;flex-wrap:wrap;gap:20px}
-            #halloween-dgf-card-v4 .h-dgf-abobora-v4{width:82px;height:82px;flex:0 0 82px;border-radius:50%;background:radial-gradient(circle,#ffb13b,#ff7900 60%,#7b2700);border:2px solid #ffd58c;display:flex;align-items:center;justify-content:center;font-size:45px;box-shadow:0 0 25px rgba(255,132,0,.7);animation:hDgfFlutuarV4 3.2s ease-in-out infinite}
-            #halloween-dgf-card-v4 .h-dgf-botao-v4{border:1px solid rgba(255,190,100,.6);border-radius:24px;padding:10px 15px;font-weight:800;cursor:pointer;transition:transform .2s,filter .2s}
-            #halloween-dgf-card-v4 .h-dgf-botao-v4:hover{transform:translateY(-2px) scale(1.03);filter:brightness(1.13)}
-            #halloween-dgf-card-v4 .h-dgf-principal-v4{background:linear-gradient(135deg,#ffb000,#ff6500);color:#180d20;border:0;box-shadow:0 4px 14px rgba(255,111,0,.27)}
-            #halloween-dgf-card-v4 .h-dgf-secundario-v4{color:#fff;background:rgba(20,0,28,.72)}
-            #halloween-dgf-card-v4 input{min-width:180px;max-width:100%;border-radius:24px;border:1px solid #a879b9;background:#170b20;color:#fff;padding:11px 15px;font:inherit}
-            #halloween-dgf-card-v4 input:focus{outline:2px solid #ff9a2f;outline-offset:2px}
-            #halloween-jogos-dgf-v4[hidden]{display:none!important}
-            #halloween-jogos-dgf-v4:not([hidden]){display:block!important;position:relative!important;width:100%!important;height:auto!important;min-height:460px!important;max-height:none!important;overflow:visible!important;flex:0 0 auto!important;align-self:stretch!important;box-sizing:border-box!important;padding:20px;border:1px solid #57306c;border-radius:16px;color:#f8efff;background:radial-gradient(circle at top left,#39174e,#170d22 65%,#0d0813);font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
-            #halloween-jogos-dgf-v4 *{box-sizing:border-box}
-            #halloween-jogos-dgf-v4 .h-topo-jogos-v4{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-            #halloween-jogos-dgf-v4 .h-pontos-box-v4{background:#11091a;border:1px solid #87539e;padding:12px 18px;border-radius:12px;text-align:center}
-            #halloween-jogos-dgf-v4 .h-pilula-v4{background:#30203a;padding:7px 11px;border-radius:20px;font-size:12px}
-            #halloween-jogos-dgf-v4 .h-grade-v4{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:15px;width:100%;margin-top:18px}
-            #halloween-jogos-dgf-v4 .h-card-v4{min-width:0;min-height:235px;padding:17px;border:1px solid rgba(255,166,74,.3);border-radius:14px;background:linear-gradient(145deg,rgba(67,27,83,.94),rgba(21,13,32,.97));box-shadow:0 7px 18px rgba(0,0,0,.2);overflow:visible}
-            #halloween-jogos-dgf-v4 .h-card-v4 h3{margin:0 0 8px;color:#ffd18a;font-size:18px}
-            #halloween-jogos-dgf-v4 .h-card-v4 p{font-size:13px;line-height:1.6;color:#e4d8ed}
-            #halloween-jogos-dgf-v4 .h-btn-v4{color:#fff;background:#321745;border:1px solid #9661b0;border-radius:10px;padding:10px;margin:4px;cursor:pointer;font:inherit;font-weight:700;transition:transform .2s,background .2s}
-            #halloween-jogos-dgf-v4 .h-btn-v4:hover:not(:disabled){transform:translateY(-2px);background:#54266f}
-            #halloween-jogos-dgf-v4 .h-btn-v4:disabled{cursor:default;opacity:.55}
-            #halloween-jogos-dgf-v4 .h-portas-grid-v4{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-top:12px}
-            #halloween-jogos-dgf-v4 .h-portas-grid-v4 button{margin:0;padding:9px 2px;min-width:0;font-size:12px}
-            #halloween-jogos-dgf-v4 .h-ranking-row-v4{display:flex;justify-content:space-between;gap:10px;padding:10px;border-bottom:1px solid rgba(255,255,255,.1);overflow-wrap:anywhere}
-            #halloween-jogos-dgf-v4 .h-ranking-row-v4 strong{color:#ffc46d;white-space:nowrap;text-align:right}
-            #halloween-caca-badge-v4{position:fixed;top:52px;right:12px;z-index:99996;background:#180022;color:#ffd18a;border:2px solid #ff7a00;border-radius:12px;padding:9px 13px;font:800 14px 'Segoe UI',sans-serif;box-shadow:0 4px 15px #0005;display:none;pointer-events:none}
-            #halloween-aboboras-overlay-v4{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:900;background:transparent;overflow:visible}
-            #halloween-aboboras-overlay-v4 .h-pumpkin-v4{position:absolute;pointer-events:auto;display:flex;align-items:center;justify-content:center;border:0;background:transparent;padding:0;margin:0;line-height:1;cursor:pointer;animation:hDgfPulsarV4 2.6s ease-in-out infinite;filter:drop-shadow(0 0 5px #ff8a00);transition:transform .14s}
-            #halloween-aboboras-overlay-v4 .h-pumpkin-v4:hover{transform:scale(1.3)!important}
-            @media(max-width:650px){#halloween-dgf-card-v4{padding:15px}#halloween-dgf-card-v4 .h-dgf-conteudo-v4{align-items:flex-start;gap:14px}#halloween-dgf-card-v4 .h-dgf-abobora-v4{width:60px;height:60px;flex-basis:60px;font-size:34px}#halloween-jogos-dgf-v4:not([hidden]){padding:12px}#halloween-jogos-dgf-v4 .h-grade-v4{grid-template-columns:minmax(0,1fr)}#halloween-jogos-dgf-v4 .h-portas-grid-v4{grid-template-columns:repeat(2,minmax(0,1fr))}}
-            @media(prefers-reduced-motion:reduce){#halloween-dgf-card-v4,#halloween-dgf-card-v4 .h-dgf-abobora-v4,#halloween-aboboras-overlay-v4 .h-pumpkin-v4{animation:none!important}}
-        `;
-        document.head.appendChild(s);
-    }
-
-    function criarSomRisada() {
-        if (!audioRisada) {
-            audioRisada = new Audio(LAUGH_URL);
-            audioRisada.preload = 'none';
-            audioRisada.volume = 0.75;
-        }
-        return audioRisada;
-    }
-
-    function removerFallbackAudio() {
-        if (!fallbackAudioArmed || !fallbackAudioHandler) return;
-        document.removeEventListener('pointerdown', fallbackAudioHandler, true);
-        document.removeEventListener('keydown', fallbackAudioHandler, true);
-        fallbackAudioArmed = false;
-        fallbackAudioHandler = null;
-    }
-
-    function armarFallbackAudio() {
-        if (fallbackAudioArmed) return;
-        fallbackAudioArmed = true;
-        fallbackAudioHandler = function() {
-            removerFallbackAudio();
-            tocarRisadaHumana(false);
-        };
-        document.addEventListener('pointerdown', fallbackAudioHandler, true);
-        document.addEventListener('keydown', fallbackAudioHandler, true);
-    }
-
-    function tocarRisadaHumana(autoplay) {
-        try {
-            const audio = criarSomRisada();
-            audio.pause();
-            audio.currentTime = 0;
-            const p = audio.play();
-            if (p && typeof p.catch === 'function') {
-                p.catch(function() {
-                    if (autoplay) armarFallbackAudio();
-                    else {
-                        const msg = document.getElementById('halloween-boasvindas-v4');
-                        if (msg) msg.textContent = '⚠️ O navegador bloqueou o áudio. Clique novamente em “Ouvir risada”.';
-                    }
-                });
-            }
-        } catch (e) {
-            if (autoplay) armarFallbackAudio();
-        }
-    }
-
-    window.tocarRisadaBruxaDGF = function() { tocarRisadaHumana(false); };
-
-    function chamarAPI(parametros, callbackFinal) {
-        const callback = 'halloweenDGFJsonpV4_' + Date.now() + '_' + Math.floor(Math.random() * 1000000);
-        const script = document.createElement('script');
-        let terminou = false;
-        const timeout = setTimeout(function() {
-            finalizar({ ok: false, error: 'A planilha demorou para responder.' });
-        }, 15000);
-
-        function finalizar(resposta) {
-            if (terminou) return;
-            terminou = true;
-            clearTimeout(timeout);
-            try { delete window[callback]; } catch (e) { window[callback] = undefined; }
-            if (script.parentNode) script.parentNode.removeChild(script);
-            callbackFinal(resposta || { ok: false, error: 'Resposta vazia do Apps Script.' });
-        }
-
-        window[callback] = finalizar;
-        script.onerror = function() {
-            finalizar({ ok: false, error: 'Não foi possível acessar a API do Halloween DGF.' });
-        };
-
-        const query = Object.keys(parametros).map(function(k) {
-            return encodeURIComponent(k) + '=' + encodeURIComponent(String(parametros[k] == null ? '' : parametros[k]));
-        }).join('&');
-
-        script.async = true;
-        script.src = API + (API.indexOf('?') >= 0 ? '&' : '?') + query +
-            '&callback=' + encodeURIComponent(callback) + '&_=' + Date.now();
-        document.body.appendChild(script);
-    }
-
-    function setStatus(texto) {
-        const e = document.getElementById('halloween-status-geral-v4');
-        if (e) e.textContent = texto;
-    }
-
-    function salvarEstado() {
-        estado.tempoSegundos = tempoAtual();
-        try { sessionStorage.setItem(STATE_KEY, JSON.stringify(estado)); } catch (e) {}
-    }
-
-    function salvarPontuacao() {
-        if (!estado.nome || !estado.sessionId) return;
-        if (!estado.finalizada) estado.tempoSegundos = tempoAtual();
-        estado.versao = (Number(estado.versao) || 0) + 1;
-        guardar();
-        setStatus('⏳ Salvando pontuação e tempo na planilha...');
-
-        chamarAPI({
-            action: 'saveScore', sessionId: estado.sessionId, name: estado.nome,
-            score: estado.pontos, pumpkins: estado.aboboras.length,
-            quizCorrect: estado.quizAcertos,
-            doorChosen: estado.portaEscolhida ? 'sim' : 'nao',
-            timeSeconds: estado.tempoSegundos,
-            finished: estado.finalizada ? 'sim' : 'nao',
-            pumpkinTimeSeconds: estado.huntTimeSeconds == null ? '' : estado.huntTimeSeconds,
-            version: estado.versao
-        }, function(r) {
-            if (r && r.ok) {
-                const tempo = Number(estado.tempoSegundos) || 0;
-                setStatus('✅ Pontuação salva: ' + estado.pontos + ' pontos • Tempo: ' + formatarTempo(tempo) + (estado.finalizada ? ' • participação finalizada' : ''));
-            } else {
-                setStatus('⚠️ ' + ((r && r.error) || 'Não foi possível salvar. Confira a implantação do Apps Script.'));
-            }
-        });
-    }
-
-    function carregarRanking() {
-        const el = document.getElementById('halloween-ranking-v4');
-        if (!el) return;
-        el.textContent = '⏳ Carregando placar...';
-        chamarAPI({ action: 'leaderboard' }, function(r) {
-            if (!el) return;
-            if (!r || !r.ok || !Array.isArray(r.leaderboard)) {
-                el.textContent = '⚠️ Não foi possível carregar o ranking. Confira o Apps Script.';
-                return;
-            }
-            el.textContent = '';
-            if (!r.leaderboard.length) {
-                el.textContent = 'Ainda não há pontuações. Seja a primeira pessoa a jogar!';
-                return;
-            }
-            r.leaderboard.forEach(function(p, i) {
-                const row = document.createElement('div');
-                row.className = 'h-ranking-row-v4';
-                const name = document.createElement('span');
-                name.textContent = (i + 1) + '. ' + String(p.name || 'Participante');
-                const meta = document.createElement('strong');
-                meta.textContent = (Number(p.bestScore) || 0) + ' pts • ' + formatarTempo(p.timeSeconds) + (p.finished ? '' : ' *');
-                row.appendChild(name);
-                row.appendChild(meta);
-                el.appendChild(row);
-            });
-            const nota = document.createElement('p');
-            nota.style.cssText = 'font-size:11px;color:#c6b0d4;margin-top:8px';
-            nota.textContent = '* Participação ainda não finalizada.';
-            el.appendChild(nota);
-        });
-    }
-
-    function desenharQuiz() {
-        const box = document.getElementById('halloween-quiz-conteudo-v4');
-        if (!box) return;
-        if (!estado.nome) { box.textContent = 'Entre no mistério para começar.'; return; }
-        if (estado.quizConcluido || estado.quizIndice >= PREGUNTAS.length) {
-            estado.quizConcluido = true;
-            box.innerHTML = '<div style="padding:12px;background:rgba(255,255,255,.06);border-radius:10px"><strong style="color:#ffd18a">🏆 Quiz concluído!</strong><p style="line-height:1.6">Você acertou ' + estado.quizAcertos + ' de 10 perguntas e ganhou ' + (estado.quizAcertos * 10) + ' pontos.</p></div>';
-            return;
-        }
-        const q = PREGUNTAS[estado.quizIndice];
-        box.textContent = '';
-        const n = document.createElement('div');
-        n.style.cssText = 'color:#d9c1ea;font-size:11px;font-weight:800;margin-bottom:7px';
-        n.textContent = 'PERGUNTA ' + (estado.quizIndice + 1) + ' DE 10';
-        const pergunta = document.createElement('div');
-        pergunta.style.cssText = 'font-weight:800;line-height:1.5;margin-bottom:10px';
-        pergunta.textContent = q.pergunta;
-        box.appendChild(n);
-        box.appendChild(pergunta);
-        q.opcoes.forEach(function(opcao, i) {
-            const b = document.createElement('button');
-            b.type = 'button'; b.className = 'h-btn-v4'; b.textContent = opcao;
-            b.addEventListener('click', function() { responderQuiz(i); });
-            box.appendChild(b);
-        });
-    }
-
-    function atualizarPainel() {
-        const ePontos = document.getElementById('halloween-pontos-v4');
-        const eAbob = document.getElementById('halloween-contagem-aboboras-v4');
-        const eQuiz = document.getElementById('halloween-contagem-quiz-v4');
-        const ePorta = document.getElementById('halloween-contagem-porta-v4');
-        const eNome = document.getElementById('halloween-boasvindas-jogos-v4');
-        const eTempo = document.getElementById('halloween-tempo-v4');
-        if (ePontos) ePontos.textContent = estado.pontos;
-        if (eAbob) eAbob.textContent = estado.aboboras.length + '/5';
-        if (eQuiz) eQuiz.textContent = estado.quizAcertos + '/10';
-        if (ePorta) ePorta.textContent = estado.portaEscolhida ? 'Escolhida' : 'Ainda não escolhida';
-        if (eNome) eNome.textContent = 'Boa sorte, ' + estado.nome + '!';
-        if (eTempo) eTempo.textContent = formatarTempo(tempoAtual());
-
-        const huntStart = document.getElementById('halloween-iniciar-caca-v4');
-        if (huntStart) {
-            huntStart.disabled = estado.huntStarted || estado.huntEnded || !estado.nome || estado.finalizada;
-            huntStart.textContent = estado.huntEnded ? '✅ Caça encerrada' : (estado.huntStarted ? '🎃 Caça em andamento' : '🎃 Começar caça (02:00)');
-        }
-
-        const huntStatus = document.getElementById('halloween-status-aboboras-v4');
-        if (huntStatus && estado.huntEnded && !huntStatus.dataset.custom) {
-            huntStatus.textContent = 'Caça encerrada: ' + estado.aboboras.length + ' de 5 encontradas.';
-        }
-
-        const startTimer = document.getElementById('halloween-tempo-caca-v4');
-        if (startTimer && !estado.huntStarted) startTimer.textContent = estado.huntEnded ? '00:00' : '02:00';
-
-        const portas = document.getElementById('halloween-portas-v4');
-        if (portas && !portas.children.length) {
-            for (let i = 0; i < 10; i++) {
-                const b = document.createElement('button');
-                b.type = 'button'; b.className = 'h-btn-v4';
-                b.textContent = '🚪 ' + (i + 1);
-                b.setAttribute('data-porta-v4', String(i));
-                b.title = 'Escolher porta ' + (i + 1);
-                b.addEventListener('click', function() { escolherPorta(i); });
-                portas.appendChild(b);
-            }
-        }
-        if (portas) portas.querySelectorAll('[data-porta-v4]').forEach(function(b) { b.disabled = estado.portaEscolhida || !estado.nome || estado.finalizada; });
-        desenharQuiz();
-        if (estado.finalizada) {
-            const f = document.getElementById('halloween-finalizar-v4');
-            if (f) { f.disabled = true; f.textContent = '✅ Participação finalizada'; }
-        }
-    }
-
-    function responderQuiz(i) {
-        if (!estado.nome || estado.finalizada || estado.quizConcluido) return;
-        const idx = estado.quizIndice;
-        const q = PREGUNTAS[idx];
-        if (!q || estado.quizRespostas[idx] !== undefined) return;
-        estado.quizRespostas[idx] = i;
-        const status = document.getElementById('halloween-status-quiz-v4');
-        if (i === q.correta) {
-            estado.quizAcertos++;
-            estado.pontos += 10;
-            if (status) status.textContent = '✅ Resposta correta! +10 pontos.';
-        } else if (status) {
-            status.textContent = '👻 Não foi dessa vez! A próxima pergunta espera por você.';
-        }
-        estado.quizIndice++;
-        if (estado.quizIndice >= PREGUNTAS.length) estado.quizConcluido = true;
-        guardar(); atualizarPainel(); salvarPontuacao();
-    }
-
-    function criarOverlayAboboras() {
-        if (!scrollHome) return;
-        removerOverlayAboboras();
-        const computed = window.getComputedStyle(scrollHome);
-        if (computed.position === 'static') scrollHome.style.position = 'relative';
-        const alturaBase = Math.max(scrollHome.scrollHeight, scrollHome.clientHeight, 700);
-        const largura = Math.max(scrollHome.clientWidth, 320);
-        const overlay = document.createElement('div');
-        overlay.id = 'halloween-aboboras-overlay-v4';
-        overlay.style.height = (alturaBase + 10) + 'px';
-        overlay.setAttribute('aria-label', 'Caça às cinco abóboras escondidas');
-        scrollHome.appendChild(overlay);
-        overlayAboboras = overlay;
-        const tamanhos = [18, 22, 27, 35, 46];
-        const opacidades = [0.68, 0.74, 0.85, 0.92, 1];
-
-        for (let i = 0; i < 5; i++) {
-            if (estado.aboboras.indexOf(i) >= 0) continue;
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'h-pumpkin-v4';
-            btn.id = 'halloween-abobora-oculta-v4-' + i;
-            btn.textContent = '🎃';
-            btn.style.fontSize = tamanhos[i] + 'px';
-            btn.style.opacity = String(opacidades[i]);
-            btn.setAttribute('aria-label', 'Abóbora escondida ' + (i + 1));
-            btn.title = 'Abóbora misteriosa';
-            btn.addEventListener('click', function(ev) {
-                ev.preventDefault(); ev.stopPropagation(); encontrarAbobora(i, btn);
-            });
-            overlay.appendChild(btn);
-            posicionarAbobora(btn, overlay, largura, alturaBase, true);
-            programarMovimento(btn, i, overlay, largura, alturaBase);
-        }
-    }
-
-    function posicionarAbobora(btn, overlay, largura, altura, inicial) {
-        if (!btn || !overlay || estado.aboboras.indexOf(Number(btn.id.split('-').pop())) >= 0) return;
-        const size = Math.max(18, parseFloat(btn.style.fontSize) || 26);
-        const maxLeft = Math.max(2, 96 - (size / Math.max(largura, 320) * 100));
-        const left = 2 + Math.random() * maxLeft;
-        const maxTop = Math.max(120, altura - size - 50);
-        let top = 100 + Math.random() * Math.max(20, maxTop - 100);
-        if (inicial && overlay.children.length === 1) top = Math.max(80, Math.random() * Math.min(altura - size, 350));
-        btn.style.left = left + '%';
-        btn.style.top = Math.floor(top) + 'px';
-    }
-
-    function programarMovimento(btn, indice, overlay, largura, altura) {
-        const atrasos = [4200, 6800, 5300, 8700, 6200];
-        const timer = setTimeout(function mover() {
-            if (!estado.huntStarted || estado.huntEnded || estado.aboboras.indexOf(indice) >= 0 || !btn.isConnected) return;
-            posicionarAbobora(btn, overlay, largura, altura, false);
-            const novoTimer = setTimeout(mover, atrasos[indice] + Math.random() * 3500);
-            timersMovimento.push(novoTimer);
-        }, atrasos[indice] + Math.random() * 2000);
-        timersMovimento.push(timer);
-    }
-
-    function removerOverlayAboboras() {
-        timersMovimento.forEach(clearTimeout);
-        timersMovimento = [];
-        if (overlayAboboras && overlayAboboras.parentNode) overlayAboboras.parentNode.removeChild(overlayAboboras);
-        overlayAboboras = null;
-    }
-
-    function criarBadgeCaca() {
-        if (!badgeTempo) {
-            badgeTempo = document.createElement('div');
-            badgeTempo.id = 'halloween-caca-badge-v4';
-            document.body.appendChild(badgeTempo);
-        }
-        badgeTempo.style.display = 'block';
-        atualizarBadgeCaca();
-    }
-
-    function atualizarBadgeCaca() {
-        if (!badgeTempo || !estado.huntStarted || estado.huntEnded) return;
-        const restante = Math.max(0, Math.ceil((HUNT_LIMIT_MS - (Date.now() - estado.huntStartedAt)) / 1000));
-        badgeTempo.textContent = '🎃 Caça: ' + formatarTempo(restante);
-        const label = document.getElementById('halloween-tempo-caca-v4');
-        if (label) label.textContent = formatarTempo(restante);
-        if (restante <= 0) finalizarCaca('⏰ O tempo acabou! A caça às abóboras terminou.');
-    }
-
-    function iniciarCaca() {
-        if (!estado.nome || estado.finalizada || estado.huntStarted || estado.huntEnded) return;
-        estado.huntStarted = true;
-        estado.huntStartedAt = Date.now();
-        guardar();
-        criarOverlayAboboras();
-        criarBadgeCaca();
-        const status = document.getElementById('halloween-status-aboboras-v4');
-        if (status) { status.dataset.custom = '1'; status.textContent = '👀 As cinco abóboras estão escondidas pela página. Algumas se movem. Você tem dois minutos!'; }
-        if (intervaloCaca) clearInterval(intervaloCaca);
-        intervaloCaca = setInterval(atualizarBadgeCaca, 250);
-        atualizarPainel();
-    }
-
-    function encontrarAbobora(indice, btn) {
-        if (!estado.huntStarted || estado.huntEnded || estado.finalizada) return;
-        if (estado.aboboras.indexOf(indice) >= 0) return;
-        estado.aboboras.push(indice);
-        estado.pontos += 10;
-        if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
-        guardar(); atualizarPainel(); salvarPontuacao();
-        const status = document.getElementById('halloween-status-aboboras-v4');
-        if (status) {
-            status.dataset.custom = '1';
-            status.textContent = estado.aboboras.length === 5
-                ? '🏆 Todas as cinco encontradas! +50 pontos na caça.'
-                : '🎉 Abóbora encontrada! +10 pontos. Faltam ' + (5 - estado.aboboras.length) + '.';
-        }
-        if (estado.aboboras.length >= 5) {
-            estado.huntTimeSeconds = Math.floor((Date.now() - estado.huntStartedAt) / 1000);
-            finalizarCaca('🏆 Parabéns! Você encontrou todas as abóboras em ' + formatarTempo(estado.huntTimeSeconds) + '.');
-        }
-    }
-
-    function finalizarCaca(mensagem) {
-        if (estado.huntEnded) return;
-        estado.huntEnded = true;
-        if (estado.huntStartedAt) {
-            const decorrido = Math.min(120, Math.floor((Date.now() - estado.huntStartedAt) / 1000));
-            estado.huntTimeSeconds = estado.huntTimeSeconds == null ? decorrido : estado.huntTimeSeconds;
-        }
-        if (intervaloCaca) clearInterval(intervaloCaca);
-        intervaloCaca = null;
-        removerOverlayAboboras();
-        if (badgeTempo) badgeTempo.style.display = 'none';
-        const status = document.getElementById('halloween-status-aboboras-v4');
-        if (status) { status.dataset.custom = '1'; status.textContent = mensagem + ' Você encontrou ' + estado.aboboras.length + ' de 5 abóboras.'; }
-        guardar(); atualizarPainel(); salvarPontuacao();
-    }
-
-    function escolherPorta(indice) {
-        if (!estado.nome || estado.finalizada || estado.portaEscolhida) return;
-        const premio = estado.portasRecompensas[indice];
-        if (!premio) return;
-        estado.portaEscolhida = true;
-        estado.portaResultado = { porta: indice + 1, pontos: premio.pontos, mensagem: premio.mensagem };
-        estado.pontos = Math.max(0, estado.pontos + premio.pontos);
-        const status = document.getElementById('halloween-status-portas-v4');
-        if (status) status.textContent = '🚪 Porta ' + (indice + 1) + ': ' + premio.mensagem + (premio.pontos < 0 ? ' Sua pontuação não fica abaixo de zero.' : '');
-        guardar(); atualizarPainel(); salvarPontuacao();
-    }
-
-    function iniciarNovaPartida() {
-        const nome = estado.nome;
-        estado = novoEstado();
-        estado.nome = nome;
-        estado.startedAt = Date.now();
-        guardar();
-        removerOverlayAboboras();
-        if (badgeTempo) badgeTempo.style.display = 'none';
-        if (intervaloCaca) clearInterval(intervaloCaca);
-        intervaloCaca = null;
-        iniciarRelogioParticipacao();
-        limparMensagensJogo();
-        atualizarPainel();
-        salvarPontuacao();
-        const jogos = document.getElementById('halloween-jogos-dgf-v4');
-        if (jogos) jogos.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function limparMensagensJogo() {
-        ['halloween-status-aboboras-v4','halloween-status-quiz-v4','halloween-status-portas-v4'].forEach(function(id) {
-            const el = document.getElementById(id);
-            if (el) { el.textContent = ''; delete el.dataset.custom; }
-        });
-        const ab = document.getElementById('halloween-status-aboboras-v4');
-        if (ab) ab.textContent = 'Clique em “Começar caça” para espalhar as abóboras pela página inicial.';
-        const port = document.getElementById('halloween-status-portas-v4');
-        if (port) port.textContent = 'Escolha uma das dez portas.';
-        const rank = document.getElementById('halloween-ranking-v4');
-        if (rank) rank.textContent = 'Clique para consultar o ranking.';
-        const finalBtn = document.getElementById('halloween-finalizar-v4');
-        if (finalBtn) { finalBtn.disabled = false; finalBtn.textContent = '🏁 Finalizar participação e registrar meu tempo'; }
-    }
-
-    function finalizarParticipacao() {
-        if (!estado.nome || estado.finalizada) return;
-        if (estado.huntStarted && !estado.huntEnded) finalizarCaca('🏁 A participação foi finalizada.');
-        estado.tempoSegundos = tempoAtual();
-        estado.finalizada = true;
-        if (intervaloRelogio) clearInterval(intervaloRelogio);
-        if (intervaloSalvamento) clearInterval(intervaloSalvamento);
-        intervaloRelogio = null;
-        intervaloSalvamento = null;
-        guardar(); atualizarPainel(); salvarPontuacao(); carregarRanking();
-        const finalBtn = document.getElementById('halloween-finalizar-v4');
-        if (finalBtn) { finalBtn.disabled = true; finalBtn.textContent = '✅ Participação finalizada'; }
-    }
-
-    function iniciarJogo() {
-        const input = document.getElementById('halloween-nome-v4');
-        const nome = String(input ? input.value : '').trim().replace(/[<>]/g, '').replace(/\s+/g, ' ').slice(0, 50);
-        const aviso = document.getElementById('halloween-boasvindas-v4');
-        if (!nome) {
-            if (aviso) aviso.textContent = '🎃 Digite seu nome ou apelido para começar.';
-            if (input) input.focus();
-            return;
-        }
-
-        const nomeAnterior = String(estado.nome || '').toLocaleLowerCase('pt-BR');
-        if (estado.finalizada || (nomeAnterior && nomeAnterior !== nome.toLocaleLowerCase('pt-BR'))) {
-            estado = novoEstado();
-        }
-        estado.nome = nome;
-        if (!estado.startedAt) estado.startedAt = Date.now();
-        if (aviso) aviso.textContent = '🎃 Bem-vindo(a), ' + nome + '! Que comecem os mistérios!';
-        guardar();
-
-        const jogos = document.getElementById('halloween-jogos-dgf-v4');
-        if (!jogos) {
-            if (aviso) aviso.textContent = '⚠️ Não encontrei a área dos jogos. Confira se o card de Halloween foi inserido.';
-            return;
-        }
-        jogos.hidden = false;
-        jogos.removeAttribute('hidden');
-        jogos.style.setProperty('display', 'block', 'important');
-        atualizarPainel();
-        iniciarRelogioParticipacao();
-        salvarPontuacao();
-        carregarRanking();
-        jogos.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function instalarEventos(shell) {
-        const entrar = shell.querySelector('#halloween-entrar-v4');
-        if (entrar) entrar.addEventListener('click', iniciarJogo);
-        const nomeInput = shell.querySelector('#halloween-nome-v4');
-        if (nomeInput) nomeInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') iniciarJogo(); });
-
-        const audioBtn = shell.querySelector('#halloween-audio-v4');
-        if (audioBtn) audioBtn.addEventListener('click', function() { removerFallbackAudio(); tocarRisadaHumana(false); });
-
-        const f = shell.querySelector('#halloween-cursor-fantasma-v4');
-        if (f) f.addEventListener('click', function() { if (typeof window.mudarCursorDGF === 'function') window.mudarCursorDGF('fantasma'); });
-        const m = shell.querySelector('#halloween-cursor-morcego-v4');
-        if (m) m.addEventListener('click', function() { if (typeof window.mudarCursorDGF === 'function') window.mudarCursorDGF('morcego'); });
-
-        const caca = shell.querySelector('#halloween-iniciar-caca-v4');
-        if (caca) caca.addEventListener('click', iniciarCaca);
-        const rank = shell.querySelector('#halloween-atualizar-ranking-v4');
-        if (rank) rank.addEventListener('click', carregarRanking);
-        const fim = shell.querySelector('#halloween-finalizar-v4');
-        if (fim) fim.addEventListener('click', finalizarParticipacao);
-        const novo = shell.querySelector('#halloween-nova-partida-v4');
-        if (novo) novo.addEventListener('click', iniciarNovaPartida);
-    }
-
-    function instalarNoHome() {
-        const conteudo = document.getElementById('conteudo');
-        if (!conteudo || conteudo.querySelector('#halloween-dgf-shell-v4')) return;
-        const cardAntigo = conteudo.querySelector('.card-halloween-animado');
-        if (!cardAntigo) return;
-
-        instalarEstilos();
-        scrollHome = cardAntigo.parentElement;
-        const posicao = window.getComputedStyle(scrollHome).position;
-        if (posicao === 'static') scrollHome.style.position = 'relative';
-
-        const shell = document.createElement('div');
-        shell.id = 'halloween-dgf-shell-v4';
-        shell.style.cssText = 'display:flex;flex-direction:column;gap:18px;width:100%;flex:0 0 auto;box-sizing:border-box;position:relative;z-index:2';
-        shell.innerHTML = htmlHalloween();
-        cardAntigo.parentNode.insertBefore(shell, cardAntigo);
-        cardAntigo.remove();
-        instalarEventos(shell);
-
-        if (estado.nome) {
-            const input = shell.querySelector('#halloween-nome-v4');
-            if (input) input.value = estado.nome;
-        }
-        if (estado.nome) {
-            const jogos = shell.querySelector('#halloween-jogos-dgf-v4');
-            if (jogos) { jogos.hidden = false; jogos.removeAttribute('hidden'); }
-            atualizarPainel();
-            iniciarRelogioParticipacao();
-            carregarRanking();
-            if (estado.huntStarted && !estado.huntEnded && Date.now() - estado.huntStartedAt < HUNT_LIMIT_MS) {
-                criarOverlayAboboras();
-                criarBadgeCaca();
-                if (intervaloCaca) clearInterval(intervaloCaca);
-                intervaloCaca = setInterval(atualizarBadgeCaca, 250);
-            } else if (estado.huntStarted && !estado.huntEnded) {
-                finalizarCaca('⏰ O tempo acabou enquanto a página não estava aberta.');
-            }
-        }
-
-        if (!primeiraTentativaAudio) {
-            primeiraTentativaAudio = true;
-            setTimeout(function() { tocarRisadaHumana(true); }, 300);
-        }
-    }
-
-    function aoSairHome() {
-        if (estado.huntStarted && !estado.huntEnded) {
-            removerOverlayAboboras();
-            if (intervaloCaca) clearInterval(intervaloCaca);
-            intervaloCaca = null;
-            if (badgeTempo) badgeTempo.style.display = 'none';
-        }
-        removerFallbackAudio();
-    }
-
-    window.mostrar = function(pagina) {
-        const ehHome = String(pagina == null ? '' : pagina).toLowerCase() === 'home';
-        if (!ehHome) {
-            aoSairHome();
-            return mostrarOriginal.apply(this, arguments);
-        }
-
-        const audioContextOriginal = window.AudioContext;
-        const webkitAudioContextOriginal = window.webkitAudioContext;
-        const addEventListenerOriginal = document.addEventListener;
-        try {
-            window.AudioContext = undefined;
-            window.webkitAudioContext = undefined;
-            document.addEventListener = function(tipo, listener, options) {
-                const fonte = typeof listener === 'function' ? String(listener) : '';
-                if (String(tipo).toLowerCase() === 'click' && /desbloquearAudio/.test(fonte)) return;
-                return addEventListenerOriginal.call(this, tipo, listener, options);
-            };
-            const resultado = mostrarOriginal.apply(this, arguments);
-            if (window.intervaloRisadaHalloweenDGF) {
-                clearInterval(window.intervaloRisadaHalloweenDGF);
-                window.intervaloRisadaHalloweenDGF = null;
-            }
-            window.tocarRisadaBruxaDGF = function() { tocarRisadaHumana(false); };
-            setTimeout(instalarNoHome, 60);
-            setTimeout(instalarNoHome, 250);
-            return resultado;
-        } finally {
-            window.AudioContext = audioContextOriginal;
-            window.webkitAudioContext = webkitAudioContextOriginal;
-            document.addEventListener = addEventListenerOriginal;
-        }
-    };
-
-    setTimeout(instalarNoHome, 100);
-})();
-</script>
 
 
 </body>
